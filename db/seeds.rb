@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+sections = Section.create([
+	{name: "San Luis"},
+	{name: "Seguridad"},
+	{name: "Nacional"},
+	{name: "Internacional"},
+	{name: "Farándula"},
+	{name: "Táctica"},
+	{name: "Negocios"},
+	{name: "Estados"},
+	{name: "Actualidad"}
+	])	

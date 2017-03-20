@@ -1,0 +1,28 @@
+<%= form_for(@article) do |f| %>
+	<% if @article.errors.any? %>	
+		<h5><%= pluralize(@article.errors.count, "error") %></h5>
+			<ul>
+				<% @article.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+				<% end %>
+			</ul>
+	<% end %>
+	<label>Sección</label>
+	<%= f.select :articable_id, options_for_select( Section.all.collect{ |u| [u.name, u.id] }) %>
+	<%= f.hidden_field :articable_type, value: "Section" %>
+	<br>
+
+	<label>Nombre de la Nota</label>
+	<%= f.text_field :name %><br/>
+	<label>Descripción corta de la Nota</label><br/>
+	<%= f.text_area :short_description %>
+	<label>Nota: </label><br/>
+	<%= f.text_area :note %><br/>
+	
+	<label>Hashtags: </label>
+
+	<%= f.text_field :hashtags_names, placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", id: "hashtags" %>
+
+	<%= f.submit "Guardar" %>
+	
+<% end %>
