@@ -1,5 +1,5 @@
 <% @sections.each do |section| %>
-	<%= section.name %><br/>
+	<%= section.name %> <%= link_to "Ver Sección", section %><br/>
 	<% section.articles.last(5).each do |article|%>
 		
 		<%= link_to article.name, article %><br/>

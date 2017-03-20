@@ -1,0 +1,7 @@
+<h1><%= @section.name %></h1>
+
+
+<% @section.articles.each do |article|%>
+		
+	<%= link_to article.name, article %><br/>
+<% end %>

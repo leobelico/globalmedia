@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   resources :articles, param: :slug do
   	get :search_hashtag, on: :collection
   end
+
+  resources :sections, param: :slug 
+
 end
