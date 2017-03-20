@@ -1,5 +1,6 @@
 class HashtagsController < ApplicationController
 	def remove
+		
 		@article =  Article.find(params[:article_id])
 		@hashtag = Hashtag.find(params[:id])
 

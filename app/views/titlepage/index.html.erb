@@ -1,3 +1,9 @@
+<h3>#ESNOTICIA</h3>
+<% @its_news.each do |hashtag| %>
+	| <%= hashtag.article.name %> | 
+	
+<% end %>
+<br/>
 <% @sections.each do |section| %>
 	<%= section.name %> <%= link_to "Ver Sección", section %><br/>
 	<% section.articles.last(5).each do |article|%>
