@@ -1,0 +1,7 @@
+<% @sections.each do |section| %>
+	<%= section.name %><br/>
+	<% section.articles.last(5).each do |article|%>
+		
+		<%= link_to article.name, article %><br/>
+	<% end %>
+<% end %>

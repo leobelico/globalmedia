@@ -4,9 +4,9 @@
 <p><%= render @article.hashtags %></p>
 
 <% if @article.articable_type == "Section" %>
-	<%= @article.section.name %>
+	<%= @article.articable.name %>
 		
-	</article>
+	
 <% end %>
 
 <p><%= @article.short_description %></p>
