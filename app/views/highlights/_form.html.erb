@@ -1,0 +1,22 @@
+<%= form_for(@highlight) do |f| %>
+	<% if @highlight.errors.any? %>	
+		<h5><%= pluralize(@highlight.errors.count, "error") %></h5>
+			<ul>
+				<% @highlight.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+				<% end %>
+			</ul>
+	<% end %>
+	<label>Highlights ya establecidos:</label>
+	<% @highlights.each do |highlight| %>
+		Posición: <%= highlight.order %> Artículo: <%= link_to highlight.article.name, highlight.article %>
+	<% end %>
+	
+	<label>Posición del Highlight:</label>
+	<%= f.select :order, options_for_select((1..6).step(1))%>
+	<br/>
+	<label>Artículo:</label>
+	 <%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+	<br/>
+	<%= f.submit "Guardar" %>
+<% end %>

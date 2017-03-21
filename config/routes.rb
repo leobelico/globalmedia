@@ -7,4 +7,8 @@ Rails.application.routes.draw do
 
   resources :sections, param: :slug 
 
+  resources :highlights do 
+  	get :autocomplete_article_name, on: :collection
+  end
+
 end

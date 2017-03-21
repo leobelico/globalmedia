@@ -1,5 +1,5 @@
 class Article < ApplicationRecord
-	belongs_to :articable, polymorphic: true, optional: true
+  belongs_to :articable, polymorphic: true, optional: true
 
 	attr_accessor :hashtags_names
   has_and_belongs_to_many :hashtags, uniq: true
