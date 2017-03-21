@@ -1,0 +1,4 @@
+<h3>Al momento</h3>
+<% section.each do |article|%>	
+	<%= article.created_at.to_time %><%= link_to article.name, article %><br/>
+<% end %>

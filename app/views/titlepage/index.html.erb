@@ -11,23 +11,25 @@
 <% end %>
 <br/>
 
-<%= render "/layouts/articles", section: @san_luis, section_name: "San Luis" %>
+<%= render "/layouts/al_momento", section: al_momento(true, false, false, 5) %>
 
-<%= render "/layouts/articles", section: @seguridad, section_name: "Seguridad" %>
+<%= render "/layouts/articles", section: san_luis(4), section_name: "San Luis" %>
 
-<%= render "/layouts/articles", section: @nacional, section_name: "Nacional" %>
+<%= render "/layouts/articles", section: seguridad(4), section_name: "Seguridad" %>
 
-<%= render "/layouts/articles", section: @internacional, section_name: "Internacional" %>
+<%= render "/layouts/articles", section: nacional(4), section_name: "Nacional" %>
 
-<%= render "/layouts/articles", section: @farandula, section_name: "Farándula" %>
+<%= render "/layouts/articles", section: internacional(4), section_name: "Internacional" %>
 
-<%= render "/layouts/articles", section: @tactica, section_name: "Táctica" %>
+<%= render "/layouts/articles", section: farandula(4), section_name: "Farándula" %>
 
-<%= render "/layouts/articles", section: @negocios, section_name: "Negocios" %>
+<%= render "/layouts/articles", section: tactica(4), section_name: "Táctica" %>
 
-<%= render "/layouts/articles", section: @estados, section_name: "Estados" %>
+<%= render "/layouts/articles", section: negocios(4), section_name: "Negocios" %>
 
-<%= render "/layouts/articles", section: @actualidad, section_name: "Actualidad" %>
+<%= render "/layouts/articles", section: estados(4), section_name: "Estados" %>
+
+<%= render "/layouts/articles", section: actualidad(4), section_name: "Actualidad" %>
 
 
 

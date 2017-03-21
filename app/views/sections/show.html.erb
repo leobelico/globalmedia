@@ -5,3 +5,26 @@
 		
 	<%= link_to article.name, article %><br/>
 <% end %>
+
+<% case @section.name %>
+	<% when "San Luis" %>
+		<%= render "/layouts/articles", section: seguridad(3), section_name: "Seguridad" %>
+	<% when "Seguridad" %>
+		<%= render "/layouts/articles", section: negocios(3), section_name: "Negocios" %>
+	<% when "Estados" %>
+		<%= render "/layouts/articles", section: nacional(3), section_name: "Nacional" %>
+	<% when "Nacional" %>
+		<%= render "/layouts/articles", section: internacional(3), section_name: "Internacional" %>
+
+	<% when "Internacional" %>
+		<%= render "/layouts/articles", section: internacional(3), section_name: "Internacional" %>
+
+	<% when "Actualidad" %>
+		<%= render "/layouts/articles", section: farandula(3), section_name: "Farándula" %>
+	<% when "Farándula" %>
+		<%= render "/layouts/articles", section: actualidad(3), section_name: "Actualidad" %>
+	<% when "Táctica" %>
+		<%= render "/layouts/articles", section: actualidad(3), section_name: "Actualidad" %>
+	<% when "Negocio" %>
+		<%= render "/layouts/articles", section: san_luis(3), section_name: "San Luis" %>
+<% end %>
