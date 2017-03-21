@@ -1,0 +1,5 @@
+<h3><%= section_name %></h3>
+<%= link_to "Ver Sección", Section.find_by_name(section_name) %><br/>
+<% section.each do |article|%>	
+	<%= link_to article.name, article %><br/>
+<% end %>

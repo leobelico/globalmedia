@@ -4,10 +4,31 @@
 	
 <% end %>
 <br/>
-<% @sections.each do |section| %>
-	<%= section.name %> <%= link_to "Ver Sección", section %><br/>
-	<% section.articles.last(5).each do |article|%>
-		
-		<%= link_to article.name, article %><br/>
-	<% end %>
+
+<% @highlights.each do |highlight| %>
+	Posición: <%= highlight.order %>
+	Artículo: <%= link_to highlight.article.name, highlight.article %>
 <% end %>
+<br/>
+
+<%= render "/layouts/articles", section: @san_luis, section_name: "San Luis" %>
+
+<%= render "/layouts/articles", section: @seguridad, section_name: "Seguridad" %>
+
+<%= render "/layouts/articles", section: @nacional, section_name: "Nacional" %>
+
+<%= render "/layouts/articles", section: @internacional, section_name: "Internacional" %>
+
+<%= render "/layouts/articles", section: @farandula, section_name: "Farándula" %>
+
+<%= render "/layouts/articles", section: @tactica, section_name: "Táctica" %>
+
+<%= render "/layouts/articles", section: @negocios, section_name: "Negocios" %>
+
+<%= render "/layouts/articles", section: @estados, section_name: "Estados" %>
+
+<%= render "/layouts/articles", section: @actualidad, section_name: "Actualidad" %>
+
+
+
+
