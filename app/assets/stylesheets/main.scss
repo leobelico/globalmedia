@@ -26,6 +26,7 @@ $interface-width:  1024px;
 	flex-direction:  row; 
 	align-items:  flex-start; 
 	justify-content:  flex-start; 
+	flex-wrap:  wrap;
 	margin-left:  auto; 
 	margin-right:  auto; 
 }
@@ -43,5 +44,6 @@ $interface-width:  1024px;
 @import "components/header";
 @import "components/navbar"; 
 @import "components/social-media"; 
+@import "components/its-news"; 
 
 
