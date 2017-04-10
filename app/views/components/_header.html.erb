@@ -1,0 +1,33 @@
+<div class="header">
+	<%= link_to root_path, class: "header__logo" do %>
+		<%= image_tag "logo-gradient.svg", class: "" %>
+	<% end %>
+	<div class="weather">
+		<%= image_tag "temperature.svg" %>
+		<div class="weather__data">
+			<p class="weather__location">
+				
+			</p>
+			<p>
+				<span class="weather__degrees">--.--</span>
+				<span class="weather__units">°C</span>
+			</p>
+		</div>
+	</div>
+	<div class="exchange-rate dollar">
+		<%= image_tag "dollar.svg" %>
+		<p class="">
+			<span class="exchange-rate__name">USD</span>
+			<br>
+			<span class="exchange-rate__rate">$--.--</span>
+		</p>
+	</div>
+	<div class="exchange-rate euro">
+		<%= image_tag "euro.svg" %>
+		<p class="">
+			<span class="exchange-rate__name">EUR</span>
+			<br>
+			<span class="exchange-rate__rate">$--.--</span>
+		</p> 			
+	</div>
+</div>

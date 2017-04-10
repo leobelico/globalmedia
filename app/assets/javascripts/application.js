@@ -15,6 +15,9 @@
 //= require jquery-ui/autocomplete
 //= require autocomplete-rails
 //= require turbolinks
-//= require_tree .
+//= require_directory .
+//= require libraries/money
+//= require components/currency-rates
+//= require components/weather
 
 

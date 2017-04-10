@@ -1,0 +1,43 @@
+.header {
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  center; 
+	justify-content:  flex-end; 
+	width:  100%; 
+	max-width:  $interface-width; 
+	background-color:  $primary; 
+	padding-top:  12px; 
+	padding-bottom:  12px; 
+	padding-right:  18px; 
+	position:  relative; 
+	margin-left:  auto; 
+	margin-right:  auto; 
+	box-sizing:  border-box; 
+	min-height:  72px; 
+	overflow:  hidden; 
+}
+.header__logo {
+	position:  absolute; 
+	left:  -12px; 
+	top:  50%; 
+	transform:  translateY(-50%);
+}
+.exchange-rate, 
+.weather {
+	display:  flex; 
+	flex-direction:  row;
+	align-items:  center; 
+	color:  #ffffff;
+	margin-left:  36px; 
+	img {
+		margin-right:  12px; 
+		height:  32px; 
+	}
+}
+.weather:last-of-type {}
+.weather__location {
+	font-weight:  bold; 
+}
+.exchange-rate__name {
+	font-weight:  bold; 
+}
