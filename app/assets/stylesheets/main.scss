@@ -1,0 +1,47 @@
+//
+// MAIN SCSS 
+// 
+//
+// THIS FILE SERVES FOR THE DECLARATION 
+// OF GLOBAL STYLES AND ORGANIZING IMPORTS
+//
+// 
+
+
+// Base foundation reset
+
+@import "base/foundation";
+
+
+// Color import
+
+@import "base/colors"; 
+
+$interface-width:  1024px; 
+
+.interface {
+	width:  100%; 
+	max-width:  $interface-width; 
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  flex-start; 
+	justify-content:  flex-start; 
+	margin-left:  auto; 
+	margin-right:  auto; 
+}
+.main-content,
+.sidebar {
+	display:  flex; 
+	flex-direction:  column; 
+}
+.main-content {
+
+}
+
+
+@import "components/topbar"; 
+@import "components/header";
+@import "components/navbar"; 
+@import "components/social-media"; 
+
+
