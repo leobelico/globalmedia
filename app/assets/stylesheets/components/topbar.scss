@@ -22,3 +22,32 @@
 	padding-left:  9px; 
 	border-right:  solid 1px $primary; 
 }
+.topbar .social-media {
+	margin-left: auto;
+}
+.search {
+	position:  relative;
+}
+.search__image {
+	position:  absolute;
+	left:  28px; 
+	top:  50%; 
+	transform:  translateY(-50%); 
+	height:  14px; 
+	width:  auto;
+	opacity:  .3; 
+	pointer-events:  none; 
+	transition:  opacity .3s ease; 
+}
+.search__box:focus + .search__image {
+	opacity:  0; 
+}
+.search__box {
+	background: #ffffff; 
+	color:  $primary; 
+	padding:  6px 8px; 
+	font-size:  14px;
+	text-align:  right; 
+	margin-left:  18px; 
+	border:  solid 1px #dbdbdb;
+}
