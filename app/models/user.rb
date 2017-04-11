@@ -10,4 +10,12 @@ class User < ApplicationRecord
     	def set_full_name
     		self.full_name = self.first_name + " " + self.last_name
     	end
+
+    	def superadmin?
+    		role == "Superadmin"
+  		end
+
+  		def admin?
+    		role == "Admin"
+  		end
 end

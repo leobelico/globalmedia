@@ -1,0 +1,17 @@
+<%= form_for(@user) do |f| %>
+	<% if @user.errors.any? %>
+		<div >
+			<label><%= pluralize(@admin.errors.count, "error") %></label>
+			<ul>
+				<% @admin.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<%= f.text_field :first_name, placeholder: "Nombre(s)" %><br/>
+	<%= f.text_field :last_name, placeholder: "Apellidos(s)" %><br/>
+	<%= f.text_field :email, placeholder: "Email" %><br/>
+	Rol: <%= f.select(:role, ['Superadmin', 'Admin']) %>
+	<%= f.submit "Guardar" %>
+<% end %>

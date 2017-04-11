@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   	get :autocomplete_article_name, on: :collection
   end
 
+  resources :users
 end
