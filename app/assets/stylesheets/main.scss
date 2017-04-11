@@ -19,16 +19,26 @@
 
 $interface-width:  1024px; 
 
+
+html, 
+body {
+	height:  100%; 
+	width:  100%; 
+	font-family: "Open Sans", sans-serif; 
+}
 .interface {
 	width:  100%; 
 	max-width:  $interface-width; 
 	display:  flex; 
-	flex-direction:  row; 
+	flex-direction:  column; 
 	align-items:  flex-start; 
 	justify-content:  flex-start; 
 	flex-wrap:  wrap;
 	margin-left:  auto; 
 	margin-right:  auto; 
+	border-left:  solid 1px #dbdbdb; 
+	border-right:  solid 1px #dbdbdb; 
+	min-height:  100%; 
 }
 .main-content,
 .sidebar {
@@ -45,5 +55,6 @@ $interface-width:  1024px;
 @import "components/navbar"; 
 @import "components/social-media"; 
 @import "components/its-news"; 
+@import "components/breaking-news"; 
 
 
