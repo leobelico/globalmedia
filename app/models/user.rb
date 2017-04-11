@@ -6,16 +6,17 @@ class User < ApplicationRecord
 
     before_save :set_full_name
 
-    private
-    	def set_full_name
-    		self.full_name = self.first_name + " " + self.last_name
-    	end
-
-    	def superadmin?
+    def superadmin?
     		role == "Superadmin"
   		end
 
   		def admin?
     		role == "Admin"
   		end
+    private
+    	def set_full_name
+    		self.full_name = self.first_name + " " + self.last_name
+    	end
+
+    	
 end
