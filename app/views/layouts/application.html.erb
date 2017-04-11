@@ -13,14 +13,17 @@
   </head>
 
   <body>
-
-	<%= render "components/topbar" %>
-	<%= render "components/header" %>
-	<%= render "components/navbar" %>
-	
+	<% if !request.url.include? (request.base_url + "/panel") %>
+		<%= render "components/topbar" %>
+		<%= render "components/header" %>
+		<%= render "components/navbar" %>
+	<% end %>
  	<div class="interface">
-		<%= render "components/its-news" %>
-		<%= render "components/breaking-news" %>
+ 	
+		<% if !request.url.include? (request.base_url + "/panel") %>
+			<%= render "components/its-news" %>
+			<%= render "components/breaking-news" %>
+		<% end %>
 	    <%= yield %>
 
 	    <% if user_signed_in? %>

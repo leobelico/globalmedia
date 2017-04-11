@@ -39,6 +39,8 @@ body {
 	border-left:  solid 1px #dbdbdb; 
 	border-right:  solid 1px #dbdbdb; 
 	min-height:  100%; 
+	padding:  8px;
+	box-sizing:  border-box; 
 }
 .main-content,
 .sidebar {
@@ -50,6 +52,7 @@ body {
 }
 
 
+@import "components/forms"; 
 @import "components/topbar"; 
 @import "components/header";
 @import "components/navbar"; 
