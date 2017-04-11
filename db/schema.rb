@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170320143742) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "articles", force: :cascade do |t|
     t.string   "name",              default: ""
     t.text     "note",              default: ""
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20170320143742) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "slug",              default: ""
-    t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id"
+    t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
   end
 
   create_table "articles_hashtags", force: :cascade do |t|
@@ -42,7 +45,7 @@ ActiveRecord::Schema.define(version: 20170320143742) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "article_id"
-    t.index ["article_id"], name: "index_highlights_on_article_id"
+    t.index ["article_id"], name: "index_highlights_on_article_id", using: :btree
   end
 
   create_table "sections", force: :cascade do |t|
@@ -52,4 +55,5 @@ ActiveRecord::Schema.define(version: 20170320143742) do
     t.string   "slug"
   end
 
+  add_foreign_key "highlights", "articles"
 end
