@@ -1,0 +1,20 @@
+<div class="topbar">
+	<%= link_to "global media", root_path, class: "topbar__link" %>
+	<%= link_to "invesitgación especial", root_path, class: "topbar__link" %>
+	<%= link_to "denuncia global", root_path, class: "topbar__link" %>
+	<%= link_to "tráfico san luis", root_path, class: "topbar__link" %>
+
+	<div class="social-media">
+		<p class="social-media__tag">Siguenos</p>
+		<%= link_to root_path, class: "social-media__link" do %>
+			<%= image_tag "twitter.svg" %>
+		<% end %>
+		<%= link_to root_path, class: "social-media__link" do %>
+			<%= image_tag "facebook.svg" %>
+		<% end %>
+	</div>
+	<div class="search">
+		<input type="text" class="search__box" placeholder="Busqueda">
+		<%= image_tag "search.svg", class: "search__image" %>
+	</div>
+</div>

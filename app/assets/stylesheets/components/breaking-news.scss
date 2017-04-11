@@ -1,0 +1,22 @@
+.breaking-news {
+	width:  calc(100% - 16px); 
+	margin:  0px 8px 8px 8px; 
+	background:  #ffc05b; 
+	padding:  24px; 
+	padding-top:  32px; 
+	box-sizing:  border-box; 
+	position:  relative;
+	display:  flex; 
+	flex-direction:  row; 
+}
+.breaking-news__tag	{
+	position:  absolute; 
+	top:  0; 
+	left:  0; 
+	padding:  8px;
+	text-transform:  uppercase; 
+	color:  #ffffff; 
+	background-color:  #f79800; 
+	font-weight:  600; 
+	letter-spacing:  2px; 
+}
