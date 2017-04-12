@@ -1,6 +1,15 @@
 class SectionsController < ApplicationController
+	before_action :authenticate_user!, except: [:index, :show]
 	before_action :set_section, only: [:show, :edit, :update, :destroy]
 	
+	def admin_show
+		@section = Section.find(params[:format])
+
+	end
+	def set_highlight_and_recomendations
+		@section = Sectios.find(params[:format])
+	end
+
 	def show
 	end
 

@@ -1,0 +1,12 @@
+<h1><%= @section.name %></h1>
+
+<%= form_tag(panel_sections_set_highlight_and_recomendations_path) do %>
+	<% @section.articles.each do |article|%>
+		Resaltado: <%= radio_button_tag(:highlight, article.id) %>
+		Global Recomienda<%= check_box_tag :all_recomendations, article.id, false, :name => '[all_recomendations][]' %>
+		<%= link_to article.name, article %><br/>
+	<% end %>
+
+	<%= submit_tag "Enviar" %>
+<% end %>
+

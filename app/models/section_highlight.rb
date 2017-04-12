@@ -1,0 +1,2 @@
+class SectionHighlight < ApplicationRecord
+end
