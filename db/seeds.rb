@@ -25,7 +25,6 @@ short_description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. T
 
 article_name = "Lorem Ipsum Dolor Sit Amet"
 
-
 superadmins = User.create([
 		{first_name: "Ilse", last_name: "Alejo", email: "ilse@nuva.rocks", password: "qwerty123", password_confirmation: "qwerty123", role: "superadmin"},
 		{first_name: "Eugenio", last_name: "Lujambio", email: "eugenio@nuva.rocks", password: "qwerty123", password_confirmation: "qwerty123", role: "superadmin"},
@@ -35,8 +34,6 @@ superadmins = User.create([
 		{first_name: "Nats", last_name: "Ramírez", email: "nats@nuva.rocks", password: "qwerty123", password_confirmation: "qwerty123", role: "admin"},
 		{first_name: "Carlos", last_name: "Ramírez", email: "carlos@nuva.rocks", password: "qwerty123", password_confirmation: "qwerty123", role: "admin"}
 	])
-
-
 
 
 
