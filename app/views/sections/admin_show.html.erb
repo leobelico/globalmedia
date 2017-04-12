@@ -2,6 +2,7 @@
 
 <%= form_tag(panel_sections_set_highlight_and_recomendations_path) do %>
 	<% @section.articles.order(created_at: "DESC").each do |article|%>
+		<%= article.highlight %>
 		<% if article.highlight? %>
 			Resaltado: <%= radio_button_tag(:highlight, article.id, :checked) %>
 		<% else %>

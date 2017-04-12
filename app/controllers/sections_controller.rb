@@ -34,30 +34,20 @@ class SectionsController < ApplicationController
 
 		current_articles = Article.where(articable: article.articable)
 		current_articles.each do |a|
-			p "UPDATING"
-			p a.name
-			a.update_attributes(highlight: false)
-			p a.highlight
+			if a != article
+				p "UPDATING"
+				p a.name
+				a.update_attributes(highlight: false)
+				p a.highlight
+			end
 		end
 		article.update_attributes(highlight: true)
 		p "ARTICLE highlight"
 		p article.name
 		p article.highlight
-
-		current_articles.each do |a|
-			p "UPDATING"
-			p a.name
-			a.update_attributes(highlight: false)
-			p a.highlight
-		end
-
-			#SectionHighlight.create(article_id: this_article.id, section_id: this_article.articable.id )
-
-		
-
-		
+     
 	    
-		redirect_to :back
+		redirect_back(fallback_location: root_url)
 
 	end
 
