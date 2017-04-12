@@ -2,11 +2,24 @@
 
 <%= form_tag(panel_sections_set_highlight_and_recomendations_path) do %>
 	<% @section.articles.each do |article|%>
-		Resaltado: <%= radio_button_tag(:highlight, article.id) %>
-		Global Recomienda<%= check_box_tag :all_recomendations, article.id, false, :name => '[all_recomendations][]' %>
+		Resaltado: <%= radio_button_tag(:highlight, article.id, value: article.highlight) %>
+
+		
+		
+		Global Recomienda
+		
+		<% if article.section_highlights.count == 0 %>
+			<%= check_box_tag :all_recommendations, article.id, false, :name => '[all_recommendations][]' %>
+		<% else %>
+			<%= check_box_tag :all_recommendations, article.id, true, :name => '[all_recommendations][]' %>
+		<% end %>
 		<%= link_to article.name, article %><br/>
+		<br/>
 	<% end %>
 
 	<%= submit_tag "Enviar" %>
 <% end %>
 
+<% @highlights.each do |highlight| %>
+	<%= highlight.article.name %> <br/>
+<% end %>

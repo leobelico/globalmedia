@@ -4,10 +4,40 @@ class SectionsController < ApplicationController
 	
 	def admin_show
 		@section = Section.find(params[:format])
-
+		@highlights = SectionHighlight.where(section: @section).order(updated_at: "DESC")
 	end
 	def set_highlight_and_recomendations
-		@section = Sectios.find(params[:format])
+		article = Article.find(params[:highlight])
+		article.update_attributes(highlight: true)
+
+		articles =  Article.where(id: params[:all_recommendations])
+		articles_in_highlights = SectionHighlight.where(article_id: params[:all_recommendations], section: article.articable)
+		articles.each do |this_article|
+			created = false
+			articles_in_highlights.each do |a_in_h|
+				if this_article == a_in_h.article
+					created = true
+				end
+			end
+			if created == false
+				SectionHighlight.create(article_id: this_article.id, section_id: this_article.articable.id )
+			end
+		end
+
+		if articles_in_highlights.count >= 4
+			get_first_h = SectionHighlight.where(section: article.articable).first(articles_in_highlights.count - 3)
+			get_first_h.each do |h|
+				h.destroy
+			end 
+		end
+			#SectionHighlight.create(article_id: this_article.id, section_id: this_article.articable.id )
+
+		
+
+		
+	    
+		redirect_to :back
+
 	end
 
 	def show
