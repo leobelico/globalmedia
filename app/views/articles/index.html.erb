@@ -1,0 +1,10 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Notas</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Nueva nota", new_article_path, class: "button" %>
+	</div>
+</div>
+<% @articles.each do |article| %>
+	<%= article.name %>
+	<%= article.short_description %>
+<% end %>

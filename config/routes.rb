@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :articles, param: :slug, only: [:show] do
       get :search_hashtag, on: :collection
   end
+  
+  get "panel", to: "panel#panel"
 
   authenticated :user do 
     root to: "panel#panel", as: "authenticated_root"

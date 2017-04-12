@@ -1,0 +1,34 @@
+.admin-sidebar {
+	display:  flex; 
+	flex-direction:  column; 
+	align-items:  flex-start; 
+	justify-content:  flex-start; 
+	box-sizing:  border-box; 
+	width:  $admin-sidebar-width; 
+	background-color:  $gray; 
+	position:  fixed; 
+	top:  0; 
+	left:  0; 
+	height:  100%; 
+	padding-bottom:  24px; 
+}
+.admin-sidebar__logo {
+	// width:  140px; 
+	height:  78px; 
+	padding:  24px;
+	margin-bottom:  36px; 
+	width:  100%;  
+	box-sizing:  border-box; 
+	background:  rgb(59, 59, 74); 
+	img {
+		height:  100%; 
+		width:  auto; 
+	}
+}
+.admin-sidebar__link {
+	color:  #ffffff; 
+	font-size:  18px; 
+	font-weight:  600; 
+	padding-left:  24px; 
+	padding-right:  24px; 
+}
