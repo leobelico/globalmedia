@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   helper_method :actualidad
   helper_method :mundo_tecnologico
   helper_method :al_momento
+  helper_method :get_todays_keywords
 
   def san_luis(last_number)
   	@san_luis = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where('highlights.article_id IS NULL AND articable_id = 1').last(last_number)
@@ -60,6 +61,10 @@ class ApplicationController < ActionController::Base
   	if not_repeat_highlight
   		@articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where('highlights.article_id IS NULL').order(created_at: "DESC").last(last_number)
   	end
+  end
+
+  def get_todays_keywords
+    @keywords = Keyword.where('keyword != ?', '').order(created_at: "ASC")
   end
 
 end

@@ -46,7 +46,7 @@ class ArticlesController < ApplicationController
 
 	private
 		def article_params
-			params.require(:article).permit(:name, :note, :short_description, :hashtags_names, :articable_id, :articable_type)
+			params.require(:article).permit(:name, :note, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id)
 		end
 
 		def set_article

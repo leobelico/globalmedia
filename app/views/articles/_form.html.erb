@@ -14,6 +14,13 @@
 
 	<label>Nombre de la Nota</label>
 	<%= f.text_field :name %><br/>
+
+	<% if get_todays_keywords.count > 1 %>
+		<label>Palabra Clave</label>
+
+		<%= f.select :keyword_id, options_for_select( get_todays_keywords.collect{ |u| [u.keyword, u.id] }), include_blank: 'Ninguno' %><br/>
+	<% end %>
+
 	<label>Descripción corta de la Nota</label><br/>
 	<%= f.text_area :short_description %>
 	<label>Nota: </label><br/>
