@@ -1,0 +1,6 @@
+<h1>#ESNOTICIA</h1>
+
+<%= link_to "Editar", panel_keywords_edit_multiple_path %>
+<% @keywords.each do |keyword| %>
+	<%= keyword.keyword %><br/>
+<% end %>

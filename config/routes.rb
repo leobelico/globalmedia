@@ -13,4 +13,9 @@ Rails.application.routes.draw do
   end
 
   resources :users
+  resources :keywords
+  get "panel/keywords/edit_multiple", to: "keywords#edit_multiple"
+  
+  get "panel/keywords/update_multiple", to: "keywords#update_multiple"
+  post "panel/keywords/update_multiple", to: "keywords#update_multiple"
 end
