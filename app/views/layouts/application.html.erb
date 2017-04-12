@@ -14,18 +14,29 @@
 
   <body>
 
-	<%= render "components/topbar" %>
-	<%= render "components/header" %>
-	<%= render "components/navbar" %>
+    <% if user_signed_in? %>
+		<%= link_to "Salir", destroy_user_session_path %>
+	<% end %>
 	
- 	<div class="interface">
-		<%= render "components/its-news" %>
-		<%= render "components/breaking-news" %>
-	    <%= yield %>
+  	<% panel_url = request.url.include? (request.base_url + "/panel")%>
 
-	    <% if user_signed_in? %>
-			<%= link_to "Salir", destroy_user_session_path %><br/>
-	    <% end %>
- 	</div>
+	<%= render "components/topbar" if !panel_url %>	
+	<%= render "components/header" %>
+	<%= render "components/navbar" if !panel_url %>
+
+	<% if user_signed_in? %>
+		<div class="interface interface--admin">
+			<%= yield %>
+		</div>
+	<% else %>
+	 	<div class="interface">
+			<% if !panel_url %>
+				<%= render "components/its-news" %>
+				<%= render "components/breaking-news" %>
+			<% end %>
+		    <%= yield %>
+	 	</div>
+ 	<% end %>
+
   </body>
 </html>
