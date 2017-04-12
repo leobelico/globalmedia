@@ -18,7 +18,7 @@
 @import "base/colors"; 
 
 $interface-width:  1024px; 
-
+$admin-sidebar-width:  260px; 
 
 html, 
 body {
@@ -42,6 +42,15 @@ body {
 	padding:  8px;
 	box-sizing:  border-box; 
 }
+.interface--admin {
+	border:  none; 
+	max-width:  calc(100% - #{$admin-sidebar-width}); 
+	margin-right:  0; 
+	margin-left:  auto; 
+	padding:  0px; 
+	background-color:  $gray-100; 
+}
+
 .main-content,
 .sidebar {
 	display:  flex; 
@@ -53,6 +62,8 @@ body {
 
 @import "components/text"; 
 @import "components/forms"; 
+@import "components/buttons"; 
+@import "components/admin/cards"; 
 
 @import "components/topbar"; 
 @import "components/header";
@@ -60,5 +71,7 @@ body {
 @import "components/social-media"; 
 @import "components/its-news"; 
 @import "components/breaking-news"; 
+@import "components/admin/admin-sidebar"; 
+@import "components/admin/admin-panel"; 
 
 

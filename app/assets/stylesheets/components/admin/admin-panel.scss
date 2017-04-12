@@ -1,0 +1,25 @@
+.panel__header {
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  center; 
+	justify-content:  space-between; 
+	width:  100%; 
+	// border-bottom:  solid 1px #dbdbdb; 
+	padding:  18px 28px; 
+	background:  #ffffff; 
+	box-sizing:  border-box; 
+}
+.panel__title {
+	font-weight:  600; 
+	color: #424242; 
+	margin-bottom:  0px; 
+	font-size:  28px; 
+}
+.panel__header .title .current {
+	color:  $tertiary; 
+}
+.panel__actions {
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  center; 
+}
