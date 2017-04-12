@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_todays_keywords
-    @keywords = Keyword.order(created_at: "ASC")
+    @keywords = Keyword.where('keyword != ?', '').order(created_at: "ASC")
   end
 
 end

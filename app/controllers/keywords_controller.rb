@@ -1,6 +1,6 @@
 class KeywordsController < ApplicationController
 	before_action :authenticate_user!, except: [:show]
-	before_action :get_all_keywords, only: [:index, :edit_multiple]
+	before_action :get_all_keywords, only: [ :edit_multiple]
 	def index
 		
 	end
@@ -14,13 +14,16 @@ class KeywordsController < ApplicationController
 
 	def create
 		params["keywords"].each do |keyword|
-	    	if keyword["keyword"] != ""
-	      		Keyword.create(keyword_params(keyword))
-	    	end
+	    	
+	    	Keyword.create(keyword_params(keyword))
+	    	
  	 	end
  	 	redirect_to keywords_path
 	end
 
+	def show
+		@keyword = Keyword.find_by_slug(params[:slug])
+	end
 	
 	def edit_multiple
 	end

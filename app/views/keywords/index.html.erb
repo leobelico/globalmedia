@@ -1,6 +1,10 @@
 <h1>#ESNOTICIA</h1>
+<% if get_todays_keywords.count > 1 %>
+	<%= link_to "Editar", panel_keywords_edit_multiple_path %>
+<% else %>
+	<%= link_to "Agregar Palabras Clave", new_keyword_path %>
 
-<%= link_to "Editar", panel_keywords_edit_multiple_path %>
-<% @keywords.each do |keyword| %>
+<% end %>
+<% get_todays_keywords.each do |keyword| %>
 	<%= keyword.keyword %><br/>
 <% end %>
