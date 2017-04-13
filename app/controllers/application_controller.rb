@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_recommendations_per_section
   helper_method :get_global_recommendations
   helper_method :get_todays_keywords
+  helper_method :get_banner
 
   def get_articles_per_section(id, last_number)
     section = Section.find(id)
@@ -37,6 +38,12 @@ class ApplicationController < ActionController::Base
 
   def get_todays_keywords
     @keywords = Keyword.where('keyword != ?', '').order(created_at: "ASC")
+  end
+
+  def get_banner(section, section_type, size)
+    
+    @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where(" section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}'").last
+
   end
 
 end

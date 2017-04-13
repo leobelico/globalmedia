@@ -1,14 +1,36 @@
 <h1><%= @section.name %></h1>
 
 
-<%= @section.articles.each do |article|%>
+<% @section.articles.each do |article|%>
 		
 	<%= link_to article.name, article_path(article) %><br/>
+<% end %>
+
+
+<!-- NOTAS DEL PROGRAMADOR-->
+	<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
+
+	<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
+<!-- -->
+<% if get_banner(@section, "Section", "Chico" ) %>
+	Banner Chico: <%= get_banner(@section, "Section", "Chico" ).name %>
+	<br/>
+<% end %>
+
+<% if get_banner(@section, "Section", "Mediano" ) %>
+
+	Banner Mediano: <%= get_banner(@section, "Section", "Mediano" ).name  %><br/>
+<% end %>
+
+<% if get_banner(@section, "Section", "Grande" ) %>
+
+	Banner Grande: <%= get_banner(@section, "Section", "Grande" ).name  %><br/>
 <% end %>
 
 <% case @section.name %>
 	<% when "San Luis" %>
 		<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Seguridad").id, 3) , section_name: "Seguridad", highlight: "" %>
+
 	<% when "Seguridad" %>
 		<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Negocios").id, 3), section_name: "Negocios", highlight: "" %>
 	<% when "Estados" %>

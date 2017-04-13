@@ -5,5 +5,5 @@
 
 <h3>Este banner aparece en: </h3>
 <% @banner.section_banners.each do |section_banner| %>
-	<%= section_banner.sectionable.name %><br/>
+	<%= section_banner.sectionable.name %> <%= section_banner.sectionable_type %><br/>
 <% end %>
