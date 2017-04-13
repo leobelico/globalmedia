@@ -19,6 +19,15 @@
 //= require libraries/money
 //= require libraries/iframe-resizer/iframe-resizer
 //= require libraries/iframe-resizer/iframe-resizer-content-window
+//= require libraries/quill/quill.min 
+// 
+// 
+// 
+// 
+// QUILL BLOTS
+// 
+//= require libraries/quill/blots/Tweet 
+//= require libraries/quill/blots/EmbedContent 
 // 
 // 
 // 
@@ -28,13 +37,5 @@
 //= require components/currency-rates
 //= require components/weather
 //= require components/quill-forms
-// 
-// 
-// 
-// 
-// 
-// QUILL BLOTS
-// 
-//= require libraries/quill/blots/Tweet 
-//= require libraries/quill/blots/EmbedContent 
+
 
