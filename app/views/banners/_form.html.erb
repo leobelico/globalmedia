@@ -1,0 +1,55 @@
+<%= form_for(@banner, html: { class: "admin-form card" }) do |f| %>
+	<% if @banner.errors.any? %>	
+		<h5><%= pluralize(@banner.errors.count, "error") %></h5>
+			<ul>
+				<% @banner.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+				<% end %>
+			</ul>
+	<% end %>
+	
+	<div class="field field--string">
+		<label>Nombre del Banner</label>
+		<%= f.text_field :name %>
+	</div>
+	
+	<div class="field field--string">
+		<label>Imagen para Escritorio</label>
+		<%= f.text_field :large_image %>
+	</div>
+	
+	<div class="field field--string">
+		<label>Imagen para móviles</label>
+		<%= f.text_field :small_image %>
+	</div>
+	
+	<div class="field field--string">
+		<%= f.select(:size, [ "Chico", "Mediano", "Grande"], {}, { class: "" }) %>
+	</div>
+	
+	<h3>Este banner aparecerá en:</h3>
+	<h4>Banner Global</h4>
+		<%= f.check_box :global %> Global
+	<h4>Banner en Portada</h4>
+		<%= f.check_box :titlepage %> Página Principal
+
+	<h4>Secciones:</h4>
+	<% Section.all.each do |section| %>
+		<% if @banner.new_record? %>
+			<%= check_box_tag :all_sections, section.id, false, :name => '[all_sections][]' %> <%= section.name %>
+		<% else %>
+			<% if SectionBanner.where(sectionable_id: section.id, banner: @banner).count == 0 %>
+				<%= check_box_tag :all_sections, section.id, false, :name => '[all_sections][]' %> <%= section.name %>
+				<% else %>
+					<%= check_box_tag :all_sections, section.id, true, :name => '[all_sections][]' %> <%= section.name %>
+			<% end %>
+		<% end %>
+		
+
+		<br/>
+	<% end %>
+	<div class="actions">
+		<%= f.submit "Guardar" %>
+	</div>
+	
+<% end %>

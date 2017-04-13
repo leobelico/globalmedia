@@ -1,8 +1,11 @@
 <div class="its-news">
 	<p class="its-news__hashtag">#ESNOTICIA</p>
 	<div class="its-news__news">
+
 		<% get_todays_keywords.each do |keyword| %>
-			<%= link_to keyword.keyword, keyword, class: "its-news__title" %>
+			<% if !keyword.slug.empty? %>
+				<%= link_to keyword.keyword, keyword, class: "its-news__title" %>
+			<% end %>
 		<% end %>
 		
 	</div>

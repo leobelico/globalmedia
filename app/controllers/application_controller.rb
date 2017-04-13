@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_recommendations_per_section
   helper_method :get_global_recommendations
   helper_method :get_todays_keywords
+  helper_method :get_banner
 
   def get_articles_per_section(id, last_number)
     section = Section.find(id)
@@ -16,7 +17,7 @@ class ApplicationController < ActionController::Base
   
   def al_momento(not_repeat_highlight, not_repeat_recommendation, not_repeat_outstading, last_number)
   	if not_repeat_highlight
-  		@articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where('highlights.article_id IS NULL').order(created_at: "DESC").last(last_number)
+  		@articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where('highlights.article_id IS NULL AND articles.highlight = false AND articles.global_recommendation = false').order(created_at: "DESC").last(last_number)
   	end
   end
 
@@ -37,6 +38,20 @@ class ApplicationController < ActionController::Base
 
   def get_todays_keywords
     @keywords = Keyword.where('keyword != ?', '').order(created_at: "ASC")
+  end
+
+  def get_banner(section, section_type, size)
+    if section_type == "Global" or section_type == "TitlePage"
+      if section_type == "Global"
+        @banner = Banner.where(global: true, size: size).last
+      else
+        @banner = Banner.where(titlepage: true, size: size).last
+
+      end 
+    else
+      @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where(" section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}'").last
+    end
+
   end
 
 end

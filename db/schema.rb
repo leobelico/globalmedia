@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413154207) do
+ActiveRecord::Schema.define(version: 20170413185743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,17 @@ ActiveRecord::Schema.define(version: 20170413154207) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "banners", force: :cascade do |t|
+    t.string   "large_image", default: ""
+    t.string   "small_image", default: ""
+    t.string   "size",        default: ""
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "name",        default: ""
+    t.boolean  "global",      default: false
+    t.boolean  "titlepage",   default: false
+  end
+
   create_table "hashtags", force: :cascade do |t|
     t.string   "name",       default: ""
     t.datetime "created_at",              null: false
@@ -67,6 +78,16 @@ ActiveRecord::Schema.define(version: 20170413154207) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.string   "slug",       default: ""
+  end
+
+  create_table "section_banners", force: :cascade do |t|
+    t.integer  "sectionable_id"
+    t.string   "sectionable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "banner_id"
+    t.index ["banner_id"], name: "index_section_banners_on_banner_id", using: :btree
+    t.index ["sectionable_type", "sectionable_id"], name: "index_section_banners_on_sectionable_type_and_sectionable_id", using: :btree
   end
 
   create_table "section_highlights", force: :cascade do |t|
@@ -110,6 +131,7 @@ ActiveRecord::Schema.define(version: 20170413154207) do
   add_foreign_key "articles", "users"
   add_foreign_key "highlights", "articles"
   add_foreign_key "hits", "articles"
+  add_foreign_key "section_banners", "banners"
   add_foreign_key "section_highlights", "articles"
   add_foreign_key "section_highlights", "sections"
 end
