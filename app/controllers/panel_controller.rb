@@ -1,5 +1,6 @@
 class PanelController < ApplicationController
 
+
 	def show_global_recommendations
 		@articles = Article.all
 	end
@@ -14,4 +15,8 @@ class PanelController < ApplicationController
 		redirect_back(fallback_location: root_url)
 		
 	end
+
+	def panel
+	end 
+
 end

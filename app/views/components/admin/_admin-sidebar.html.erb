@@ -1,0 +1,7 @@
+<div class="admin-sidebar">
+	<%= link_to root_path, class: "admin-sidebar__logo" do %>
+		<%= image_tag "logo-white.svg" %>
+	<% end %>
+	<%= link_to "Notas", articles_path, class: "admin-sidebar__link" %>
+	<%= link_to "Salir", destroy_user_session_path, class: " button--logout admin-sidebar__link" %>
+</div>

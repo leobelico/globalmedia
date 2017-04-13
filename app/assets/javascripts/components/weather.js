@@ -1,5 +1,3 @@
-
-
 var weather_success = function(data){
 	var degrees_farenheit = data.query.results.channel.item.condition.temp; 
 
