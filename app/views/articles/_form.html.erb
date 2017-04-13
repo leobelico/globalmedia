@@ -1,4 +1,4 @@
-<%= form_for(@article, html: { class: "admin-form card" }) do |f| %>
+<%= form_for(@article, html: { class: "admin-form form--article card", remote: true }) do |f| %>
 	<% if @article.errors.any? %>	
 		<h5><%= pluralize(@article.errors.count, "error") %></h5>
 			<ul>
@@ -13,31 +13,26 @@
 		<%= f.hidden_field :articable_type, value: "Section" %>
 	</div>
 	<div class="field field--string">
-		<label>Nombre de la Nota</label>
+		<label>Título de la Nota</label>
 		<%= f.text_field :name %>
 	</div>
-
-	<% if get_todays_keywords.count > 1 %>
-		<div class="field field--string">
-			<label>Palabra Clave</label>
-
-			<%= f.select :keyword_id, options_for_select( get_todays_keywords.collect{ |u| [u.keyword, u.id] }), include_blank: 'Ninguno' %>
-		</div>
-	<% end %>
 	<div class="field">
 		<label>Descripción corta de la Nota</label>
 		<%= f.text_area :short_description %>
 	</div>
-	<div class="field">
-		<label>Nota: </label>
-		<%= f.text_area :note %>
+	<div id="note-editor">
+		
 	</div>
+	<% if get_todays_keywords.count > 1 %>
+		<div class="field field--string">
+			<label>Palabra Clave</label>
+			<%= f.select :keyword_id, options_for_select( get_todays_keywords.collect{ |u| [u.keyword, u.id] }), include_blank: 'Ninguno' %>
+		</div>
+	<% end %>
 	<div class="field">
 		<label>Hashtags: </label>
 		<%= f.text_field :hashtags_names, placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", id: "hashtags" %>
 	</div>
-	<div class="actions">
-		<%= f.submit "Guardar" %>
-	</div>
 	
 <% end %>
+<%= javascript_include_tag "/assets/components/quill-initializer" %>

@@ -7,6 +7,12 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700" rel="stylesheet">
+
+	<script src="https://cdn.quilljs.com/1.2.3/quill.min.js"></script>
+	<link href="https://cdn.quilljs.com/1.2.3/quill.snow.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+	<script src="https://platform.twitter.com/widgets.js"></script>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
@@ -17,7 +23,7 @@
   	<% panel_url = request.url.include? (request.base_url + "/panel")%>
 
 	<%= render "components/topbar" if !panel_url %>	
-	<%= render "components/header" if !user_signed_in? %>
+	<%= render "components/header" if !user_signed_in? || !panel_url %>
 	<%= render "components/navbar" if !panel_url %>
 
 	<%= render "components/admin/admin-sidebar" if panel_url && user_signed_in? %>

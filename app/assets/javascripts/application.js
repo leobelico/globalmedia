@@ -17,7 +17,24 @@
 //= require turbolinks
 //= require_directory .
 //= require libraries/money
+//= require libraries/iframe-resizer/iframe-resizer
+//= require libraries/iframe-resizer/iframe-resizer-content-window
+// 
+// 
+// 
+// 
+//  COMPONENTS 
+// 
 //= require components/currency-rates
 //= require components/weather
-
+//= require components/quill-forms
+// 
+// 
+// 
+// 
+// 
+// QUILL BLOTS
+// 
+//= require libraries/quill/blots/Tweet 
+//= require libraries/quill/blots/EmbedContent 
 
