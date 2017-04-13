@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :articles, param: :slug, only: [:show] do
       get :search_hashtag, on: :collection
   end
+  resources :sections, only: [:show], param: :slug 
 
 
   resources :highlights do 
@@ -21,8 +22,7 @@ Rails.application.routes.draw do
   end
   resources :users
   resources :keywords, only: [:show], param: :slug 
-  resources :sections, only: [:show], param: :slug 
-  resources :articles, only: [:show], param: :slug 
+
   
   get "panel/sections/set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
   post "panel/sections/set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
@@ -32,4 +32,10 @@ Rails.application.routes.draw do
   get "panel/keywords/edit_multiple", to: "keywords#edit_multiple"
   get "panel/keywords/update_multiple", to: "keywords#update_multiple"
   post "panel/keywords/update_multiple", to: "keywords#update_multiple"
+
+
+  get "panel/show_global_recommendations", to: "panel#show_global_recommendations"
+  get "panel/set_global_recommendations", to: "panel#set_global_recommendations"
+  post "panel/set_global_recommendations", to: "panel#set_global_recommendations"
+
 end

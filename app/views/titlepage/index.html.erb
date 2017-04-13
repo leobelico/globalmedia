@@ -13,23 +13,73 @@
 
 <%= render "/layouts/al_momento", section: al_momento(true, false, false, 5) %>
 
-<%= render "/layouts/articles", section: san_luis(4), section_name: "San Luis" %>
+<% if get_section_highlight("San Luis") %>
+	<%= render "/layouts/articles", section: san_luis(3), section_name: "San Luis", highlight: get_section_highlight("San Luis") %>
+<% else %>
+	<%= render "/layouts/articles", section: san_luis(4), section_name: "San Luis", highlight: get_section_highlight("San Luis") %>
+<% end %>
 
-<%= render "/layouts/articles", section: seguridad(4), section_name: "Seguridad" %>
+<% if get_section_highlight("Seguridad") %>
 
-<%= render "/layouts/articles", section: nacional(4), section_name: "Nacional" %>
+	<%= render "/layouts/articles", section: seguridad(3), section_name: "Seguridad", highlight: get_section_highlight("Seguridad") %>
+<% else %>
+	<%= render "/layouts/articles", section: seguridad(4), section_name: "Seguridad", highlight: get_section_highlight("Seguridad") %>
 
-<%= render "/layouts/articles", section: internacional(4), section_name: "Internacional" %>
+<% end %>
+<% if get_section_highlight("Nacional") %>
+	<%= render "/layouts/articles", section: nacional(3), section_name: "Nacional", highlight: get_section_highlight("Nacional") %>
+<% else %>
+	<%= render "/layouts/articles", section: nacional(4), section_name: "Nacional", highlight: get_section_highlight("Nacional") %>
 
-<%= render "/layouts/articles", section: farandula(4), section_name: "Farándula" %>
+<% end %>
 
-<%= render "/layouts/articles", section: tactica(4), section_name: "Táctica" %>
+<% if get_section_highlight("Internacional") %>
 
-<%= render "/layouts/articles", section: negocios(4), section_name: "Negocios" %>
+	<%= render "/layouts/articles", section: internacional(3), section_name: "Internacional", highlight: get_section_highlight("Internacional") %>
+<% else %>
+	<%= render "/layouts/articles", section: internacional(4), section_name: "Internacional", highlight: get_section_highlight("Internacional") %>
 
-<%= render "/layouts/articles", section: estados(4), section_name: "Estados" %>
+<% end %>
+<% if get_section_highlight("Farándula") %>
 
-<%= render "/layouts/articles", section: actualidad(4), section_name: "Actualidad" %>
+	<%= render "/layouts/articles", section: farandula(3), section_name: "Farándula", highlight: get_section_highlight("Farándula") %>
+<% else %>
+	<%= render "/layouts/articles", section: farandula(4), section_name: "Farándula", highlight: get_section_highlight("Farándula") %>
+
+<% end %>
+
+<% if get_section_highlight("Táctica") %>
+
+	<%= render "/layouts/articles", section: tactica(3), section_name: "Táctica", highlight: get_section_highlight("Táctica") %>
+<% else %>
+	<%= render "/layouts/articles", section: tactica(4), section_name: "Táctica", highlight: get_section_highlight("Táctica") %>
+<% end %>
+<% if get_section_highlight("Negocios") %>
+
+	<%= render "/layouts/articles", section: negocios(3), section_name: "Negocios", highlight: get_section_highlight("Negocios") %>
+<% else %>
+	<%= render "/layouts/articles", section: negocios(4), section_name: "Negocios", highlight: get_section_highlight("Negocios") %>
+
+<% end %>
+
+<% if get_section_highlight("Estados") %>
+
+	<%= render "/layouts/articles", section: estados(3), section_name: "Estados", highlight: get_section_highlight("Estados") %>
+<% else %>
+	<%= render "/layouts/articles", section: estados(4), section_name: "Estados", highlight: get_section_highlight("Estados") %>
+
+<% end %>
+
+<% if get_section_highlight("Actualidad") %>
+
+	<%= render "/layouts/articles", section: actualidad(3), section_name: "Actualidad", highlight: get_section_highlight("Actualidad") %>
+<% else %>
+	<%= render "/layouts/articles", section: actualidad(4), section_name: "Actualidad", highlight: get_section_highlight("Actualidad") %>
+
+<% end %>
+
+<%= render "/layouts/recommendations", articles: get_global_recommendations %>
+
 
 
 
