@@ -124,12 +124,9 @@ input:focus {
 	}
 	iframe {
 		border:  none;
-	}
-	iframe.embed-content {
-		width:  100%; 
+		max-width:  100%;
 	}
 }
-
 
 
 
