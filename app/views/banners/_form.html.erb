@@ -1,0 +1,34 @@
+<%= form_for(@banner, html: { class: "admin-form card" }) do |f| %>
+	<% if @banner.errors.any? %>	
+		<h5><%= pluralize(@banner.errors.count, "error") %></h5>
+			<ul>
+				<% @banner.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+				<% end %>
+			</ul>
+	<% end %>
+	
+	<div class="field field--string">
+		<label>Nombre del Banner</label>
+		<%= f.text_field :name %>
+	</div>
+	
+	<div class="field field--string">
+		<label>Imagen para Escritorio</label>
+		<%= f.text_field :large_image %>
+	</div>
+	
+	<div class="field field--string">
+		<label>Imagen para móviles</label>
+		<%= f.text_field :small_image %>
+	</div>
+	
+	<div class="field field--string">
+		<%= f.select(:size, [ "Chico", "Mediano", "Grande"], {}, { class: "" }) %>
+	</div>
+
+	<div class="actions">
+		<%= f.submit "Guardar" %>
+	</div>
+	
+<% end %>

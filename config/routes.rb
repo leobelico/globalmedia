@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resources :articles, param: :slug, except: [:show, :destroy]
     resources :sections, param: :slug, except: [:show, :destroy] 
     resources :hits
+    resources :banners
 
   end
   resources :users

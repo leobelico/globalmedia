@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   
   def al_momento(not_repeat_highlight, not_repeat_recommendation, not_repeat_outstading, last_number)
   	if not_repeat_highlight
-  		@articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where('highlights.article_id IS NULL').order(created_at: "DESC").last(last_number)
+  		@articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where('highlights.article_id IS NULL AND articles.highlight = false AND articles.global_recommendation = false').order(created_at: "DESC").last(last_number)
   	end
   end
 
