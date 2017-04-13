@@ -12,6 +12,7 @@ class ArticlesController < ApplicationController
 
 	def create
 		@article = Article.new(article_params)
+		@article.user = current_user
 		if @article.save
 			redirect_to @article
 		else
@@ -20,6 +21,18 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
+
+		if !user_signed_in?
+			last_hit = Hit.where(article: @article, created_at: 1.hours.ago..Time.now).last
+
+			if last_hit
+				last_hit.update_attributes(number: last_hit.number + 1)
+			else
+				#no hay ningún hit entonces lo creamos
+				Hit.create(number: 1, article: @article)
+
+			end
+		end
 	end
 
 	def edit

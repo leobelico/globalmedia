@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413002921) do
+ActiveRecord::Schema.define(version: 20170413154207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,8 +27,10 @@ ActiveRecord::Schema.define(version: 20170413002921) do
     t.integer  "keyword_id"
     t.boolean  "highlight",             default: false
     t.boolean  "global_recommendation", default: false
+    t.integer  "user_id"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
     t.index ["keyword_id"], name: "index_articles_on_keyword_id", using: :btree
+    t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
   end
 
   create_table "articles_hashtags", force: :cascade do |t|
@@ -50,6 +52,14 @@ ActiveRecord::Schema.define(version: 20170413002921) do
     t.datetime "updated_at",             null: false
     t.integer  "article_id"
     t.index ["article_id"], name: "index_highlights_on_article_id", using: :btree
+  end
+
+  create_table "hits", force: :cascade do |t|
+    t.integer  "number",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "article_id"
+    t.index ["article_id"], name: "index_hits_on_article_id", using: :btree
   end
 
   create_table "keywords", force: :cascade do |t|
@@ -97,7 +107,9 @@ ActiveRecord::Schema.define(version: 20170413002921) do
   end
 
   add_foreign_key "articles", "keywords"
+  add_foreign_key "articles", "users"
   add_foreign_key "highlights", "articles"
+  add_foreign_key "hits", "articles"
   add_foreign_key "section_highlights", "articles"
   add_foreign_key "section_highlights", "sections"
 end
