@@ -1,6 +1,7 @@
 class Section < ApplicationRecord
 	has_many :articles, as: :articable
   	before_save :to_slug
+  	has_many :section_highlights, dependent: :delete_all
 	
 
 	def to_param

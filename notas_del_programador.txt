@@ -1,0 +1,9 @@
+Destacado de la sección:
+Es un atributo que va en el artículo porque solo es 1 por sección
+Falta tmb que se puedan seleccionar desde la creacion del articulo
+
+
+Globales de global recomienda:
+También es un parametro dentro del artículo, falta hacer que los otros se les quite el atributo automaticamente.
+
+Falta tmb que se puedan seleccionar desde la creacion del articulo

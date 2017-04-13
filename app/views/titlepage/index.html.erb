@@ -13,23 +13,17 @@
 
 <%= render "/layouts/al_momento", section: al_momento(true, false, false, 5) %>
 
-<%= render "/layouts/articles", section: san_luis(4), section_name: "San Luis" %>
+<% @sections.each do |section| %>
+	<% if get_section_highlight(section.id) %>
+		<%= render "/layouts/articles", section: get_articles_per_section(section.id, 3), section_name: section.name, highlight: get_section_highlight(section.id) %>
+	<% else %>
+		<%= render "/layouts/articles", section: get_articles_per_section(section.id, 4), section_name: section.name, highlight: get_section_highlight(section.id) %>
+	<% end %>
+<% end %> 
 
-<%= render "/layouts/articles", section: seguridad(4), section_name: "Seguridad" %>
 
-<%= render "/layouts/articles", section: nacional(4), section_name: "Nacional" %>
+<%= render "/layouts/recommendations", articles: get_global_recommendations %>
 
-<%= render "/layouts/articles", section: internacional(4), section_name: "Internacional" %>
-
-<%= render "/layouts/articles", section: farandula(4), section_name: "Farándula" %>
-
-<%= render "/layouts/articles", section: tactica(4), section_name: "Táctica" %>
-
-<%= render "/layouts/articles", section: negocios(4), section_name: "Negocios" %>
-
-<%= render "/layouts/articles", section: estados(4), section_name: "Estados" %>
-
-<%= render "/layouts/articles", section: actualidad(4), section_name: "Actualidad" %>
 
 
 

@@ -1,0 +1,20 @@
+
+
+<%= form_tag(panel_set_global_recommendations_path) do %>
+	<% @articles.order(created_at: "DESC").each do |article|%>
+		
+		
+		
+		Global Recomienda
+		
+	
+			<%= check_box_tag :all_recommendations, article.id, 
+			article.global_recommendation, :name => '[all_recommendations][]' %>
+		
+		<%= link_to article.name, article %> | <%= article.articable.name %><br/>
+		<br/>
+	<% end %>
+
+	<%= submit_tag "Enviar" %>
+<% end %>
+

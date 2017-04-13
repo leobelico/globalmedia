@@ -1,30 +1,34 @@
 <h1><%= @section.name %></h1>
 
 
-<% @section.articles.each do |article|%>
+<%= @section.articles.each do |article|%>
 		
-	<%= link_to article.name, article %><br/>
+	<%= link_to article.name, article_path(article) %><br/>
 <% end %>
 
 <% case @section.name %>
 	<% when "San Luis" %>
-		<%= render "/layouts/articles", section: seguridad(3), section_name: "Seguridad" %>
+		<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Seguridad").id, 3) , section_name: "Seguridad", highlight: "" %>
 	<% when "Seguridad" %>
-		<%= render "/layouts/articles", section: negocios(3), section_name: "Negocios" %>
+		<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Negocios").id, 3), section_name: "Negocios", highlight: "" %>
 	<% when "Estados" %>
-		<%= render "/layouts/articles", section: nacional(3), section_name: "Nacional" %>
+		<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Nacional").id, 3), section_name: "Nacional", highlight: "" %>
 	<% when "Nacional" %>
-		<%= render "/layouts/articles", section: internacional(3), section_name: "Internacional" %>
+		<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Internacional").id, 3), section_name: "Internacional", highlight: "" %>
 
 	<% when "Internacional" %>
-		<%= render "/layouts/articles", section: internacional(3), section_name: "Internacional" %>
+		<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Nacional").id, 3), section_name: "Nacional", highlight: "" %>
 
 	<% when "Actualidad" %>
-		<%= render "/layouts/articles", section: farandula(3), section_name: "Farándula" %>
+		<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Fárandula").id, 3), section_name: "Farándula", highlight: "" %>
 	<% when "Farándula" %>
-		<%= render "/layouts/articles", section: actualidad(3), section_name: "Actualidad" %>
+		<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Actualidad").id, 3),  section_name: "Actualidad", section_name: "Actualidad", highlight: "" %>
 	<% when "Táctica" %>
-		<%= render "/layouts/articles", section: actualidad(3), section_name: "Actualidad" %>
+		<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Actualidad").id, 3), section_name: "Actualidad", section_name: "Actualidad", highlight: "" %>
 	<% when "Negocio" %>
-		<%= render "/layouts/articles", section: san_luis(3), section_name: "San Luis" %>
+		<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("San Luis").id, 3), section_name: "San Luis", section_name: "San Luis", highlight: "" %>
 <% end %>
+
+<!-- GLOBAL RECOMIENDA-->
+
+<%= render "/layouts/recommendations", articles: get_recommendations_per_section(@section.id) %>

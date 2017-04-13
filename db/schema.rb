@@ -10,21 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412170544) do
+ActiveRecord::Schema.define(version: 20170413002921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
-    t.string   "name",              default: ""
-    t.text     "note",              default: ""
-    t.text     "short_description", default: ""
+    t.string   "name",                  default: ""
+    t.text     "note",                  default: ""
+    t.text     "short_description",     default: ""
     t.integer  "articable_id"
     t.string   "articable_type"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "slug",              default: ""
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "slug",                  default: ""
     t.integer  "keyword_id"
+    t.boolean  "highlight",             default: false
+    t.boolean  "global_recommendation", default: false
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
     t.index ["keyword_id"], name: "index_articles_on_keyword_id", using: :btree
   end
@@ -57,6 +59,15 @@ ActiveRecord::Schema.define(version: 20170412170544) do
     t.string   "slug",       default: ""
   end
 
+  create_table "section_highlights", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "section_id"
+    t.integer  "article_id"
+    t.index ["article_id"], name: "index_section_highlights_on_article_id", using: :btree
+    t.index ["section_id"], name: "index_section_highlights_on_section_id", using: :btree
+  end
+
   create_table "sections", force: :cascade do |t|
     t.string   "name",       default: ""
     t.datetime "created_at",              null: false
@@ -87,4 +98,6 @@ ActiveRecord::Schema.define(version: 20170412170544) do
 
   add_foreign_key "articles", "keywords"
   add_foreign_key "highlights", "articles"
+  add_foreign_key "section_highlights", "articles"
+  add_foreign_key "section_highlights", "sections"
 end

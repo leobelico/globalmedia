@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   resources :articles, param: :slug, only: [:show] do
       get :search_hashtag, on: :collection
   end
+  resources :sections, only: [:show], param: :slug 
 
-  resources :sections, param: :slug 
 
   resources :highlights do 
   	get :autocomplete_article_name, on: :collection
@@ -16,13 +16,26 @@ Rails.application.routes.draw do
 
   scope '/panel' do
     resources :keywords, except: [:show, :edit, :update, :destroy]
-    resources :articles, param: :slug, except: [:show]
+    resources :articles, param: :slug, except: [:show, :destroy]
+    resources :sections, param: :slug, except: [:show, :destroy] 
+
   end
   resources :users
   resources :keywords, only: [:show], param: :slug 
-  
-  get "panel/keywords/edit_multiple", to: "keywords#edit_multiple"
 
+  
+  get "panel/sections/set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
+  post "panel/sections/set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
+  get "panel/sections/admin_show", to: "sections#admin_show"
+
+
+  get "panel/keywords/edit_multiple", to: "keywords#edit_multiple"
   get "panel/keywords/update_multiple", to: "keywords#update_multiple"
   post "panel/keywords/update_multiple", to: "keywords#update_multiple"
+
+
+  get "panel/show_global_recommendations", to: "panel#show_global_recommendations"
+  get "panel/set_global_recommendations", to: "panel#set_global_recommendations"
+  post "panel/set_global_recommendations", to: "panel#set_global_recommendations"
+
 end

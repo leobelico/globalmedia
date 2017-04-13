@@ -1,7 +1,7 @@
 class Article < ApplicationRecord
   belongs_to :articable, polymorphic: true, optional: true
   belongs_to :keyword, optional: true
-
+  has_many :section_highlights, dependent: :delete_all
 	attr_accessor :hashtags_names
   has_and_belongs_to_many :hashtags, uniq: true
   before_save :associate_tags, :to_slug

@@ -1,5 +1,8 @@
 <h3><%= section_name %></h3>
 <%= link_to "Ver Sección", Section.find_by_name(section_name) %><br/>
+<% if highlight and highlight != ""%>
+	<%= highlight.name %><br/>
+<% end %>
 <% section.each do |article|%>	
-	<%= link_to article.name, article %><br/>
+	<%= link_to article.name,  article %><br/>
 <% end %>
