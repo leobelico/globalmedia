@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     resources :keywords, except: [:show, :edit, :update, :destroy]
     resources :articles, param: :slug, except: [:show, :destroy]
     resources :sections, param: :slug, except: [:show, :destroy] 
+    resources :hits
 
   end
   resources :users

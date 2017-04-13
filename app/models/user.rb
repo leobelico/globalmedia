@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
     before_save :set_full_name
-
+    has_many :articles, dependent: :nullify
+    has_many :hits, dependent: :delete_all
     def superadmin?
     		role == "Superadmin"
   		end
