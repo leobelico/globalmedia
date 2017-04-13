@@ -113,7 +113,23 @@ input:focus {
 		min-height:  500px;
 		margin-bottom:  18px;  
 	}
+	.ql-toolbar {
+		border-radius:  4px 4px 0px 0px; 
+	}
+	.ql-container {
+		border-radius:  0px 0px 4px 4px; 
+	}
+	.ql-tweet {
+		background-image: url("twitter-black.svg") !important; 
+	}
+	iframe {
+		border:  none;
+	}
+	iframe.embed-content {
+		width:  100%; 
+	}
 }
+
 
 
 
