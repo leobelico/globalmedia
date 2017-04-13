@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413173936) do
+ActiveRecord::Schema.define(version: 20170413185743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,9 +44,11 @@ ActiveRecord::Schema.define(version: 20170413173936) do
     t.string   "large_image", default: ""
     t.string   "small_image", default: ""
     t.string   "size",        default: ""
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "name",        default: ""
+    t.boolean  "global",      default: false
+    t.boolean  "titlepage",   default: false
   end
 
   create_table "hashtags", force: :cascade do |t|

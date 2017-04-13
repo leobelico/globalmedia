@@ -41,8 +41,16 @@ class ApplicationController < ActionController::Base
   end
 
   def get_banner(section, section_type, size)
-    
-    @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where(" section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}'").last
+    if section_type == "Global" or section_type == "TitlePage"
+      if section_type == "Global"
+        @banner = Banner.where(global: true, size: size).last
+      else
+        @banner = Banner.where(titlepage: true, size: size).last
+
+      end 
+    else
+      @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where(" section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}'").last
+    end
 
   end
 

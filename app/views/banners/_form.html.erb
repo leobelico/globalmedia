@@ -28,6 +28,11 @@
 	</div>
 	
 	<h3>Este banner aparecerá en:</h3>
+	<h4>Banner Global</h4>
+		<%= f.check_box :global %> Global
+	<h4>Banner en Portada</h4>
+		<%= f.check_box :titlepage %> Página Principal
+
 	<h4>Secciones:</h4>
 	<% Section.all.each do |section| %>
 		<% if @banner.new_record? %>

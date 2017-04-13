@@ -24,7 +24,35 @@
 
 <%= render "/layouts/recommendations", articles: get_global_recommendations %>
 
+<h1>Banners</h1>
+<% if get_banner("", "TitlePage", "Chico" ) %>
+	Banner Chico: <%= get_banner("", "TitlePage", "Chico" ).name %>
+	<br/>
+<% else %>
+	<% if get_banner("", "Global", "Chico" ) %>
+		Banner Chico: <%= get_banner("", "Global", "Chico" ).name %>
+	<% end %>
+	<br/>
+<% end %>
 
+<% if get_banner("", "TitlePage", "Mediano" ) %>
 
+	Banner Mediano: <%= get_banner("", "TitlePage", "Mediano" ).name  %><br/>
+<% else %>
+	<% if get_banner("", "Global", "Mediano" ) %>
+		Banner Mediano: <%= get_banner("", "Global", "Mediano" ).name %>
+	<% end %>
+	<br/>
+<% end %>
+
+<% if get_banner("", "TitlePage", "Grande" ) %>
+
+	Banner Grande: <%= get_banner("", "TitlePage", "Grande" ).name  %><br/>
+<% else %>
+	<% if get_banner("", "Global", "Grande" ) %>
+		Banner Grande: <%= get_banner("", "Global", "Grande" ).name %>
+	<% end %>
+	<br/>
+<% end %>
 
 

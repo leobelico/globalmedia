@@ -52,7 +52,7 @@ class BannersController < ApplicationController
 
 	private
 		def banner_params
-			params.require(:banner).permit(:large_image, :small_image, :size, :name )
+			params.require(:banner).permit(:large_image, :small_image, :size, :name, :global, :titlepage )
 		end
 
 		def set_banner

@@ -15,16 +15,31 @@
 <% if get_banner(@section, "Section", "Chico" ) %>
 	Banner Chico: <%= get_banner(@section, "Section", "Chico" ).name %>
 	<br/>
+<% else %>
+	<% if get_banner(@section, "Global", "Chico" ) %>
+		Banner Chico: <%= get_banner(@section, "Global", "Chico" ).name %>
+	<% end %>
+	<br/>
 <% end %>
 
 <% if get_banner(@section, "Section", "Mediano" ) %>
 
 	Banner Mediano: <%= get_banner(@section, "Section", "Mediano" ).name  %><br/>
+<% else %>
+	<% if get_banner(@section, "Global", "Mediano" ) %>
+		Banner Mediano: <%= get_banner(@section, "Global", "Mediano" ).name %>
+	<% end %>
+	<br/>
 <% end %>
 
 <% if get_banner(@section, "Section", "Grande" ) %>
 
 	Banner Grande: <%= get_banner(@section, "Section", "Grande" ).name  %><br/>
+<% else %>
+	<% if get_banner(@section, "Global", "Grande" ) %>
+		Banner Grande: <%= get_banner(@section, "Global", "Grande" ).name %>
+	<% end %>
+	<br/>
 <% end %>
 
 <% case @section.name %>
