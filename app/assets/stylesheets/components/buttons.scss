@@ -6,7 +6,31 @@
 	width:  auto; 
 	flex-shrink:  0; 
 	border-radius:  4px; 
+	position:  relative; 
 }
 .button--logout {
 	margin-top:  auto; 
+}
+.button--saver {
+	position:  relative;
+	overflow:  hidden; 
+}
+.button--text, 
+.button--spinner {
+	pointer-events:  none; 
+	display:  flex; 
+}
+.button--spinner {
+	height:  18px; 
+	width:  18px;
+	position:  absolute; 
+	left:  50%; 
+	top:  50%; 
+	border-radius: 50%; 
+	border-left:  solid 2px #ffffff; 
+	border-right:  solid 2px #ffffff; 
+	border-top:  solid 2px #ffffff; 
+	border-bottom:  solid 1px transparent; 
+	transform:  translate(-50%, -40px); 
+	// opacity:  0; 
 }
