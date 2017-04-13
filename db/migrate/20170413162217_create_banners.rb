@@ -4,7 +4,8 @@ class CreateBanners < ActiveRecord::Migration[5.0]
       t.string :large_image, default: ""
       t.string :small_image, default: ""
       t.string :size, default: ""
-
+     
+      
       t.timestamps
     end
   end

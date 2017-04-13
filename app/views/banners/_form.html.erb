@@ -26,7 +26,23 @@
 	<div class="field field--string">
 		<%= f.select(:size, [ "Chico", "Mediano", "Grande"], {}, { class: "" }) %>
 	</div>
+	
+	<h3>Este banner aparecerá en:</h3>
+	<h4>Secciones:</h4>
+	<% Section.all.each do |section| %>
+		<% if @banner.new_record? %>
+			<%= check_box_tag :all_sections, section.id, false, :name => '[all_sections][]' %> <%= section.name %>
+		<% else %>
+			<% if SectionBanner.where(sectionable_id: section.id, banner: @banner).count == 0 %>
+				<%= check_box_tag :all_sections, section.id, false, :name => '[all_sections][]' %> <%= section.name %>
+				<% else %>
+					<%= check_box_tag :all_sections, section.id, true, :name => '[all_sections][]' %> <%= section.name %>
+			<% end %>
+		<% end %>
+		
 
+		<br/>
+	<% end %>
 	<div class="actions">
 		<%= f.submit "Guardar" %>
 	</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413163553) do
+ActiveRecord::Schema.define(version: 20170413173936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,16 @@ ActiveRecord::Schema.define(version: 20170413163553) do
     t.string   "slug",       default: ""
   end
 
+  create_table "section_banners", force: :cascade do |t|
+    t.integer  "sectionable_id"
+    t.string   "sectionable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "banner_id"
+    t.index ["banner_id"], name: "index_section_banners_on_banner_id", using: :btree
+    t.index ["sectionable_type", "sectionable_id"], name: "index_section_banners_on_sectionable_type_and_sectionable_id", using: :btree
+  end
+
   create_table "section_highlights", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -119,6 +129,7 @@ ActiveRecord::Schema.define(version: 20170413163553) do
   add_foreign_key "articles", "users"
   add_foreign_key "highlights", "articles"
   add_foreign_key "hits", "articles"
+  add_foreign_key "section_banners", "banners"
   add_foreign_key "section_highlights", "articles"
   add_foreign_key "section_highlights", "sections"
 end

@@ -12,6 +12,13 @@ class BannersController < ApplicationController
 	def create
 		@banner = Banner.new(banner_params)
 		if @banner.save
+			sections =  Section.where(id: params[:all_sections])
+			p "cuenta de secciones"
+			p sections.count
+			sections.each do |section|
+				p "creating"
+				SectionBanner.create(banner: @banner, sectionable_id: section.id, sectionable_type: "Section")
+			end
 			redirect_to @banner
 		else
 			render action: "new"
@@ -24,6 +31,14 @@ class BannersController < ApplicationController
 
 	def update
 		if @banner.update(banner_params)
+			banners_in_sections = SectionBanner.where(banner: @banner)
+			banners_in_sections.each do |banner|
+				banner.destroy
+			end
+			sections =  Section.where(id: params[:all_sections])
+			sections.each do |section|
+				SectionBanner.create(banner: @banner, sectionable_id: section.id, sectionable_type: "Section")
+			end
 			redirect_to @banner
 		else
 			render action: "edit"

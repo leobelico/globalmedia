@@ -2,3 +2,8 @@
 <%= @banner.large_image %><br/>
 <%= @banner.small_image %><br/>
 <%= @banner.size %><br/>
+
+<h3>Este banner aparece en: </h3>
+<% @banner.section_banners.each do |section_banner| %>
+	<%= section_banner.sectionable.name %><br/>
+<% end %>
