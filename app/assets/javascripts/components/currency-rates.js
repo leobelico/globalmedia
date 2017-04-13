@@ -5,4 +5,4 @@ var rates = function(data) {
   $(".exchange-rate.euro").find(".exchange-rate__rate").html("$" + fx(1).to("MXN").toFixed(2));
 }
 
-$.getJSON("http://api.fixer.io/latest", rates); 
+$.getJSON("https://api.fixer.io/latest", rates); 

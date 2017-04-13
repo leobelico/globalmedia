@@ -109,20 +109,10 @@ input:focus {
 	select:focus {
 		border:  solid 1px $tertiary;  
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	#note-editor {
+		min-height:  500px;
+		margin-bottom:  18px;  
+	}
 }
 
 
