@@ -17,11 +17,7 @@
 //= require turbolinks
 //= require_directory .
 //= require libraries/money
-//= require libraries/iframe-resizer/iframe-resizer
-//= require libraries/iframe-resizer/iframe-resizer-content-window
 //= require libraries/quill/quill.min 
-// 
-// 
 // 
 // 
 // QUILL BLOTS

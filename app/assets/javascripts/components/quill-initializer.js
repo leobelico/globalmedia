@@ -29,9 +29,6 @@ var toolbarOptions = [
 //     }
 // } );
 
-function iframeLoaded(domNode){
-	$('iframe').iFrameResize(); 
-}
 
 var options = {
   theme: 'snow',
