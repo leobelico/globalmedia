@@ -4,7 +4,15 @@
 		<%= link_to "Nueva nota", new_article_path, class: "button" %>
 	</div>
 </div>
-<% @articles.each do |article| %>
-	<%= article.name %>
-	<%= article.short_description %>
-<% end %>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Título:</p>
+		<p class="table__cell">Extracto:</p>
+	</div>
+	<% @articles.each do |article| %>
+		<div class="table__row">
+			<p class="table__cell name"><%= article.name %></p>	
+			<p class="table__cell short-description"><%= article.short_description %></p>	
+		</div>
+	<% end %>
+</div>
