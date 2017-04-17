@@ -13,7 +13,7 @@ class Panel::ArticlesController < ApplicationController
 	def create
 		@article = Article.new(article_params)
 		@article.user = current_user
-		@article.note = params[:article][:note]
+
 		if @article.save
 			redirect_to @article
 		else
@@ -23,17 +23,6 @@ class Panel::ArticlesController < ApplicationController
 
 	def show
 
-		if !user_signed_in?
-			last_hit = Hit.where(article: @article, created_at: 1.hours.ago..Time.now).last
-
-			if last_hit
-				last_hit.update_attributes(number: last_hit.number + 1)
-			else
-				#no hay ningún hit entonces lo creamos
-				Hit.create(number: 1, article: @article)
-
-			end
-		end
 	end
 
 	def edit
@@ -50,7 +39,7 @@ class Panel::ArticlesController < ApplicationController
 
 	def destroy
 		@article.destroy
-		redirect_to @articles
+		redirect_to panel_articles_path
 	end
 
 	def search_hashtag
@@ -62,7 +51,10 @@ class Panel::ArticlesController < ApplicationController
 
 	private
 		def article_params
-			params.require(:article).permit(:name, :note, :plain_text, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id)
+			params.require(:article).permit(:name, :note, :plain_text, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id, :the_note, the_note: [:quill])
+
+			# all_options = params.require(:article).fetch(:note, nil).try(:permit!)
+   # 			params.require(:article).permit(:name, :plain_text, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id).merge(:note => all_options)
 		end
 
 		def set_article

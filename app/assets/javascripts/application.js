@@ -32,6 +32,7 @@
 // 
 //= require components/currency-rates
 //= require components/weather
+//= require components/quill-initializer
 //= require components/quill-forms
 //= require components/quill-notes
 

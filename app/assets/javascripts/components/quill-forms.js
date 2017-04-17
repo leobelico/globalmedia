@@ -1,11 +1,14 @@
 $(document).on("click", function(event){
-  if ( $(event.target).is(".saver--article") ) {
-    submit_form(); 
-    
+  if ( $(event.target).is(".save-article") ) {
+    if ($(event.target).attr("data-slug")){      
+      submit_form("update", $(event.target).data("slug")); 
+    } else {
+      submit_form("create"); 
+    }
   }
 }); 
 
-function submit_form(){
+function submit_form(action, slug){
    show_button_spinner($(event.target));
 
   console.log(editor.getContents()) 
@@ -14,9 +17,19 @@ function submit_form(){
 
   var quill_note = editor.getContents();
   var text_note = editor.getText();
+
+  if (action == "create") {
+    url = "/panel/articles"; 
+    type = "POST"
+  }
+  if (action == "update") {
+    url = "/panel/articles/" + slug; 
+    type = "PUT";
+  }
+
   $.ajax({
-    url: '/panel/articles',
-    type: 'POST',
+    url: url,
+    type: type,
     data: {
       article: {
         name: $("#article_name").val(),
@@ -24,8 +37,9 @@ function submit_form(){
         articable_id: $("#article_articable_id").val(),
         articable_type: $("#article_articable_type").val(),
         hashtag_names: $("#article_hashtags_names").val(), 
-        note: { quill: quill_note.ops }, 
-        plain_text: text_note          
+        plain_text: text_note,
+        note: JSON.stringify(quill_note)
+
       }
     }
   })
