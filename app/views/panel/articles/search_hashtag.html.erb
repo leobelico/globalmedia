@@ -1,0 +1,13 @@
+<h3 class="title"><%= @search.name %></h3>
+
+<% @hashtags.each do |hashtag| %>
+	
+	<h3 ><%= link_to hashtag.article.name, hashtag.article, class: "title" %></h3>
+	<div ><%= render hashtag.article.hashtags %></div>
+	<p ><%= hashtag.article.short_description %></p>
+	
+	<%= link_to "Ver Nota", hashtag.article, class: "link" %>
+		
+
+	
+<% end %>

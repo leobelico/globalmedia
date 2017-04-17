@@ -51,7 +51,7 @@
 	}
 	&:not(:first-of-type) {
 		border-top:  solid 1px #ebebeb; 
-		.table__cell:first-of-type {
+		.table__cell:first-child {
 			color:  $tertiary; 
 		}
 	}

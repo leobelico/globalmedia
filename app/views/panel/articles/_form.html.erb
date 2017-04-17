@@ -1,0 +1,38 @@
+<%= form_for(@article, html: { class: "admin-form form--article card", remote: true }) do |f| %>
+	<% if @article.errors.any? %>	
+		<h5><%= pluralize(@article.errors.count, "error") %></h5>
+			<ul>
+				<% @article.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+				<% end %>
+			</ul>
+	<% end %>
+	<div class="field field--string">
+		<label>Sección</label>
+		<%= f.select :articable_id, options_for_select( Section.all.collect{ |u| [u.name, u.id] }) %>
+		<%= f.hidden_field :articable_type, value: "Section" %>
+	</div>
+	<div class="field field--string">
+		<label>Título de la Nota</label>
+		<%= f.text_field :name %>
+	</div>
+	<div class="field">
+		<label>Descripción corta de la Nota</label>
+		<%= f.text_area :short_description %>
+	</div>
+	<div id="note-editor">
+		
+	</div>
+	<% if get_todays_keywords.count > 1 %>
+		<div class="field field--string">
+			<label>Palabra Clave</label>
+			<%= f.select :keyword_id, options_for_select( get_todays_keywords.collect{ |u| [u.keyword, u.id] }), include_blank: 'Ninguno' %>
+		</div>
+	<% end %>
+	<div class="field">
+		<label>Hashtags: </label>
+		<%= f.text_field :hashtags_names, placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", id: "hashtags" %>
+	</div>
+	
+<% end %>
+<%= javascript_include_tag "/assets/components/quill-initializer" %>

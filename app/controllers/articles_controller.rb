@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+	before_action :authenticate_user!
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
 	
 	def index
@@ -13,6 +13,7 @@ class ArticlesController < ApplicationController
 	def create
 		@article = Article.new(article_params)
 		@article.user = current_user
+		@article.note = params[:article][:note]
 		if @article.save
 			redirect_to @article
 		else
@@ -22,6 +23,8 @@ class ArticlesController < ApplicationController
 
 	def show
 
+		# @article.note
+		@note = @article.note["quill"].to_s
 		if !user_signed_in?
 			last_hit = Hit.where(article: @article, created_at: 1.hours.ago..Time.now).last
 
@@ -39,6 +42,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def update
+		@article.note = params[:article][:note]
 		if @article.update(article_params)
 			redirect_to @article
 		else

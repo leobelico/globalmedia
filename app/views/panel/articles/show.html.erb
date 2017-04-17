@@ -1,20 +1,17 @@
-<h1><%= @article.name %></h1>	
-<!-- <h1><%= @article.id %></h1>	
-lala
-<h1><%= @article.note %></h1>
- -->
+<h1><%= @article.name %></h1>
+<h1><%= @note %></h1>
+<h1><%= raw(@article.note) %></h1>
 
 <p><%= render @article.hashtags %></p>
 
-<div id="note-display" class="quill--article">	
-</div>
-
 <% if @article.articable_type == "Section" %>
 	<%= @article.articable.name %>
+		
+	
 <% end %>
 
 <p><%= @article.short_description %></p>
-<p></p>
+<p><%= @article.note %></p>
 
 <!-- NOTAS DEL PROGRAMADOR-->
 	<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
@@ -50,8 +47,3 @@ lala
 	<% end %>
 	<br/>
 <% end %>
-<script>
-	var content = <%= raw(@article.note.to_json) %>;
-	var container = document.getElementById("note-display")
-	display_quill_note(content, container);
-</script>

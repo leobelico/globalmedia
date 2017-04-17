@@ -4,7 +4,7 @@
 
 		<% get_todays_keywords.each do |keyword| %>
 			<% if !keyword.slug.empty? %>
-				<%= link_to keyword.keyword, keyword, class: "its-news__title" %>
+				<%= link_to keyword.keyword, keyword_show_keyword_path(keyword), class: "its-news__title" %>
 			<% end %>
 		<% end %>
 		

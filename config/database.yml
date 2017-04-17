@@ -21,19 +21,19 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-development:
-  <<: *default
-  database: global_media
-
 # development:
-#   adapter: postgresql
-#   encoding: utf8
-#   database: global_media_development
-#   username: postgres
-#   password: codepelm-319
-#   host: localhost
-#   port: 5432
-#   pool: 10
+#   <<: *default
+#   database: global_media
+
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: global_media_development2
+  username: postgres
+  password: codepelm-319
+  host: localhost
+  port: 5432
+  pool: 10
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

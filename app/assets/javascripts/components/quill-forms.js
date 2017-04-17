@@ -24,7 +24,7 @@ function submit_form(){
         articable_id: $("#article_articable_id").val(),
         articable_type: $("#article_articable_type").val(),
         hashtag_names: $("#article_hashtags_names").val(), 
-        note: quill_note.opts, 
+        note: { quill: quill_note.ops }, 
         plain_text: text_note          
       }
     }

@@ -1,5 +1,5 @@
 class KeywordsController < ApplicationController
-	before_action :authenticate_user!, except: [:show]
+	before_action :authenticate_user!, except: [:show_keyword]
 	before_action :get_all_keywords, only: [ :edit_multiple]
 	def index
 		
@@ -21,16 +21,29 @@ class KeywordsController < ApplicationController
  	 	redirect_to keywords_path
 	end
 
+	# NOTAS DEL PROGRAMADOR 
+	# En este proyecto todas las rutas y acciones por defecto son 
+	# exclusivas de los administradores de la plataforma; 
+	# para los usuarios finales usamos accion_modelo para la acción
+	# como aquí a bajo se puede apreciar:
+	# 
+	# 	show_keyword
+	# 
+	# 
+
 	def show
 		@keyword = Keyword.find_by_slug(params[:slug])
 	end
 	
+	def show_keyword
+		@keyword = Keyword.find_by_slug(params[:keyword_slug])
+	end
+
 	def edit_multiple
 	end
 
 	def update_multiple
 		Keyword.update(params[:keyword].keys, params[:keyword].values)
-    	
     	redirect_to keywords_path
 	end
 
