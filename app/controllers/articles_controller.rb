@@ -13,6 +13,8 @@ class ArticlesController < ApplicationController
 	def create
 		@article = Article.new(article_params)
 		@article.user = current_user
+		p "------------------------"
+		p params[:article][:note]
 		@article.note = params[:article][:note]
 		if @article.save
 			redirect_to @article
@@ -64,7 +66,8 @@ class ArticlesController < ApplicationController
 
 	private
 		def article_params
-			params.require(:article).permit(:name, :note, :plain_text, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id)
+			# params.require(:article).permit(:name, :plain_text, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id)
+			params.require(:article).permit_all_parameters = true
 		end
 
 		def set_article
