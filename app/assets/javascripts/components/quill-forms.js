@@ -1,38 +1,58 @@
 $(document).on("click", function(event){
-  if ( $(event.target).is(".saver--article") ) {
-    show_button_spinner($(event.target));
-
-    console.log(editor.getContents()) 
-    console.log(editor.getText())
-
-
-
-
-    $.ajax({
-      url: '/path/to/file',
-      type: 'default GET (Other values: POST)',
-      dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-      data: {
-        name: $("#article_name").val(),
-        short_description: $("#article_short_description").val(),
-        articable_type: $("#article_articable_type").val(),
-        hashtag_names: $("#article_hashtags_names").val(), 
-        note: editor.getContents(), 
-        plain_text: editor.getText()
-      },
-    })
-    .done(function() {
-      console.log("success");
-    })
-    .fail(function() {
-      console.log("error");
-    })
-    .always(function() {
-      console.log("complete");
-    });
-    
+  if ( $(event.target).is(".save-article") ) {
+    if ($(event.target).attr("data-slug")){      
+      submit_form("update", $(event.target).data("slug")); 
+    } else {
+      submit_form("create"); 
+    }
   }
 }); 
+
+function submit_form(action, slug){
+   show_button_spinner($(event.target));
+
+  console.log(editor.getContents()) 
+  console.log(editor.getText())
+
+
+  var quill_note = editor.getContents();
+  var text_note = editor.getText();
+
+  if (action == "create") {
+    url = "/panel/articles"; 
+    type = "POST"
+  }
+  if (action == "update") {
+    url = "/panel/articles/" + slug; 
+    type = "PUT";
+  }
+
+  $.ajax({
+    url: url,
+    type: type,
+    data: {
+      article: {
+        name: $("#article_name").val(),
+        short_description: $("#article_short_description").val(),
+        articable_id: $("#article_articable_id").val(),
+        articable_type: $("#article_articable_type").val(),
+        hashtag_names: $("#article_hashtags_names").val(), 
+        plain_text: text_note,
+        note: JSON.stringify(quill_note)
+
+      }
+    }
+  })
+  .done(function() {
+    console.log("success");
+  })
+  .fail(function() {
+    console.log("error");
+  })
+  .always(function() {
+    console.log("complete");
+  });
+}
 
 function show_button_spinner(button) {
   TweenMax.to(button.find(".button--text"), .3, {

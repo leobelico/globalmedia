@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "titlepage#index"
   
-  resources :articles, param: :slug, only: [:show] do
+  resources :articles, param: :slug do
       get :search_hashtag, on: :collection
   end
 
@@ -28,26 +28,34 @@ Rails.application.routes.draw do
   end
 
 
-  scope '/panel' do
-    resources :keywords, except: [:show, :edit, :update, :destroy]
-    resources :articles, param: :slug, except: [:show, :destroy]
-    resources :sections, param: :slug, except: [:show, :destroy] 
+  namespace :panel do
+   
+    resources :keywords, param: :slug do 
+
+    end
+    resources :articles, param: :slug
+    resources :sections, param: :slug 
     resources :hits
     resources :banners
 
   end
-  resources :users
-  resources :keywords, only: [:show], param: :slug 
+  # get "panel/keywords/edit_multiple", to: "panel/keywords#edit_multiple"
+  # get "panel/keywords/update_multiple", to: "panel/keywords#update_multiple"
+  # post "panel/keywords/update_multiple", to: "panel/keywords#update_multiple"
+   
 
-  
+  resources :users
+  # NOTAS DE PROGRAMADOR 
+  # REVISAR DONDE SE USA KEYWORD SHOW A 
+
+  resources :keywords, param: :slug, except: [:index, :show, :edit, :update, :destroy, :new, :create] do
+    get :show_keyword
+  end
+
   get "panel/sections/set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
   post "panel/sections/set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
   get "panel/sections/admin_show", to: "sections#admin_show"
 
-
-  get "panel/keywords/edit_multiple", to: "keywords#edit_multiple"
-  get "panel/keywords/update_multiple", to: "keywords#update_multiple"
-  post "panel/keywords/update_multiple", to: "keywords#update_multiple"
 
 
   get "panel/show_global_recommendations", to: "panel#show_global_recommendations"

@@ -1,27 +1,13 @@
 class ArticlesController < ApplicationController
-	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
 	
 	def index
 		@articles = Article.all
 	end
-
-	def new
-		@article = Article.new
-	end
-
-	def create
-		@article = Article.new(article_params)
-		@article.user = current_user
-		if @article.save
-			redirect_to @article
-		else
-			render action: "new"
-		end
-	end
-
 	def show
 
+		# @article.note
+		@note = @article.note
 		if !user_signed_in?
 			last_hit = Hit.where(article: @article, created_at: 1.hours.ago..Time.now).last
 
@@ -35,22 +21,7 @@ class ArticlesController < ApplicationController
 		end
 	end
 
-	def edit
-	end
-
-	def update
-		if @article.update(article_params)
-			redirect_to @article
-		else
-			render action: "edit"
-		end
-	end
-
-	def destroy
-		@article.destroy
-		redirect_to @articles
-	end
-
+	
 	def search_hashtag
 		@search = Hashtag.find(params[:search])
 		@hashtags = ArticlesHashtag.where(hashtag_id:params[:search])

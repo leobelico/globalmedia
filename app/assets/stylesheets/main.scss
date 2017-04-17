@@ -20,6 +20,7 @@
 
 $interface-width:  1024px; 
 $admin-sidebar-width:  260px; 
+$main-content-width: 650px;
 
 html, 
 body {
@@ -73,7 +74,10 @@ body {
 @import "components/social-media"; 
 @import "components/its-news"; 
 @import "components/breaking-news"; 
+@import "components/notes"; 
 @import "components/admin/admin-sidebar"; 
 @import "components/admin/admin-panel"; 
+@import "components/admin/tables"; 
+@import "components/admin/articles-panel"; 
 
 

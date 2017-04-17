@@ -121,6 +121,15 @@ input:focus {
 	}
 	.ql-tweet {
 		background-image: image-url("twitter-black.svg") !important; 
+		background-position:  center center !important; 
+		background-size:  contain !important;
+		background-repeat:  no-repeat !important;  
+	}
+	.ql-embed-content {
+		background-image:  image-url("code.svg") !important; 
+		background-position:  center center !important; 
+		background-size:  18px !important; 
+		background-repeat:  no-repeat !important; 
 	}
 	iframe {
 		border:  none;

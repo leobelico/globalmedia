@@ -1,12 +1,13 @@
 class EmbedContentBlot extends BlockEmbed {
-  static create(src) {
+  static create(iframe) {
     let node = super.create();
-    node.innerHTML = src; 
+    node.innerHTML = iframe; 
+    node.iframe = iframe; 
   	console.log(node);
     return node;
   }
   static value(domNode) {
-    return domNode.src;
+    return domNode.iframe;
   }
 }
 

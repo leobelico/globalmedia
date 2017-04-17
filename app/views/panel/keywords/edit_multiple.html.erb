@@ -1,4 +1,4 @@
-<%= form_for :keyword, url: {controller: "panel/keywords", saction: 'update_multiple'} do -%>
+<%= form_for(panel_keywords_update_multiple_path) do -%>
   
   
     <% @keywords.each_with_index do |keyword, index| %>
@@ -12,6 +12,6 @@
      
       <% end %>
     <% end %>
-  
+ 
     <%= submit_tag 'Update' %>
 <% end %>

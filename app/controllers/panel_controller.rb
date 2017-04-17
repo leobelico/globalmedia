@@ -1,5 +1,6 @@
 class PanelController < ApplicationController
 
+	before_action :authenticate_user!
 
 	def show_global_recommendations
 		@articles = Article.all
