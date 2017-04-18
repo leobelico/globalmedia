@@ -43,8 +43,9 @@ class Panel::KeywordsController < ApplicationController
 	end
 
 	def update_multiple
+		#kw = params[:keyword].map{|e| {id: e[:id], keyword: e[:keyword]}}
 		Keyword.update(params[:keyword].keys, params[:keyword].values)
-    	redirect_to keywords_path
+    	redirect_to panel_keywords_path
 	end
 
 

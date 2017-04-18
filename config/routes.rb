@@ -32,12 +32,15 @@ Rails.application.routes.draw do
 
   namespace :panel do
    
-    resources :keywords, param: :slug
+    resources :keywords, param: :slug 
+      
+
     get "edit_multiple_keywords", to: "keywords#edit_multiple"
-    post "edit_multiple_keywords", to: "keywords#edit_multiple"
+    #post "edit_multiple_keywords", to: "keywords#edit_multiple"
     get "update_multiple_keywords", to: "keywords#update_multiple"
-    put "update_multiple_keywords", to: "keywords#update_multiple"
+    patch "update_multiple_keywords", to: "keywords#update_multiple"
     post "update_multiple_keywords", to: "keywords#update_multiple"
+
     resources :highlights, param: :slug
     resources :articles, param: :slug
     resources :stations, param: :slug

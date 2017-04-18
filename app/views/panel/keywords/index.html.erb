@@ -13,10 +13,12 @@
 		<p class="table__cell">Palabras Clave:</p>
 	</div>
 	<% get_todays_keywords.each do |keyword| %>
-		<div class="table__row">
-			<div class="table__cell">
-				<%= link_to keyword.keyword, panel_keyword_path(keyword)%>
+		<% if !keyword.slug.empty? %>
+			<div class="table__row">
+				<div class="table__cell">
+					<%= link_to keyword.keyword, panel_keyword_path(keyword)%>
+				</div>
 			</div>
-		</div>
+		<% end %>
 	<% end %>
 </div>
