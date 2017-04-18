@@ -4,19 +4,20 @@
 		<button class="button">Guardar palabras clave</button>
 	</div>
 </div>
-<%= form_for(panel_update_multiple_keywords_path, controller: "panel/keywords", action: "update_multiple", html: { class: "admin-form card" }) do -%>
+<%= form_for :keywords, url: {action: 'update_multiple', controller: "panel/keywords"}, html: { class: "admin-form card" } do -%>
   
   
-    <% @keywords.each_with_index do |keyword, index| %>
-      <%= fields_for "keyword[]", keyword do |f| %>
-    
+    <% @keywords.last(4).each_with_index do |keyword, index| %>
+      <%= fields_for "keyword[]", keyword, index: keyword.id do |f| %>
+
         <div class="field">
-            <label>Palabra Clave <%= index + 1 %></label>
-            <%= f.text_field :keyword %>
+          <label>Palabra Clave <%= index + 1 %></label><br>
+          
+          <%= f.text_field :keyword %><br>
+         
         </div>
-     
       <% end %>
-    <% end %>
+  <% end %>
  <% end %>
  <script> 
  	button = $("button.button"); 

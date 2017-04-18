@@ -15,6 +15,7 @@ class Panel::ArticlesController < ApplicationController
 		@article.user = current_user
 
 		if @article.save
+			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s) 
 			redirect_to @article
 		else
 			render action: "new"

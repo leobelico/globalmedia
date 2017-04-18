@@ -1,4 +1,4 @@
-class PanelController < ApplicationController
+class Panel::PanelController < ApplicationController
 
 	before_action :authenticate_user!
 

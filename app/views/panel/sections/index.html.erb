@@ -1,0 +1,18 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Secciones</span> </h2>
+	
+</div>
+<div class="card">
+	<div class="table__row">
+		<p class="table__cell">Palabras Clave:</p>
+	</div>
+	<% @sections.each do |section| %>
+		
+			<div class="table__row">
+				<div class="table__cell">
+					<%= link_to section.name, panel_section_path(section)%>
+				</div>
+			</div>
+		
+	<% end %>
+</div>

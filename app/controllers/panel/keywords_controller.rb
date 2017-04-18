@@ -18,6 +18,10 @@ class Panel::KeywordsController < ApplicationController
 	    	Keyword.create(keyword_params(keyword))
 	    	
  	 	end
+ 	 	Keyword.last(4).each do |keyword|
+			keyword.update_attributes(slug: keyword.slug + "-" + keyword.id.to_s) 
+
+ 	 	end
  	 	redirect_to panel_keywords_path
 	end
 
@@ -43,8 +47,9 @@ class Panel::KeywordsController < ApplicationController
 	end
 
 	def update_multiple
+		#kw = params[:keyword].map{|e| {id: e[:id], keyword: e[:keyword]}}
 		Keyword.update(params[:keyword].keys, params[:keyword].values)
-    	redirect_to keywords_path
+    	redirect_to panel_keywords_path
 	end
 
 

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "titlepage#index"
   
-  resources :articles, param: :slug do
+  resources :articles, param: :slug, only: [:show] do
       get :search_hashtag, on: :collection
   end
   #resources :stations, param: :slug
@@ -17,10 +17,10 @@ Rails.application.routes.draw do
 
 
   
-  get "panel", to: "panel#panel"
+  get "panel", to: "panel/panel#panel"
 
   authenticated :user do 
-    root to: "panel#panel", as: "authenticated_root"
+    root to: "panel/panel#panel", as: "authenticated_root"
   end
   
 
@@ -32,12 +32,15 @@ Rails.application.routes.draw do
 
   namespace :panel do
    
-    resources :keywords, param: :slug
+    resources :keywords, param: :slug 
+      
+
     get "edit_multiple_keywords", to: "keywords#edit_multiple"
-    post "edit_multiple_keywords", to: "keywords#edit_multiple"
+    #post "edit_multiple_keywords", to: "keywords#edit_multiple"
     get "update_multiple_keywords", to: "keywords#update_multiple"
-    put "update_multiple_keywords", to: "keywords#update_multiple"
+    patch "update_multiple_keywords", to: "keywords#update_multiple"
     post "update_multiple_keywords", to: "keywords#update_multiple"
+
     resources :highlights, param: :slug
     resources :articles, param: :slug
     resources :stations, param: :slug
@@ -46,6 +49,12 @@ Rails.application.routes.draw do
     resources :hits
     resources :banners
 
+    get "set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
+    post "set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
+
+    get "show_global_recommendations", to: "panel#show_global_recommendations"
+  get "set_global_recommendations", to: "panel#set_global_recommendations"
+  post "set_global_recommendations", to: "panel#set_global_recommendations"
   end
   # get "panel/keywords/edit_multiple", to: "panel/keywords#edit_multiple"
   # get "panel/keywords/update_multiple", to: "panel/keywords#update_multiple"
@@ -61,14 +70,11 @@ Rails.application.routes.draw do
   end
 
 
-  get "panel/sections/set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
-  post "panel/sections/set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
-  get "panel/sections/admin_show", to: "sections#admin_show"
+  
+  
 
 
 
-  get "panel/show_global_recommendations", to: "panel#show_global_recommendations"
-  get "panel/set_global_recommendations", to: "panel#set_global_recommendations"
-  post "panel/set_global_recommendations", to: "panel#set_global_recommendations"
+  
 
 end

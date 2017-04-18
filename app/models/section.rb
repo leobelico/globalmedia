@@ -1,6 +1,6 @@
 class Section < ApplicationRecord
 	has_many :articles, as: :articable
-  	before_save :to_slug
+  	before_create :to_slug
   	has_many :section_highlights, dependent: :delete_all
   	has_many :section_banners, as: :seleccionable
 	
