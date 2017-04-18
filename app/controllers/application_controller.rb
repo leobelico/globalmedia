@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_todays_keywords
-    @keywords = Keyword.where('keyword != ?', '').order(created_at: "ASC")
+    @keywords = Keyword.where('keyword != ?', '').order(created_at: "ASC").last(4)
   end
 
   def get_banner(section, section_type, size)

@@ -136,6 +136,40 @@ input:focus {
 		max-width:  100%;
 	}
 }
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  padding: 12px 18px;
+  list-style: none;
+  background-color: #fafafa;
+  border:  solid 1px #f5f5f5; 
+  border-radius: 5px;
+
+
+  .ui-menu-item > a.ui-corner-all {
+    display: block;
+    padding: 12px 18px;
+    font-size:  18px; 
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #555555;
+    white-space: nowrap;
+
+    &.ui-state-hover, &.ui-state-active {
+      color: #ffffff;
+      text-decoration: none;
+      background-color: #0088cc;
+      border-radius: 0px;
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      background-image: none;
+    }
+  }
+}
 
 
 

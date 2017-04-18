@@ -1,0 +1,23 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Notas destacadas</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Nueva nota destacada", new_panel_highlight_path, class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Posición:</p>
+		<p class="table__cell">Artículo:</p>
+	</div>
+	<% @highlights.each do |highlight| %>
+		<div class="table__row">
+			<div class="table__cell"><%= highlight.order %> </div>
+			<div class="table__cell"><%= link_to highlight.article.name, highlight.article %></div>
+		</div>
+	<% end %>
+	<% if @highlights.count == 0 %>
+		<div class="table__row">
+			<div class="table__cell table__empty">No hay notas destacadas.</div>
+		</div>
+	<% end %>
+</div>

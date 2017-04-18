@@ -18,7 +18,7 @@ class Panel::KeywordsController < ApplicationController
 	    	Keyword.create(keyword_params(keyword))
 	    	
  	 	end
- 	 	redirect_to keywords_path
+ 	 	redirect_to panel_keywords_path
 	end
 
 	# NOTAS DEL PROGRAMADOR 
@@ -43,9 +43,10 @@ class Panel::KeywordsController < ApplicationController
 	end
 
 	def update_multiple
-		Keyword.update(params[:lalala].keys, params[:lalala].values)
+		Keyword.update(params[:keyword].keys, params[:keyword].values)
     	redirect_to keywords_path
 	end
+
 
 	private
 		def keyword_params(my_params)

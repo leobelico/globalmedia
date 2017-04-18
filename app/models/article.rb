@@ -12,6 +12,10 @@ class Article < ApplicationRecord
     slug
   end
 
+  def section 
+    self.articable.name 
+  end
+
   private
     def associate_tags
       if hashtags_names

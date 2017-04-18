@@ -2,8 +2,11 @@
 	
 	<h1 class="title"><%= @article.name %></h1>	
 	<div class="article__info">
-		<p class="author">Por <%= @article.user.full_name %> - </p>
+		<p class="author">Por <%= @article.user.full_name %></p>
 		<p class="date"><%= @article.created_at.strftime("%m:%M %p %A %e %B, %Y") %></p>
+		<% if @article.articable_type == "Section" %>
+			<p class="section"><%= @article.section %></p>
+		<% end %>
 	</div>
 	<p><%= render @article.hashtags %></p>
 
@@ -11,10 +14,6 @@
 
 	<div id="quill-container" class="quill--article">	
 	</div>
-
-	<% if @article.articable_type == "Section" %>
-		<%= @article.articable.name %>
-	<% end %>
 
 	<!-- NOTAS DEL PROGRAMADOR-->
 		<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->

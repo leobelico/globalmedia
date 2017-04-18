@@ -1,5 +1,5 @@
 <div class="panel__header">
-	<h2 class="title panel__title"><span class="current">#EsNoticia</span></h2>
+	<h2 class="title panel__title"><span class="current">Palabras Clave</span><small>(#EsNoticia)</small></h2>
 	<div class="panel__actions">
 		<% if get_todays_keywords.count > 0 %>	
 			<%= link_to "Editar palabras clave",  panel_keywords_edit_multiple_path, class: "button" %>
@@ -12,7 +12,7 @@
 	<% get_todays_keywords.each do |keyword| %>
 		<div class="table__row">
 			<div class="table__cell">
-				<%= link_to keyword.keyword, keyword_show_keyword_path(keyword)%>
+				<%= link_to keyword.keyword, panel_keyword_path(keyword)%>
 			</div>
 		</div>
 	<% end %>
