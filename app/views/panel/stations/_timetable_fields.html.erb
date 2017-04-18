@@ -1,0 +1,18 @@
+<div class= "field-builder">
+	<div class="create__field-container">
+		Nombre del Programa<%= f.text_field :name %><br>
+
+		Hora de Inicio: <%= f.time_select :streaming_hour, default: {hour:"00", minute: "00"} %> 
+		<br/>
+		Hora de Fin: <%= f.time_select :end_streaming_hour, default: {hour: "01", minute: "00"} %> 
+		<br/>
+		Imagen: <%= f.text_field :image %>
+		<br/><br/>
+		Días de la semana: <%= f.check_box :monday %> Lunes <%= f.check_box :tuesday %> Martes <%= f.check_box :wednesday %> Miércoles <%= f.check_box :thursday %> Jueves <%= f.check_box :friday %> Viernes <%= f.check_box :saturday %> Sábado <%= f.check_box :sunday %> Domingo<br/>
+		<%= f.hidden_field :_destroy %>
+	</div>
+		<%= link_to_remove_fields 'Eliminar', f, "fields__remove" %>
+
+</div>
+
+<br/><br/>

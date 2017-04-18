@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418155425) do
+ActiveRecord::Schema.define(version: 20170418181437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,33 @@ ActiveRecord::Schema.define(version: 20170418155425) do
     t.string   "slug"
   end
 
+  create_table "stations", force: :cascade do |t|
+    t.string   "name",       default: ""
+    t.string   "stream_url", default: ""
+    t.string   "image",      default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "slug",       default: ""
+  end
+
+  create_table "timetables", force: :cascade do |t|
+    t.time     "streaming_hour"
+    t.string   "name",               default: ""
+    t.string   "image",              default: ""
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "station_id"
+    t.time     "end_streaming_hour"
+    t.boolean  "monday",             default: false
+    t.boolean  "tuesday",            default: false
+    t.boolean  "wednesday",          default: false
+    t.boolean  "thursday",           default: false
+    t.boolean  "friday",             default: false
+    t.boolean  "saturday",           default: false
+    t.boolean  "sunday",             default: false
+    t.index ["station_id"], name: "index_timetables_on_station_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                       default: "",    null: false
     t.string   "encrypted_password",          default: "",    null: false
@@ -142,4 +169,5 @@ ActiveRecord::Schema.define(version: 20170418155425) do
   add_foreign_key "section_banners", "banners"
   add_foreign_key "section_highlights", "articles"
   add_foreign_key "section_highlights", "sections"
+  add_foreign_key "timetables", "stations"
 end

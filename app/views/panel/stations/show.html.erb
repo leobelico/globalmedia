@@ -1,0 +1,37 @@
+Nombre de la estación: <%= @station.name %><br/>
+URL de Stream: <%= @station.stream_url %><br/>
+<%= @station.image %>
+
+<%= link_to "Editar", edit_panel_station_path(@station) %><br/>
+<%= link_to "Eliminar", panel_station_path(@station), method: :delete, data: {confirm: "¿Seguro? Esta acción no se puede deshacer"} %><br/>
+<h3>Programas</h3>
+<% @station.timetables.each do |timetable| %>
+	<%= link_to "Eliminar Programa", panel_timetable_path(timetable), method: :delete, data: {confirm: "¿Seguro? Esta acción no se puede deshacer"} %><br>
+	<%= timetable.name %><br/>
+	Comienza: <%= timetable.streaming_hour.strftime("%I:%M%p") %><br/>
+	Termina: <%= timetable.end_streaming_hour.strftime("%I:%M%p") %><br/>
+	<% if timetable.monday? %>
+		Lunes
+	<% end %>
+	<% if timetable.tuesday? %>
+		Martes
+	<% end %>
+	<% if timetable.wednesday? %>
+		Miércoles
+	<% end %>
+	<% if timetable.thursday? %>
+		Jueves
+	<% end %>
+
+	<% if timetable.friday? %>
+		Viernes
+	<% end %>
+	<% if timetable.saturday? %>
+		Sábado
+	<% end %>
+	<% if timetable.sunday? %>
+		Domingo
+	<% end %>
+	<%= timetable.image %><br/>
+
+<% end %>

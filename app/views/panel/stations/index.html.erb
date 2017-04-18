@@ -1,0 +1,4 @@
+<%= link_to "+ Estación", new_panel_station_path %><br/>
+<% @stations.each do |station| %>
+	<%= link_to station.name, panel_station_path(station) %><br/>
+<% end %>

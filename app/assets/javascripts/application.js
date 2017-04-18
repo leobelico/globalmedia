@@ -38,3 +38,16 @@
 //= require components/forms
 
 
+function add_fields(link, association, content) { 
+//
+    var new_id = new Date().getTime();  
+    var regexp = new RegExp("new_" + association, "g");  
+    $(link).parent().append(content.replace(regexp, new_id));
+    TweenMax.to(".field-builder", 1.2, {maxHeight: 200})
+}
+
+function remove_fields(link) {
+  $(link).prev("input[type=hidden]").val("1");
+  $(link).closest(".field-builder").hide();
+  TweenMax.to($(link).parent(), .6, { height:  0});
+}
