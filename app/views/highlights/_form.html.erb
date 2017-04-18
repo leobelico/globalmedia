@@ -17,6 +17,5 @@
 	<br/>
 	<label>Artículo:</label>
 	 <%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
-	<br/>
 	<%= f.submit "Guardar" %>
 <% end %>

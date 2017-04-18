@@ -45,8 +45,8 @@
 		flex-direction:  column; 
 		align-items:  center; 
 		iframe {
-			margin-left:  auto; 
-			margin-right:  auto; 
+			margin-left:  auto !important; 
+			margin-right:  auto !important; 
 		}
 	}
 	p {
@@ -67,6 +67,9 @@
 		font-size:  18px;  
 		padding:  0 40px; 
 	}
-
+	.ql-video {
+		margin-left:  auto !important; 
+		margin-right:  auto !important; 
+	}
 	.ql-size-small { font-size:  13.5px; }
 }

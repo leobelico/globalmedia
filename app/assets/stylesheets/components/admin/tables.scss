@@ -6,7 +6,12 @@
 	box-sizing:  border-box; 
 	max-width:  initial; 
 }
-
+.table__row .table__empty {
+	align-items:  center; 
+	justify-content:  center; 
+	text-align:  center; 
+	color: #424242; 
+}
 .table__row {
 	display: flex;
 	flex-direction: row;
@@ -24,6 +29,12 @@
 		.table__cell:first-child {
 			color:  $tertiary; 
 		}
+		.edit { 
+			color:  $tertiary;
+		}
+		.delete {
+			color: $red; 
+		}
 	}
 	&:last-of-type {
 		.table__cell {
@@ -32,7 +43,9 @@
 	}
 
 }
-
+.table__empty {
+	color:  #424242 !important; 
+}
 .table__column {
 	display: flex;
 	flex-direction: column;
@@ -55,7 +68,6 @@
 	} 
 
 } 
-
 .table__cell.name { flex: 2; }
 .table__cell.short-description { flex:  3; }
 .table__cell.user-name { flex:  1; }

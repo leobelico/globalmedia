@@ -35,5 +35,6 @@
 //= require components/quill-initializer
 //= require components/quill-forms
 //= require components/quill-notes
+//= require components/forms
 
 

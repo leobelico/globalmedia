@@ -1,5 +1,10 @@
-<h1>Es Noticia</h1>
-<%= form_tag keywords_path do %>
+<div class="panel__header">
+  <h2 class="title panel__title"><span>#EsNoticia / </span><span class="current">Nuevas palabras clave</span></h2>
+  <div class="panel__actions">
+    <button class="button">Guardar palabras clave</button>
+  </div>
+</div>
+<%= form_tag panel_keywords_path, class: "card admin-form" do %>
   <% @keywords.each_with_index do |keyword, index| %>
     <%= fields_for 'keywords[]', keyword do |f| %>
 
@@ -8,11 +13,9 @@
         <%= f.text_field :keyword %><br>
        
       </div>
-     
-
     <% end %>
   <% end %>
-  <div class="actions">
-    <%= submit_tag %>
-  </div>
 <% end %>
+<script>
+  saveFormOnButtonClick($("button.button"), $(".card.admin-form"));
+</script>
