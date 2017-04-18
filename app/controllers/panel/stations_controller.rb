@@ -17,7 +17,7 @@ class Panel::StationsController < ApplicationController
 	def create
 		@station = Station.new(station_params)
 		if @station.save
-			redirect_to panel_stations_path
+			redirect_to panel_station_path(@station)
 		else
 			render action: "new"
 		end
@@ -28,7 +28,7 @@ class Panel::StationsController < ApplicationController
 
 	def update
 		if @station.update(station_params)
-			redirect_to panel_stations_path
+			redirect_to panel_station_path(@station)
 		else
 			render action: "new"
 		end
@@ -41,7 +41,7 @@ class Panel::StationsController < ApplicationController
 
 	private
 		def station_params
-			params.require(:station).permit(:name, :stream_url, :image, timetables_attributes: [:id, :streaming_hour, :name, :end_streaming_hour, :_destroy])
+			params.require(:station).permit(:name, :stream_url, :image, timetables_attributes: [:id, :streaming_hour, :name, :end_streaming_hour,  :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :_destroy])
 		end
 
 		def set_station

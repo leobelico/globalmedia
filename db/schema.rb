@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418165242) do
+ActiveRecord::Schema.define(version: 20170418181437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,10 +120,17 @@ ActiveRecord::Schema.define(version: 20170418165242) do
     t.time     "streaming_hour"
     t.string   "name",               default: ""
     t.string   "image",              default: ""
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "station_id"
     t.time     "end_streaming_hour"
+    t.boolean  "monday",             default: false
+    t.boolean  "tuesday",            default: false
+    t.boolean  "wednesday",          default: false
+    t.boolean  "thursday",           default: false
+    t.boolean  "friday",             default: false
+    t.boolean  "saturday",           default: false
+    t.boolean  "sunday",             default: false
     t.index ["station_id"], name: "index_timetables_on_station_id", using: :btree
   end
 

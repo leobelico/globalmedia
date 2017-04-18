@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     end
     resources :articles, param: :slug
     resources :stations, param: :slug
-
+    resources :timetables, only: [:show, :destroy] 
     resources :sections, param: :slug 
     resources :hits
     resources :banners
