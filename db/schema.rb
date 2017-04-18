@@ -10,25 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418181437) do
+ActiveRecord::Schema.define(version: 20170418204432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
-    t.string   "name",                  default: ""
-    t.text     "note",                  default: ""
-    t.text     "short_description",     default: ""
+    t.string   "name",                      default: ""
+    t.text     "note",                      default: ""
+    t.text     "short_description",         default: ""
     t.integer  "articable_id"
     t.string   "articable_type"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.string   "slug",                  default: ""
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "slug",                      default: ""
     t.integer  "keyword_id"
-    t.boolean  "highlight",             default: false
-    t.boolean  "global_recommendation", default: false
+    t.boolean  "highlight",                 default: false
+    t.boolean  "global_recommendation",     default: false
     t.integer  "user_id"
     t.string   "plain_text"
+    t.datetime "updated_recommendation_on"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
     t.index ["keyword_id"], name: "index_articles_on_keyword_id", using: :btree
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree

@@ -18,3 +18,9 @@
 	<%= submit_tag "Enviar" %>
 <% end %>
 
+<% Article.all.order(updated_at: "DESC").each do |article| %>
+				<%= article.name %>
+				<%= article.global_recommendation %>
+				Fecha: <%= article.updated_at %><br/><br/>
+			<% end %>
+
