@@ -3,7 +3,7 @@ class Station < ApplicationRecord
 	has_many :timetables, dependent: :delete_all
 	accepts_nested_attributes_for :timetables, reject_if: proc { |attributes| attributes['name'].blank? }, :allow_destroy => true
 
-	before_save :to_slug
+	before_create :to_slug
 	def to_param
     	slug
   	end

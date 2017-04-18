@@ -1,6 +1,6 @@
 class Keyword < ApplicationRecord
 	has_many :articles, dependent: :nullify
-  	before_save :to_slug
+  	before_create :to_slug
 
 	def to_param
     	slug

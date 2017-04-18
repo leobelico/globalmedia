@@ -17,6 +17,8 @@ class Panel::StationsController < ApplicationController
 	def create
 		@station = Station.new(station_params)
 		if @station.save
+			@station.update_attributes(slug: @station.slug + "-" + @station.id.to_s) 
+
 			redirect_to panel_station_path(@station)
 		else
 			render action: "new"
