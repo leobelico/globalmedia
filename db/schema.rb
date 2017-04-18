@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413185743) do
+ActiveRecord::Schema.define(version: 20170418155425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,22 +108,29 @@ ActiveRecord::Schema.define(version: 20170413185743) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                       default: "",    null: false
+    t.string   "encrypted_password",          default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",               default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "first_name",             default: ""
-    t.string   "last_name",              default: ""
-    t.string   "full_name",              default: ""
-    t.string   "role",                   default: ""
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "first_name",                  default: ""
+    t.string   "last_name",                   default: ""
+    t.string   "full_name",                   default: ""
+    t.string   "role",                        default: ""
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.boolean  "banners_permission",          default: false
+    t.boolean  "create_articles_permission",  default: false
+    t.boolean  "video_complaints_permission", default: false
+    t.boolean  "hits_permission",             default: false
+    t.boolean  "destroy_articles_permission", default: false
+    t.boolean  "radio_stations_permission",   default: false
+    t.boolean  "remote_controls_permission",  default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
