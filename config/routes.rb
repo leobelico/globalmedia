@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :articles, param: :slug do
       get :search_hashtag, on: :collection
   end
+  #resources :stations, param: :slug
+
 
   resources :sections, only: [:show], param: :slug 
 
@@ -34,6 +36,8 @@ Rails.application.routes.draw do
 
     end
     resources :articles, param: :slug
+    resources :stations, param: :slug
+
     resources :sections, param: :slug 
     resources :hits
     resources :banners
@@ -51,6 +55,7 @@ Rails.application.routes.draw do
   resources :keywords, param: :slug, except: [:index, :show, :edit, :update, :destroy, :new, :create] do
     get :show_keyword
   end
+
 
   get "panel/sections/set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
   post "panel/sections/set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"

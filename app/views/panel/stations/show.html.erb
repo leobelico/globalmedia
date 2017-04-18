@@ -1,0 +1,12 @@
+Nombre de la estación: <%= @station.name %><br/>
+URL de Stream: <%= @station.stream_url %><br/>
+<%= @station.image %>
+
+<%= link_to "Editar", edit_panel_station_path(@station) %><br/>
+<h3>Programas</h3>
+<% @station.timetables.each do |timetable| %>
+	<%= timetable.name %><br/>
+	Comienza: <%= timetable.streaming_hour.strftime("%I:%M%p") %><br/>
+	Termina: <%= timetable.end_streaming_hour.strftime("%I:%M%p") %><br/>
+	<%= timetable.image %><br/>
+<% end %>

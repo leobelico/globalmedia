@@ -1,0 +1,38 @@
+<%= form_for [:panel, @station], html: { class: "admin-form form--article card"} do |f| %>
+	<% if @station.errors.any? %>	
+		<h5><%= pluralize(@station.errors.count, "error") %></h5>
+			<ul>
+				<% @station.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+				<% end %>
+			</ul>
+	<% end %>
+
+	<label>Nombre: </label><%= f.text_field :name %><br/>
+	<label>URL de Stream: </label><%= f.text_field :stream_url %><br/>
+	<label>Imagen: </label><%= f.text_field :image %><br/>
+	
+	<br>
+	<h3>Programas de Radio</h3>
+	
+	<div class= "field-builder">
+			<%= link_to_add_fields "+ Programa", f, :timetables, "", "Add a Program"%>
+	</div>
+	<%= f.fields_for :timetables, class: "field-builder" do |builder| %>
+		<div class= "field-builder">
+			
+			Hora de Inicio: <%= builder.time_select :streaming_hour, default: {hour:"00", minute: "00"} %> 
+			<br/>
+			Hora de Fin: <%= builder.time_select :end_streaming_hour, default: {hour: "01", minute: "00"} %> 
+			<br/>
+			Nombre del Programa<%= builder.text_field :name %><br>
+			Imagen: <%= builder.text_field :image %>
+			<br/><br/>
+			
+			<%= link_to_remove_fields 'Eliminar', builder, "fields__remove" %>
+		</div>
+	<% end %>
+	
+	<br/><br/>
+	<%= f.submit "Guardar" %>
+<% end %>

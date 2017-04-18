@@ -4,7 +4,7 @@ class Article < ApplicationRecord
   has_many :section_highlights, dependent: :delete_all
 	attr_accessor :hashtags_names, :the_note
   has_and_belongs_to_many :hashtags, uniq: true
-  before_save :associate_tags, :to_slug, :set_note
+  before_save :associate_tags, :to_slug
   belongs_to :user, optional: true
   
 

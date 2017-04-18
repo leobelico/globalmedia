@@ -1,0 +1,16 @@
+<div class= "field-builder">
+	<div class="create__field-container">
+		Hora de Inicio: <%= f.time_select :streaming_hour, default: {hour:"00", minute: "00"} %> 
+		<br/>
+		Hora de Fin: <%= f.time_select :end_streaming_hour, default: {hour: "01", minute: "00"} %> 
+		<br/>
+		Nombre del Programa<%= f.text_field :name %><br>
+		Imagen: <%= f.text_field :image %>
+		<br/><br/>
+		<%= f.hidden_field :_destroy %>
+	</div>
+		<%= link_to_remove_fields 'Eliminar', f, "fields__remove" %>
+
+</div>
+
+<br/><br/>
