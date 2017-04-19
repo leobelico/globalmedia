@@ -43,7 +43,7 @@ class Panel::StationsController < ApplicationController
 
 	private
 		def station_params
-			params.require(:station).permit(:name, :stream_url, :image, timetables_attributes: [:id, :streaming_hour, :name, :end_streaming_hour,  :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :_destroy])
+			params.require(:station).permit(:name, :stream_url, :image, timetables_attributes: [:id, :streaming_hour, :name, :broadcasters, :end_streaming_hour,  :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :_destroy])
 		end
 
 		def set_station

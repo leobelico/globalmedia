@@ -10,6 +10,6 @@ module ApplicationHelper
       fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|  
         render(association.to_s.singularize + "_fields", :f => builder)  
       end  
-      link_to name, "#", :onclick => h("add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")"), :class => cssClass, :title => title, data: { turbolinks: "false" }
+      link_to name, "#", :onclick => h("add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")"), :class => "button", :title => title, data: { turbolinks: "false" }
   end
 end

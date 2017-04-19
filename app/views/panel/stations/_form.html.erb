@@ -1,44 +1,120 @@
-<%= form_for [:panel, @station], html: { class: "admin-form form--article card"} do |f| %>
+<%= form_for [:panel, @station], html: { class: ""} do |f| %>
 	<% if @station.errors.any? %>	
-		<h5><%= pluralize(@station.errors.count, "error") %></h5>
+		<div class="card">
+			
+			<h5><%= pluralize(@station.errors.count, "error") %></h5>
 			<ul>
 				<% @station.errors.full_messages.each do |msg| %>
 						<li><%= msg %></li>
 				<% end %>
 			</ul>
+		</div>
 	<% end %>
+	<div class="card admin-form">
+		<h3 class="section-title">Estación</h3>
 
-	<label>Nombre: </label><%= f.text_field :name %><br/>
-	<label>URL de Stream: </label><%= f.text_field :stream_url %><br/>
-	<label>Imagen: </label><%= f.text_field :image %><br/>
+		<div class="field">
+			<label>Nombre de la estación:</label>
+			<%= f.text_field :name %>
+		</div>
+		<div class="field">
+			<label>URL de Stream:</label>
+			<%= f.text_field :stream_url %>
+		</div>
+		<div class="field">	
+			<label>Imagen: </label>
+			<%= f.text_field :image %>
+		</div>
+	</div>
 	
-	<br>
-	<h3>Programas de Radio</h3>
+	
+	<div class="admin-form">
+		
+	<h3 class="section-title">Programas de Radio</h3>
 	
 	<div class= "field-builder">
-			<%= link_to_add_fields "+ Programa", f, :timetables, "", "Add a Program"%>
+		<%= link_to_add_fields "Añadir Programa", f, :timetables, "", "Add a Program"%>
 	</div>
 	
 		<%= f.fields_for :timetables, class: "field-builder" do |builder| %>
-			<div class= "field-builder">
+			<div class= "field-builder card">
+					
+				<div class="field">
+					
+					<label>Nombre del Programa</label>
+					<%= builder.text_field :name %>
+				</div>
+				<div class="field">
+					<label>Locutores</label>
+					<%= builder.text_field :broadcasters %>
+				</div>				
+				<div class="multifield">
+					
+					<div class="timefield">
+						<label>Hora de Inicio:</label> 
+						<div class="field">
+							<%= builder.time_select :streaming_hour, default: {hour:"00", minute: "00"}, time_separator: "<span>:</span>" %> 
+						</div>
+					</div>
+					<div class="timefield">
+						<label>Hora de Fin:</label> 
+						<div class="field">
+							<%= builder.time_select :end_streaming_hour, default: {hour: "01", minute: "00"}, time_separator: "<span>:</span>" %> 
+							
+						</div>
+					</div>
+				</div>
+				<div class="field">	
+					<label>Días de la semana: </label>
+				</div>
+				<div class="field field--checkbox">
+					<%= builder.check_box :monday %> 
+					<label>Lunes</label> 
+				</div>
+				<div class="field field--checkbox">
+					<%= builder.check_box :tuesday %> 
+					<label>Martes</label> 
+					
+				</div>
+				<div class="field field--checkbox">
+					<%= builder.check_box :wednesday %> 
+					<label>Miércoles</label> 
+					
+				</div>
+				<div class="field field--checkbox">
+					
+					<%= builder.check_box :thursday %> 
+					<label>Jueves</label> 
+				</div>
+				<div class="field field--checkbox">
+					<%= builder.check_box :friday %> 
+					<label>Viernes</label> 
+					
+				</div>
+				<div class="field field--checkbox">
+					<%= builder.check_box :saturday %> 
+					<label>Sábado</label> 
+					
+				</div>
+				<div class="field field--checkbox">
+					<%= builder.check_box :sunday %> 
+					<label>Domingo</label>
+					
+				</div>
+				<div class="field">
+					<label>Imagen:</label>
+					<%= builder.text_field :image %>
+				</div>
 				
-				
-				Nombre del Programa<%= builder.text_field :name %><br>
-				Hora de Inicio: <%= builder.time_select :streaming_hour, default: {hour:"00", minute: "00"} %> 
-				<br/>
-				Hora de Fin: <%= builder.time_select :end_streaming_hour, default: {hour: "01", minute: "00"} %> 
-				<br/>
-				Días de la semana: <%= builder.check_box :monday %> Lunes <%= builder.check_box :tuesday %> Martes <%= builder.check_box :wednesday %> Miércoles <%= builder.check_box :thursday %> Jueves <%= builder.check_box :friday %> Viernes <%= builder.check_box :saturday %> Sábado <%= builder.check_box :sunday %> Domingo<br/>
-				Imagen: <%= builder.text_field :image %>
-				<br/><br/>
-		<%= builder.hidden_field :_destroy %>
+				<%= builder.hidden_field :_destroy %>
+				<%= link_to_remove_fields 'Eliminar programa', builder, "fields__remove delete" %>
 
 				
-				<%= link_to_remove_fields 'Eliminar', builder, "fields__remove" %>
 			</div>
 		<% end %>
 		
+	</div>
 	
-	<br/><br/>
-	<%= f.submit "Guardar" %>
+	
+	<% f.submit "Guardar" %>
 <% end %>

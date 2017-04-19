@@ -1,37 +1,79 @@
-Nombre de la estación: <%= @station.name %><br/>
-URL de Stream: <%= @station.stream_url %><br/>
-<%= @station.image %>
+<div class="panel__header">
+	<h2 class="title panel__title"><span>Estaciones de Radio / </span><span class="current"><%= @station.name %></span></h2>
+	<div class="panel__actions">
+		<%= link_to "Eliminar estación", panel_station_path(@station), method: :delete, data: {confirm: "¿Seguro? Esta acción no se puede deshacer"}, class: "delete" %>
+		<%= link_to "Editar estación", edit_panel_station_path(@station), class: "button" %>
 
-<%= link_to "Editar", edit_panel_station_path(@station) %><br/>
-<%= link_to "Eliminar", panel_station_path(@station), method: :delete, data: {confirm: "¿Seguro? Esta acción no se puede deshacer"} %><br/>
-<h3>Programas</h3>
-<% @station.timetables.each do |timetable| %>
-	<%= link_to "Eliminar Programa", panel_timetable_path(timetable), method: :delete, data: {confirm: "¿Seguro? Esta acción no se puede deshacer"} %><br>
-	<%= timetable.name %><br/>
-	Comienza: <%= timetable.streaming_hour.strftime("%I:%M%p") %><br/>
-	Termina: <%= timetable.end_streaming_hour.strftime("%I:%M%p") %><br/>
-	<% if timetable.monday? %>
-		Lunes
-	<% end %>
-	<% if timetable.tuesday? %>
-		Martes
-	<% end %>
-	<% if timetable.wednesday? %>
-		Miércoles
-	<% end %>
-	<% if timetable.thursday? %>
-		Jueves
-	<% end %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__image">Imagen:</div>
+		<p class="table__cell">Nombre de la estación:</p>
+		<p class="table__cell">URL de stream:</p>
+	</div>
+	<div class="table__row">
+		<img src="<%= @station.image %>" alt="" class="table__image">
+		<div class="table__cell"><%= @station.name %></div>
+		<div class="table__cell"><%= @station.stream_url %></div>
+	</div>
+</div>
 
-	<% if timetable.friday? %>
-		Viernes
-	<% end %>
-	<% if timetable.saturday? %>
-		Sábado
-	<% end %>
-	<% if timetable.sunday? %>
-		Domingo
-	<% end %>
-	<%= timetable.image %><br/>
+<h3 class="card">Programas</h3>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Nombre del programa:</p>
+		<p class="table__cell">Comienza:</p>
+		<p class="table__cell">Termina:</p>
+		<p class="table__cell weekdays">Días de la semana:</p>
+		<p class="table__cell">Locutores:</p>
+	</div>
+	<% @station.timetables.each do |timetable| %>
+		<div class="table__row">
+			<p class="table__cell"><%= timetable.name %></p>
+			<p class="table__cell"><%= timetable.streaming_hour.strftime("%I:%M%p") %></p>
+			<p class="table__cell"><%= timetable.end_streaming_hour.strftime("%I:%M%p") %></p>
+			<p class="table__cell weekdays">
+				<% if timetable.monday? %>
+					<span class="primary">L</span>
+				<% else %>
+					<span class="inactive">L</span>
+				<% end %>	
+				<% if timetable.tuesday? %>
+					<span class="primary">M</span>
+				<% else %>
+					<span class="inactive">M</span>
+				<% end %>	
+				<% if timetable.wednesday? %>
+					<span class="primary">M</span>
+				<% else %>
+					<span class="inactive">M</span>
+				<% end %>	
+				<% if timetable.thursday? %>
+					<span class="primary">J</span>
+				<% else %>
+					<span class="inactive">J</span>
+				<% end %>	
+				<% if timetable.friday? %>
+					<span class="primary">V</span>
+				<% else %>
+					<span class="inactive">V</span>
+				<% end %>	
+				<% if timetable.saturday? %>
+					<span class="primary">S</span>
+				<% else %>
+					<span class="inactive">S</span>
+				<% end %>	
+				<% if timetable.sunday? %>
+					<span class="primary">D</span>
+				<% else %>
+					<span class="inactive">D</span>
+				<% end %>	
 
-<% end %>
+			</p>
+			<p class="table__cell"><%= timetable.broadcasters %></p>
+			<% timetable.image %>
+		</div>
+
+	<% end %>
+</div>

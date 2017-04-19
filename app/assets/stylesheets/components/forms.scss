@@ -20,6 +20,39 @@
 	width:  100%; 
 }
 
+.multifield {
+	display:  flex; 
+	flex-direction:  row; 
+	.timefield, .field {
+		flex: 1; 
+		&:nth-of-type(even) {
+			margin-left:  8px; 
+		}
+		&:nth-of-type(odd) {
+			margin-right:  8px; 
+		}
+	}
+}
+.timefield {
+	display:  flex; 
+	flex-direction:  column; 
+	.field { 
+		display:  flex; 
+		flex-direction:  row; 
+		align-items:  ceter; 
+		justify-content:  center; 
+		* {
+			margin-top:  auto; 
+			margin-bottom:  auto; 
+		}
+		select:first-of-type {
+			margin-right:  8px; 
+		}
+		select:last-of-type {
+			margin-left:  8px; 
+		}
+	}
+}
 .field--string {
 	position:  relative; 
 	input {
@@ -170,7 +203,37 @@ input:focus {
     }
   }
 }
+.delete {
+	color:  $red; 
+}
+.field-builder.card {
+	margin-left:  0; 
+}
 
-
-
-
+.banner-sections {
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  flex-start; 
+	justify-content:  flex-start; 
+	flex-wrap:  wrap; 
+	.field--checkbox {
+		width:  50%; 
+		box-sizing:  border-box; 
+		justify-content:  space-between; 
+		&:nth-of-type(even) {
+			padding-left:  8px; 
+		}
+		&:nth-of-type(odd) {
+			padding-right:  8px; 
+		}
+		label {
+			flex: 20; 
+		}
+		input[type="checkbox"] {
+			margin: 0 0; 
+			height:  24px; 
+			width:  24px; 
+			margin-left:  auto; 
+		}
+	}
+}

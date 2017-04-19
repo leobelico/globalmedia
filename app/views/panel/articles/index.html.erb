@@ -21,7 +21,6 @@
 			<p class="table__cell date"><%= article.created_at.strftime("%B %d, %Y") %></p>
 			<%= link_to	"Editar", edit_panel_article_path(article), class: "table__cell edit" %>
 			<%= link_to	"Eliminar", panel_article_path(article), class: "table__cell delete", method: :delete, data: { confirm: "¿Estas seguro de querer eliminar esta nota?" } %>
-
 		</div>
 	<% end %>
 	<% if @articles.count == 0 %>
