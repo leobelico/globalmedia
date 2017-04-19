@@ -8,38 +8,16 @@ class Panel::PanelController < ApplicationController
 
 
 	def set_global_recommendations
-		articles =  Article.where(id: params[:all_recommendations])
 		articles_in_highlights = Article.where(global_recommendation: true)
-		articles.each do |article|
-			article.update_attributes(global_recommendation: true)
-		end 
-
-		if articles.count >= 4
-			articles.each do |this_article|
-				created = false
-				articles_in_highlights.each do |a_in_h|
-					if this_article == a_in_h
-						created = true
-					end
-				end
-				if created == false
-					article.update_attributes(global_recommendation: true, updated_recommendation_on: DateTime.now)
-				end
-			end
-
-			if articles_in_highlights.count >= 4
-				get_first_h = Article.where(global_recommendation: true).order(updated_at: "ASC").first(articles_in_highlights.count - 3)
-				get_first_h.each do |h|
-					h.update_attributes(global_recommendation: false)
-				end 
-			end
+		articles_in_highlights.update_all(global_recommendation: false)
+		if params[:panel][:first_article_id]
+			first_article = Article.find_by_name(params[:panel][:first_article_id])
 		end
-
-
-		if articles_in_highlights.count == 0
-			articles.each do |article|
-				article.update_attributes(global_recommendation: true, updated_recommendation_on: DateTime.now)
-			end
+		if params[:panel][:second_article_id]
+			second_article = Article.find_by_name(params[:panel][:second_article_id])
+		end
+		if params[:panel][:third_article_id]
+			third_article = Article.find_by_name(params[:panel][:third_article_id])
 		end
 
 		#Article.all.each do |article|

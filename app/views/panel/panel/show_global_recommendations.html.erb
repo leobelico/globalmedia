@@ -1,26 +1,35 @@
 
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Global Recomienda</span></h2>
+	<div class="panel__actions">
+		<button class="button">Guardar recomendaciones</button>
+	</div>
+</div>
 
-<%= form_tag(panel_set_global_recommendations_path) do %>
-	<% @articles.order(created_at: "DESC").each do |article|%>
+<%= form_for :panel, html: { class: "admin-form card" }, url: {controller: "panel/panel", action: 'set_global_recommendations'} do |f| %>
+	<div class="field">
 		
+		<label>Global Recomienda #1</label>
+		<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+	</div>
+	<div class="field">
 		
+		<label>Global Recomienda #2</label>
+		<%= f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+	</div>
+	<div class="field">
 		
-		Global Recomienda
-		
-	
-			<%= check_box_tag :all_recommendations, article.id, 
-			article.global_recommendation, :name => '[all_recommendations][]' %>
-		
-		<%= link_to article.name, article %> | <%= article.articable.name %><br/>
-		<br/>
-	<% end %>
+		<label>Global Recomienda #3</label>
+		<%= f.autocomplete_field(:third_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#third_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
 
-	<%= submit_tag "Enviar" %>
+	</div>
 <% end %>
-
+<script>
+	saveFormOnButtonClick($("form"), $("button.button"));
+</script>
 <% Article.all.order(updated_at: "DESC").each do |article| %>
-				<%= article.name %>
-				<%= article.global_recommendation %>
-				Fecha: <%= article.updated_at %><br/><br/>
-			<% end %>
+	<%= article.name %>
+	<%= article.global_recommendation %>
+	Fecha: <%= article.updated_at %>
+<% end %>
 

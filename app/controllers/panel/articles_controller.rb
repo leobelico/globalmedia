@@ -1,6 +1,7 @@
 class Panel::ArticlesController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
+	autocomplete :article, :name, full: true
 	
 	def index
 		@articles = Article.all

@@ -29,7 +29,6 @@ Rails.application.routes.draw do
   	get :autocomplete_article_name, on: :collection
   end
 
-
   namespace :panel do
    
     resources :keywords, param: :slug 
@@ -42,7 +41,9 @@ Rails.application.routes.draw do
     post "update_multiple_keywords", to: "keywords#update_multiple"
 
     resources :highlights, param: :slug
-    resources :articles, param: :slug
+    resources :articles, param: :slug do 
+      get :autocomplete_article_name, on: :collection
+    end
     resources :stations, param: :slug
     resources :timetables, only: [:show, :destroy] 
     resources :sections, param: :slug 
