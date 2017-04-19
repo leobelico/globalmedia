@@ -25,6 +25,9 @@ short_description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. T
 
 article_name = "Lorem Ipsum Dolor Sit Amet"
 
+plain_text = "Lorem ipsum dolor sit amet - consectetur adipiscing elit. Proin cursus sit amet augue ut viverra. Pellentesque pulvinar, lectus ac lacinia convallis, tortor massa tempor ante, nec consectetur arcu purus sed ipsum. Vivamus nec sapien auctor velit faucibus vehicula sed vitae justo. Fusce dolor enim, auctor at turpis id, placerat pretium sapien. Nunc vitae efficitur tellus. Sed quis vestibulum ante, sed malesuada erat. Etiam ullamcorper pharetra scelerisque. 
+
+Nunc fringilla, sapien non porttitor tempus, tortor felis porttitor nulla, ac ullamcorper purus eros et lacus. Praesent condimentum dapibus eros id ullamcorper. Mauris blandit justo eu varius placerat. Aliquam lacus velit, mattis at arcu ac, viverra laoreet nisl. Integer eu sapien interdum, ornare risus sit amet, iaculis nulla. Sed tempus quam sed nulla maximus placerat. Donec vitae velit ut est semper tempus. Nam lacinia tempor convallis. Fusce lobortis velit eget ligula tempus, vitae vehicula risus tincidunt."
 
 superadmins = User.create([
 		{first_name: "Ilse", last_name: "Alejo", email: "ilse@nuva.rocks", password: "qwerty123", password_confirmation: "qwerty123", role: "superadmin"},
@@ -36,7 +39,191 @@ superadmins = User.create([
 		{first_name: "Carlos", last_name: "Ramírez", email: "carlos@nuva.rocks", password: "qwerty123", password_confirmation: "qwerty123", role: "admin"}
 	])
 
+placeholder_note = '{"ops":[{"attributes":{"bold":true},"insert":"Lorem ipsum dolor sit amet - "},{"insert":"consectetur adipiscing elit. Proin cursus sit amet augue ut viverra. Pellentesque pulvinar, lectus ac lacinia convallis, tortor massa tempor ante, nec consectetur arcu purus sed ipsum. Vivamus nec sapien auctor velit faucibus vehicula sed vitae justo. Fusce dolor enim, auctor at turpis id, placerat pretium sapien. Nunc vitae efficitur tellus. Sed quis vestibulum ante, sed malesuada erat. Etiam ullamcorper pharetra scelerisque. \n\nNunc fringilla, sapien non porttitor tempus, tortor felis porttitor nulla, ac ullamcorper purus eros et lacus. Praesent condimentum dapibus eros id ullamcorper. Mauris blandit justo eu varius placerat. Aliquam lacus velit, mattis at arcu ac, viverra laoreet nisl. Integer eu sapien interdum, ornare risus sit amet, iaculis nulla. Sed tempus quam sed nulla maximus placerat. Donec vitae velit ut est semper tempus. Nam lacinia tempor convallis. Fusce lobortis velit eget ligula tempus, vitae vehicula risus tincidunt.\n\n"},{"insert":{"tweet":"854793360145600512"}},{"insert":"\n"}]}'
 
-
+short_lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin cursus sit amet augue ut viverra. Pellentesque pulvinar, lectus ac lacinia convallis, tortor massa tempor ante, nec consectetur arcu purus sed ipsum."
+hashtags = "#duarte #poltica"
+articles = Article.create([
+	{		
+		name: "Nota 1",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 2",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 3",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 4",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 5",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 6",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 7",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 8",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 9",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 10",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 11",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 12",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 13",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 14",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 15",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	},	
+	{		
+		name: "Nota 16",
+		note: placeholder_note,
+		short_description: short_lorem,
+		plain_text: plain_text,
+		hashtags_names: hashtags, 
+		global_recommendation:  false, 
+		highlight:  false, 
+		articable_type:  "Section", 
+		articable_id: 1
+	}
+])
+articles.each do |article|
+	article.update_attributes(user: superadmins[0])
+	p "updated article user"
+end
 
 

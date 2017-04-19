@@ -41,8 +41,10 @@ Rails.application.routes.draw do
     post "update_multiple_keywords", to: "keywords#update_multiple"
 
     resources :highlights, param: :slug
+
     resources :articles, param: :slug do 
       get :autocomplete_article_name, on: :collection
+    
     end
     resources :stations, param: :slug
     resources :timetables, only: [:show, :destroy] 
@@ -54,8 +56,8 @@ Rails.application.routes.draw do
     post "set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
 
     get "show_global_recommendations", to: "panel#show_global_recommendations"
-  get "set_global_recommendations", to: "panel#set_global_recommendations"
-  post "set_global_recommendations", to: "panel#set_global_recommendations"
+    get "set_global_recommendations", to: "panel#set_global_recommendations"
+    post "set_global_recommendations", to: "panel#set_global_recommendations"
   end
   # get "panel/keywords/edit_multiple", to: "panel/keywords#edit_multiple"
   # get "panel/keywords/update_multiple", to: "panel/keywords#update_multiple"

@@ -15,7 +15,7 @@ class Panel::HighlightsController < ApplicationController
 		article = Article.find_by_name(params[:highlight][:article_id])
 		@highlight.article = article
 		if @highlight.save
-			redirect_to highlights_path
+			redirect_to panel_highlights_path
 		else
 			render action: "new"
 		end
@@ -32,7 +32,7 @@ class Panel::HighlightsController < ApplicationController
 
 		@highlight.article = article
 		if @highlight.update(highlight_params)
-			redirect_to highlights_path
+			redirect_to panel_highlights_path
 		else
 			render action: "edit"
 		end
@@ -40,7 +40,7 @@ class Panel::HighlightsController < ApplicationController
 
 	def destroy
 		@highlight.destroy
-		redirect_to highlights_path
+		redirect_to panel_highlights_path
 	end
 
 	private
