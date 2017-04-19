@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418181437) do
+ActiveRecord::Schema.define(version: 20170418204406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20170418181437) do
     t.string   "name",        default: ""
     t.boolean  "global",      default: false
     t.boolean  "titlepage",   default: false
+    t.string   "client"
   end
 
   create_table "hashtags", force: :cascade do |t|
@@ -131,6 +132,7 @@ ActiveRecord::Schema.define(version: 20170418181437) do
     t.boolean  "friday",             default: false
     t.boolean  "saturday",           default: false
     t.boolean  "sunday",             default: false
+    t.string   "broadcasters"
     t.index ["station_id"], name: "index_timetables_on_station_id", using: :btree
   end
 

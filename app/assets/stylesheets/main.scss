@@ -53,7 +53,20 @@ body {
 	padding-top:  78px; 
 	background-color:  $gray-100; 
 }
-
+.primary {
+	color:  $tertiary; 
+	font-weight:  700; 
+}
+.inactive {
+	color:  #424242; 
+	opacity:  .1;
+}
+.section-title.card {
+	margin-top:  24px !important; 
+	margin-left:  24px !important; 
+	margin-bottom:  0px !important; 
+	margin-right:  0px !important; 
+}
 .main-content,
 .sidebar {
 	display:  flex; 

@@ -1,7 +1,0 @@
-<%= link_to "+ Banner", new_banner_path %><br/>
-<% @banners.each do |banner| %>
-	<%= link_to banner do %>
-		<%= banner.name %> | <%= banner.created_at.to_date %>
-	<% end %>
-	<br/>
-<% end %>	

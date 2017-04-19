@@ -1,0 +1,71 @@
+<%= form_for [:panel, @banner], html: { class: "card admin-form" } do |f| %>
+	<% if @banner.errors.any? %>	
+		<h5><%= pluralize(@banner.errors.count, "error") %></h5>
+			<ul>
+				<% @banner.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+				<% end %>
+			</ul>
+	<% end %>
+	
+	<div class="field field--string">
+		<label>Nombre del Banner</label>
+		<%= f.text_field :name %>
+	</div>
+	<div class="field field--string">
+		<label>Cliente del Banner</label>
+		<%= f.text_field :client %>
+	</div>
+	
+	<div class="field field--string">
+		<label>Imagen para Escritorio</label>
+		<%= f.text_field :large_image %>
+	</div>
+	
+	<div class="field field--string">
+		<label>Imagen para móviles</label>
+		<%= f.text_field :small_image %>
+	</div>
+	
+	<div class="field field--string">
+		<label>Tamaño del banner:</label>
+		<%= f.select(:size, [ "Chico", "Mediano", "Grande"], {}, { class: "" }) %>
+	</div>
+	<div class="banner-sections">
+		
+		<div class="field field--checkbox">
+			
+			<label>Banner Global</label>
+			<%= f.check_box :global %>
+		</div>
+		<div class="field field--checkbox">
+			<label>Banner en Portada (Página Principal)</label>
+			<%= f.check_box :titlepage %>
+		</div>
+
+		<!-- <h4>Secciones:</h4> -->
+		<% Section.all.each do |section| %>
+			<% if @banner.new_record? %>
+				<div class="field field--checkbox">
+					<label><%= section.name %></label>
+					<%= check_box_tag :all_sections, section.id, false, :name => '[all_sections][]' %>
+				</div>
+			<% else %>
+				<% if SectionBanner.where(sectionable_id: section.id, banner: @banner).count == 0 %>
+					<div class="field field--checkbox">
+						<label><%= section.name %></label>	
+						<%= check_box_tag :all_sections, section.id, false, :name => '[all_sections][]' %> 
+					</div>
+				<% else %>
+					<div class="field field--checkbox">
+						<label><%= section.name %></label>
+						<%= check_box_tag :all_sections, section.id, true, :name => '[all_sections][]' %> 
+						
+					</div>
+				<% end %>
+			<% end %>
+			
+		<% end %>
+	</div>
+	
+<% end %>

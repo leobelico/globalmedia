@@ -1,7 +1,12 @@
 <div class="panel__header">
-	<h2 class="title panel__title">Estaciones / <span class="current">Crear estación</span></h2>
-	
+	<h2 class="title panel__title">Estaciones de Radio / <span class="current">Nueva estación</span></h2>
+	<div class="panel__actions">
+		<button class="button">Crear estación</button>
+	</div>
 </div>
 
-	<%= render 'form' %>
+<%= render 'form' %>
 
+<script>
+	saveFormOnButtonClick($("button.button"), $("form")); 
+</script>

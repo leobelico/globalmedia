@@ -23,6 +23,10 @@
 		.table__cell {
 			padding-top:  0; 
 		}
+		.table__image {
+			width:  120px; 
+			margin-right:  18px; 
+		}
 	}
 	&:not(:first-of-type) {
 		border-top:  solid 1px #ebebeb; 
@@ -35,6 +39,15 @@
 		.delete {
 			color: $red; 
 		}
+		.table__image {
+			width:  120px; 
+			height:  120px; 
+			object-fit:  cover; 
+			object-position:  center center; 
+			border-radius:  24px; 
+			margin-top:  12px; 
+			margin-right:  18px; 
+		}		
 	}
 	&:last-of-type {
 		.table__cell {
@@ -66,11 +79,37 @@
 	&.edit:not {
 		color:  $tertiary; 
 	} 
-
 } 
+
 .table__cell.name { flex: 2; }
 .table__cell.short-description { flex:  3; }
 .table__cell.user-name { flex:  1; }
 .table__cell.date { flex:  1; }
 .table__cell.edit { flex:  1; }
 .table__cell.delete { flex:  1; }
+
+.table__cell.weekdays {
+	display:  flex; 
+	flex-direction:  row; 
+	font-weight:  600; 
+	span {
+		margin-right:  8px; 
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

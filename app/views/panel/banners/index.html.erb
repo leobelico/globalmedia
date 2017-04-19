@@ -1,0 +1,20 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Banners Publicitarios</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Nuevo Banner", new_panel_banner_path, class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Nombre:</p>
+		<p class="table__cell">Fecha de creación:</p>
+		<p class="table__cell">Fecha de última modificación:</p>
+	</div>
+	<% @banners.each do |banner| %>
+		<div class="table__row">
+			<%= link_to banner.name, panel_banner_path(banner), class: "table__cell" %>
+			<p class="table__cell"><%= banner.created_at.strftime("%A, %d %b %Y %l:%M %p") %></p>
+			<p class="table__cell"><%= banner.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></p>
+		</div>
+	<% end %>	
+</div>

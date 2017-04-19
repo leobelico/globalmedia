@@ -1,4 +1,4 @@
-class BannersController < ApplicationController
+class Panel::BannersController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_banner, only: [:show, :edit, :update, :destroy]
 	def index
@@ -19,7 +19,7 @@ class BannersController < ApplicationController
 				p "creating"
 				SectionBanner.create(banner: @banner, sectionable_id: section.id, sectionable_type: "Section")
 			end
-			redirect_to @banner
+			redirect_to panel_banner_path(@banner)
 		else
 			render action: "new"
 		end
@@ -39,7 +39,7 @@ class BannersController < ApplicationController
 			sections.each do |section|
 				SectionBanner.create(banner: @banner, sectionable_id: section.id, sectionable_type: "Section")
 			end
-			redirect_to @banner
+			redirect_to panel_banner_path(@banner)
 		else
 			render action: "edit"
 		end
@@ -52,7 +52,7 @@ class BannersController < ApplicationController
 
 	private
 		def banner_params
-			params.require(:banner).permit(:large_image, :small_image, :size, :name, :global, :titlepage )
+			params.require(:banner).permit(:large_image, :small_image, :size, :name, :client, :global, :titlepage )
 		end
 
 		def set_banner

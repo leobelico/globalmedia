@@ -1,0 +1,38 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span>Banners / </span><span class="current">Banner</span></h2>
+	<%= link_to "Editar banner", edit_panel_banner_path(@banner), class: "button" %>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Nombre del banner:</p>
+		<p class="table__cell">Cliente:</p>
+		<p class="table__cell">Tamaño:</p>
+	</div>
+	<div class="table__row">
+		<p class="table__cell"><%= @banner.name %></p>
+		<p class="table__cell"><%= @banner.client %></p>
+		<p class="table__cell"><%= @banner.size %></p>
+	</div>
+</div>
+<div class="small-title card">Secciones del banner:</div>
+<div class="card banner-sections-card">
+	<% if @banner.global? %>
+		<p class="">Global</p>
+	<% end %>
+
+	<% if @banner.titlepage? %>
+		<p class="">Página Principal</p>
+	<% end %>
+
+	<% @banner.section_banners.each do |section_banner| %>
+		<p class=""><%= section_banner.sectionable.name %> <%# section_banner.sectionable_type %></p> 
+	<% end %>
+</div>
+<label class="small-title card">Imagen de Escritorio:</label>
+<div class="card">
+	<img src="<%= @banner.large_image %>" alt="">
+</div>
+<label class="small-title card">Imagen de Móviles:</label>
+<div class="card">
+	<img src="<%= @banner.small_image %>" alt="">
+</div>
