@@ -6,6 +6,9 @@
 <br/>
 
 <% @highlights.each do |highlight| %>
+	<% if highlight.order == 1 %>
+		<%= render "components/principal-highlight", article: highlight.article %>
+	<% end %>
 	Posición: <%= highlight.order %>
 	Artículo: <%= link_to highlight.article.name, highlight.article %>
 <% end %>

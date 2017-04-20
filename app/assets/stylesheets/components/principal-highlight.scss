@@ -1,0 +1,16 @@
+.principal-highlight {
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  stretch; 
+	justify-content:  flex-start; 
+	width:  75%; 
+	padding-right:  18px; 
+	box-sizing:  border-box;  
+}
+.principal-highlight__image {
+	width:  calc(#{$interface-width} * .5);
+	background:  red; 
+	height:  320px; 
+	object-fit:  cover; 
+	object-position:  center center; 
+}
