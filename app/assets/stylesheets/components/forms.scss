@@ -183,7 +183,9 @@ input:focus {
   border:  solid 1px #f5f5f5; 
   border-radius: 5px;
 
-
+  .ui-menu-item {
+  	padding:  12px 0px; 
+  }
   .ui-menu-item > a.ui-corner-all {
     display: block;
     padding: 12px 18px;

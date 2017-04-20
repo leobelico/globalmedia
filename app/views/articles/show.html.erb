@@ -9,7 +9,7 @@
 		<% end %>
 	</div>
 	<% if @article.keyword %>
-		<div class="label"><%= @article.keyword.keyword %></div>
+		<div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
 	<% end %>
 	<div class="hashtags-container">
 		<%= render @article.hashtags %>

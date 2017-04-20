@@ -1,3 +1,22 @@
+<div class="panel__header">
+	<h4 class="panel__title">Hits</h4>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell f-4">Artículo:</p>
+		<p class="table__cell f-2">Autor:</p>
+		<p class="table__cell f-1">Hits:</p>
+		<p class="table__cell f-3">Hora inicial:</p>
+		<p class="table__cell f-3">Hora final:</p>
+	</div>
 <% @hits.each do |hit| %>
-	<%= hit.created_at %> | <%= hit.number %> | <%= hit.article.name %> | <%= hit.article.user.full_name %> |<br/>
+	<div class="table__row">
+		<%= link_to hit.article.name, hit.article, class: "table__cell f-4" %>
+		<p class="table__cell f-2"><%= hit.article.user.full_name %></p>
+		<p class="table__cell f-1"><%= hit.number %></p>
+		<p class="table__cell f-3"><%= hit.created_at.strftime("%l:%M %p, %b %e, %Y") %></p>
+		<p class="table__cell f-3"><%= (hit.created_at + 1.hours).strftime("%l:%M %p, %b %e, %Y") %></p>
+	</div>
+
 <% end %>
+</div>

@@ -11,6 +11,8 @@
 <% end %>
 <br/>
 
+<%= render "components/latest-news", articles: al_momento(true, false, false, 5)  %>
+
 <%= render "/layouts/al_momento", section: al_momento(true, false, false, 5) %>
 
 <% @sections.each do |section| %>
