@@ -2,6 +2,7 @@ class Panel::ArticlesController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
 	autocomplete :article, :name, full: true
+	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
 	
 	def index
 		@articles = Article.all.order(created_at: "DESC")
@@ -28,6 +29,12 @@ class Panel::ArticlesController < ApplicationController
 	end
 
 	def edit
+		if @article.hashtags.count > 0	
+			@hashtags = ""
+			@article.hashtags.each do |hashtag|
+				@hashtags = @hashtags + " " + hashtag.name
+			end
+		end
 	end
 
 	def update
@@ -53,7 +60,7 @@ class Panel::ArticlesController < ApplicationController
 
 	private
 		def article_params
-			params.require(:article).permit(:name, :note, :plain_text, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id, :the_note, the_note: [:quill])
+			params.require(:article).permit(:name, :note, :plain_text, :image, :image_thumbnail, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id, :the_note, the_note: [:quill])
 
 			# all_options = params.require(:article).fetch(:note, nil).try(:permit!)
    # 			params.require(:article).permit(:name, :plain_text, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id).merge(:note => all_options)
@@ -65,4 +72,7 @@ class Panel::ArticlesController < ApplicationController
 				flash[:alert] = "La página que estabas buscando no existe."
 				redirect_to root_url
 		end
+		def set_s3_direct_post
+    		@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+  		end
 end

@@ -8,9 +8,18 @@
 			<p class="section"><%= @article.section %></p>
 		<% end %>
 	</div>
-	<p><%= render @article.hashtags %></p>
+	<% if @article.keyword %>
+		<div class="label"><%= @article.keyword.keyword %></div>
+	<% end %>
+	<div class="hashtags-container">
+		<%= render @article.hashtags %>
+	</div>
 
 	<p class="short-description"><%= @article.short_description %></p>
+	
+	<% if @article.image %>
+		<%= image_tag @article.image, class: "main-image" %>
+	<% end %>
 
 	<div id="quill-container" class="quill--article">	
 	</div>
@@ -27,8 +36,10 @@
 		<% if get_banner(@article.articable, "Global", "Chico" ) %>
 			Banner Chico: <%= get_banner(@article.articable, "Global", "Chico" ).name %>
 		<% end %>
-		<br/>
 	<% end %>
+	
+
+
 
 	<% if get_banner(@article.articable, @article.articable_type, "Mediano" ) %>
 

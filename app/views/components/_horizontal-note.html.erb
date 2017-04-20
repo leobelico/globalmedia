@@ -1,0 +1,10 @@
+<div class="horizontal-article">
+	<img src="<% %>" class="article__image">
+	<div class="article__information">
+		<%= article.name %>
+		<%= article.user.full_name %>
+		<%= article.created_at.strftime("%b %d, %Y %I:%M:%S %p") %>
+		<%= article.section %>
+		<%= article.articable_type %>
+	</div>
+</div>

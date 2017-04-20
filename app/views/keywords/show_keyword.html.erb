@@ -1,0 +1,5 @@
+<h2 class="title"><%= @keyword.keyword %></h2>
+
+<% @keyword.articles.each do |article| %>
+	<%= render "components/horizontal-note", article: article %>
+<% end %>

@@ -1,4 +1,9 @@
-<%= form_for [:panel, @article], html: { class: "admin-form form--article card", remote: true } do |f| %>
+<form id="fields-for-s3">
+	<% @s3_direct_post.fields.map do |name, value| %>
+	    <input type="hidden" name="<%= name %>" value="<%= value %>" />
+	<% end %>
+</form>
+<%= form_for [:panel, @article], multipart: true, html: { class: "admin-form form--article card directUpload", remote: true, data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } } do |f| %>
 	<% if @article.errors.any? %>	
 		<h5><%= pluralize(@article.errors.count, "error") %></h5>
 			<ul>
@@ -9,7 +14,7 @@
 	<% end %>
 	<div class="field field--string">
 		<label>Sección</label>
-		<%= f.select :articable_id, options_for_select( Section.all.collect{ |u| [u.name, u.id] }) %>
+		<%= f.select :articable_id, options_for_select( Section.all.collect{ |u| [u.name, u.id] }, @article.articable_id) %>
 		<%= f.hidden_field :articable_type, value: "Section" %>
 	</div>
 	<div class="field field--string">
@@ -20,21 +25,27 @@
 		<label>Descripción corta de la Nota</label>
 		<%= f.text_area :short_description %>
 	</div>
+
+	<div class="field field--string">
+		<label>Imagen principal</label>
+		<%= f.file_field :image %>
+	</div>
 	<div id="note-editor">
 		
 	</div>
 	<% if get_todays_keywords.count > 1 %>
 		<div class="field field--string">
 			<label>Palabra Clave</label>
-			<%= f.select :keyword_id, options_for_select( get_todays_keywords.collect{ |u| [u.keyword, u.id] }), include_blank: 'Ninguno' %>
+			<%= f.select :keyword_id, options_for_select( get_todays_keywords.collect{ |u| [u.keyword, u.id] }, @article.keyword_id), include_blank: 'Ninguno' %>
 		</div>
 	<% end %>
 	<div class="field">
 		<label>Hashtags: </label>
-		<%= f.text_field :hashtags_names, placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", id: "hashtags" %>
+		<%= f.text_field :hashtags_names, placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", id: "hashtags", value: @hashtags %>
 	</div>
 	
 <% end %>
 <script>
 	initialize_quill(); 
 </script>
+<%= render "components/s3_form_js" %>
