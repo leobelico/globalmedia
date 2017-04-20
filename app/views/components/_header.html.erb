@@ -5,12 +5,12 @@
 	<div class="weather">
 		<%= image_tag "temperature.svg" %>
 		<div class="weather__data">
-			<p class="weather__location">
+			<p id="wl" class="weather__location" data-turbolinks-permanent> 
 				
 			</p>
 			<p>
-				<span class="weather__degrees">--.--</span>
-				<span class="weather__units">°C</span>
+				<span id="wd" class="weather__degrees" data-turbolinks-permanent>--.--</span>
+				<span id="wu" class="weather__units">°C</span>
 			</p>
 		</div>
 	</div>
@@ -19,7 +19,7 @@
 		<p class="">
 			<span class="exchange-rate__name">USD</span>
 			<br>
-			<span class="exchange-rate__rate">$--.--</span>
+			<span id="usd" class="exchange-rate__rate" data-turbolinks-permanent>$--.--</span>
 		</p>
 	</div>
 	<div class="exchange-rate euro">
@@ -27,7 +27,7 @@
 		<p class="">
 			<span class="exchange-rate__name">EUR</span>
 			<br>
-			<span class="exchange-rate__rate">$--.--</span>
+			<span id="eur" class="exchange-rate__rate" data-turbolinks-permanent>$--.--</span>
 		</p> 			
 	</div>
 </div>

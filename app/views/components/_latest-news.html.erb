@@ -1,0 +1,12 @@
+<div class="latest-news">
+	<div class="latest-news__header">
+		<h4 class="latest-news__title">Al Momento</h4>
+		<%= link_to "Ir a sección", "", class: "latest-news__link" %>
+	</div>
+	<% articles.each do |article| %>
+		<%= link_to article, class: "latest-news__article" do %>
+			<p class="article__time"><%= article.created_at.strftime("%H:%M") %></p>
+			<p class="article__title"><%= article.name %></p>
+		<% end %>
+	<% end %>
+</div>
