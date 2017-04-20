@@ -60,10 +60,10 @@ class Panel::ArticlesController < ApplicationController
 
 	private
 		def article_params
-			# params.require(:article).permit(:name, :note, :plain_text, :image, :image_thumbnail, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id, :the_note, the_note: [:quill])
+			params.require(:article).permit(:name, :note, :plain_text, :image, :image_thumbnail, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id, :the_note, the_note: [:quill])
 
-			all_options = params.require(:article).fetch(:note, nil).try(:permit!)
-   			params.require(:article).permit(:name, :plain_text, :image, :image_thumbnail, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id).merge(:note => all_options)
+			# all_options = params.require(:article).fetch(:note, nil).try(:permit!)
+   			# params.require(:article).permit(:name, :plain_text, :image, :image_thumbnail, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id).merge(:note => all_options)
 		end
 
 		def set_article
