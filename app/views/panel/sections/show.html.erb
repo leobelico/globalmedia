@@ -1,4 +1,10 @@
-<h1><%= @section.name %></h1>
+<div class="panel__header">
+	<h2 class="title panel__title"><span>Secciones / </span><span class="current"><%= @section %></span></h2>
+	<div class="panel__actions">
+		<%= link_to "Nueva sección", new_panel_section_path, class: "button" %>
+	</div>
+</div>
+<h1><%= @section %></h1>
 
 <%= form_tag(panel_set_highlight_and_recomendations_path) do %>
 	<% @section.articles.order(created_at: "DESC").each do |article|%>

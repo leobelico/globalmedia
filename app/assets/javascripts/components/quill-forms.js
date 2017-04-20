@@ -36,9 +36,11 @@ function submit_form(action, slug){
         short_description: $("#article_short_description").val(),
         articable_id: $("#article_articable_id").val(),
         articable_type: $("#article_articable_type").val(),
-        hashtag_names: $("#article_hashtags_names").val(), 
+        hashtags_names: $("#hashtags").val(), 
         plain_text: text_note,
-        note: JSON.stringify(quill_note)
+        note: JSON.stringify(quill_note),
+        keyword_id: $("#article_keyword_id").val(),
+        image: $("input[type='hidden'][name='article[image]']").val() 
 
       }
     }

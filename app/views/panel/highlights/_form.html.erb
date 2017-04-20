@@ -1,4 +1,4 @@
-<%= form_for(@highlight, html: { class: "card admin-form" }) do |f| %>
+<%= form_for [:panel, @highlight], html: { class: "card admin-form" } do |f| %>
 	<% if @highlight.errors.any? %>	
 		<h5><%= pluralize(@highlight.errors.count, "error") %></h5>
 			<ul>

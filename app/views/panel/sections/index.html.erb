@@ -1,18 +1,21 @@
 <div class="panel__header">
-	<h2 class="title panel__title"><span class="current">Secciones</span> </h2>
-	
+	<h2 class="title panel__title"><span class="current">Secciones</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Nueva sección", new_panel_section_path, class: "button" %>
+	</div>
 </div>
 <div class="card">
 	<div class="table__row">
-		<p class="table__cell">Palabras Clave:</p>
+		<p class="table__cell">Nombre:</p>
+		<p class="table__cell">Artículos:</p>
 	</div>
 	<% @sections.each do |section| %>
-		
-			<div class="table__row">
-				<div class="table__cell">
-					<%= link_to section.name, panel_section_path(section)%>
-				</div>
+		<div class="table__row">
+			<div class="table__cell">
+				<%= link_to section.name, panel_section_path(section)%>
 			</div>
+			<div class="table__cell"><%= section.articles.count %></div>
+		</div>
 		
 	<% end %>
 </div>

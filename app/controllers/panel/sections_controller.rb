@@ -1,6 +1,7 @@
 class Panel::SectionsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_section, only: [:show, :edit, :update, :destroy]
+	
 	def index
 		@sections = Section.all.order(name: "ASC")
 	end

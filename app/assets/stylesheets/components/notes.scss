@@ -31,6 +31,27 @@
 	}
 
 }
+.hashtags-container {
+	display:  flex; 
+	flex-direction:  row;
+	align-items:  center;
+	flex-wrap:  wrap;  
+	justify-content:  flex-start; 
+	a {
+		margin-right:  18px; 
+		font-size:  14px; 
+		font-weight:  400; 
+		color:  $tertiary; 
+		margin-bottom:  18px; 
+	}
+}
+.main-image {
+	width:  100%; 
+	height:  350px;
+	margin-bottom:  24px; 
+	object-fit:  cover; 
+	object-position:  center center;  
+}
 #quill-container {
 	width:  100%;
 	.ql-editor {

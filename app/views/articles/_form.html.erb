@@ -1,3 +1,8 @@
+<form id="fields-for-s3">
+	<% @s3_direct_post.fields.map do |name, value| %>
+	    <input type="hidden" name="<%= name %>" value="<%= value %>" />
+	<% end %>
+</form>
 <%= form_for(@article, html: { class: "admin-form form--article card", remote: true }) do |f| %>
 	<% if @article.errors.any? %>	
 		<h5><%= pluralize(@article.errors.count, "error") %></h5>
