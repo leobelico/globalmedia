@@ -64,7 +64,7 @@
 </div>
 
 <script>
-	var content = <%= @article.note %>;
+	var content = <%= raw(@article.note) %>;
 	var container = document.getElementById("quill-container")
 	display_quill_note(content, container);
 </script>
