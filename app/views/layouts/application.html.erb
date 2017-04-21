@@ -14,6 +14,10 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+	<% if controller_name == "articles" and action_name == "show" %>
+		<%= render "components/article_meta_tags", article: @article %>
+	<% end %>
+
   </head>
 
   <body>
