@@ -1,5 +1,9 @@
+<meta property="fb:app_id"       content="502512736803830" /> 
 <meta property="og:url"          content="<%= article_url(article) %>" />
 <meta property="og:type"         content="artículo" />
 <meta property="og:title"        content="<%= article.name %>" />
 <meta property="og:description"  content="<%= article.short_description %>" />
 <meta property="og:image"        content="https:<%= article.image %>" />
+<meta property="og:updated_time" content="<%= article.created_at.strftime('%b %e, %l:%M %p') %>" />
+<meta property="og:author" 		content="<%= article.user.full_name %>">
+<meta property="og:rich_attachment" content="true">
