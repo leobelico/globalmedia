@@ -2,7 +2,16 @@
 	<img src="<%= article.image %>" alt="" class="principal-highlight__image">
 	<div class="pincipal-highlight__info">
 		<h4 class="title"><%= article.name %></h4>	
-		<%= article.short_description %>
+		<p><%= article.short_description %></p> 	
+		
+		<div class="social-media-links" data-article="<%= article_url(article) %>">
+			<%= link_to ("whatsapp://send?text=" + article_url(article)), class: "social-media__link", target: "_blank" do %>
+				<%= image_tag "whatsapp.svg" %>
+			<% end %>
+			<a class="social-media__link" onclick="shareToFacebook(event);">
+				<%= image_tag "facebook.svg" %>				
+			</a>	
 
+		</div>
 	</div>
 </div>
