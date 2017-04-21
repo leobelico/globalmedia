@@ -36,6 +36,7 @@
 //= require components/quill-forms
 //= require components/quill-notes
 //= require components/forms
+//= require components/post-share
 
 
 function add_fields(link, association, content) { 
