@@ -4,13 +4,14 @@
 		<h4 class="title"><%= article.name %></h4>	
 		<p><%= article.short_description %></p> 	
 		
-		<div class="social-media-links">
+		<div class="social-media-links" data-article="<%= article_url(article) %>">
 			<%= link_to ("whatsapp://send?text=" + article_url(article)), class: "social-media__link", target: "_blank" do %>
 				<%= image_tag "whatsapp.svg" %>
 			<% end %>
-			<%= link_to ("https://www.facebook.com/sharer/sharer.php?u=" + article_url(article)).encode, class: "social-media__link", target: "blank" do %>
-				<%= image_tag "facebook.svg" %>
-			<% end %>
+			<a class="social-media__link" onclick="shareToFacebook(event);">
+				<%= image_tag "facebook.svg" %>				
+			</a>	
+
 		</div>
 	</div>
 </div>
