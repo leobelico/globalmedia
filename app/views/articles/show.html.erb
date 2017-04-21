@@ -8,6 +8,7 @@
 			<p class="section"><%= @article.section %></p>
 		<% end %>
 	</div>
+	<%= render "components/social-media-links", article: @article %>
 	<% if @article.keyword %>
 		<div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
 	<% end %>

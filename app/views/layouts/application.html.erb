@@ -21,7 +21,7 @@
   </head>
 
   <body>
-	<script>
+	<script data-turbolinks-permanent>
 	  window.fbAsyncInit = function() {
 	    FB.init({
 	      appId      : '502512736803830',
@@ -39,6 +39,7 @@
 	     fjs.parentNode.insertBefore(js, fjs);
 	   }(document, 'script', 'facebook-jssdk'));
 	</script>
+
   	<% panel_url = request.url.include? (request.base_url + "/panel")%>
 
 	<%= render "components/topbar" if !panel_url %>	
