@@ -1,0 +1,27 @@
+<div class="section-preview">
+	<div class="sp__header">
+		<div class="sp__name"><%= section.name %></div>
+		<%= link_to "Ir a sección", section, class: "sp__link" %>
+	</div>
+	<div class="sp__articles">
+		<% if highlight and highlight != ""%>
+			<div class="sp__article">
+				<%= link_to highlight do %>
+					<%= image_tag highlight.image, class: "sp__image" %>
+					<h4 class="small-title"><%= highlight.name %></h4>
+				<% end %>
+				<%= render "components/social-media-links", article: highlight %>
+			</div>
+		<% end %>
+
+		<% articles.each do |article|%>	
+			<div class="sp__article">
+				<%= link_to article do %>
+					<%= image_tag article.image, class: "sp__image" %>
+					<h4 class="small-title"><%= article.name %></h4>
+				<% end %>
+				<%= render "components/social-media-links", article: article %>
+			</div>
+		<% end %>
+	</div>
+</div>
