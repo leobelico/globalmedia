@@ -76,6 +76,10 @@ body {
 
 }
 
+//
+// COMPONENTS IMPORTs
+//
+
 @import "components/text"; 
 @import "components/forms"; 
 @import "components/buttons"; 
@@ -90,10 +94,27 @@ body {
 @import "components/notes"; 
 @import "components/latest-news"; 
 @import "components/principal-highlight"; 
+@import "components/preview-article-info"; 
+@import "components/secondary-highlight"; 
 
 @import "components/admin/admin-sidebar"; 
 @import "components/admin/admin-panel"; 
 @import "components/admin/tables"; 
 @import "components/admin/articles-panel"; 
+
+// 
+// PAGES IMPORTS
+// 
+
+@import "pages/titlepage"; 
+
+
+
+
+
+
+
+
+
 
 

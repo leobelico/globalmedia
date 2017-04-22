@@ -1,22 +1,21 @@
-<h3>#ESNOTICIA</h3>
-<% @its_news.each do |hashtag| %>
-	| <%= hashtag.article.name %> | 
-	
-<% end %>
-<br/>
-
-<% @highlights.each do |highlight| %>
-	<% if highlight.order == 1 %>
-		<%= render "components/principal-highlight", article: highlight.article %>
+<div class="highlights-container">	
+	<% @highlights.each do |highlight| %>
+		<% if highlight.order == 1 %>
+			<%= render "components/principal-highlight", article: highlight.article %>
+		<% else %>
+			<%= render "components/secondary-highlight", article: highlight.article %>
+		<% end %>
 	<% end %>
-	Posición: <%= highlight.order %>
-	Artículo: <%= link_to highlight.article.name, highlight.article %>
-<% end %>
-<br/>
+</div>
+
+
+
 
 <%= render "components/latest-news", articles: al_momento(true, false, false, 5)  %>
 
-<%= render "/layouts/al_momento", section: al_momento(true, false, false, 5) %>
+
+<%= render "components/banner", banner: get_banner("global", "TitlePage", "Grande") %>
+
 
 <% @sections.each do |section| %>
 	<% if get_section_highlight(section.id) %>
@@ -32,32 +31,26 @@
 <h1>Banners</h1>
 <% if get_banner("", "TitlePage", "Chico" ) %>
 	Banner Chico: <%= get_banner("", "TitlePage", "Chico" ).name %>
-	<br/>
-<% else %>
+	<% else %>
 	<% if get_banner("", "Global", "Chico" ) %>
 		Banner Chico: <%= get_banner("", "Global", "Chico" ).name %>
 	<% end %>
-	<br/>
-<% end %>
+	<% end %>
 
 <% if get_banner("", "TitlePage", "Mediano" ) %>
 
-	Banner Mediano: <%= get_banner("", "TitlePage", "Mediano" ).name  %><br/>
-<% else %>
+	Banner Mediano: <%= get_banner("", "TitlePage", "Mediano" ).name  %><% else %>
 	<% if get_banner("", "Global", "Mediano" ) %>
 		Banner Mediano: <%= get_banner("", "Global", "Mediano" ).name %>
 	<% end %>
-	<br/>
-<% end %>
+	<% end %>
 
 <% if get_banner("", "TitlePage", "Grande" ) %>
 
-	Banner Grande: <%= get_banner("", "TitlePage", "Grande" ).name  %><br/>
-<% else %>
+	Banner Grande: <%= get_banner("", "TitlePage", "Grande" ).name  %><% else %>
 	<% if get_banner("", "Global", "Grande" ) %>
 		Banner Grande: <%= get_banner("", "Global", "Grande" ).name %>
 	<% end %>
-	<br/>
-<% end %>
+	<% end %>
 
 

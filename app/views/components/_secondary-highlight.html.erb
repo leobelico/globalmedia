@@ -1,12 +1,13 @@
-<div class="principal-highlight">
-	
-	<img src="<%= article.image %>" alt="" class="principal-highlight__image">
-	<div class="article-preview__info principal-highlight__info">
+<div class="secondary-highlight">
+	<%= link_to article, class: "image-link" do %>
+		<img src="<%= article.image %>" alt="" class="secondary-highlight__image">
+	<% end %>
+	<div class="article-preview__info">
 		<%= link_to article do %>
 			<h4 class="title semibold"><%= article.name %></h4>	
 			<p class="section-and-author"><span class="section"><%= article.section %></span> - <span class="author"><%= article.user.full_name %></span></p> 	
 			<p class="datetime">Hace <%= distance_of_time_in_words(Time.now, (article.created_at)) %></p>
-			<p class="short-description"><%= article.short_description %></p> 	
+			<p class="short-description"><%= truncate(article.short_description, length: 90) %></p> 	
 		<% end %>
 		<%= render "components/social-media-links", article: article %>
 	</div>

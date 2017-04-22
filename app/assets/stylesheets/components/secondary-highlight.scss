@@ -1,0 +1,44 @@
+.secondary-highlight {
+	width:  calc(#{$interface-width} * .25 - 14px);
+	margin-bottom:  12px; 
+	display:  flex; 
+	flex-direction: column; 
+	.article-preview__info {
+		display:  flex; 
+		flex-grow: 1; 
+		.title {
+			font-size:  21px; 
+			margin-top:  8px; 
+			margin-bottom:  0px; 
+		}
+		.section-and-author {
+			margin-top:  8px; 
+			margin-bottom:  0px; 
+		}
+		.datetime {
+			margin-top:  8px; 
+			margin-bottom:  0px; 
+		}
+		.short-description {
+			margin-top:  8px; 
+			margin-bottom:  18px; 
+		}
+		.social-media {
+			margin-top:  auto !important;
+		}
+	}
+	.image-link {
+		width:  100%; 
+		height:  150px; 
+	}
+}
+
+.sh-mr {
+	margin-right:  18px; 
+}
+.secondary-highlight__image {
+	width:  100%;
+	height:  150px; 
+	object-fit:  cover; 
+	object-position:  center center; 
+}

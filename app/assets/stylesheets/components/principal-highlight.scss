@@ -6,11 +6,18 @@
 	width:  75%; 
 	padding-right:  18px; 
 	box-sizing:  border-box;  
+	margin-bottom:  12px; 
+	.principal-highlight__info {
+		margin-left:  12px; 
+		.title {
+			font-size:  36px;
+		}
+	}
 }
 .principal-highlight__image {
-	width:  calc(#{$interface-width} * .5);
-	background:  #f5f5f5; 
-	height:  320px; 
+	width:  calc(100% * .676);
+	height:  349px; 
+	background:  #f5f5f5;
 	object-fit:  cover; 
 	object-position:  center center; 
 }

@@ -53,7 +53,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 2",
@@ -64,7 +65,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 3",
@@ -75,7 +77,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 4",
@@ -86,7 +89,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 5",
@@ -97,7 +101,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 6",
@@ -108,7 +113,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 7",
@@ -119,7 +125,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 8",
@@ -130,7 +137,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 9",
@@ -141,7 +149,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 10",
@@ -152,7 +161,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 11",
@@ -163,7 +173,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 12",
@@ -174,7 +185,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 13",
@@ -185,7 +197,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 14",
@@ -196,7 +209,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 15",
@@ -207,7 +221,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	},	
 	{		
 		name: "Nota 16",
@@ -218,7 +233,8 @@ articles = Article.create([
 		global_recommendation:  false, 
 		highlight:  false, 
 		articable_type:  "Section", 
-		articable_id: 1
+		articable_id: 1, 
+		image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg"
 	}
 ])
 articles.each do |article|

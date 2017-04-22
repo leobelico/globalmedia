@@ -7,19 +7,23 @@
 				<% end %>
 			</ul>
 	<% end %>
-	<label>Highlights ya establecidos:</label>
+<!-- 	<label>Highlights ya establecidos:</label>
 	<% @highlights.each do |highlight| %>
 		Posición: <%= highlight.order %> Artículo: <%= link_to highlight.article.name, highlight.article %>
-	<% end %>
+	<% end %> -->
 
 	<div class="field">	
 		<label>Posición del Highlight:</label>
-		<%= f.select :order, options_for_select((1..6).step(1))%>
+		<%= f.select :order, options_for_select((1..6).step(1), @highlight.order)%>
 	</div>
 	<div class="field">
 		
 		<label>Artículo:</label>
-		<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+		<% if @highlight.new_record? %>
+			<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
+		<% else %>
+			<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @highlight.article.name) %>
+		<% end %>
 	</div>
 <% end %>
 <script>
