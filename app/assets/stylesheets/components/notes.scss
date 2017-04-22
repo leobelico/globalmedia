@@ -4,32 +4,31 @@
 	.title {
 		margin-bottom:  18px; 
 	}
-	.article__info {
-		display:  flex; 
-		flex-direction:  row; 
-		align-items:  center;
-		justify-conent:  center;  
-		margin-bottom:  18px; 
-		.author, 
-		.date, 
-		.section {
-			margin-right:  12px; 
-		}
-	}
-	.author {
-		font-size:  13.5px; 
-		font-style:  italic; 
-		color:  #616161; 
-		display:  flex; 
-	}
-	.short-description {
-		color:  #000000; 
-		font-size:  14px; 
-		line-height:  125%; 
-		font-weight:  600; 
-		margin-bottom:  18px; 
-	}
+}
 
+.article__info {
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  center;
+	justify-conent:  center;  
+	margin-bottom:  18px; 
+	.author, 
+	.date, 
+	.section {
+		margin-right:  12px; 
+	}
+}
+.author {
+	font-size:  13.5px; 
+	font-style:  italic; 
+	color:  #616161; 
+}
+.short-description {
+	color:  #000000; 
+	font-size:  14px; 
+	line-height:  125%; 
+	font-weight:  600; 
+	margin-bottom:  18px; 
 }
 .hashtags-container {
 	display:  flex; 

@@ -55,8 +55,8 @@
 	<% else %>
 	 	<div class="interface">
 			<% if !panel_url %>
-				<%= render "components/its-news" %>
-				<%= render "components/breaking-news" %>
+				<%= render "components/its-news" if get_todays_keywords.count > 0  %>
+				<%= render "components/breaking-news" if false %>
 			<% end %>
 		    <%= yield %>
 	 	</div>

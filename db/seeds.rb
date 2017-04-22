@@ -17,7 +17,7 @@ sections = Section.first_or_create([
 	{name: "Estados"},
 	{name: "Actualidad"},
 	{name: "Último Momento"}
-	])	
+])	
 
 article_content = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in qusae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? "
 
@@ -43,185 +43,27 @@ placeholder_note = '{"ops":[{"attributes":{"bold":true},"insert":"Lorem ipsum do
 
 short_lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin cursus sit amet augue ut viverra. Pellentesque pulvinar, lectus ac lacinia convallis, tortor massa tempor ante, nec consectetur arcu purus sed ipsum."
 hashtags = "#duarte #poltica"
-articles = Article.create([
-	{		
-		name: "Nota 1",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 2",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 3",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 4",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 5",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 6",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 7",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 8",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 9",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 10",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 11",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 12",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 13",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 14",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 15",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	},	
-	{		
-		name: "Nota 16",
-		note: placeholder_note,
-		short_description: short_lorem,
-		plain_text: plain_text,
-		hashtags_names: hashtags, 
-		global_recommendation:  false, 
-		highlight:  false, 
-		articable_type:  "Section", 
-		articable_id: 1
-	}
-])
-articles.each do |article|
+
+sections.each do |section|
+	for i in 0..20
+		article = Article.create([
+			{		
+				name: ("Lorem ipsum dolor sit amet, consectetur adipiscing elit cont") + (0...4).map { ('a'..'z').to_a[rand(26)] }.join,
+				note: placeholder_note,
+				short_description: short_lorem,
+				plain_text: plain_text,
+				hashtags_names: hashtags, 
+				global_recommendation:  false, 
+				highlight:  false, 
+				articable_type:  "Section", 
+				articable_id: section.id, 
+				image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg", 
+				image_thumbnail: "http://www.sothebys.com/content/dam/sothebys-pages/blogs/ModernImpressions/2017/2/klimt-bauerngarten_banner.jpg.webrend.1920.350.jpeg"
+			}
+		])
+	end
+end
+Article.all.each do |article|
 	article.update_attributes(user: superadmins[0])
 	p "updated article user"
 end

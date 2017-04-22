@@ -3,8 +3,9 @@ class Panel::HighlightsController < ApplicationController
 	autocomplete :article, :name, full: true
 	before_action :get_all_highlights, only: [:new, :create, :edit, :update]
 	def index
-		@highlights = Highlight.all
+		@highlights = Highlight.all.order(order: "ASC")
 	end
+
 	def new
 		@highlight = Highlight.new
 	end
@@ -19,6 +20,7 @@ class Panel::HighlightsController < ApplicationController
 		else
 			render action: "new"
 		end
+
 	end
 
 	def edit
@@ -29,9 +31,11 @@ class Panel::HighlightsController < ApplicationController
 
 		
 		article = Article.find_by_name(params[:highlight][:article_id])
-
-		@highlight.article = article
-		if @highlight.update(highlight_params)
+		# p "---------------------"
+		# p article.id
+		# p "---------------------"
+		@highlight.article_id = article.id
+		if @highlight.update_attributes(article: article, order: params[:highlight][:order])
 			redirect_to panel_highlights_path
 		else
 			render action: "edit"
@@ -45,7 +49,7 @@ class Panel::HighlightsController < ApplicationController
 
 	private
 		def set_highlight
-			@highlight = Highlight.find(params[:id])
+			@highlight = Highlight.find(params[:slug])
 			rescue ActiveRecord::RecordNotFound
 				flash[:alert] = "La página que estabas buscando no existe."
 				redirect_to root_url

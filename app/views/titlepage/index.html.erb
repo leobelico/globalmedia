@@ -1,28 +1,27 @@
-<h3>#ESNOTICIA</h3>
-<% @its_news.each do |hashtag| %>
-	| <%= hashtag.article.name %> | 
-	
-<% end %>
-<br/>
-
-<% @highlights.each do |highlight| %>
-	<% if highlight.order == 1 %>
-		<%= render "components/principal-highlight", article: highlight.article %>
+<div class="highlights-container">	
+	<% @highlights.each do |highlight| %>
+		<% if highlight.order == 1 %>
+			<%= render "components/principal-highlight", article: highlight.article %>
+		<% else %>
+			<%= render "components/secondary-highlight", article: highlight.article %>
+		<% end %>
 	<% end %>
-	Posición: <%= highlight.order %>
-	Artículo: <%= link_to highlight.article.name, highlight.article %>
+</div>
+
+<% if Banner.count > 0 %>
+<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
 <% end %>
-<br/>
+
+
 
 <%= render "components/latest-news", articles: al_momento(true, false, false, 5)  %>
 
-<%= render "/layouts/al_momento", section: al_momento(true, false, false, 5) %>
 
 <% @sections.each do |section| %>
 	<% if get_section_highlight(section.id) %>
-		<%= render "/layouts/articles", section: get_articles_per_section(section.id, 3), section_name: section.name, highlight: get_section_highlight(section.id) %>
+		<%= render "/layouts/section_preview", articles: get_articles_per_section(section.id, 3), section: section, highlight: get_section_highlight(section.id) %>
 	<% else %>
-		<%= render "/layouts/articles", section: get_articles_per_section(section.id, 4), section_name: section.name, highlight: get_section_highlight(section.id) %>
+		<%= render "/layouts/section_preview", articles: get_articles_per_section(section.id, 4), section: section, highlight: get_section_highlight(section.id) %>
 	<% end %>
 <% end %> 
 
@@ -32,32 +31,26 @@
 <h1>Banners</h1>
 <% if get_banner("", "TitlePage", "Chico" ) %>
 	Banner Chico: <%= get_banner("", "TitlePage", "Chico" ).name %>
-	<br/>
-<% else %>
+	<% else %>
 	<% if get_banner("", "Global", "Chico" ) %>
 		Banner Chico: <%= get_banner("", "Global", "Chico" ).name %>
 	<% end %>
-	<br/>
-<% end %>
+	<% end %>
 
 <% if get_banner("", "TitlePage", "Mediano" ) %>
 
-	Banner Mediano: <%= get_banner("", "TitlePage", "Mediano" ).name  %><br/>
-<% else %>
+	Banner Mediano: <%= get_banner("", "TitlePage", "Mediano" ).name  %><% else %>
 	<% if get_banner("", "Global", "Mediano" ) %>
 		Banner Mediano: <%= get_banner("", "Global", "Mediano" ).name %>
 	<% end %>
-	<br/>
-<% end %>
+	<% end %>
 
 <% if get_banner("", "TitlePage", "Grande" ) %>
 
-	Banner Grande: <%= get_banner("", "TitlePage", "Grande" ).name  %><br/>
-<% else %>
+	Banner Grande: <%= get_banner("", "TitlePage", "Grande" ).name  %><% else %>
 	<% if get_banner("", "Global", "Grande" ) %>
 		Banner Grande: <%= get_banner("", "Global", "Grande" ).name %>
 	<% end %>
-	<br/>
-<% end %>
+	<% end %>
 
 

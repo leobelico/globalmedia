@@ -7,5 +7,7 @@
 	<a class="social-media__link" target="_blank" onclick="shareToFacebook(event);">
 		<%= image_tag "facebook.svg" %>				
 	</a>	
-
+	<a target="_blank" href="https://twitter.com/home?status=<%= truncate(article.name, length: 80) %>%20%2D%20<%= url_encode(article_url(article)) %>">
+		<%= image_tag "twitter.svg" %>
+	</a>
 </div>
