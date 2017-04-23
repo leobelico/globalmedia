@@ -32,7 +32,7 @@ gem 'rails-jquery-autocomplete'
 gem 'devise'
 gem 'foreman'
 gem 'aws-sdk', "2.2.8"
-
+gem 'will_paginate'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

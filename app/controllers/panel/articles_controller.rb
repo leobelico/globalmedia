@@ -5,7 +5,7 @@ class Panel::ArticlesController < ApplicationController
 	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
 	
 	def index
-		@articles = Article.all.order(created_at: "DESC")
+		@articles = Article.all.order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
 	end
 
 	def new

@@ -1,36 +1,13 @@
 <div class="panel__header">
-	<h2 class="title panel__title"><span>Secciones / </span><span class="current"><%= @section %></span></h2>
+	<h2 class="title panel__title"><span>Secciones / </span><span class="current"><%= @section.name %></span></h2>
 	<div class="panel__actions">
-		<%= link_to "Nueva sección", new_panel_section_path, class: "button" %>
+		<%= link_to "Editar sección", new_panel_section_path, class: "button" %>
 	</div>
 </div>
-<h1><%= @section %></h1>
-
-<%= form_tag(panel_set_highlight_and_recomendations_path) do %>
-	<% @section.articles.order(created_at: "DESC").each do |article|%>
-		<%= article.highlight %>
-		<% if article.highlight? %>
-			Resaltado: <%= radio_button_tag(:highlight, article.id, :checked) %>
-		<% else %>
-			Resaltado: <%= radio_button_tag(:highlight, article.id) %>
-		<% end %>
-
-		
-		
-		Global Recomienda
-		
-		<% if article.section_highlights.count == 0 %>
-			<%= check_box_tag :all_recommendations, article.id, false, :name => '[all_recommendations][]' %>
-		<% else %>
-			<%= check_box_tag :all_recommendations, article.id, true, :name => '[all_recommendations][]' %>
-		<% end %>
-		<%= link_to article.name, article %><br/>
-		<br/>
-	<% end %>
-
-	<%= submit_tag "Enviar" %>
-<% end %>
-
-<%= @highlights.each do |highlight| %>
-	<%= highlight.article.name %> <br/>
-<% end %>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Título:</p>
+		<p class="table__cell">Vistas Totales:</p>
+	</div>
+	
+</div>
