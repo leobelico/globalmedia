@@ -1,6 +1,6 @@
 class Panel::RelationshipsController < ApplicationController
 	before_action :authenticate_user!
-	before_action :set_investigation, only: [:show, :edit, :update, :destroy]
+	before_action :set_relationship, only: [:show, :edit, :update, :destroy]
 	before_action :set_new, only: [:new, :new_collaborator, :new_complaint]
 	before_action :set_s3_direct_post, only: [:new_complaint, :new_collaborator, :new, :create, :edit, :update]
 
@@ -25,12 +25,12 @@ class Panel::RelationshipsController < ApplicationController
 	end
 
 	def create
-		@investigation = Relationship.new(relationship_params)
-		if @investigation.save
+		@relationship = Relationship.new(relationship_params)
+		if @relationship.save
 
-			@investigation.update_attributes(slug: @investigation.slug + "-" + @investigation.id.to_s) 
+			@relationship.update_attributes(slug: @relationship.slug + "-" + @relationship.id.to_s) 
 			
-				redirect_to panel_relationship_path(@investigation)
+				redirect_to panel_relationship_path(@relationship)
 			
 		else
 			render action: "new"
@@ -47,9 +47,9 @@ class Panel::RelationshipsController < ApplicationController
 
 	def update
 		
-		if @investigation.update(relationship_params)
+		if @relationship.update(relationship_params)
 			
-				redirect_to panel_relationship_path(@investigation)
+				redirect_to panel_relationship_path(@relationship)
 			
 		else
 			render action: "edit"
@@ -57,7 +57,7 @@ class Panel::RelationshipsController < ApplicationController
 	end
 
 	def destroy
-		@investigation.destroy
+		@relationship.destroy
 		redirect_to panel_investigations_path
 	end
 
@@ -87,10 +87,10 @@ class Panel::RelationshipsController < ApplicationController
 
 		end
 		def set_new
-			@investigation = Relationship.new
+			@relationship = Relationship.new
 		end
-		def set_investigation
-			@investigation = Relationship.find_by_slug(params[:slug])
+		def set_relationship
+			@relationship = Relationship.find_by_slug(params[:slug])
 			rescue ActiveRecord::RecordNotFound
 				flash[:alert] = "La página que estabas buscando no existe."
 				redirect_to root_url

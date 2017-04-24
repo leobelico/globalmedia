@@ -3,11 +3,11 @@
 	    <input type="hidden" name="<%= name %>" value="<%= value %>" />
 	<% end %>
 </form>
-<%= form_for [:panel, @investigation], multipart: true, html: { class: "admin-form form--article card directUpload", data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } } do |f| %>
-	<% if @investigation.errors.any? %>	
-		<h5><%= pluralize(@investigation.errors.count, "error") %></h5>
+<%= form_for [:panel, @relationship], multipart: true, html: { class: "admin-form form--article card directUpload", data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } } do |f| %>
+	<% if @relationship.errors.any? %>	
+		<h5><%= pluralize(@relationship.errors.count, "error") %></h5>
 			<ul>
-				<% @investigation.errors.full_messages.each do |msg| %>
+				<% @relationship.errors.full_messages.each do |msg| %>
 						<li><%= msg %></li>
 				<% end %>
 			</ul>
@@ -27,7 +27,7 @@
 		<label>Imagen principal</label>
 		<%= f.file_field :image %>
 	</div>
-	<% if @investigation.new_record? %>
+	<% if @relationship.new_record? %>
 		<%= f.hidden_field :relationship_type, value: the_type %>
 	<% end %>
 <% end %>
