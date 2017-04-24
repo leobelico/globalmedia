@@ -1,0 +1,29 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Investigación Especial</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Nueva nota", new_panel_investigation_path, class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell name">Título:</p>
+		<p class="table__cell short-description">Descripción:</p>
+		
+	</div>
+	<% @investigations.each do |investigation| %>
+		<div class="table__row">
+			<%= link_to investigation.name, panel_investigation_path(investigation), class: "table__cell name" %>
+			<p class="table__cell short-description"><%= truncate(investigation.description, length: 40) %></p>	
+
+			
+			<%= link_to	"Editar", edit_panel_investigation_path(investigation), class: "table__cell edit" %>
+			<%= link_to	"Eliminar", panel_investigation_path(investigation), class: "table__cell delete", method: :delete, data: { confirm: "¿Estas seguro de querer eliminar esta nota?" } %>
+		</div>
+	<% end %>
+	<% if @investigations.count == 0 %>
+		<div class="table__row">
+			<p class="table__cell table__empty">No hay investigaciones para mostrar</p>
+		</div>
+	<% end %>
+</div>
+<%= will_paginate @investigations, class: "card admin-pagination" %>
