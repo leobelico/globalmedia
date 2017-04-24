@@ -14,7 +14,21 @@
 
 
 
-<%= render "components/latest-news", articles: al_momento(true, false, false, 5)  %>
+<div class="special-articles-container">
+	
+	<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_articles[0].article_relationships[0].relationship.name, articles: @investigation_articles %>
+	<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: @complaints[0].article_relationships[0].relationship.name, articles: @complaints %>
+
+</div>
+<div class="special-articles-container">
+	<div class="special-articles">
+		
+		<%= render "components/latest-news", articles: al_momento(true, false, false, 5)  %>
+	</div>
+	<div class="special-articles">
+		<%= render "components/collaborators", articles: @collaborator_articles %>
+	</div>
+</div>
 
 
 <% @sections.each do |section| %>
@@ -51,6 +65,6 @@
 	<% if get_banner("", "Global", "Grande" ) %>
 		Banner Grande: <%= get_banner("", "Global", "Grande" ).name %>
 	<% end %>
-	<% end %>
+<% end %>
 
 

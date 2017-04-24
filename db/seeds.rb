@@ -34,8 +34,8 @@ superadmins = User.create([
 		{first_name: "Eugenio", last_name: "Lujambio", email: "eugenio@nuva.rocks", password: "qwerty123", password_confirmation: "qwerty123", role: "superadmin"},
 		{first_name: "Eugenio", last_name: "Lujambio", email: "eugenio@nuva.rocks", password: "qwerty123", password_confirmation: "qwerty123", role: "superadmin"},
 		{first_name: "Osmar", last_name: "Ramírez", email: "osmar@nuva.rocks", password: "qwerty123", password_confirmation: "qwerty123", role: "superadmin"},
-		{first_name: "Osmar", last_name: "Ramírez", email: "osmar@nuva.rocks", password: "qwerty123", password_confirmation: "qwerty123", role: "superadmin"},
 		{first_name: "Erwin", last_name: "Ayvar", email: "erwin.ayvar@globalmedia.mx", password: "globalmediatest", password_confirmation: "globalmediatest", role: "superadmin"},
+		{first_name: "Luis", last_name: "González", email: "luis.gonzalez@gmnet.com.mx", password: "globalmediatest", password_confirmation: "globalmediatest", role: "superadmin"},
 
 		{first_name: "Nats", last_name: "Ramírez", email: "nats@nuva.rocks", password: "qwerty123", password_confirmation: "qwerty123", role: "admin"},
 		{first_name: "Carlos", last_name: "Ramírez", email: "carlos@nuva.rocks", password: "qwerty123", password_confirmation: "qwerty123", role: "admin"}
@@ -46,6 +46,36 @@ placeholder_note = '{"ops":[{"attributes":{"bold":true},"insert":"Lorem ipsum do
 short_lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin cursus sit amet augue ut viverra. Pellentesque pulvinar, lectus ac lacinia convallis, tortor massa tempor ante, nec consectetur arcu purus sed ipsum."
 hashtags = "#duarte #poltica"
 
+images = [
+"http://www.metmuseum.org/toah/images/hb/hb_62.24.jpg", 
+"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg", 
+"http://www.metmuseum.org/toah/images/hb/hb_1993.132.jpg", 
+"https://upload.wikimedia.org/wikipedia/commons/b/b4/Vincent_Willem_van_Gogh_128.jpg", 
+"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gustav_Klimt_046.jpg/1023px-Gustav_Klimt_046.jpg", 
+"https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg",
+"https://s-media-cache-ak0.pinimg.com/originals/8d/02/13/8d0213fd171c553b0da0f98b856d050d.jpg",
+"http://www.sothebys.com/content/dam/stb/lots/L14/L14006/812L14006_7H7HW.jpg",
+"http://1.bp.blogspot.com/-ii9a2EoLT7A/VVIMzFF27fI/AAAAAAAEcR0/8jXHWFmJtWw/s1600/Claude%2BMonet%2BLetters%2BTutt%27Art%40%2B(53).jpg",
+"https://s-media-cache-ak0.pinimg.com/originals/8d/b1/e9/8db1e9ceb968f84843ddcbc8a750d0e4.jpg",
+"https://upload.wikimedia.org/wikipedia/commons/1/1f/Michelangelo%27s_Pieta_5450_cropncleaned_edit.jpg",
+"http://www.wallpaperawesome.com/wallpapers-awesome/wallpapers-famous-painting-artist-painter-brush-oil-on-canvas-awesome/wallpaper-painting-of-famous-painters-4.jpg",
+"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gustav_Klimt_046.jpg/1023px-Gustav_Klimt_046.jpg", 
+"https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg",
+"https://s-media-cache-ak0.pinimg.com/originals/8d/02/13/8d0213fd171c553b0da0f98b856d050d.jpg",
+"http://www.sothebys.com/content/dam/stb/lots/L14/L14006/812L14006_7H7HW.jpg",
+"http://1.bp.blogspot.com/-ii9a2EoLT7A/VVIMzFF27fI/AAAAAAAEcR0/8jXHWFmJtWw/s1600/Claude%2BMonet%2BLetters%2BTutt%27Art%40%2B(53).jpg",
+"https://s-media-cache-ak0.pinimg.com/originals/8d/b1/e9/8db1e9ceb968f84843ddcbc8a750d0e4.jpg",
+"https://upload.wikimedia.org/wikipedia/commons/1/1f/Michelangelo%27s_Pieta_5450_cropncleaned_edit.jpg",
+"http://www.wallpaperawesome.com/wallpapers-awesome/wallpapers-famous-painting-artist-painter-brush-oil-on-canvas-awesome/wallpaper-painting-of-famous-painters-4.jpg",
+"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gustav_Klimt_046.jpg/1023px-Gustav_Klimt_046.jpg", 
+"https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg",
+"https://s-media-cache-ak0.pinimg.com/originals/8d/02/13/8d0213fd171c553b0da0f98b856d050d.jpg",
+"http://www.sothebys.com/content/dam/stb/lots/L14/L14006/812L14006_7H7HW.jpg",
+"http://1.bp.blogspot.com/-ii9a2EoLT7A/VVIMzFF27fI/AAAAAAAEcR0/8jXHWFmJtWw/s1600/Claude%2BMonet%2BLetters%2BTutt%27Art%40%2B(53).jpg",
+"https://s-media-cache-ak0.pinimg.com/originals/8d/b1/e9/8db1e9ceb968f84843ddcbc8a750d0e4.jpg",
+"https://upload.wikimedia.org/wikipedia/commons/1/1f/Michelangelo%27s_Pieta_5450_cropncleaned_edit.jpg",
+"http://www.wallpaperawesome.com/wallpapers-awesome/wallpapers-famous-painting-artist-painter-brush-oil-on-canvas-awesome/wallpaper-painting-of-famous-painters-4.jpg"
+]
 sections.each do |section|
 	for i in 0..20
 		article = Article.create([
@@ -59,15 +89,213 @@ sections.each do |section|
 				highlight:  false, 
 				articable_type:  "Section", 
 				articable_id: section.id, 
-				image: "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg", 
-				image_thumbnail: "http://www.sothebys.com/content/dam/sothebys-pages/blogs/ModernImpressions/2017/2/klimt-bauerngarten_banner.jpg.webrend.1920.350.jpeg"
+				image: images[i], 
+				image_thumbnail: images[i]
 			}
 		])
 	end
 end
-Article.all.each do |article|
+
+
+articles = Article.all
+
+
+articles.each do |article|
 	article.update_attributes(user: superadmins[0])
 	p "updated article user"
 end
+p "----------------------"
+p articles.count 
+p articles[1].id
+p articles[2].id
+p articles[3].id
+p articles[4].id
+p articles[5].id
+p articles[6].id
+p articles[7].id
+p "----------------------"
+
+highlights = Highlight.create([
+	{
+		order: 1,
+		article: articles[1]
+	},
+	{
+		order: 2,
+		article: articles[2]
+	},
+	{
+		order: 3,
+		article: articles[3]
+	},
+	{
+		order: 4,
+		article: articles[4]
+	},
+	{
+		order: 5,
+		article: articles[5]
+	},
+	{
+		order: 6,
+		article: articles[6]
+	}
+])
+
+keywords = Keyword.create([
+	{ keyword: "Duarte" },
+	{ keyword: "Politica" },
+	{ keyword: "Corea del Norte" },
+	{ keyword: "Trump" }
+])
+
+investigation = Relationship.create({
+	name: "Duarte se escapa",
+	image: images[15],
+	description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+	relationship_type: "Investigation",
+})
+investigation_articles = ArticleRelationship.create([
+	{
+		article_id: articles[0].id,
+		relationship_id: investigation.id
+	},
+	{
+		article_id: articles[1].id,
+		relationship_id: investigation.id
+	},
+	{
+		article_id: articles[2].id,
+		relationship_id: investigation.id
+	},
+	{
+		article_id: articles[3].id,
+		relationship_id: investigation.id
+	},
+	{
+		article_id: articles[4].id,
+		relationship_id: investigation.id
+	},
+	{
+		article_id: articles[5].id,
+		relationship_id: investigation.id
+	},
+	{
+		article_id: articles[6].id,
+		relationship_id: investigation.id
+	}
+]) 
+
+globalcomplaint = Relationship.create({
+	name: "Denuncia Global",
+	image: images[10],
+	description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+	relationship_type: "Complaint",
+})
+globalcomplaint_articles = ArticleRelationship.create([
+	{
+		article_id: articles[10].id,
+		relationship_id: globalcomplaint.id
+	},
+	{
+		article_id: articles[11].id,
+		relationship_id: globalcomplaint.id
+	},
+	{
+		article_id: articles[12].id,
+		relationship_id: globalcomplaint.id
+	},
+	{
+		article_id: articles[13].id,
+		relationship_id: globalcomplaint.id
+	},
+	{
+		article_id: articles[14].id,
+		relationship_id: globalcomplaint.id
+	},
+	{
+		article_id: articles[15].id,
+		relationship_id: globalcomplaint.id
+	},
+	{
+		article_id: articles[16].id,
+		relationship_id: globalcomplaint.id
+	}
+]) 
+
+collaborators = Relationship.create([
+	{
+		name: "Pablo Lujambio",
+		image: images[3],
+		description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+		relationship_type: "Collaborator",
+	},
+	{
+		name: "Plumas Nacionales",
+		image: images[4],
+		description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+		relationship_type: "Collaborator",
+	},
+	{
+		name: "Erwin Ayvar",
+		image: images[4],
+		description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+		relationship_type: "Collaborator",
+	},
+	{
+		name: "Luis González",
+		image: images[4],
+		description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+		relationship_type: "Collaborator",
+	},
+	{
+		name: "Osmar Oramas",
+		image: images[4],
+		description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+		relationship_type: "Collaborator",
+	}
+])
+
+collaborator_articles = ArticleRelationship.create([
+	{
+		article_id: articles[20].id,
+		relationship_id: collaborators[0].id
+	},
+	{
+		article_id: articles[21].id,
+		relationship_id: collaborators[0].id
+	},
+	{
+		article_id: articles[22].id,
+		relationship_id: collaborators[1].id
+	},
+	{
+		article_id: articles[23].id,
+		relationship_id: collaborators[2].id
+	},
+	{
+		article_id: articles[24].id,
+		relationship_id: collaborators[3].id
+	},
+	{
+		article_id: articles[25].id,
+		relationship_id: collaborators[4].id
+	},
+	{
+		article_id: articles[26].id,
+		relationship_id: collaborators[1].id
+	}
+]) 
+
+
+
+
+
+
+
+
+
+
+
 
 

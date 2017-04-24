@@ -1,0 +1,15 @@
+<div class="special-articles">
+	<div class="special-articles__type">
+		<p class="type">Colaboradores</p>
+		<p class="link">Ver todos</p>
+	</div>
+	<% articles.each do |article| %>
+		<%= link_to article, class: "collaborator-note" do %>
+			<%= image_tag article.article_relationships[0].relationship.image, class: "collaborator__image"%>
+			<div class="collaborator__info">
+				<p class="note__title"><%= truncate(article.name, length: 60) %></p>
+				<p class="note__author"><%= article.article_relationships[0].relationship.name %></p>
+			</div>
+		<% end %>
+	<% end %>
+</div>
