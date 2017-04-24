@@ -53,6 +53,12 @@ Rails.application.routes.draw do
     resources :banners
     resources :relationships, param: :slug 
 
+    get "new_collaborator", to: "relationships#new_collaborator"
+    get "collaborators", to: "relationships#collaborators"
+
+    get "new_complaint", to: "relationships#new_complaint"
+    get "complaints", to: "relationships#complaints"
+
     get "add_article_to_investigations", to: "relationships#add_article_to_investigations"
 
      get "set_investigation_articles", to: "relationships#set_investigation_articles"

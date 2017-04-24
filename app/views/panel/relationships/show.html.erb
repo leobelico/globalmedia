@@ -1,5 +1,5 @@
 <div class="panel__header">
-	<h2 class="title panel__title"><span>Investigación Especial/ </span></h2>
+	<h2 class="title panel__title"><span><%= @investigation.relationship_type %> </span></h2>
 	<div class="panel__actions">	
 		<%= link_to "+ Artículo", panel_add_article_to_investigations_path(@investigation), class: "button" %>
 	</div>

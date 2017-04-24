@@ -14,11 +14,12 @@
 	<% end %>
 	
 	<div class="field field--string">
-		<label>Título de la Investigación</label>
+
+		<label>Nombre</label>
 		<%= f.text_field :name %>
 	</div>
 	<div class="field">
-		<label>Descripción de la Investigación Especial</label>
+		<label>Descripción </label>
 		<%= f.text_area :description %>
 	</div>
 
@@ -26,8 +27,9 @@
 		<label>Imagen principal</label>
 		<%= f.file_field :image %>
 	</div>
-	
-	<%= f.hidden_field :relationship_type, value: "Investigation" %>
+	<% if @investigation.new_record? %>
+		<%= f.hidden_field :relationship_type, value: the_type %>
+	<% end %>
 <% end %>
 
 <%= render "components/s3_form_js" %>

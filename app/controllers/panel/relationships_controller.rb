@@ -1,14 +1,27 @@
 class Panel::RelationshipsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_investigation, only: [:show, :edit, :update, :destroy]
-	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
+	before_action :set_new, only: [:new, :new_collaborator, :new_complaint]
+	before_action :set_s3_direct_post, only: [:new_complaint, :new_collaborator, :new, :create, :edit, :update]
 
 	def index
-		@investigations = Relationship.all.order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
+		@investigations = Relationship.where(relationship_type: "Investigation").order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
 	end
 
+	def collaborators
+		@collaborators = Relationship.where(relationship_type: "Collaborator").order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
+	end
+
+	def complaints
+		@complaints = Relationship.where(relationship_type: "Complaint").order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
+	end
 	def new
-		@investigation = Relationship.new
+		
+	end
+
+	def new_collaborator
+	end
+	def new_complaint
 	end
 
 	def create
@@ -16,11 +29,9 @@ class Panel::RelationshipsController < ApplicationController
 		if @investigation.save
 
 			@investigation.update_attributes(slug: @investigation.slug + "-" + @investigation.id.to_s) 
-			if @investigation.relationship_type == "Investigation"
+			
 				redirect_to panel_relationship_path(@investigation)
-			else
-				redirect_to root_url
-			end
+			
 		else
 			render action: "new"
 		end
@@ -36,12 +47,10 @@ class Panel::RelationshipsController < ApplicationController
 
 	def update
 		
-		if @investigation.update(investigation_params)
-			if @investigation.relationship_type == "Investigation"
+		if @investigation.update(relationship_params)
+			
 				redirect_to panel_relationship_path(@investigation)
-			else
-				redirect_to root_url
-			end
+			
 		else
 			render action: "edit"
 		end
@@ -51,6 +60,9 @@ class Panel::RelationshipsController < ApplicationController
 		@investigation.destroy
 		redirect_to panel_investigations_path
 	end
+
+	
+	
 	def add_article_to_investigations
 		@investigation = Relationship.find_by_slug(params[:format])
 	end
@@ -74,7 +86,9 @@ class Panel::RelationshipsController < ApplicationController
 			params.require(:relationship).permit(:name, :image, :description, :relationship_type)
 
 		end
-
+		def set_new
+			@investigation = Relationship.new
+		end
 		def set_investigation
 			@investigation = Relationship.find_by_slug(params[:slug])
 			rescue ActiveRecord::RecordNotFound
@@ -84,4 +98,6 @@ class Panel::RelationshipsController < ApplicationController
 		def set_s3_direct_post
     		@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
   		end
+
+
 end
