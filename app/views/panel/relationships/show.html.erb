@@ -8,5 +8,6 @@
 <%= @investigation.description %><br/>
 <%= @investigation.image %><br/>
 
-<%= @investigation.articles.each do |article| %>
+<% @investigation.article_relationships.each do |relationship| %>
+	<%= relationship.article.name %><br/>
 <% end %>

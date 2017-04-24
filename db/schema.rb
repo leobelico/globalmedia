@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424035555) do
+ActiveRecord::Schema.define(version: 20170424043908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "article_relationships", force: :cascade do |t|
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "article_id"
+    t.integer  "relationship_id"
+    t.index ["article_id"], name: "index_article_relationships_on_article_id", using: :btree
+    t.index ["relationship_id"], name: "index_article_relationships_on_relationship_id", using: :btree
+  end
 
   create_table "articles", force: :cascade do |t|
     t.string   "name",                      default: ""
@@ -32,9 +41,7 @@ ActiveRecord::Schema.define(version: 20170424035555) do
     t.datetime "updated_recommendation_on"
     t.string   "image_thumbnail"
     t.string   "image"
-    t.integer  "investigation_id"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
-    t.index ["investigation_id"], name: "index_articles_on_investigation_id", using: :btree
     t.index ["keyword_id"], name: "index_articles_on_keyword_id", using: :btree
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
   end
@@ -81,20 +88,21 @@ ActiveRecord::Schema.define(version: 20170424035555) do
     t.index ["article_id"], name: "index_hits_on_article_id", using: :btree
   end
 
-  create_table "investigations", force: :cascade do |t|
-    t.string   "name",        default: ""
-    t.string   "image",       default: ""
-    t.text     "description", default: ""
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.string   "slug",        default: ""
-  end
-
   create_table "keywords", force: :cascade do |t|
     t.string   "keyword",    default: ""
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.string   "slug",       default: ""
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.string   "name",              default: ""
+    t.string   "image",             default: ""
+    t.text     "description",       default: ""
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "slug",              default: ""
+    t.string   "relationship_type", default: ""
   end
 
   create_table "section_banners", force: :cascade do |t|
@@ -179,7 +187,8 @@ ActiveRecord::Schema.define(version: 20170424035555) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "articles", "investigations"
+  add_foreign_key "article_relationships", "articles"
+  add_foreign_key "article_relationships", "relationships"
   add_foreign_key "articles", "keywords"
   add_foreign_key "articles", "users"
   add_foreign_key "highlights", "articles"

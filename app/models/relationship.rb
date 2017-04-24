@@ -1,6 +1,6 @@
-class Investigation < ApplicationRecord
+class Relationship < ApplicationRecord
 	validates :name, presence: true
-	has_many :articles, dependent: :nullify
+	has_many :article_relationships, dependent: :delete_all
   before_save :to_slug
 	
 	def to_param

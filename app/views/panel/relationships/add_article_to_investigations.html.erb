@@ -5,7 +5,7 @@
 	</div>
 </div>
 <%= @investigation.name %>
-<%= form_for :panel, html: { class: "admin-form card" }, url: {controller: "panel/investigations", action: 'set_investigation_articles'} do |f| %>
+<%= form_for :panel, html: { class: "admin-form card" }, url: {controller: "panel/relationships", action: 'set_investigation_articles'} do |f| %>
 	<div class="field">
 		
 		<label>Artículo</label>

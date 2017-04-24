@@ -27,7 +27,7 @@
 		<%= f.file_field :image %>
 	</div>
 	
-	
+	<%= f.hidden_field :relationship_type, value: "Investigation" %>
 <% end %>
 
 <%= render "components/s3_form_js" %>

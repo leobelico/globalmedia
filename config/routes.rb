@@ -51,12 +51,12 @@ Rails.application.routes.draw do
     resources :sections, param: :slug 
     resources :hits
     resources :banners
-    resources :investigations, param: :slug 
+    resources :relationships, param: :slug 
 
-    get "add_article_to_investigations", to: "investigations#add_article_to_investigations"
+    get "add_article_to_investigations", to: "relationships#add_article_to_investigations"
 
-     get "set_investigation_articles", to: "investigations#set_investigation_articles"
-    post "set_investigation_articles", to: "investigations#set_investigation_articles"
+     get "set_investigation_articles", to: "relationships#set_investigation_articles"
+    post "set_investigation_articles", to: "relationships#set_investigation_articles"
 
 
     get "set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"

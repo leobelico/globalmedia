@@ -1,22 +1,26 @@
-class Panel::InvestigationsController < ApplicationController
+class Panel::RelationshipsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_investigation, only: [:show, :edit, :update, :destroy]
 	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
 
 	def index
-		@investigations = Investigation.all.order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
+		@investigations = Relationship.all.order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
 	end
 
 	def new
-		@investigation = Investigation.new
+		@investigation = Relationship.new
 	end
 
 	def create
-		@investigation = Investigation.new(investigation_params)
-
+		@investigation = Relationship.new(relationship_params)
 		if @investigation.save
+
 			@investigation.update_attributes(slug: @investigation.slug + "-" + @investigation.id.to_s) 
-			redirect_to panel_investigation_path(@investigation)
+			if @investigation.relationship_type == "Investigation"
+				redirect_to panel_relationship_path(@investigation)
+			else
+				redirect_to root_url
+			end
 		else
 			render action: "new"
 		end
@@ -33,7 +37,11 @@ class Panel::InvestigationsController < ApplicationController
 	def update
 		
 		if @investigation.update(investigation_params)
-			redirect_to panel_investigation_path(@investigation)
+			if @investigation.relationship_type == "Investigation"
+				redirect_to panel_relationship_path(@investigation)
+			else
+				redirect_to root_url
+			end
 		else
 			render action: "edit"
 		end
@@ -44,36 +52,31 @@ class Panel::InvestigationsController < ApplicationController
 		redirect_to panel_investigations_path
 	end
 	def add_article_to_investigations
-		@investigation = Investigation.find_by_slug(params[:format])
+		@investigation = Relationship.find_by_slug(params[:format])
 	end
 
 	def set_investigation_articles
-		investigation = Investigation.find(params[:panel][:investigation_id])
+		investigation = Relationship.find(params[:panel][:investigation_id])
 		
 		first_article = Article.find_by_name(params[:panel][:first_article_id])
-		first_article.update_attributes(investigation_id: investigation.id)
+		ArticleRelationship.create(article: first_article, relationship: investigation)
 
 		#Article.all.each do |article|
 		#		article.update_attributes(global_recommendation: false)
 		#	end
-		redirect_to panel_investigation_path(investigation)
+		redirect_to panel_relationship_path(investigation)
 		
 	end
-	def search_hashtag
-		@search = Hashtag.find(params[:search])
-		@hashtags = investigationsHashtag.where(hashtag_id:params[:search])
-		
 
-	end
 
 	private
-		def investigation_params
-			params.require(:investigation).permit(:name, :image, :description)
+		def relationship_params
+			params.require(:relationship).permit(:name, :image, :description, :relationship_type)
 
 		end
 
 		def set_investigation
-			@investigation = Investigation.find_by_slug(params[:slug])
+			@investigation = Relationship.find_by_slug(params[:slug])
 			rescue ActiveRecord::RecordNotFound
 				flash[:alert] = "La página que estabas buscando no existe."
 				redirect_to root_url
