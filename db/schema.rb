@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20170422194117) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "name",                      default: ""
-    t.text     "note",                      default: ""
+    t.jsonb    "note",                      default: ""
     t.text     "short_description",         default: ""
     t.integer  "articable_id"
     t.string   "articable_type"

@@ -1,0 +1,11 @@
+.footer {
+	width:  100%; 
+	max-width:  1024px; 
+	margin-left:  auto; 
+	margin-right:  auto; 
+	background-color:  $primary; 
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  center; 
+	justify-content:  space-between; 
+}
