@@ -1,0 +1,33 @@
+<form id="fields-for-s3">
+	<% @s3_direct_post.fields.map do |name, value| %>
+	    <input type="hidden" name="<%= name %>" value="<%= value %>" />
+	<% end %>
+</form>
+<%= form_for [:panel, @investigation], multipart: true, html: { class: "admin-form form--article card directUpload", data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } } do |f| %>
+	<% if @investigation.errors.any? %>	
+		<h5><%= pluralize(@investigation.errors.count, "error") %></h5>
+			<ul>
+				<% @investigation.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+				<% end %>
+			</ul>
+	<% end %>
+	
+	<div class="field field--string">
+		<label>Título de la Investigación</label>
+		<%= f.text_field :name %>
+	</div>
+	<div class="field">
+		<label>Descripción de la Investigación Especial</label>
+		<%= f.text_area :description %>
+	</div>
+
+	<div class="field field--string">
+		<label>Imagen principal</label>
+		<%= f.file_field :image %>
+	</div>
+	
+	
+<% end %>
+
+<%= render "components/s3_form_js" %>

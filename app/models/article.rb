@@ -9,6 +9,7 @@ class Article < ApplicationRecord
   before_save :associate_tags, :to_slug
   
   belongs_to :user, optional: true
+  belongs_to :investigation, optional: true
   
 
   def to_param
