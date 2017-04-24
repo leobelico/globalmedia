@@ -1,0 +1,13 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span><%= @relationship.relationship_type %> </span></h2>
+	<div class="panel__actions">	
+		<%= link_to "+ Artículo", panel_add_article_to_investigations_path(@relationship), class: "button" %>
+	</div>
+</div>
+<%= @relationship.name %><br/>
+<%= @relationship.description %><br/>
+<%= @relationship.image %><br/>
+
+<% @relationship.article_relationships.each do |relationship| %>
+	<%= relationship.article.name %><br/>
+<% end %>

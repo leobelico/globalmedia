@@ -1,0 +1,29 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Colaboradores</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Nuevo colaborador", panel_new_collaborator_path, class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell name">Título:</p>
+		<p class="table__cell short-description">Descripción:</p>
+		
+	</div>
+	<% @collaborators.each do |collaborator| %>
+		<div class="table__row">
+			<%= link_to collaborator.name, panel_relationship_path(collaborator), class: "table__cell name" %>
+			<p class="table__cell short-description"><%= truncate(collaborator.description, length: 40) %></p>	
+
+			
+			<%= link_to	"Editar", edit_panel_relationship_path(collaborator), class: "table__cell edit" %>
+			<%= link_to	"Eliminar", panel_relationship_path(collaborator), class: "table__cell delete", method: :delete, data: { confirm: "¿Estas seguro de querer eliminar esta nota?" } %>
+		</div>
+	<% end %>
+	<% if @collaborators.count == 0 %>
+		<div class="table__row">
+			<p class="table__cell table__empty">No hay colaboradores para mostrar</p>
+		</div>
+	<% end %>
+</div>
+<%= will_paginate @collaborators, class: "card admin-pagination" %>

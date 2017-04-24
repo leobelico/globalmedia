@@ -1,0 +1,35 @@
+<form id="fields-for-s3">
+	<% @s3_direct_post.fields.map do |name, value| %>
+	    <input type="hidden" name="<%= name %>" value="<%= value %>" />
+	<% end %>
+</form>
+<%= form_for [:panel, @relationship], multipart: true, html: { class: "admin-form form--article card directUpload", data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } } do |f| %>
+	<% if @relationship.errors.any? %>	
+		<h5><%= pluralize(@relationship.errors.count, "error") %></h5>
+			<ul>
+				<% @relationship.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+				<% end %>
+			</ul>
+	<% end %>
+	
+	<div class="field field--string">
+
+		<label>Nombre</label>
+		<%= f.text_field :name %>
+	</div>
+	<div class="field">
+		<label>Descripción </label>
+		<%= f.text_area :description %>
+	</div>
+
+	<div class="field field--string">
+		<label>Imagen principal</label>
+		<%= f.file_field :image %>
+	</div>
+	<% if @relationship.new_record? %>
+		<%= f.hidden_field :relationship_type, value: the_type %>
+	<% end %>
+<% end %>
+
+<%= render "components/s3_form_js" %>
