@@ -21,14 +21,14 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-development:
-  <<: *default
-  database: global_media
+  development:
+    <<: *default
+    database: global_media
 
 # development:
 #   adapter: postgresql
 #   encoding: utf8
-#   database: global_media_development2
+#   database: global_media_development
 #   username: postgres
 #   password: codepelm-319
 #   host: localhost
