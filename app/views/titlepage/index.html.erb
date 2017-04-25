@@ -8,8 +8,8 @@
 	<% end %>
 </div>
 
-<% if Banner.count > 0 %>
-<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
+<% if get_banner("", "TitlePage", "Grande" ) %>
+	<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
 <% end %>
 
 
@@ -22,8 +22,16 @@
 </div>
 <div class="special-articles-container">
 	<div class="special-articles">
-		
 		<%= render "components/latest-news", articles: al_momento(true, false, false, 5)  %>
+		<% if get_banner("", "TitlePage", "Chico" ) %>
+			<%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
+		<% else %>
+			<% if get_banner("", "Global", "Chico" ) %>
+				<%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
+			<% end %>
+		<% end %>
+
+		
 	</div>
 	<div class="special-articles">
 		<%= render "components/collaborators", articles: @collaborator_articles %>
@@ -43,13 +51,7 @@
 <%= render "/layouts/recommendations", articles: get_global_recommendations %>
 
 <h1>Banners</h1>
-<% if get_banner("", "TitlePage", "Chico" ) %>
-	Banner Chico: <%= get_banner("", "TitlePage", "Chico" ).name %>
-	<% else %>
-	<% if get_banner("", "Global", "Chico" ) %>
-		Banner Chico: <%= get_banner("", "Global", "Chico" ).name %>
-	<% end %>
-	<% end %>
+
 
 <% if get_banner("", "TitlePage", "Mediano" ) %>
 

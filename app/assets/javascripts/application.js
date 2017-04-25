@@ -16,6 +16,7 @@
 //= require autocomplete-rails
 //= require turbolinks
 //= require_directory .
+//= require libraries/gsap/TweenMax.min
 //= require libraries/money
 //= require libraries/quill/quill.min 
 // 

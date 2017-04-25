@@ -1,0 +1,17 @@
+.sidebar {
+	width:  $side-content-width; 
+	.latest-news {
+		margin-top:  8px; 
+		.type { 
+			color:  #000000; 
+			border-left:  solid 6px $tertiary; 
+			padding-left:  8px; 
+			font-size:  21px; 
+			text-transform:  none; 
+			font-weight:  600; 
+		}
+		.link {
+			display:  none; 
+		}
+	}
+}

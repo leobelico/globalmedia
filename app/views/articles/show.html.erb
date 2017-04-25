@@ -1,67 +1,71 @@
-<div class="note note--display">
+<div class="interface--row">
 	
-	<h1 class="title"><%= @article.name %></h1>	
-	<div class="article__info">
-		<p class="author">Por <%= @article.user.full_name %></p>
-		<p class="date"><%= @article.created_at.strftime("%m:%M %p %A %e %B, %Y") %></p>
-		<% if @article.articable_type == "Section" %>
-			<p class="section"><%= @article.section %></p>
+	<div class="note note--display">
+		
+		<h1 class="title"><%= @article.name %></h1>	
+		<div class="article__info">
+			<p class="author">Por <%= @article.user.full_name %></p>
+			<p class="date"><%= @article.created_at.strftime("%m:%M %p %A %e %B, %Y") %></p>
+			<% if @article.articable_type == "Section" %>
+				<p class="section"><%= @article.section %></p>
+			<% end %>
+		</div>
+		<%= render "components/social-media-links", article: @article %>
+		<% if @article.keyword %>
+			<div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
 		<% end %>
+		<div class="hashtags-container">
+			<%= render @article.hashtags %>
+		</div>
+
+		<p class="short-description"><%= @article.short_description %></p>
+		
+		<% if @article.image %>
+			<%= image_tag @article.image, class: "main-image" %>
+		<% end %>
+
+		<div id="quill-container" class="quill--article">	
+		</div>
+
+		<!-- NOTAS DEL PROGRAMADOR-->
+			<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
+
+			<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
+		<!-- -->
+		<% if get_banner(@article.articable, @article.articable_type, "Chico" ) %>
+			Banner Chico: <%= get_banner(@article.articable, @article.articable_type, "Chico" ).name %>
+			<br/>
+		<% else %>
+			<% if get_banner(@article.articable, "Global", "Chico" ) %>
+				Banner Chico: <%= get_banner(@article.articable, "Global", "Chico" ).name %>
+			<% end %>
+		<% end %>
+		
+
+
+
+		<% if get_banner(@article.articable, @article.articable_type, "Mediano" ) %>
+
+			Banner Mediano: <%= get_banner(@article.articable, @article.articable_type, "Mediano" ).name  %><br/>
+		<% else %>
+			<% if get_banner(@article.articable, "Global", "Mediano" ) %>
+				Banner Mediano: <%= get_banner(@article.articable, "Global", "Mediano" ).name %>
+			<% end %>
+			<br/>
+		<% end %>
+
+		<% if get_banner(@article.articable, @article.articable_type, "Grande" ) %>
+
+			Banner Grande: <%= get_banner(@article.articable, @article.articable_type, "Grande" ).name  %><br/>
+		<% else %>
+			<% if get_banner(@article.articable, "Global", "Grande" ) %>
+				Banner Grande: <%= get_banner(@article.articable, "Global", "Grande" ).name %>
+			<% end %>
+			<br/>
+		<% end %>
+
 	</div>
-	<%= render "components/social-media-links", article: @article %>
-	<% if @article.keyword %>
-		<div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
-	<% end %>
-	<div class="hashtags-container">
-		<%= render @article.hashtags %>
-	</div>
-
-	<p class="short-description"><%= @article.short_description %></p>
-	
-	<% if @article.image %>
-		<%= image_tag @article.image, class: "main-image" %>
-	<% end %>
-
-	<div id="quill-container" class="quill--article">	
-	</div>
-
-	<!-- NOTAS DEL PROGRAMADOR-->
-		<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
-
-		<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
-	<!-- -->
-	<% if get_banner(@article.articable, @article.articable_type, "Chico" ) %>
-		Banner Chico: <%= get_banner(@article.articable, @article.articable_type, "Chico" ).name %>
-		<br/>
-	<% else %>
-		<% if get_banner(@article.articable, "Global", "Chico" ) %>
-			Banner Chico: <%= get_banner(@article.articable, "Global", "Chico" ).name %>
-		<% end %>
-	<% end %>
-	
-
-
-
-	<% if get_banner(@article.articable, @article.articable_type, "Mediano" ) %>
-
-		Banner Mediano: <%= get_banner(@article.articable, @article.articable_type, "Mediano" ).name  %><br/>
-	<% else %>
-		<% if get_banner(@article.articable, "Global", "Mediano" ) %>
-			Banner Mediano: <%= get_banner(@article.articable, "Global", "Mediano" ).name %>
-		<% end %>
-		<br/>
-	<% end %>
-
-	<% if get_banner(@article.articable, @article.articable_type, "Grande" ) %>
-
-		Banner Grande: <%= get_banner(@article.articable, @article.articable_type, "Grande" ).name  %><br/>
-	<% else %>
-		<% if get_banner(@article.articable, "Global", "Grande" ) %>
-			Banner Grande: <%= get_banner(@article.articable, "Global", "Grande" ).name %>
-		<% end %>
-		<br/>
-	<% end %>
-
+	<%= render "components/sidebar", article: @article %>
 </div>
 
 <script>

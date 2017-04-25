@@ -1,0 +1,6 @@
+<%= link_to banner.url, class: "banner--small" do %>
+	<img 
+		src="<%= banner.large_image %>" 
+		srcset="<%= banner.large_image %> 1024w, <%= banner.small_image %> 1023w"
+		alt="<%= banner.name %>">
+<% end %>

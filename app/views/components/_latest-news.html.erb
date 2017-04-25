@@ -1,12 +1,14 @@
 <div class="latest-news">
-	<div class="latest-news__header">
-		<h4 class="latest-news__title">Al Momento</h4>
-		<%= link_to "Ir a sección", "", class: "latest-news__link" %>
+	<div class="special-articles__type">
+		<p class="type">Al Momento</p>
+		<p class="link">&nbsp; </p>
+
 	</div>
+
 	<% articles.each do |article| %>
 		<%= link_to article, class: "latest-news__article" do %>
 			<p class="article__time"><%= article.created_at.strftime("%H:%M") %></p>
-			<p class="article__title"><%= article.name %></p>
+			<p class="article__title"><%= truncate(article.name, length: 55) %></p>
 		<% end %>
 	<% end %>
 </div>
