@@ -9,7 +9,6 @@ $(document).on("click", function(event){
 }); 
 
 function submit_form(action, slug){
-   show_button_spinner($(event.target));
 
   console.log(editor.getContents()) 
   console.log(editor.getText())
@@ -26,6 +25,8 @@ function submit_form(action, slug){
     url = "/panel/articles/" + slug; 
     type = "PUT";
   }
+  button = $(event.target);
+  show_button_spinner(button);
 
   $.ajax({
     url: url,
@@ -50,6 +51,9 @@ function submit_form(action, slug){
   })
   .fail(function() {
     console.log("error");
+    hide_button_spinner(button);
+    $(".admin-form.form--article.card").prepend('<h4 class="small-title delete" style="margin-bottom:  18px; ">Asegurate de llenar todos los campos de la forma.</h4>')
+    $(".admin-form.form--article.card").append('<h4 class="small-title delete" style="margin-top:  18px; ">Asegurate de llenar todos los campos de la forma.</h4>')
   })
   .always(function() {
     console.log("complete");
@@ -62,6 +66,19 @@ function show_button_spinner(button) {
   }); 
   TweenMax.to(button.find(".button--spinner"), .3, {
     y:  "-9" 
+  });
+  TweenMax.to(button.find(".button--spinner"), 1, {
+    rotation:  360,
+    repeat:  -1,
+    ease: Power0.easeNone
+  }); 
+}
+function hide_button_spinner(button) {
+  TweenMax.to(button.find(".button--text"), .3, {
+    y:  0, delay: 1 
+  }); 
+  TweenMax.to(button.find(".button--spinner"), .3, {
+    y:  "-=33", delay: 1 
   });
   TweenMax.to(button.find(".button--spinner"), 1, {
     rotation:  360,

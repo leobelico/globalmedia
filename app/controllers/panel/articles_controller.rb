@@ -20,7 +20,9 @@ class Panel::ArticlesController < ApplicationController
 			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s) 
 			redirect_to @article
 		else
-			render action: "new"
+			respond_to do |format|
+				format.json { render :json => { :error_message => @article.errors.full_messages }, :status => :unprocessable_entity }
+			end	
 		end
 	end
 

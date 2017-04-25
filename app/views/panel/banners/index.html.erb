@@ -18,7 +18,7 @@
 			<p class="table__cell"><%= banner.created_at.strftime("%A, %d %b %Y %l:%M %p") %></p>
 			<p class="table__cell"><%= banner.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></p>
 			<%= link_to "Editar", edit_panel_banner_path(banner), class: "table__cell edit" %>
-			<%= link_to "Delete", edit_panel_banner_path(banner), class: "table__cell delete" %>
+			<%= link_to "Delete", panel_banner_path(banner), method: :delete, data: { confirm: "¿Estas seguro de querer eliminar el banenr? Esta acción no se puede deshacer." }, class: "table__cell delete" %>
 		</div>
 	<% end %>	
 </div>

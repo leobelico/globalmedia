@@ -1,4 +1,8 @@
 es:
+  will_paginate:
+    previous_label: "Anterior"
+    next_label: "Siguiente"
+    page_gap: "&hellip;"
   activerecord:
     errors:
       messages:
@@ -6,6 +10,13 @@ es:
         restrict_dependent_destroy:
           has_one: No se puede eliminar el registro porque existe un %{record} dependiente
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
+    attributes: 
+      banner: 
+        name: "Nombre del banner"
+        client: "Cliente"
+        large_iamge: "Imagen grande del banner"
+        small_image: "Imagen para móviles"
+        url: "Vínculo"
   date:
     abbr_day_names:
     - dom
@@ -213,3 +224,13 @@ es:
       default: "%A, %d de %B de %Y %H:%M:%S %z"
       long: "%d de %B de %Y %H:%M"
       short: "%d de %b %H:%M"
+  
+
+
+
+
+
+
+
+
+

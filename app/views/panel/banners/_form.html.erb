@@ -1,7 +1,7 @@
 <%= form_for [:panel, @banner], html: { class: "card admin-form" } do |f| %>
 	<% if @banner.errors.any? %>	
-		<h5><%= pluralize(@banner.errors.count, "error") %></h5>
-			<ul>
+		<h5 class="small-title"><%= pluralize(@banner.errors.count, "errores") %></h5>
+			<ul class="errors">
 				<% @banner.errors.full_messages.each do |msg| %>
 						<li><%= msg %></li>
 				<% end %>

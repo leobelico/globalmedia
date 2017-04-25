@@ -64,6 +64,11 @@ body {
 	padding-top:  78px; 
 	background-color:  $gray-100; 
 }
+.wrapper-link {
+	display:  flex; 
+	flex-direction:  column; 
+	width:  100%; 
+}
 .primary {
 	color:  $tertiary; 
 	font-weight:  700; 
@@ -86,7 +91,18 @@ body {
 .main-content {
 	width:  $main-content-width; 
 }
-
+.field_with_errors {
+	width:  100%; 
+	input {
+		border:  solid 1px $red !important; 
+	}
+}
+.errors {
+	margin-bottom:  18px; 
+	li {
+		margin-bottom:  8px; 
+	}
+}
 //
 // COMPONENTS IMPORTs
 //
@@ -116,6 +132,7 @@ body {
 @import "components/sections"; 
 @import "components/section-article"; 
 @import "components/horizontal-article"; 
+@import "components/section-recommendations"; 
 @import "components/footer"; 
 
 @import "components/admin/admin-sidebar"; 

@@ -9,6 +9,7 @@ class SectionsController < ApplicationController
 	
 
 	def show
+		@articles = @section.articles.paginate(page: params[:page], per_page: 18) 	
 	end
 
 	

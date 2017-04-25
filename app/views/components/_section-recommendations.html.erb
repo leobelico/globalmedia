@@ -1,0 +1,15 @@
+<div class="section-recommendations">
+	<div class="special-articles__type">
+		<p class="type"><%= section_name %></p>
+		<%= link_to "Ir a sección", articles.first.section, class: "link" %>
+	</div>
+	<% articles.each do |article| %>
+		<div class="section-recommendations__article">
+			<%= link_to article, class: "wrapper-link" do %>
+				<%= image_tag article.image, class: "section-recommendations__image" %>
+				<h4 class="small-title"><%= article.name %></h4>
+			<% end %>
+			<%= render "components/social-media-links", article: article %>
+		</div>
+	<% end %>
+</div>

@@ -1,7 +1,8 @@
 <div class="panel__header">
 	<h2 class="title panel__title"><span>Secciones / </span><span class="current"><%= @section.name %></span></h2>
 	<div class="panel__actions">
-		<%= link_to "Editar sección", new_panel_section_path, class: "button" %>
+		<%= link_to "Escoger destacado", panel_section_select_highlights_path(@section), class: "button" %>
+		<%= link_to "Editar sección", edit_panel_section_path(@section), class: "button" %>
 	</div>
 </div>
 <div class="table card">
@@ -9,6 +10,7 @@
 		<p class="table__cell">Título:</p>
 		<p class="table__cell">Vistas Totales:</p>
 	</div>
+	Destacado: <% if @highlight_article %><%= @highlight_article.name %><% end %>
 	<% @section.articles.each do |article| %>
 		<div class="table__row">
 			<%= link_to article.name, article, class: "table__cell" %>

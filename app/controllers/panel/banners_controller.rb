@@ -47,7 +47,7 @@ class Panel::BannersController < ApplicationController
 
 	def destroy
 		@banner.destroy
-		redirect_to @banner
+		redirect_to panel_banners_path
 	end
 
 	private

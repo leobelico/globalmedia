@@ -4,3 +4,7 @@ Validar presencia de imagenes en todo
 Si no subes imagen da error
 Que el filefield te diga el nombre de la imagen 
 Revisar funcionalidad de es noticia 
+Claridad en highlights cambiar/lala
+Poner callback para eliminación de imagen en articulo 
+Eliminar nota que está en destacados da error
+Banner programático

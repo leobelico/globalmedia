@@ -5,7 +5,7 @@ class Panel::SectionsController < ApplicationController
 	def index
 		@sections = Section.all.order(name: "ASC")
 	end
-
+	#SectionHighlight.create(article_id: article.id, section: section.id)
 	def set_highlight_and_recomendations
 		article = Article.find(params[:highlight])
 		
@@ -54,6 +54,8 @@ class Panel::SectionsController < ApplicationController
 	end
 
 	def show
+		@highlight_article = Article.where(articable_id: @section.id, highlight: true).first
+
 		@highlights = SectionHighlight.where(section: @section).order(updated_at: "DESC")
 
 	end
@@ -73,6 +75,19 @@ class Panel::SectionsController < ApplicationController
 	def edit
 	end
 
+	def select_highlights
+		@section = Section.find_by_slug(params[:section_slug])
+	end
+	def set_highlight
+		@section = Section.find_by_slug(params[:section_slug])
+		@section.articles.each do |article|
+			article.update_attributes(highlight: false)
+		end 
+		article = Article.find_by_name(params[:panel][:article_id])
+		article.update_attributes(highlight: true)
+		redirect_to panel_section_path(@section)
+
+	end
 	def update
 	
 		if @section.update(section_params)

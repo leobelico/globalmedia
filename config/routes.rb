@@ -48,7 +48,11 @@ Rails.application.routes.draw do
     end
     resources :stations, param: :slug
     resources :timetables, only: [:show, :destroy] 
-    resources :sections, param: :slug 
+    resources :sections, param: :slug do 
+      get :select_highlights
+      post :select_highlights
+      post :set_highlight
+    end
     resources :hits
     resources :banners
     resources :relationships, param: :slug 

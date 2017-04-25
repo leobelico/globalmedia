@@ -3,6 +3,8 @@ class Article < ApplicationRecord
   belongs_to :keyword, optional: true
   has_many :section_highlights, dependent: :delete_all
 
+  validates :name, :short_description, :image, presence: true
+
 	attr_accessor :hashtags_names, :the_note
 
   has_and_belongs_to_many :hashtags, uniq: true

@@ -19,16 +19,21 @@
 	</div>
 	<div class="field field--string">
 		<label>Título de la Nota</label>
-		<%= f.text_field :name %>
+		<%= f.text_field :name, required: true %>
 	</div>
 	<div class="field">
 		<label>Descripción corta de la Nota</label>
-		<%= f.text_area :short_description %>
+		<%= f.text_area :short_description, required: true %>
 	</div>
-
+	<% if @article.image %>
+		<div class="field field--string">
+			<label>Imagen principal acutal</label>
+			<input type="text" disabled value="<%= @article.image %>">
+		</div>	
+	<% end %>
 	<div class="field field--string">
 		<label>Imagen principal</label>
-		<%= f.file_field :image %>
+		<%= f.file_field :image, required: true %>
 	</div>
 	<div id="note-editor">
 		

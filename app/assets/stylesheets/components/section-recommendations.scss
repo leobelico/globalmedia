@@ -1,0 +1,29 @@
+.section-recommendations {
+	display:  flex; 
+	flex-direction:  row;
+	align-items:  stretch;
+	justify-content:  space-between; 
+	flex-wrap:  wrap;
+	width:  100%; 
+	.special-articles__type {
+		margin-bottom:  16px; 
+	}
+}
+.section-recommendations__article {
+	display:  flex;
+	flex-direction:  column;
+	width:  206px;
+	.section-recommendations__image {
+		width:  206px; 
+		height:  120px; 
+		object-fit:  cover; 
+		object-position:  center center; 
+		margin-bottom:  8px; 
+	}
+	.small-title {
+		margin-bottom:  8px;
+	}
+	.social-media {
+		margin-top:  auto; 
+	}
+}

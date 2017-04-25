@@ -6,11 +6,12 @@
 
 		<div class="section-articles-container">
 			
-			<% @section.articles.each do |article|%>
+			<% @articles.each do |article|%>
 				<%= render "components/section-article", article: article %>
 			<% end %>
 		</div>
 
+		<%= will_paginate @articles, class: "site-pagination" %>
 
 		<!-- NOTAS DEL PROGRAMADOR-->
 			<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
@@ -49,32 +50,32 @@
 
 		<% case @section.name %>
 			<% when "San Luis" %>
-				<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Seguridad").id, 3) , section_name: "Seguridad", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Seguridad").id, 3) , section_name: "Seguridad", highlight: "" %>
 
 			<% when "Seguridad" %>
-				<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Negocios").id, 3), section_name: "Negocios", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Negocios").id, 3), section_name: "Negocios", highlight: "" %>
 			<% when "Estados" %>
-				<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Nacional").id, 3), section_name: "Nacional", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Nacional").id, 3), section_name: "Nacional", highlight: "" %>
 			<% when "Nacional" %>
-				<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Internacional").id, 3), section_name: "Internacional", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Internacional").id, 3), section_name: "Internacional", highlight: "" %>
 
 			<% when "Internacional" %>
-				<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Nacional").id, 3), section_name: "Nacional", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Nacional").id, 3), section_name: "Nacional", highlight: "" %>
 
 			<% when "Actualidad" %>
-				<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Fárandula").id, 3), section_name: "Farándula", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Fárandula").id, 3), section_name: "Farándula", highlight: "" %>
 			<% when "Farándula" %>
-				<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Actualidad").id, 3),  section_name: "Actualidad", section_name: "Actualidad", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Actualidad").id, 3),  section_name: "Actualidad", section_name: "Actualidad", highlight: "" %>
 			<% when "Táctica" %>
-				<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("Actualidad").id, 3), section_name: "Actualidad", section_name: "Actualidad", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Actualidad").id, 3), section_name: "Actualidad", section_name: "Actualidad", highlight: "" %>
 			<% when "Negocio" %>
-				<%= render "/layouts/articles", section: get_articles_per_section(Section.find_by_name("San Luis").id, 3), section_name: "San Luis", section_name: "San Luis", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3), section_name: "San Luis", section_name: "San Luis", highlight: "" %>
 		<% end %>
 
 		<!-- GLOBAL RECOMIENDA-->
-
-		<%= render "/layouts/recommendations", articles: get_recommendations_per_section(@section.id) %>
+		
+		<% render "/layouts/recommendations", articles: get_recommendations_per_section(@section.id) %>
 	</div>
-	<%= render "components/sidebar", article: @section.articles.first %>
+	<%= render "components/sidebar", article: @articles.first %>
 </div>
 

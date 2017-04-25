@@ -1,5 +1,5 @@
 class Relationship < ApplicationRecord
-	validates :name, presence: true
+	validates :name, :image, presence: true
 	has_many :article_relationships, dependent: :delete_all
   before_save :to_slug
 	
