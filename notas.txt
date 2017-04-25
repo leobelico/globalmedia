@@ -1,0 +1,6 @@
+Transformar campos de imagenes a filefields
+validar hora de inicio y fin en creación de programas de radio 
+Validar presencia de imagenes en todo
+Si no subes imagen da error
+Que el filefield te diga el nombre de la imagen 
+Revisar funcionalidad de es noticia 

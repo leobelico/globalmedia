@@ -7,13 +7,15 @@
 <div class="table card">
 	<div class="table__row">
 		<p class="table__cell name">Título:</p>
-		<p class="table__cell short-description">Descripción:</p>
+		<p class="table__cell f-3">Descripción:</p>
+		<p class="table__cell">Editar:</p>
+		<p class="table__cell">Eliminar:</p>
 		
 	</div>
 	<% @investigations.each do |investigation| %>
 		<div class="table__row">
 			<%= link_to investigation.name, panel_relationship_path(investigation), class: "table__cell name" %>
-			<p class="table__cell short-description"><%= truncate(investigation.description, length: 40) %></p>	
+			<p class="table__cell f-3"><%= truncate(investigation.description, length: 40) %></p>	
 
 			
 			<%= link_to	"Editar", edit_panel_relationship_path(investigation), class: "table__cell edit" %>

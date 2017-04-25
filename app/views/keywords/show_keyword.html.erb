@@ -1,5 +1,10 @@
-<h2 class="title"><%= @keyword.keyword %></h2>
+<div class="interface--row">
+	<div class="section main-content"> 
+		<h2 class="section__title">#EsNoticia: <%= @keyword.keyword %></h2>
 
-<% @keyword.articles.each do |article| %>
-	<%= render "components/horizontal-note", article: article %>
-<% end %>
+		<% @keyword.articles.each do |article| %>
+			<%= render "components/horizontal-note", article: article %>
+		<% end %>
+	</div>
+	<%= render "components/sidebar", article: @keyword.articles.first %>
+</div>

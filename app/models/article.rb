@@ -10,7 +10,7 @@ class Article < ApplicationRecord
   
   belongs_to :user, optional: true
   has_many :article_relationships, dependent: :delete_all
-  
+  has_many :hits, dependent: :delete_all
 
   def to_param
     slug
