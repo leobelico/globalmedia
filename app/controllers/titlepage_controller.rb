@@ -31,7 +31,7 @@ class TitlepageController < ApplicationController
 		collaborators.each do |collaborator|
 			# collaborator.article_relationships.last.relationship.article 
 			p "--------------------------------"
-			p relationship
+			p collaborator
 			p "--------------------------------"
 			if collaborator.article_relationships.last
 				@collaborator_articles << collaborator.article_relationships.last.article
