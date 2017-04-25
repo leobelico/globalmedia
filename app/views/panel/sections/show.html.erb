@@ -9,5 +9,16 @@
 		<p class="table__cell">Título:</p>
 		<p class="table__cell">Vistas Totales:</p>
 	</div>
-	
+	<% @section.articles.each do |article| %>
+		<div class="table__row">
+			<%= link_to article.name, article, class: "table__cell" %>
+			<p class="table__cell">
+				<% if article.hits.last %>
+					<%= article.hits.last.number %>
+				<% else %>
+					0
+				<% end %>
+			</p>
+		</div>
+	<% end %>
 </div>

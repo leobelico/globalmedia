@@ -1,10 +1,10 @@
 <div class="horizontal-article">
-	<img src="<% %>" class="article__image">
+	<%= image_tag article.image, class: "article__image" %>
 	<div class="article__information">
-		<%= article.name %>
-		<%= article.user.full_name %>
-		<%= article.created_at.strftime("%b %d, %Y %I:%M:%S %p") %>
-		<%= article.section %>
-		<%= article.articable_type %>
+		<h4 class="small-title semibold"><%= article.name %></h4>
+		<p class="section-and-author"><span class="section"><%= article.section %></span> - <span class="author"><%= article.user.full_name %></span></p> 	
+		<p class="datetime">Hace <%= distance_of_time_in_words(Time.now, (article.created_at)) %></p>
+		<p class="short-description"><%= truncate(article.short_description, length: 90) %></p> 	
+		<%= render "components/social-media-links", article: article %>
 	</div>
 </div>

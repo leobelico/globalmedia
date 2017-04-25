@@ -7,7 +7,7 @@
 			<p class="author">Por <%= @article.user.full_name %></p>
 			<p class="date"><%= @article.created_at.strftime("%m:%M %p %A %e %B, %Y") %></p>
 			<% if @article.articable_type == "Section" %>
-				<p class="section"><%= @article.section %></p>
+				<%= link_to @article.section, @article.section, class: "section" %>
 			<% end %>
 		</div>
 		<%= render "components/social-media-links", article: @article %>
