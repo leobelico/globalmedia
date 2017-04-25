@@ -23,6 +23,8 @@ $admin-sidebar-width:  260px;
 $main-content-width: 650px;
 $side-content-width: 342px;
 
+
+
 html, 
 body {
 	height:  100%; 
@@ -82,7 +84,7 @@ body {
 	flex-direction:  column; 
 }
 .main-content {
-
+	width:  $main-content-width; 
 }
 
 //
@@ -111,6 +113,8 @@ body {
 @import "components/collaborators"; 
 @import "components/sidebar"; 
 @import "components/recommendations"; 
+@import "components/sections"; 
+@import "components/section-article"; 
 @import "components/footer"; 
 
 @import "components/admin/admin-sidebar"; 

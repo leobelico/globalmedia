@@ -33,8 +33,10 @@ class TitlepageController < ApplicationController
 			p "--------------------------------"
 			# p relationship
 			p "--------------------------------"
-			@collaborator_articles << collaborator.article_relationships.last.article
-			@collaborator_articles = @collaborator_articles.last(5)
+			if collaborator.article_relationships.last.article
+				@collaborator_articles << collaborator.article_relationships.last.article
+				@collaborator_articles = @collaborator_articles.last(5)
+			end
 		end	
 
 
