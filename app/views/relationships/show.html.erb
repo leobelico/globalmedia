@@ -1,0 +1,15 @@
+<div class="interface--row">
+	<div class="section main-content">
+		<h1 class="section__title"><%= @relationship.name %></h1>
+		<div class="section-articles-container ">
+			<div class="relationship">
+				<p class="relationship__description"><%= @relationship.description %></p>
+				<%= image_tag @relationship.image, class: "relationship__image" %>
+			</div>
+			<% @relationship.article_relationships.each do |relationship|%>
+				<%= render "components/section-article", article: relationship.article %>
+			<% end %>
+		</div>
+
+	</div>
+</div>
