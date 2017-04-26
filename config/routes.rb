@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     resources :hits
     resources :banners
     resources :relationships, param: :slug 
+    resources :controls
 
     get "new_collaborator", to: "relationships#new_collaborator"
     get "collaborators", to: "relationships#collaborators"
