@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
 
   resources :sections, only: [:show], param: :slug 
-
+  resources :relationships
 
   
   get "panel", to: "panel/panel#panel"

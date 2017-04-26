@@ -57,3 +57,18 @@
 .sp__article:first-child {
 	width:  320px;
 }
+@media screen and (max-width:  1023px) {
+	.section-preview,
+	.sp__articles {
+		flex-direction:  column; 
+	}
+	.sp__link {
+		width:  auto; 
+		padding-left:  48px; 
+	}
+	.sp__article,
+	.sp__article:first-of-type {
+		width:  100%; 
+		margin-bottom:  16px; 
+	}
+}

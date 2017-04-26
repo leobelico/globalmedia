@@ -1,7 +1,9 @@
 <div class="sidebar">
 	<%= render "components/latest-news", articles: latest_news %>
-	<% if article %>
-	<%= render "components/recommendations", articles: get_recommendations_per_section(Section.find_by_name(article.section).id) %>
+	<% if article != "global" %>
+		<%= render "components/recommendations", articles: get_recommendations_per_section(Section.find_by_name(article.section).id) %>
+	<% else %>
+		<%= render "components/recommendations", articles: get_global_recommendations %>
 	<% end %>
 </div>
 	

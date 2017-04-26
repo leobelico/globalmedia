@@ -22,7 +22,7 @@
 		<%= f.text_field :name %>
 	</div>
 	<div class="field">
-		<label>Descripción corta de la Nota</label>
+		<label>Extracto de la nota</label>
 		<%= f.text_area :short_description %>
 	</div>
 	<div id="note-editor">
@@ -36,7 +36,7 @@
 	<% end %>
 	<div class="field">
 		<label>Hashtags: </label>
-		<%= f.text_field :hashtags_names, placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", id: "hashtags" %>
+		<%= f.text_field :hashtags_names, placeholder: "Por ejemplo: #ESNOTICIA #GLOBALMEDIA #NUVAROCKS", id: "hashtags" %>
 	</div>
 	
 <% end %>

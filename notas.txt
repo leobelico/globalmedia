@@ -8,3 +8,25 @@ Claridad en highlights cambiar/lala
 Poner callback para eliminación de imagen en articulo 
 Eliminar nota que está en destacados da error
 Banner programático
+
+
+Regla de notas relacionadas (Por TAG/Sección)
+
+Validación carga de TEMAS DEL DÍA (se reinicia a las 00:00 hrs, sino lo 
+carga el jefe de noticias no debe aparecer en página)
+
+Share de la nota (vista previa y texto complementario en whats app ejemplo: “Estoy leyendo – Trump continúa con la discusión del Muro Fronterizo en GlobalMedia Mx – www.globalmedia.mx/100234/trump)
+
+
+On site / Off site LINKS de Alexa (validar programación y mejores prácticas)
+Correcta indexación en motores de búsqueda
+
+Desaparecer palabra balazo o descripción de la nota y poner EXTRACTO, validando que sea de 120 caracteres.
+
+Complementos de Reproductor completos (Incluidos Playlists, eventos, top ten de la semana)
+
+El reproductor no debe abrirse en otra pestaña, sino cambiar en esa misma que se está navegando.
+
+Poder cargar una canción en el reproductor para reproducción de las personas (éxito de la semana).
+
+Validación de tamaño y fuente de acuerdo a maquetación
