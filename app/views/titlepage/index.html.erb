@@ -15,10 +15,12 @@
 
 
 <div class="special-articles-container">
-	
-	<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_articles[0].article_relationships[0].relationship.name, articles: @investigation_articles %>
-	<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: @complaints[0].article_relationships[0].relationship.name, articles: @complaints %>
-
+	<% if @investigation_articles %>
+		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_articles[0].article_relationships[0].relationship.name, articles: @investigation_articles %>
+	<% end %>
+	<% if @complaints[0] %>
+		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: @complaints[0].article_relationships[0].relationship.name, articles: @complaints %>
+	<% end %>
 </div>
 <div class="special-articles-container">
 	<div class="special-articles">
@@ -70,3 +72,6 @@
 <% end %>
 
 
+ VISITED: <% most_visited.each do |lala| %>
+ 	<%= lala.article.name %>
+<% end %>

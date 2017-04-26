@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
 		# @article.note
 		@note = @article.note
 		if !user_signed_in?
-			last_hit = Hit.where(article: @article, created_at: 1.hours.ago..Time.now).last
+			last_hit = Hit.where(article: @article, created_at: 2.hours.ago..Time.now).last
 
 			if last_hit
 				last_hit.update_attributes(number: last_hit.number + 1)
