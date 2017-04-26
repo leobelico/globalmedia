@@ -1,0 +1,43 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Usuarios</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Nuevo Usuario", new_panel_user_path, class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Nombre:</p>
+		<p class="table__cell">Email:</p>
+		<p class="table__cell">Crear Notas:</p>
+		<p class="table__cell">Eliminar Notas:</p>
+		<p class="table__cell">Banners:</p>
+		<p class="table__cell">Hits:</p>
+		<p class="table__cell">Denuncia Global:</p>
+		<p class="table__cell">Estaciones de Radio:</p>
+		<p class="table__cell">Controles Remotos:</p>
+		<p class="table__cell">Usuarios:</p>
+
+	</div>
+	<% @users.each do |user| %>
+		<div class="table__row">
+			<%= link_to user.full_name, panel_user_path(user), class: "table__cell" %>
+			<p class="table__cell"><%= user.email %></p>	
+			
+			<p class="table__cell"><%= user.create_articles_permission%></p>	
+			<p class="table__cell"><%= user.destroy_articles_permission%></p>
+			<p class="table__cell"><%= user.create_articles_permission%></p>
+			<p class="table__cell"><%= user.create_articles_permission%></p>
+			<p class="table__cell"><%= user.create_articles_permission%></p>
+			<p class="table__cell"><%= user.create_articles_permission%></p>
+			<p class="table__cell"><%= user.create_articles_permission%></p>
+			<p class="table__cell"><%= user.create_articles_permission%></p>
+			
+		</div>
+	<% end %>
+	<% if @users.count == 0 %>
+		<div class="table__row">
+			<p class="table__cell table__empty">No hay usuarios para mostrar</p>
+		</div>
+	<% end %>
+</div>
+<%= will_paginate @users, class: "card admin-pagination" %>

@@ -1,7 +1,11 @@
-class UsersController < ApplicationController
+class Panel::UsersController < ApplicationController
 	before_action :authenticate_user!
+	before_action :authenticate_user_permission
 	before_action :set_user, only: [:show, :edit, :update]
 	
+	def index
+		@users = User.all.order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
+	end
 	def new
 		@user = User.new
 	end
@@ -18,7 +22,7 @@ class UsersController < ApplicationController
 			UserMailer.confirmation_email(@user, raw_token).deliver_now
 			#NOTAS DEL PROGRAMADOR: 
 			#CAMBIAR ESTE REDIRECT AL DEL PANEL
-			redirect_to current_user
+			redirect_to panel_users_path
 		else
 			render action: "new"	
 		end
@@ -33,7 +37,7 @@ class UsersController < ApplicationController
 
 	def update
 		if @user.update(user_params)
-			redirect_to @user
+			redirect_to panel_users_path
 		else
 			render action: "edit"	
 		end
@@ -46,7 +50,11 @@ class UsersController < ApplicationController
 
 	private
 		
-
+		def authenticate_user_permission
+			if !current_user.user_permission?
+				redirect_to panel_path
+			end
+		end
 		def set_user
 			@user = User.find(params[:id])
 			rescue  ActiveRecord::RecordNotFound
@@ -54,6 +62,6 @@ class UsersController < ApplicationController
 				redirect_to root_url
 		end
 		def user_params
-			params.require(:user).permit(:first_name, :last_name, :email, :role)
+			params.require(:user).permit(:first_name, :last_name, :email, :role, :create_articles_permission, :destroy_articles_permission, :video_complaints_permission, :radio_stations_permission, :remote_controls_permission, :banners_permission, :hits_permission, :user_permission   )
 		end
 end

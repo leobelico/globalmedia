@@ -1,5 +1,6 @@
 class Panel::StationsController < ApplicationController
 	before_action :authenticate_user!
+	load_and_authorize_resource
 	before_action :set_station, only: [:show, :edit, :update, :destroy]
 
 	def index

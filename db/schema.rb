@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424043908) do
+ActiveRecord::Schema.define(version: 20170426032032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 20170424043908) do
     t.boolean  "destroy_articles_permission", default: false
     t.boolean  "radio_stations_permission",   default: false
     t.boolean  "remote_controls_permission",  default: false
+    t.boolean  "user_permission",             default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

@@ -51,6 +51,7 @@ GEM
     bindex (0.5.0)
     builder (3.2.3)
     byebug (9.0.6)
+    cancan (1.6.10)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -185,6 +186,7 @@ DEPENDENCIES
   autoprefixer-rails
   aws-sdk (= 2.2.8)
   byebug
+  cancan
   coffee-rails (~> 4.2)
   devise
   foreman
@@ -206,4 +208,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.13.7
+   1.14.6
