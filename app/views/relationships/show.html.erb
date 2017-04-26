@@ -1,5 +1,8 @@
 <div class="interface--row">
 	<div class="section main-content">
+		<% if @relationship.relationship_type == "Investigation"%>
+			<p class="section__small-title">Investigación Especial</p>
+		<% end %>
 		<h1 class="section__title"><%= @relationship.name %></h1>
 		<div class="section-articles-container ">
 			<div class="relationship">
@@ -12,4 +15,5 @@
 		</div>
 
 	</div>
+	<%= render "components/sidebar", article: "global" %>
 </div>

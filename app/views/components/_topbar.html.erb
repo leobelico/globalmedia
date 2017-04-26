@@ -1,11 +1,15 @@
 <div class="topbar">
 	<%= link_to "global media", root_path, class: "topbar__link" %>
-	<%= link_to "invesitgación especial", relationship_path(Relationship.find_by(relationship_type: "Investigation").slug), class: "topbar__link" %>
-	<%= link_to "denuncia global", root_path, class: "topbar__link" %>
+	<% if Relationship.find_by(relationship_type: "Investigation") %>
+		<%= link_to "investigación especial", relationship_path(Relationship.find_by(relationship_type: "Investigation").slug), class: "topbar__link" %>
+	<% end %>
+	<% if Relationship.find_by(relationship_type: "Complaint") %>
+		<%= link_to "denuncia global", relationship_path(Relationship.find_by(relationship_type: "Complaint").slug), class: "topbar__link" %>
+	<% end %>
 	<%= link_to "tráfico san luis", root_path, class: "topbar__link" %>
 
 	<div class="social-media">
-		<p class="social-media__tag">Siguenos</p>
+		<p class="social-media__tag">Síguenos</p>
 		<%= link_to root_path, class: "social-media__link" do %>
 			<%= image_tag "twitter.svg" %>
 		<% end %>
@@ -14,7 +18,7 @@
 		<% end %>
 	</div>
 	<div class="search">
-		<input type="text" class="search__box" placeholder="Busqueda">
+		<input type="text" class="search__box" placeholder="Búsqueda">
 		<%= image_tag "search.svg", class: "search__image" %>
 	</div>
 </div>
