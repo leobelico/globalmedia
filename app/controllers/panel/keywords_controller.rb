@@ -1,5 +1,6 @@
 class Panel::KeywordsController < ApplicationController
 	before_action :authenticate_user!, except: [:show_keyword]
+	load_and_authorize_resource
 	before_action :get_all_keywords, only: [ :edit_multiple]
 	def index
 		

@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to panel_path, :alert => exception.message
+  end
+
+  
+
   helper_method :get_articles_per_section
   
   helper_method :al_momento

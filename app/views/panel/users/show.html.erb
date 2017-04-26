@@ -1,0 +1,10 @@
+<%= @user.full_name %> <br/>
+<%= @user.email %><br/>
+Último inicio de sesión: <%= @user.last_sign_in_at%>
+Número de veces que ha iniciado sesión: <%= @user.sign_in_count %>
+
+<%= link_to "Editar", edit_panel_user_path(@user) %>
+<% if current_user != @user and  current_user.superadmin? %>
+	
+	<%= link_to "Eliminar", @user, method: :delete, data: {confirm: "¿Seguro? Esta acción no se puede deshacer"} %>
+<% end %>
