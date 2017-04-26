@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  init_date: 2017-04-26 11:48:24
+  end_date: 2017-04-26 11:48:24
+  client_name: MyString
+  event_name: MyString
+  event_address: MyString
+  station_name: MyString
+  unit_name: MyString
+  techs: 
+  observations: 
+  contract_number: MyString
+  contract_state: MyString
+  agent_name: MyString
+  datsheet: false
+
+two:
+  init_date: 2017-04-26 11:48:24
+  end_date: 2017-04-26 11:48:24
+  client_name: MyString
+  event_name: MyString
+  event_address: MyString
+  station_name: MyString
+  unit_name: MyString
+  techs: 
+  observations: 
+  contract_number: MyString
+  contract_state: MyString
+  agent_name: MyString
+  datsheet: false

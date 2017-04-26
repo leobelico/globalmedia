@@ -1,13 +1,16 @@
-<h3 class="title"><%= @search.name %></h3>
 
-<% @hashtags.each do |hashtag| %>
-	
-	<h3 ><%= link_to hashtag.article.name, hashtag.article, class: "title" %></h3>
-	<div ><%= render hashtag.article.hashtags %></div>
-	<p ><%= hashtag.article.short_description %></p>
-	
-	<%= link_to "Ver Nota", hashtag.article, class: "link" %>
-		
 
-	
-<% end %>
+<div class="interface--row">
+	<div class="section main-content"> 
+		<p class="section__small-title">Hashtag:</p>
+
+		<h3 class="section__title"><%= @search.name %></h3>
+
+		<% @articles.each do |article| %>
+			<%= render "components/horizontal-note", article: article %>
+		<% end %>
+		<%= will_paginate @articles, class: "site-pagination" %>
+
+	</div>
+	<%= render "components/sidebar", article: "global" %>
+</div>

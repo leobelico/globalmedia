@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
 		# @article.note
 		@note = @article.note
 		if !user_signed_in?
-			last_hit = Hit.where(article: @article, created_at: 1.hours.ago..Time.now).last
+			last_hit = Hit.where(article: @article, created_at: 2.hours.ago..Time.now).last
 
 			if last_hit
 				last_hit.update_attributes(number: last_hit.number + 1)
@@ -24,9 +24,8 @@ class ArticlesController < ApplicationController
 	
 	def search_hashtag
 		@search = Hashtag.find(params[:search])
-		@hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
-		
-
+		# @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
+		@articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ params[:search] }").paginate(page: params[:page], per_page: 20)
 	end
 
 	private

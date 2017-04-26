@@ -6,14 +6,18 @@ class TitlepageController < ApplicationController
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')
 		@sections = Section.where('name != ?', "Último Momento")
 
-		relationships_investigations = Relationship.where(relationship_type: "Investigation").last.article_relationships
+		relationships_investigations = Relationship.where(relationship_type: "Investigation").last
+		if relationships_investigations
+			relationships_investigations = relationships_investigations.article_relationships
+			@investigation_articles = []
 
- 		@investigation_articles = []
-
-		relationships_investigations.last(6).each do |relationship|
+			relationships_investigations.last(6).each do |relationship|
 			@investigation_articles << relationship.article
 		end
 
+		end
+
+ 		
 		@complaints = []
 
 		complaint_relationships = Relationship.where(relationship_type: "Complaint")

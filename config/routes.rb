@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
 
   resources :sections, only: [:show], param: :slug 
-
+  resources :relationships
 
   
   get "panel", to: "panel/panel#panel"
@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     resources :hits
     resources :banners
     resources :relationships, param: :slug 
+    resources :controls
 
     get "new_collaborator", to: "relationships#new_collaborator"
     get "collaborators", to: "relationships#collaborators"
