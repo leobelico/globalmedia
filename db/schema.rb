@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424043908) do
+ActiveRecord::Schema.define(version: 20170426164824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170424043908) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "name",                      default: ""
-    t.jsonb    "note",                      default: ""
+    t.text     "note",                      default: ""
     t.text     "short_description",         default: ""
     t.integer  "articable_id"
     t.string   "articable_type"
@@ -64,6 +64,24 @@ ActiveRecord::Schema.define(version: 20170424043908) do
     t.boolean  "titlepage",   default: false
     t.string   "client"
     t.string   "url"
+  end
+
+  create_table "controls", force: :cascade do |t|
+    t.datetime "init_date"
+    t.datetime "end_date"
+    t.string   "client_name",     default: ""
+    t.string   "event_name",      default: ""
+    t.string   "event_address",   default: ""
+    t.string   "station_name",    default: ""
+    t.string   "unit_name",       default: ""
+    t.text     "techs",           default: ""
+    t.text     "observations",    default: ""
+    t.string   "contract_number", default: ""
+    t.string   "contract_state",  default: ""
+    t.string   "agent_name",      default: ""
+    t.boolean  "datasheet",       default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "hashtags", force: :cascade do |t|
