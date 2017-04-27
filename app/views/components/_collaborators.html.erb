@@ -1,7 +1,7 @@
 <div class="special-articles">
 	<div class="special-articles__type">
 		<p class="type">Colaboradores</p>
-		<p class="link">Ver todos</p>
+		<%= link_to "Ir a sección", collaborators_path, class: "link" %>
 	</div>
 	<% articles.each do |article| %>
 		<%= link_to article, class: "collaborator-note" do %>

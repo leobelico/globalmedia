@@ -1,0 +1,20 @@
+<div class="interface--row">
+	<div class="main-content station">
+		<div class="station__header">
+			<%= image_tag @station.image, class: "station__image" %>
+			<h4 class="station__name"><%= @station.name %><br><span>Radio</span></h4>
+			
+		</div>
+		<audio controls>
+			<source src="<%= @station.stream_url %>" type="audio/mpeg">	
+		</audio>
+		<div class="station__recommendations">
+			<% @recommendations.each do |recommendation| %>
+				<%= link_to recommendation, class: "recommendation__image" do %>
+					<%= image_tag recommendation.image %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	<%= render "components/stations-sidebar" %>
+</div>

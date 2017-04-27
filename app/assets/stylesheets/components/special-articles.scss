@@ -60,3 +60,12 @@
 		margin-top:  12px;  
 	}
 }
+@media screen and (max-width:  1023px) {
+	.special-articles-container {
+		flex-direction:  column; 
+	}
+	.special-articles {
+		margin-bottom:  16px; 
+		width:  100%; 
+	}
+}

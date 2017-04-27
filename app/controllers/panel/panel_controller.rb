@@ -12,12 +12,16 @@ class Panel::PanelController < ApplicationController
 		articles_in_highlights.update_all(global_recommendation: false)
 		if params[:panel][:first_article_id]
 			first_article = Article.find_by_name(params[:panel][:first_article_id])
+			first_article.update_attributes(global_recommendation: true)
 		end
 		if params[:panel][:second_article_id]
 			second_article = Article.find_by_name(params[:panel][:second_article_id])
+			second_article.update_attributes(global_recommendation: true)
 		end
 		if params[:panel][:third_article_id]
 			third_article = Article.find_by_name(params[:panel][:third_article_id])
+			third_article.update_attributes(global_recommendation: true)
+			
 		end
 
 		#Article.all.each do |article|

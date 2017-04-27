@@ -1,0 +1,44 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Controles Remotos</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Nuevo Control", new_panel_control_path, class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Nombre del Cliente:</p>
+		<p class="table__cell">Fecha de inicio:</p>
+		<p class="table__cell">Fecha de fin:</p>
+		<p class="table__cell">Nombre del Evento:</p>
+		<p class="table__cell">Dirección del Evento:</p>
+		<p class="table__cell">Nombre de la Estación:</p>
+		<p class="table__cell">Nombre de la Unidad:</p>
+		<p class="table__cell">Técnicos:</p>
+		<p class="table__cell">Número de Contrato:</p>
+		<p class="table__cell">Estado de Contrato:</p>
+		<p class="table__cell">Nombre del Agente:</p>
+		<p class="table__cell">Hoja de Datos:</p>
+		<p class="table__cell">Editar:</p>
+		<p class="table__cell">Delete:</p>
+	</div>
+	<% @controls.each do |control| %>
+		<div class="table__row">
+			<%= link_to control.client_name, panel_control_path(control), class: "table__cell" %>
+			<p class="table__cell"><%= control.init_date.strftime("%A, %d %b %Y %l:%M %p") %></p>
+			<p class="table__cell"><%= control.end_date.strftime("%A, %d %b %Y %l:%M %p") %></p>
+			<p class="table__cell"><%= control.event_name%></p>
+			<p class="table__cell"><%= control.event_address %></p>
+			<p class="table__cell"><%= control.station_name %></p>
+			<p class="table__cell"><%= control.unit_name %></p>
+			<p class="table__cell"><%= control.techs %></p>
+			<p class="table__cell"><%= control.contract_number %></p>
+			<p class="table__cell"><%= control.contract_state %></p>
+			<p class="table__cell"><%= control.agent_name %></p>
+			<p class="table__cell"><%= control.observations[0..40] %></p>
+			<p class="table__cell"><%= control.datasheet %></p>
+
+			<%= link_to "Editar", edit_panel_control_path(control), class: "table__cell edit" %>
+			<%= link_to "Delete", panel_control_path(control), method: :delete, data: { confirm: "¿Estas seguro de querer eliminar el banenr? Esta acción no se puede deshacer." }, class: "table__cell delete" %>
+		</div>
+	<% end %>	
+</div>

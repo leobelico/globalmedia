@@ -1,0 +1,25 @@
+<%= form_for [:panel, @user] do |f| %>
+	<% if @user.errors.any? %>
+		<div >
+			<label><%= pluralize(@admin.errors.count, "error") %></label>
+			<ul>
+				<% @admin.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<%= f.text_field :first_name, placeholder: "Nombre(s)" %><br/>
+	<%= f.text_field :last_name, placeholder: "Apellidos(s)" %><br/>
+	<%= f.text_field :email, placeholder: "Email" %><br/>
+	Rol: <%= f.select(:role, ['Superadmin', 'Admin']) %><br/>
+	<%= f.check_box :create_articles_permission %> Crear Notas <br/>
+	<%= f.check_box :destroy_articles_permission %> Eliminar Notas <br/>
+	<%= f.check_box :video_complaints_permission %> Denuncia Global <br/>
+	<%= f.check_box :radio_stations_permission %> Estaciones de Radio <br/>
+	<%= f.check_box :remote_controls_permission %> Controles Remotos <br/>
+	<%= f.check_box :banners_permission %> Banners <br/>
+	<%= f.check_box :hits_permission %> Vistas por Página<br/>
+	<%= f.check_box :user_permission%> Usuarios<br/>
+	<%= f.submit "Guardar" %>
+<% end %>

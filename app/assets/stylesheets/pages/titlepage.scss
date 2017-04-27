@@ -7,3 +7,8 @@
 	width:  100%; 
 	margin-top:  4px; 
 }
+@media screen and (max-width:  1023px) {
+	.highlights-container {
+		flex-direction:  column; 
+	}
+}

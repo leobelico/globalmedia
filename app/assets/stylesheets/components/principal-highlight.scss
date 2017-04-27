@@ -36,3 +36,17 @@
 	object-fit:  cover; 
 	object-position:  center center; 
 }
+@media screen and (max-width:  1023px) {
+	.principal-highlight {
+		width:  100%; 
+		flex-direction:  column; 
+		.principal-highlight__info {
+			margin-left:  0px; 
+		}
+	}
+	.principal-highlight__image {
+		width:  100%;
+		height:  240px;
+		margin-bottom:  12px; 
+	}
+}

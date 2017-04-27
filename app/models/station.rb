@@ -1,5 +1,5 @@
 class Station < ApplicationRecord
-	validates :name, presence: true
+	validates :name, :image, :stream_url, presence: true
 	has_many :timetables, dependent: :delete_all
 	accepts_nested_attributes_for :timetables, reject_if: proc { |attributes| attributes['name'].blank? }, :allow_destroy => true
 

@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to panel_path, :alert => exception.message
+  end
+
+  
+
   helper_method :get_articles_per_section
   
   helper_method :al_momento
@@ -10,6 +16,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_todays_keywords
   helper_method :get_banner
   helper_method :latest_news
+  helper_method :most_visited
 
   def get_articles_per_section(id, last_number)
     section = Section.find(id)
@@ -58,6 +65,10 @@ class ApplicationController < ActionController::Base
       @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where(" section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}'").last
     end
 
+  end
+
+  def most_visited
+    @hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
   end
 
 end

@@ -104,3 +104,23 @@
 	}
 	.ql-size-small { font-size:  13.5px; }
 }
+@media screen and (max-width:  1023px) {
+	.note--display {
+		width:  100%; 
+	}
+	.tweet, 
+	.embed-content {
+		iframe {
+			margin-left:  auto !important; 
+			margin-right:  auto !important; 
+			max-width:  100% !important; 
+		}
+	}
+	.article__info {
+		flex-direction:  column; 
+		align-items:  flex-start; 
+		* {
+			margin-bottom:  4px; 
+		}
+	}
+}

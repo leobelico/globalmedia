@@ -14,7 +14,10 @@ Rails.application.routes.draw do
 
 
   resources :sections, only: [:show], param: :slug 
-
+  resources :relationships
+  resources :stations
+  get "collaborators", to: "relationships#collaborators"
+  get "about_us", to: "titlepage#about_us"
 
   
   get "panel", to: "panel/panel#panel"
@@ -62,6 +65,8 @@ Rails.application.routes.draw do
     resources :banners
     resources :relationships, param: :slug 
     resources :hit_objectives
+    resources :controls
+
 
     get "new_collaborator", to: "relationships#new_collaborator"
     get "collaborators", to: "relationships#collaborators"
@@ -81,13 +86,15 @@ Rails.application.routes.draw do
     get "show_global_recommendations", to: "panel#show_global_recommendations"
     get "set_global_recommendations", to: "panel#set_global_recommendations"
     post "set_global_recommendations", to: "panel#set_global_recommendations"
+    resources :users
+    
   end
   # get "panel/keywords/edit_multiple", to: "panel/keywords#edit_multiple"
   # get "panel/keywords/update_multiple", to: "panel/keywords#update_multiple"
   # post "panel/keywords/update_multiple", to: "panel/keywords#update_multiple"
    
 
-  resources :users
+ 
   # NOTAS DE PROGRAMADOR 
   # REVISAR DONDE SE USA KEYWORD SHOW A 
 
