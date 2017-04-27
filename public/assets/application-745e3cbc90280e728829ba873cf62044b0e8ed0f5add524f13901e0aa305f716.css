@@ -1,0 +1,4272 @@
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/base/foundation.scss */
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* line 5, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/base/foundation.scss */
+body {
+  margin: 0;
+  font: 16px/1 sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 11, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/base/foundation.scss */
+h1,
+h2,
+h3,
+h4,
+p,
+blockquote,
+figure,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 23, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/base/foundation.scss */
+main,
+li {
+  display: block;
+}
+
+/* line 27, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/base/foundation.scss */
+h1,
+h2,
+h3,
+h4 {
+  font-size: inherit;
+}
+
+/* line 33, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/base/foundation.scss */
+strong {
+  font-weight: bold;
+}
+
+/* line 36, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/base/foundation.scss */
+a,
+button {
+  color: inherit;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+/* line 41, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/base/foundation.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 44, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/base/foundation.scss */
+button {
+  overflow: visible;
+  border: 0;
+  font: inherit;
+  -webkit-font-smoothing: inherit;
+  letter-spacing: inherit;
+  background: none;
+  cursor: pointer;
+}
+
+/* line 53, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/base/foundation.scss */
+::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+/* line 57, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/base/foundation.scss */
+:focus {
+  outline: 0;
+}
+
+/* line 60, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/base/foundation.scss */
+img {
+  max-width: 100%;
+  height: auto;
+  border: 0;
+}
+
+/*!
+ * Quill Editor v1.2.3
+ * https://quilljs.com/
+ * Copyright (c) 2014, Jason Chen
+ * Copyright (c) 2013, salesforce.com
+ */
+/* line 7, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-container {
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  height: 100%;
+  margin: 0px;
+  position: relative;
+}
+
+/* line 15, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-container.ql-disabled .ql-tooltip {
+  visibility: hidden;
+}
+
+/* line 18, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-container.ql-disabled .ql-editor ul[data-checked] > li::before {
+  pointer-events: none;
+}
+
+/* line 21, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-clipboard {
+  left: -100000px;
+  height: 1px;
+  overflow-y: hidden;
+  position: absolute;
+  top: 50%;
+}
+
+/* line 28, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-clipboard p {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 32, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor {
+  box-sizing: border-box;
+  cursor: text;
+  line-height: 1.42;
+  height: 100%;
+  outline: none;
+  overflow-y: auto;
+  padding: 12px 15px;
+  -o-tab-size: 4;
+     tab-size: 4;
+  -moz-tab-size: 4;
+  text-align: left;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* line 46, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor p,
+.ql-editor ol,
+.ql-editor ul,
+.ql-editor pre,
+.ql-editor blockquote,
+.ql-editor h1,
+.ql-editor h2,
+.ql-editor h3,
+.ql-editor h4,
+.ql-editor h5,
+.ql-editor h6 {
+  margin: 0;
+  padding: 0;
+  counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+}
+
+/* line 61, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol,
+.ql-editor ul {
+  padding-left: 1.5em;
+}
+
+/* line 65, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol > li,
+.ql-editor ul > li {
+  list-style-type: none;
+}
+
+/* line 69, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ul > li::before {
+  content: '\2022';
+}
+
+/* line 72, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ul[data-checked=true],
+.ql-editor ul[data-checked=false] {
+  pointer-events: none;
+}
+
+/* line 76, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ul[data-checked=true] > li *,
+.ql-editor ul[data-checked=false] > li * {
+  pointer-events: all;
+}
+
+/* line 80, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ul[data-checked=true] > li::before,
+.ql-editor ul[data-checked=false] > li::before {
+  color: #777;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+/* line 86, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ul[data-checked=true] > li::before {
+  content: '\2611';
+}
+
+/* line 89, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ul[data-checked=false] > li::before {
+  content: '\2610';
+}
+
+/* line 92, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li::before {
+  display: inline-block;
+  margin-right: 0.3em;
+  text-align: right;
+  white-space: nowrap;
+  width: 1.2em;
+}
+
+/* line 99, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li:not(.ql-direction-rtl)::before {
+  margin-left: -1.5em;
+}
+
+/* line 102, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li,
+.ql-editor ul li {
+  padding-left: 1.5em;
+}
+
+/* line 106, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li {
+  counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+  counter-increment: list-num;
+}
+
+/* line 110, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li:before {
+  content: counter(list-num,decimal) ". ";
+}
+
+/* line 113, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-1 {
+  counter-increment: list-1;
+}
+
+/* line 116, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-1:before {
+  content: counter(list-1,lower-alpha) ". ";
+}
+
+/* line 119, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-1 {
+  counter-reset: list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+}
+
+/* line 122, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-2 {
+  counter-increment: list-2;
+}
+
+/* line 125, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-2:before {
+  content: counter(list-2,lower-roman) ". ";
+}
+
+/* line 128, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-2 {
+  counter-reset: list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+}
+
+/* line 131, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-3 {
+  counter-increment: list-3;
+}
+
+/* line 134, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-3:before {
+  content: counter(list-3,decimal) ". ";
+}
+
+/* line 137, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-3 {
+  counter-reset: list-4 list-5 list-6 list-7 list-8 list-9;
+}
+
+/* line 140, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-4 {
+  counter-increment: list-4;
+}
+
+/* line 143, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-4:before {
+  content: counter(list-4,lower-alpha) ". ";
+}
+
+/* line 146, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-4 {
+  counter-reset: list-5 list-6 list-7 list-8 list-9;
+}
+
+/* line 149, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-5 {
+  counter-increment: list-5;
+}
+
+/* line 152, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-5:before {
+  content: counter(list-5,lower-roman) ". ";
+}
+
+/* line 155, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-5 {
+  counter-reset: list-6 list-7 list-8 list-9;
+}
+
+/* line 158, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-6 {
+  counter-increment: list-6;
+}
+
+/* line 161, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-6:before {
+  content: counter(list-6,decimal) ". ";
+}
+
+/* line 164, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-6 {
+  counter-reset: list-7 list-8 list-9;
+}
+
+/* line 167, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-7 {
+  counter-increment: list-7;
+}
+
+/* line 170, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-7:before {
+  content: counter(list-7,lower-alpha) ". ";
+}
+
+/* line 173, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-7 {
+  counter-reset: list-8 list-9;
+}
+
+/* line 176, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-8 {
+  counter-increment: list-8;
+}
+
+/* line 179, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-8:before {
+  content: counter(list-8,lower-roman) ". ";
+}
+
+/* line 182, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-8 {
+  counter-reset: list-9;
+}
+
+/* line 185, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-9 {
+  counter-increment: list-9;
+}
+
+/* line 188, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor ol li.ql-indent-9:before {
+  content: counter(list-9,decimal) ". ";
+}
+
+/* line 191, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-1:not(.ql-direction-rtl) {
+  padding-left: 3em;
+}
+
+/* line 194, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-1:not(.ql-direction-rtl) {
+  padding-left: 4.5em;
+}
+
+/* line 197, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-1.ql-direction-rtl.ql-align-right {
+  padding-right: 3em;
+}
+
+/* line 200, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-1.ql-direction-rtl.ql-align-right {
+  padding-right: 4.5em;
+}
+
+/* line 203, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-2:not(.ql-direction-rtl) {
+  padding-left: 6em;
+}
+
+/* line 206, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-2:not(.ql-direction-rtl) {
+  padding-left: 7.5em;
+}
+
+/* line 209, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-2.ql-direction-rtl.ql-align-right {
+  padding-right: 6em;
+}
+
+/* line 212, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-2.ql-direction-rtl.ql-align-right {
+  padding-right: 7.5em;
+}
+
+/* line 215, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-3:not(.ql-direction-rtl) {
+  padding-left: 9em;
+}
+
+/* line 218, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-3:not(.ql-direction-rtl) {
+  padding-left: 10.5em;
+}
+
+/* line 221, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-3.ql-direction-rtl.ql-align-right {
+  padding-right: 9em;
+}
+
+/* line 224, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-3.ql-direction-rtl.ql-align-right {
+  padding-right: 10.5em;
+}
+
+/* line 227, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-4:not(.ql-direction-rtl) {
+  padding-left: 12em;
+}
+
+/* line 230, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-4:not(.ql-direction-rtl) {
+  padding-left: 13.5em;
+}
+
+/* line 233, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-4.ql-direction-rtl.ql-align-right {
+  padding-right: 12em;
+}
+
+/* line 236, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-4.ql-direction-rtl.ql-align-right {
+  padding-right: 13.5em;
+}
+
+/* line 239, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-5:not(.ql-direction-rtl) {
+  padding-left: 15em;
+}
+
+/* line 242, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-5:not(.ql-direction-rtl) {
+  padding-left: 16.5em;
+}
+
+/* line 245, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-5.ql-direction-rtl.ql-align-right {
+  padding-right: 15em;
+}
+
+/* line 248, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-5.ql-direction-rtl.ql-align-right {
+  padding-right: 16.5em;
+}
+
+/* line 251, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-6:not(.ql-direction-rtl) {
+  padding-left: 18em;
+}
+
+/* line 254, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-6:not(.ql-direction-rtl) {
+  padding-left: 19.5em;
+}
+
+/* line 257, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-6.ql-direction-rtl.ql-align-right {
+  padding-right: 18em;
+}
+
+/* line 260, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-6.ql-direction-rtl.ql-align-right {
+  padding-right: 19.5em;
+}
+
+/* line 263, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-7:not(.ql-direction-rtl) {
+  padding-left: 21em;
+}
+
+/* line 266, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-7:not(.ql-direction-rtl) {
+  padding-left: 22.5em;
+}
+
+/* line 269, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-7.ql-direction-rtl.ql-align-right {
+  padding-right: 21em;
+}
+
+/* line 272, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-7.ql-direction-rtl.ql-align-right {
+  padding-right: 22.5em;
+}
+
+/* line 275, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-8:not(.ql-direction-rtl) {
+  padding-left: 24em;
+}
+
+/* line 278, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-8:not(.ql-direction-rtl) {
+  padding-left: 25.5em;
+}
+
+/* line 281, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-8.ql-direction-rtl.ql-align-right {
+  padding-right: 24em;
+}
+
+/* line 284, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-8.ql-direction-rtl.ql-align-right {
+  padding-right: 25.5em;
+}
+
+/* line 287, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-9:not(.ql-direction-rtl) {
+  padding-left: 27em;
+}
+
+/* line 290, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-9:not(.ql-direction-rtl) {
+  padding-left: 28.5em;
+}
+
+/* line 293, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-indent-9.ql-direction-rtl.ql-align-right {
+  padding-right: 27em;
+}
+
+/* line 296, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor li.ql-indent-9.ql-direction-rtl.ql-align-right {
+  padding-right: 28.5em;
+}
+
+/* line 299, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-video {
+  display: block;
+  max-width: 100%;
+}
+
+/* line 303, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-video.ql-align-center {
+  margin: 0 auto;
+}
+
+/* line 306, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-video.ql-align-right {
+  margin: 0 0 0 auto;
+}
+
+/* line 309, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-bg-black {
+  background-color: #000;
+}
+
+/* line 312, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-bg-red {
+  background-color: #e60000;
+}
+
+/* line 315, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-bg-orange {
+  background-color: #f90;
+}
+
+/* line 318, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-bg-yellow {
+  background-color: #ff0;
+}
+
+/* line 321, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-bg-green {
+  background-color: #008a00;
+}
+
+/* line 324, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-bg-blue {
+  background-color: #06c;
+}
+
+/* line 327, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-bg-purple {
+  background-color: #93f;
+}
+
+/* line 330, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-color-white {
+  color: #fff;
+}
+
+/* line 333, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-color-red {
+  color: #e60000;
+}
+
+/* line 336, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-color-orange {
+  color: #f90;
+}
+
+/* line 339, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-color-yellow {
+  color: #ff0;
+}
+
+/* line 342, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-color-green {
+  color: #008a00;
+}
+
+/* line 345, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-color-blue {
+  color: #06c;
+}
+
+/* line 348, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-color-purple {
+  color: #93f;
+}
+
+/* line 351, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-font-serif {
+  font-family: Georgia, Times New Roman, serif;
+}
+
+/* line 354, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-font-monospace {
+  font-family: Monaco, Courier New, monospace;
+}
+
+/* line 357, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-size-small {
+  font-size: 0.75em;
+}
+
+/* line 360, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-size-large {
+  font-size: 1.5em;
+}
+
+/* line 363, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-size-huge {
+  font-size: 2.5em;
+}
+
+/* line 366, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-direction-rtl {
+  direction: rtl;
+  text-align: inherit;
+}
+
+/* line 370, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-align-center {
+  text-align: center;
+}
+
+/* line 373, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-align-justify {
+  text-align: justify;
+}
+
+/* line 376, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor .ql-align-right {
+  text-align: right;
+}
+
+/* line 379, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-editor.ql-blank::before {
+  color: rgba(0, 0, 0, 0.6);
+  content: attr(data-placeholder);
+  font-style: italic;
+  pointer-events: none;
+  position: absolute;
+}
+
+/* line 386, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow.ql-toolbar:after,
+.ql-snow .ql-toolbar:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+/* line 392, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow.ql-toolbar button,
+.ql-snow .ql-toolbar button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  height: 24px;
+  padding: 3px 5px;
+  width: 28px;
+}
+
+/* line 403, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow.ql-toolbar button svg,
+.ql-snow .ql-toolbar button svg {
+  float: left;
+  height: 100%;
+}
+
+/* line 408, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow.ql-toolbar button:active:hover,
+.ql-snow .ql-toolbar button:active:hover {
+  outline: none;
+}
+
+/* line 412, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow.ql-toolbar input.ql-image[type=file],
+.ql-snow .ql-toolbar input.ql-image[type=file] {
+  display: none;
+}
+
+/* line 416, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow.ql-toolbar button:hover,
+.ql-snow .ql-toolbar button:hover,
+.ql-snow.ql-toolbar button.ql-active,
+.ql-snow .ql-toolbar button.ql-active,
+.ql-snow.ql-toolbar .ql-picker-label:hover,
+.ql-snow .ql-toolbar .ql-picker-label:hover,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active,
+.ql-snow.ql-toolbar .ql-picker-item:hover,
+.ql-snow .ql-toolbar .ql-picker-item:hover,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected {
+  color: #06c;
+}
+
+/* line 430, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow.ql-toolbar button:hover .ql-fill,
+.ql-snow .ql-toolbar button:hover .ql-fill,
+.ql-snow.ql-toolbar button.ql-active .ql-fill,
+.ql-snow .ql-toolbar button.ql-active .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+.ql-snow.ql-toolbar button:hover .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar button:hover .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar button.ql-active .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
+  fill: #06c;
+}
+
+/* line 456, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow.ql-toolbar button:hover .ql-stroke,
+.ql-snow .ql-toolbar button:hover .ql-stroke,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke,
+.ql-snow .ql-toolbar button.ql-active .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+.ql-snow.ql-toolbar button:hover .ql-stroke-miter,
+.ql-snow .ql-toolbar button:hover .ql-stroke-miter,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke-miter,
+.ql-snow .ql-toolbar button.ql-active .ql-stroke-miter,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
+  stroke: #06c;
+}
+
+/* line 482, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow {
+  box-sizing: border-box;
+}
+
+/* line 485, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow * {
+  box-sizing: border-box;
+}
+
+/* line 488, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-hidden {
+  display: none;
+}
+
+/* line 491, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-out-bottom,
+.ql-snow .ql-out-top {
+  visibility: hidden;
+}
+
+/* line 495, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip {
+  position: absolute;
+  -webkit-transform: translateY(10px);
+          transform: translateY(10px);
+}
+
+/* line 499, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* line 503, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip.ql-flip {
+  -webkit-transform: translateY(-10px);
+          transform: translateY(-10px);
+}
+
+/* line 506, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-formats {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 510, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-formats:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+/* line 515, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-stroke {
+  fill: none;
+  stroke: #444;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+/* line 522, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-stroke-miter {
+  fill: none;
+  stroke: #444;
+  stroke-miterlimit: 10;
+  stroke-width: 2;
+}
+
+/* line 528, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+  fill: #444;
+}
+
+/* line 532, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-empty {
+  fill: none;
+}
+
+/* line 535, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-even {
+  fill-rule: evenodd;
+}
+
+/* line 538, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-thin,
+.ql-snow .ql-stroke.ql-thin {
+  stroke-width: 1;
+}
+
+/* line 542, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-transparent {
+  opacity: 0.4;
+}
+
+/* line 545, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-direction svg:last-child {
+  display: none;
+}
+
+/* line 548, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-direction.ql-active svg:last-child {
+  display: inline;
+}
+
+/* line 551, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-direction.ql-active svg:first-child {
+  display: none;
+}
+
+/* line 554, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor h1 {
+  font-size: 2em;
+}
+
+/* line 557, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor h2 {
+  font-size: 1.5em;
+}
+
+/* line 560, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor h3 {
+  font-size: 1.17em;
+}
+
+/* line 563, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor h4 {
+  font-size: 1em;
+}
+
+/* line 566, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor h5 {
+  font-size: 0.83em;
+}
+
+/* line 569, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor h6 {
+  font-size: 0.67em;
+}
+
+/* line 572, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor a {
+  text-decoration: underline;
+}
+
+/* line 575, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor blockquote {
+  border-left: 4px solid #ccc;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-left: 16px;
+}
+
+/* line 581, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor code,
+.ql-snow .ql-editor pre {
+  background-color: #f0f0f0;
+  border-radius: 3px;
+}
+
+/* line 586, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor pre {
+  white-space: pre-wrap;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 5px 10px;
+}
+
+/* line 592, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor code {
+  font-size: 85%;
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+
+/* line 597, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor code:before,
+.ql-snow .ql-editor code:after {
+  content: "\A0";
+  letter-spacing: -2px;
+}
+
+/* line 602, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor pre.ql-syntax {
+  background-color: #23241f;
+  color: #f8f8f2;
+  overflow: visible;
+}
+
+/* line 607, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-editor img {
+  max-width: 100%;
+}
+
+/* line 610, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker {
+  color: #444;
+  display: inline-block;
+  float: left;
+  font-size: 14px;
+  font-weight: 500;
+  height: 24px;
+  position: relative;
+  vertical-align: middle;
+}
+
+/* line 620, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker-label {
+  cursor: pointer;
+  display: inline-block;
+  height: 100%;
+  padding-left: 8px;
+  padding-right: 2px;
+  position: relative;
+  width: 100%;
+}
+
+/* line 629, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker-label::before {
+  display: inline-block;
+  line-height: 22px;
+}
+
+/* line 633, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker-options {
+  background-color: #fff;
+  display: none;
+  min-width: 100%;
+  padding: 4px 8px;
+  position: absolute;
+  white-space: nowrap;
+}
+
+/* line 641, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker-options .ql-picker-item {
+  cursor: pointer;
+  display: block;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+/* line 647, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+  color: #ccc;
+  z-index: 2;
+}
+
+/* line 651, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-expanded .ql-picker-label .ql-fill {
+  fill: #ccc;
+}
+
+/* line 654, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-expanded .ql-picker-label .ql-stroke {
+  stroke: #ccc;
+}
+
+/* line 657, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+  display: block;
+  margin-top: -1px;
+  top: 100%;
+  z-index: 1;
+}
+
+/* line 663, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-color-picker,
+.ql-snow .ql-icon-picker {
+  width: 28px;
+}
+
+/* line 667, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-color-picker .ql-picker-label,
+.ql-snow .ql-icon-picker .ql-picker-label {
+  padding: 2px 4px;
+}
+
+/* line 671, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-color-picker .ql-picker-label svg,
+.ql-snow .ql-icon-picker .ql-picker-label svg {
+  right: 4px;
+}
+
+/* line 675, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-icon-picker .ql-picker-options {
+  padding: 4px 0px;
+}
+
+/* line 678, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-icon-picker .ql-picker-item {
+  height: 24px;
+  width: 24px;
+  padding: 2px 4px;
+}
+
+/* line 683, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-color-picker .ql-picker-options {
+  padding: 3px 5px;
+  width: 152px;
+}
+
+/* line 687, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-color-picker .ql-picker-item {
+  border: 1px solid transparent;
+  float: left;
+  height: 16px;
+  margin: 2px;
+  padding: 0px;
+  width: 16px;
+}
+
+/* line 695, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+  position: absolute;
+  margin-top: -9px;
+  right: 0;
+  top: 50%;
+  width: 18px;
+}
+
+/* line 702, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-label]:not([data-label=''])::before,
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-label]:not([data-label=''])::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-label]:not([data-label=''])::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-label]:not([data-label=''])::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-label]:not([data-label=''])::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-label]:not([data-label=''])::before {
+  content: attr(data-label);
+}
+
+/* line 710, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header {
+  width: 98px;
+}
+
+/* line 713, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-label::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item::before {
+  content: 'Normal';
+}
+
+/* line 717, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
+  content: 'Heading 1';
+}
+
+/* line 721, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
+  content: 'Heading 2';
+}
+
+/* line 725, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
+  content: 'Heading 3';
+}
+
+/* line 729, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="4"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="4"]::before {
+  content: 'Heading 4';
+}
+
+/* line 733, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="5"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="5"]::before {
+  content: 'Heading 5';
+}
+
+/* line 737, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-label[data-value="6"]::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="6"]::before {
+  content: 'Heading 6';
+}
+
+/* line 741, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
+  font-size: 2em;
+}
+
+/* line 744, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
+  font-size: 1.5em;
+}
+
+/* line 747, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
+  font-size: 1.17em;
+}
+
+/* line 750, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="4"]::before {
+  font-size: 1em;
+}
+
+/* line 753, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="5"]::before {
+  font-size: 0.83em;
+}
+
+/* line 756, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value="6"]::before {
+  font-size: 0.67em;
+}
+
+/* line 759, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-font {
+  width: 108px;
+}
+
+/* line 762, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-font .ql-picker-label::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item::before {
+  content: 'Sans Serif';
+}
+
+/* line 766, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=serif]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=serif]::before {
+  content: 'Serif';
+}
+
+/* line 770, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=monospace]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before {
+  content: 'Monospace';
+}
+
+/* line 774, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=serif]::before {
+  font-family: Georgia, Times New Roman, serif;
+}
+
+/* line 777, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before {
+  font-family: Monaco, Courier New, monospace;
+}
+
+/* line 780, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-size {
+  width: 98px;
+}
+
+/* line 783, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+  content: 'Normal';
+}
+
+/* line 787, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value=small]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
+  content: 'Small';
+}
+
+/* line 791, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value=large]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
+  content: 'Large';
+}
+
+/* line 795, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value=huge]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
+  content: 'Huge';
+}
+
+/* line 799, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
+  font-size: 10px;
+}
+
+/* line 802, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
+  font-size: 18px;
+}
+
+/* line 805, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
+  font-size: 32px;
+}
+
+/* line 808, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-color-picker.ql-background .ql-picker-item {
+  background-color: #fff;
+}
+
+/* line 811, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-color-picker.ql-color .ql-picker-item {
+  background-color: #000;
+}
+
+/* line 814, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-toolbar.ql-snow {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  padding: 8px;
+}
+
+/* line 820, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-toolbar.ql-snow .ql-formats {
+  margin-right: 15px;
+}
+
+/* line 823, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-toolbar.ql-snow .ql-picker-label {
+  border: 1px solid transparent;
+}
+
+/* line 826, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-toolbar.ql-snow .ql-picker-options {
+  border: 1px solid transparent;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 8px;
+}
+
+/* line 830, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+  border-color: #ccc;
+}
+
+/* line 833, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+  border-color: #ccc;
+}
+
+/* line 836, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-toolbar.ql-snow .ql-color-picker .ql-picker-item.ql-selected,
+.ql-toolbar.ql-snow .ql-color-picker .ql-picker-item:hover {
+  border-color: #000;
+}
+
+/* line 840, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+  border-top: 0px;
+}
+
+/* line 843, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 5px #ddd;
+  color: #444;
+  padding: 5px 12px;
+  white-space: nowrap;
+}
+
+/* line 851, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip::before {
+  content: "Visit URL:";
+  line-height: 26px;
+  margin-right: 8px;
+}
+
+/* line 856, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip input[type=text] {
+  display: none;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  height: 26px;
+  margin: 0px;
+  padding: 3px 5px;
+  width: 170px;
+}
+
+/* line 865, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip a.ql-preview {
+  display: inline-block;
+  max-width: 200px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+}
+
+/* line 872, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip a.ql-action::after {
+  border-right: 1px solid #ccc;
+  content: 'Edit';
+  margin-left: 16px;
+  padding-right: 8px;
+}
+
+/* line 878, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip a.ql-remove::before {
+  content: 'Remove';
+  margin-left: 8px;
+}
+
+/* line 882, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip a {
+  line-height: 26px;
+}
+
+/* line 885, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip.ql-editing a.ql-preview,
+.ql-snow .ql-tooltip.ql-editing a.ql-remove {
+  display: none;
+}
+
+/* line 889, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip.ql-editing input[type=text] {
+  display: inline-block;
+}
+
+/* line 892, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip.ql-editing a.ql-action::after {
+  border-right: 0px;
+  content: 'Save';
+  padding-right: 0px;
+}
+
+/* line 897, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip[data-mode=link]::before {
+  content: "Enter link:";
+}
+
+/* line 900, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip[data-mode=formula]::before {
+  content: "Enter formula:";
+}
+
+/* line 903, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow .ql-tooltip[data-mode=video]::before {
+  content: "Enter video:";
+}
+
+/* line 906, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-snow a {
+  color: #06c;
+}
+
+/* line 909, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/libraries/quill.snow.scss */
+.ql-container.ql-snow {
+  border: 1px solid #ccc;
+}
+
+/* line 28, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+}
+
+/* line 34, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.interface {
+  width: 100%;
+  max-width: 1024px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  border-left: solid 1px #dbdbdb;
+  border-right: solid 1px #dbdbdb;
+  min-height: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  padding-bottom: 144px;
+}
+
+/* line 51, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.interface--row {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+/* line 58, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.interface--admin {
+  border: none;
+  max-width: calc(100% - 260px);
+  margin-right: 0;
+  margin-left: auto;
+  padding: 0px;
+  padding-top: 78px;
+  background-color: #efeff7;
+}
+
+/* line 67, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.wrapper-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+
+/* line 72, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.primary {
+  color: #3470d1;
+  font-weight: 700;
+}
+
+/* line 76, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.inactive {
+  color: #424242;
+  opacity: .1;
+}
+
+/* line 80, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.section-title.card {
+  margin-top: 24px !important;
+  margin-left: 24px !important;
+  margin-bottom: 0px !important;
+  margin-right: 0px !important;
+}
+
+/* line 86, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.main-content,
+.sidebar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+/* line 91, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.main-content {
+  width: 650px;
+}
+
+/* line 94, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.field_with_errors {
+  width: 100%;
+}
+/* line 96, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.field_with_errors input {
+  border: solid 1px #E53935 !important;
+}
+
+/* line 100, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.errors {
+  margin-bottom: 18px;
+}
+/* line 102, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+.errors li {
+  margin-bottom: 8px;
+}
+
+@media screen and (max-width: 1023px) {
+  /* line 107, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+  * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* line 111, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+  .topbar,
+  .header,
+  .navbar,
+  .its-news {
+    display: none !important;
+  }
+
+  /* line 117, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+  .interface {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    border: none;
+  }
+
+  /* line 122, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/main.scss */
+  .interface--row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+}
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/text.scss */
+.heading {
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 48px;
+  color: #424242;
+}
+
+/* line 7, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/text.scss */
+.title {
+  font-size: 36px;
+  font-weight: 400;
+  color: #212121;
+  margin-bottom: 36px;
+}
+
+/* line 13, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/text.scss */
+.bold {
+  font-weight: 900;
+}
+
+/* line 16, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/text.scss */
+.semibold {
+  font-weight: 600;
+}
+
+/* line 19, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/text.scss */
+.section-title {
+  font-size: 24px;
+  font-weight: 400;
+  color: #424242;
+  margin-bottom: 36px;
+}
+
+/* line 25, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/text.scss */
+.medium-title {
+  font-size: 21px;
+  font-weight: 900;
+}
+
+/* line 29, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/text.scss */
+.small-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* line 33, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/text.scss */
+.spaced {
+  margin-top: 18px;
+}
+
+/* line 36, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/text.scss */
+.super-small {
+  font-size: 11px;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.station-form .fields__remove.delete {
+  margin-top: 12px;
+  display: block;
+  text-align: center;
+}
+
+/* line 6, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.session-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 100%;
+  max-width: 320px;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 18, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.ui-helper-hidden-accessible div {
+  display: none;
+}
+
+/* line 21, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+/* line 29, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.field:last-of-type {
+  margin-bottom: 0;
+}
+
+/* line 32, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.multifield {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-bottom: 18px;
+}
+/* line 36, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.multifield .timefield, .multifield .field {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+/* line 38, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.multifield .timefield:nth-of-type(even), .multifield .field:nth-of-type(even) {
+  margin-left: 8px;
+}
+/* line 41, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.multifield .timefield:nth-of-type(odd), .multifield .field:nth-of-type(odd) {
+  margin-right: 8px;
+}
+
+/* line 46, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.timefield {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+/* line 49, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.timefield .field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: ceter;
+      -ms-flex-align: ceter;
+          align-items: ceter;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/* line 54, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.timefield .field * {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+/* line 58, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.timefield .field select:first-of-type {
+  margin-right: 8px;
+}
+/* line 61, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.timefield .field select:last-of-type {
+  margin-left: 8px;
+}
+
+/* line 66, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.field--string {
+  position: relative;
+}
+/* line 68, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.field--string input {
+  width: 100%;
+  padding: 12px 18px;
+  color: #212121;
+  border: solid 1px #9e9e9e;
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+/* line 79, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.field--string label {
+  margin-bottom: 8px;
+}
+
+/* line 83, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 18px;
+  width: 100%;
+}
+/* line 89, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.actions input {
+  width: 100%;
+  padding: 12px 18px;
+  color: #1b2d41;
+  background: #ffffff;
+  border: solid 1px #1b2d41;
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 18px;
+  width: 100%;
+}
+/* line 103, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.actions a {
+  margin-bottom: 18px;
+}
+
+/* line 107, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.field--checkbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/* line 111, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.field--checkbox input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* line 115, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+input {
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+/* line 118, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+input:focus {
+  border: solid 1px #3470d1;
+}
+
+/* line 121, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.admin-form {
+  width: calc(100% - 48px);
+  margin: 24px;
+  box-sizing: border-box;
+}
+/* line 125, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.admin-form select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+/* line 129, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+  width: 100%;
+  padding: 12px 18px;
+  color: #212121;
+  border: solid 1px #dbdbdb;
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+/* line 142, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.admin-form label {
+  margin-bottom: 8px;
+}
+/* line 145, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+}
+/* line 150, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+  border: solid 1px #3470d1;
+}
+/* line 155, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.admin-form #note-editor {
+  min-height: 500px;
+  margin-bottom: 18px;
+}
+/* line 159, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.admin-form .ql-toolbar {
+  border-radius: 4px 4px 0px 0px;
+}
+/* line 162, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.admin-form .ql-container {
+  border-radius: 0px 0px 4px 4px;
+}
+/* line 165, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.admin-form .ql-tweet {
+  background-image: url(/assets/twitter-black-13e967af789117baba260340d0610242a1cb1211db2d72445929877d1ddec766.svg) !important;
+  background-position: center center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+}
+/* line 171, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.admin-form .ql-embed-content {
+  background-image: url(/assets/code-5b342ac130fb5d22543e7273d96c0ad930c96ae48d2359a03e585b9e4f2d972f.svg) !important;
+  background-position: center center !important;
+  background-size: 18px !important;
+  background-repeat: no-repeat !important;
+}
+/* line 177, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.admin-form iframe {
+  border: none;
+  max-width: 100%;
+}
+
+/* line 182, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  padding: 12px 18px;
+  list-style: none;
+  background-color: #fafafa;
+  border: solid 1px #f5f5f5;
+  border-radius: 5px;
+}
+/* line 194, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.ui-autocomplete .ui-menu-item {
+  padding: 12px 0px;
+}
+/* line 197, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.ui-autocomplete .ui-menu-item > a.ui-corner-all {
+  display: block;
+  padding: 12px 18px;
+  font-size: 18px;
+  clear: both;
+  font-weight: normal;
+  line-height: 18px;
+  color: #555555;
+  white-space: nowrap;
+}
+/* line 207, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.ui-autocomplete .ui-menu-item > a.ui-corner-all.ui-state-hover, .ui-autocomplete .ui-menu-item > a.ui-corner-all.ui-state-active {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #0088cc;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  background-image: none;
+}
+
+/* line 218, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.delete {
+  color: #E53935;
+}
+
+/* line 221, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.field-builder.card {
+  margin-left: 0;
+}
+
+/* line 225, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.banner-sections {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+/* line 231, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.banner-sections .field--checkbox {
+  width: 50%;
+  box-sizing: border-box;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+/* line 235, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.banner-sections .field--checkbox:nth-of-type(even) {
+  padding-left: 8px;
+}
+/* line 238, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.banner-sections .field--checkbox:nth-of-type(odd) {
+  padding-right: 8px;
+}
+/* line 241, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.banner-sections .field--checkbox label {
+  -webkit-box-flex: 20;
+      -ms-flex: 20;
+          flex: 20;
+}
+/* line 244, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/forms.scss */
+.banner-sections .field--checkbox input[type="checkbox"] {
+  margin: 0 0;
+  height: 24px;
+  width: 24px;
+  margin-left: auto;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/buttons.scss */
+.button {
+  background-color: #3470d1;
+  color: #ffffff;
+  padding: 12px 18px;
+  font-size: 18px;
+  width: auto;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  border-radius: 4px;
+  position: relative;
+}
+
+/* line 11, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/buttons.scss */
+.button--logout {
+  margin-top: auto;
+}
+
+/* line 14, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/buttons.scss */
+.button--save {
+  position: relative;
+  overflow: hidden;
+}
+
+/* line 18, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/buttons.scss */
+.button--text,
+.button--spinner {
+  pointer-events: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/* line 23, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/buttons.scss */
+.button--spinner {
+  height: 18px;
+  width: 18px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  border-left: solid 2px #ffffff;
+  border-right: solid 2px #ffffff;
+  border-top: solid 2px #ffffff;
+  border-bottom: solid 1px transparent;
+  -webkit-transform: translate(-50%, -40px);
+          transform: translate(-50%, -40px);
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/cards.scss */
+.card {
+  box-shadow: rgba(0, 0, 0, 0.09804) 0px 2px 4px 0px;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 4px;
+  max-width: 698px;
+  width: 100%;
+  margin-top: 24px;
+  margin-left: 24px;
+}
+
+/* line 11, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/cards.scss */
+.card:last-of-type {
+  margin-bottom: 24px;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/topbar.scss */
+.topbar {
+  width: 100%;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 6px 12px;
+  background: #e9e9e9;
+  box-sizing: border-box;
+}
+
+/* line 14, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/topbar.scss */
+.topbar__link {
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1b2d41;
+  text-transform: uppercase;
+  padding-right: 9px;
+  padding-left: 9px;
+  border-right: solid 1px #1b2d41;
+}
+
+/* line 25, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/topbar.scss */
+.topbar .social-media {
+  margin-left: auto;
+}
+
+/* line 28, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/topbar.scss */
+.search {
+  position: relative;
+}
+
+/* line 31, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/topbar.scss */
+.search__image {
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  height: 14px;
+  width: auto;
+  opacity: .3;
+  pointer-events: none;
+  -webkit-transition: opacity .3s ease;
+  transition: opacity .3s ease;
+}
+
+/* line 42, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/topbar.scss */
+.search__box:focus + .search__image {
+  opacity: 0;
+}
+
+/* line 45, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/topbar.scss */
+.search__box {
+  background: #ffffff;
+  color: #1b2d41;
+  padding: 6px 8px;
+  font-size: 14px;
+  text-align: right;
+  margin-left: 18px;
+  border: solid 1px #dbdbdb;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/header.scss */
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: 100%;
+  max-width: 1024px;
+  background-color: #1b2d41;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 18px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  min-height: 72px;
+  overflow: hidden;
+}
+
+/* line 19, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/header.scss */
+.header__logo {
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+/* line 25, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/header.scss */
+.exchange-rate,
+.weather {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #ffffff;
+  margin-left: 36px;
+}
+/* line 32, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/header.scss */
+.exchange-rate img,
+.weather img {
+  margin-right: 12px;
+  height: 32px;
+}
+
+/* line 38, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/header.scss */
+.weather__location {
+  font-weight: bold;
+}
+
+/* line 41, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/header.scss */
+.exchange-rate__name {
+  font-weight: bold;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/navbar.scss */
+.navbar {
+  width: 100%;
+  max-width: 1024px;
+  background: #2d5b8e;
+  padding: 12px 18px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* line 13, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/navbar.scss */
+.navbar__link {
+  color: #ffffff;
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-right: 9px;
+  margin-right: 9px;
+  border-right: solid 1px rgba(255, 255, 255, 0.55);
+}
+/* line 14, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/navbar.scss */
+.navbar__link img {
+  height: 14px;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/social-media.scss */
+.social-media {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* line 6, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/social-media.scss */
+.social-media__tag {
+  color: #1b2d41;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: -3px;
+  margin-right: 12px;
+}
+
+/* line 14, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/social-media.scss */
+.social-media__link {
+  height: 28px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+/* line 18, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/social-media.scss */
+.social-media__link img, .social-media__link * {
+  pointer-events: none;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/its-news.scss */
+.its-news {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 0px 18px 0px 0px;
+  background-color: #2d5b8e;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* line 12, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/its-news.scss */
+.its-news__news {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+/* line 19, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/its-news.scss */
+.its-news__hashtag {
+  color: #2d5b8e;
+  background-color: #ffffff;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: "Open Sans", sans-serif;
+}
+
+/* line 28, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/its-news.scss */
+.its-news__title {
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/breaking-news.scss */
+.breaking-news {
+  width: 100%;
+  margin-bottom: 8px;
+  background: #ffc05b;
+  padding: 24px;
+  padding-top: 32px;
+  box-sizing: border-box;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+/* line 12, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/breaking-news.scss */
+.breaking-news__tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 8px;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: #f79800;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.note--display {
+  margin-top: 36px;
+  width: 650px;
+}
+/* line 4, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.note--display .title {
+  margin-bottom: 18px;
+}
+
+/* line 9, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.article__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-conent: center;
+  margin-bottom: 18px;
+}
+/* line 15, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.article__info .author,
+.article__info .date,
+.article__info .section {
+  margin-right: 12px;
+}
+/* line 20, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.article__info .section {
+  font-weight: 900;
+}
+
+/* line 24, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.author {
+  font-size: 13.5px;
+  font-style: italic;
+  color: #616161;
+}
+
+/* line 29, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.short-description {
+  color: #000000;
+  font-size: 14px;
+  line-height: 125%;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+/* line 36, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.hashtags-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-top: 18px;
+}
+/* line 43, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.hashtags-container a {
+  margin-right: 18px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #3470d1;
+  margin-bottom: 18px;
+}
+
+/* line 51, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.keyword-container {
+  margin-top: 18px;
+  margin-bottom: 18px;
+  font-size: 18px;
+  font-weight: 900;
+  color: #1b2d41;
+}
+
+/* line 58, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.main-image {
+  width: 100%;
+  height: 350px;
+  margin-bottom: 24px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+
+/* line 65, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+#quill-container {
+  width: 100%;
+}
+/* line 67, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+#quill-container .ql-editor {
+  padding: 0;
+}
+
+/* line 72, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.ql-editor .tweet,
+.ql-editor .embed-content {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/* line 78, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.ql-editor .tweet iframe,
+.ql-editor .embed-content iframe {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+/* line 83, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.ql-editor p {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+}
+/* line 89, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.ql-editor strong {
+  font-weight: 700;
+}
+/* line 92, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.ql-editor em {
+  font-style: italic;
+}
+/* line 95, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.ql-editor blockquote {
+  line-height: 155%;
+  display: block;
+  font-size: 18px;
+  padding: 0 40px;
+}
+/* line 101, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.ql-editor .ql-video {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+/* line 105, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+.ql-editor .ql-size-small {
+  font-size: 13.5px;
+}
+
+@media screen and (max-width: 1023px) {
+  /* line 108, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+  .note--display {
+    width: 100%;
+  }
+
+  /* line 113, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+  .tweet iframe,
+  .embed-content iframe {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+  }
+
+  /* line 119, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+  .article__info {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  /* line 122, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/notes.scss */
+  .article__info * {
+    margin-bottom: 4px;
+  }
+}
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/latest-news.scss */
+.latest-news {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 100%;
+}
+/* line 7, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/latest-news.scss */
+.latest-news .latest-news__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  margin-bottom: 12px;
+}
+/* line 14, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/latest-news.scss */
+.latest-news .latest-news__header .latest-news__title {
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #1b2d41;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 12px;
+  font-size: 18px;
+}
+/* line 23, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/latest-news.scss */
+.latest-news .latest-news__header .latest-news__link {
+  background-color: #1b2d41;
+  letter-spacing: 2px;
+  padding: 12px 18px;
+  font-size: 14px;
+  color: #ffffff;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: right;
+}
+/* line 33, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/latest-news.scss */
+.latest-news .latest-news__article {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 8px 0;
+  margin-top: 8px;
+}
+/* line 41, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/latest-news.scss */
+.latest-news .latest-news__article .article__time {
+  font-weight: 900;
+  color: #646464;
+  width: 48px;
+  margin-right: 12px;
+}
+/* line 47, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/latest-news.scss */
+.latest-news .latest-news__article .article__title {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+/* line 52, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/latest-news.scss */
+.latest-news .latest-news__article:nth-of-type(1) .article__time {
+  color: #E53935;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/principal-highlight.scss */
+.principal-highlight {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 751px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  position: relative;
+}
+/* line 10, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/principal-highlight.scss */
+.principal-highlight .principal-highlight__info {
+  margin-left: 16px;
+}
+/* line 12, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/principal-highlight.scss */
+.principal-highlight .principal-highlight__info .title {
+  font-size: 28px;
+}
+
+/* line 17, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/principal-highlight.scss */
+.principal-highlight__image {
+  width: 496px;
+  margin-top: 0;
+  margin-bottom: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  position: relative;
+}
+
+/* line 24, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/principal-highlight.scss */
+.principal-highlight__image img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  background: #f5f5f5;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+
+@media screen and (max-width: 1023px) {
+  /* line 40, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/principal-highlight.scss */
+  .principal-highlight {
+    width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  /* line 43, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/principal-highlight.scss */
+  .principal-highlight .principal-highlight__info {
+    margin-left: 0px;
+  }
+
+  /* line 47, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/principal-highlight.scss */
+  .principal-highlight__image {
+    width: 100%;
+    height: 240px;
+    margin-bottom: 12px;
+  }
+}
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/preview-article-info.scss */
+.article-preview__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+/* line 4, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/preview-article-info.scss */
+.article-preview__info .title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 18px;
+}
+/* line 10, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/preview-article-info.scss */
+.article-preview__info .section-and-author {
+  margin-bottom: 12px;
+}
+/* line 13, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/preview-article-info.scss */
+.article-preview__info .section {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 13.5px;
+}
+/* line 18, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/preview-article-info.scss */
+.article-preview__info .author {
+  font-size: 13.5px;
+  font-weight: 400;
+  font-style: italic;
+  color: #757575;
+  margin-bottom: 12px;
+  width: auto;
+}
+/* line 26, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/preview-article-info.scss */
+.article-preview__info .datetime {
+  font-size: 13.5px;
+  font-weight: 400;
+  font-style: italic;
+  color: #424242;
+  margin-bottom: 18px;
+}
+/* line 33, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/preview-article-info.scss */
+.article-preview__info .social-media {
+  margin-top: auto;
+}
+/* line 36, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/preview-article-info.scss */
+.article-preview__info .short-description {
+  font-size: 16px;
+  color: #000000;
+  font-weight: 400;
+  line-height: 110%;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/secondary-highlight.scss */
+.secondary-highlight {
+  width: 240px;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+/* line 6, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/secondary-highlight.scss */
+.secondary-highlight .article-preview__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+/* line 9, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/secondary-highlight.scss */
+.secondary-highlight .article-preview__info .title {
+  font-size: 21px;
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+/* line 14, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/secondary-highlight.scss */
+.secondary-highlight .article-preview__info .section-and-author {
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+/* line 18, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/secondary-highlight.scss */
+.secondary-highlight .article-preview__info .datetime {
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+/* line 22, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/secondary-highlight.scss */
+.secondary-highlight .article-preview__info .short-description {
+  margin-top: 8px;
+  margin-bottom: 18px;
+}
+/* line 26, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/secondary-highlight.scss */
+.secondary-highlight .article-preview__info .social-media {
+  margin-top: auto !important;
+}
+/* line 30, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/secondary-highlight.scss */
+.secondary-highlight .image-link {
+  width: 100%;
+  height: 150px;
+}
+
+/* line 36, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/secondary-highlight.scss */
+.sh-mr {
+  margin-right: 18px;
+}
+
+/* line 39, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/secondary-highlight.scss */
+.secondary-highlight__image {
+  width: 100%;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+
+@media screen and (max-width: 1023px) {
+  /* line 46, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/secondary-highlight.scss */
+  .secondary-highlight {
+    width: 100%;
+  }
+}
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/banners.scss */
+.banner--big {
+  width: 100%;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+/* line 6, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/banners.scss */
+.banner--small {
+  width: 100%;
+  height: auto;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+.section-preview {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+/* line 8, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+.sp__header {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+/* line 15, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+.sp__name {
+  font-weight: 900;
+  font-size: 18px;
+  color: #1b2d41;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* line 22, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+.sp__link {
+  text-align: right;
+  font-size: 14px;
+  color: #ffffff;
+  background: #1b2d41;
+  padding: 8px;
+  width: 768px;
+}
+
+/* line 30, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+.sp__articles {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+/* line 39, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+.sp__article {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 216.66px;
+}
+/* line 43, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+.sp__article .small-title {
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+/* line 47, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+.sp__article .social-media {
+  margin-top: auto;
+}
+
+/* line 51, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+.sp__image {
+  height: 150px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+
+/* line 57, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+.sp__article:first-child {
+  width: 320px;
+}
+
+@media screen and (max-width: 1023px) {
+  /* line 61, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+  .section-preview,
+  .sp__articles {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  /* line 65, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+  .sp__link {
+    width: auto;
+    padding-left: 48px;
+  }
+
+  /* line 69, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-preview.scss */
+  .sp__article,
+  .sp__article:first-of-type {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+}
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/special-articles.scss */
+.special-articles-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+/* line 9, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/special-articles.scss */
+.special-articles {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 496px;
+}
+
+/* line 16, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/special-articles.scss */
+.special-articles__type {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+}
+/* line 22, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/special-articles.scss */
+.special-articles__type .type {
+  color: #3470d1;
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+/* line 28, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/special-articles.scss */
+.special-articles__type .link {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 96px;
+  padding-right: 18px;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #3470d1;
+  letter-spacing: 2px;
+}
+
+/* line 39, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/special-articles.scss */
+.special-articles__title {
+  font-size: 21px;
+  font-weight: 900;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+/* line 45, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/special-articles.scss */
+.special-articles__image {
+  width: 100%;
+  height: 280px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+
+/* line 51, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/special-articles.scss */
+.special-articles__article {
+  font-size: 14px;
+  font-weight: 600;
+  color: #3470d1;
+  margin-top: 12px;
+}
+/* line 56, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/special-articles.scss */
+.special-articles__article:first-of-type {
+  font-size: 21px;
+  color: #000000;
+  font-weight: 900;
+  margin-top: 12px;
+}
+
+@media screen and (max-width: 1023px) {
+  /* line 64, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/special-articles.scss */
+  .special-articles-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  /* line 67, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/special-articles.scss */
+  .special-articles {
+    margin-bottom: 16px;
+    width: 100%;
+  }
+}
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/collaborators.scss */
+.collaborator-note {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 100%;
+  margin-top: 12px;
+}
+
+/* line 9, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/collaborators.scss */
+.collaborator__image {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  border: solid 2px #2d5b8e;
+  margin-right: 8px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+
+/* line 18, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/collaborators.scss */
+.collaborator__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+/* line 21, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/collaborators.scss */
+.collaborator__info .note__title {
+  font-weight: 600;
+  color: #000000;
+  font-size: 14px;
+}
+/* line 26, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/collaborators.scss */
+.collaborator__info .note__author {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 11.5px;
+  color: #424242;
+  margin-top: 4px;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/sidebar.scss */
+.sidebar {
+  width: 342px;
+}
+/* line 3, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/sidebar.scss */
+.sidebar .latest-news {
+  margin-top: 8px;
+}
+/* line 5, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/sidebar.scss */
+.sidebar .latest-news .type {
+  color: #000000;
+  border-left: solid 6px #3470d1;
+  padding-left: 8px;
+  font-size: 21px;
+  text-transform: none;
+  font-weight: 600;
+}
+/* line 13, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/sidebar.scss */
+.sidebar .latest-news .link {
+  display: none;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/recommendations.scss */
+.recommendations {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 8px;
+  box-sizing: border-box;
+  background: #f5f5f5;
+  margin-top: 18px;
+}
+/* line 9, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/recommendations.scss */
+.recommendations .medium-title {
+  margin-bottom: 18px;
+}
+
+/* line 13, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/recommendations.scss */
+.recommendation {
+  margin-bottom: 24px;
+}
+
+/* line 16, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/recommendations.scss */
+.recommendation__image {
+  width: 100%;
+  height: 180px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+
+/* line 22, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/recommendations.scss */
+.recommendation__title {
+  margin-top: 8px;
+  color: #000000;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/sections.scss */
+.section__title {
+  font-size: 36px;
+  font-weight: 900;
+  color: #3470d1;
+  width: 100%;
+  margin-top: 18px;
+  padding-bottom: 18px;
+  margin-bottom: 36px;
+  border-bottom: solid 4px #3470d1;
+}
+
+/* line 12, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/sections.scss */
+.section__small-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-article.scss */
+.section-articles-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+/* line 9, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-article.scss */
+.section-article {
+  width: 206px;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-bottom: 16px;
+  position: relative;
+}
+/* line 18, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-article.scss */
+.section-article .social-media {
+  margin-top: auto;
+}
+/* line 21, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-article.scss */
+.section-article .small-title {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+/* line 25, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-article.scss */
+.section-article .section-and-author {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+/* line 29, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-article.scss */
+.section-article .datetime {
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+/* line 33, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-article.scss */
+.section-article .short-description {
+  font-weight: 400;
+}
+
+/* line 37, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-article.scss */
+.sa-img-link {
+  width: 206px;
+  height: 120px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/* line 43, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-article.scss */
+.section-article__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+
+/* line 48, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-article.scss */
+.section-article__image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+  margin-bottom: 12px;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/horizontal-article.scss */
+.horizontal-article {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 16px;
+}
+/* line 8, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/horizontal-article.scss */
+.horizontal-article .article__image {
+  width: 250px;
+  height: 180px;
+  background: #fafafa;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+/* line 15, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/horizontal-article.scss */
+.horizontal-article .article__information {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-left: 8px;
+}
+/* line 21, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/horizontal-article.scss */
+.horizontal-article .article__information .small-title {
+  margin-bottom: 8px;
+}
+/* line 24, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/horizontal-article.scss */
+.horizontal-article .article__information .section-and-author {
+  margin-bottom: 8px;
+}
+/* line 27, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/horizontal-article.scss */
+.horizontal-article .article__information .datetime {
+  margin-bottom: 8px;
+}
+/* line 30, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/horizontal-article.scss */
+.horizontal-article .article__information .short-description {
+  font-weight: 400;
+}
+/* line 35, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/horizontal-article.scss */
+.horizontal-article .social-media {
+  margin-top: auto;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-recommendations.scss */
+.section-recommendations {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+/* line 8, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-recommendations.scss */
+.section-recommendations .special-articles__type {
+  margin-bottom: 16px;
+}
+
+/* line 12, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-recommendations.scss */
+.section-recommendations__article {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 206px;
+}
+/* line 16, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-recommendations.scss */
+.section-recommendations__article .section-recommendations__image {
+  width: 206px;
+  height: 120px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+  margin-bottom: 8px;
+}
+/* line 23, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-recommendations.scss */
+.section-recommendations__article .small-title {
+  margin-bottom: 8px;
+}
+/* line 26, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/section-recommendations.scss */
+.section-recommendations__article .social-media {
+  margin-top: auto;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/relationships.scss */
+.relationship {
+  width: 100%;
+}
+
+/* line 4, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/relationships.scss */
+.relationship__image {
+  width: 100%;
+  height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+  margin-bottom: 16px;
+}
+
+/* line 11, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/relationships.scss */
+.relationship__description {
+  font-size: 14px;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+/* line 2, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/stations.scss */
+.stations-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+/* line 10, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/stations.scss */
+.station-preview {
+  width: 206px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 16px;
+}
+/* line 15, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/stations.scss */
+.station-preview .station-preview__image {
+  width: 206px;
+  height: 206px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+  margin-bottom: 12px;
+}
+/* line 22, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/stations.scss */
+.station-preview .station-preview__name {
+  font-size: 21px;
+  font-weight: 900;
+  color: #000000;
+  width: 100%;
+  text-align: center;
+}
+
+/* line 30, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/stations.scss */
+.station__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 36px;
+}
+
+/* line 38, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/stations.scss */
+.station__name {
+  font-size: 36px;
+  font-weight: 900;
+  color: #FFC107;
+}
+/* line 42, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/stations.scss */
+.station__name span {
+  font-size: 13.5px;
+  font-weight: 400;
+}
+
+/* line 47, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/stations.scss */
+.station__image {
+  height: 206px;
+  width: 206px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+  margin-right: 18px;
+}
+
+/* line 54, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/stations.scss */
+.station__recommendations {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+/* line 59, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/stations.scss */
+.station__recommendations .recommendation__image {
+  width: 117.2px;
+  height: 117.2px;
+}
+/* line 62, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/stations.scss */
+.station__recommendations .recommendation__image img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/stations-sidebar.scss */
+.fb-page.fb_iframe_widget {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* line 2, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/about-us.scss */
+.about-us p {
+  margin-bottom: 16px;
+  line-height: 155%;
+}
+/* line 6, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/about-us.scss */
+.about-us img {
+  width: auto;
+  max-width: 100%;
+  margin-bottom: 16px;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/radio-banner.scss */
+.radio-banner {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-bottom: 8px;
+}
+/* line 6, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/radio-banner.scss */
+.radio-banner .radio-program {
+  width: 20%;
+  height: 50px;
+}
+/* line 9, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/radio-banner.scss */
+.radio-banner .radio-program img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/footer.scss */
+.footer {
+  width: 100%;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 144px;
+  box-sizing: border-box;
+  padding: 18px;
+  background-color: #1b2d41;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+/* line 16, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/footer.scss */
+.footer__column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+/* line 20, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/footer.scss */
+.footer__column:first-of-type {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+/* line 23, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/footer.scss */
+.footer__column:last-of-type {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-sidebar.scss */
+.admin-sidebar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  box-sizing: border-box;
+  width: 260px;
+  background-color: #313140;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding-bottom: 24px;
+  overflow: scroll;
+}
+/* line 15, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-sidebar.scss */
+.admin-sidebar .button--logout {
+  margin-top: 144px;
+}
+
+/* line 19, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-sidebar.scss */
+.admin-sidebar__logo {
+  height: 78px;
+  padding: 24px;
+  margin-bottom: 36px;
+  width: 100%;
+  box-sizing: border-box;
+  background: #3b3b4a;
+}
+/* line 27, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-sidebar.scss */
+.admin-sidebar__logo img {
+  height: 100%;
+  width: auto;
+}
+
+/* line 32, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-sidebar.scss */
+.admin-sidebar__link {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  border-bottom: solid 2px rgba(255, 255, 255, 0.01);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* line 2, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-pagination.scss */
+.admin-pagination em {
+  color: #E53935;
+}
+/* line 5, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-pagination.scss */
+.admin-pagination a {
+  color: #3470d1;
+}
+
+/* line 9, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-pagination.scss */
+.site-pagination {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 32px;
+}
+/* line 13, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-pagination.scss */
+.site-pagination em {
+  color: #E53935;
+}
+/* line 16, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-pagination.scss */
+.site-pagination a {
+  color: #3470d1;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-panel.scss */
+.panel__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: calc(100% - 260px);
+  height: 78px;
+  padding: 18px 28px;
+  background: #ffffff;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+
+/* line 17, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-panel.scss */
+.panel__title {
+  font-weight: 600;
+  color: #424242;
+  margin-bottom: 0px;
+  font-size: 28px;
+}
+
+/* line 23, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-panel.scss */
+.panel__header .title .current {
+  color: #3470d1;
+}
+
+/* line 26, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-panel.scss */
+.panel__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/* line 32, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-panel.scss */
+.panel__actions .button:not(:last-of-type),
+.panel__actions .delete:not(:last-of-type) {
+  margin-right: 12px;
+}
+
+/* line 37, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-panel.scss */
+.banner-sections-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+/* line 41, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/admin-panel.scss */
+.banner-sections-card p {
+  width: 50%;
+  line-height: 200%;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table {
+  width: calc(100% - 48px);
+  height: calc(100% - 48px);
+  padding: 24px;
+  margin: 24px;
+  box-sizing: border-box;
+  max-width: initial;
+}
+
+/* line 9, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__row .table__empty {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  color: #424242;
+}
+
+/* line 15, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+/* line 19, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__row:first-of-type {
+  color: #595959;
+  font-size: 14px;
+  font-weight: 600;
+}
+/* line 23, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__row:first-of-type .table__cell {
+  padding-top: 0;
+}
+/* line 26, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__row:first-of-type .table__image {
+  width: 120px;
+  margin-right: 18px;
+}
+/* line 31, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__row:not(:first-of-type) {
+  border-top: solid 1px #ebebeb;
+}
+/* line 33, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__row:not(:first-of-type) .table__cell:first-child {
+  color: #3470d1;
+}
+/* line 36, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__row:not(:first-of-type) .edit {
+  color: #3470d1;
+}
+/* line 39, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__row:not(:first-of-type) .delete {
+  color: #E53935;
+}
+/* line 42, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__row:not(:first-of-type) .table__image {
+  width: 120px;
+  height: 120px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+  border-radius: 24px;
+  margin-top: 12px;
+  margin-right: 18px;
+}
+/* line 53, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__row:last-of-type .table__cell {
+  padding-bottom: 0;
+}
+
+/* line 59, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__empty {
+  color: #424242 !important;
+}
+
+/* line 62, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+/* line 68, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 18px 0px;
+  box-sizing: border-box;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+/* line 76, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell:not(:last-child) {
+  margin-right: 18px;
+}
+/* line 79, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell.edit:not {
+  color: #3470d1;
+}
+
+/* line 84, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.f-1 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+/* line 85, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.f-2 {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+/* line 86, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.f-3 {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+/* line 87, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.f-4 {
+  -webkit-box-flex: 4;
+      -ms-flex: 4;
+          flex: 4;
+}
+
+/* line 88, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.f-5 {
+  -webkit-box-flex: 5;
+      -ms-flex: 5;
+          flex: 5;
+}
+
+/* line 89, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.f-6 {
+  -webkit-box-flex: 6;
+      -ms-flex: 6;
+          flex: 6;
+}
+
+/* line 90, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.f-7 {
+  -webkit-box-flex: 7;
+      -ms-flex: 7;
+          flex: 7;
+}
+
+/* line 91, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.f-8 {
+  -webkit-box-flex: 8;
+      -ms-flex: 8;
+          flex: 8;
+}
+
+/* line 93, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell.name {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+/* line 94, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell.short-description {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+/* line 95, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell.user-name {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+/* line 96, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell.date {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+/* line 97, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell.edit {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+/* line 98, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell.delete {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+/* line 100, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell.weekdays {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  font-weight: 600;
+}
+/* line 104, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell.weekdays span {
+  margin-right: 8px;
+}
+
+/* line 108, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell.boolean {
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/* line 112, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/components/admin/tables.scss */
+.table__cell.boolean img {
+  max-height: 24px;
+  max-width: 24px;
+}
+
+/* line 1, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/pages/titlepage.scss */
+.highlights-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+  margin-top: 4px;
+}
+
+@media screen and (max-width: 1023px) {
+  /* line 11, /Users/eugenio/Desktop/globalmedia/app/assets/stylesheets/pages/titlepage.scss */
+  .highlights-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
