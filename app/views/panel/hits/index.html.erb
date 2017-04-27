@@ -8,6 +8,7 @@
 		<p class="table__cell f-1">Vistas a Página:</p>
 		<p class="table__cell f-3">Hora inicial:</p>
 		<p class="table__cell f-3">Hora final:</p>
+		<p class="table__cell f-3">Totales del Mes:</p>
 	</div>
 <% @hits.each do |hit| %>
 	<div class="table__row">
@@ -16,7 +17,14 @@
 		<p class="table__cell f-1"><%= hit.number %></p>
 		<p class="table__cell f-3"><%= hit.created_at.strftime("%l:%M %p, %b %e, %Y") %></p>
 		<p class="table__cell f-3"><%= (hit.created_at + 1.hours).strftime("%l:%M %p, %b %e, %Y") %></p>
+		<p class="table__cell f-1"><%= hit.article.total_hits_in_current_month %></p>
+
 	</div>
 
 <% end %>
+
+
+
+
+
 </div>

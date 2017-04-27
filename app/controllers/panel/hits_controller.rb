@@ -3,5 +3,6 @@ class Panel::HitsController < ApplicationController
 	load_and_authorize_resource
 	def index
 		@hits = Hit.all
+		
 	end
 end

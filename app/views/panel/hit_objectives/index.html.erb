@@ -1,0 +1,24 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Objetivos de Vistas por página</span> <small></small></h2>
+	<div class="panel__actions">
+
+		<% if @hit_objectives.count > 0 %>	
+			<%= link_to "Editar objetivos",  panel_edit_multiple_hit_objectives_path, class: "button" %>
+		<% end %>
+		<% if Time.now.strftime("%B") != @hit_objectives.last.created_at.strftime("%B") %>
+			<%= link_to "Nuevos Objetivos", new_panel_hit_objective_path, class: "button" %>	
+		<% end %>
+	</div>
+</div>
+<div class="card">
+	<div class="table__row">
+		<p class="table__cell">Objetivos de <%= Time.now.strftime("%B") %>:</p>
+	</div>
+	<% @hit_objectives.last(Section.all.count).each do |objective| %>
+			<div class="table__row">
+				
+				<p class="table__cell"><%= objective.section.name %></p>
+				<p class="table__cell"><%= objective.objective %></p>
+			</div>
+	<% end %>
+</div>

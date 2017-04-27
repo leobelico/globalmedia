@@ -43,6 +43,11 @@ Rails.application.routes.draw do
     patch "update_multiple_keywords", to: "keywords#update_multiple"
     post "update_multiple_keywords", to: "keywords#update_multiple"
 
+    get "edit_multiple_hit_objectives", to: "hit_objectives#edit_multiple"
+    #post "edit_multiple_hit_objectives", to: "hit_objectives#edit_multiple"
+    get "update_multiple_hit_objectives", to: "hit_objectives#update_multiple"
+    patch "update_multiple_hit_objectives", to: "hit_objectives#update_multiple"
+    post "update_multiple_hit_objectives", to: "hit_objectives#update_multiple"
     resources :highlights, param: :slug
 
     resources :articles, param: :slug do 
@@ -59,7 +64,9 @@ Rails.application.routes.draw do
     resources :hits
     resources :banners
     resources :relationships, param: :slug 
+    resources :hit_objectives
     resources :controls
+
 
     get "new_collaborator", to: "relationships#new_collaborator"
     get "collaborators", to: "relationships#collaborators"

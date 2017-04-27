@@ -10,13 +10,14 @@
 		<p class="table__cell">Título:</p>
 		<p class="table__cell">Vistas Totales:</p>
 	</div>
+	<%= @section.total_hits_in_current_month %>
 	Destacado: <% if @highlight_article %><%= @highlight_article.name %><% end %>
 	<% @section.articles.each do |article| %>
 		<div class="table__row">
 			<%= link_to article.name, article, class: "table__cell" %>
 			<p class="table__cell">
 				<% if article.hits.last %>
-					<%= article.hits.last.number %>
+					<%= article.total_hits_in_current_month %>
 				<% else %>
 					0
 				<% end %>
