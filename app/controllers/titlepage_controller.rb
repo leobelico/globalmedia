@@ -1,4 +1,6 @@
 class TitlepageController < ApplicationController
+	def about_us 
+	end
 	def index
 		@highlights = Highlight.all.order(order: "ASC")
 		search = Hashtag.find_by_name("#ESNOTICIA")

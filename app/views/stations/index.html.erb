@@ -1,0 +1,14 @@
+<div class="interface--row">
+	<div class="main-content">
+		<h4 class="section__title">Radio y TV</h4>
+		<div class="section-articles-container">
+			<% @stations.each do |station| %>
+				<%= link_to station, class: "station-preview" do %>
+					<%= image_tag station.image, class: "station-preview__image" %>
+					<h4 class="station-preview__name"><%= station.name %></h4>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	<%= render "components/stations-sidebar" %>
+</div>

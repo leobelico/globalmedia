@@ -3,7 +3,9 @@ class RelationshipsController < ApplicationController
 
 	def show 
 	end
-
+	def collaborators
+		@collaborators = Relationship.where(relationship_type: "Collaborator").order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
+	end
 	private 
 		def set_relationship 
 			@relationship = Relationship.find_by(slug: params[:id])

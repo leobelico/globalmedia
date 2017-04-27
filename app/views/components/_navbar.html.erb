@@ -2,7 +2,7 @@
 	<%= link_to root_path, class: "navbar__link" do %>
 		<%= image_tag "home.svg" %>		
 	<% end %>
-	<%= link_to "Radio y TV", root_path, class: "navbar__link" %>
+	<%= link_to "Radio y TV", stations_path, class: "navbar__link" %>
 	<% if Section.find_by(name: "San Luis") %>
 		<%= link_to "San Luis", section_path(Section.find_by(name: "San Luis")), class: "navbar__link" %>
 	<% end %>
@@ -18,6 +18,6 @@
 	<% if Section.find_by(name: "Táctica") %>
 		<%= link_to "Táctica", section_path(Section.find_by(name: "Táctica")), class: "navbar__link" %>
 	<% end %>
-	<%= link_to "Colaboradores", root_path, class: "navbar__link" %>
-	<%= link_to "Acerca de", root_path, class: "navbar__link" %>
+	<%= link_to "Colaboradores", collaborators_path, class: "navbar__link" %>
+	<%= link_to "Acerca de", about_us_path, class: "navbar__link" %>
 </div>

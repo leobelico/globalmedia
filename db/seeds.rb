@@ -286,11 +286,33 @@ collaborator_articles = ArticleRelationship.create([
 		relationship_id: collaborators[1].id
 	}
 ]) 
+stations_image = "https://cdn.dribbble.com/users/482851/screenshots/2717061/radio.gif"
+stations_image_2 = "https://cdn.dribbble.com/users/229993/screenshots/2924148/spaceradio4dr.jpg"
+stations_name = "Estación "
+stream_url = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1xtra_mf_p"
+for i in 0..5
+	stations = Station.create([
+		{
+			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			image: stations_image,
+			stream_url: stream_url
+		}
+	])
+end
+for i in 0..5
+	stations = Station.create([
+		{
+			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			image: stations_image_2,
+			stream_url: stream_url
+		}
+	])
+end
 
 
-
-
-
+User.all.each do |user|
+	user.update_attributes(banners_permission: true, create_articles_permission: true, video_complaints_permission: true, hits_permission: true, destroy_articles_permission: true, radio_stations_permission: true, remote_controls_permission: true, user_permission: true)
+end
 
 
 

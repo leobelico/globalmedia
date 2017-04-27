@@ -20,7 +20,7 @@ class Ability
         elsif user.destroy_articles_permission?
             can [:show, :destroy], Article
         elsif user.radio_stations_permission?
-            can [:manage], Station, Timetable
+            can [:manage], [Station, Timetable]
         elsif user.remote_controls_permission?
             can [:manage], Control
         else
