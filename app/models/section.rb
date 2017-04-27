@@ -3,10 +3,15 @@ class Section < ApplicationRecord
   	before_create :to_slug
   	has_many :section_highlights, dependent: :delete_all
   	has_many :section_banners, as: :seleccionable
+  	has_many :hits_objectives, dependent: :delete_all
 	
 
 	def to_param
     	slug
+  	end
+
+  	def total_hits_in_current_month
+    	Hit.joins("INNER JOIN articles ON articles.id = hits.article_id WHERE articles.articable_id = #{self.id}").sum(:number)
   	end
 
   	private

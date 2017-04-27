@@ -1,0 +1,23 @@
+<div class="panel__header">
+  <h2 class="title panel__title"><span>#EsNoticia / </span><span class="current">Nuevas palabras clave</span></h2>
+  <div class="panel__actions">
+    <button class="button">Guardar palabras clave</button>
+  </div>
+</div>
+<%= form_tag panel_hit_objectives_path, class: "card admin-form" do %>
+  <% @hit_objectives.each_with_index do |objective, index| %>
+    <%= fields_for 'hit_objectives[]', objective do |f| %>
+
+      <div class="field">
+        <label> <%= Section.find_by(id: index + 1).name %></label><br>
+        <%= f.hidden_field :section_id, value: index + 1 %><br>
+
+        Objetivo: <%= f.text_field :objective %><br>
+        
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+<script>
+  saveFormOnButtonClick($("button.button"), $(".card.admin-form"));
+</script>

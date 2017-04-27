@@ -18,6 +18,9 @@ class Article < ApplicationRecord
     slug
   end
 
+  def total_hits_in_current_month
+    self.hits.where(created_at: 1.months.ago..Time.now).sum(:number)
+  end
   def section 
     self.articable.name 
   end
