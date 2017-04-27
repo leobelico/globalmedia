@@ -8,22 +8,29 @@ class Ability
         user ||= User.new # guest user (not logged in)
         if user.banners_permission?
             can :manage, Banner
-        elsif user.create_articles_permission?
+        end
+        if user.create_articles_permission?
             can [:new, :create, :edit, :update, :show, :index], Article
             can [:manage], Relationship, relationship_type: 'Investigation'
             can [:manage], Relationship, relationship_type: 'Collaborator'
             can [:manage], [Keyword, Highlight, Section]
-        elsif user.video_complaints_permission?
+        end
+        if user.video_complaints_permission?
             can [:manage], Relationship, relationship_type: 'Complaint'
-        elsif user.hits_permission?
+        end
+        if user.hits_permission?
             can [:manage], Hit
-        elsif user.destroy_articles_permission?
+        end
+        if user.destroy_articles_permission?
             can [:show, :destroy], Article
-        elsif user.radio_stations_permission?
+        end
+        if user.radio_stations_permission?
             can [:manage], [Station, Timetable]
-        elsif user.remote_controls_permission?
+        end
+        if user.remote_controls_permission?
             can [:manage], Control
-        else
+        end
+        if User.new
            can :read, :all
         end
     #
