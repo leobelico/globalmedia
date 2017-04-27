@@ -1,13 +1,34 @@
 <div class="panel__header">
-	<h2 class="title panel__title"><span><%= @relationship.relationship_type %> </span></h2>
+	<h2 class="title panel__title"><span><%= "Colaborador" if @relationship.relationship_type == "Collaborator" %></span> / <span class="current"><%= @relationship.name%></span></h2>
 	<div class="panel__actions">	
 		<%= link_to "+ Artículo", panel_add_article_to_investigations_path(@relationship), class: "button" %>
 	</div>
 </div>
-<%= @relationship.name %><br/>
-<%= @relationship.description %><br/>
-<%= @relationship.image %><br/>
-
-<% @relationship.article_relationships.each do |relationship| %>
-	<%= relationship.article.name %><br/>
-<% end %>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__image">Imagen:</div>
+		<p class="table__cell">Nombre:</p>
+		<p class="table__cell">Descripción:</p>
+	</div>
+	<div class="table__row">
+		<img src="<%= @relationship.image %>" alt="" class="table__image">
+		<div class="table__cell"><%= @relationship.name %></div>
+		<div class="table__cell"><%= truncate(@relationship.description, length: 60) %></div>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__cell">Artículo:</div>
+		<div class="table__cell">Extracto:</div>
+		<div class="table__cell">Sección:</div>
+		<div class="table__cell">Fecha:</div>
+	</div>
+	<% @relationship.article_relationships.each do |relationship| %>
+		<div class="table__row">
+			<%= link_to truncate(relationship.article.name, length:  60), relationship.article, class: "table__cell" %>
+			<p class="table__cell"><%= truncate(relationship.article.short_description, length:  120) %></p>
+			<p class="table__cell"><%= relationship.article.section %></p>
+			<p class="table__cell"><%= relationship.article.created_at %></p>
+		</div>
+	<% end %>
+</div>

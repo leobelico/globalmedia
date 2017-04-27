@@ -309,6 +309,26 @@ for i in 0..5
 	])
 end
 
+timetable_image = "http://www.sothebys.com/content/dam/sothebys-pages/blogs/ModernImpressions/2017/2/klimt-bauerngarten_banner.jpg.webrend.1920.350.jpeg"
+for i in 0..10
+	Timetable.create(
+		name: "Programa Eterno",
+		image: timetable_image,
+		streaming_hour: Time.now.beginning_of_day,
+		end_streaming_hour: Time.now.end_of_day,
+		monday: true, 
+		tuesday: true, 
+		wednesday: true, 
+		thursday: true, 
+		friday: true, 
+		saturday: true, 
+		sunday: true, 
+		broadcasters: "Lalalala",
+		broadcaster_image: timetable_image,
+		station_id: Station.first.id
+	)
+end
+
 
 User.all.each do |user|
 	user.update_attributes(banners_permission: true, create_articles_permission: true, video_complaints_permission: true, hits_permission: true, destroy_articles_permission: true, radio_stations_permission: true, remote_controls_permission: true, user_permission: true)

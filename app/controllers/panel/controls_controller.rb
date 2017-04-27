@@ -1,6 +1,6 @@
 class Panel::ControlsController < ApplicationController
 	before_action :authenticate_user!
-	load_and_authorize_resource
+	# load_and_authorize_resource
 	
 	before_action :set_control, only: [:show, :edit, :update, :destroy]
 	def index

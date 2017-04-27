@@ -17,12 +17,45 @@ class ApplicationController < ActionController::Base
   helper_method :get_banner
   helper_method :latest_news
   helper_method :most_visited
+  helper_method :get_current_programs
 
   def get_articles_per_section(id, last_number)
     section = Section.find(id)
     @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false").last(last_number)
   end
 
+  def get_current_programs
+    time = Time.now
+    if time.sunday? 
+      @timetables = Timetable.where("sunday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+    end
+   
+    if time.monday? 
+      @timetables = Timetable.where("monday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+    end
+   
+    if time.tuesday? 
+      @timetables = Timetable.where("tuesday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+    end
+   
+    if time.wednesday? 
+      @timetables = Timetable.where("wednesday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+    end
+   
+    if time.thursday? 
+      @timetables = Timetable.where("thursday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+    end
+   
+    if time.friday? 
+      @timetables = Timetable.where("friday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+    end
+   
+    if time.saturday? 
+      @timetables = Timetable.where("saturday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+    end
+   
+    p @timetables
+  end
 
   def al_momento(not_repeat_highlight, not_repeat_recommendation, not_repeat_outstading, last_number)
   	if not_repeat_highlight

@@ -1,7 +1,8 @@
 class Panel::StationsController < ApplicationController
 	before_action :authenticate_user!
-	load_and_authorize_resource
+	# load_and_authorize_resource
 	before_action :set_station, only: [:show, :edit, :update, :destroy]
+	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
 
 	def index
 		@stations = Station.all.order(name: "ASC")
@@ -44,7 +45,7 @@ class Panel::StationsController < ApplicationController
 
 	private
 		def station_params
-			params.require(:station).permit(:name, :stream_url, :image, timetables_attributes: [:id, :streaming_hour, :name, :broadcasters, :end_streaming_hour,  :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :_destroy])
+			params.require(:station).permit(:name, :stream_url, :image, timetables_attributes: [:id, :streaming_hour, :image, :broadcaster_image, :name, :broadcasters, :end_streaming_hour,  :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :_destroy])
 		end
 
 		def set_station
@@ -54,4 +55,7 @@ class Panel::StationsController < ApplicationController
 				redirect_to root_ur
 
 		end
+		def set_s3_direct_post
+    		@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+  		end
 end

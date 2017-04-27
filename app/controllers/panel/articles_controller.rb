@@ -1,6 +1,6 @@
 class Panel::ArticlesController < ApplicationController
 	before_action :authenticate_user!
-	load_and_authorize_resource
+	# load_and_authorize_resource
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
 	autocomplete :article, :name, full: true
 	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]

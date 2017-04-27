@@ -6,23 +6,20 @@
 </div>
 
 
-<%= form_for [:panel, @highlight], html: { class: "card admin-form" } do |f| %>
-	<% if @highlight.errors.any? %>	
-		<h5><%= pluralize(@highlight.errors.count, "error") %></h5>
+<%= form_for [:panel, @section], html: { class: "card admin-form" } do |f| %>
+	<% if @section.errors.any? %>	
+		<h5><%= pluralize(@section.errors.count, "error") %></h5>
 			<ul>
-				<% @highlight.errors.full_messages.each do |msg| %>
+				<% @section.errors.full_messages.each do |msg| %>
 						<li><%= msg %></li>
 				<% end %>
 			</ul>
 	<% end %>
-<!-- 	<label>Highlights ya establecidos:</label>
-	<% @highlights.each do |highlight| %>
-		Posición: <%= highlight.order %> Artículo: <%= link_to highlight.article.name, highlight.article %>
-	<% end %> -->
+
 
 	<div class="field">	
 		<label>Posición del Highlight:</label>
-		<%= f.select :order, options_for_select((1..6).step(1), @highlight.order)%>
+		<%= f.select :order, options_for_select((1..6).step(1), @seection.highlight.order)%>
 	</div>
 	<div class="field">
 		

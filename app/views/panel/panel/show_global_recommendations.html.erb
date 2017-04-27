@@ -24,14 +24,21 @@
 
 	</div>
 <% end %>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Recomendaciones actuales:</p>
+		<p class="table__cell">Extracto:</p>
+		<p class="table__cell">Sección:</p>
+	</div>
+	<% get_global_recommendations.each do |article| %>
+		<div class="table__row">
+			<%= link_to truncate(article.name, length:  40), article, class: "table__cell" %>
+			<p class="table__cell"><%= truncate(article.short_description, length:  60) %></p>
+			<p class="table__cell"><%= article.section %></p>
+		</div>
+	<% end %>
+</div>
 <script>
 	saveFormOnButtonClick($("button.button"), $("form"));
 </script>
-<!-- 
-<% Article.all.order(updated_at: "DESC").each do |article| %>
-	<%= article.name %>
-	<%= article.global_recommendation %>
-	Fecha: <%= article.updated_at %>
-<% end %>
- -->
 

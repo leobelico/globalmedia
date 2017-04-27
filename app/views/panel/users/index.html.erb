@@ -6,31 +6,47 @@
 </div>
 <div class="table card">
 	<div class="table__row">
-		<p class="table__cell">Nombre:</p>
-		<p class="table__cell">Email:</p>
-		<p class="table__cell">Crear Notas:</p>
-		<p class="table__cell">Eliminar Notas:</p>
-		<p class="table__cell">Banners:</p>
-		<p class="table__cell">Hits:</p>
-		<p class="table__cell">Denuncia Global:</p>
-		<p class="table__cell">Estaciones de Radio:</p>
-		<p class="table__cell">Controles Remotos:</p>
-		<p class="table__cell">Usuarios:</p>
+		<p class="table__cell f-2">Nombre:</p>
+		<p class="table__cell f-3">Email:</p>
+		<p class="table__cell super-small">Crear Notas:</p>
+		<p class="table__cell super-small">Eliminar Notas:</p>
+		<p class="table__cell super-small">Banners:</p>
+		<p class="table__cell super-small">Hits:</p>
+		<p class="table__cell super-small">Denuncia Global:</p>
+		<p class="table__cell super-small">Estaciones:</p>
+		<p class="table__cell super-small">Controles Remotos:</p>
+		<p class="table__cell super-small">Usuarios:</p>
 
 	</div>
 	<% @users.each do |user| %>
 		<div class="table__row">
-			<%= link_to user.full_name, panel_user_path(user), class: "table__cell" %>
-			<p class="table__cell"><%= user.email %></p>	
+			<%= link_to user.full_name, panel_user_path(user), class: "table__cell f-2" %>
+			<p class="table__cell f-3"><%= user.email %></p>	
 			
-			<p class="table__cell"><%= user.create_articles_permission%></p>	
-			<p class="table__cell"><%= user.destroy_articles_permission%></p>
-			<p class="table__cell"><%= user.create_articles_permission%></p>
-			<p class="table__cell"><%= user.create_articles_permission%></p>
-			<p class="table__cell"><%= user.create_articles_permission%></p>
-			<p class="table__cell"><%= user.create_articles_permission%></p>
-			<p class="table__cell"><%= user.create_articles_permission%></p>
-			<p class="table__cell"><%= user.create_articles_permission%></p>
+			<p class="table__cell boolean">
+				<img src="/assets/<%= user.create_articles_permission%>.svg">
+			</p>	
+			<p class="table__cell boolean">
+				<img src="/assets/<%= user.destroy_articles_permission%>.svg">
+			</p>
+			<p class="table__cell boolean">
+				<img src="/assets/<%= user.create_articles_permission%>.svg">
+			</p>
+			<p class="table__cell boolean">
+				<img src="/assets/<%= user.create_articles_permission%>.svg">
+			</p>
+			<p class="table__cell boolean">
+				<img src="/assets/<%= user.create_articles_permission%>.svg">
+			</p>
+			<p class="table__cell boolean">
+				<img src="/assets/<%= user.create_articles_permission%>.svg">
+			</p>
+			<p class="table__cell boolean">
+				<img src="/assets/<%= user.create_articles_permission%>.svg">
+			</p>
+			<p class="table__cell boolean">
+				<img src="/assets/<%= user.create_articles_permission%>.svg">
+			</p>
 			
 		</div>
 	<% end %>

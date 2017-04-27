@@ -1,6 +1,6 @@
 class Panel::HighlightsController < ApplicationController
 	before_action :set_highlight, only: [:edit, :update, :destroy]
-	load_and_authorize_resource
+	# load_and_authorize_resource
 	autocomplete :article, :name, full: true
 	before_action :get_all_highlights, only: [:new, :create, :edit, :update]
 	def index

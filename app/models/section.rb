@@ -4,7 +4,7 @@ class Section < ApplicationRecord
   	has_many :section_highlights, dependent: :delete_all
   	has_many :section_banners, as: :seleccionable
   	has_many :hits_objectives, dependent: :delete_all
-	
+	validates :name, presence: true
 
 	def to_param
     	slug

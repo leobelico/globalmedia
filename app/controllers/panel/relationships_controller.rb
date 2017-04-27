@@ -1,6 +1,6 @@
 class Panel::RelationshipsController < ApplicationController
 	before_action :authenticate_user!
-	load_and_authorize_resource
+	# load_and_authorize_resource
 	before_action :set_relationship, only: [:show, :edit, :update, :destroy]
 	before_action :set_new, only: [:new, :new_collaborator, :new_complaint]
 	before_action :set_s3_direct_post, only: [:new_complaint, :new_collaborator, :new, :create, :edit, :update]

@@ -61,8 +61,12 @@
 			
 		</div>
 		<div class="field">
-			<label>Imagen:</label>
-			<%= f.text_field :image %>
+			<label>Imagen para banner programático:</label>
+			<%= f.file_field :image %>
+		</div>
+		<div class="field">
+			<label>Imagen de locutor:</label>
+			<%= f.file_field :broadcaster_image %>
 		</div>
 		<%= f.hidden_field :_destroy %>
 		<%= link_to_remove_fields 'Eliminar programa', f, "delete fields__remove" %>

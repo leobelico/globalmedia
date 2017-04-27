@@ -14,6 +14,8 @@
 
 
 
+
+
 <div class="special-articles-container">
 	<% if @investigation_articles %>
 		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_articles[0].article_relationships[0].relationship.name, articles: @investigation_articles %>
@@ -49,8 +51,6 @@
 	<% end %>
 <% end %> 
 
-
-<%= render "/layouts/recommendations", articles: get_global_recommendations %>
 
 <h1>Banners</h1>
 

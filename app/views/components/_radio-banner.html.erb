@@ -1,0 +1,7 @@
+<div class="radio-banner">
+	<% get_current_programs.each do |program| %>
+		<%= link_to program.station, class: "radio-program" do %>
+			<%= image_tag program.image %>
+		<% end %>
+	<% end %>
+</div>

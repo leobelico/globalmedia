@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :sections, only: [:show], param: :slug 
   resources :relationships
   resources :stations
+  
   get "collaborators", to: "relationships#collaborators"
   get "about_us", to: "titlepage#about_us"
 
@@ -54,7 +55,9 @@ Rails.application.routes.draw do
       get :autocomplete_article_name, on: :collection
     
     end
-    resources :stations, param: :slug
+    resources :stations, param: :slug do 
+      resources :timetables 
+    end
     resources :timetables, only: [:show, :destroy] 
     resources :sections, param: :slug do 
       get :select_highlights

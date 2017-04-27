@@ -1,7 +1,8 @@
 class Panel::BannersController < ApplicationController
 	before_action :authenticate_user!
-	load_and_authorize_resource
+	# load_and_authorize_resource
 	before_action :set_banner, only: [:show, :edit, :update, :destroy]
+	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
 	def index
 		@banners = Banner.all
 	end
@@ -59,5 +60,7 @@ class Panel::BannersController < ApplicationController
 		def set_banner
 			@banner = Banner.find(params[:id])
 		end
-
+		def set_s3_direct_post
+    		@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+  		end
 end

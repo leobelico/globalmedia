@@ -1,4 +1,9 @@
-<%= form_for [:panel, @station], html: { class: ""} do |f| %>
+<form id="fields-for-s3">
+	<% @s3_direct_post.fields.map do |name, value| %>
+	    <input type="hidden" name="<%= name %>" value="<%= value %>" />
+	<% end %>
+</form>
+<%= form_for [:panel, @station], multipart: true, html: { class: "station-form directUpload", data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }} do |f| %>
 	<% if @station.errors.any? %>	
 		<div class="card">
 			
@@ -22,8 +27,8 @@
 			<%= f.text_field :stream_url %>
 		</div>
 		<div class="field">	
-			<label>Imagen: </label>
-			<%= f.text_field :image %>
+			<label>Imagen (logo): </label>
+			<%= f.file_field :image %>
 		</div>
 	</div>
 	
@@ -102,8 +107,12 @@
 					
 				</div>
 				<div class="field">
-					<label>Imagen:</label>
-					<%= builder.text_field :image %>
+					<label>Imagen para banner programático:</label>
+					<%= builder.file_field :image %>
+				</div>
+				<div class="field">
+					<label>Imagen del locutor:</label>
+					<%= builder.file_field :broadcaster_image %>
 				</div>
 				
 				<%= builder.hidden_field :_destroy %>
@@ -118,3 +127,5 @@
 	
 	<% f.submit "Guardar" %>
 <% end %>
+
+<%= render "components/s3_form_js" %>
