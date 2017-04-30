@@ -72,8 +72,8 @@ class Panel::RelationshipsController < ApplicationController
 		investigation = Relationship.find(params[:panel][:investigation_id])
 		
 		first_article = Article.find_by_name(params[:panel][:first_article_id])
-		ArticleRelationship.create(article: first_article, relationship: investigation)
-
+		r = ArticleRelationship.create(article: first_article, articable_id: investigation.id, articable_type: "Relationship" )
+		
 		#Article.all.each do |article|
 		#		article.update_attributes(global_recommendation: false)
 		#	end
