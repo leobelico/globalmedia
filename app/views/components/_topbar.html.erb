@@ -1,10 +1,10 @@
 <div class="topbar">
 	<%= link_to "global media", root_path, class: "topbar__link" %>
 	<% if Relationship.find_by(relationship_type: "Investigation") %>
-		<%= link_to "investigación especial", relationship_path(Relationship.find_by(relationship_type: "Investigation").slug), class: "topbar__link" %>
+		<%= link_to "investigación especial", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "topbar__link" %>
 	<% end %>
 	<% if Relationship.find_by(relationship_type: "Complaint") %>
-		<%= link_to "denuncia global", relationship_path(Relationship.find_by(relationship_type: "Complaint").slug), class: "topbar__link" %>
+		<%= link_to "denuncia global", relationship_path(Relationship.where(relationship_type: "Complaint").last), class: "topbar__link" %>
 	<% end %>
 	<%= link_to "tráfico san luis", root_path, class: "topbar__link" %>
 

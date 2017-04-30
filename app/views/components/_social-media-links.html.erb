@@ -1,13 +1,17 @@
 <% article ||=  "nuva.rocks" %>
 
 <div class="social-media" data-article="<%= article_url(article) %>">
-	<%= link_to ("whatsapp://send?text=" + article_url(article)), class: "social-media__link", target: "_blank" do %>
+	<%= link_to ("whatsapp://send?text=" + article_url(article)), class: "social-media__link whatsapp", target: "_blank" do %>
 		<%= image_tag "whatsapp.svg" %>
 	<% end %>
-	<a class="social-media__link" target="_blank" onclick="shareToFacebook(event);">
+	<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
 		<%= image_tag "facebook.svg" %>				
 	</a>	
-	<a target="_blank" href="https://twitter.com/home?status=<%= truncate(article.name, length: 80) %>%20%2D%20<%= url_encode(article_url(article)) %>">
+	<a target="_blank" href="https://twitter.com/home?status=<%= truncate(article.name, length: 80) %>%20%2D%20<%= url_encode(article_url(article)) %>" class="social-media__link twitter">
 		<%= image_tag "twitter.svg" %>
+	</a>
+	<a class="social-media__link copy" target="_self">	
+		<input class="hidden" value="<%= article_url(article) %>">
+		<%= image_tag "copy.svg" %>
 	</a>
 </div>

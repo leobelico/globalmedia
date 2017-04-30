@@ -59,7 +59,7 @@ class Panel::RelationshipsController < ApplicationController
 
 	def destroy
 		@relationship.destroy
-		redirect_to panel_investigations_path
+		redirect_to panel_path
 	end
 
 	

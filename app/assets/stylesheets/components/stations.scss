@@ -36,7 +36,7 @@
 	margin-bottom:  36px; 
 }
 .station__name {
-	font-size:  36px; 
+	font-size:  24px; 
 	font-weight:  900; 
 	color:  $amber; 
 	span {
@@ -66,4 +66,24 @@
 			object-position:  center center; 
 		}
 	}
+}
+.station__programs {
+	display:  flex; 
+	flex-direction:  column; 
+	align-items:  flex-start; 
+	justify-content:  flex-start; 
+	margin-left:  12px;  
+	.program {
+		display:  flex; 
+		flex-direction:  row;
+		margin-bottom:  12px; 
+		padding-top:  12px;
+
+	}
+	.program__hour {
+		font-size:  18px; 
+		font-weight:  900;
+		margin-right:  12px;
+	}
+
 }

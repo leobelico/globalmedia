@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   helper_method :al_momento
   helper_method :get_section_highlight
   helper_method :get_recommendations_per_section
+  helper_method :get_latest_articles_per_section
   helper_method :get_global_recommendations
   helper_method :get_todays_keywords
   helper_method :get_banner
@@ -23,35 +24,38 @@ class ApplicationController < ActionController::Base
     section = Section.find(id)
     @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false").last(last_number)
   end
-
+  def get_latest_articles_per_section(id, quantity)
+    section = Section.find(id)
+    @articles = section.articles.last(quantity)
+  end
   def get_current_programs
     time = Time.now
     if time.sunday? 
-      @timetables = Timetable.where("sunday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+      @timetables = Timetable.where("sunday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
     end
    
     if time.monday? 
-      @timetables = Timetable.where("monday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+      @timetables = Timetable.where("monday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
     end
    
     if time.tuesday? 
-      @timetables = Timetable.where("tuesday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+      @timetables = Timetable.where("tuesday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
     end
    
     if time.wednesday? 
-      @timetables = Timetable.where("wednesday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+      @timetables = Timetable.where("wednesday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
     end
    
     if time.thursday? 
-      @timetables = Timetable.where("thursday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+      @timetables = Timetable.where("thursday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
     end
    
     if time.friday? 
-      @timetables = Timetable.where("friday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+      @timetables = Timetable.where("friday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
     end
    
     if time.saturday? 
-      @timetables = Timetable.where("saturday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(5)
+      @timetables = Timetable.where("saturday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
     end
    
     p @timetables

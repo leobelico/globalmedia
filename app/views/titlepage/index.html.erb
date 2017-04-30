@@ -17,7 +17,7 @@
 
 
 <div class="special-articles-container">
-	<% if @investigation_articles %>
+	<% if @investigation_articles[0] %>
 		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_articles[0].article_relationships[0].relationship.name, articles: @investigation_articles %>
 	<% end %>
 	<% if @complaints[0] %>
