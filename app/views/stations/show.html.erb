@@ -3,22 +3,23 @@
 		<div class="station__header">
 			<%= image_tag @station.image, class: "station__image" %>
 			<h4 class="station__name"><%= @station.name %><br><span>Radio</span></h4>
-			<div class="station__programs">
-				<% @timetables.each_with_index do |timetable, index| %>
-					<% if index == 0 %>
-						<p class="program__current-indicator">Suena Ahora:</p>
-					<% end %>				
-					<div class="program">
-						
-						<p class="program__hour"><%= timetable.streaming_hour.strftime('%H:%M') %></p>	 
-						<p class="program__name"><%= timetable.name %></p>		 
-					</div>
-				<% end %>		
-			</div>
 		</div>
 		<audio controls autoplay>
 			<source src="<%= @station.stream_url %>" type="audio/mpeg">	
 		</audio>
+		<div class="station__programs">
+			<% @timetables.each_with_index do |timetable, index| %>
+				<% if index == 0 %>
+					<p class="program__current-indicator">Suena Ahora:</p>
+				<% end %>				
+				<div class="program">
+					
+					<p class="program__hour"><%= timetable.streaming_hour.strftime('%H:%M') %></p>	 
+					<p class="program__name"><%= timetable.name %></p>		 
+				</div>
+			<% end %>		
+		</div>
+
 		<div class="station__recommendations">
 			<% @recommendations.each do |recommendation| %>
 				<%= link_to recommendation, class: "recommendation__image" do %>
