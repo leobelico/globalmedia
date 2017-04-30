@@ -83,6 +83,12 @@ Rails.application.routes.draw do
     post "set_investigation_articles", to: "relationships#set_investigation_articles"
 
 
+    get "add_article_to_stations", to: "stations#add_article_to_stations"
+
+     get "set_station_articles", to: "stations#set_station_articles"
+    post "set_station_articles", to: "stations#set_station_articles"
+
+
     get "set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
     post "set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
 

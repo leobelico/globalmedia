@@ -15,6 +15,13 @@
 				<% end %>
 			<% end %>
 		</div>
+
+		<% @station.article_relationships.each do |relationship| %>
+			<%= render "components/horizontal-note", article: relationship.article %>
+		<% end %>
+
 	</div>
+
+	
 	<%= render "components/stations-sidebar" %>
 </div>
