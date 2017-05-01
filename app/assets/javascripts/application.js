@@ -20,6 +20,8 @@
 //= require libraries/money
 //= require libraries/quill/quill.min 
 //= require libraries/clipboard.js/clipboard.min 
+//= require libraries/MediaElementJS/hls
+//= require libraries/MediaElementJS/media-element
 // 
 // 
 // QUILL BLOTS

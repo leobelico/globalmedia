@@ -1,7 +1,8 @@
 class StationsController < ApplicationController
 	before_action :set_station, only: [:show]
 	def index 
-		@stations = Station.all
+		@radio_programs = Station.where(video: false)
+		@video_programs = Station.where(video: true)
 	end
 	def show
 		@recommendations = Station.last(5)

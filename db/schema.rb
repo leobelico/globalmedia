@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427152621) do
+ActiveRecord::Schema.define(version: 20170430204014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,16 @@ ActiveRecord::Schema.define(version: 20170427152621) do
     t.boolean  "titlepage",   default: false
     t.string   "client"
     t.string   "url"
+  end
+
+  create_table "cameras", force: :cascade do |t|
+    t.string   "name"
+    t.string   "location"
+    t.string   "lat"
+    t.string   "lng"
+    t.string   "stream"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "controls", force: :cascade do |t|
@@ -161,9 +171,12 @@ ActiveRecord::Schema.define(version: 20170427152621) do
     t.string   "name",       default: ""
     t.string   "stream_url", default: ""
     t.string   "image",      default: ""
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "slug",       default: ""
+    t.string   "twitter"
+    t.string   "facebook"
+    t.boolean  "video",      default: false
   end
 
   create_table "timetables", force: :cascade do |t|
