@@ -43,6 +43,20 @@ class Panel::StationsController < ApplicationController
 		redirect_to panel_stations_path
 	end
 
+	def add_article_to_stations
+		@station = Station.find_by_slug(params[:format])
+
+	end
+
+	def set_station_articles
+		station = Station.find(params[:panel][:station_id])
+		
+		first_article = Article.find_by_name(params[:panel][:first_article_id])
+		r = ArticleRelationship.create(article: first_article, articable_id: station.id, articable_type: "Station" )
+		
+		redirect_to panel_station_path(station)
+	end
+
 	private
 		def station_params
 			params.require(:station).permit(:name, :stream_url, :image, timetables_attributes: [:id, :streaming_hour, :image, :broadcaster_image, :name, :broadcasters, :end_streaming_hour,  :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :_destroy])

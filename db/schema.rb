@@ -10,18 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427152621) do
+ActiveRecord::Schema.define(version: 20170430215114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "article_relationships", force: :cascade do |t|
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "article_id"
-    t.integer  "relationship_id"
+    t.string   "articable_type"
+    t.integer  "articable_id"
+    t.index ["articable_type", "articable_id"], name: "index_article_relationships_on_articable_type_and_articable_id", using: :btree
     t.index ["article_id"], name: "index_article_relationships_on_article_id", using: :btree
-    t.index ["relationship_id"], name: "index_article_relationships_on_relationship_id", using: :btree
   end
 
   create_table "articles", force: :cascade do |t|
@@ -216,7 +217,6 @@ ActiveRecord::Schema.define(version: 20170427152621) do
   end
 
   add_foreign_key "article_relationships", "articles"
-  add_foreign_key "article_relationships", "relationships"
   add_foreign_key "articles", "keywords"
   add_foreign_key "articles", "users"
   add_foreign_key "highlights", "articles"

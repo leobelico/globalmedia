@@ -18,10 +18,10 @@
 
 <div class="special-articles-container">
 	<% if @investigation_articles %>
-		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_articles[0].article_relationships[0].relationship.name, articles: @investigation_articles %>
+		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_articles[0].article_relationships[0].articable.name, articles: @investigation_articles %>
 	<% end %>
 	<% if @complaints[0] %>
-		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: @complaints[0].article_relationships[0].relationship.name, articles: @complaints %>
+		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: @complaints[0].article_relationships[0].articable.name, articles: @complaints %>
 	<% end %>
 </div>
 <div class="special-articles-container">
