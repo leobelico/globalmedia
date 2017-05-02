@@ -13,7 +13,13 @@ class Panel::ArticlesController < ApplicationController
 		redirect_to panel_articles_path
 	end
 	def index
-		@articles = Article.all.order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
+		if params[:name]
+			@articles = Article.where('lower(name) LIKE ?', "%#{params[:name]}%").paginate(page: params[:page], per_page: 20)
+			p(params[:name])
+		else 
+			@articles = Article.all.order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
+			
+		end
 	end
 
 	def new

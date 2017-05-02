@@ -6,6 +6,11 @@
 		</div>
 	<% end %>
 </div>
+<%= form_tag(panel_articles_path, method: :get, class: "search__box") do %>
+	<%= text_field_tag :name, "", placeholder: "Búsqueda" %>
+	<%= submit_tag 'Search', name: nil %>
+<% end %>
+
 <div class="table card">
 	<div class="table__row">
 		<p class="table__cell name">Título:</p>
