@@ -42,6 +42,12 @@
 				<% end %>
 			<% end %>
 		</div>
+
+		<% @station.article_relationships.each do |relationship| %>
+			<%= render "components/horizontal-note", article: relationship.article %>
+		<% end %>
+
 	</div>
 	<%= render "components/stations-sidebar", facebook: @station.facebook, twitter: @station.twitter %>
+
 </div>

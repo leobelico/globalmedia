@@ -159,31 +159,38 @@ investigation = Relationship.create({
 investigation_articles = ArticleRelationship.create([
 	{
 		article_id: articles[0].id,
-		relationship_id: investigation.id
+		articable_id: investigation.id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[1].id,
-		relationship_id: investigation.id
+		articable_id: investigation.id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[2].id,
-		relationship_id: investigation.id
+		articable_id: investigation.id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[3].id,
-		relationship_id: investigation.id
+		articable_id: investigation.id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[4].id,
-		relationship_id: investigation.id
+		articable_id: investigation.id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[5].id,
-		relationship_id: investigation.id
+		articable_id: investigation.id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[6].id,
-		relationship_id: investigation.id
+		articable_id: investigation.id,
+		articable_type: "Relationship"
 	}
 ]) 
 
@@ -196,31 +203,38 @@ globalcomplaint = Relationship.create({
 globalcomplaint_articles = ArticleRelationship.create([
 	{
 		article_id: articles[10].id,
-		relationship_id: globalcomplaint.id
+		articable_id: globalcomplaint.id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[11].id,
-		relationship_id: globalcomplaint.id
+		articable_id: globalcomplaint.id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[12].id,
-		relationship_id: globalcomplaint.id
+		articable_id: globalcomplaint.id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[13].id,
-		relationship_id: globalcomplaint.id
+		articable_id: globalcomplaint.id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[14].id,
-		relationship_id: globalcomplaint.id
+		articable_id: globalcomplaint.id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[15].id,
-		relationship_id: globalcomplaint.id
+		articable_id: globalcomplaint.id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[16].id,
-		relationship_id: globalcomplaint.id
+		articable_id: globalcomplaint.id,
+		articable_type: "Relationship"
 	}
 ]) 
 
@@ -260,31 +274,38 @@ collaborators = Relationship.create([
 collaborator_articles = ArticleRelationship.create([
 	{
 		article_id: articles[20].id,
-		relationship_id: collaborators[0].id
+		articable_id: collaborators[0].id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[21].id,
-		relationship_id: collaborators[0].id
+		articable_id: collaborators[0].id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[22].id,
-		relationship_id: collaborators[1].id
+		articable_id: collaborators[1].id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[23].id,
-		relationship_id: collaborators[2].id
+		articable_id: collaborators[2].id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[24].id,
-		relationship_id: collaborators[3].id
+		articable_id: collaborators[3].id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[25].id,
-		relationship_id: collaborators[4].id
+		articable_id: collaborators[4].id,
+		articable_type: "Relationship"
 	},
 	{
 		article_id: articles[26].id,
-		relationship_id: collaborators[1].id
+		articable_id: collaborators[1].id,
+		articable_type: "Relationship"
 	}
 ]) 
 stations_image = "https://cdn.dribbble.com/users/482851/screenshots/2717061/radio.gif"

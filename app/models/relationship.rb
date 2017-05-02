@@ -1,6 +1,6 @@
 class Relationship < ApplicationRecord
 	validates :name, :image, presence: true
-	has_many :article_relationships, dependent: :delete_all
+	has_many :article_relationships, dependent: :nullify, as: :articable
   before_save :to_slug
 	
 	def to_param

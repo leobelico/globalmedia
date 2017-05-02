@@ -38,6 +38,9 @@ class StationsController < ApplicationController
 	    p @timetables
 
 	end
+
+	
+
 	private 
 		def set_station
 			@station = Station.find_by(slug: params[:id])
