@@ -7,6 +7,7 @@
 <div class="table card">
 	<div class="table__row">
 		<p class="table__cell name">Título:</p>
+		<p class="table__cell name">Status:</p>
 		<p class="table__cell f-3">Extracto:</p>
 		<p class="table__cell">Sección:</p>
 		<p class="table__cell user-name">Escritor:</p>
@@ -20,6 +21,12 @@
 	<% @articles.each do |article| %>
 		<div class="table__row">
 			<%= link_to article.name, article, class: "table__cell name" %>
+			<% if article.draft? %>
+				<p class="table__cell f-3">Borrador</p>	
+			<% else %>
+				<p class="table__cell f-3">Aprobado</p>	
+
+			<% end %>
 			<p class="table__cell f-3"><%= truncate(article.short_description, length: 40) %></p>	
 			<%= link_to article.section, panel_section_path(article.section), class: "table__cell" %>
 			<p class="table__cell user-name"><%= article.user.full_name %></p>	

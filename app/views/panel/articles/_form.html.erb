@@ -21,6 +21,15 @@
 		<label>Título de la Nota</label>
 		<%= f.text_field :name, required: true %>
 	</div>
+	<div class="field field--checkbox">
+		
+		
+		<%= f.select :draft, options_for_select([['Borrador', true], ['Aprobado', false]]) %>
+	</div>
+	<div class="field ">
+		<label>Programar publicación</label>
+		<%= f.datetime_select :scheduled_time %>
+	</div>
 	<div class="field">
 		<label>Extracto</label>
 		<%= f.text_area :short_description, required: true, data: { max_chars: 120 } %>
@@ -38,12 +47,7 @@
 	<div id="note-editor">
 		
 	</div>
-	<% if get_todays_keywords.count > 1 %>
-		<div class="field field--string">
-			<label>Palabra Clave</label>
-			<%= f.select :keyword_id, options_for_select( get_todays_keywords.collect{ |u| [u.keyword, u.id] }, @article.keyword_id), include_blank: 'Ninguno' %>
-		</div>
-	<% end %>
+	
 	<div class="field">
 		<label>Hashtags: </label>
 		<%= f.text_field :hashtags_names, placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", id: "hashtags", value: @hashtags %>

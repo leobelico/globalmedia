@@ -1,6 +1,6 @@
 <%= form_for :panel, url: {controller: "panel/sections", action: 'set_highlight'}  do |f|%>
 	<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
-
+	<%= hidden_field_tag :article_id, :id => "article_id", class:"search-results", style:"background-color:#fff;" %> 
 	<%= f.submit "Enviar" %>
 <% end %>
 

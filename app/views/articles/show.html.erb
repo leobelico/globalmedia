@@ -23,6 +23,7 @@
 		<% if @article.image %>
 			<%= image_tag @article.image, class: "main-image" %>
 		<% end %>
+			Tiempo: <%= @article.scheduled_time %>
 
 		<div id="quill-container" class="quill--article">	
 		</div>

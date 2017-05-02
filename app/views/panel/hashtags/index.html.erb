@@ -1,0 +1,23 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">#ESNOTICIA</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Escoger hashtags", panel_selecting_hashtags_path, class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__cell">Nombre:</div>
+		<div class="table__cell">Activo:</div>
+		<div class="table__cell">Activado el:</div>
+	</div>
+	<% @hashtags.each do |hashtag| %>
+	<div class="table__row">
+		<p class="table__cell"><%= hashtag.name %></p>
+		<p class="table__cell boolean">
+			<img src="/assets/<%= hashtag.selected%>.svg">
+		</p>
+		<p class="table__cell"><%= hashtag.selected_on %></p>
+	</div>
+	<% end %>
+</div>
+	

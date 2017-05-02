@@ -16,6 +16,12 @@ class Panel::ArticlesController < ApplicationController
 	def create
 		@article = Article.new(article_params)
 		@article.user = current_user
+		@article.scheduled_time = somedate
+		somedate = Time.zone.local(params[:scheduled_time_1i].to_i, 
+                        params[:scheduled_time_2i].to_i,
+                        params[:scheduled_time_3i].to_i,
+                        params[:scheduled_time_4i].to_i,
+                        params[:scheduled_time_5i].to_i, 0)
 
 		if @article.save
 			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s) 
@@ -42,7 +48,15 @@ class Panel::ArticlesController < ApplicationController
 
 	def update
 		@article.note = params[:article][:note]
+		somedate = Time.zone.local(params[:scheduled_time_1i].to_i, 
+                        params[:scheduled_time_2i].to_i,
+                        params[:scheduled_time_3i].to_i,
+                        params[:scheduled_time_4i].to_i,
+                        params[:scheduled_time_5i].to_i, 0)
+
+
 		if @article.update(article_params)
+			@article.update_attributes(scheduled_time: somedate)
 			redirect_to @article
 		else
 			render action: "edit"
@@ -63,7 +77,7 @@ class Panel::ArticlesController < ApplicationController
 
 	private
 		def article_params
-			params.require(:article).permit(:name, :note, :plain_text, :image, :image_thumbnail, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id, :the_note, the_note: [:quill])
+			params.require(:article).permit(:name, :note, :plain_text, :image, :image_thumbnail, :short_description, :hashtags_names, :articable_id, :articable_type, :draft, :keyword_id, :the_note, the_note: [:quill])
 
 			# all_options = params.require(:article).fetch(:note, nil).try(:permit!)
    			# params.require(:article).permit(:name, :plain_text, :image, :image_thumbnail, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id).merge(:note => all_options)

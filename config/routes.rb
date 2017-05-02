@@ -69,6 +69,10 @@ Rails.application.routes.draw do
     resources :relationships, param: :slug 
     resources :hit_objectives
     resources :controls
+    resources :hashtags, only: :index do
+      get :autocomplete_hashtag_name, on: :collection
+
+    end
 
 
     get "new_collaborator", to: "relationships#new_collaborator"
@@ -85,7 +89,7 @@ Rails.application.routes.draw do
 
     get "add_article_to_stations", to: "stations#add_article_to_stations"
 
-     get "set_station_articles", to: "stations#set_station_articles"
+    get "set_station_articles", to: "stations#set_station_articles"
     post "set_station_articles", to: "stations#set_station_articles"
 
 
@@ -95,6 +99,13 @@ Rails.application.routes.draw do
     get "show_global_recommendations", to: "panel#show_global_recommendations"
     get "set_global_recommendations", to: "panel#set_global_recommendations"
     post "set_global_recommendations", to: "panel#set_global_recommendations"
+
+
+    get "selecting_hashtags", to: "hashtags#selecting_hashtags"
+
+    get "set_selected", to: "hashtags#set_selected"
+    post "set_selected", to: "hashtags#set_selected"
+
     resources :users
     
   end

@@ -1,0 +1,58 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Hashtags</span></h2>
+	<div class="panel__actions">
+		<button class="button">Guardar Artículo</button>
+	</div>
+</div>
+<%= form_for :panel, html: { class: "admin-form card" }, url: {controller: "panel/hashtags", action: 'set_selected'} do |f| %>
+	<div class="field">
+		<% if @hashtags.count > 0 %>
+			<div class="field">
+			<%= f.autocomplete_field(:h_1, autocomplete_hashtag_name_panel_hashtags_path, :id_element => '#h_1', class: "search-bar", placeholder: "Buscar Hashtag", type: "search", value: @hashtags.first.name ) %>
+		
+			</div>
+
+			<div class="field">
+			
+				<%= f.autocomplete_field(:h_2, autocomplete_hashtag_name_panel_hashtags_path, :id_element => '#h_2', class: "search-bar", placeholder: "Buscar Hashtag", type: "search", value: @hashtags.second.name ) %>
+			</div>
+
+			<div class="field">
+			
+				<%= f.autocomplete_field(:h_3, autocomplete_hashtag_name_panel_hashtags_path, :id_element => '#h_3', class: "search-bar", placeholder: "Buscar Hashtag", type: "search", value: @hashtags.third.name ) %>
+			</div>
+
+			<div class="field">
+			
+				<%= f.autocomplete_field(:h_4, autocomplete_hashtag_name_panel_hashtags_path, :id_element => '#h_4', class: "search-bar", placeholder: "Buscar Hashtag", type: "search", value: @hashtags.fourth.name ) %>
+			</div>
+		<% else %>
+			<div class="field">
+			
+				<%= f.autocomplete_field(:h_1, autocomplete_hashtag_name_panel_hashtags_path, :id_element => '#h_1', class: "search-bar", placeholder: "Buscar Hashtag", type: "search") %>
+			</div>
+
+			<div class="field">
+			
+				<%= f.autocomplete_field(:h_2, autocomplete_hashtag_name_panel_hashtags_path, :id_element => '#h_2', class: "search-bar", placeholder: "Buscar Hashtag", type: "search") %>
+			</div>
+
+			<div class="field">
+			
+				<%= f.autocomplete_field(:h_3, autocomplete_hashtag_name_panel_hashtags_path, :id_element => '#h_3', class: "search-bar", placeholder: "Buscar Hashtag", type: "search" ) %>
+			</div>
+
+			<div class="field">
+			
+				<%= f.autocomplete_field(:h_4, autocomplete_hashtag_name_panel_hashtags_path, :id_element => '#h_4', class: "search-bar", placeholder: "Buscar Hashtag", type: "search" ) %>
+			</div>
+		<% end %>
+		
+
+	</div>
+	<%= f.submit %>
+<% end %>
+<script>
+	saveFormOnButtonClick($("form"), $("button.button"));
+</script>
+<!-- 
