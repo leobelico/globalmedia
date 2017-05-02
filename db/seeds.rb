@@ -99,6 +99,114 @@ sections.each do |section|
 	end
 end
 
+articles_new = Article.create([
+			{		
+				name: "Ilse",
+				note: placeholder_note,
+				short_description: short_lorem,
+				plain_text: plain_text,
+				hashtags_names: hashtags, 
+				global_recommendation:  false, 
+				highlight:  false, 
+				articable_type:  "Section", 
+				articable_id: Section.first.id, 
+				image: images[1], 
+				image_thumbnail: images[1],
+				draft: false,
+				published: true
+			},
+			{		
+				name: "Pablo",
+				note: placeholder_note,
+				short_description: short_lorem,
+				plain_text: plain_text,
+				hashtags_names: hashtags, 
+				global_recommendation:  false, 
+				highlight:  false, 
+				articable_type:  "Section", 
+				articable_id: Section.first.id, 
+				image: images[1], 
+				image_thumbnail: images[1],
+				draft: false,
+				published: true
+			},
+			{		
+				name: "Osmar",
+				note: placeholder_note,
+				short_description: short_lorem,
+				plain_text: plain_text,
+				hashtags_names: hashtags, 
+				global_recommendation:  false, 
+				highlight:  false, 
+				articable_type:  "Section", 
+				articable_id: Section.first.id, 
+				image: images[1], 
+				image_thumbnail: images[1],
+				draft: false,
+				published: true
+			},
+			{		
+				name: "Nuva",
+				note: placeholder_note,
+				short_description: short_lorem,
+				plain_text: plain_text,
+				hashtags_names: hashtags, 
+				global_recommendation:  false, 
+				highlight:  false, 
+				articable_type:  "Section", 
+				articable_id: Section.first.id, 
+				image: images[1], 
+				image_thumbnail: images[1],
+				draft: false,
+				published: true
+			},
+			{		
+				name: "Rocks",
+				note: placeholder_note,
+				short_description: short_lorem,
+				plain_text: plain_text,
+				hashtags_names: hashtags, 
+				global_recommendation:  false, 
+				highlight:  false, 
+				articable_type:  "Section", 
+				articable_id: Section.first.id, 
+				image: images[1], 
+				image_thumbnail: images[1],
+				draft: false,
+				published: true
+			},
+			{		
+				name: "Lalala",
+				note: placeholder_note,
+				short_description: short_lorem,
+				plain_text: plain_text,
+				hashtags_names: hashtags, 
+				global_recommendation:  false, 
+				highlight:  false, 
+				articable_type:  "Section", 
+				articable_id: Section.first.id, 
+				image: images[1], 
+				image_thumbnail: images[1],
+				draft: false,
+				published: true
+			},
+			{		
+				name: "Lol",
+				note: placeholder_note,
+				short_description: short_lorem,
+				plain_text: plain_text,
+				hashtags_names: hashtags, 
+				global_recommendation:  false, 
+				highlight:  false, 
+				articable_type:  "Section", 
+				articable_id: Section.first.id, 
+				image: images[1], 
+				image_thumbnail: images[1],
+				draft: false,
+				published: true
+			}
+
+		])
 
 articles = Article.all
 
@@ -121,27 +229,27 @@ p "----------------------"
 highlights = Highlight.create([
 	{
 		order: 1,
-		article: articles[1]
+		article: articles_new[1]
 	},
 	{
 		order: 2,
-		article: articles[2]
+		article: articles_new[2]
 	},
 	{
 		order: 3,
-		article: articles[3]
+		article: articles_new[3]
 	},
 	{
 		order: 4,
-		article: articles[4]
+		article: articles_new[4]
 	},
 	{
 		order: 5,
-		article: articles[5]
+		article: articles_new[5]
 	},
 	{
 		order: 6,
-		article: articles[6]
+		article: articles_new[6]
 	}
 ])
 
