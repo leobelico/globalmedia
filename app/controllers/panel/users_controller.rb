@@ -62,6 +62,6 @@ class Panel::UsersController < ApplicationController
 				redirect_to root_url
 		end
 		def user_params
-			params.require(:user).permit(:first_name, :last_name, :email, :role, :create_articles_permission, :destroy_articles_permission, :video_complaints_permission, :radio_stations_permission, :remote_controls_permission, :banners_permission, :hits_permission, :user_permission   )
+			params.require(:user).permit(:first_name, :last_name, :email, :role, :create_articles_permission, :destroy_articles_permission, :video_complaints_permission, :radio_stations_permission, :remote_controls_permission, :banners_permission, :hits_permission, :user_permission, :is_news_chief   )
 		end
 end

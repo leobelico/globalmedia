@@ -1,6 +1,8 @@
 class Panel::HighlightsController < ApplicationController
 	before_action :set_highlight, only: [:edit, :update, :destroy]
 	# load_and_authorize_resource
+	before_action :check_news_chief
+	
 	autocomplete :article, :name, full: true
 	before_action :get_all_highlights, only: [:new, :create, :edit, :update]
 	def index
@@ -31,7 +33,8 @@ class Panel::HighlightsController < ApplicationController
 	def update
 
 		
-		article = Article.find_by_name(params[:highlight][:article_id])
+		#article = Articles.find_by_name(params[:highlight][:article_id])
+		article = Article.find(params[:highlight][:article_id])
 		# p "---------------------"
 		# p article.id
 		# p "---------------------"
