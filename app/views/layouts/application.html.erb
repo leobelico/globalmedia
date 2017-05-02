@@ -39,11 +39,32 @@
 	</script>
 
   	<% panel_url = request.url.include? (request.base_url + "/panel")%>
+	<% if !panel_url %>
+		<div class="top-padder"></div>
+	<% end %>
+	<div class="navigation">
+		
+		<%= render "components/topbar" if !panel_url %>	
+		<%= render "components/header" if !user_signed_in? || !panel_url %>
+		<%= render "components/navbar" if !panel_url %>
+	</div>
+	<% if !panel_url %>
+		<script>
+			var navflag = false; 
+			$(window).scroll(function() {
+				if ($(window).scrollTop() > 144 && navflag == false) {
+					TweenMax.to(".header--wrapper", .3, { maxHeight: 0 })
+					navflag = true;
+				}
+				if ($(window).scrollTop() < 144 && navflag == true) {
+					TweenMax.to(".header--wrapper", .3, { maxHeight: 72 })
+					navflag = false;
+				}
+		     	console.log($(window).scrollTop()); 
+			});
 
-	<%= render "components/topbar" if !panel_url %>	
-	<%= render "components/header" if !user_signed_in? || !panel_url %>
-	<%= render "components/navbar" if !panel_url %>
-
+		</script>
+	<% end %>
 	<%= render "components/admin/admin-sidebar" if panel_url && user_signed_in? %>
 
 	<% if user_signed_in? && panel_url %>
