@@ -1,7 +1,12 @@
 <div class="special-articles">
 	<div class="special-articles__type">
 		<p class="type"><%= type %></p>
-		<p class="link">Ir a sección</p>
+		<% if articles[0].article_relationships[0].relationship.relationship_type == "Investigation" %>
+			<%= link_to "Ver investigación", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "link" %>
+		<% end %>
+		<% if articles[0].article_relationships[0].relationship.relationship_type == "Complaint" %>
+			<%= link_to "Ver denuncia", relationship_path(Relationship.where(relationship_type: "Complaint").last), class: "link" %>
+		<% end %>
 	</div>
 	<h4 class="special-articles__title"><%= title %></h4>
 	<%= image_tag articles.first.image, class: "special-articles__image" %>

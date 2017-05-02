@@ -1,0 +1,19 @@
+.char-counter {
+	position:  absolute; 
+	right: 0; 
+	top:  0; 
+	font-size:  14px; 
+	transition:  all .3s ease; 
+}
+[max-chars] {
+	transition:  all .3s ease; 
+}
+textarea.cc-warn, 
+input.cc-warn,
+textarea.cc-warn:focus, 
+input.cc-warn:focus {
+	border-color: #F44336; 
+}
+label.cc-warn {
+	color: #F44336;
+}

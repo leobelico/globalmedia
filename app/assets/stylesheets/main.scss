@@ -31,6 +31,9 @@ body {
 	width:  100%; 
 	font-family: "Open Sans", sans-serif; 
 }
+.hidden {
+	display:  none;
+}
 .interface {
 	width:  100%; 
 	max-width:  $interface-width; 
@@ -163,6 +166,7 @@ body {
 @import "components/about-us"; 
 @import "components/radio-banner"; 
 @import "components/footer"; 
+@import "components/char-count"; 
 
 @import "components/admin/admin-sidebar"; 
 @import "components/admin/admin-pagination"; 
