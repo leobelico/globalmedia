@@ -18,12 +18,12 @@ class Panel::ArticlesController < ApplicationController
 	def create
 		@article = Article.new(article_params)
 		@article.user = current_user
-		@article.scheduled_time = somedate
 		somedate = Time.zone.local(params[:scheduled_time_1i].to_i, 
                         params[:scheduled_time_2i].to_i,
                         params[:scheduled_time_3i].to_i,
                         params[:scheduled_time_4i].to_i,
                         params[:scheduled_time_5i].to_i, 0)
+		@article.scheduled_time = somedate
 
 		if @article.save
 			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s) 

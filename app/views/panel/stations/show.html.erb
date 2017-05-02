@@ -3,7 +3,7 @@
 	<div class="panel__actions">
 		<%= link_to "Eliminar estación", panel_station_path(@station), method: :delete, data: {confirm: "¿Seguro? Esta acción no se puede deshacer"}, class: "delete" %>
 		<%= link_to "Editar estación", edit_panel_station_path(@station), class: "button" %>
-		<%= link_to "+ Artículo", panel_add_article_to_stations_path(@station), class: "button" %>
+		<%= link_to "Añadir entrada", panel_add_article_to_stations_path(@station), class: "button" %>
 	</div>
 </div>
 <div class="table card">

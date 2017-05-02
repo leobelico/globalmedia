@@ -46,7 +46,7 @@ function submit_form(action, slug){
         
        
       },
-      scheduled_time_3i: $("#article_scheduled_time_3i").val(),
+        scheduled_time_3i: $("#article_scheduled_time_3i").val(),
         scheduled_time_2i: $("#article_scheduled_time_2i").val(),
         scheduled_time_1i: $("#article_scheduled_time_1i").val(),
         scheduled_time_4i: $("#article_scheduled_time_4i").val(),

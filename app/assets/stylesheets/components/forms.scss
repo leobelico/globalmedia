@@ -64,6 +64,20 @@
 		}
 	}
 }
+.field--datetime {
+	display:   flex; 
+	flex-direction:  column; 
+	.field {
+		display:  flex; 
+		flex-direction:  row; 
+		align-items:  center; 
+		justify-content:  center; 
+		span, 
+		select {
+			margin-right: 8px; 
+		}
+	}
+}
 .field--string {
 	position:  relative; 
 	input {
