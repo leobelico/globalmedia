@@ -15,9 +15,7 @@
 			<%= link_to "Colaboradores", panel_collaborators_path, class: "admin-sidebar__link" %>
 			<%= link_to "Secciones", panel_sections_path, class: "admin-sidebar__link" %>
 		<% end %>
-	<% if current_user.video_complaints_permission? %>
-		<%= link_to "Denuncia Global", panel_complaints_path, class: "admin-sidebar__link" %>
-	<% end %>
+
 	<% if current_user.radio_stations_permission? %>
 		<%= link_to "Radio y T.V.", panel_stations_path, class: "admin-sidebar__link" %>
 	<% end %>

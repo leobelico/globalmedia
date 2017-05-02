@@ -41,16 +41,8 @@ class TitlepageController < ApplicationController
 		end
 		p "INVESTIGATION ARTICLES"
 		p @investigation_articles
- 		
-		@complaints = []
-
-		complaint_relationships = Relationship.where(relationship_type: "Complaint")
-
-		complaint_relationships.last(1).each do |relationship|
-			relationship.article_relationships.last(6).each do |r|
-				@complaints << r.article
-			end
-		end
+ 		section = Section.find_by_name("Denuncia Global")
+		@complaints = Article.where(articable_id: section.id, published: true).order(created_at: "DESC").last(6)
 
 		@collaborator_articles = []
 

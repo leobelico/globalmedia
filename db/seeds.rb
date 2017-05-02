@@ -17,7 +17,8 @@ sections = Section.first_or_create([
 	{name: "Negocios"},
 	{name: "Estados"},
 	{name: "Actualidad"},
-	{name: "Último Momento"}
+	{name: "Último Momento"},
+	{name: "Denuncia Global"}
 ])	
 
 article_content = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in qusae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? "
@@ -101,7 +102,7 @@ end
 
 articles_new = Article.create([
 			{		
-				name: "Ilse",
+				name: "Corea del Norte lanza misil",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
@@ -116,7 +117,7 @@ articles_new = Article.create([
 				published: true
 			},
 			{		
-				name: "Pablo",
+				name: "Trump le dice no al muro",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
@@ -131,7 +132,7 @@ articles_new = Article.create([
 				published: true
 			},
 			{		
-				name: "Osmar",
+				name: "Muere David Bowie",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
@@ -146,7 +147,7 @@ articles_new = Article.create([
 				published: true
 			},
 			{		
-				name: "Nuva",
+				name: "Conflicto en medio oriente",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
@@ -161,7 +162,7 @@ articles_new = Article.create([
 				published: true
 			},
 			{		
-				name: "Rocks",
+				name: "Cierran 254 empresas Pyme en SLP",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
@@ -176,7 +177,7 @@ articles_new = Article.create([
 				published: true
 			},
 			{		
-				name: "Lalala",
+				name: "Encuentran eslabón en la cadena evolutiva",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
@@ -191,7 +192,7 @@ articles_new = Article.create([
 				published: true
 			},
 			{		
-				name: "Lol",
+				name: "Dan a conocer nuevos impuestos",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,

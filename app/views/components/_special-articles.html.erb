@@ -1,11 +1,14 @@
 <div class="special-articles">
 	<div class="special-articles__type">
 		<p class="type"><%= type %></p>
-		<% if articles[0].article_relationships[0].articable.relationship_type == "Investigation" %>
-			<%= link_to "Ver investigación", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "link" %>
-		<% end %>
-		<% if articles[0].article_relationships[0].articable.relationship_type == "Complaint" %>
-			<%= link_to "Ver denuncia", relationship_path(Relationship.where(relationship_type: "Complaint").last), class: "link" %>
+
+		
+		<% if type == "#DENUNCIAGLOBAL" %>
+			<%= link_to "Ver denuncia", section_path(Section.find_by(name: "Denuncia Global")), class: "link" %>
+		<% else %>
+			
+				<%= link_to "Ver investigación", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "link" %>
+			
 		<% end %>
 	</div>
 	<h4 class="special-articles__title"><%= title %></h4>
