@@ -14,7 +14,10 @@
 	display:  flex; 
 	flex-direction:  row; 
 	align-items:  center; 
-	justify-content:  space-around; 
+	justify-content:  space-around;  
+	a {
+		color:  #ffffff; 
+	}
 }
 .its-news__hashtag {
 	color:  $secondary; 

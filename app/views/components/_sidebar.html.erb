@@ -5,5 +5,9 @@
 	<% else %>
 		<%= render "components/recommendations", articles: get_global_recommendations %>
 	<% end %>
+	<%= render "components/most-visited", hits: most_visited %>
+	<% if banner and banner != "" and banner != nil %>
+		<%= render "components/medium-banner", banner: banner %>
+	<% end %>
 </div>
 	

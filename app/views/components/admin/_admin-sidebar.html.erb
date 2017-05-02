@@ -7,12 +7,12 @@
 		<% if current_user.is_news_chief? %>
 			<%= link_to "Notas destacadas", panel_highlights_path, class: "admin-sidebar__link" %>
 			<%= link_to "Palabras clave", panel_hashtags_path, class: "admin-sidebar__link" %>
-
 			<%= link_to "Global Recomienda", panel_show_global_recommendations_path, class: "admin-sidebar__link" %>
 			<%= link_to "Investigación Especial", panel_relationships_path, class: "admin-sidebar__link" %>
 			<%= link_to "Colaboradores", panel_collaborators_path, class: "admin-sidebar__link" %>
 			<%= link_to "Secciones", panel_sections_path, class: "admin-sidebar__link" %>
 		<% end %>
+
 	<% end %>
 	<% if current_user.video_complaints_permission? %>
 		<%= link_to "Denuncia Global", panel_complaints_path, class: "admin-sidebar__link" %>

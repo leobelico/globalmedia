@@ -12,7 +12,9 @@
 		<p class="table__cell">Editar:</p>
 	</div>
 	<%= @section.total_hits_in_current_month %>
-	Destacado: <% if @highlight_article %><%= @highlight_article.name %><% end %>
+		<% if @highlight_article %>
+			<%= @highlight_article.name %>
+		<% end %>
 	<% @section.articles.each do |article| %>
 		<div class="table__row">
 			<%= link_to article.name, article, class: "table__cell f-3" %>
