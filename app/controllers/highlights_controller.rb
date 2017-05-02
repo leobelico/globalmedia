@@ -29,7 +29,7 @@ class HighlightsController < ApplicationController
 
 		
 		article = Article.find_by_name(params[:highlight][:article_id])
-
+		
 		@highlight.article = article
 		if @highlight.update(highlight_params)
 			redirect_to panel_highlights_path

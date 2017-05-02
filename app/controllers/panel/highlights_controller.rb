@@ -1,4 +1,5 @@
 class Panel::HighlightsController < ApplicationController
+	before_action :authenticate_user!
 	before_action :set_highlight, only: [:edit, :update, :destroy]
 	# load_and_authorize_resource
 	before_action :check_news_chief
@@ -38,11 +39,49 @@ class Panel::HighlightsController < ApplicationController
 		# p "---------------------"
 		# p article.id
 		# p "---------------------"
-		@highlight.article_id = article.id
-		if @highlight.update_attributes(article: article, order: params[:highlight][:order])
-			redirect_to panel_highlights_path
+		already_h = Highlight.where(article: article)
+		if already_h.count == 0
+			highlights = Highlight.last(6)
+			counter = @highlight.order
+			p "HIGHLIGHTSSS"
+			p highlights
+
+			p "counter"
+			p counter
+			highlights.each do |h|
+				p "ciclo"
+				p h.order
+				if h.order == counter and counter < 6
+					p "Entrando en el if"
+					h_to_mod = Highlight.where(order: counter + 1).first
+					p h_to_mod
+					p h_to_mod.article.name
+					h_to_mod.update_attributes(article_id: h.article.id)
+					p "MODIFICADO"
+					p h_to_mod
+					p h_to_mod.article.name
+					
+				end
+				counter = counter + 1
+
+				
+			end
+
+
+			@highlight.article_id = article.id
+			if @highlight.update_attributes(article: article, order: params[:highlight][:order])
+				
+
+			
+
+				redirect_to panel_highlights_path
+			else
+				render action: "edit"
+			end
 		else
-			render action: "edit"
+			flash[:notice] = "Esa noticia ya esta en highlights" 
+				render action: "edit"
+
 		end
 	end
 
