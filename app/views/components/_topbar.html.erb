@@ -18,7 +18,12 @@
 		<% end %>
 	</div>
 	<div class="search">
-		<input type="text" class="search__box" placeholder="Búsqueda">
-		<%= image_tag "search.svg", class: "search__image" %>
+		<%= form_for :article, url: {controller: "titlepage", action: 'search_article'}  do |f|%>
+          <%= f.autocomplete_field(:articable_id, autocomplete_article_name_path, :id_element => '#article_id', class: "search__box", placeholder: "Búsqueda", type: "search", value: "" ) %>
+          <%= hidden_field_tag :article_id, :id => "article_id" %>
+       		<%= image_tag "search.svg", class: "search__image" %>
+        <% end %>
+		
+		
 	</div>
 </div>

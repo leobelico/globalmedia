@@ -6,6 +6,12 @@ class ApplicationController < ActionController::Base
   end
 
   
+   autocomplete :article, :name, full: true
+
+  def get_autocomplete_items(parameters)
+      items = active_record_get_autocomplete_items(parameters)
+      items = items.where(published: true)
+  end
 
   helper_method :get_articles_per_section
   

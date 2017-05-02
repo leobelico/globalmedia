@@ -73,7 +73,7 @@ class Panel::RelationshipsController < ApplicationController
 	def set_investigation_articles
 		investigation = Relationship.find(params[:panel][:investigation_id])
 		
-		first_article = Article.find_by_name(params[:panel][:first_article_id])
+		first_article = Article.find(params[:panel][:first_article_id])
 		r = ArticleRelationship.create(article: first_article, articable_id: investigation.id, articable_type: "Relationship" )
 		
 		#Article.all.each do |article|

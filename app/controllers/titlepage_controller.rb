@@ -1,4 +1,18 @@
 class TitlepageController < ApplicationController
+	def search_article
+		if params[:article_id].include? "article_id"
+       
+        	redirect_to search_results_path(params[:article][:articable_id])
+    	else
+	  		@article = Article.find(params[:article_id])
+			redirect_to @article
+      	end	
+	end
+	
+	def search_results
+		@articles = Article.where('lower(name) LIKE ? AND published = ? ', "%#{params[:format]}%", true).paginate(page: params[:page], per_page: 20)
+	end
+
 	def about_us 
 	end
 	def index

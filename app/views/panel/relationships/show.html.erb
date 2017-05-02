@@ -22,13 +22,17 @@
 		<div class="table__cell">Extracto:</div>
 		<div class="table__cell">Sección:</div>
 		<div class="table__cell">Fecha:</div>
+		<div class="table__cell delete">Eliminar:</div>
 	</div>
 	<% @relationship.article_relationships.each do |relationship| %>
-		<div class="table__row">
-			<%= link_to truncate(relationship.article.name, length:  60), relationship.article, class: "table__cell" %>
-			<p class="table__cell"><%= truncate(relationship.article.short_description, length:  120) %></p>
-			<p class="table__cell"><%= relationship.article.section %></p>
-			<p class="table__cell"><%= relationship.article.created_at %></p>
-		</div>
+		<% if relationship.article %>
+			<div class="table__row">
+				<%= link_to truncate(relationship.article.name, length:  60), relationship.article, class: "table__cell" %>
+				<p class="table__cell"><%= truncate(relationship.article.short_description, length:  120) %></p>
+				<p class="table__cell"><%= relationship.article.section %></p>
+				<p class="table__cell"><%= relationship.article.created_at %></p>
+				<%= link_to	"Eliminar", panel_article_relationship_path(relationship), class: "table__cell delete", method: :delete, data: { confirm: "¿Estás seguro de querer eliminar esta nota?" } %>
+			</div>
+		<% end %>
 	<% end %>
 </div>

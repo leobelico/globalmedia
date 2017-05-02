@@ -1,0 +1,8 @@
+<% @articles.each do |article| %>
+	<%= render "components/horizontal-note", article: article %>
+<% end %>
+<%= will_paginate @articles, class: "card admin-pagination" %>
+		
+<% if @articles.count == 0 %>
+	<p>Todavía no hay artículos con esta palabra clave.</p>
+<% end %>

@@ -9,7 +9,7 @@ class Panel::ArticlesController < ApplicationController
 	
 	def publish_now
 		@article = Article.find_by(slug: params[:article_slug])
-		@article.update_attributes(published: true)
+		@article.update_attributes(published: true, draft: false)
 		redirect_to panel_articles_path
 	end
 	def index
