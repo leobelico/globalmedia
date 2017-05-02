@@ -16,6 +16,7 @@
 		<p class="table__cell super-small">Estaciones:</p>
 		<p class="table__cell super-small">Controles Remotos:</p>
 		<p class="table__cell super-small">Usuarios:</p>
+		<p class="table__cell super-small">Jefe de Noticias:</p>
 
 	</div>
 	<% @users.each do |user| %>
@@ -46,6 +47,9 @@
 			</p>
 			<p class="table__cell boolean">
 				<img src="/assets/<%= user.user_permission%>.svg">
+			</p>
+			<p class="table__cell boolean">
+				<img src="/assets/<%= user.is_news_chief %>.svg">
 			</p>
 			
 		</div>

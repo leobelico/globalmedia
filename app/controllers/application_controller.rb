@@ -26,6 +26,7 @@ class ApplicationController < ActionController::Base
   helper_method :check_video_complaints_permission
   helper_method :check_radio_stations_permission
   helper_method :check_remote_controls_permission
+  helper_method :check_news_chief
 
   def check_hits_permission
     if !current_user.hits_permission?
@@ -69,6 +70,11 @@ class ApplicationController < ActionController::Base
       end
   end
 
+  def check_news_chief
+    if !current_user.is_news_chief?
+      redirect_to panel_path
+      end
+  end
 
   def get_articles_per_section(id, last_number)
     section = Section.find(id)

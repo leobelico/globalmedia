@@ -1,5 +1,7 @@
 class Panel::HashtagsController < ApplicationController
 	before_action :authenticate_user!
+	before_action :check_news_chief
+
 	autocomplete :hashtag, :name, full: true
 	
 	def index
