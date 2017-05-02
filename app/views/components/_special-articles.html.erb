@@ -1,10 +1,10 @@
 <div class="special-articles">
 	<div class="special-articles__type">
 		<p class="type"><%= type %></p>
-		<% if articles[0].article_relationships[0].relationship.relationship_type == "Investigation" %>
+		<% if articles[0].article_relationships[0].articable.relationship_type == "Investigation" %>
 			<%= link_to "Ver investigación", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "link" %>
 		<% end %>
-		<% if articles[0].article_relationships[0].relationship.relationship_type == "Complaint" %>
+		<% if articles[0].article_relationships[0].articable.relationship_type == "Complaint" %>
 			<%= link_to "Ver denuncia", relationship_path(Relationship.where(relationship_type: "Complaint").last), class: "link" %>
 		<% end %>
 	</div>

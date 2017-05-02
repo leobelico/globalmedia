@@ -1,6 +1,8 @@
 class Panel::ArticlesController < ApplicationController
 	before_action :authenticate_user!
 	# load_and_authorize_resource
+	before_action :check_create_permission, only: [:new, :create, :edit, :update]
+	before_action :check_delete_permission, only: [:destroy]
 	before_action :set_article, only: [:show, :edit, :update, :destroy]
 	autocomplete :article, :name, full: true
 	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
@@ -92,4 +94,6 @@ class Panel::ArticlesController < ApplicationController
 		def set_s3_direct_post
     		@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
   		end
+
+  		
 end

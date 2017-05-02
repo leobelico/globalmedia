@@ -19,6 +19,56 @@ class ApplicationController < ActionController::Base
   helper_method :latest_news
   helper_method :most_visited
   helper_method :get_current_programs
+  helper_method :check_hits_permission
+  helper_method :check_create_permission
+  helper_method :check_delete_permission
+  helper_method :check_banners_permission
+  helper_method :check_video_complaints_permission
+  helper_method :check_radio_stations_permission
+  helper_method :check_remote_controls_permission
+
+  def check_hits_permission
+    if !current_user.hits_permission?
+      redirect_to panel_path
+    end
+  end
+
+  def check_create_permission
+    if !current_user.create_articles_permission?
+      redirect_to panel_path
+    end
+  end
+
+  def check_delete_permission
+    if !current_user.destroy_articles_permission?
+      redirect_to panel_path
+      end
+  end
+
+  def check_banners_permission
+    if !current_user.banners_permission?
+      redirect_to panel_path
+      end
+  end
+
+  def check_remote_controls_permission
+    if !current_user.remote_controls_permission?
+      redirect_to panel_path
+      end
+  end
+
+  def check_radio_stations_permission
+    if !current_user.radio_stations_permission?
+      redirect_to panel_path
+      end
+  end
+
+  def check_video_complaints_permission
+    if !current_user.video_complaints_permission?
+      redirect_to panel_path
+      end
+  end
+
 
   def get_articles_per_section(id, last_number)
     section = Section.find(id)

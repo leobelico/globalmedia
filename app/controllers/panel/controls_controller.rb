@@ -1,7 +1,7 @@
 class Panel::ControlsController < ApplicationController
 	before_action :authenticate_user!
 	# load_and_authorize_resource
-	
+	before_action :check_remote_controls_permission
 	before_action :set_control, only: [:show, :edit, :update, :destroy]
 	def index
 		@controls = Control.all

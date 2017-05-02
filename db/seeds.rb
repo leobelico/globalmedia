@@ -92,7 +92,8 @@ sections.each do |section|
 				articable_id: section.id, 
 				image: images[i], 
 				image_thumbnail: images[i],
-				draft: false
+				draft: false,
+				published: true
 			}
 		])
 	end
