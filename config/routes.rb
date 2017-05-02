@@ -65,6 +65,8 @@ Rails.application.routes.draw do
       get :select_highlights
       post :select_highlights
       post :set_highlight
+      get :autocomplete_article_name, on: :collection
+      
     end
     resources :hits
     resources :banners

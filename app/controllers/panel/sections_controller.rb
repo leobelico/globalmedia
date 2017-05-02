@@ -3,6 +3,7 @@ class Panel::SectionsController < ApplicationController
 	# load_and_authorize_resource
 	before_action :check_news_chief
 	before_action :set_section, only: [:show, :edit, :update, :destroy]
+	autocomplete :article, :name, full: true
 	
 	def index
 		@sections = Section.all.order(name: "ASC")
@@ -78,14 +79,19 @@ class Panel::SectionsController < ApplicationController
 	end
 
 	def select_highlights
+
 		@section = Section.find_by_slug(params[:section_slug])
+		@highlight_article = Article.where(articable_id: @section.id, highlight: true).first
+
+		session[:section_id] = @section.id
+
 	end
 	def set_highlight
 		@section = Section.find_by_slug(params[:section_slug])
 		@section.articles.each do |article|
 			article.update_attributes(highlight: false)
 		end 
-		article = Article.find(params[:article_id])
+		article = Article.find(params[:panel][:article_id])
 		article.update_attributes(highlight: true)
 		redirect_to panel_section_path(@section)
 
@@ -115,4 +121,9 @@ class Panel::SectionsController < ApplicationController
 				flash[:alert] = "La página que estabas buscando no existe."
 				redirect_to root_url
 		end
+
+		def get_autocomplete_items(parameters)
+      		items = active_record_get_autocomplete_items(parameters)
+      		items = items.where(published: true, articable_id: session[:section_id])
+    	end
 end

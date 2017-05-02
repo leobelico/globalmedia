@@ -33,7 +33,8 @@ class Panel::HighlightsController < ApplicationController
 	def update
 
 		
-		article = Article.find_by_name(params[:highlight][:article_id])
+		#article = Articles.find_by_name(params[:highlight][:article_id])
+		article = Article.find(params[:highlight][:article_id])
 		# p "---------------------"
 		# p article.id
 		# p "---------------------"

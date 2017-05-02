@@ -7,22 +7,82 @@
 </div>
 
 <%= form_for :panel, html: { class: "admin-form card" }, url: {controller: "panel/panel", action: 'set_global_recommendations'} do |f| %>
-	<div class="field">
+	<% if get_global_recommendations.count > 0 %>
+		<% if get_global_recommendations.first %>
+			<div class="field">
+			
+			<label>Global Recomienda #1</label>
+				<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: get_global_recommendations.first.name )%>
+				<%= f.hidden_field :first_article_id, :id => "first_article_id", value: get_global_recommendations.first.id %>
+			</div>
+
+		<% else %>
+			<div class="field">
+		
+				<label>Global Recomienda #1</label>
+				<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+				<%= f.hidden_field :first_article_id, :id => "first_article_id" %>
+
+			</div>
+		<% end %>
+
+		<% if get_global_recommendations.second %>
+			<div class="field">
+				
+				<label>Global Recomienda #2</label>
+				<%= f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: get_global_recommendations.second.name ) %>
+				<%= f.hidden_field :second_article_id, :id => "second_article_id", value: get_global_recommendations.second.id %>
+			</div>
+
+		<% else %>
+			<div class="field">
+		
+				<label>Global Recomienda #2</label>
+				<%= f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+				<%= f.hidden_field :second_article_id, :id => "second_article_id" %>
+
+			</div>
+		<% end %>
+		<% if get_global_recommendations.third %>
+
+			<div class="field">
+				
+				<label>Global Recomienda #3</label>
+				<%= f.autocomplete_field(:third_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#third_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: get_global_recommendations.third.name  ) %>
+				<%= f.hidden_field :third_article_id, :id => "third_article_id", value: get_global_recommendations.third.id %> 
+
+			</div>
+		<% else %>
+			<div class="field">
+		
+				<label>Global Recomienda #3</label>
+				<%= f.autocomplete_field(:third_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#third_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+				<%= f.hidden_field :third_article_id, :id => "third_article_id" %>
+
+			</div>
+		<% end %>
+	<% else %>
+		<div class="field">
 		
 		<label>Global Recomienda #1</label>
 		<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+		<%= f.hidden_field :first_article_id, :id => "first_article_id" %>
 	</div>
 	<div class="field">
 		
 		<label>Global Recomienda #2</label>
 		<%= f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+		<%= f.hidden_field :second_article_id, :id => "second_article_id" %>
 	</div>
 	<div class="field">
 		
 		<label>Global Recomienda #3</label>
 		<%= f.autocomplete_field(:third_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#third_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+		<%= f.hidden_field :third_article_id, :id => "third_article_id" %>
 
 	</div>
+	<% end %>
+	
 <% end %>
 <div class="table card">
 	<div class="table__row">
