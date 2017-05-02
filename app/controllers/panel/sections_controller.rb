@@ -84,7 +84,7 @@ class Panel::SectionsController < ApplicationController
 		@section.articles.each do |article|
 			article.update_attributes(highlight: false)
 		end 
-		article = Article.find_by_name(params[:panel][:article_id])
+		article = Article.find(params[:article_id])
 		article.update_attributes(highlight: true)
 		redirect_to panel_section_path(@section)
 

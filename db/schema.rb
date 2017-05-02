@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501054120) do
+ActiveRecord::Schema.define(version: 20170502044614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,9 +89,11 @@ ActiveRecord::Schema.define(version: 20170501054120) do
   end
 
   create_table "hashtags", force: :cascade do |t|
-    t.string   "name",       default: ""
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "name",        default: ""
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "selected",    default: false
+    t.datetime "selected_on"
   end
 
   create_table "highlights", force: :cascade do |t|
