@@ -60,7 +60,6 @@
 					TweenMax.to(".header--wrapper", .3, { maxHeight: 72 })
 					navflag = false;
 				}
-		     	console.log($(window).scrollTop()); 
 			});
 
 		</script>
@@ -81,7 +80,6 @@
 		    <%= yield %>
 	 	</div>
  	<% end %>
-	
 	<%= render "components/footer" if !panel_url %>
   </body>
 </html>

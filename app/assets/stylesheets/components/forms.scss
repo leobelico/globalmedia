@@ -239,7 +239,16 @@ input:focus {
 .field-builder.card {
 	margin-left:  0; 
 }
-
+.admin-form--autocomplete {
+	display:  flex; 
+	flex-direction:  row; 
+	input[type="submit"] {
+		margin-left:  8px; 
+		width:  auto; 
+		background-color:  $primary; 
+		color:  #ffffff; 
+	}
+}
 .banner-sections {
 	display:  flex; 
 	flex-direction:  row; 

@@ -355,7 +355,17 @@ for i in 0..7
 end
 
 User.all.each do |user|
-	user.update_attributes(banners_permission: true, create_articles_permission: true, video_complaints_permission: true, hits_permission: true, destroy_articles_permission: true, radio_stations_permission: true, remote_controls_permission: true, user_permission: true)
+	user.update_attributes(
+		banners_permission: true, 
+		create_articles_permission: true, 
+		video_complaints_permission: true, 
+		hits_permission: true, 
+		destroy_articles_permission: true, 
+		radio_stations_permission: true, 
+		remote_controls_permission: true, 
+		user_permission: true, 
+		is_news_chief: true
+	)
 end
 
 
