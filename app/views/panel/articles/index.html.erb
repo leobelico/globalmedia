@@ -1,8 +1,10 @@
 <div class="panel__header">
 	<h2 class="title panel__title"><span class="current">Notas</span></h2>
-	<div class="panel__actions">
-		<%= link_to "Nueva nota", new_panel_article_path, class: "button" %>
-	</div>
+	<% if current_user.create_articles_permission %>
+		<div class="panel__actions">
+			<%= link_to "Nueva nota", new_panel_article_path, class: "button" %>
+		</div>
+	<% end %>
 </div>
 <div class="table card">
 	<div class="table__row">

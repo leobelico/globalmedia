@@ -1,6 +1,7 @@
 class Panel::BannersController < ApplicationController
 	before_action :authenticate_user!
 	# load_and_authorize_resource
+	before_action :check_banners_permission
 	before_action :set_banner, only: [:show, :edit, :update, :destroy]
 	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
 	def index
