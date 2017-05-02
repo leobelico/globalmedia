@@ -18,32 +18,17 @@
 
 			<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
 		<!-- -->
-		<% if get_banner(@section, "Section", "Chico" ) %>
-			Banner Chico: <%= get_banner(@section, "Section", "Chico" ).name %>
-			<br/>
-		<% else %>
-			<% if get_banner(@section, "Global", "Chico" ) %>
-				Banner Chico: <%= get_banner(@section, "Global", "Chico" ).name %>
-			<% end %>
-			<br/>
-		<% end %>
+		<!--  -->
 
-		<% if get_banner(@section, "Section", "Mediano" ) %>
 
-			Banner Mediano: <%= get_banner(@section, "Section", "Mediano" ).name  %><br/>
-		<% else %>
-			<% if get_banner(@section, "Global", "Mediano" ) %>
-				Banner Mediano: <%= get_banner(@section, "Global", "Mediano" ).name %>
-			<% end %>
-			<br/>
-		<% end %>
+
 
 		<% if get_banner(@section, "Section", "Grande" ) %>
 
-			Banner Grande: <%= get_banner(@section, "Section", "Grande" ).name  %><br/>
+			<%=render "components/big-banner", banner: get_banner(@section, "Section", "Grande" )  %>
 		<% else %>
 			<% if get_banner(@section, "Global", "Grande" ) %>
-				Banner Grande: <%= get_banner(@section, "Global", "Grande" ).name %>
+				<%= render "components/big-banner", banner: get_banner(@section, "Global", "Grande" ) %>
 			<% end %>
 			<br/>
 		<% end %>
@@ -73,6 +58,15 @@
 		<% end %>
 
 	</div>
-	<%= render "components/sidebar", article: @articles.first %>
+		<% if get_banner(@section, "Section", "Mediano" ) %>
+			<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Section", "Mediano" ) %>
+		<% else %>
+			<% if get_banner(@section, "Global", "Mediano" ) %>
+				<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Global", "Mediano" ) %>
+				
+			<% else %>
+				<%= render "components/sidebar", article: @articles.first, banner: "" %>
+			<% end %>
+		<% end %>
 </div>
 

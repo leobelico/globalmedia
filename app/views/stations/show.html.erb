@@ -32,7 +32,9 @@
 					</div>
 				<% end %>		
 			</div>
-			<%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
+			<% if @timetables.first %>
+				<%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
+			<% end %>
 		</div>
 
 		<div class="station__recommendations">
