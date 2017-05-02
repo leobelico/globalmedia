@@ -42,7 +42,8 @@ function submit_form(action, slug){
         note: JSON.stringify(quill_note),
         keyword_id: $("#article_keyword_id").val(),
         image: $("input[type='hidden'][name='article[image]']").val(),
-        draft: $("#article_draft").val()
+        draft: $("#article_draft").val(),
+        video_url: $("#video_url").val()
         
        
       },

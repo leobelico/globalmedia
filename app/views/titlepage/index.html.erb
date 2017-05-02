@@ -20,9 +20,9 @@
 	<% if @investigation_articles %>
 		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_articles[0].article_relationships[0].articable.name, articles: @investigation_articles %>
 	<% end %>
-	<% if @complaints[0] %>
-		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: @complaints[0].article_relationships[0].articable.name, articles: @complaints %>
-	<% end %>
+	
+		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: @complaints %>
+	
 </div>
 <div class="special-articles-container">
 	<div class="special-articles">

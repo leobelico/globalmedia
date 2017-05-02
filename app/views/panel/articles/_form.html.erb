@@ -14,9 +14,22 @@
 	<% end %>
 	<div class="field field--string">
 		<label>Sección</label>
-		<%= f.select :articable_id, options_for_select( Section.all.collect{ |u| [u.name, u.id] }, @article.articable_id) %>
-		<%= f.hidden_field :articable_type, value: "Section" %>
+		<% if current_user.video_complaints_permission? %>
+			<%= f.select :articable_id, options_for_select( Section.all.collect{ |u| [u.name, u.id] }, @article.articable_id) %>
+			<%= f.hidden_field :articable_type, value: "Section" %>
+			<div class="field field--string">
+			<label>Vídeo para Denuncia Global</label>
+				<%= f.text_field :video_url %>
+			</div>
+		<% else %>
+			<%= f.select :articable_id, options_for_select( Section.where("name != 'Denuncia Global'").collect{ |u| [u.name, u.id] }, @article.articable_id) %>
+			<%= f.hidden_field :articable_type, value: "Section" %>
+
+			
+		<% end %>
 	</div>
+	
+
 	<div class="field field--string">
 		<label>Título de la Nota</label>
 		<%= f.text_field :name, required: true %>
