@@ -21,6 +21,15 @@
 		<label>Título de la Nota</label>
 		<%= f.text_field :name, required: true %>
 	</div>
+	<div class="field field--checkbox">
+		
+		
+		<%= f.select :draft, options_for_select([['Borrador', true], ['Aprobado', false]]) %>
+	</div>
+	<div class="field ">
+		<label>Programar publicación</label>
+		<%= f.datetime_select :scheduled_time %>
+	</div>
 	<div class="field">
 		<label>Descripción corta de la Nota</label>
 		<%= f.text_area :short_description, required: true %>

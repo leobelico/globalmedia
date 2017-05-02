@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   def get_articles_per_section(id, last_number)
     section = Section.find(id)
-    @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false").last(last_number)
+    @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true").last(last_number)
   end
 
   def get_current_programs
@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
 
   def al_momento(not_repeat_highlight, not_repeat_recommendation, not_repeat_outstading, last_number)
   	if not_repeat_highlight
-  		@articles = Article.order(created_at: "ASC").joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where('highlights.article_id IS NULL AND articles.highlight = false AND articles.global_recommendation = false').order(created_at: "DESC").last(last_number).reverse
+  		@articles = Article.order(created_at: "ASC").joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where('highlights.article_id IS NULL AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true').order(created_at: "DESC").last(last_number).reverse
   	end
   end
 
@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
 
   def get_recommendations_per_section(id)
     section = Section.find(id)
-    @articles = Article.joins("LEFT OUTER JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.article_id IS NULL AND articles.highlight = false AND global_recommendation = false AND articles.articable_id = #{section.id}").last(3)
+    @articles = Article.joins("LEFT OUTER JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.article_id IS NULL AND articles.highlight = false AND global_recommendation = false AND articles.published = true AND articles.articable_id = #{section.id}").last(3)
     #SectionHighlight.where(section: section).last(3)
   end
 

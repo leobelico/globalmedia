@@ -90,7 +90,8 @@ sections.each do |section|
 				articable_type:  "Section", 
 				articable_id: section.id, 
 				image: images[i], 
-				image_thumbnail: images[i]
+				image_thumbnail: images[i],
+				draft: false
 			}
 		])
 	end

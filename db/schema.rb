@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170430215114) do
+ActiveRecord::Schema.define(version: 20170501054120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,9 @@ ActiveRecord::Schema.define(version: 20170430215114) do
     t.datetime "updated_recommendation_on"
     t.string   "image_thumbnail"
     t.string   "image"
+    t.boolean  "draft",                     default: true
+    t.boolean  "published",                 default: false
+    t.datetime "scheduled_time"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
     t.index ["keyword_id"], name: "index_articles_on_keyword_id", using: :btree
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree

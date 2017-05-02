@@ -41,9 +41,16 @@ function submit_form(action, slug){
         plain_text: text_note,
         note: JSON.stringify(quill_note),
         keyword_id: $("#article_keyword_id").val(),
-        image: $("input[type='hidden'][name='article[image]']").val() 
-
-      }
+        image: $("input[type='hidden'][name='article[image]']").val(),
+        draft: $("#article_draft").val()
+        
+       
+      },
+      scheduled_time_3i: $("#article_scheduled_time_3i").val(),
+        scheduled_time_2i: $("#article_scheduled_time_2i").val(),
+        scheduled_time_1i: $("#article_scheduled_time_1i").val(),
+        scheduled_time_4i: $("#article_scheduled_time_4i").val(),
+        scheduled_time_5i: $("#article_scheduled_time_5i").val()
     }
   })
   .done(function() {
