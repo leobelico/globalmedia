@@ -44,10 +44,12 @@
 				<% end %>
 			<% end %>
 		</div>
-
-		<% @station.article_relationships.each do |relationship| %>
-			<%= render "components/horizontal-note", article: relationship.article %>
-		<% end %>
+		<div class="station__articles">
+			
+			<% @station.article_relationships.each do |relationship| %>
+				<%= render "components/horizontal-note", article: relationship.article %>
+			<% end %>
+		</div>
 
 	</div>
 	<%= render "components/stations-sidebar", facebook: @station.facebook, twitter: @station.twitter %>

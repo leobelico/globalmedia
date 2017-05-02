@@ -64,6 +64,20 @@
 		}
 	}
 }
+.field--datetime {
+	display:   flex; 
+	flex-direction:  column; 
+	.field {
+		display:  flex; 
+		flex-direction:  row; 
+		align-items:  center; 
+		justify-content:  center; 
+		span, 
+		select {
+			margin-right: 8px; 
+		}
+	}
+}
 .field--string {
 	position:  relative; 
 	input {
@@ -108,9 +122,12 @@
 .field--checkbox {
 	display:  flex; 
 	flex-direction:  row; 
-	align-items:  center; 
+	align-items:  center;
+	justify-content:  space-between; 
+	width:  100%; 
 	input[type="checkbox"] {
 		margin-right:  8px; 
+		width:  auto; 
 	}
 }
 input {

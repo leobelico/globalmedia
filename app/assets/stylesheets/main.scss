@@ -34,6 +34,7 @@ body {
 .hidden {
 	display:  none;
 }
+
 .interface {
 	width:  100%; 
 	max-width:  $interface-width; 
@@ -139,6 +140,7 @@ body {
 @import "components/buttons"; 
 @import "components/admin/cards"; 
 
+@import "components/navigation"; 
 @import "components/topbar"; 
 @import "components/header";
 @import "components/navbar"; 

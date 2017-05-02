@@ -26,9 +26,11 @@
 		
 		<%= f.select :draft, options_for_select([['Borrador', true], ['Aprobado', false]]) %>
 	</div>
-	<div class="field ">
-		<label>Programar publicación</label>
-		<%= f.datetime_select :scheduled_time %>
+	<div class="field field--datetime">
+		<label>Fecha programada:</label>
+		<div class="field">
+			<%= f.datetime_select :scheduled_time, datetime_separator: "<span>-</span>", time_separator: "<span>:</span>" %>
+		</div>
 	</div>
 	<div class="field">
 		<label>Extracto</label>
