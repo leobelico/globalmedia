@@ -19,6 +19,9 @@
 //= require libraries/gsap/TweenMax.min
 //= require libraries/money
 //= require libraries/quill/quill.min 
+//= require libraries/clipboard.js/clipboard.min 
+//= require libraries/MediaElementJS/hls
+//= require libraries/MediaElementJS/media-element
 // 
 // 
 // QUILL BLOTS
@@ -38,6 +41,8 @@
 //= require components/quill-notes
 //= require components/forms
 //= require components/post-share
+//= require components/char-count
+//= require components/copy-to-clipboard
 
 
 function add_fields(link, association, content) { 

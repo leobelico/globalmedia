@@ -11,6 +11,7 @@
 		<p class="table__cell f-3">Extracto:</p>
 		<p class="table__cell">Sección:</p>
 		<p class="table__cell user-name">Escritor:</p>
+		<p class="table__cell user-name">Vistas:</p>
 		<p class="table__cell date">Fecha:</p>
 		<p class="table__cell edit">Editar:</p>
 		<% if current_user.destroy_articles_permission? %>
@@ -29,6 +30,13 @@
 			<p class="table__cell f-3"><%= truncate(article.short_description, length: 40) %></p>	
 			<%= link_to article.section, panel_section_path(article.section), class: "table__cell" %>
 			<p class="table__cell user-name"><%= article.user.full_name %></p>	
+			<p class="table__cell user-name">
+				<% total = 0 %>
+				<% article.hits.each do |hits| %>			
+					<% total = hits.number + total %>
+				<% end %>
+				<%= total %>
+			</p>	
 			<p class="table__cell date"><%= article.created_at.strftime("%B %d, %Y") %></p>
 			<%= link_to	"Editar", edit_panel_article_path(article), class: "table__cell edit" %>
 			<% if current_user.destroy_articles_permission? %>

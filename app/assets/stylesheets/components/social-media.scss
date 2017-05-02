@@ -15,7 +15,20 @@
 	height:  28px; 
 	margin-right:  8px;
 	cursor:  pointer; 
-	img, * {
+	img {
 		pointer-events:  none; 
+		height:  100%;
 	} 
+}
+.whatsapp {
+	display:  none;
+}
+@media screen and (max-width: 1023px) {
+	.whatsapp {
+		display:  flex; 
+	}
+	.social-media__link {
+		height:  48px; 
+		width:  48px;
+	}
 }

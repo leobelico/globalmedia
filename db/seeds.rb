@@ -12,7 +12,8 @@ sections = Section.first_or_create([
 	{name: "Nacional"},
 	{name: "Internacional"},
 	{name: "Farándula"},
-	{name: "Táctica"},
+	{name: "Táctica Nacional"},
+	{name: "Táctica Internacional"},
 	{name: "Negocios"},
 	{name: "Estados"},
 	{name: "Actualidad"},
@@ -312,7 +313,7 @@ stations_image = "https://cdn.dribbble.com/users/482851/screenshots/2717061/radi
 stations_image_2 = "https://cdn.dribbble.com/users/229993/screenshots/2924148/spaceradio4dr.jpg"
 stations_name = "Estación "
 stream_url = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1xtra_mf_p"
-for i in 0..5
+for i in 0..7
 	stations = Station.create([
 		{
 			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
@@ -321,18 +322,19 @@ for i in 0..5
 		}
 	])
 end
-for i in 0..5
+for i in 0..3
 	stations = Station.create([
 		{
 			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
 			image: stations_image_2,
-			stream_url: stream_url
+			stream_url: "http://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov/playlist.m3u8",
+			video: true
 		}
 	])
 end
 
 timetable_image = "http://www.sothebys.com/content/dam/sothebys-pages/blogs/ModernImpressions/2017/2/klimt-bauerngarten_banner.jpg.webrend.1920.350.jpeg"
-for i in 0..10
+for i in 0..7
 	Timetable.create(
 		name: "Programa Eterno",
 		image: timetable_image,
@@ -350,7 +352,6 @@ for i in 0..10
 		station_id: Station.first.id
 	)
 end
-
 
 User.all.each do |user|
 	user.update_attributes(banners_permission: true, create_articles_permission: true, video_complaints_permission: true, hits_permission: true, destroy_articles_permission: true, radio_stations_permission: true, remote_controls_permission: true, user_permission: true)

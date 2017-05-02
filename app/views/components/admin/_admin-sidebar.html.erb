@@ -4,8 +4,10 @@
 	<% end %>
 	<% if current_user.create_articles_permission? or current_user.destroy_articles_permission? %>
 		<%= link_to "Notas", panel_articles_path, class: "admin-sidebar__link" %>
+
 		<%= link_to "Notas destacadas", panel_highlights_path, class: "admin-sidebar__link" %>
 		<%= link_to "Palabras clave", panel_hashtags_path, class: "admin-sidebar__link" %>
+
 		<%= link_to "Global Recomienda", panel_show_global_recommendations_path, class: "admin-sidebar__link" %>
 		<%= link_to "Investigación Especial", panel_relationships_path, class: "admin-sidebar__link" %>
 		<%= link_to "Colaboradores", panel_collaborators_path, class: "admin-sidebar__link" %>
@@ -15,7 +17,7 @@
 		<%= link_to "Denuncia Global", panel_complaints_path, class: "admin-sidebar__link" %>
 	<% end %>
 	<% if current_user.radio_stations_permission? %>
-		<%= link_to "Estaciones de Radio", panel_stations_path, class: "admin-sidebar__link" %>
+		<%= link_to "Radio y T.V.", panel_stations_path, class: "admin-sidebar__link" %>
 	<% end %>
 	<% if current_user.banners_permission? %>
 		<%= link_to "Banners Publicitarios", panel_banners_path, class: "admin-sidebar__link" %>

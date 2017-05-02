@@ -31,8 +31,8 @@
 		<%= f.datetime_select :scheduled_time %>
 	</div>
 	<div class="field">
-		<label>Descripción corta de la Nota</label>
-		<%= f.text_area :short_description, required: true %>
+		<label>Extracto</label>
+		<%= f.text_area :short_description, required: true, data: { max_chars: 120 } %>
 	</div>
 	<% if @article.image %>
 		<div class="field field--string">
@@ -55,6 +55,7 @@
 	
 <% end %>
 <script>
+	char_count();
 	initialize_quill(); 
 </script>
 <%= render "components/s3_form_js" %>

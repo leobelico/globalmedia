@@ -64,6 +64,7 @@
 			<% end %>
 			<br/>
 		<% end %>
+		<%= render "components/section-recommendations", articles: get_latest_articles_per_section(Section.find_by_name(@article.section).id, 3), section_name: @article.section, highlight: "" %>
 
 	</div>
 	<%= render "components/sidebar", article: @article %>

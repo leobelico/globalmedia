@@ -16,7 +16,7 @@
 		</div>
 	<% end %>
 	<div class="card admin-form">
-		<h3 class="section-title">Estación</h3>
+		<h3 class="section-title">Estación / Canal</h3>
 
 		<div class="field">
 			<label>Nombre de la estación:</label>
@@ -26,6 +26,19 @@
 			<label>URL de Stream:</label>
 			<%= f.text_field :stream_url %>
 		</div>
+		<div class="field">
+			<label>URL de Facebook:</label>
+			<%= f.text_field :facebook %>
+		</div>
+		<div class="field">
+			<label>URL de Twitter:</label>
+			<%= f.text_field :twitter %>
+		</div>
+		<div class="field field--checkbox">	
+			<label>Stream de video:</label>
+			<%= f.check_box	 :video %>
+		</div>
+
 		<div class="field">	
 			<label>Imagen (logo): </label>
 			<%= f.file_field :image %>
@@ -35,7 +48,7 @@
 	
 	<div class="admin-form">
 		
-	<h3 class="section-title">Programas de Radio</h3>
+	<h3 class="section-title">Programas</h3>
 	
 	<div class= "field-builder">
 		<%= link_to_add_fields "Añadir Programa", f, :timetables, "", "Add a Program"%>
@@ -50,7 +63,7 @@
 					<%= builder.text_field :name %>
 				</div>
 				<div class="field">
-					<label>Locutores</label>
+					<label>Locutores o Anfitriones</label>
 					<%= builder.text_field :broadcasters %>
 				</div>				
 				<div class="multifield">
@@ -111,7 +124,7 @@
 					<%= builder.file_field :image %>
 				</div>
 				<div class="field">
-					<label>Imagen del locutor:</label>
+					<label>Imagen del locutor o anfitrión:</label>
 					<%= builder.file_field :broadcaster_image %>
 				</div>
 				
