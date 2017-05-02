@@ -52,6 +52,8 @@ Rails.application.routes.draw do
     resources :highlights, param: :slug
 
     resources :articles, param: :slug do 
+      post :publish_now
+      get :publish_now
       get :autocomplete_article_name, on: :collection
     
     end
