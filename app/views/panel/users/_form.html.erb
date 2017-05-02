@@ -21,5 +21,9 @@
 	<%= f.check_box :banners_permission %> Banners <br/>
 	<%= f.check_box :hits_permission %> Vistas por Página<br/>
 	<%= f.check_box :user_permission%> Usuarios<br/>
+	<br/><br/>
+	<label>Jefe de Noticia</label><br/>
+	<%= f.check_box :is_news_chief %>¿Es Jefe de Noticias?<br/>
+
 	<%= f.submit "Guardar" %>
 <% end %>

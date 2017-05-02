@@ -7,8 +7,19 @@ class Panel::ArticlesController < ApplicationController
 	autocomplete :article, :name, full: true
 	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
 	
+	def publish_now
+		@article = Article.find_by(slug: params[:article_slug])
+		@article.update_attributes(published: true, draft: false)
+		redirect_to panel_articles_path
+	end
 	def index
-		@articles = Article.all.order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
+		if params[:name]
+			@articles = Article.where('lower(name) LIKE ?', "%#{params[:name]}%").paginate(page: params[:page], per_page: 20)
+			p(params[:name])
+		else 
+			@articles = Article.all.order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
+			
+		end
 	end
 
 	def new
@@ -18,12 +29,13 @@ class Panel::ArticlesController < ApplicationController
 	def create
 		@article = Article.new(article_params)
 		@article.user = current_user
-		@article.scheduled_time = somedate
 		somedate = Time.zone.local(params[:scheduled_time_1i].to_i, 
                         params[:scheduled_time_2i].to_i,
                         params[:scheduled_time_3i].to_i,
                         params[:scheduled_time_4i].to_i,
                         params[:scheduled_time_5i].to_i, 0)
+		@article.scheduled_time = somedate
+
 
 		if @article.save
 			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s) 
@@ -59,6 +71,10 @@ class Panel::ArticlesController < ApplicationController
 
 		if @article.update(article_params)
 			@article.update_attributes(scheduled_time: somedate)
+			if @article.draft?
+				@article.update_attributes(published: false)
+
+			end
 			redirect_to @article
 		else
 			render action: "edit"
@@ -95,5 +111,9 @@ class Panel::ArticlesController < ApplicationController
     		@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
   		end
 
+  		def get_autocomplete_items(parameters)
+      		items = active_record_get_autocomplete_items(parameters)
+      		items = items.where(published: true)
+    	end
   		
 end

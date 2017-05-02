@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   authenticated :user do 
     root to: "panel/panel#panel", as: "authenticated_root"
   end
-  
+  get :autocomplete_article_name, controller:"application"
 
 
   resources :highlights do 
@@ -52,6 +52,8 @@ Rails.application.routes.draw do
     resources :highlights, param: :slug
 
     resources :articles, param: :slug do 
+      post :publish_now
+      get :publish_now
       get :autocomplete_article_name, on: :collection
     
     end
@@ -63,6 +65,8 @@ Rails.application.routes.draw do
       get :select_highlights
       post :select_highlights
       post :set_highlight
+      get :autocomplete_article_name, on: :collection
+      
     end
     resources :hits
     resources :banners
@@ -107,6 +111,7 @@ Rails.application.routes.draw do
     post "set_selected", to: "hashtags#set_selected"
 
     resources :users
+    resources :article_relationships, only: [:show, :destroy]
     
   end
   # get "panel/keywords/edit_multiple", to: "panel/keywords#edit_multiple"
@@ -114,7 +119,9 @@ Rails.application.routes.draw do
   # post "panel/keywords/update_multiple", to: "panel/keywords#update_multiple"
    
 
- 
+  get "search_article", to: "titlepage#search_article"
+  post "search_article", to: "titlepage#search_article"
+  get "search_results", to: "titlepage#search_results"
   # NOTAS DE PROGRAMADOR 
   # REVISAR DONDE SE USA KEYWORD SHOW A 
 
