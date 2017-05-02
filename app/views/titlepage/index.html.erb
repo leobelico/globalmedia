@@ -51,27 +51,21 @@
 	<% end %>
 <% end %> 
 
-
-<h1>Banners</h1>
-
-
+<!-- 
 <% if get_banner("", "TitlePage", "Mediano" ) %>
-
-	Banner Mediano: <%= get_banner("", "TitlePage", "Mediano" ).name  %><% else %>
+	<img src="<%= get_banner("", "TitlePage", "Mediano" ).large_image  %>" alt="">
+<% else %>
 	<% if get_banner("", "Global", "Mediano" ) %>
-		Banner Mediano: <%= get_banner("", "Global", "Mediano" ).name %>
-	<% end %>
-	<% end %>
-
-<% if get_banner("", "TitlePage", "Grande" ) %>
-
-	Banner Grande: <%= get_banner("", "TitlePage", "Grande" ).name  %><% else %>
-	<% if get_banner("", "Global", "Grande" ) %>
-		Banner Grande: <%= get_banner("", "Global", "Grande" ).name %>
+		<img src="<%= get_banner("", "Global", "Mediano" ).large_image %>" alt="">
 	<% end %>
 <% end %>
 
+ -->
 
- VISITED: <% most_visited.each do |lala| %>
- 	<%= lala.article.name %>
+<% if get_banner("", "TitlePage", "Grande" ) %>
+	<%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande" )  %>
+<% else %>
+	<% if get_banner("", "Global", "Grande" ) %>
+		<%= render "components/big-banner", banner: get_banner("", "Global", "Grande" )  %>
+	<% end %>
 <% end %>
