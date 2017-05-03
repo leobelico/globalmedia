@@ -43,7 +43,8 @@ function submit_form(action, slug){
         keyword_id: $("#article_keyword_id").val(),
         image: $("input[type='hidden'][name='article[image]']").val(),
         draft: $("#article_draft").val(),
-        video_url: $("#video_url").val()
+        video_url: $("#article_video_url").val(),
+        author_id: $("#article_author_id").val()
         
        
       },

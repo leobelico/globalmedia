@@ -2,7 +2,7 @@ class Article < ApplicationRecord
   belongs_to :articable, polymorphic: true, optional: true
   belongs_to :keyword, optional: true
   has_many :section_highlights, dependent: :delete_all
-
+  belongs_to :author, optional: true
   validates :name, :short_description, :image, presence: true
 
 	attr_accessor :hashtags_names, :the_note

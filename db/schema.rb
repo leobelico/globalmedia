@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170502211543) do
+ActiveRecord::Schema.define(version: 20170503140939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,9 @@ ActiveRecord::Schema.define(version: 20170502211543) do
     t.boolean  "published",                 default: false
     t.datetime "scheduled_time"
     t.string   "video_url",                 default: ""
+    t.integer  "author_id"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
+    t.index ["author_id"], name: "index_articles_on_author_id", using: :btree
     t.index ["keyword_id"], name: "index_articles_on_keyword_id", using: :btree
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
   end
@@ -56,6 +58,13 @@ ActiveRecord::Schema.define(version: 20170502211543) do
     t.integer  "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string   "name",       default: ""
+    t.string   "logo",       default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "banners", force: :cascade do |t|
@@ -237,6 +246,7 @@ ActiveRecord::Schema.define(version: 20170502211543) do
   end
 
   add_foreign_key "article_relationships", "articles"
+  add_foreign_key "articles", "authors"
   add_foreign_key "articles", "keywords"
   add_foreign_key "articles", "users"
   add_foreign_key "highlights", "articles"
