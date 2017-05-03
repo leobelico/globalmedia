@@ -14,7 +14,7 @@
 	<div class="table__row">
 		<p class="table__cell"><%= hashtag.name %></p>
 		<p class="table__cell boolean">
-			<img src="/assets/<%= hashtag.selected%>.svg">
+			<%= image_tag (hashtag.selected.to_s + ".svg") %>
 		</p>
 		<p class="table__cell"><%= hashtag.selected_on %></p>
 	</div>
