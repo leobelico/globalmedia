@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
   helper_method :check_radio_stations_permission
   helper_method :check_remote_controls_permission
   helper_method :check_news_chief
+  helper_method :set_article
 
   def check_hits_permission
     if !current_user.hits_permission?
@@ -88,8 +89,19 @@ class ApplicationController < ActionController::Base
   end
   def get_latest_articles_per_section(id, quantity)
     section = Section.find(id)
-    @articles = section.articles.last(quantity)
+    articles = Article.where(articable_id: section.id, global_recommendation: false, published: true)
+    recommendations = SectionHighlight.where(section: section)
+    re = []
+    recommendations.each do |r|
+      re << r.article
+    end
+    
+    @articles = articles - re
+    return @articles.last(3)
+
   end
+
+
   def get_current_programs
     time = Time.now
     if time.sunday? 
@@ -142,16 +154,25 @@ class ApplicationController < ActionController::Base
     section = Section.find(id)
     @articles = []
     SectionHighlight.where(section: section).each do |section| 
-
-      @articles << section.article
+      
+        @articles << section.article
+      
     end
 
-    return @articles
+    current_article = []
+    current_article << Article.find(session[:article_id])
+
+    return @articles - current_article
     #SectionHighlight.where(section: section).last(3)
   end
 
   def get_global_recommendations
-    @articles = Article.where(global_recommendation: true).order(updated_at: "ASC").last(3)
+    @articles = Article.where(global_recommendation: true, highlight: false, published: true).order(updated_at: "ASC").last(3)
+
+    current_article = []
+    current_article << Article.find(session[:article_id])
+
+    return @articles - current_article
   end
 
   def get_todays_keywords
@@ -172,8 +193,30 @@ class ApplicationController < ActionController::Base
 
   end
 
-  def most_visited
-    @hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
+  def most_visited(id)
+    section = Section.find(id)
+    #@hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
+    articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND hits.created_at > ? AND hits.created_at < ?", 2.hours.ago, Time.now)
+
+    recommendations = SectionHighlight.where(section: section)
+    re = []
+    recommendations.each do |r|     
+      re << r.article
+    end
+
+    current_article = []
+    current_article << Article.find(session[:article_id])
+
+    @articles = articles - re - current_article
+    return @articles.last(3)
+
   end
 
+  def set_article
+      @article = Article.find_by_slug(params[:slug])
+      session[:article_id] = @article.id
+      rescue ActiveRecord::RecordNotFound
+        flash[:alert] = "La página que estabas buscando no existe."
+        redirect_to root_url
+    end
 end
