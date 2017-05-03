@@ -9,7 +9,7 @@ class Panel::ArticlesController < ApplicationController
 	
 	def publish_now
 		@article = Article.find_by(slug: params[:article_slug])
-		@article.update_attributes(published: true, draft: false)
+		@article.update_attributes(published: true, draft: 1)
 		redirect_to panel_articles_path
 	end
 	def index
@@ -71,7 +71,7 @@ class Panel::ArticlesController < ApplicationController
 
 		if @article.update(article_params)
 			@article.update_attributes(scheduled_time: somedate)
-			if @article.draft?
+			if @article.draft == 0 or @article.draft == -1
 				@article.update_attributes(published: false)
 
 			end

@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170503140939) do
     t.datetime "updated_recommendation_on"
     t.string   "image_thumbnail"
     t.string   "image"
-    t.boolean  "draft",                     default: true
+    t.integer  "draft",                     default: 0
     t.boolean  "published",                 default: false
     t.datetime "scheduled_time"
     t.string   "video_url",                 default: ""

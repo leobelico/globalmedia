@@ -95,7 +95,7 @@ sections.each do |section|
 				articable_id: section.id, 
 				image: images[i], 
 				image_thumbnail: images[i],
-				draft: false,
+				draft: 1,
 				published: true
 			}
 		])
@@ -115,7 +115,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			},
 			{		
@@ -130,7 +130,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			},
 			{		
@@ -145,7 +145,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			},
 			{		
@@ -160,7 +160,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			},
 			{		
@@ -175,7 +175,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			},
 			{		
@@ -190,7 +190,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			},
 			{		
@@ -205,7 +205,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			}
 

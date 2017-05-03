@@ -37,14 +37,23 @@
 		<div class="table__row">
 			<%= link_to article.name, article, class: "table__cell f-2" %>
 
-			<% if article.draft? %>
-				<p class="table__cell">Borrador</p>	
+			<% if article.published? %>
+				<p class="table__cell">Publicado</p>	
 			<% else %>
-				<% if article.published? %>
-					<p class="table__cell">Publicado</p>	
-				<% else %>
+				<% if article.draft == 0 %>
+					<p class="table__cell">Borrador</p>	
+
+				<% end %>
+
+				<% if article.draft == 1 %>
 					<p class="table__cell">Aprobado</p>	
 				<% end %>
+
+				<% if article.draft == -1 %>
+					<p class="table__cell">No aprobado</p>	
+				<% end %>
+
+				
 			<% end %>
 			
 			<p class="table__cell"><% if article.scheduled_time %><%= article.scheduled_time.strftime("%B %d, %Y %H:%M") %><% end %></p>
