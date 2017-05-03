@@ -21,6 +21,8 @@ sections = Section.first_or_create([
 	{name: "Denuncia Global"}
 ])	
 
+
+	
 article_content = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in qusae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? "
 
 short_description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore architecto harum sint, cumque laboriosam, dolorum culpa voluptatum porro quae doloremque magni optio odit sunt suscipit fugit officia modi accusantium distinctio!"
@@ -93,7 +95,7 @@ sections.each do |section|
 				articable_id: section.id, 
 				image: images[i], 
 				image_thumbnail: images[i],
-				draft: false,
+				draft: 1,
 				published: true
 			}
 		])
@@ -113,7 +115,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			},
 			{		
@@ -128,7 +130,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			},
 			{		
@@ -143,7 +145,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			},
 			{		
@@ -158,7 +160,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			},
 			{		
@@ -173,7 +175,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			},
 			{		
@@ -188,7 +190,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			},
 			{		
@@ -203,7 +205,7 @@ articles_new = Article.create([
 				articable_id: Section.first.id, 
 				image: images[1], 
 				image_thumbnail: images[1],
-				draft: false,
+				draft: 1,
 				published: true
 			}
 
@@ -478,7 +480,17 @@ User.all.each do |user|
 end
 
 
-
+authors = Author.create([
+	{name: "Ninguno", logo: images[3]},
+	{name: "J.K Rowling", logo: images[3]},
+	{name: "Harry Potter", logo: images[3]},
+	{name: "Hermione Granger", logo: images[3]},
+	{name: "Ron Weasley", logo: images[3]},
+	{name: "Fred Weasley", logo: images[3]},
+	{name: "George Weasley", logo: images[3]},
+	{name: "Ginny Weasley", logo: images[3]},
+	
+	])
 
 
 

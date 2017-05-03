@@ -34,11 +34,17 @@
 		<label>Título de la Nota</label>
 		<%= f.text_field :name, required: true %>
 	</div>
-	<div class="field field--checkbox">
-		
-		
-		<%= f.select :draft, options_for_select([['Borrador', true], ['Aprobado', false]]) %>
+
+	<div class="field field--string">
+		<label>Autor de la Nota</label>
+		<%= f.select :author_id, options_for_select( Author.all.collect{ |u| [u.name, u.id] }, @article.author_id), prompt: "Selecciona un Autor" %> 
 	</div>
+
+	<% if current_user.is_news_chief? %>
+		<div class="field field--checkbox">
+			<%= f.select :draft, options_for_select([['Borrador', 0], ['Aprobado', 1], ['No Aprobado', -1]], @article.draft) %>
+		</div>
+	<% end %>
 	<div class="field field--datetime">
 		<label>Fecha programada:</label>
 		<div class="field">

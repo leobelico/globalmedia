@@ -9,7 +9,7 @@ class Panel::ArticlesController < ApplicationController
 	
 	def publish_now
 		@article = Article.find_by(slug: params[:article_slug])
-		@article.update_attributes(published: true, draft: false)
+		@article.update_attributes(published: true, draft: 1)
 		redirect_to panel_articles_path
 	end
 	def index
@@ -71,7 +71,7 @@ class Panel::ArticlesController < ApplicationController
 
 		if @article.update(article_params)
 			@article.update_attributes(scheduled_time: somedate)
-			if @article.draft?
+			if @article.draft == 0 or @article.draft == -1
 				@article.update_attributes(published: false)
 
 			end
@@ -95,10 +95,8 @@ class Panel::ArticlesController < ApplicationController
 
 	private
 		def article_params
-			params.require(:article).permit(:name, :note, :plain_text, :image, :image_thumbnail, :video_url, :short_description, :hashtags_names, :articable_id, :articable_type, :draft, :keyword_id, :the_note, the_note: [:quill])
+			params.require(:article).permit(:name, :note, :plain_text, :image, :image_thumbnail, :video_url, :short_description, :hashtags_names, :articable_id, :articable_type, :draft, :keyword_id, :the_note, :author_id, the_note: [:quill])
 
-			# all_options = params.require(:article).fetch(:note, nil).try(:permit!)
-   			# params.require(:article).permit(:name, :plain_text, :image, :image_thumbnail, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id).merge(:note => all_options)
 		end
 
 		def set_article

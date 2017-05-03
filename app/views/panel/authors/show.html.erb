@@ -1,16 +1,11 @@
 <div class="panel__header">
-	<h2 class="title panel__title"><span class="current">Notas</span></h2>
-	<% if current_user.create_articles_permission %>
-		<div class="panel__actions">
-			<%= link_to "Nueva nota", new_panel_article_path, class: "button" %>
-		</div>
-	<% end %>
+	<h2 class="title panel__title"><span>Autores / </span><span class="current"><%= @author.name %></span></h2>
+	<div class="panel__actions">
+		<%= link_to "Eliminar", panel_author_path(@author), method: :delete, data: {confirm: "¿Seguro? Esta acción no se puede deshacer"}, class: "delete" %>
+		<%= link_to "Editar", edit_panel_author_path(@author), class: "button" %>
+		
+	</div>
 </div>
-<%= form_tag(panel_articles_path, method: :get, class: "admin-form admin-form--autocomplete card ") do %>
-	<%= text_field_tag :name, "", placeholder: "Búsqueda" %>
-	<%= submit_tag 'Buscar', name: nil %>
-<% end %>
-
 <div class="table card">
 	<div class="table__row">
 		<p class="table__cell f-2">Título:</p>
@@ -33,27 +28,18 @@
 		<% end %>
 
 	</div>
-	<% @articles.each do |article| %>
+	<% @author.articles.each do |article| %>
 		<div class="table__row">
 			<%= link_to article.name, article, class: "table__cell f-2" %>
 
-			<% if article.published? %>
-				<p class="table__cell">Publicado</p>	
+			<% if article.draft? %>
+				<p class="table__cell">Borrador</p>	
 			<% else %>
-				<% if article.draft == 0 %>
-					<p class="table__cell">Borrador</p>	
-
-				<% end %>
-
-				<% if article.draft == 1 %>
+				<% if article.published? %>
+					<p class="table__cell">Publicado</p>	
+				<% else %>
 					<p class="table__cell">Aprobado</p>	
 				<% end %>
-
-				<% if article.draft == -1 %>
-					<p class="table__cell">No aprobado</p>	
-				<% end %>
-
-				
 			<% end %>
 			
 			<p class="table__cell"><% if article.scheduled_time %><%= article.scheduled_time.strftime("%B %d, %Y %H:%M") %><% end %></p>
@@ -87,10 +73,9 @@
 
 		</div>
 	<% end %>
-	<% if @articles.count == 0 %>
+	<% if @author.articles.count == 0 %>
 		<div class="table__row">
 			<p class="table__cell table__empty">No hay artículos para mostrar</p>
 		</div>
 	<% end %>
 </div>
-<%= will_paginate @articles, class: "card admin-pagination" %>
