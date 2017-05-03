@@ -1,7 +1,7 @@
 <div class="recommendations">
 	<h4 class="medium-title">Global Recomienda</h4>	
 	<% articles.each do |article| %>
-		<%= link_to article, class: "recommendation" do %>
+		<%= link_to article_path(article), class: "recommendation" do %>
 			<%= image_tag article.image, class: "recommendation__image" %>
 			<h4 class="recommendation__title"><%= article.name %></h4>
 		<% end %>

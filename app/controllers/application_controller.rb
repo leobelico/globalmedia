@@ -130,7 +130,7 @@ class ApplicationController < ActionController::Base
   end
 
   def latest_news
-    @articles = Article.last(6).reverse
+    @articles = Article.where(published: true).last(6).reverse
   end
   
   def get_section_highlight(id)
@@ -140,7 +140,13 @@ class ApplicationController < ActionController::Base
 
   def get_recommendations_per_section(id)
     section = Section.find(id)
-    @articles = Article.joins("LEFT OUTER JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.article_id IS NULL AND articles.highlight = false AND global_recommendation = false AND articles.published = true AND articles.articable_id = #{section.id}").last(3)
+    @articles = []
+    SectionHighlight.where(section: section).each do |section| 
+
+      @articles << section.article
+    end
+
+    return @articles
     #SectionHighlight.where(section: section).last(3)
   end
 

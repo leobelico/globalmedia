@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
 		if !user_signed_in? and @article.published == false 
 			redirect_to root_url
 		end
-		if !user_signed_in? 
+		if !user_signed_in? and @article.published == true
 			last_hit = Hit.where(article: @article, created_at: 2.hours.ago..Time.now).last
 
 			if last_hit

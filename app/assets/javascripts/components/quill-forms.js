@@ -45,6 +45,7 @@ function submit_form(action, slug){
         draft: $("#article_draft").val(),
         video_url: $("#article_video_url").val(),
         author_id: $("#article_author_id").val()
+        global_recommendation: $("#article_global_recommendation").val()
         
        
       },

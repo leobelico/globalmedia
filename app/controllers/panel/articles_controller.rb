@@ -83,7 +83,11 @@ class Panel::ArticlesController < ApplicationController
 
 	def destroy
 		@article.destroy
-		redirect_to panel_articles_path
+		redirect_to 
+		rescue ActiveRecord::InvalidForeignKey
+    		flash[:notice] = "No se puede eliminar porque es nota de portada o recomendación global"
+    		panel_articles_path
+ 		
 	end
 
 	def search_hashtag
@@ -95,7 +99,7 @@ class Panel::ArticlesController < ApplicationController
 
 	private
 		def article_params
-			params.require(:article).permit(:name, :note, :plain_text, :image, :image_thumbnail, :video_url, :short_description, :hashtags_names, :articable_id, :articable_type, :draft, :keyword_id, :the_note, :author_id, the_note: [:quill])
+			params.require(:article).permit(:name, :note, :plain_text, :image, :image_thumbnail, :video_url, :short_description, :hashtags_names, :articable_id, :articable_type, :draft, :keyword_id, :global_recommendation, :the_note, :author_id, the_note: [:quill])
 
 		end
 
