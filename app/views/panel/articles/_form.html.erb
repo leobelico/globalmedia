@@ -37,12 +37,12 @@
 		<label>Título de la Nota</label>
 		<%= f.text_field :name, required: true %>
 	</div>
-
-	<div class="field field--string">
-		<label>Autor de la Nota</label>
-		<%= f.select :author_id, options_for_select( Author.all.collect{ |u| [u.name, u.id] }, @article.author_id), prompt: "Selecciona un Autor" %> 
-	</div>
-
+	<% if Author.all.count > 0 %>
+		<div class="field field--string">
+			<label>Autor de la Nota</label>
+			<%= f.select :author_id, options_for_select( Author.all.collect{ |u| [u.name, u.id] }, @article.author_id), prompt: "Selecciona un Autor" %> 
+		</div>
+	<% end %>
 	<% if current_user.is_news_chief? %>
 		<div class="field field--string">
 			<label for="">Estatus de la nota</label>

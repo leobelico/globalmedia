@@ -1,10 +1,24 @@
-<meta property="og:type" 		 content="website" />
-<meta property="fb:app_id"       content="502512736803830" /> 
-<meta property="og:url"          content="<%= article_url(article) %>" />
-<meta property="og:type"         content="artículo" />
-<meta property="og:title"        content="<%= article.name %>" />
-<meta property="og:description"  content="<%= article.short_description %>" />
-<meta property="og:image"        content="https:<%= article.image %>" itemprop="image"  	/>
-<meta property="og:updated_time" content="<%= article.created_at.strftime('%b %e, %l:%M %p') %>" />
-<meta property="og:author" 		content="<%= article.user.full_name %>">
+<meta property="og:type" 			content="article">
+<meta property="fb:app_id"      	content="502512736803830" /> 
+
+<meta property="og:description" 	content="<%= article.short_description%>">
+<meta property="og:site_name" 		content="GlobalMedia">
+<meta property="og:locale" 			content="es_MX">
+<meta property="article:author" 	content="https://www.facebook.com/GlobalMediaSLP/?fref=ts">
+<meta property="article:section"	content="Articulo">
+<meta property="og:url" content="<%= article_url(article) %>">
+
 <meta property="og:rich_attachment" content="true">
+<meta property="og:updated_time" 	content="<%= article.created_at.strftime('%b %e, %l:%M %p') %>" />
+
+<!-- Change to prod after debug -->
+<meta property="og:image" 			content="http://picsim.de/400x200">
+
+<meta name="twitter:card" 			content="summary_large_image">
+<meta name="twitter:site" 			content="@globalmediamx">
+<meta name="twitter:title" 			content="<%= article.name %>">
+<meta name="twitter:description" 	content="<%= article.short_description %>">
+<meta name="twitter:creator" 		content="@globalmediamx">
+<meta name="twitter:image:src" 		content="https:<%= article.image %>">
+<meta name="twitter:image:alt" 		content="<%= article.short_description %>">
+<meta name="twitter:domain" 		content="www.globalmedia.mx">
