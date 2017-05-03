@@ -112,6 +112,7 @@ Rails.application.routes.draw do
 
     resources :users
     resources :article_relationships, only: [:show, :destroy]
+    resources :authors
     
   end
   # get "panel/keywords/edit_multiple", to: "panel/keywords#edit_multiple"

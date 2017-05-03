@@ -6,6 +6,9 @@
 		<div class="article__info">
 			<% if @article.author and @article.author.name != "Ninguno" %>
 				<p class="author">Por <%= @article.author.name %></p>
+
+			<% else %>
+				<p class="author">Por <%= @article.user.full_name %></p>
 			<% end %>
 			<p class="date"><%= @article.created_at.strftime("%m:%M %p %A %e %B, %Y") %></p>
 			<% if @article.articable_type == "Section" %>
