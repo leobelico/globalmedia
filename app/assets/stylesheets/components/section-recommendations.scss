@@ -28,3 +28,12 @@
 		margin-top:  auto; 
 	}
 }
+@media screen and (max-width:  1023px) {
+	.section-recommendations__article {
+		width:  100%;
+		margin-bottom:  16px;
+		.section-recommendations__image {
+			width:  100%;
+		}
+	}
+}
