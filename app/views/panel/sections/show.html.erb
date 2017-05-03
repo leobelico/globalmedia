@@ -2,6 +2,7 @@
 	<h2 class="title panel__title"><span>Secciones / </span><span class="current"><%= @section.name %></span></h2>
 	<div class="panel__actions">
 		<%= link_to "Escoger destacado", panel_section_select_highlights_path(@section), class: "button" %>
+		<%= link_to "Escoger Recomendaciones de Sección", panel_section_select_global_recommendations_path(@section), class: "button" %>
 		<%= link_to "Editar sección", edit_panel_section_path(@section), class: "button" %>
 	</div>
 </div>
@@ -27,6 +28,21 @@
 			</p>
 			<%= link_to "Editar", edit_panel_article_path(article), class: "table__cell edit" %>
 
+		</div>
+	<% end %>
+</div>
+
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Recomendaciones actuales:</p>
+		<p class="table__cell">Extracto:</p>
+		<p class="table__cell">Sección:</p>
+	</div>
+	<% @recommendations.each do |recommendation| %>
+		<div class="table__row">
+			<%= link_to truncate(recommendation.article.name, length:  40), recommendation.article, class: "table__cell" %>
+			<p class="table__cell"><%= truncate(recommendation.article.short_description, length:  60) %></p>
+			<p class="table__cell"><%= recommendation.article.section %></p>
 		</div>
 	<% end %>
 </div>

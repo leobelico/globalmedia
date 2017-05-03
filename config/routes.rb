@@ -65,6 +65,10 @@ Rails.application.routes.draw do
       get :select_highlights
       post :select_highlights
       post :set_highlight
+
+      get :select_global_recommendations
+      post :select_global_recommendations
+      post :set_global_recommendations
       get :autocomplete_article_name, on: :collection
       
     end

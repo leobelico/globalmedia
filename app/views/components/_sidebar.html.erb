@@ -1,11 +1,17 @@
 <div class="sidebar">
 	<%= render "components/latest-news", articles: latest_news %>
 	<% if article != "global" %>
-		<%= render "components/recommendations", articles: get_recommendations_per_section(Section.find_by_name(article.section).id) %>
+		<% if  get_recommendations_per_section(Section.find_by_name(article.section).id).size == 0 %>
+			<%= render "components/recommendations", articles: get_global_recommendations %>
+		<% else %>
+			<%= render "components/recommendations", articles: get_recommendations_per_section(Section.find_by_name(article.section).id) %>
+		<% end %>
+		
 	<% else %>
 		<%= render "components/recommendations", articles: get_global_recommendations %>
+		
 	<% end %>
-	<%= render "components/most-visited", hits: most_visited %>
+	<%= render "components/most-visited", articles: most_visited(Section.find_by_name(article.section).id) %>
 	<% if banner != "" and banner != nil %>
 		<%= render "components/medium-banner", banner: banner %>
 	<% end %>

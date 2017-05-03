@@ -44,6 +44,7 @@
 		<div class="field field--checkbox">
 			<%= f.select :draft, options_for_select([['Borrador', 0], ['Aprobado', 1], ['No Aprobado', -1]], @article.draft) %>
 		</div>
+
 	<% end %>
 	<div class="field field--datetime">
 		<label>Fecha programada:</label>

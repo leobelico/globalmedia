@@ -1,9 +1,9 @@
 <div class="recommendations">
 	<h4 class="medium-title">Lo más destacado</h4>	
-	<% hits.each do |hit| %>
-			<%= link_to hit.article, class: "recommendation" do %>
-				<%= image_tag hit.article.image, class: "recommendation__image" %>
-				<h4 class="recommendation__title"><%= hit.article.name %></h4>
+	<% articles.each do |article| %>
+			<%= link_to article, class: "recommendation" do %>
+				<%= image_tag article.image, class: "recommendation__image" %>
+				<h4 class="recommendation__title"><%= article.name %></h4>
 			<% end %>
 	<% end %>
 </div>

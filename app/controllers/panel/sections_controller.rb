@@ -7,6 +7,7 @@ class Panel::SectionsController < ApplicationController
 	
 	def index
 		@sections = Section.all.order(name: "ASC")
+
 	end
 	#SectionHighlight.create(article_id: article.id, section: section.id)
 	def set_highlight_and_recomendations
@@ -60,7 +61,7 @@ class Panel::SectionsController < ApplicationController
 		@highlight_article = Article.where(articable_id: @section.id, highlight: true).first
 
 		@highlights = SectionHighlight.where(section: @section).order(updated_at: "DESC")
-
+		@recommendations = SectionHighlight.where(section: @section)
 	end
 	def new
 		@section = Section.new
@@ -96,6 +97,39 @@ class Panel::SectionsController < ApplicationController
 		redirect_to panel_section_path(@section)
 
 	end
+
+	def select_global_recommendations
+
+		@section = Section.find_by_slug(params[:section_slug])
+		@recommendations = SectionHighlight.where(section: @section)
+
+		session[:section_id] = @section.id
+
+	end
+	def set_global_recommendations
+		@section = Section.find_by_slug(params[:section_slug])
+		@recommendations = SectionHighlight.where(section: @section)
+		@recommendations.destroy_all
+		if params[:panel][:first_article_id]
+			first_article = Article.find(params[:panel][:first_article_id])
+			
+			SectionHighlight.create(article_id: first_article.id, section_id: @section.id )
+		end
+		if params[:panel][:second_article_id]
+			second_article = Article.find(params[:panel][:second_article_id])
+			
+			SectionHighlight.create(article_id: second_article.id, section_id: @section.id )
+		end
+		if params[:panel][:third_article_id]
+			third_article = Article.find(params[:panel][:third_article_id])
+			
+			SectionHighlight.create(article_id: third_article.id, section_id: @section.id )
+			
+		end
+
+		redirect_to panel_section_path(@section)
+
+	end
 	def update
 	
 		if @section.update(section_params)
@@ -124,6 +158,6 @@ class Panel::SectionsController < ApplicationController
 
 		def get_autocomplete_items(parameters)
       		items = active_record_get_autocomplete_items(parameters)
-      		items = items.where(published: true, articable_id: session[:section_id])
+      		items = items.where(published: true, articable_id: session[:section_id], set_global_recommendations: false)
     	end
 end
