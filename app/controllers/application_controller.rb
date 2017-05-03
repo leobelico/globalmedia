@@ -160,7 +160,9 @@ class ApplicationController < ActionController::Base
     end
 
     current_article = []
-    current_article << Article.find(session[:article_id])
+    if session[:article_id]
+      current_article << Article.find(session[:article_id])
+    end
 
     return @articles - current_article
     #SectionHighlight.where(section: section).last(3)
@@ -170,7 +172,9 @@ class ApplicationController < ActionController::Base
     @articles = Article.where(global_recommendation: true, highlight: false, published: true).order(updated_at: "ASC").last(3)
 
     current_article = []
-    current_article << Article.find(session[:article_id])
+    if session[:article_id]
+      current_article << Article.find(session[:article_id])
+    end
 
     return @articles - current_article
   end
@@ -205,7 +209,9 @@ class ApplicationController < ActionController::Base
     end
 
     current_article = []
-    current_article << Article.find(session[:article_id])
+    if session[:article_id]
+      current_article << Article.find(session[:article_id])
+    end
 
     @articles = articles - re - current_article
     return @articles.last(3)

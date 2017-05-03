@@ -159,6 +159,6 @@ class Panel::SectionsController < ApplicationController
 
 		def get_autocomplete_items(parameters)
       		items = active_record_get_autocomplete_items(parameters)
-      		items = items.where(published: true, articable_id: session[:section_id], set_global_recommendations: false)
+      		items = items.where(published: true, articable_id: session[:section_id], global_recommendation: false)
     	end
 end
