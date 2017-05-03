@@ -43,6 +43,7 @@
 //= require components/post-share
 //= require components/char-count
 //= require components/copy-to-clipboard
+//= require components/mobile-menu
 
 
 function add_fields(link, association, content) { 

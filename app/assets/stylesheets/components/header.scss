@@ -77,10 +77,11 @@
 			height:  1px;
 			background:  #ffffff; 
 			position:  absolute;  
+			pointer-events:  none; 
 		}
-		.mt-1 { top: 0px }
-		.mt-2 { top: 8px }
-		.mt-3 { top: 17px }
+		.mt-1 { top: 0px; }
+		.mt-2 { top: 8px; }
+		.mt-3 { top: 17px; }
 	}
 	.header {
 		display:  flex; 
