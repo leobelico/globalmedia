@@ -1,0 +1,28 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span>Secciones / </span><span class="current">Nueva sección</span></h2>
+	<div class="panel__actions">
+		<button class="button">Crear sección</button>
+	</div>
+</div>
+
+
+<%= form_for [:panel, @section], html: { class: "card admin-form" } do |f| %>
+	<% if @section.errors.any? %>	
+		<h5><%= pluralize(@section.errors.count, "error") %></h5>
+			<ul>
+				<% @section.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+				<% end %>
+			</ul>
+	<% end %>
+	<div class="field">	
+		<label>Nombre de sección:</label>
+		<%= f.text_field :name %>
+	</div>
+<% end %>
+
+<script>
+	button = $("button.button");
+	form = $(".card.admin-form");
+	saveFormOnButtonClick(button, form); 
+</script>

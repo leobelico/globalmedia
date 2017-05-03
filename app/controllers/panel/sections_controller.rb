@@ -63,6 +63,7 @@ class Panel::SectionsController < ApplicationController
 		@highlights = SectionHighlight.where(section: @section).order(updated_at: "DESC")
 		@recommendations = SectionHighlight.where(section: @section)
 	end
+	
 	def new
 		@section = Section.new
 	end

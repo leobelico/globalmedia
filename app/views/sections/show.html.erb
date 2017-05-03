@@ -58,6 +58,7 @@
 		<% end %>
 
 	</div>
+	<% if @section.articles.count > 0 %>
 		<% if get_banner(@section, "Section", "Mediano" ) %>
 			<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Section", "Mediano" ) %>
 		<% else %>
@@ -68,5 +69,6 @@
 				<%= render "components/sidebar", article: @articles.first, banner: "" %>
 			<% end %>
 		<% end %>
+	<% end %>
 </div>
 
