@@ -51,3 +51,12 @@
 	margin-left:  18px; 
 	border:  solid 1px #dbdbdb;
 }
+@media screen and (max-width:  1023px) {
+	.search__box, 
+	.topbar .social-media {
+		display:  none; 
+	}
+	.topbar__link {
+		font-size:  11px; 
+	}
+}

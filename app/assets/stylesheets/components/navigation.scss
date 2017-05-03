@@ -12,3 +12,6 @@
 	align-items:  center; 
 	z-index:  100; 
 }
+@media screen and (max-width:  1023px) {
+	.top-padder { height:  132px }
+}

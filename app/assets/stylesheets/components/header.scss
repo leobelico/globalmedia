@@ -7,7 +7,7 @@
 	display:  flex; 
 	flex-direction:  row; 
 	align-items:  center; 
-	justify-content:  flex-end; 
+	justify-content:  space-between; 
 	width:  100%; 
 	max-width:  $interface-width; 
 	background-color:  $primary; 
@@ -22,6 +22,19 @@
 	max-height:  72px; 
 	height:  auto; 
 	overflow:  hidden; 
+}
+.header__container {
+	display:  flex; 
+	flex-direction:  row; 
+	flex-shrink: 0; 
+	box-sizing:  border-box; 
+}
+.header__container.container--1 {
+	height:  44px; 
+	width:  200px;
+	position:  relative; 
+}
+.header__container.container--2 {
 }
 .header__logo {
 	position:  absolute; 
@@ -47,4 +60,84 @@
 }
 .exchange-rate__name {
 	font-weight:  bold; 
+}
+@media screen and (max-width:  1023px) {
+	.menu-trigger {
+		display:  flex;
+		flex-direction:  column; 
+		width:  36px; 
+		height:  18px; 
+		position:  relative; 
+		margin-top:  auto; 
+		margin-left:  auto; 
+		margin-bottom:  auto; 
+		margin-right:  12px;
+		div {
+			width:  36px; 
+			height:  1px;
+			background:  #ffffff; 
+			position:  absolute;  
+		}
+		.mt-1 { top: 0px }
+		.mt-2 { top: 8px }
+		.mt-3 { top: 17px }
+	}
+	.header {
+		display:  flex; 
+		flex-direction:  column; 
+		min-height:  none; 
+		max-height:  none; 
+		align-items:  stretch; 
+		justify-content:  flex-start; 
+		padding:  0px; 
+		height:  auto; 
+		min-height:  auto; 
+		max-height:  auto; 
+	}
+	.header--wrapper {
+		width:  100%; 
+		max-height:  92px; 
+		overflow:  hidden; 
+	}
+	.header__container {
+		width:  100% !important; 
+		
+	}
+	.container--1 {
+		padding:  8px; 
+		min-height:  60px; 
+	}
+	.container--2 {
+		display:  flex; 
+		flex-direction:  row; 
+		align-items:  flex-start; 
+		justify-content:  flex-start; 
+		padding:  8px; 
+		background-color:  $quaternary; 
+		img {
+			display:  none; 
+		} 
+		p {
+			br {
+				display:  none; 
+			}
+			flex-direction:  row; 
+		}
+		.weather__data {
+			display:  flex; 
+			flex-direction:  row;
+			p {
+				width:  auto; 
+			} 
+		}
+		.exchange-rate {
+			margin-left:  12px; 
+		}
+		.weather {
+			margin-left: 0px; 
+			p:last-of-type {
+				margin-left:  4px;
+			}
+		}
+	}
 }
