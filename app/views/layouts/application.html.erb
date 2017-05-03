@@ -81,4 +81,14 @@
  	<% end %>
 	<%= render "components/footer" if !panel_url %>
   </body>
+<script>
+	document.addEventListener("turbolinks:before-visit", function() {
+	  if(document.getElementById('audio')) {
+	    document.getElementById('audio').remove();
+	  }
+	  if(document.getElementById('video')) {
+	    document.getElementById('video').remove();
+	  }
+	});
+</script>
 </html>

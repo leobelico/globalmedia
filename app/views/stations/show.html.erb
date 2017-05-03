@@ -5,11 +5,11 @@
 			<h4 class="station__name"><%= @station.name %></h4>
 		</div>
 		<% if @station.video == false %>
-			<audio controls autoplay>
+			<audio controls autoplay id="audio">
 				<source src="<%= @station.stream_url %>" type="audio/mpeg">	
 			</audio>
 		<% else %>	
-			<video controls autoplay>
+			<video controls autoplay id="video">
 				<source src="<%= @station.stream_url %>">
 			</video>	
 			<script>
