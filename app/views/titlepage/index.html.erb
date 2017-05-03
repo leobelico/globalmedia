@@ -14,11 +14,10 @@
 
 
 <div class="special-articles-container">
-	<% if @investigation_articles %>
+	<% if @investigation_articles.count > 0 %>
 		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_articles[0].article_relationships[0].articable.name, articles: @investigation_articles %>
 	<% end %>
 	<% if @complaints %>
-
 		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: @complaints %>
 	<% end %>
 </div>
