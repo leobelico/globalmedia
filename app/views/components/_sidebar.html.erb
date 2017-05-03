@@ -11,7 +11,11 @@
 		<%= render "components/recommendations", articles: get_global_recommendations %>
 		
 	<% end %>
-	<%= render "components/most-visited", articles: most_visited(Section.find_by_name(article.section).id) %>
+	<% if article != "" and article != "global" %>
+		<%= render "components/most-visited", articles: most_visited(Section.find_by_name(article.section).id) %>
+	<% else %>
+		<%= render "components/most-visited", articles: most_visited(3) %>
+	<% end %>
 	<% if banner != "" and banner != nil %>
 		<%= render "components/medium-banner", banner: banner %>
 	<% end %>

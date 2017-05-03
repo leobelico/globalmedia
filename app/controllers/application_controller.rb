@@ -209,7 +209,6 @@ class ApplicationController < ActionController::Base
 
     @articles = articles - re - current_article
     return @articles.last(3)
-
   end
 
   def set_article
