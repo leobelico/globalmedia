@@ -12,7 +12,10 @@ class ArticlesController < ApplicationController
 		if !user_signed_in? and @article.published == false 
 			redirect_to root_url
 		end
-		if !user_signed_in? 
+		if !user_signed_in? and @article.published == true
+
+			
+			session[:current_position] = "Articles"
 			last_hit = Hit.where(article: @article, created_at: 2.hours.ago..Time.now).last
 
 			if last_hit
@@ -37,10 +40,5 @@ class ArticlesController < ApplicationController
 			params.require(:article).permit(:name, :note, :plain_text, :short_description, :hashtags_names, :articable_id, :articable_type, :keyword_id)
 		end
 
-		def set_article
-			@article = Article.find_by_slug(params[:slug])
-			rescue ActiveRecord::RecordNotFound
-				flash[:alert] = "La página que estabas buscando no existe."
-				redirect_to root_url
-		end
+		
 end

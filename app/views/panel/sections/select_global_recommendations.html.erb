@@ -1,0 +1,34 @@
+<%= form_for :panel, url: {controller: "panel/sections", action: 'set_global_recommendations'}, html: { class: "card admin-form" }  do |f|%>
+
+	<% if @recommendations.first %>
+		<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_sections_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @recommendations.first.article.name) %>
+		<%= f.hidden_field :first_article_id, :id => "first_article_id", value: @recommendations.first.article.id %>
+
+	<% else %>
+		<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_sections_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
+		<%= f.hidden_field :first_article_id, :id => "first_article_id" %>
+	<% end %>
+
+	<% if @recommendations.second %>
+		<%= f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_sections_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @recommendations.second.article.name) %>
+		<%= f.hidden_field :second_article_id, :id => "second_article_id", value: @recommendations.second.article.id %>
+
+	<% else %>
+		<%= f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_sections_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
+		<%= f.hidden_field :second_article_id, :id => "second_article_id" %>
+	<% end %>
+
+
+	<% if @recommendations.second %>
+		<%= f.autocomplete_field(:third_article_id, autocomplete_article_name_panel_sections_path, :id_element => '#third_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @recommendations.third.article.name) %>
+		<%= f.hidden_field :third_article_id, :id => "third_article_id", value: @recommendations.third.article.id %>
+
+	<% else %>
+		<%= f.autocomplete_field(:third_article_id, autocomplete_article_name_panel_sections_path, :id_element => '#third_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
+		<%= f.hidden_field :third_article_id, :id => "third_article_id" %>
+	<% end %>
+
+
+	<%= f.submit %><br/>
+<% end %>
+

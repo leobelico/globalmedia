@@ -81,8 +81,12 @@
 			
 			<% end %>
 			<% if current_user.destroy_articles_permission? %>
+				<% if article.global_recommendation? == false %>
 
-				<%= link_to	"Eliminar", panel_article_path(article), class: "table__cell delete", method: :delete, data: { confirm: "¿Estás seguro de querer eliminar esta nota?" } %>
+					<%= link_to	"Eliminar", panel_article_path(article), class: "table__cell delete", method: :delete, data: { confirm: "¿Estás seguro de querer eliminar esta nota?" } %>
+				<% else %>
+					<p class="table__cell delete">No se puede eliminar</p>
+				<% end %>
 			<% end %>
 
 		</div>
