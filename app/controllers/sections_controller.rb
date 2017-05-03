@@ -1,3 +1,4 @@
+require 'will_paginate/array'
 class SectionsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
 	before_action :set_section, only: [:show, :edit, :update, :destroy]
@@ -5,14 +6,29 @@ class SectionsController < ApplicationController
 	def admin_show
 		@section = Section.find(params[:format])
 		@highlights = SectionHighlight.where(section: @section).order(updated_at: "DESC")
+
 	end
 	
 
 	def show
-		@articles = @section.articles.paginate(page: params[:page], per_page: 18) 	
-	end
+		#articles = @section.articles	
+		# r_articles = []
+  #   	SectionHighlight.where(section: @section).each do |section| 
+      
+  #      		 r_articles << section.article.id
+      
+  #  		 end
+   		 
+  #  		 @articles =  articles - r_articles
+   		  
+  #  		 @articles = @articles.paginate(page: params[:page], per_page: 20)
 
-	
+
+  	@articles = @section.articles.paginate(page: params[:page], per_page: 20)
+
+
+
+	end
 
 
 	private

@@ -32,7 +32,7 @@ gem 'rails-jquery-autocomplete'
 gem 'devise'
 gem 'foreman'
 gem 'aws-sdk', "2.2.8"
-gem 'will_paginate'
+gem 'will_paginate', "~>3.0.5"
 gem 'autoprefixer-rails'
 gem "cancan"
 # Use Redis adapter to run Action Cable in production
