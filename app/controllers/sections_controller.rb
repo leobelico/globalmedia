@@ -12,19 +12,26 @@ class SectionsController < ApplicationController
 
 	def show
 		#articles = @section.articles	
-		# r_articles = []
-  #   	SectionHighlight.where(section: @section).each do |section| 
+		r_articles = []
+    	SectionHighlight.where(section: @section).each do |section| 
       
-  #      		 r_articles << section.article.id
+       		 r_articles << section.article.id
       
-  #  		 end
-   		 
-  #  		 @articles =  articles - r_articles
-   		  
-  #  		 @articles = @articles.paginate(page: params[:page], per_page: 20)
+   		 end
 
+   		articles = []
+   		@section.articles.each do |article|
+   			articles << article.id
+   		end
 
-  	@articles = @section.articles.paginate(page: params[:page], per_page: 20)
+   		most_visited = []
+
+   		most_visited(@section.id).each do |article|
+   			most_visited << article.id
+   		end
+
+  		@articles = Article.find(articles - r_articles - most_visited).paginate(page: params[:page], per_page: 20)
+  		
 
 
 
