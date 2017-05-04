@@ -21,6 +21,13 @@
   </head>
 
   <body>
+  	<% if @article %>
+		<link itemprop="thumbnailUrl" href="<%= image_url 'globalmedia.jpg' %>"> 
+
+		<span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> 
+		      <link itemprop="url" href="<%= image_url 'globalmedia.jpg' %>"> 
+		</span>
+	<% end %>
 	<script data-turbolinks-permanent>
 	  window.fbAsyncInit = function() {
 	    FB.init({
