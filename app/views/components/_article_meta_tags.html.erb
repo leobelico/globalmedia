@@ -1,4 +1,4 @@
-<meta property="og:type" 			content="article">
+<meta property="og:type" 			content="website">
 <meta property="fb:app_id"      	content="502512736803830" /> 
 
 <meta property="og:description" 	content="<%= article.short_description%>">
@@ -9,13 +9,9 @@
 <meta property="og:url" content="<%= article_url(article) %>">
 
 <meta property="og:rich_attachment" content="true">
-<% if article.scheduled_time %>
-	<meta property="og:updated_time" 	content="<%= article.scheduled_time.strftime('%b %e, %l:%M %p') %>" />
-<% else %>
-	<meta property="og:updated_time" 	content="<%= article.updated_at.strftime('%b %e, %l:%M %p') %>" />
-<% end %>
+
 <!-- Change to prod after debug -->
-<meta property="og:image" 			content="<%= article.image %>">
+<meta property="og:image" itemprop="image" 			content="<%= article.image %>">
 
 <link rel="image_src" href="<%= article.image %>">
 
