@@ -9,10 +9,15 @@
 <meta property="og:url" content="<%= article_url(article) %>">
 
 <meta property="og:rich_attachment" content="true">
-<meta property="og:updated_time" 	content="<%= article.created_at.strftime('%b %e, %l:%M %p') %>" />
-
+<% if article.scheduled_time %>
+	<meta property="og:updated_time" 	content="<%= article.scheduled_time.strftime('%b %e, %l:%M %p') %>" />
+<% else %>
+	<meta property="og:updated_time" 	content="<%= article.updated_at.strftime('%b %e, %l:%M %p') %>" />
+<% end %>
 <!-- Change to prod after debug -->
-<meta property="og:image" 			content="http://picsim.de/400x200">
+<meta property="og:image" 			content="<%= article.image %>">
+
+<link rel="image_src" href="<%= article.image %>">
 
 <meta name="twitter:card" 			content="summary_large_image">
 <meta name="twitter:site" 			content="@globalmediamx">
