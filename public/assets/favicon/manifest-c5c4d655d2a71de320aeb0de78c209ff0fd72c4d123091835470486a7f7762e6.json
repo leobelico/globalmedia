@@ -1,13 +1,13 @@
 {
-    "name": "GlobalMedia",
+    "name": "",
     "icons": [
         {
-            "src": "/assets/icons/android-chrome-192x192.png",
+            "src": "/assets/favicon/android-chrome-192x192-e4e34eed2dfd581a3f2adbdc80d71c5251c7288dfda2533d9bb87e3c5da05bd2.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/assets/icons/android-chrome-512x512.png",
+            "src": "/assets/favicon/android-chrome-512x512-8116c1c0b0aea9c415115f7d5caa634a25a57df403704628b4ff950c30dce72b.png",
             "sizes": "512x512",
             "type": "image/png"
         }
