@@ -205,7 +205,10 @@ class ApplicationController < ActionController::Base
     end
 
     current_article = []
-    current_article << Article.find(session[:article_id])
+    
+    if session[:article_id]
+      current_article << Article.find(session[:article_id])
+    end
 
     @articles = articles - re - current_article
     return @articles.last(3)
