@@ -8,19 +8,19 @@
 			</ul>
 	<% end %>
 	
-	<div class="field field--string">
+	<div class="field field--datetime">
 		<label>Fecha de Inicio</label>
-		<%= f.datetime_select :init_date%>
+		<div class="field">
+			
+			<%= f.datetime_select :init_date%>
+		</div>
 	</div>
 	
-	<div class="field field--string">
+	<div class="field field--datetime">
 		<label>Fecha de Fin </label>
-		<%= f.datetime_select :end_date%>
-	</div>
-
-	<div class="field field--string">
-		<label>Nombre del Cliente</label>
-		<%= f.text_field :client_name %>
+		<div class="field">
+			<%= f.datetime_select :end_date%>
+		</div>
 	</div>
 
 	<div class="field field--string">
@@ -66,8 +66,9 @@
 	</div>
 	
 	<div class="field field--string">
-		
-		<%= f.check_box :datasheet %></label>
+		<label>Hoja de datos:</label>
+		<%= f.check_box :datasheet %>
+			
 	</div>
 
 

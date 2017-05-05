@@ -17,7 +17,9 @@
 			<%= link_to "Autores", panel_authors_path, class: "admin-sidebar__link" %>
 
 		<% end %>
-
+	<% if current_user.remote_controls_permission? %>
+		<%= link_to "Controles remotos", panel_controls_path, class: "admin-sidebar__link" %>
+	<% end %>
 	<% if current_user.radio_stations_permission? %>
 		<%= link_to "Radio y T.V.", panel_stations_path, class: "admin-sidebar__link" %>
 	<% end %>
