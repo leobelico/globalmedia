@@ -4,6 +4,7 @@
 		<%= link_to "Eliminar estación", panel_station_path(@station), method: :delete, data: {confirm: "¿Seguro? Esta acción no se puede deshacer"}, class: "delete" %>
 		<%= link_to "Editar estación", edit_panel_station_path(@station), class: "button" %>
 		<%= link_to "Añadir entrada", panel_add_article_to_stations_path(@station), class: "button" %>
+		<%= link_to "Añadir podcast", new_panel_station_podcast_path(@station), class: "button" %>
 	</div>
 </div>
 <div class="table card">
@@ -77,20 +78,46 @@
 
 	<% end %>
 </div>
+<h3 class="card">Podcasts</h3>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__cell">Nombre:</div>
+		<div class="table__cell">URL:</div>
+		<p class="table__cell edit">Editar:</p>
+		<div class="table__cell delete">Eliminar:</div>
 
+	</div>
+	<% @station.podcasts.last(20).each do |podcast| %>
+		<div class="table__row">
+			<p class="table__cell"><%= truncate(podcast.name, length:  60) %></p>
+			<p class="table__cell"><%= truncate(podcast.stream_url, length:  120) %></p>
+			<%= link_to	"Editar", edit_panel_station_podcast_path(@station,podcast), class: "table__cell edit" %>
+
+			<%= link_to	"Eliminar", panel_station_podcast_path(@station,podcast), method: :delete, class: "table__cell delete" %>
+		</div>
+	<% end %>
+</div>
+
+<h3 class="card">Artículos</h3>
 <div class="table card">
 	<div class="table__row">
 		<div class="table__cell">Artículo:</div>
 		<div class="table__cell">Extracto:</div>
 		<div class="table__cell">Sección:</div>
 		<div class="table__cell">Fecha:</div>
+		<div class="table__cell delete">Eliminar:</div>
+
 	</div>
-	<% @station.article_relationships.each do |relationship| %>
+	<% @station.article_relationships.last(20).each do |relationship| %>
 		<div class="table__row">
 			<%= link_to truncate(relationship.article.name, length:  60), relationship.article, class: "table__cell" %>
 			<p class="table__cell"><%= truncate(relationship.article.short_description, length:  120) %></p>
 			<p class="table__cell"><%= relationship.article.section %></p>
 			<p class="table__cell"><%= relationship.article.created_at %></p>
+
+			<%= link_to	"Eliminar", panel_article_relationship_path(relationship), method: :delete, class: "table__cell delete" %>
 		</div>
 	<% end %>
 </div>
+
+

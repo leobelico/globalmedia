@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503140939) do
+ActiveRecord::Schema.define(version: 20170505162159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170503140939) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "name",                      default: ""
-    t.jsonb    "note",                      default: ""
+    t.text     "note",                      default: ""
     t.text     "short_description",         default: ""
     t.integer  "articable_id"
     t.string   "articable_type"
@@ -147,6 +147,15 @@ ActiveRecord::Schema.define(version: 20170503140939) do
     t.string   "slug",       default: ""
   end
 
+  create_table "podcasts", force: :cascade do |t|
+    t.string   "name",       default: ""
+    t.string   "stream_url", default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "station_id"
+    t.index ["station_id"], name: "index_podcasts_on_station_id", using: :btree
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.string   "name",              default: ""
     t.string   "image",             default: ""
@@ -252,6 +261,7 @@ ActiveRecord::Schema.define(version: 20170503140939) do
   add_foreign_key "highlights", "articles"
   add_foreign_key "hit_objectives", "sections"
   add_foreign_key "hits", "articles"
+  add_foreign_key "podcasts", "stations"
   add_foreign_key "section_banners", "banners"
   add_foreign_key "section_highlights", "articles"
   add_foreign_key "section_highlights", "sections"
