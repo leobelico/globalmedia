@@ -96,7 +96,8 @@ sections.each do |section|
 				image: images[i], 
 				image_thumbnail: images[i],
 				draft: 1,
-				published: true
+				published: true,
+				video_url: "https://www.youtube.com/watch?v=Mh5LY4Mz15o"
 			}
 		])
 	end
