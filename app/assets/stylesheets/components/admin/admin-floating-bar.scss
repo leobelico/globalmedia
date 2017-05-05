@@ -1,0 +1,16 @@
+.floating-bar {
+	display:  flex; 
+	flex-direction:  column; 
+	position:  fixed; 
+	top:  8px; 
+	left:  8px; 
+	z-index:  1000; 
+}
+.floating-bar__link {
+	margin-bottom:  8px;
+	padding:  12px; 
+	border-radius:  21px; 
+	box-shadow:  rgba(0, 0, 0, 0.0980392) 0px 2px 4px 0px;
+	background-color:  $tertiary; 
+	color:  #ffffff;
+}

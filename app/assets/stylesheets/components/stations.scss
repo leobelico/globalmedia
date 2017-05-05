@@ -108,9 +108,23 @@
 			padding-top:  12px;
 		}
 	}
-
-
-
+}
+.playlists {
+	display:  flex; 
+	flex-direction:  row; 
+	justify-content:  space-between; 
+	width:  100%; 
+	margin-bottom:  8px; 
+	.playlist {
+		height:  156.5px; 
+		width:  156.5px; 
+		img {
+			height:  100%; 
+			width:  100%; 
+			object-fit:  cover; 
+			object-position:  center center; 
+		}
+	}
 }
 .station video {
 	width:  100%; 

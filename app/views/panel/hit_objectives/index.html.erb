@@ -1,24 +1,39 @@
 <div class="panel__header">
-	<h2 class="title panel__title"><span class="current">Objetivos de Vistas por página</span> <small></small></h2>
+	<h2 class="title panel__title"><span class="current">Objetivos de <%= Time.now.strftime("%B") %></span></h2>
 	<div class="panel__actions">
 
 		<% if @hit_objectives.count > 0 %>	
 			<%= link_to "Editar objetivos",  panel_edit_multiple_hit_objectives_path, class: "button" %>
 		<% end %>
-		<% if Time.now.strftime("%B") != @hit_objectives.last.created_at.strftime("%B") %>
+
+		<% if @hit_objectives.count > 0 and (Time.now.strftime("%B") != @hit_objectives.last.created_at.strftime("%B")) %> 
+			<%= link_to "Nuevos Objetivos", new_panel_hit_objective_path, class: "button" %>	
+		<% end %>
+		<% if @hit_objectives.count == 0 %>
 			<%= link_to "Nuevos Objetivos", new_panel_hit_objective_path, class: "button" %>	
 		<% end %>
 	</div>
 </div>
-<div class="card">
+
+<div class="table card">
+
 	<div class="table__row">
-		<p class="table__cell">Objetivos de <%= Time.now.strftime("%B") %>:</p>
+		<p class="table__cell f-4">Sección:</p>
+		<p class="table__cell">Objetivo del mes:</p>
+		<p class="table__cell">Vistas del mes:</p>
+		<p class="table__cell">Porcentaje:</p>
 	</div>
-	<% @hit_objectives.last(Section.all.count).each do |objective| %>
-			<div class="table__row">
-				
-				<p class="table__cell"><%= objective.section.name %></p>
-				<p class="table__cell"><%= objective.objective %></p>
-			</div>
+	<% @hit_objectives.each do |objective| %>
+		<div class="table__row">
+			<p class="table__cell f-4"><%= objective.section.name %></p>
+			<p class="table__cell"><%= objective.objective %></p>
+			<p class="table__cell"><%= objective.section.total_hits_in_current_month %></p>
+			<% percentage = 0.0 %>
+			<% percentage = objective.section.total_hits_in_current_month.to_f/objective.objective.to_f %>
+			<% percentage = percentage*100 %>
+			<% percentage = percentage.round(2) %>
+			<p class="table__cell"><%= percentage %>%</p>
+		</div>
 	<% end %>
+</div>	
 </div>

@@ -36,7 +36,28 @@
 				<%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
 			<% end %>
 		</div>
-
+		<div class="playlists">
+			<% if @station.playlist_1 != "" %>
+				<a target="_blank" href="<%= @station.playlist_1 %>" class="playlist">
+					<%= image_tag @station.playlist_1_image %>
+				</a>
+			<% end %>
+			<% if @station.playlist_2 != "" %>
+				<a target="_blank" href="<%= @station.playlist_2 %>" class="playlist">
+					<%= image_tag @station.playlist_2_image %>
+				</a>
+			<% end %>
+			<% if @station.playlist_3 != "" %>
+				<a target="_blank" href="<%= @station.playlist_3 %>" class="playlist">
+					<%= image_tag @station.playlist_3_image %>
+				</a>
+			<% end %>
+			<% if @station.playlist_4 != "" %>
+				<a target="_blank" href="<%= @station.playlist_4 %>" class="playlist">
+					<%= image_tag @station.playlist_4_image %>
+				</a>
+			<% end %>
+		</div>
 		<div class="station__recommendations">
 			<% @recommendations.each do |recommendation| %>
 				<%= link_to recommendation, class: "recommendation__image" do %>

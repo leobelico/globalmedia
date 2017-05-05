@@ -18,6 +18,15 @@
 				<% end %>
 			<% end %>
 		</div>
+		<h4 class="section__title">Noticieros</h4>
+		<div class="section-articles-container">
+			<% @news_channels.each do |program| %>
+				<%= link_to program, class: "station-preview" do %>
+					<%= image_tag program.image, class: "station-preview__image" %>
+					<h4 class="station-preview__name"><%= program.name %></h4>
+				<% end %>
+			<% end %>
+		</div>
 	</div>
 	<%= render "components/stations-sidebar", facebook: "", twitter: "" %>
 </div>

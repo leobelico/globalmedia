@@ -1,5 +1,28 @@
 <div class="panel__header">
 	<h4 class="panel__title">Vistas a Página</h4>
+	<div class="panel__actions">
+		<%= link_to "Ir a Objetivos", panel_hit_objectives_path, class: "button" %>
+	</div>	
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell f-4">Sección:</p>
+		<p class="table__cell">Objetivo del mes:</p>
+		<p class="table__cell">Vistas del mes:</p>
+		<p class="table__cell">Porcentaje:</p>
+	</div>
+	<% @hit_objectives.each do |objective| %>
+		<div class="table__row">
+			<p class="table__cell f-4"><%= objective.section.name %></p>
+			<p class="table__cell"><%= objective.objective %></p>
+			<p class="table__cell"><%= objective.section.total_hits_in_current_month %></p>
+			<% percentage = 0.0 %>
+			<% percentage = objective.section.total_hits_in_current_month.to_f/objective.objective.to_f %>
+			<% percentage = percentage*100 %>
+			<% percentage = percentage.round(2) %>
+			<p class="table__cell"><%= percentage %>%</p>
+		</div>
+	<% end %>
 </div>
 <div class="table card">
 	<div class="table__row">
@@ -8,7 +31,7 @@
 		<p class="table__cell f-1">Vistas a Página:</p>
 		<p class="table__cell f-3">Hora inicial:</p>
 		<p class="table__cell f-3">Hora final:</p>
-		<p class="table__cell f-3">Totales del Mes:</p>
+		<p class="table__cell f-1">Totales del Mes:</p>
 	</div>
 <% @hits.each do |hit| %>
 	<div class="table__row">
