@@ -426,12 +426,22 @@ stations_image = "https://cdn.dribbble.com/users/482851/screenshots/2717061/radi
 stations_image_2 = "https://cdn.dribbble.com/users/229993/screenshots/2924148/spaceradio4dr.jpg"
 stations_name = "Estación "
 stream_url = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1xtra_mf_p"
+playlist_image = "https://images.8tracks.com/cover/i/008/729/179/bedcovers1-8272.jpg?rect=0,0,540,540&q=98&fm=jpg&fit=max"
+playlist = "https://open.spotify.com/user/spotifycharts/playlist/37i9dQZEVXbO3qyFxbkOE1"
 for i in 0..7
 	stations = Station.create([
 		{
 			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
 			image: stations_image,
-			stream_url: stream_url
+			stream_url: stream_url, 
+			playlist_1: playlist,
+			playlist_1_image: playlist_image,
+			playlist_2: playlist,
+			playlist_2_image: playlist_image,
+			playlist_3: playlist,
+			playlist_3_image: playlist_image,
+			playlist_4: playlist,
+			playlist_4_image: playlist_image
 		}
 	])
 end

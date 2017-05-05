@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503140939) do
+ActiveRecord::Schema.define(version: 20170505151114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,15 +184,24 @@ ActiveRecord::Schema.define(version: 20170503140939) do
   end
 
   create_table "stations", force: :cascade do |t|
-    t.string   "name",       default: ""
-    t.string   "stream_url", default: ""
-    t.string   "image",      default: ""
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "slug",       default: ""
+    t.string   "name",             default: ""
+    t.string   "stream_url",       default: ""
+    t.string   "image",            default: ""
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "slug",             default: ""
     t.string   "twitter"
     t.string   "facebook"
-    t.boolean  "video",      default: false
+    t.boolean  "video",            default: false
+    t.string   "playlist_1",       default: ""
+    t.string   "playlist_2",       default: ""
+    t.string   "playlist_3",       default: ""
+    t.string   "playlist_4",       default: ""
+    t.string   "playlist_1_image", default: ""
+    t.string   "playlist_2_image", default: ""
+    t.string   "playlist_3_image", default: ""
+    t.string   "playlist_4_image", default: ""
+    t.boolean  "news",             default: false
   end
 
   create_table "timetables", force: :cascade do |t|

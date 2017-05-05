@@ -57,6 +57,8 @@
 		<%= render "components/header" if !user_signed_in? || !panel_url %>
 		<%= render "components/navbar" if !panel_url %>
 	</div>
+	<%= render "components/admin/admin-floating-bar" if !panel_url and user_signed_in? %>
+	
 	<% if !panel_url %>
 		<script>
 			var navflag = false; 

@@ -3,6 +3,7 @@ class StationsController < ApplicationController
 	def index 
 		@radio_programs = Station.where(video: false)
 		@video_programs = Station.where(video: true)
+		@news_channels = Station.where(news: true)
 	end
 	def show
 		@recommendations = Station.last(5)
