@@ -1,6 +1,9 @@
 <div class="principal-highlight">
 	<%= link_to article, class: "principal-highlight__image" do %>
 		<%= image_tag article.image %>
+		<% if article.exclusive? %>
+			<p class="exclusive">EXCLUSIVA</p>
+		<% end %>
 	<% end %>
 	<div class="article-preview__info principal-highlight__info">
 		<%= link_to article do %>

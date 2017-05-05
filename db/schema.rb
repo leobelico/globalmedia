@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170505162159) do
+ActiveRecord::Schema.define(version: 20170505204008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20170505162159) do
     t.datetime "scheduled_time"
     t.string   "video_url",                 default: ""
     t.integer  "author_id"
+    t.boolean  "exclusive",                 default: false
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
     t.index ["author_id"], name: "index_articles_on_author_id", using: :btree
     t.index ["keyword_id"], name: "index_articles_on_keyword_id", using: :btree

@@ -154,14 +154,13 @@ class ApplicationController < ActionController::Base
     section = Section.find(id)
     @articles = []
     SectionHighlight.where(section: section).each do |section| 
-      
         @articles << section.article
-      
     end
 
     current_article = []
-    current_article << Article.find(session[:article_id])
-
+    if session[:article_id]
+      current_article << Article.find(session[:article_id])
+    end
     return @articles - current_article
     #SectionHighlight.where(section: section).last(3)
   end
@@ -170,7 +169,9 @@ class ApplicationController < ActionController::Base
     @articles = Article.where(global_recommendation: true, highlight: false, published: true).order(updated_at: "ASC").last(3)
 
     current_article = []
-    current_article << Article.find(session[:article_id])
+    if session[:article_id]
+      current_article << Article.find(session[:article_id])
+    end
 
     return @articles - current_article
   end
@@ -216,7 +217,9 @@ class ApplicationController < ActionController::Base
 
   def set_article
       @article = Article.find_by_slug(params[:slug])
-      session[:article_id] = @article.id
+      if @article 
+        session[:article_id] = @article.id
+      end
       
       rescue ActiveRecord::RecordNotFound
         flash[:alert] = "La página que estabas buscando no existe."

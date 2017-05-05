@@ -21,6 +21,9 @@
 					<%= image_tag article.image, class: "sp__image" %>
 					<% end %>
 					<h4 class="small-title"><%= article.name %></h4>
+					<% if article.exclusive? %>
+						<p class="exclusive">EXCLUSIVA</p>
+					<% end %>
 				<% end %>
 				<%= render "components/social-media-links", article: article %>
 			</div>

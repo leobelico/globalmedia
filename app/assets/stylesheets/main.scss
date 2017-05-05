@@ -23,7 +23,9 @@ $admin-sidebar-width:  260px;
 $main-content-width: 650px;
 $side-content-width: 342px;
 
-
+* {
+	position:  relative; 
+}
 
 html, 
 body {
@@ -170,6 +172,7 @@ body {
 @import "components/footer"; 
 @import "components/char-count"; 
 @import "components/hit-objectives"; 
+@import "components/exclusives"; 
 
 @import "components/admin/admin-sidebar"; 
 @import "components/admin/admin-pagination"; 

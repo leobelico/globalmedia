@@ -7,6 +7,9 @@
 		<div class="section-recommendations__article">
 			<%= link_to article, class: "wrapper-link" do %>
 				<%= image_tag article.image, class: "section-recommendations__image" %>
+				<% if article.exclusive? %>
+					<p class="exclusive">EXCLUSIVA</p>
+				<% end %>
 				<h4 class="small-title"><%= article.name %></h4>
 			<% end %>
 			<%= render "components/social-media-links", article: article %>

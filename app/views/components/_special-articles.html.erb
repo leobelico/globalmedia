@@ -16,7 +16,7 @@
 
 		<%= image_tag articles.first.image, class: "special-articles__image" %>
 	<% else %>
-		<iframe src="<%= articles.first.video_url %>" class="special-articles__image" frameborder="0" allowfullscreen></iframe>	
+		<iframe class="special-articles__image" src="<%= articles.first.video_url %>" frameborder="0" allowfullscreen></iframe>	
 	<% end %>
 	<%= link_to articles[0].name, articles[0], class: "special-articles__article" %>
 	<% articles[1..-1].each do |article| %>
