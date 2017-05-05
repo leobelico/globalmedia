@@ -59,6 +59,7 @@ Rails.application.routes.draw do
     end
     resources :stations, param: :slug do 
       resources :timetables 
+      resources :podcasts 
     end
     resources :timetables, only: [:show, :destroy] 
     resources :sections, param: :slug do 
