@@ -500,8 +500,7 @@ authors = Author.create([
 	{name: "Fred Weasley", logo: images[3]},
 	{name: "George Weasley", logo: images[3]},
 	{name: "Ginny Weasley", logo: images[3]},
-	
-	])
+])
 
 
 
