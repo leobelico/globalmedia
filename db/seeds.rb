@@ -426,6 +426,7 @@ stations_image = "https://cdn.dribbble.com/users/482851/screenshots/2717061/radi
 stations_image_2 = "https://cdn.dribbble.com/users/229993/screenshots/2924148/spaceradio4dr.jpg"
 stations_name = "Estación "
 stream_url = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1xtra_mf_p"
+video_stream = "http://38.96.148.213:1935/CamarasGlobal/Camara1.sdp/playlist.m3u8"
 playlist_image = "https://images.8tracks.com/cover/i/008/729/179/bedcovers1-8272.jpg?rect=0,0,540,540&q=98&fm=jpg&fit=max"
 playlist = "https://open.spotify.com/user/spotifycharts/playlist/37i9dQZEVXbO3qyFxbkOE1"
 for i in 0..7
@@ -450,7 +451,17 @@ for i in 0..3
 		{
 			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
 			image: stations_image_2,
-			stream_url: "http://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov/playlist.m3u8",
+			stream_url: video_stream,
+			news: true
+		}
+	])
+end
+for i in 0..3
+	stations = Station.create([
+		{
+			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			image: stations_image_2,
+			stream_url: video_stream,
 			video: true
 		}
 	])
@@ -490,6 +501,17 @@ User.all.each do |user|
 	)
 end
 
+for i in 0..6 
+	camera = Camera.create([
+		{
+			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			location: "Avenida Salvador Nava Martínez " + (0...6).map { ('0'..'9').to_a[rand(9)] }.join,
+			lat: "22.140166",
+			lng: "-101.004523",
+			stream: video_stream
+		}
+	]) 
+end
 
 authors = Author.create([
 	{name: "Ninguno", logo: images[3]},

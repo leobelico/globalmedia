@@ -92,15 +92,11 @@
 	 	</div>
  	<% end %>
 	<%= render "components/footer" if !panel_url %>
+	<script>
+		$(document).on('turbolinks:click', function(event) {
+			clear_media();
+		});
+	</script>
   </body>
-<script>
-	document.addEventListener("turbolinks:before-visit", function() {
-	  if(document.getElementById('audio')) {
-	    document.getElementById('audio').remove();
-	  }
-	  if(document.getElementById('video')) {
-	    document.getElementById('video').remove();
-	  }
-	});
-</script>
+
 </html>
