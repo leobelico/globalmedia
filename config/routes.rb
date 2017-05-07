@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   namespace :panel do
    
     resources :keywords, param: :slug 
-      
+    resources :cameras
 
     get "edit_multiple_keywords", to: "keywords#edit_multiple"
     #post "edit_multiple_keywords", to: "keywords#edit_multiple"
