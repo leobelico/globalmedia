@@ -35,7 +35,7 @@ class Panel::StationsController < ApplicationController
 		if @station.update(station_params)
 			redirect_to panel_station_path(@station)
 		else
-			render action: "new"
+			render action: "edit"
 		end
 	end
 
