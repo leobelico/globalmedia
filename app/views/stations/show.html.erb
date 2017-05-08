@@ -41,6 +41,7 @@
 				<%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
 			<% end %>
 		</div>
+		<div class="radio-banner__tune-in">Nuestras Playlists</div>
 		<div class="playlists">
 			<% if @station.playlist_1 != "" %>
 				<a target="_blank" href="<%= @station.playlist_1 %>" class="playlist">
@@ -63,6 +64,7 @@
 				</a>
 			<% end %>
 		</div>
+		<div class="radio-banner__tune-in">Estaciones recomendadas</div>
 		<div class="station__recommendations">
 			<% @recommendations.each do |recommendation| %>
 				<%= link_to recommendation, class: "recommendation__image" do %>
@@ -70,6 +72,7 @@
 				<% end %>
 			<% end %>
 		</div>
+		<div class="radio-banner__tune-in">Lo más reciente</div>
 		<div class="station__articles">
 			
 			<% @station.article_relationships.each do |relationship| %>
