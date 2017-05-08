@@ -1,6 +1,6 @@
 <div class="secondary-highlight">
 	<%= link_to article, class: "image-link" do %>
-		<img src="<%= article.image %>" alt="" class="secondary-highlight__image">
+		<%= image_tag article.image, class: "secondary-highlight__image" %>
 		<% if article.exclusive? %>
 			<p class="exclusive">EXCLUSIVA</p>
 		<% end %>
