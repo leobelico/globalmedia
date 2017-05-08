@@ -21,7 +21,6 @@
 		<p class="table__cell f-3">Extracto:</p>
 		<p class="table__cell">Sección:</p>
 		<p class="table__cell">Escritor:</p>
-		<p class="table__cell">Estatus:</p>
 		<p class="table__cell">Vistas:</p>
 		<p class="table__cell">Fecha:</p>
 		<p class="table__cell edit">Editar:</p>
@@ -61,12 +60,7 @@
 			<p class="table__cell f-3"><%= truncate(article.short_description, length: 40) %></p>	
 			<%= link_to article.section, panel_section_path(article.section), class: "table__cell" %>
 			<p class="table__cell"><%= article.user.full_name %></p>	
-			<% if article.draft? %>
-				<p class="table__cell">Borrador</p>	
-			<% else %>
-				<p class="table__cell">Aprobado</p>	
-
-			<% end %>
+			
 			<p class="table__cell">
 				<% total = 0 %>
 				<% article.hits.each do |hits| %>			
