@@ -80,8 +80,8 @@ class Panel::ArticlesController < ApplicationController
 
 			end
 			if @article.draft == 2
-				@article.update_attributes(published: true) 
-
+				@article.update_attributes(published: true)
+				p "PUBLICADO"
 			end
 			redirect_to @article
 		else
