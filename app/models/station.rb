@@ -7,7 +7,7 @@ class Station < ApplicationRecord
 	before_create :to_slug
 	def to_param
     	slug
-  	end
+  end
 	def to_slug
       #strip the string
       ret = self.name.strip
