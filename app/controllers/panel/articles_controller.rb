@@ -75,8 +75,12 @@ class Panel::ArticlesController < ApplicationController
 
 		if @article.update(article_params)
 			@article.update_attributes(scheduled_time: somedate)
-			if @article.draft == 0 or @article.draft == -1
+			if @article.draft == 0 or @article.draft == -1 
 				@article.update_attributes(published: false)
+
+			end
+			if @article.draft == 2
+				@article.update_attributes(published: true) 
 
 			end
 			redirect_to @article
