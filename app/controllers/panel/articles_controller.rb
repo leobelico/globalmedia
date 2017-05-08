@@ -39,6 +39,10 @@ class Panel::ArticlesController < ApplicationController
 
 		if @article.save
 			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s) 
+			if @articles.draft == 2
+				@article.update_attributes(published: true , draft: 1) 
+
+			end
 			redirect_to @article
 		else
 			respond_to do |format|
