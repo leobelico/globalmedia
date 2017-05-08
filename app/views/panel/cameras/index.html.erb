@@ -6,15 +6,16 @@
 </div>
 <div class="table card">
 	<div class="table__row">
-		<div class="table__cell">Nombre:</div>
-		<div class="table__cell">Locación:</div>
-		<div class="table__cell">Stream:</div>
+		<div class="table__cell f-2">Nombre:</div>
+		<div class="table__cell  f-3">Locación:</div>
+		<div class="table__cell">Editar:</div>
+		<!-- <div class="table__cell">Eliminar:</div> -->
 	</div>
 	<% @cameras.each do |camera| %>
 		<div class="table__row">
-			<%= link_to camera.name, panel_camera_path(station), class: "table__cell" %>
-			<p class="table__cell"><%= camera.location %></p>	
-			<p class="table__cell"><%= camera.stream %></p>	
+			<%= link_to camera.name, camera_path(camera), class: "table__cell f-2" %>
+			<p class="table__cell f-3"><%= camera.location %></p>	
+			<%= link_to "Editar", edit_panel_camera_path(camera), class: "table__cell edit" %>	
 		</div>
 	<% end %>
 	<% if @cameras.count == 0 %>

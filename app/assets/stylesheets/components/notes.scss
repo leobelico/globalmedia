@@ -5,7 +5,18 @@
 		margin-bottom:  18px; 
 	}
 }
-
+.exclusive--note {
+	width:  100%; 
+	padding:  12px; 
+	box-sizing:  border-box; 
+	color:  #ffffff; 
+	background-color: $primary;  
+	font-weight:  900; 
+	font-size:  13.5px; 
+	text-transform:  uppercase; 
+	letter-spacing:  2px; 
+	margin-bottom:  12px; 
+}
 .article__info {
 	display:  flex; 
 	flex-direction:  row; 

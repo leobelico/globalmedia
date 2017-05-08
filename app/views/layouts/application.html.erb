@@ -47,11 +47,11 @@
 		</span>
 	<% end %>
 
-
   	<% panel_url = request.url.include? (request.base_url + "/panel")%>
 	<% if !panel_url %>
 		<div class="top-padder"></div>
 	<% end %>
+	<p class="copied-link">Vínculo copiado</p>
 	<div class="navigation">
 		
 		<%= render "components/topbar" if !panel_url %>	

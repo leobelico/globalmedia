@@ -19,7 +19,7 @@ class Panel::CamerasController < ApplicationController
 	def edit 
 	end
 	def update
-		if @camera.update(camer_params)
+		if @camera.update(camera_params)
 			redirect_to panel_cameras_path
 		else
 			render action: "edit"
@@ -35,7 +35,7 @@ class Panel::CamerasController < ApplicationController
 			@camera = Camera.find(params[:id])
 		end
 		def camera_params
-			params.require(:camera).permit(:name, :location, :lat, :lnt, :stream, :cover)
+			params.require(:camera).permit(:name, :location, :lat, :lng, :stream, :cover)
 		end
 		def set_s3_direct_post
     		@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')

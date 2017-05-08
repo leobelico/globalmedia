@@ -501,8 +501,7 @@ User.all.each do |user|
 	)
 end
 
-for i in 0..6 
-	camera = Camera.create([
+	camera = Camera.create(
 		{
 			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
 			location: "Avenida Salvador Nava Martínez " + (0...6).map { ('0'..'9').to_a[rand(9)] }.join,
@@ -510,8 +509,44 @@ for i in 0..6
 			lng: "-101.004523",
 			stream: video_stream
 		}
-	]) 
-end
+	) 
+	camera = Camera.create(
+		{
+			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			location: "Avenida Salvador Nava Martínez " + (0...6).map { ('0'..'9').to_a[rand(9)] }.join,
+			lat: "23.140166",
+			lng: "-100.004523",
+			stream: video_stream
+		}
+	) 
+	camera = Camera.create(
+		{
+			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			location: "Avenida Salvador Nava Martínez " + (0...6).map { ('0'..'9').to_a[rand(9)] }.join,
+			lat: "23.130166",
+			lng: "-100.104523",
+			stream: video_stream
+		}
+	) 
+	camera = Camera.create(
+		{
+			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			location: "Avenida Salvador Nava Martínez " + (0...6).map { ('0'..'9').to_a[rand(9)] }.join,
+			lat: "22.530166",
+			lng: "-101.104523",
+			stream: video_stream
+		}
+	) 
+	camera = Camera.create(
+		{
+			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			location: "Avenida Salvador Nava Martínez " + (0...6).map { ('0'..'9').to_a[rand(9)] }.join,
+			lat: "25.530166",
+			lng: "-101.104523",
+			stream: video_stream
+		}
+	) 
+
 
 authors = Author.create([
 	{name: "Ninguno", logo: images[3]},
