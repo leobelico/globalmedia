@@ -59,4 +59,9 @@ class HighlightsController < ApplicationController
 		def get_all_highlights
 			@highlights = Highlight.all.order(order: "ASC")
 		end
+
+		def get_autocomplete_items(parameters)
+      		items = active_record_get_autocomplete_items(parameters)
+      		items = items.where(published: true)
+  		end
 end
