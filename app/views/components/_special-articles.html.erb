@@ -1,4 +1,8 @@
-<div class="special-articles">
+<% if type == "Investigación Especial" %>
+	<div class="special-articles investigation">
+<% else %>
+	<div class="special-articles">
+<% end %>
 	<div class="special-articles__type">
 		<p class="type"><%= type %></p>
 

@@ -27,6 +27,10 @@
 		text-align:  center; 
 	}
 }
+.header__info {
+	display:  flex; 
+	flex-direction:  column; 
+}
 .station__header {
 	display:  flex; 
 	flex-direction:  row; 
@@ -38,11 +42,17 @@
 .station__name {
 	font-size:  24px; 
 	font-weight:  900; 
-	color:  $amber; 
+	margin-bottom:  12px; 
+	color:  #000000; 
 	span {
 		font-size:  13.5px; 
 		font-weight:  400;
 	} 
+}
+.station__description {
+	font-size:  13.5px; 
+	color:  #424242; 
+	font-weight:  400; 
 }
 .station__image {
 	height:  206px; 
@@ -57,9 +67,10 @@
 	flex-direction:  row; 
 	align-items:  center; 
 	justify-content:  space-between;
+	margin-bottom:  8px; 
 	.recommendation__image {
-		width:  117.2px;
-		height:  117.2px;
+		width:  101.67px;
+		height:  101.67px;
 		img {
 			height:  100%; 
 			width:  100%; 
@@ -74,7 +85,7 @@
 	align-items:  flex-start; 
 	justify-content:  space-between;   
 	width:  100%;
-	border-top:  solid 8px $amber;
+	border-top:  solid 8px $tertiary;
 	padding-top:  12px;
 	margin-top:  24px;
 	margin-bottom:  24px;

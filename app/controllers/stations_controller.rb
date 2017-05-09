@@ -1,12 +1,12 @@
 class StationsController < ApplicationController
 	before_action :set_station, only: [:show]
 	def index 
-		@radio_programs = Station.where(video: false)
-		@video_programs = Station.where(video: true)
-		@news_channels = Station.where(news: true)
+		@radio_programs = Station.where(video: false, news: false).order(frequency: "ASC")
+		@video_programs = Station.where(video: true).order(frequency: "ASC")
+		@news_channels = Station.where(news: true).order(frequency: "ASC")
 	end
 	def show
-		@recommendations = Station.last(5)
+		@recommendations = Station.where("video = 'false' AND news = 'false' AND id != '#{@station.id}'") 
 	    time = Time.now
 	    if time.sunday? 
 	      @timetables = Timetable.where("sunday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}' AND station_id = '#{@station.id}'").first(5)

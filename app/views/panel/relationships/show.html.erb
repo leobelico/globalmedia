@@ -1,7 +1,7 @@
 <div class="panel__header">
 	<h2 class="title panel__title"><span><%= "Colaborador" if @relationship.relationship_type == "Collaborator" %></span> / <span class="current"><%= @relationship.name%></span></h2>
 	<div class="panel__actions">	
-		<%= link_to "+ Artículo", panel_add_article_to_investigations_path(@relationship), class: "button" %>
+		<%= link_to "Añadir artículo", panel_add_article_to_investigations_path(@relationship), class: "button" %>
 	</div>
 </div>
 <div class="table card">
@@ -22,7 +22,8 @@
 		<div class="table__cell">Extracto:</div>
 		<div class="table__cell">Sección:</div>
 		<div class="table__cell">Fecha:</div>
-		<div class="table__cell delete">Eliminar:</div>
+		<div class="table__cell">Editar:</div>
+		<div class="table__cell">Eliminar:</div>
 	</div>
 	<% @relationship.article_relationships.each do |relationship| %>
 		<% if relationship.article %>
@@ -31,6 +32,7 @@
 				<p class="table__cell"><%= truncate(relationship.article.short_description, length:  120) %></p>
 				<p class="table__cell"><%= relationship.article.section %></p>
 				<p class="table__cell"><%= relationship.article.created_at %></p>
+				<%= link_to "Editar", edit_panel_article_path(relationship.article), class: "table__cell edit" %>
 				<%= link_to	"Eliminar", panel_article_relationship_path(relationship), class: "table__cell delete", method: :delete, data: { confirm: "¿Estás seguro de querer eliminar esta nota?" } %>
 			</div>
 		<% end %>

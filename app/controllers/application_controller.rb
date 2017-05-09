@@ -34,7 +34,19 @@ class ApplicationController < ActionController::Base
   helper_method :check_remote_controls_permission
   helper_method :check_news_chief
   helper_method :set_article
+  helper_method :get_radio_stations
+  helper_method :get_video_stations
+  helper_method :get_news_stations
 
+  def get_radio_stations
+    @radio_stations = Station.where(video: false, news: false).order(frequency: "ASC")
+  end
+  def get_video_stations 
+    @video_stations = Station.where(video: true).order(frequency: "ASC")
+  end
+  def get_news_stations
+    @news_stations = Station.where(news: true).order(frequency: "ASC")
+  end
   def check_hits_permission
     if !current_user.hits_permission?
       redirect_to panel_path
@@ -105,31 +117,31 @@ class ApplicationController < ActionController::Base
   def get_current_programs
     time = Time.now
     if time.sunday? 
-      @timetables = Timetable.where("sunday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
+      @timetables = Timetable.includes(:station).where("sunday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency desc").first(7)
     end
    
     if time.monday? 
-      @timetables = Timetable.where("monday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
+      @timetables = Timetable.includes(:station).where("monday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency desc").first(7)
     end
    
     if time.tuesday? 
-      @timetables = Timetable.where("tuesday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
+      @timetables = Timetable.includes(:station).where("tuesday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency desc").first(7)
     end
    
     if time.wednesday? 
-      @timetables = Timetable.where("wednesday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
+      @timetables = Timetable.includes(:station).where("wednesday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency desc").first(7)
     end
    
     if time.thursday? 
-      @timetables = Timetable.where("thursday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
+      @timetables = Timetable.includes(:station).where("thursday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency desc").first(7)
     end
    
     if time.friday? 
-      @timetables = Timetable.where("friday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
+      @timetables = Timetable.includes(:station).where("friday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency desc").first(7)
     end
    
     if time.saturday? 
-      @timetables = Timetable.where("saturday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").first(7)
+      @timetables = Timetable.includes(:station).where("saturday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency desc").first(7)
     end
    
     p @timetables
