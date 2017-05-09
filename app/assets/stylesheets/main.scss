@@ -27,7 +27,16 @@ $side-content-width: 342px;
 * {
 	position:  relative; 
 }
-
+.line {
+	width:  75px; 
+	height:  3px; 
+	background-color:  $tertiary; 
+	border:  none; 
+	margin-top:  0; 
+	margin-left:  0; 
+	margin-right:  0; 
+	margin-bottom:  8px;
+}
 html, 
 body {
 	height:  100%; 

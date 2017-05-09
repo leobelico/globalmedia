@@ -1,7 +1,16 @@
+<div class="gallery">
+	<div class="gallery__image"></div>
+	<div class="gallery__controls">
+		<div class="next"></div>
+		<div class="previous"></div>
+	</div>
+</div>
 <div class="interface--row">
 
 	<div class="note note--display">
-		<p class="exclusive--note">Exclusiva</p>
+		<% if @article.exclusive? %>
+			<p class="exclusive--note">Exclusiva</p>
+		<% end %>
 		<h1 class="title"><%= @article.name %></h1>	
 		<div class="article__info">
 			<% if @article.author and @article.author.name != "Ninguno" %>

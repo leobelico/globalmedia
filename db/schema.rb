@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170507072251) do
+ActiveRecord::Schema.define(version: 20170509184658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,6 +213,8 @@ ActiveRecord::Schema.define(version: 20170507072251) do
     t.string   "playlist_3_image", default: ""
     t.string   "playlist_4_image", default: ""
     t.boolean  "news",             default: false
+    t.float    "frequency",        default: 0.0
+    t.text     "description",      default: ""
   end
 
   create_table "timetables", force: :cascade do |t|
@@ -232,6 +234,7 @@ ActiveRecord::Schema.define(version: 20170507072251) do
     t.boolean  "sunday",             default: false
     t.string   "broadcasters"
     t.string   "broadcaster_image"
+    t.text     "description",        default: ""
     t.index ["station_id"], name: "index_timetables_on_station_id", using: :btree
   end
 

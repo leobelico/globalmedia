@@ -429,8 +429,9 @@ stream_url = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1xtra_mf_p"
 video_stream = "http://38.96.148.213:1935/CamarasGlobal/Camara1.sdp/playlist.m3u8"
 playlist_image = "https://images.8tracks.com/cover/i/008/729/179/bedcovers1-8272.jpg?rect=0,0,540,540&q=98&fm=jpg&fit=max"
 playlist = "https://open.spotify.com/user/spotifycharts/playlist/37i9dQZEVXbO3qyFxbkOE1"
-for i in 0..7
-	stations = Station.create([
+
+for i in 0..6
+	station = Station.create(
 		{
 			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
 			image: stations_image,
@@ -444,27 +445,27 @@ for i in 0..7
 			playlist_4: playlist,
 			playlist_4_image: playlist_image
 		}
-	])
+	)
 end
-for i in 0..3
-	stations = Station.create([
+for i in 0..2
+	station = Station.create(
 		{
 			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
 			image: stations_image_2,
 			stream_url: video_stream,
 			news: true
 		}
-	])
+	)
 end
-for i in 0..3
-	stations = Station.create([
+for i in 0..2
+	station = Station.create(
 		{
 			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
 			image: stations_image_2,
 			stream_url: video_stream,
 			video: true
 		}
-	])
+	)
 end
 
 timetable_image = "http://www.sothebys.com/content/dam/sothebys-pages/blogs/ModernImpressions/2017/2/klimt-bauerngarten_banner.jpg.webrend.1920.350.jpeg"

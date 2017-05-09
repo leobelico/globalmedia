@@ -23,7 +23,9 @@
 </div>
 <div class="special-articles-container">
 	<div class="special-articles">
-		<%= render "components/latest-news", articles: al_momento(true, false, false, 5)  %>
+	
+		<%= render "components/latest-news", articles: latest_news  %>
+
 		<% if get_banner("", "TitlePage", "Chico" ) %>
 			<%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
 		<% else %>

@@ -36,6 +36,18 @@
 		letter-spacing:  2px; 
 	}
 }
+
+.investigation {
+	.type {
+		color:  $red; 
+	} 
+	.link {
+		background-color:  $red; 
+	}
+	.special-articles__article {
+		color:  $red; 
+	}
+}
 .special-articles__title {
 	font-size:  21px; 
 	font-weight:  900; 

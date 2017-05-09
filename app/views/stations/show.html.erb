@@ -3,7 +3,10 @@
 	<div class="main-content station">
 		<div class="station__header">
 			<%= image_tag @station.image, class: "station__image" %>
-			<h4 class="station__name"><%= @station.name %></h4>
+			<div class="header__info">
+				<h4 class="station__name"><%= @station.name %></h4>
+				<p class="station__description"><%= @station.description %></p>
+			</div>
 		</div>
 		<% if !@station.video? and !@station.news? %>
 			<audio controls autoplay id="audio">
@@ -73,12 +76,38 @@
 			<% end %>
 		</div>
 		<div class="radio-banner__tune-in">Lo más reciente</div>
+
+
+
+	<div class="note note--display">
+		<div id="quill-container" class="quill--article">	
+		</div>
+
+	</div>
+
+	<script>
+		<% @station.article_relationships.last(1).each do |relationship| %>
+			var content = <%= raw(relationship.article.note) %>;
+			var container = document.getElementById("quill-container")
+			display_quill_note(content, container);
+		<% end %>
+	</script>
+
+
+
+
+
+
+
+		<div class="radio-banner__tune-in">Histórico</div>
+
 		<div class="station__articles">
 			
 			<% @station.article_relationships.each do |relationship| %>
 				<%= render "components/horizontal-note", article: relationship.article %>
 			<% end %>
 		</div>
+
 
 	</div>
 	<%= render "components/stations-sidebar", facebook: @station.facebook, twitter: @station.twitter %>
