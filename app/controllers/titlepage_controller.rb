@@ -48,7 +48,7 @@ class TitlepageController < ApplicationController
 
 		@collaborator_articles = []
 
-		collaborators = Relationship.where(relationship_type: "Collaborator").order(created_at: "DESC")
+		collaborators = Relationship.where(relationship_type: "Collaborator").order(created_at: "ASC")
 
 		collaborators.each do |collaborator|
 			# collaborator.article_relationships.last.relationship.article 
@@ -57,7 +57,7 @@ class TitlepageController < ApplicationController
 			p "--------------------------------"
 			if collaborator.article_relationships.last
 				@collaborator_articles << collaborator.article_relationships.last.article
-				@collaborator_articles = @collaborator_articles.last(5)
+				@collaborator_articles = @collaborator_articles.last(5).reverse
 			end
 		end	
 
