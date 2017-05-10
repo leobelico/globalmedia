@@ -22,7 +22,7 @@ class TitlepageController < ApplicationController
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')
 		@sections = Section.where('name != ?', "Último Momento")
 
-		relationships_investigations = Relationship.where(relationship_type: "Investigation")
+		relationships_investigations = Relationship.order(created_at: "DESC").where(relationship_type: "Investigation")
 
 		p "relationships_investigations"
 		p relationships_investigations

@@ -17,8 +17,8 @@
 	</div>
 	<h4 class="special-articles__title"><%= title %></h4>
 	<% if articles.first.video_url == "" %>
-
-		<%= image_tag articles.first.image, class: "special-articles__image" %>
+		<% Relationship.where("relationship_type = 'Investigation'").last.image %>
+		<%= image_tag Relationship.where("relationship_type = 'Investigation'").last.image, class: "special-articles__image" %>
 	<% else %>
 		<iframe class="special-articles__image" src="<%= articles.first.video_url %>" frameborder="0" allowfullscreen></iframe>	
 	<% end %>
