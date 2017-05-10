@@ -16,7 +16,7 @@
 		<% end %>
 	</div>
 	<h4 class="special-articles__title"><%= title %></h4>
-	<% if !articles.first.video_url %>
+	<% if articles.first.video_url == "" %>
 
 		<%= image_tag articles.first.image, class: "special-articles__image" %>
 	<% else %>

@@ -14,4 +14,7 @@
 }
 @media screen and (max-width:  1023px) {
 	.top-padder { height:  132px }
+	.interface > .radio-banner__tune-in {
+		display:  none;
+	}
 }
