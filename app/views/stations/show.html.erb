@@ -6,10 +6,26 @@
 			<div class="header__info">
 				<h4 class="station__name"><%= @station.name %></h4>
 				<p class="station__description"><%= @station.description %></p>
+				<div class="social-media" data-article="<%= station_url(@station) %>">
+					<%= link_to ("whatsapp://send?text=" + station_url(@station)), class: "social-media__link whatsapp", target: "_blank" do %>
+						<%= image_tag "whatsapp.svg" %>
+					<% end %>
+					<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
+						<%= image_tag "facebook.svg" %>				
+					</a>	
+					<a target="_blank" href="https://twitter.com/home?status=<%= truncate(@station.name, length: 80) %>%20%2D%20<%= url_encode(station_url(@station)) %>" class="social-media__link twitter">
+						<%= image_tag "twitter.svg" %>
+					</a>
+					<a class="social-media__link copy" target="_self">	
+						<input class="hidden" value="<%= station_url(@station) %>">
+						<%= image_tag "copy.svg" %>
+					</a>
+				</div>
+
 			</div>
 		</div>
 		<% if !@station.video? and !@station.news? %>
-			<audio controls autoplay id="audio">
+			<audio controls autoplay id="audio" controlsList="nodownload">
 				<source src="<%= @station.stream_url %>" type="audio/mpeg">	
 			</audio>
 		<% else %>	
@@ -40,9 +56,16 @@
 					</div>
 				<% end %>		
 			</div>
-			<% if @timetables.first %>
-				<%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
-			<% end %>
+			<div class="program__info">
+				
+				<% if @timetables.first %>
+
+					<%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
+					<p><%= @timetables.first.description %></p>
+					<p class="radio-banner__tune-in">Con:</p>
+					<p><%= @timetables.first.broadcasters %></p>
+				<% end %>
+			</div>
 		</div>
 		<div class="radio-banner__tune-in">Nuestras Playlists</div>
 		<div class="playlists">
@@ -103,7 +126,7 @@
 
 		<div class="station__articles">
 			
-			<% @station.article_relationships.each do |relationship| %>
+			<% @station.article_relationships.offset(1).last(4).each do |relationship| %>
 				<%= render "components/horizontal-note", article: relationship.article %>
 			<% end %>
 		</div>

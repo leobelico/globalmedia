@@ -22,7 +22,7 @@ class TitlepageController < ApplicationController
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')
 		@sections = Section.where('name != ?', "Último Momento")
 
-		relationships_investigations = Relationship.order(created_at: "DESC").where(relationship_type: "Investigation")
+		relationships_investigations = Relationship.order(created_at: "ASC").where(relationship_type: "Investigation")
 
 		p "relationships_investigations"
 		p relationships_investigations
@@ -30,6 +30,7 @@ class TitlepageController < ApplicationController
 		
 		if relationships_investigations
 			relationships_investigations.last(1).each do |relationship|
+				@investigation_name = relationship.name
 				relationship.article_relationships.last(6).each do |r|
 					p "ARTICLELALA"
 					p r.article
@@ -41,8 +42,9 @@ class TitlepageController < ApplicationController
 		end
 		p "INVESTIGATION ARTICLES"
 		p @investigation_articles
+
  		section = Section.find_by_name("Denuncia Global")
-		@complaints = Article.where(articable_id: section.id, published: true).order(created_at: "DESC").last(6)
+		@complaints = Article.where(articable_id: section.id, published: true).order(updated_at: "ASC").last(6)
 
 		@collaborator_articles = []
 

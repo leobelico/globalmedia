@@ -31,6 +31,9 @@
 	<% if Section.find_by(name: "Nacional") %>
 		<%= link_to "Nacional", section_path(Section.find_by(name: "Nacional")), class: "navbar__link" %>
 	<% end %>
+	<% if Section.find_by(name: "Internacional") %>
+		<%= link_to "Internacional", section_path(Section.find_by(name: "Internacional")), class: "navbar__link" %>
+	<% end %>
 	<% if Section.find_by(name: "Negocios") %>		
 		<%= link_to "Negocios", section_path(Section.find_by(name: "Negocios")), class: "navbar__link" %>
 	<% end %>

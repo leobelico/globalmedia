@@ -41,3 +41,13 @@
 		text-align:  justify;  
 	}
 }
+.article-preview:hover,
+.principal-highlight:hover,
+.secondary-highlight:hover {
+
+	.article-preview__info {
+		.line {
+			width:  100px; 
+		}
+	}
+}

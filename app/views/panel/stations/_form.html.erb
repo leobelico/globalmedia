@@ -94,10 +94,16 @@
 			<label>Noticiero:</label>
 			<%= f.check_box	 :news %>
 		</div>
-
-		<div class="field">	
-			<label>Imagen (logo): </label>
-			<%= f.file_field :image %>
+		<div class="multifield">
+			
+			<div class="field">	
+				<label>Imagen (logo):</label>
+				<%= f.file_field :image %>
+			</div>
+			<div class="field">	
+				<label>Imagen para Facebook:</label>
+				<%= f.file_field :image_preview %>
+			</div>
 		</div>
 	</div>
 	

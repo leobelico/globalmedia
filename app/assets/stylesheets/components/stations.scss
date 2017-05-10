@@ -30,6 +30,9 @@
 .header__info {
 	display:  flex; 
 	flex-direction:  column; 
+	.social-media {
+		margin-top:  8px; 
+	}
 }
 .station__header {
 	display:  flex; 
@@ -89,6 +92,17 @@
 	padding-top:  12px;
 	margin-top:  24px;
 	margin-bottom:  24px;
+	.program__info {
+		display:  flex; 
+		flex-direction:  column;
+		width:  300px;  
+		.station__broadcaster-image {
+			margin-bottom:  12px; 
+		}
+		p {
+			margin-bottom:  12px; 
+		}
+	}
 	.station__broadcaster-image {
 		width:  300px; 
 		height:  300px; 

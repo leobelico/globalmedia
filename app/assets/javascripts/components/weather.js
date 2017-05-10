@@ -16,8 +16,14 @@ var geolocation_success = function(geolocation){
 }
 
 var geolocation_error = function(){
-	console.log("geolocation error")
+	if (geolocation == undefined) {
+		geolocation = { coords: { latitude: 22.1566, longitude: -100.9855} }; 
+		geolocation_success(geolocation); 
+	} else {
+		geolocation = navigator.geolocation.getCurrentPosition(geolocation_success, geolocation_error)
+		error_counter++; 
+	}
 }
-
-var geolocation = navigator.geolocation.getCurrentPosition(geolocation_success); 
+var error_counter = 0; 
+var geolocation = navigator.geolocation.getCurrentPosition(geolocation_success, geolocation_error); 
 
