@@ -129,6 +129,9 @@ Rails.application.routes.draw do
   get "search_article", to: "titlepage#search_article"
   post "search_article", to: "titlepage#search_article"
   get "search_results", to: "titlepage#search_results"
+
+  get "panel/sections/set_highlight_and_recomendations", to: "panel/sections#set_highlight_and_recomendations"
+  post "panel/sections/set_highlight_and_recomendations", to: "panel/sections#set_highlight_and_recomendations"
   # NOTAS DE PROGRAMADOR 
   # REVISAR DONDE SE USA KEYWORD SHOW A 
 

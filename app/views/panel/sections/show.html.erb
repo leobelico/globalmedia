@@ -30,10 +30,12 @@
 		<p class="table__cell">Vistas Totales:</p>
 		<p class="table__cell">Editar:</p>
 		<p class="table__cell">Destacado:</p>
+		<p class="table__cell">Global Recomienda:</p>
 	</div>
 	<%= form_tag(panel_sections_set_highlight_and_recomendations_path) do %>
-
-		<% @section.articles.each do |article| %>
+		<%= submit_tag "Guardar", class: "button" %>
+		
+		<% @articles.each do |article| %>
 			<div class="table__row">
 				<%= link_to article.name, article, class: "table__cell f-3" %>
 				<p class="table__cell">
@@ -44,14 +46,21 @@
 					<% end %>
 				</p>
 				<%= link_to "Editar", edit_panel_article_path(article), class: "table__cell edit" %>
-				<%= article.highlight %>
+				
 				<% if article.highlight? %>
 					<p class="table__cell"> <%= radio_button_tag(:highlight, article.id, :checked) %></p>
 				<% else %>
 					<p class="table__cell"> <%= radio_button_tag(:highlight, article.id) %></p>
 				<% end %>
+
+				<% if article.section_highlights.count == 0 %>
+					<p class="table__cell"><%= check_box_tag :all_recommendations, article.id, false, :name => '[all_recommendations][]' %></p>
+				<% else %>
+					<p class="table__cell"><%= check_box_tag :all_recommendations, article.id, true, :name => '[all_recommendations][]' %></p>
+				<% end %>
 			</div>
 		<% end %>
+		<%= will_paginate @articles %>
 	<% end %>
 </div>
 

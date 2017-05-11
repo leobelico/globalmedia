@@ -11,34 +11,55 @@ class Panel::SectionsController < ApplicationController
 	end
 	#SectionHighlight.create(article_id: article.id, section: section.id)
 	def set_highlight_and_recomendations
-		article = Article.find(params[:highlight])
-		
-		articles =  Article.where(id: params[:all_recommendations])
-		articles_in_highlights = SectionHighlight.where(article_id: params[:all_recommendations], section: article.articable)
-		
-		if articles.count >= 4
-			articles.each do |this_article|
-				created = false
-				articles_in_highlights.each do |a_in_h|
-					if this_article == a_in_h.article
-						created = true
+		if params[:highlight]
+			article = Article.find(params[:highlight])
+		else
+			article = Article.where(highlight: true).first
+		end
+
+		if params[:all_recommendations]
+			articles =  Article.where(id: params[:all_recommendations])
+			articles_in_highlights = SectionHighlight.where( section: articles.first.articable).order(created_at: "ASC")
+			
+			# if articles_in_highlights.count > 0
+			# 	get_first_h = SectionHighlight.where(section: articles.first.articable).last(articles_in_highlights.count - 3)
+			# 		get_first_h.each do |h|
+			#  			h.destroy
+			#  		end 
+			# 	articles.each do |this_article|
+			#  		SectionHighlight.create(article_id: this_article.id, section_id: this_article.articable.id )
+			#  	end
+			# else
+			# 	articles.each do |this_article|
+			#  		SectionHighlight.create(article_id: this_article.id, section_id: this_article.articable.id )
+			#  	end
+			# end
+
+				articles.each do |this_article|
+					created = false
+					articles_in_highlights.each do |a_in_h|
+						if this_article == a_in_h.article
+							created = true
+						end
+					end
+					if created == false
+						SectionHighlight.create(article_id: this_article.id, section_id: this_article.articable.id )
 					end
 				end
-				if created == false
-					SectionHighlight.create(article_id: this_article.id, section_id: this_article.articable.id )
+				p "CUENTA"
+				p articles_in_highlights.count
+				if articles_in_highlights.count >= 5
+					get_first_h = SectionHighlight.where(section: articles.first.articable).first(articles_in_highlights.count - 4)
+					get_first_h.each do |h|
+						"p destroying"
+						h.destroy
+					end 
 				end
-			end
-
-			if articles_in_highlights.count >= 4
-				get_first_h = SectionHighlight.where(section: article.articable).first(articles_in_highlights.count - 3)
-				get_first_h.each do |h|
-					h.destroy
-				end 
-			end
-		end
-		if articles_in_highlights.count == 0
-			articles.each do |this_article|
-				SectionHighlight.create(article_id: this_article.id, section_id: this_article.articable.id )
+			
+			if articles_in_highlights.count == 0
+				articles.each do |this_article|
+					SectionHighlights.create(article_id: this_article.id, section_id: this_article.articable.id )
+				end
 			end
 		end
 
@@ -50,7 +71,12 @@ class Panel::SectionsController < ApplicationController
 				
 			end
 		end
-		article.update_attributes(highlight: true)
+
+		if params[:highlight]
+			
+			article.update_attributes(highlight: true)
+
+		end
 		
 	    
 		redirect_back(fallback_location: root_url)
@@ -58,10 +84,12 @@ class Panel::SectionsController < ApplicationController
 	end
 
 	def show
+		
 		@highlight_article = Article.where(articable_id: @section.id, highlight: true).first
 
 		@highlights = SectionHighlight.where(section: @section).order(updated_at: "DESC")
 		@recommendations = SectionHighlight.where(section: @section)
+		@articles = Article.where(articable_id: @section.id).order(created_at: "DESC").paginate(page: params[:page], per_page: 10)
 	end
 	
 	def new
