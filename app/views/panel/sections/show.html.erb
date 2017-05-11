@@ -29,20 +29,29 @@
 		<p class="table__cell f-3">Título:</p>
 		<p class="table__cell">Vistas Totales:</p>
 		<p class="table__cell">Editar:</p>
+		<p class="table__cell">Destacado:</p>
 	</div>
-	<% @section.articles.each do |article| %>
-		<div class="table__row">
-			<%= link_to article.name, article, class: "table__cell f-3" %>
-			<p class="table__cell">
-				<% if article.hits.last %>
-					<%= article.total_hits_in_current_month %>
-				<% else %>
-					0
-				<% end %>
-			</p>
-			<%= link_to "Editar", edit_panel_article_path(article), class: "table__cell edit" %>
+	<%= form_tag(panel_sections_set_highlight_and_recomendations_path) do %>
 
-		</div>
+		<% @section.articles.each do |article| %>
+			<div class="table__row">
+				<%= link_to article.name, article, class: "table__cell f-3" %>
+				<p class="table__cell">
+					<% if article.hits.last %>
+						<%= article.total_hits_in_current_month %>
+					<% else %>
+						0
+					<% end %>
+				</p>
+				<%= link_to "Editar", edit_panel_article_path(article), class: "table__cell edit" %>
+				<%= article.highlight %>
+				<% if article.highlight? %>
+					<p class="table__cell"> <%= radio_button_tag(:highlight, article.id, :checked) %></p>
+				<% else %>
+					<p class="table__cell"> <%= radio_button_tag(:highlight, article.id) %></p>
+				<% end %>
+			</div>
+		<% end %>
 	<% end %>
 </div>
 
