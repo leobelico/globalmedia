@@ -1,7 +1,8 @@
+
 <div class="panel__header">
-	<h2 class="title panel__title"><span>Secciones / </span><span class="current"><%= @section.name %></span></h2>
+	<h2 class="title panel__title"><span>Secciones / </span><span class="current">Editar sección</span></h2>
 	<div class="panel__actions">
-		<%= link_to "Nueva sección", new_panel_section_path, class: "button" %>
+		<button class="button">Guardar cambios</button>
 	</div>
 </div>
 
@@ -15,20 +16,13 @@
 				<% end %>
 			</ul>
 	<% end %>
-
-
 	<div class="field">	
-		<label>Posición del Highlight:</label>
-		<%= f.select :order, options_for_select((1..6).step(1), @section.highlight.order)%>
+		<label>Nombre de sección:</label>
+		<%= f.text_field :name %>
 	</div>
-	<div class="field">
-		
-		<label>Artículo:</label>
-		<% if @highlight.new_record? %>
-			<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
-		<% else %>
-			<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @highlight.article.name) %>
-		<% end %>
+	<div class="field">	
+		<label>Color de sección:</label>
+		<%= f.text_field :color %>
 	</div>
 <% end %>
 
