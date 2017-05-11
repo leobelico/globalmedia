@@ -13,6 +13,8 @@ class Article < ApplicationRecord
   belongs_to :user, optional: true
   has_many :article_relationships, dependent: :delete_all
   has_many :hits, dependent: :delete_all
+  has_many :images, dependent: :delete_all
+  accepts_nested_attributes_for :images, reject_if: proc { |attributes| attributes['src'].blank? }, allow_destroy: true
 
   def to_param
     slug

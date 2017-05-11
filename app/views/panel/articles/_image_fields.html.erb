@@ -1,0 +1,12 @@
+<div >
+	<div >
+		<!-- <label class="create__label">Image</label> -->
+		<%= f.file_field :src %>
+		<%= f.hidden_field :_destroy %>
+	</div>
+    <%= link_to_remove_fields 'Remove', f, "fields__remove" %>
+</div>
+
+<script type="text/javascript">
+	new_fields();
+</script> 

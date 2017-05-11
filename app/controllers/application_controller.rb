@@ -37,6 +37,30 @@ class ApplicationController < ActionController::Base
   helper_method :get_radio_stations
   helper_method :get_video_stations
   helper_method :get_news_stations
+  
+
+ 
+  helper_method :related_by_hashtags
+
+  def related_by_hashtags(article)
+    
+    if article.hashtags.count == 1
+       @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ article.hashtags.first.id} AND articles.published = true").last(3)
+    end
+
+    if article.hashtags.count == 2
+      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id }) AND articles.published = true").last(3)
+    end 
+    
+    if article.hashtags.count >= 3
+      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.third.id }) AND articles.published = true").last(3)
+    end 
+    # @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
+   
+    return @articles
+
+  end
+
 
   def get_radio_stations
     @radio_stations = Station.where(video: false, news: false).order(frequency: "ASC")
@@ -180,7 +204,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_global_recommendations
-    @articles = Article.where(global_recommendation: true, highlight: false, published: true).order(updated_at: "ASC").last(3)
+    @articles = Article.where(global_recommendation: true, highlight: false, published: true).order(updated_at: "ASC").last(4)
 
     current_article = []
     if session[:article_id]

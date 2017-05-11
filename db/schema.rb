@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170510192041) do
+ActiveRecord::Schema.define(version: 20170511201210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,14 @@ ActiveRecord::Schema.define(version: 20170510192041) do
     t.datetime "updated_at",             null: false
     t.integer  "article_id"
     t.index ["article_id"], name: "index_hits_on_article_id", using: :btree
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string   "src"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "article_id"
+    t.index ["article_id"], name: "index_images_on_article_id", using: :btree
   end
 
   create_table "keywords", force: :cascade do |t|
@@ -276,6 +284,7 @@ ActiveRecord::Schema.define(version: 20170510192041) do
   add_foreign_key "highlights", "articles"
   add_foreign_key "hit_objectives", "sections"
   add_foreign_key "hits", "articles"
+  add_foreign_key "images", "articles"
   add_foreign_key "podcasts", "stations"
   add_foreign_key "section_banners", "banners"
   add_foreign_key "section_highlights", "articles"
