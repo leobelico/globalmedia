@@ -2,8 +2,7 @@ class Panel::HitObjectivesController < ApplicationController
 	before_action :authenticate_user!, except: [:show_keyword]
 	
 	def index
-		@hit_objectives = HitObjective.all
-		
+		@hit_objectives = HitObjective.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month)	
 	end
 
 	def new

@@ -35,3 +35,9 @@
 	text-transform:  uppercase; 
 	color:  #ffffff; 
 }
+
+@media screen and (max-width:  1023px) {
+	.its-news {
+		display:  none; 
+	}
+}

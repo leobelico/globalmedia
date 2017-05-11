@@ -1,7 +1,16 @@
+<div class="gallery">
+	<div class="gallery__image"></div>
+	<div class="gallery__controls">
+		<div class="next"></div>
+		<div class="previous"></div>
+	</div>
+</div>
 <div class="interface--row">
-	
+
 	<div class="note note--display">
-		
+		<% if @article.exclusive? %>
+			<p class="exclusive--note">Exclusiva</p>
+		<% end %>
 		<h1 class="title"><%= @article.name %></h1>	
 		<div class="article__info">
 			<% if @article.author and @article.author.name != "Ninguno" %>
@@ -28,7 +37,6 @@
 		<% if @article.image %>
 			<%= image_tag @article.image, class: "main-image" %>
 		<% end %>
-			Tiempo: <%= @article.scheduled_time %>
 
 		<div id="quill-container" class="quill--article">	
 		</div>
@@ -67,6 +75,10 @@
 
 	<% related_by_hashtags(@article) %>
 </div>
+
+
+
+
 
 <script>
 	var content = <%= raw(@article.note) %>;

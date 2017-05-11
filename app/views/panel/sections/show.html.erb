@@ -8,14 +8,28 @@
 </div>
 <div class="table card">
 	<div class="table__row">
+		<div class="table__cell">Visitas totales a sección:</div>
+	</div>
+	<div class="table__row">
+		<div class="table__cell"><%= @section.total_hits_in_current_month %></div>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__cell">Artículo destacado:</div>
+	</div>
+	<div class="table__row">
+		<div class="table__cell"><% if @highlight_article %><%= @highlight_article.name %><% else %>Ninguno<% end %></div>
+	</div>
+</div>
+
+
+<div class="table card">
+	<div class="table__row">
 		<p class="table__cell f-3">Título:</p>
 		<p class="table__cell">Vistas Totales:</p>
 		<p class="table__cell">Editar:</p>
 	</div>
-	<%= @section.total_hits_in_current_month %>
-		<% if @highlight_article %>
-			<%= @highlight_article.name %>
-		<% end %>
 	<% @section.articles.each do |article| %>
 		<div class="table__row">
 			<%= link_to article.name, article, class: "table__cell f-3" %>

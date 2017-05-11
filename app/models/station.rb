@@ -3,11 +3,11 @@ class Station < ApplicationRecord
 	has_many :timetables, dependent: :delete_all
 	accepts_nested_attributes_for :timetables, reject_if: proc { |attributes| attributes['name'].blank? }, :allow_destroy => true
   has_many :article_relationships, dependent: :nullify, as: :articable
-
+  has_many :podcasts, dependent: :delete_all
 	before_create :to_slug
 	def to_param
     	slug
-  	end
+  end
 	def to_slug
       #strip the string
       ret = self.name.strip

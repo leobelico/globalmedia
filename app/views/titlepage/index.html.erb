@@ -15,15 +15,18 @@
 
 <div class="special-articles-container">
 	<% if @investigation_articles.count > 0 %>
-		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_articles[0].article_relationships[0].articable.name, articles: @investigation_articles %>
+		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
+		
 	<% end %>
 	<% if @complaints %>
-		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: @complaints %>
+		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: @complaints.reverse %>
 	<% end %>
 </div>
 <div class="special-articles-container">
 	<div class="special-articles">
-		<%= render "components/latest-news", articles: al_momento(true, false, false, 5)  %>
+	
+		<%= render "components/latest-news", articles: latest_news  %>
+
 		<% if get_banner("", "TitlePage", "Chico" ) %>
 			<%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
 		<% else %>

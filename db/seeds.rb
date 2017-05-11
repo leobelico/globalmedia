@@ -12,8 +12,8 @@ sections = Section.first_or_create([
 	{name: "Nacional"},
 	{name: "Internacional"},
 	{name: "Farándula"},
-	{name: "Táctica Nacional"},
-	{name: "Táctica Internacional"},
+	{name: "Táctica Local"},
+	{name: "Táctica Nacional e Internacional"},
 	{name: "Negocios"},
 	{name: "Estados"},
 	{name: "Actualidad"},
@@ -96,7 +96,8 @@ sections.each do |section|
 				image: images[i], 
 				image_thumbnail: images[i],
 				draft: 1,
-				published: true
+				published: true,
+				video_url: "https://www.youtube.com/embed/2PSvFlF7akY"
 			}
 		])
 	end
@@ -425,24 +426,46 @@ stations_image = "https://cdn.dribbble.com/users/482851/screenshots/2717061/radi
 stations_image_2 = "https://cdn.dribbble.com/users/229993/screenshots/2924148/spaceradio4dr.jpg"
 stations_name = "Estación "
 stream_url = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1xtra_mf_p"
-for i in 0..7
-	stations = Station.create([
+video_stream = "http://38.96.148.213:1935/CamarasGlobal/Camara1.sdp/playlist.m3u8"
+playlist_image = "https://images.8tracks.com/cover/i/008/729/179/bedcovers1-8272.jpg?rect=0,0,540,540&q=98&fm=jpg&fit=max"
+playlist = "https://open.spotify.com/user/spotifycharts/playlist/37i9dQZEVXbO3qyFxbkOE1"
+
+for i in 0..6
+	station = Station.create(
 		{
 			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
 			image: stations_image,
-			stream_url: stream_url
+			stream_url: stream_url, 
+			playlist_1: playlist,
+			playlist_1_image: playlist_image,
+			playlist_2: playlist,
+			playlist_2_image: playlist_image,
+			playlist_3: playlist,
+			playlist_3_image: playlist_image,
+			playlist_4: playlist,
+			playlist_4_image: playlist_image
 		}
-	])
+	)
 end
-for i in 0..3
-	stations = Station.create([
+for i in 0..2
+	station = Station.create(
 		{
 			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
 			image: stations_image_2,
-			stream_url: "http://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov/playlist.m3u8",
+			stream_url: video_stream,
+			news: true
+		}
+	)
+end
+for i in 0..2
+	station = Station.create(
+		{
+			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			image: stations_image_2,
+			stream_url: video_stream,
 			video: true
 		}
-	])
+	)
 end
 
 timetable_image = "http://www.sothebys.com/content/dam/sothebys-pages/blogs/ModernImpressions/2017/2/klimt-bauerngarten_banner.jpg.webrend.1920.350.jpeg"
@@ -479,6 +502,52 @@ User.all.each do |user|
 	)
 end
 
+	camera = Camera.create(
+		{
+			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			location: "Avenida Salvador Nava Martínez " + (0...6).map { ('0'..'9').to_a[rand(9)] }.join,
+			lat: "22.140166",
+			lng: "-101.004523",
+			stream: video_stream
+		}
+	) 
+	camera = Camera.create(
+		{
+			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			location: "Avenida Salvador Nava Martínez " + (0...6).map { ('0'..'9').to_a[rand(9)] }.join,
+			lat: "23.140166",
+			lng: "-100.004523",
+			stream: video_stream
+		}
+	) 
+	camera = Camera.create(
+		{
+			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			location: "Avenida Salvador Nava Martínez " + (0...6).map { ('0'..'9').to_a[rand(9)] }.join,
+			lat: "23.130166",
+			lng: "-100.104523",
+			stream: video_stream
+		}
+	) 
+	camera = Camera.create(
+		{
+			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			location: "Avenida Salvador Nava Martínez " + (0...6).map { ('0'..'9').to_a[rand(9)] }.join,
+			lat: "22.530166",
+			lng: "-101.104523",
+			stream: video_stream
+		}
+	) 
+	camera = Camera.create(
+		{
+			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+			location: "Avenida Salvador Nava Martínez " + (0...6).map { ('0'..'9').to_a[rand(9)] }.join,
+			lat: "25.530166",
+			lng: "-101.104523",
+			stream: video_stream
+		}
+	) 
+
 
 authors = Author.create([
 	{name: "Ninguno", logo: images[3]},
@@ -489,8 +558,7 @@ authors = Author.create([
 	{name: "Fred Weasley", logo: images[3]},
 	{name: "George Weasley", logo: images[3]},
 	{name: "Ginny Weasley", logo: images[3]},
-	
-	])
+])
 
 
 

@@ -8,6 +8,10 @@
 			<label>Locutores</label>
 			<%= f.text_field :broadcasters %>
 		</div>
+		<div class="field">
+			<label for="">Descripción:</label>
+			<%= f.text_field :description %>
+		</div>
 		<div class="multifield">
 			<div class="timefield">
 				<label>Hora de Inicio: </label>
@@ -75,3 +79,4 @@
 </div>
 
 
+<%= render "components/s3_form_js" %>

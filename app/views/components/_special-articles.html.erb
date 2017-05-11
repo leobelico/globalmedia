@@ -1,4 +1,8 @@
-<div class="special-articles">
+<% if type == "Investigación Especial" %>
+	<div class="special-articles investigation">
+<% else %>
+	<div class="special-articles">
+<% end %>
 	<div class="special-articles__type">
 		<p class="type"><%= type %></p>
 
@@ -7,12 +11,21 @@
 			<%= link_to "Ver denuncia", section_path(Section.find_by(name: "Denuncia Global")), class: "link" %>
 		<% else %>
 			
-				<%= link_to "Ver investigación", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "link" %>
+			<%= link_to "Ver investigación", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "link" %>
 			
 		<% end %>
 	</div>
 	<h4 class="special-articles__title"><%= title %></h4>
-	<%= image_tag articles.first.image, class: "special-articles__image" %>
+	<% if articles.first.video_url == "" %>
+		<% if title != "Denuncia Global" %>
+		<% Relationship.where("relationship_type = 'Investigation'").last.image %>
+		<%= image_tag Relationship.where("relationship_type = 'Investigation'").last.image, class: "special-articles__image" %>
+		<% else %>
+			<%= image_tag Article.where("articable_id = 12").last.image, class: "special-articles__image" %>
+		<% end %>
+	<% else %>
+		<iframe class="special-articles__image" src="<%= articles.first.video_url %>" frameborder="0" allowfullscreen></iframe>	
+	<% end %>
 	<%= link_to articles[0].name, articles[0], class: "special-articles__article" %>
 	<% articles[1..-1].each do |article| %>
 		<%= link_to article.name, article, class: "special-articles__article" %>

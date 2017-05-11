@@ -84,7 +84,7 @@ class Panel::SectionsController < ApplicationController
 
 		@section = Section.find_by_slug(params[:section_slug])
 		@highlight_article = Article.where(articable_id: @section.id, highlight: true).first
-
+		
 		session[:section_id] = @section.id
 
 	end
@@ -111,21 +111,20 @@ class Panel::SectionsController < ApplicationController
 		@section = Section.find_by_slug(params[:section_slug])
 		@recommendations = SectionHighlight.where(section: @section)
 		@recommendations.destroy_all
-		if params[:panel][:first_article_id]
+		if params[:panel][:first_article_id] != ""
 			first_article = Article.find(params[:panel][:first_article_id])
 			
 			SectionHighlight.create(article_id: first_article.id, section_id: @section.id )
 		end
-		if params[:panel][:second_article_id]
+		if params[:panel][:second_article_id] != ""
 			second_article = Article.find(params[:panel][:second_article_id])
 			
 			SectionHighlight.create(article_id: second_article.id, section_id: @section.id )
 		end
-		if params[:panel][:third_article_id]
+		if params[:panel][:third_article_id] != ""
 			third_article = Article.find(params[:panel][:third_article_id])
 			
 			SectionHighlight.create(article_id: third_article.id, section_id: @section.id )
-			
 		end
 
 		redirect_to panel_section_path(@section)

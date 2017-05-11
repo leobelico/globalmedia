@@ -1,10 +1,9 @@
 <div class="panel__header">
-	<h2 class="title panel__title"><span class="current">Investigación Especial</span></h2>
+	<h2 class="title panel__title"><span><%= "Colaborador" if @investigation.relationship_type == "Collaborator" %></span> / <span class="current"><%= @investigation.name%></span></h2>
 	<div class="panel__actions">
-		<button class="button">Guardar Artículo</button>
+		<button class="button">Añadir artículo</button>
 	</div>
 </div>
-<%= @investigation.name %>
 <%= form_for :panel, html: { class: "admin-form card" }, url: {controller: "panel/relationships", action: 'set_investigation_articles'} do |f| %>
 	<div class="field">
 		
@@ -13,9 +12,9 @@
 		<%= f.hidden_field :first_article_id, id: "first_article_id" %>
 		<%= f.hidden_field :investigation_id, value: @investigation.id %>
 	</div>
-	<%= f.submit %>
+	<% f.submit %>
 <% end %>
 <script>
-	saveFormOnButtonClick($("form"), $("button.button"));
+	saveFormOnButtonClick($("button.button"), $("form"));
 </script>
 <!-- 

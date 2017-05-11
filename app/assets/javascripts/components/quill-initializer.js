@@ -32,13 +32,13 @@ function initialize_quill(){
   editor = new Quill(container, options);
 
   $('#tweet-button').click(function() {
-    let range = quill.getSelection(true);
+    var range = quill.getSelection(true);
     quill.insertText(range.index, '\n', Quill.sources.USER);
     quill.insertEmbed(range.index + 1, 'tweet', id, Quill.sources.USER);
     quill.setSelection(range.index + 2, Quill.sources.SILENT);
   });
   $('#embed-content-button').click(function() {
-    let range = quill.getSelection(true);
+    var range = quill.getSelection(true);
     quill.insertText(range.index, '\n', Quill.sources.USER);
     quill.insertEmbed(range.index + 1, 'embed-content', src, Quill.sources.USER);
     quill.setSelection(range.index + 2, Quill.sources.SILENT);

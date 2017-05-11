@@ -1,6 +1,9 @@
 <div class="section-article">
 	<%= link_to article, class: "sa-img-link" do %>
 		<%= image_tag article.image, class: "section-article__image" %>
+		<% if article.exclusive? %>
+			<p class="exclusive">EXCLUSIVA</p>
+		<% end %>
 	<% end %>
 	<%= link_to article, class: "section-article__info" do %>
 		<h4 class="small-title semibold"><%= article.name %></h4>	

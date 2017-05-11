@@ -39,6 +39,10 @@ class Panel::ArticlesController < ApplicationController
 
 		if @article.save
 			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s) 
+			if @article.draft == 2
+				@article.update_attributes(published: true) 
+
+			end
 			redirect_to @article
 		else
 			respond_to do |format|
@@ -71,9 +75,13 @@ class Panel::ArticlesController < ApplicationController
 
 		if @article.update(article_params)
 			@article.update_attributes(scheduled_time: somedate)
-			if @article.draft == 0 or @article.draft == -1
+			if @article.draft == 0 or @article.draft == -1 
 				@article.update_attributes(published: false)
 
+			end
+			if @article.draft == 2
+				@article.update_attributes(published: true)
+				p "PUBLICADO"
 			end
 			redirect_to @article
 		else
@@ -99,7 +107,7 @@ class Panel::ArticlesController < ApplicationController
 
 	private
 		def article_params
-			params.require(:article).permit(:name, :note, :plain_text, :image, :image_thumbnail, :video_url, :short_description, :hashtags_names, :articable_id, :articable_type, :draft, :keyword_id, :global_recommendation, :the_note, :author_id, the_note: [:quill])
+			params.require(:article).permit(:name, :exclusive, :note, :plain_text, :image, :image_thumbnail, :video_url, :short_description, :hashtags_names, :articable_id, :articable_type, :draft, :keyword_id, :global_recommendation, :the_note, :author_id, the_note: [:quill])
 
 		end
 

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>Global Media - Noticias</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
     <%= csrf_meta_tags %>
 
+
+	<%= render 'application/favicon' %>
+	
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700" rel="stylesheet">
 	<script src="https://platform.twitter.com/widgets.js"></script>
 
@@ -15,7 +17,9 @@
 	<% if controller_name == "articles" and action_name == "show" %>
 		<%= render "components/article_meta_tags", article: @article %>
 	<% end %>
-
+	<% if controller_name == "stations" and action_name == "show" %>
+		<%= render "components/station_meta_tags", station: @station %>
+	<% end %>
   </head>
 
   <body>
@@ -37,17 +41,28 @@
 	     fjs.parentNode.insertBefore(js, fjs);
 	   }(document, 'script', 'facebook-jssdk'));
 	</script>
+  	<% if @article %>
+		<link itemprop="thumbnailUrl" href="<%= image_url 'globalmedia.jpg' %>"> 
+
+		<span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> 
+		      <link itemprop="url" href="<%= image_url 'globalmedia.jpg' %>"> 
+		</span>
+	<% end %>
 
   	<% panel_url = request.url.include? (request.base_url + "/panel")%>
 	<% if !panel_url %>
 		<div class="top-padder"></div>
 	<% end %>
+	<p class="copied-link">Vínculo copiado</p>
 	<div class="navigation">
 		
 		<%= render "components/topbar" if !panel_url %>	
 		<%= render "components/header" if !user_signed_in? || !panel_url %>
 		<%= render "components/navbar" if !panel_url %>
 	</div>
+	<%= render "components/mobile-menu" if !panel_url %>
+	<%= render "components/admin/admin-floating-bar" if !panel_url and user_signed_in? %>
+	
 	<% if !panel_url %>
 		<script>
 			var navflag = false; 
@@ -80,15 +95,11 @@
 	 	</div>
  	<% end %>
 	<%= render "components/footer" if !panel_url %>
+	<script>
+		$(document).on('turbolinks:click', function(event) {
+			clear_media();
+		});
+	</script>
   </body>
-<script>
-	document.addEventListener("turbolinks:before-visit", function() {
-	  if(document.getElementById('audio')) {
-	    document.getElementById('audio').remove();
-	  }
-	  if(document.getElementById('video')) {
-	    document.getElementById('video').remove();
-	  }
-	});
-</script>
+
 </html>

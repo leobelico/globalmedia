@@ -18,11 +18,59 @@ class Panel::HighlightsController < ApplicationController
 
 		@highlight = Highlight.new(highlight_params)
 		article = Article.find_by_name(params[:highlight][:article_id])
-		@highlight.article = article
-		if @highlight.save
-			redirect_to panel_highlights_path
+		the_h = Highlight.where(order: params[:highlight][:order])
+		articles_already_in_highlight = Highlight.where(article: article)
+		if articles_already_in_highlight.count <= 0
+			if the_h.count <= 0
+				@highlight.article = article
+				if @highlight.save
+					redirect_to panel_highlights_path
+				else
+					render action: "new"
+				end
+			else
+				highlights = Highlight.last(6)
+				counter = the_h.first.order
+				p "HIGHLIGHTSSS"
+				p highlights
+
+				p "counter"
+				p counter
+				highlights.each do |h|
+					p "ciclo"
+					p h.order
+					if h.order == counter and counter < 6
+						p "Entrando en el if"
+						h_to_mod = Highlight.where(order: counter + 1).first
+						p h_to_mod
+						p h_to_mod.article.name
+						h_to_mod.update_attributes(article_id: h.article.id)
+						p "MODIFICADO"
+						p h_to_mod
+						p h_to_mod.article.name
+						
+					end
+					counter = counter + 1
+
+					
+				end
+			
+				the_h.first.article_id = article.id
+				if the_h.first.update_attributes(article: article, order: params[:highlight][:order])
+					
+
+				
+
+					redirect_to panel_highlights_path
+				else
+					render action: "new"
+				end
+				
+			end
 		else
+			flash[:error] = "Ya está ese artículo en las notas destacadas."
 			render action: "new"
+
 		end
 
 	end

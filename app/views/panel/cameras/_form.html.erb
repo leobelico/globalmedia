@@ -1,0 +1,29 @@
+<%= form_for [:panel, @camera], html: { class: "admin-form card directUpload" }, data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }  do |camera| %>
+	<div class="field">
+		<label>Nombre de la cámara:</label>
+		<%= camera.text_field :name %>
+	</div>
+	<div class="field">
+		<label>Locación:</label>
+		<%= camera.text_field :location %>
+	</div>
+	<div class="multifield">
+		<div class="field">
+			<label>Latitud:</label>
+			<%= camera.text_field :lat %>
+		</div>
+		<div class="field">
+			<label>Longitud:</label>
+			<%= camera.text_field :lng %>
+		</div>
+	</div>
+	<div class="field">
+		<label>Vínculo a stream (m3u8):</label>
+		<%= camera.text_field :stream %>
+	</div>
+	<div class="field">
+		<label>Imagen:</label>
+		<%= camera.file_field :cover %>
+	</div>
+<% end %>
+<%= render "components/s3_form_js" %>

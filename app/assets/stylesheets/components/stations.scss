@@ -27,6 +27,13 @@
 		text-align:  center; 
 	}
 }
+.header__info {
+	display:  flex; 
+	flex-direction:  column; 
+	.social-media {
+		margin-top:  8px; 
+	}
+}
 .station__header {
 	display:  flex; 
 	flex-direction:  row; 
@@ -38,11 +45,17 @@
 .station__name {
 	font-size:  24px; 
 	font-weight:  900; 
-	color:  $amber; 
+	margin-bottom:  12px; 
+	color:  #000000; 
 	span {
 		font-size:  13.5px; 
 		font-weight:  400;
 	} 
+}
+.station__description {
+	font-size:  13.5px; 
+	color:  #424242; 
+	font-weight:  400; 
 }
 .station__image {
 	height:  206px; 
@@ -57,9 +70,10 @@
 	flex-direction:  row; 
 	align-items:  center; 
 	justify-content:  space-between;
+	margin-bottom:  8px; 
 	.recommendation__image {
-		width:  117.2px;
-		height:  117.2px;
+		width:  86px;
+		height:  86px;
 		img {
 			height:  100%; 
 			width:  100%; 
@@ -74,10 +88,21 @@
 	align-items:  flex-start; 
 	justify-content:  space-between;   
 	width:  100%;
-	border-top:  solid 8px $amber;
+	border-top:  solid 8px $tertiary;
 	padding-top:  12px;
 	margin-top:  24px;
 	margin-bottom:  24px;
+	.program__info {
+		display:  flex; 
+		flex-direction:  column;
+		width:  300px;  
+		.station__broadcaster-image {
+			margin-bottom:  12px; 
+		}
+		p {
+			margin-bottom:  12px; 
+		}
+	}
 	.station__broadcaster-image {
 		width:  300px; 
 		height:  300px; 
@@ -108,9 +133,23 @@
 			padding-top:  12px;
 		}
 	}
-
-
-
+}
+.playlists {
+	display:  flex; 
+	flex-direction:  row; 
+	justify-content:  space-between; 
+	width:  100%; 
+	margin-bottom:  8px; 
+	.playlist {
+		height:  156.5px; 
+		width:  156.5px; 
+		img {
+			height:  100%; 
+			width:  100%; 
+			object-fit:  cover; 
+			object-position:  center center; 
+		}
+	}
 }
 .station video {
 	width:  100%; 

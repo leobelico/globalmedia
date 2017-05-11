@@ -48,7 +48,7 @@
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Nacional").id, 3), section_name: "Nacional", highlight: "" %>
 
 			<% when "Actualidad" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Fárandula").id, 3), section_name: "Farándula", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Farándula").id, 3), section_name: "Farándula", highlight: "" %>
 			<% when "Farándula" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Actualidad").id, 3),  section_name: "Actualidad", section_name: "Actualidad", highlight: "" %>
 			<% when "Táctica" %>

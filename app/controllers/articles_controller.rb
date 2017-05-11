@@ -7,8 +7,8 @@ class ArticlesController < ApplicationController
 	def show
 
 		# @article.note
-
 		@note = @article.note
+	
 		if !user_signed_in? and @article.published == false 
 			redirect_to root_url
 		end

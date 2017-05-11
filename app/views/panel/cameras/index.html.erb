@@ -1,0 +1,29 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Cámaras de tráfico</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Nueva cámara", new_panel_camera_path, class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__cell f-2">Nombre:</div>
+		<div class="table__cell  f-3">Locación:</div>
+		<div class="table__cell">Editar:</div>
+		<div class="table__cell">Eliminar:</div>
+	</div>
+	<% @cameras.each do |camera| %>
+		<div class="table__row">
+			<%= link_to camera.name, camera_path(camera), class: "table__cell f-2" %>
+			<p class="table__cell f-3"><%= camera.location %></p>	
+			<%= link_to "Editar", edit_panel_camera_path(camera), class: "table__cell edit" %>	
+			<%= link_to	"Eliminar", panel_camera_path(camera), class: "table__cell delete", method: :delete, data: { confirm: "¿Estás seguro de querer eliminar esta cámara?" } %>
+
+		</div>
+	<% end %>
+	<% if @cameras.count == 0 %>
+		<div class="table__row ">
+			<p class="table__cell table__empty">No hay cámaras dadas de alta</p>
+		</div>
+	<% end %>	
+</div>
+	

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :sections, only: [:show], param: :slug 
   resources :relationships
   resources :stations
+  resources :cameras
   
   get "collaborators", to: "relationships#collaborators"
   get "about_us", to: "titlepage#about_us"
@@ -36,7 +37,7 @@ Rails.application.routes.draw do
   namespace :panel do
    
     resources :keywords, param: :slug 
-      
+    resources :cameras
 
     get "edit_multiple_keywords", to: "keywords#edit_multiple"
     #post "edit_multiple_keywords", to: "keywords#edit_multiple"
@@ -59,6 +60,7 @@ Rails.application.routes.draw do
     end
     resources :stations, param: :slug do 
       resources :timetables 
+      resources :podcasts 
     end
     resources :timetables, only: [:show, :destroy] 
     resources :sections, param: :slug do 

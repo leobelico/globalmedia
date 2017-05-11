@@ -1,12 +1,15 @@
 <div class="section-recommendations">
 	<div class="special-articles__type">
 		<p class="type"><%= section_name %></p>
-		<%= link_to "Ir a sección", articles.first.section, class: "link" %>
+		<%= link_to "Ir a sección", section_path(Section.find_by(name: section_name)), class: "link" %>
 	</div>
 	<% articles.each do |article| %>
 		<div class="section-recommendations__article">
 			<%= link_to article, class: "wrapper-link" do %>
 				<%= image_tag article.image, class: "section-recommendations__image" %>
+				<% if article.exclusive? %>
+					<p class="exclusive">EXCLUSIVA</p>
+				<% end %>
 				<h4 class="small-title"><%= article.name %></h4>
 			<% end %>
 			<%= render "components/social-media-links", article: article %>

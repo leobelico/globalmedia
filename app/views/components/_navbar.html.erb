@@ -2,7 +2,26 @@
 	<%= link_to root_path, class: "navbar__link" do %>
 		<%= image_tag "home.svg" %>		
 	<% end %>
-	<%= link_to "Radio y TV", stations_path, class: "navbar__link" %>
+	<div class="dropdown">
+		<%= link_to "Radio y TV", stations_path, class: "navbar__link" %>
+		<div class="dropdown__options">
+			<p class="dropdown__section">Radio</p>
+			<% get_radio_stations.each do |radio| %>
+				<%= link_to radio.name, radio, class: "dropdown__link" %>
+				<div class="dropdown__underline"></div>
+			<% end %>	
+			<p class="dropdown__section">T.V.</p>
+			<% get_video_stations.each do |video| %>
+				<%= link_to video.name, video, class: "dropdown__link" %>
+				<div class="dropdown__underline"></div>
+			<% end %>
+			<p class="dropdown__section">Noticieros</p>
+			<% get_news_stations.each do |news| %>
+				<%= link_to news.name, news, class: "dropdown__link" %>
+				<div class="dropdown__underline"></div>
+			<% end %>
+		</div>
+	</div>
 	<% if Section.find_by(name: "San Luis") %>
 		<%= link_to "San Luis", section_path(Section.find_by(name: "San Luis")), class: "navbar__link" %>
 	<% end %>
@@ -12,12 +31,26 @@
 	<% if Section.find_by(name: "Nacional") %>
 		<%= link_to "Nacional", section_path(Section.find_by(name: "Nacional")), class: "navbar__link" %>
 	<% end %>
+	<% if Section.find_by(name: "Internacional") %>
+		<%= link_to "Internacional", section_path(Section.find_by(name: "Internacional")), class: "navbar__link" %>
+	<% end %>
 	<% if Section.find_by(name: "Negocios") %>		
 		<%= link_to "Negocios", section_path(Section.find_by(name: "Negocios")), class: "navbar__link" %>
 	<% end %>
-	<% if Section.find_by(name: "Táctica") %>
-		<%= link_to "Táctica", section_path(Section.find_by(name: "Táctica")), class: "navbar__link" %>
-	<% end %>
+	<div class="dropdown">
+		<p class="navbar__link">Táctica</p>
+		<div class="dropdown__options">
+			<% if Section.find_by(name: "Táctica Local") %>
+				<%= link_to "Táctica Local", section_path(Section.find_by(name: "Táctica Local")), class: "dropdown__link" %>
+				<div class="dropdown__underline"></div>
+			<% end %>
+			<% if Section.find_by(name: "Táctica Nacional e Internacional") %>
+				<%= link_to "Táctica Nacional e Internacional", section_path(Section.find_by(name: "Táctica Nacional e Internacional")), class: "dropdown__link" %>
+				<div class="dropdown__underline"></div>
+			<% end %>
+
+		</div>
+	</div>
 	<%= link_to "Colaboradores", collaborators_path, class: "navbar__link" %>
 	<%= link_to "Acerca de", about_us_path, class: "navbar__link" %>
 </div>

@@ -1,9 +1,13 @@
 <div class="secondary-highlight">
 	<%= link_to article, class: "image-link" do %>
-		<img src="<%= article.image %>" alt="" class="secondary-highlight__image">
+		<%= image_tag article.image, class: "secondary-highlight__image" %>
+		<% if article.exclusive? %>
+			<p class="exclusive">EXCLUSIVA</p>
+		<% end %>
 	<% end %>
 	<div class="article-preview__info">
 		<%= link_to article do %>
+
 			<h4 class="title semibold"><%= article.name %></h4>	
 			<p class="section-and-author"><span class="section"><%= article.section %></span> - 
 
@@ -16,6 +20,7 @@
 
 				
 			<p class="datetime">Hace <%= distance_of_time_in_words(Time.now, (article.created_at)) %></p>
+			<hr class="line">
 			<p class="short-description"><%= truncate(article.short_description, length: 120) %></p> 	
 		<% end %>
 		<%= render "components/social-media-links", article: article %>

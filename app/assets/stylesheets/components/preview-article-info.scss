@@ -28,7 +28,7 @@
 		font-weight:  400; 
 		font-style:  italic; 
 		color:  #424242;
-		margin-bottom:  18px; 
+		margin-bottom:  8px; 
 	}
 	.social-media {
 		margin-top:  auto;  
@@ -37,6 +37,17 @@
 		font-size:  16px; 
 		color:  #000000;
 		font-weight:  400; 
-		line-height:  110%; 
+		line-height:  110%;
+		text-align:  justify;  
+	}
+}
+.article-preview:hover,
+.principal-highlight:hover,
+.secondary-highlight:hover {
+
+	.article-preview__info {
+		.line {
+			width:  100px; 
+		}
 	}
 }

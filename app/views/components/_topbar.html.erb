@@ -6,7 +6,7 @@
 	<% if Relationship.find_by(relationship_type: "Complaint") %>
 		<%= link_to "denuncia global", relationship_path(Relationship.where(relationship_type: "Complaint").last), class: "topbar__link" %>
 	<% end %>
-	<%= link_to "tráfico san luis", root_path, class: "topbar__link" %>
+	<%= link_to "tráfico san luis", cameras_path, class: "topbar__link" %>
 
 	<div class="social-media">
 		<p class="social-media__tag">Síguenos</p>

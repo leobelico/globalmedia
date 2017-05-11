@@ -1,14 +1,14 @@
 $(document).on("click", function(event){
   if ( $(event.target).is(".save-article") ) {
-    if ($(event.target).attr("data-slug")){      
-      submit_form("update", $(event.target).data("slug")); 
+    if ( $(event.target).attr("data-slug") ){      
+      submit_form("update", $(event.target).data("slug"), event); 
     } else {
-      submit_form("create"); 
+      submit_form("create", "", event); 
     }
   }
 }); 
 
-function submit_form(action, slug){
+function submit_form(action, slug, event){
 
   console.log(editor.getContents()) 
   console.log(editor.getText())
@@ -44,10 +44,8 @@ function submit_form(action, slug){
         image: $("input[type='hidden'][name='article[image]']").val(),
         draft: $("#article_draft").val(),
         video_url: $("#article_video_url").val(),
-        author_id: $("#article_author_id").val()
-   
-        
-       
+        author_id: $("#article_author_id").val(),
+        exclusive: $("#article_exclusive").val()
       },
         scheduled_time_3i: $("#article_scheduled_time_3i").val(),
         scheduled_time_2i: $("#article_scheduled_time_2i").val(),

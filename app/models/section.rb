@@ -11,7 +11,7 @@ class Section < ApplicationRecord
   	end
 
   	def total_hits_in_current_month
-    	Hit.joins("INNER JOIN articles ON articles.id = hits.article_id WHERE articles.articable_id = #{self.id}").sum(:number)
+    	Hit.joins("INNER JOIN articles ON articles.id = hits.article_id WHERE articles.articable_id = #{self.id} AND hits.created_at >= '#{Time.now.beginning_of_month}' AND hits.created_at <= '#{Time.now.end_of_month}'").sum(:number)
   	end
 
   	private

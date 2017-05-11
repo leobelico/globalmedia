@@ -1,6 +1,9 @@
 <div class="principal-highlight">
 	<%= link_to article, class: "principal-highlight__image" do %>
 		<%= image_tag article.image %>
+		<% if article.exclusive? %>
+			<p class="exclusive">EXCLUSIVA</p>
+		<% end %>
 	<% end %>
 	<div class="article-preview__info principal-highlight__info">
 		<%= link_to article do %>
@@ -15,6 +18,7 @@
 			<% end %>
  	
 			<p class="datetime">Hace <%= distance_of_time_in_words(Time.now, (article.created_at)) %></p>
+			<hr class="line">
 			<p class="short-description"><%= truncate(article.short_description, length: 120) %></p> 	
 		<% end %>
 		<%= render "components/social-media-links", article: article %>
