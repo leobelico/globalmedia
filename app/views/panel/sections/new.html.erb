@@ -5,7 +5,6 @@
 	</div>
 </div>
 
-
 <%= form_for [:panel, @section], html: { class: "card admin-form" } do |f| %>
 	<% if @section.errors.any? %>	
 		<h5><%= pluralize(@section.errors.count, "error") %></h5>
