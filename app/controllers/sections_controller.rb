@@ -6,7 +6,7 @@ class SectionsController < ApplicationController
 	def admin_show
 		@section = Section.find(params[:format])
 		@highlights = SectionHighlight.where(section: @section).order(updated_at: "DESC")
-
+		
 	end
 	
 
