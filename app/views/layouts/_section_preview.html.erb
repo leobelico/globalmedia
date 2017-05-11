@@ -1,8 +1,9 @@
 <div class="section-preview">
-	<div class="sp__header">
+
+	<%= link_to section, class: "sp__header" do %>
 		<div class="sp__name"><%= section.name %></div>
-		<%= link_to "Ir a sección", section, class: "sp__link" %>
-	</div>
+		<p class="sp__link">Ir a sección</p>
+	<% end %>
 	<div class="sp__articles">
 		<% if highlight and highlight != ""%>
 			<div class="sp__article">
