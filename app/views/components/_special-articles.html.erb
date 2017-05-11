@@ -3,18 +3,22 @@
 <% else %>
 	<div class="special-articles">
 <% end %>
-	<div class="special-articles__type">
-		<p class="type"><%= type %></p>
 
-		
-		<% if type == "#DENUNCIAGLOBAL" %>
-			<%= link_to "Ver denuncia", section_path(Section.find_by(name: "Denuncia Global")), class: "link" %>
-		<% else %>
-			
-			<%= link_to "Ver investigación", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "link" %>
-			
+	<% if type == "#DENUNCIAGLOBAL" %>
+
+		<%= link_to section_path(Section.find_by(name: "Denuncia Global")), class: "special-articles__type" do %>
+			<p class="type">#DENUNCIAGLOBAL</p>
+			<div class="link">Ir a sección</div>		
 		<% end %>
-	</div>
+	<% else %>
+		
+		<%= link_to relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "special-articles__type" do %>
+			<p class="type">Investigación Especial</p>
+			<div class="link">Ir a sección</div>
+
+		<% end %>
+		
+	<% end %>
 	<h4 class="special-articles__title"><%= title %></h4>
 	<% if articles.first.video_url == "" %>
 		<% if title != "Denuncia Global" %>

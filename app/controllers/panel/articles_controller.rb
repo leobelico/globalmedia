@@ -91,7 +91,7 @@ class Panel::ArticlesController < ApplicationController
 
 	def destroy
 		@article.destroy
-		redirect_to 
+		redirect_to panel_articles_path
 		rescue ActiveRecord::InvalidForeignKey
     		flash[:notice] = "No se puede eliminar porque es nota de portada o recomendación global"
     		panel_articles_path

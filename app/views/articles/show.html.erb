@@ -33,9 +33,14 @@
 		</div>
 
 		<p class="short-description"><%= @article.short_description %></p>
-		
-		<% if @article.image %>
-			<%= image_tag @article.image, class: "main-image" %>
+		<% if @article.video_url != "" %> 
+			<div class="iframe">
+				<iframe width="650" height="415" src="<%= @article.	video_url %>" frameborder="0" allowfullscreen></iframe>
+			</div>
+		<% else %>		
+			<% if @article.image %>
+				<%= image_tag @article.image, class: "main-image" %>
+			<% end %>
 		<% end %>
 
 		<div id="quill-container" class="quill--article">	
