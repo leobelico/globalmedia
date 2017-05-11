@@ -146,7 +146,7 @@ class Panel::SectionsController < ApplicationController
 
 	private
 		def section_params
-			params.require(:section).permit(:name)
+			params.require(:section).permit(:name, :color)
 		end
 
 		def set_section
