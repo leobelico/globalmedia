@@ -80,7 +80,10 @@
 	
 	<div class="field">
 		<label>Hashtags: </label>
-		<%= f.text_field :hashtags_names, placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", id: "hashtags", value: @hashtags, required: true %>
+
+		<%= f.autocomplete_field(:hashtags_names,  autocomplete_hashtag_name_panel_hashtags_path, :id_element => '#hashtags', class: "search-bar", placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", type: "search", value: @hashtags, :"data-delimiter"  => ' ') %>
+		
+
 	</div>
 	
 <% end %>
