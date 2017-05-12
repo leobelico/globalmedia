@@ -7,6 +7,7 @@ function display_quill_note(quill_note, container) {
 	Delta = Quill.import('delta');
 	Quill.register(TweetBlot);
 	Quill.register(EmbedContentBlot);
+	// Quill.register(InstagramBlot);
 
 	editor = new Quill(container, options);
 

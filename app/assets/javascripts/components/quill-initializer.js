@@ -27,6 +27,7 @@ function initialize_quill(){
   Delta = Quill.import('delta');
   Quill.register(TweetBlot);
   Quill.register(EmbedContentBlot);
+  // Quill.register(InstagramBlot);
 
   container = document.getElementById('note-editor');
   editor = new Quill(container, options);
@@ -43,4 +44,10 @@ function initialize_quill(){
     quill.insertEmbed(range.index + 1, 'embed-content', src, Quill.sources.USER);
     quill.setSelection(range.index + 2, Quill.sources.SILENT);
   });
+  // $('#instagram').click(function() {
+  //   var range = quill.getSelection(true);
+  //   quill.insertText(range.index, '\n', Quill.sources.USER);
+  //   quill.insertEmbed(range.index + 1, 'instagram', src, Quill.sources.USER);
+  //   quill.setSelection(range.index + 2, Quill.sources.SILENT);
+  // });
 }
