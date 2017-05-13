@@ -78,10 +78,12 @@
 		<% end %>
 	<% end %>
 
-	<% related_by_hashtags(@article) %>
 </div>
 
 
+<template id="related-articles">
+	<p class="related-articles"><strong class="related-articles__title">Artículos relacionados:</strong><br><% related_by_hashtags(@article).each do |article| %><br><%= link_to truncate(article.name, length:  80), article, class: "related-article" %><% end %></p>
+</template>
 
 
 
@@ -89,4 +91,17 @@
 	var content = <%= raw(@article.note) %>;
 	var container = document.getElementById("quill-container")
 	display_quill_note(content, container);
+
+	<% if related_by_hashtags(@article).count > 0 %>
+		var numberOfParagraphs = $("#quill-container p").length; 
+
+		var middle = parseInt(Math.ceil(numberOfParagraphs/2)); 
+		var relatedArticles = document.querySelector("#related-articles");
+		var clone = document.importNode(relatedArticles.content, true); 
+
+		$("#quill-container p:nth-of-type("+middle+")").after(clone);
+		// $("#quill-container > p:nth-of-type("+middle+")");
+	<% end %>
+
+
 </script>

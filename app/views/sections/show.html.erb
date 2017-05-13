@@ -3,7 +3,12 @@
 	<div class="section main-content"> 
 
 		<h1 class="section__title" style="color:  <%= @section.color %>; border-bottom:  solid 4px <%= @section.color %>"><%= @section.name %></h1>
+		
 
+		<% if @section.name == "Denuncia Global" or @section.name == "DENUNCIA GLOBAL" %>
+			<iframe width="650" height="340" src="<%= @articles.first.video_url %>" frameborder="0" allowfullscreen></iframe>
+			<br>
+		<% end %>
 		<div class="section-articles-container">
 			
 			<% @articles.each do |article|%>

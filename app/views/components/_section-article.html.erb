@@ -1,10 +1,15 @@
 <div class="section-article">
-	<%= link_to article, class: "sa-img-link" do %>
-		<%= image_tag article.image, class: "section-article__image" %>
-		<% if article.exclusive? %>
-			<p class="exclusive">EXCLUSIVA</p>
+	<% if article.section == "Denuncia Global" or article.section == "DENUNCIA GLOBAL" %>
+		<iframe width="208.67" height="140" src="<%= article.video_url %>" frameborder="0" allowfullscreen></iframe>
+	<% else %>
+		<%= link_to article, class: "sa-img-link" do %>
+			<%= image_tag article.image, class: "section-article__image" %>
+			<% if article.exclusive? %>
+				<p class="exclusive">EXCLUSIVA</p>
+			<% end %>
 		<% end %>
 	<% end %>
+
 	<%= link_to article, class: "section-article__info" do %>
 		<h4 class="small-title semibold"><%= article.name %></h4>	
 		<p class="section-and-author"><span class="section"><%= article.section %></span> - 
