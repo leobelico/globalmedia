@@ -29,7 +29,7 @@
 		<p class="table__cell weekdays">Días de la semana:</p>
 		<p class="table__cell">Locutores:</p>
 	</div>
-	<% @station.timetables.each do |timetable| %>
+	<% @station.timetables.order(streaming_hour: "ASC").each do |timetable| %>
 		<div class="table__row">
 			<p class="table__cell"><%= timetable.name %></p>
 			<p class="table__cell"><%= timetable.streaming_hour.strftime("%I:%M%p") %></p>
