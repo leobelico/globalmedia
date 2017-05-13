@@ -36,8 +36,11 @@ class StationsController < ApplicationController
 	      @timetables = Timetable.where("saturday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') AND streaming_hour > '#{time}' AND station_id = '#{@station.id}'").first(5)
 	    end
 	   
-	    p @timetables
-
+	    @timetables.each do |t|
+	    	p t.name 
+	    	p t.streaming_hour
+	    	p t.end_streaming_hour
+	    end
 	end
 
 	
