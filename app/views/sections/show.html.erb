@@ -6,8 +6,8 @@
 		
 
 		<% if @section.name == "Denuncia Global" or @section.name == "DENUNCIA GLOBAL" %>
-			<iframe width="650" height="340" src="<%= @articles.first.video_url %>" frameborder="0" allowfullscreen></iframe>
-			<br>
+			<%= render "components/global_complaint_videos", article: @articles.first %>
+				
 		<% end %>
 		<div class="section-articles-container">
 			

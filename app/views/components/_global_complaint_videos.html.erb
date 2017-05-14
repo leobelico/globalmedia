@@ -1,0 +1,84 @@
+<div class="global-complaints">
+	<div id="player"></div>
+	<div class="video-thumbs"></div>
+
+	<template id="thumbnail">
+		<div class="thumbnail">
+			<img src="" alt="">
+			<p class="title"></p>
+		</div>
+	</template>		
+ <script>
+ 	$(document).on("click touchend", function(event){
+ 		if($(event.target).is(".thumbnail")) {
+ 			player.playVideoAt($(event.target).index(".thumbnail"));
+ 		}
+ 	})
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '650',
+          playerVars: 
+          {
+            listType:'playlist',
+            list: 'PLdsuxs51rfhAAmwdXo9AoUdUs-Q1Ju8Uf'
+          },
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+      // 4. The API will call this function when the video player is ready.
+ 
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          	setTimeout(stopVideo, 6000);
+          	done = true;
+          	// console.log(player.getPlaylist());
+	      	apikey = "AIzaSyBjSfnTYOKPVr-Zsg36QOuOvQEanLzrAlA"; 
+	      	thumb_template = document.querySelector("#thumbnail"); 
+	      	for(i = 0; i < 4; i++) {
+		  		playlist = player.getPlaylist(); 
+				$.getJSON('https://www.googleapis.com/youtube/v3/videos?id='+playlist[i]+'&key=' + apikey + '&part=snippet',function(data,status,xhr){
+
+				    json_data = data; 
+				    thumb = document.importNode(thumb_template.content,true); 
+
+				    $(thumb).find(".title").html(json_data.items[0].snippet.title);
+				    // console.log(data);
+				    $(thumb).find("img").attr("src", json_data.items[0].snippet.thumbnails.high.url); 
+				    // console.log(thumb);
+				    $(".video-thumbs").append(thumb);
+
+				    // data contains the JSON-Object below
+				});
+	 
+	      	}
+        }
+
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+</script>	
+
+</div>
