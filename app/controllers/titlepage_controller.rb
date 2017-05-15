@@ -46,36 +46,21 @@ class TitlepageController < ApplicationController
  		section = Section.find_by_name("Denuncia Global")
 		@complaints = Article.where(articable_id: section.id, published: true).order(updated_at: "ASC").last(6)
 
-		# @collaborator_articles = []
+		@collaborator_articles = []
 
-		# collaborators = Relationship.where(relationship_type: "Collaborator").order(created_at: "ASC")
+		collaborators = Relationship.where(relationship_type: "Collaborator").order(created_at: "ASC")
 
-		# articles 
-		# collaborators.each do |collaborator|
-		# 	# collaborator.article_relationships.last.relationship.article 
-		# 	p "--------------------------------"
-		# 	p collaborator
-		# 	p "--------------------------------"
-		# 	if collaborator.article_relationships.last
-		# 		@collaborator_articles << collaborator.article_relationships.last.article
-		# 		@collaborator_articles = @collaborator_articles.last(5).reverse
-		# 	end
-		# end	
-
-		collaborators = Relationship.where(relationship_type: "Collaborator")
-
-		collaborator_article_relationships = []
-
+		articles 
 		collaborators.each do |collaborator|
-			collaborator_article_relationships << collaborator.article_relationships.last
-		end
-
-		collaborator_article_relationships.sort_by{|e| e[:created_at]}
-		collaborator_article_relationships.reverse
-		@collaborator_articles = [] 
-		collaborator_article_relationships.each do |carp|
-			@collaborator_articles << carp.article
-		end 
+			# collaborator.article_relationships.last.relationship.article 
+			p "--------------------------------"
+			p collaborator
+			p "--------------------------------"
+			if collaborator.article_relationships.last
+				@collaborator_articles << collaborator.article_relationships.last.article
+				@collaborator_articles = @collaborator_articles.last(5).reverse
+			end
+		end	
 
 		# p "--------------------------------"
 		# p "--------------------------------"

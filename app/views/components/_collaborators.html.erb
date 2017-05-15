@@ -5,9 +5,7 @@
 	</div>
 	<% articles.each do |article| %>
 		<%= link_to article, class: "collaborator-note" do %>
-			<% if article.article_relationships[0].articable.image %>
-				<%= image_tag article.article_relationships[0].articable.image, class: "collaborator__image"%>
-			<% end %>
+			<%= image_tag article.article_relationships[0].articable.image, class: "collaborator__image"%>
 			<div class="collaborator__info">
 				<p class="note__title"><%= truncate(article.name, length: 60) %></p>
 				<p class="note__author"><%= article.article_relationships[0].articable.name %></p>
