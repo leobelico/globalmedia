@@ -53,8 +53,11 @@ class Panel::StationsController < ApplicationController
 		station = Station.find(params[:panel][:station_id])
 		
 		first_article = Article.find_by_name(params[:panel][:first_article_id])
-		r = ArticleRelationship.create(article: first_article, articable_id: station.id, articable_type: "Station" )
-		
+		if station.id
+			r = ArticleRelationship.create(article: first_article, articable_id: station.id, articable_type: "Station" )
+		else
+			flash[:error] = "No se pudo guardar, intenta de nuevo."
+		end
 		redirect_to panel_station_path(station)
 	end
 

@@ -74,8 +74,11 @@ class Panel::RelationshipsController < ApplicationController
 		investigation = Relationship.find(params[:panel][:investigation_id])
 		
 		first_article = Article.find(params[:panel][:first_article_id])
-		r = ArticleRelationship.create(article: first_article, articable_id: investigation.id, articable_type: "Relationship" )
-		
+		if investigation.id
+			r = ArticleRelationship.create(article: first_article, articable_id: investigation.id, articable_type: "Relationship" )
+		else
+			flash[:error] = "No se pudo guardar, intenta de nuevo."
+		end
 		#Article.all.each do |article|
 		#		article.update_attributes(global_recommendation: false)
 		#	end
