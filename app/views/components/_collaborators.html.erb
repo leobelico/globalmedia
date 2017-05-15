@@ -8,17 +8,15 @@
 
 				<%= link_to article, class: "collaborator-note" do %>
 					
-						<%= image_tag article.article_relationships[0].articable.image, class: "collaborator__image" %>
-					<%= article.article_relationships[0].articable %>		
-					<%# image_tag article.article_relationships[0].articable.image, class: "collaborator__image" %>
+					<%= image_tag article.article_relationships[0].articable.image, class: "collaborator__image" %>
+					
 					<div class="collaborator__info">
 						<p class="note__title"><%= truncate(article.name, length: 60) %></p>
-						<% if article.article_relationships[0].articable %>
-						<p class="note__author"><%# article.article_relationships[0].articable.name %></p>
+						<p class="note__author"><%= article.article_relationships[0].articable.name %></p>
 
 					</div>
 				<% end %>
 			<% end %>	
-		
+
 	<% end %>
 </div>
