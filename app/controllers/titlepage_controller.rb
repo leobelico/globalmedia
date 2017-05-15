@@ -50,7 +50,7 @@ class TitlepageController < ApplicationController
 
 		collaborators = Relationship.where(relationship_type: "Collaborator").order(created_at: "ASC")
 
-		articles 
+		# articles 
 		collaborators.each do |collaborator|
 			# collaborator.article_relationships.last.relationship.article 
 			p "--------------------------------"
@@ -61,6 +61,21 @@ class TitlepageController < ApplicationController
 				@collaborator_articles = @collaborator_articles.last(5).reverse
 			end
 		end	
+
+		# collaborators = Relationship.where(relationship_type: "Collaborator")
+
+		# collaborator_article_relationships = []
+
+		# collaborators.each do |collaborator|
+		# 	collaborator_article_relationships << collaborator.article_relationships.last
+		# end
+
+		# collaborator_article_relationships.sort_by{|e| e[:created_at]}
+		# collaborator_article_relationships.reverse
+		# @collaborator_articles = [] 
+		# collaborator_article_relationships.each do |carp|
+		# 	@collaborator_articles << carp.article
+		# end 
 
 		# p "--------------------------------"
 		# p "--------------------------------"
