@@ -6,7 +6,10 @@
 	<% articles.each do |article| %>
 		<%= link_to article, class: "collaborator-note" do %>
 			<%= article %>		
-			<%= article.article_relationships[0] %>		
+			<%= article.article_relationships[0] %>	
+			<% if article.article_relationships[0].articable %>
+				<%= image_tag article.article_relationships[0].articable.image, class: "collaborator__image" %>
+			<% end %>	
 			<%= article.article_relationships[0].articable %>		
 			<%# image_tag article.article_relationships[0].articable.image, class: "collaborator__image" %>
 			<div class="collaborator__info">
