@@ -3,16 +3,21 @@
 	    <input type="hidden" name="<%= name %>" value="<%= value %>" />
 	<% end %>
 </form>
-<%= form_for [:panel, @article], multipart: true, html: { class: "admin-form form--article card directUpload", remote: true, data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } } do |f| %>
+<%= form_for [:panel, @article], multipart: true, html: { class: "directUpload", remote: true, data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } } do |f| %>
+
 	<% if @article.errors.any? %>	
+	<div class="card">
+		
 		<h5><%= pluralize(@article.errors.count, "error") %></h5>
 			<ul>
 				<% @article.errors.full_messages.each do |msg| %>
 						<li><%= msg %></li>
 				<% end %>
 			</ul>
+	</div>
 	<% end %>
-
+	<div class="card admin-form form--article ">
+		
 		<% if current_user.video_complaints_permission? %>
 			<div class="field field--string">
 				<label>Sección</label>
@@ -29,72 +34,73 @@
 		<% end %>
 	
 
-	<div class="field field--string">
-		<label>Título de la Nota</label>
-		<%= f.text_field :name, required: true, data: { max_chars: 80 } %>
-	</div>
-	<% if Author.all.count > 0 %>
 		<div class="field field--string">
-			<label>Autor de la Nota</label>
-			<%= f.select :author_id, options_for_select( Author.all.collect{ |u| [u.name, u.id] }, @article.author_id), prompt: "Selecciona un Autor" %> 
+			<label>Título de la Nota</label>
+			<%= f.text_field :name, required: true, data: { max_chars: 80 } %>
 		</div>
-	<% end %>
-	<% if current_user.is_news_chief? %>
-		<div class="field field--string">
-			<label for="">Estatus de la nota</label>
-			<%= f.select :draft, options_for_select([['Borrador', 0], ['Aprobado', 1], ['No Aprobado', -1], ['Publicar', 2]], @article.draft) %>
+		<% if Author.all.count > 0 %>
+			<div class="field field--string">
+				<label>Autor de la Nota</label>
+				<%= f.select :author_id, options_for_select( Author.all.collect{ |u| [u.name, u.id] }, @article.author_id), prompt: "Selecciona un Autor" %> 
+			</div>
+		<% end %>
+		<% if current_user.is_news_chief? %>
+			<div class="field field--string">
+				<label for="">Estatus de la nota</label>
+				<%= f.select :draft, options_for_select([['Borrador', 0], ['Aprobado', 1], ['No Aprobado', -1], ['Publicar', 2]], @article.draft) %>
+			</div>
+		
+		<% end %>
+		<div class="field field--datetime">
+			<label>Fecha programada:</label>
+			<div class="field">
+				<%= f.datetime_select :scheduled_time, datetime_separator: "<span>-</span>", time_separator: "<span>:</span>" %>
+			</div>
 		</div>
-	
-	<% end %>
-	<div class="field field--datetime">
-		<label>Fecha programada:</label>
 		<div class="field">
-			<%= f.datetime_select :scheduled_time, datetime_separator: "<span>-</span>", time_separator: "<span>:</span>" %>
+			<label>Extracto</label>
+			<%= f.text_area :short_description, required: true, data: { max_chars: 120 } %>
+		</div>
+		<div class="field">
+			<label>Exclusiva</label>
+			<%= f.select :exclusive, options_for_select([['Sí, esta nota es exclusiva', true], ['No, esta nota no es exclusiva', false]], @article.exclusive) %>
+		</div>
+		<% if @article.image %>
+			<div class="field field--string">
+				<label>Imagen principal acutal</label>
+				<input type="text" disabled value="<%= @article.image %>">
+			</div>	
+		<% end %>
+		<div class="field field--string">
+			<label>Imagen principal</label>
+			<%= f.file_field :image, required: true %>
+		</div>
+		<div class="field field--string">
+			<label>Vídeo principal:</label>
+			<%= f.text_field :video_url %>
+		</div>
+		<div id="note-editor">
+			
+		</div>
+		<div class="field">
+			<label>Hashtags: </label>
+			<%= f.autocomplete_field(:hashtags_names,  autocomplete_hashtag_name_panel_hashtags_path, :id_element => 'hashtags', class: "search-bar", placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", type: "search", value: @hashtags, :"data-delimiter"  => ' ', id: 'hashtags') %>
 		</div>
 	</div>
-	<div class="field">
-		<label>Extracto</label>
-		<%= f.text_area :short_description, required: true, data: { max_chars: 120 } %>
-	</div>
-	<div class="field">
-		<label>Exclusiva</label>
-		<%= f.select :exclusive, options_for_select([['Sí, esta nota es exclusiva', true], ['No, esta nota no es exclusiva', false]], @article.exclusive) %>
-	</div>
-	<% if @article.image %>
-		<div class="field field--string">
-			<label>Imagen principal acutal</label>
-			<input type="text" disabled value="<%= @article.image %>">
-		</div>	
-	<% end %>
-	<div class="field field--string">
-		<label>Imagen principal</label>
-		<%= f.file_field :image, required: true %>
-	</div>
-	<div class="field field--string">
-		<label>Vídeo principal:</label>
-		<%= f.text_field :video_url %>
-	</div>
-	<div id="note-editor">
-		
-	</div>
-	
-	<div class="field">
-		<label>Hashtags: </label>
-
-		<%= f.autocomplete_field(:hashtags_names,  autocomplete_hashtag_name_panel_hashtags_path, :id_element => 'hashtags', class: "search-bar", placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", type: "search", value: @hashtags, :"data-delimiter"  => ' ', id: 'hashtags') %>
-		
-
-	</div>
 	
 
-	<h3 >Images</h3>
+	
+<!-- 	<div class="card admin-form form--article ">
+		
+		<h3 >Images</h3>
 		<div>
-			<%= link_to_add_fields "+ Imagen", f, :images, "create__add-button", "Add a Product Image"%>
-			<%= f.fields_for :images do |builder| %>
+			<%= link_to_add_fields "Añadir imagen", f, :images, "create__add-button", "Add a Product Image"%>
+			<%= f.fields_for :images, class: "field-builder" do |builder| %>
 				
-			
+				
 			<% end %>
 		</div>
+	</div> -->
 <% end %>
 <script>
 	char_count();

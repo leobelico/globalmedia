@@ -5,10 +5,17 @@ $(document).on("click", function(event){
     } else {
       submit_form("create", "", event); 
     }
+  }  
+  if ( $(event.target).is(".add-gallery") ) {
+    if ( $(event.target).attr("data-slug") ){      
+      submit_form("update", $(event.target).data("slug"), event, true); 
+    } else {
+      submit_form("create", "", event, false); 
+    }
   }
 }); 
 
-function submit_form(action, slug, event){
+function submit_form(action, slug, event, go_to_gallery){
 
   console.log(editor.getContents()) 
   console.log(editor.getText())
@@ -27,6 +34,8 @@ function submit_form(action, slug, event){
   }
   button = $(event.target);
   show_button_spinner(button);
+
+
 
   $.ajax({
     url: url,
@@ -52,7 +61,8 @@ function submit_form(action, slug, event){
         scheduled_time_2i: $("#article_scheduled_time_2i").val(),
         scheduled_time_1i: $("#article_scheduled_time_1i").val(),
         scheduled_time_4i: $("#article_scheduled_time_4i").val(),
-        scheduled_time_5i: $("#article_scheduled_time_5i").val()
+        scheduled_time_5i: $("#article_scheduled_time_5i").val(),
+        gallery_images: go_to_gallery
     }
   })
   .done(function() {
