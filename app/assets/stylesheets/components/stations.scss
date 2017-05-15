@@ -89,7 +89,7 @@
 	.station__recommendations {
 		.recommendation__image { 
 			width: calc(33% - 5.33px);
-			height:  100px;
+			height:  auto;
 			margin-bottom:  8px;
 		}
 	}
@@ -170,9 +170,17 @@
 	}
 	.playlists .playlist {
 		width:  calc(50% - 4px);
-		height:  120px;
+		padding-top:  calc(50vw - 4px);
+		position: relative;
+		height:  auto;
 		margin-bottom:  8px;
+		img {
+			position:  absolute; 
+			top:  0; 
+			left:  0;
+		}
 	}
+
 }
 .station video {
 	width:  100%; 

@@ -52,7 +52,10 @@
 		      position: { lat: <%= camera.lat %>, lng: <%= camera.lng %> },
 		      map: map,
 		      title: "<%= camera.name %>",
-		      url: "<%= camera_path(camera) %>"
+		      url: "<%= camera_path(camera) %>",
+		      visible: true,
+		      zIndex: 10,
+		      optimized: false
 		    });
 			google.maps.event.addListener(marker_<%= index %>, 'click', function() {
 			    window.location.href = this.url;

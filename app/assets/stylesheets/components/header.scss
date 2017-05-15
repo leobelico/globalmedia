@@ -70,23 +70,27 @@
 	.menu-trigger {
 		display:  flex;
 		flex-direction:  column; 
-		width:  36px; 
-		height:  18px; 
+		width:  50%; 
+		height:  100%; 
 		position:  relative; 
-		margin-top:  auto; 
 		margin-left:  auto; 
-		margin-bottom:  auto; 
+		margin-top:  0px; 
+		margin-bottom:  0px; 
 		margin-right:  12px;
+		padding-top:  13px;
+		padding-bottom:  13px;
+		box-sizing:  border-box;
 		div {
 			width:  36px; 
+			right:  0px;
 			height:  1px;
 			background:  #ffffff; 
 			position:  absolute;  
 			pointer-events:  none; 
 		}
-		.mt-1 { top: 0px; }
-		.mt-2 { top: 8px; }
-		.mt-3 { top: 17px; }
+		.mt-1 { top: 13px; }
+		.mt-2 { top: 21px; }
+		.mt-3 { top: 30px; }
 	}
 	.header {
 		display:  flex; 
