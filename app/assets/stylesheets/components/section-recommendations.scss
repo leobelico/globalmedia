@@ -36,4 +36,8 @@
 			width:  100%;
 		}
 	}
+	.section-recommendations__article:nth-child(n+3) {
+		display:  none; 
+	}
+
 }

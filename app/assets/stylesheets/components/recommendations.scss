@@ -25,3 +25,8 @@
 	font-size:  18px; 
 	font-weight:  600; 
 }
+@media screen and (max-width:  1023px) {
+	.recommendation:nth-of-type(n+3) {
+		display:  none; 
+	} 
+}

@@ -40,8 +40,21 @@
 				player = videojs('stream');
 			</script>
 
-		<% end %>		
-		<div class="station__info">				
+		<% end %>	
+		<div class="program__info">
+			
+			<% if @timetables.first %>
+				<%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
+				<div class="program__info__text">
+					<p><%= @timetables.first.name %></p>						
+					<p><%= @timetables.first.description %></p>
+					<p class="radio-banner__tune-in">Con:</p>
+					<p><%= @timetables.first.broadcasters %></p>
+				</div>
+			<% end %>
+		</div>
+		<div class="station__info">		
+
 			<div class="station__programs">
 				<% @timetables.each_with_index do |timetable, index| %>
 					<% if index == 0 and @station.video == false %>
@@ -56,18 +69,9 @@
 					</div>
 				<% end %>	
 			</div>
-			<div class="program__info">
-				
-				<% if @timetables.first %>
 
-					<%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
-					<p><%= @timetables.first.description %></p>
-					<p class="radio-banner__tune-in">Con:</p>
-					<p><%= @timetables.first.broadcasters %></p>
-				<% end %>
-			</div>
 		</div>
-		<div class="radio-banner__tune-in">Nuestras Playlists</div>
+		<div class="radio-banner__tune-in">Playlists recomendadas para ti</div>
 		<div class="playlists">
 			<% if @station.playlist_1 != "" %>
 				<a target="_blank" href="<%= @station.playlist_1 %>" class="playlist">
@@ -90,7 +94,7 @@
 				</a>
 			<% end %>
 		</div>
-		<div class="radio-banner__tune-in">Estaciones recomendadas</div>
+		<div class="radio-banner__tune-in">Otros como tú están escuchando</div>
 		<div class="station__recommendations">
 			<% @recommendations.each do |recommendation| %>
 				<%= link_to recommendation, class: "recommendation__image" do %>
@@ -100,32 +104,12 @@
 		</div>
 		<div class="radio-banner__tune-in">Lo más reciente</div>
 
-
-
-	<div class="note note--display">
-		<div id="quill-container" class="quill--article">	
-		</div>
-
-	</div>
-
-	<script>
-		<% @station.article_relationships.last(1).each do |relationship| %>
-			var content = <%= raw(relationship.article.note) %>;
-			var container = document.getElementById("quill-container")
-			display_quill_note(content, container);
-		<% end %>
-	</script>
-
-
-
-
 	<% image_tag @station.image_preview %>
 
 		<div class="radio-banner__tune-in">Histórico</div>
 
 		<div class="station__articles">
-			
-			<% @station.article_relationships.offset(1).last(4).each do |relationship| %>
+			<% @station.article_relationships.last(3).each do |relationship| %>
 				<%= render "components/horizontal-note", article: relationship.article %>
 			<% end %>
 		</div>

@@ -8,6 +8,11 @@
 	object-position:  center center; 
 	margin-bottom:  16px; 
 }
+@media screen and (max-width:  1023px) {
+	.relationship__image {
+		display:  none; 
+	}
+}
 .relationship__description {
 	font-size:  14px; 
 	font-weight:  900; 
