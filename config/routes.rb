@@ -140,7 +140,21 @@ Rails.application.routes.draw do
   end
 
 
-  
+  namespace :api do
+    namespace :v1 do
+      resources :articles, only: [:index, :show] do
+        collection do 
+          get "most_visited"
+        end
+      end
+      resources :stations, only: [:index, :show]
+      # , to: "api/v1/articles#most_visited"
+
+      resources :sections, only: [:index, :show] do 
+        get "articles", to: "sections#get_articles"
+      end
+    end
+  end
   
 
 
