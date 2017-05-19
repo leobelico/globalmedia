@@ -145,9 +145,11 @@ Rails.application.routes.draw do
       resources :articles, only: [:index, :show] do
         collection do 
           get "most_visited"
+          get "search"
         end
       end
       resources :stations, only: [:index, :show]
+      resources :cameras, only: [:index]
       # , to: "api/v1/articles#most_visited"
 
       resources :sections, only: [:index, :show] do 

@@ -14,6 +14,7 @@ module Globalmedia
     config.time_zone = 'Mexico City'
 	config.active_record.default_timezone = :local
 	config.i18n.default_locale = :es
+    config.active_record.time_zone_aware_types = [:datetime, :time]
     config.middleware.insert_before 0, "Rack::Cors" do
         allow do
             origins '*'
