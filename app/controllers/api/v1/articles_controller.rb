@@ -51,6 +51,17 @@ class Api::V1::ArticlesController < Api::BaseController
 		render json: @articles, adapter: :json, per_page: 20 
 	end
 
+	def search
+      @articles = Article.where('LOWER(name) LIKE ? AND published = ?', "%#{params[:name]}%", true).order(created_at: "DESC").last(30)
+      json_response(@articles)
+    end
+
+    def search_with_dates_and_category
+    	section = Section.find_by_name(params[:category_name])
+      @articles = Article.where('articable_id = ? AND articable_type = ? AND created_at BETWEEN ? AND ?', section.id, 'Section', params[:initial_date], params[:final_date]).order(created_at: "DESC").last(30)
+      json_response(@articles)
+    end
+
 	private 
 		def set_article
 			@article = Article.where(published: true).find(params[:id])
