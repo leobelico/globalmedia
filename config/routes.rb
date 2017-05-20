@@ -155,6 +155,9 @@ Rails.application.routes.draw do
       resources :sections, only: [:index, :show] do 
         get "articles", to: "sections#get_articles"
       end
+      get "latest_collaborator_articles", to: "articles#latest_collaborator_articles"
+      get "latest_special_investigation_articles", to: "articles#latest_special_investigation_articles"
+      get "latest_complaints_articles", to: "articles#latest_complaints_articles"
     end
   end
   
