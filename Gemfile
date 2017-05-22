@@ -35,6 +35,14 @@ gem 'aws-sdk', "2.2.8"
 gem 'will_paginate', "~>3.0.5"
 gem 'autoprefixer-rails'
 gem "cancan"
+
+gem 'jwt'
+gem 'active_model_serializers'
+gem 'rack-cors'
+gem 'rack-attack'
+gem 'simple_command'
+gem 'api-pagination', "4.4.0"
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -46,6 +54,8 @@ gem "cancan"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'rspec-rails', '>= 3.5.0'
+
 end
 
 # group :production do  

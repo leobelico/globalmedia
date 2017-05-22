@@ -1,0 +1,10 @@
+glatest_collaborator_articles
+
+curl -H http://localhost:3000/api/v1/latest_collaborator_articles?page=1
+
+curl http://localhost:3000/api/v1/latest_special_investigation_articles?page=1
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"name":"ilse"}' http://localhost:3000/api/v1/search
+
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -H "Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0OTI4Mjg0ODR9.X20DM8uFO5O4gbrz83RB_5EEE2aNtlq5dgLHR7K_p0I" -X POST -d '{"affle_id":"1"}'r http://localhost:3000/api/v1/favorites

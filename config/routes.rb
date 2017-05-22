@@ -140,7 +140,31 @@ Rails.application.routes.draw do
   end
 
 
-  
+  namespace :api do
+    namespace :v1 do
+      resources :articles, only: [:index, :show] do
+        collection do 
+          get "most_visited"
+          get "search"
+        end
+      end
+      resources :stations, only: [:index, :show]
+      resources :cameras, only: [:index]
+      # , to: "api/v1/articles#most_visited"
+
+      resources :sections, only: [:index, :show] do 
+        get "articles", to: "sections#get_articles"
+      end
+      get "latest_collaborator_articles", to: "articles#latest_collaborator_articles"
+      get "latest_special_investigation_articles", to: "articles#latest_special_investigation_articles"
+      get "latest_complaints_articles", to: "articles#latest_complaints_articles"
+      get "search", to: "articles#search"
+      post "search", to: "articles#search"
+
+      get "search_with_dates_and_category", to: "articles#search_with_dates_and_category"
+      post "search_with_dates_and_category", to: "articles#search_with_dates_and_category"
+    end
+  end
   
 
 

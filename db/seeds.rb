@@ -21,8 +21,6 @@ sections = Section.first_or_create([
 	{name: "Denuncia Global"}
 ])	
 
-
-	
 article_content = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in qusae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? "
 
 short_description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore architecto harum sint, cumque laboriosam, dolorum culpa voluptatum porro quae doloremque magni optio odit sunt suscipit fugit officia modi accusantium distinctio!"
@@ -80,7 +78,17 @@ images = [
 "https://upload.wikimedia.org/wikipedia/commons/1/1f/Michelangelo%27s_Pieta_5450_cropncleaned_edit.jpg",
 "http://www.wallpaperawesome.com/wallpapers-awesome/wallpapers-famous-painting-artist-painter-brush-oil-on-canvas-awesome/wallpaper-painting-of-famous-painters-4.jpg"
 ]
-sections.each do |section|
+authors = Author.create([
+	{name: "Ninguno", logo: images[3]},
+	{name: "J.K Rowling", logo: images[3]},
+	{name: "Harry Potter", logo: images[3]},
+	{name: "Hermione Granger", logo: images[3]},
+	{name: "Ron Weasley", logo: images[3]},
+	{name: "Fred Weasley", logo: images[3]},
+	{name: "George Weasley", logo: images[3]},
+	{name: "Ginny Weasley", logo: images[3]},
+])	
+Section.all.each do |section|
 	for i in 0..20
 		article = Article.create([
 			{		
@@ -97,6 +105,7 @@ sections.each do |section|
 				image_thumbnail: images[i],
 				draft: 1,
 				published: true,
+				author_id: 1,
 				video_url: "https://www.youtube.com/embed/2PSvFlF7akY"
 			}
 		])
@@ -117,7 +126,8 @@ articles_new = Article.create([
 				image: images[1], 
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true
+				published: true, 
+				author_id: 1
 			},
 			{		
 				name: "Trump le dice no al muro",
@@ -132,7 +142,8 @@ articles_new = Article.create([
 				image: images[1], 
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true
+				published: true, 
+				author_id: 1
 			},
 			{		
 				name: "Muere David Bowie",
@@ -147,7 +158,8 @@ articles_new = Article.create([
 				image: images[1], 
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true
+				published: true, 
+				author_id: 1
 			},
 			{		
 				name: "Conflicto en medio oriente",
@@ -162,7 +174,8 @@ articles_new = Article.create([
 				image: images[1], 
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true
+				published: true, 
+				author_id: 1
 			},
 			{		
 				name: "Cierran 254 empresas Pyme en SLP",
@@ -177,7 +190,8 @@ articles_new = Article.create([
 				image: images[1], 
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true
+				published: true, 
+				author_id: 1
 			},
 			{		
 				name: "Encuentran eslabón en la cadena evolutiva",
@@ -192,7 +206,8 @@ articles_new = Article.create([
 				image: images[1], 
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true
+				published: true, 
+				author_id: 1
 			},
 			{		
 				name: "Dan a conocer nuevos impuestos",
@@ -207,7 +222,8 @@ articles_new = Article.create([
 				image: images[1], 
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true
+				published: true, 
+				author_id: 1
 			}
 
 		])
@@ -469,23 +485,26 @@ for i in 0..2
 end
 
 timetable_image = "http://www.sothebys.com/content/dam/sothebys-pages/blogs/ModernImpressions/2017/2/klimt-bauerngarten_banner.jpg.webrend.1920.350.jpeg"
-for i in 0..7
-	Timetable.create(
-		name: "Programa Eterno",
-		image: timetable_image,
-		streaming_hour: Time.now.beginning_of_day,
-		end_streaming_hour: Time.now.end_of_day,
-		monday: true, 
-		tuesday: true, 
-		wednesday: true, 
-		thursday: true, 
-		friday: true, 
-		saturday: true, 
-		sunday: true, 
-		broadcasters: "Lalalala",
-		broadcaster_image: timetable_image,
-		station_id: Station.first.id
-	)
+Station.all.each do |station|
+	for i in 0..7
+		timetable = Timetable.create({
+					name: "Programa Eterno",
+					image: timetable_image,
+					streaming_hour: Time.now.beginning_of_day,
+					end_streaming_hour: Time.now.end_of_day,
+					monday: true, 
+					tuesday: true, 
+					wednesday: true, 
+					thursday: true, 
+					friday: true, 
+					saturday: true, 
+					sunday: true, 
+					broadcasters: "Lalalala",
+					broadcaster_image: timetable_image,
+					description: "Lalalala",
+					station: station
+				})
+	end
 end
 
 User.all.each do |user|
@@ -548,17 +567,6 @@ end
 		}
 	) 
 
-
-authors = Author.create([
-	{name: "Ninguno", logo: images[3]},
-	{name: "J.K Rowling", logo: images[3]},
-	{name: "Harry Potter", logo: images[3]},
-	{name: "Hermione Granger", logo: images[3]},
-	{name: "Ron Weasley", logo: images[3]},
-	{name: "Fred Weasley", logo: images[3]},
-	{name: "George Weasley", logo: images[3]},
-	{name: "Ginny Weasley", logo: images[3]},
-])
 
 
 
