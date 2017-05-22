@@ -10,6 +10,7 @@
 			<p class="type">#DENUNCIAGLOBAL</p>
 			<div class="link">Ir a sección</div>		
 		<% end %>
+		<h4 class="special-articles__title"><%= articles.first.name %></h4>
 	<% else %>
 		
 		<%= link_to relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "special-articles__type" do %>
@@ -17,13 +18,15 @@
 			<div class="link">Ir a sección</div>
 
 		<% end %>
+		<h4 class="special-articles__title"><%= title %></h4>
 		
 	<% end %>
-	<h4 class="special-articles__title"><%= title %></h4>
+
+
 	<% if articles.first.video_url == "" %>
 		<% if title != "Denuncia Global" %>
-		<% Relationship.where("relationship_type = 'Investigation'").last.image %>
-		<%= image_tag Relationship.where("relationship_type = 'Investigation'").last.image, class: "special-articles__image" %>
+			<% Relationship.where("relationship_type = 'Investigation'").last.image %>
+			<%= image_tag Relationship.where("relationship_type = 'Investigation'").last.image, class: "special-articles__image" %>
 		<% else %>
 			<%= image_tag Article.where("articable_id = 12").last.image, class: "special-articles__image" %>
 		<% end %>

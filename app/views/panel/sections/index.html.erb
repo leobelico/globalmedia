@@ -8,6 +8,8 @@
 	<div class="table__row">
 		<p class="table__cell">Nombre:</p>
 		<p class="table__cell">Artículos:</p>
+		<p class="table__cell">Editar:</p>
+		<p class="table__cell">Eliminar:</p>
 	</div>
 		<% @sections.each do |section| %>
 			<div class="table__row">
@@ -15,6 +17,9 @@
 					<%= link_to section.name, panel_section_path(section)%>
 				</div>
 				<div class="table__cell"><%= section.articles.count %></div>
+				<%= link_to "Editar", edit_panel_section_path(section), class: "table__cell edit" %>
+				<%= link_to "Eliminar", panel_section_path(section), method: :delete, data: { confirm: "Esta accion no se puede deshacer. ¿Eliminar sección?" }, class: "table__cell delete" %>
+
 			</div>	
 		<% end %>
 		

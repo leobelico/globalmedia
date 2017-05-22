@@ -16,7 +16,6 @@
 <div class="special-articles-container">
 	<% if @investigation_articles.count > 0 %>
 		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
-		
 	<% end %>
 	<% if @complaints %>
 		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: @complaints.reverse %>

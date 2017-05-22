@@ -209,7 +209,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_global_recommendations
-    @articles = Article.where(global_recommendation: true, highlight: false, published: true).order(updated_at: "ASC").last(4)
+    @articles = Article.where(global_recommendation: true, published: true).order(updated_at: "ASC").last(4)
 
     current_article = []
     if session[:article_id]

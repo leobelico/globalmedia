@@ -15,7 +15,9 @@ Rails.application.routes.draw do
 
   resources :sections, only: [:show], param: :slug 
   resources :relationships
-  resources :stations
+  resources :stations do 
+    get "articles", to: "stations#articles"
+  end
   resources :cameras
   
   get "collaborators", to: "relationships#collaborators"

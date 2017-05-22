@@ -104,14 +104,15 @@
 		</div>
 		<div class="radio-banner__tune-in">Lo más reciente</div>
 
-	<% image_tag @station.image_preview %>
-
-		<div class="radio-banner__tune-in">Histórico</div>
+		<% image_tag @station.image_preview %>
 
 		<div class="station__articles">
 			<% @station.article_relationships.last(3).each do |relationship| %>
 				<%= render "components/horizontal-note", article: relationship.article %>
 			<% end %>
+
+			<!-- VÏNCULO PARA VER MAS -->
+			<% link_to "Ver más", station_articles_path(@station.slug) %>		
 		</div>
 
 

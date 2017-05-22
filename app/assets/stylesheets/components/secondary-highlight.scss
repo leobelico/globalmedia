@@ -6,6 +6,9 @@
 	.article-preview__info {
 		display:  flex; 
 		flex-grow: 1; 
+		.author {
+			display:  none; 
+		}
 		.title {
 			font-size:  21px; 
 			margin-top:  8px; 
@@ -13,7 +16,8 @@
 		}
 		.section-and-author {
 			margin-top:  8px; 
-			margin-bottom:  0px; 
+			margin-bottom:  8px;
+
 		}
 		.datetime {
 			margin-top:  8px; 
@@ -41,6 +45,13 @@
 	height:  150px; 
 	object-fit:  cover; 
 	object-position:  center center; 
+}
+@media screen and (min-width:  1024px) {
+	.principal-highlight + .secondary-highlight {
+		.short-description {
+			display:  none; 
+		}
+	}
 }
 @media screen and (max-width:  1023px) {
 	.secondary-highlight {
