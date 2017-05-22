@@ -15,11 +15,6 @@ class Api::V1::ArticlesController < Api::BaseController
 	    @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND hits.created_at > ? AND hits.created_at < ?", 2.hours.ago, Time.now).last(6)
 	    json_response(@articles, :ok)
 	end
-	def search
-		search = Hashtag.find_by(name: params[:hashtag])
-		@articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ params[:search] } AND articles.published = true")
-		render json: @articles, adapter: :json, per_page: 20 
-	end
 
 	def latest_collaborator_articles
 		
