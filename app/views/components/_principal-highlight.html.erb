@@ -9,6 +9,7 @@
 		<%= link_to article do %>
 			<h4 class="title semibold"><%= article.name %></h4>	
 			<p class="section-and-author"><span class="section"><%= article.section %></span> - 
+			<span class="datetime">Hace <%= distance_of_time_in_words(Time.now, (article.created_at)) %></span>
 
 			<% if article.author and article.author.name != "Ninguno" %>
 				<span class="author">Por <%= article.author.name %></p>
@@ -17,7 +18,6 @@
 				<span class="author">Por <%= article.user.full_name %></p>
 			<% end %>
  	
-			<p class="datetime">Hace <%= distance_of_time_in_words(Time.now, (article.created_at)) %></p>
 			<hr class="line">
 			<p class="short-description"><%= truncate(article.short_description, length: 120) %></p> 	
 		<% end %>

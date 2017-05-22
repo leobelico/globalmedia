@@ -1,0 +1,25 @@
+<div class="interface--row">
+	
+	<div class="section main-content"> 
+
+		<h1 class="section__title"><%= @station.name %></h1>
+		
+		<div class="section-articles-container">
+			
+			<% @articles.each do |article|%>
+				<%= render "components/section-article", article: article %>
+			<% end %>
+		</div>
+
+		<%= will_paginate @articles, class: "site-pagination" %>
+
+		<!-- NOTAS DEL PROGRAMADOR-->
+			<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
+
+			<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
+		<!-- -->
+		<!--  -->
+	</div>
+
+</div>
+

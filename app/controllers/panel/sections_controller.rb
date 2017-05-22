@@ -168,13 +168,15 @@ class Panel::SectionsController < ApplicationController
 	end
 
 	def destroy
+		SectionHighlight.where(section: @section).delete_all
+		HitObjective.where(section: @section).delete_all
 		@section.destroy
 		redirect_to root_url
 	end
 
 	private
 		def section_params
-			params.require(:section).permit(:name, :color)
+			params.require(:section).permit(:name, :color, :order)
 		end
 
 		def set_section

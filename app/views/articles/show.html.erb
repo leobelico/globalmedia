@@ -12,6 +12,7 @@
 			<p class="exclusive--note">Exclusiva</p>
 		<% end %>
 		<h1 class="title"><%= @article.name %></h1>	
+		<p class="short-description"><%= @article.short_description %></p>
 		<div class="article__info">
 			<% if @article.author and @article.author.name != "Ninguno" %>
 				<p class="author">Por <%= @article.author.name %></p>
@@ -32,7 +33,6 @@
 			<%= render @article.hashtags %>
 		</div>
 
-		<p class="short-description"><%= @article.short_description %></p>
 		<% if @article.video_url != "" %> 
 			<div class="iframe">
 				<iframe width="650" height="415" src="<%= @article.	video_url %>" frameborder="0" allowfullscreen></iframe>
@@ -64,6 +64,7 @@
 
 			<% end %>
 		<% end %>
+		<div class="radio-banner__tune-in">También te puede interesar:</div>
 		<%= render "components/section-recommendations", articles: get_latest_articles_per_section(Section.find_by_name(@article.section).id, 3), section_name: @article.section, highlight: "" %>
 
 	</div>
