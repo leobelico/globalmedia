@@ -3,12 +3,27 @@
 	<div class="section main-content"> 
 
 		<h1 class="section__title" style="color:  <%= @section.color %>; border-bottom:  solid 4px <%= @section.color %>"><%= @section.name %></h1>
-		
-
+	
 		<% if @section.name == "Denuncia Global" or @section.name == "DENUNCIA GLOBAL" %>
 			<%= render "components/global_complaint_videos", article: @articles.first %>
 				
 		<% end %>
+
+		<% if @highlight %>
+			
+			<div class="section__highlight">
+				<%= link_to @highlight, class: "image" do %>
+					<%= image_tag @highlight.image %>
+				<% end %>
+				<%= link_to @highlight, class: "section-article__info" do %>
+					<h4 class="small-title semibold"><%= @highlight.name %></h4>
+					<p class="short-description"><%= @highlight.short_description %></p>
+				<% end %>
+				<%= render "components/social-media-links", article: @highlight %>
+			</div>
+		<% end %>
+
+
 		<div class="section-articles-container">
 			
 			<% @articles.each do |article|%>
