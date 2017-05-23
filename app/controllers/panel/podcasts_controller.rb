@@ -4,6 +4,7 @@ class Panel::PodcastsController < ApplicationController
 	before_action :set_station
 	before_action :set_podcast, only: [:show, :edit, :update, :destroy]
 
+	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
 	
 
 	def new
@@ -42,7 +43,9 @@ class Panel::PodcastsController < ApplicationController
 		def podcast_params
 			params.require(:podcast).permit(:name, :stream_url)
 		end
-
+		def set_s3_direct_post
+    		@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+  		end
 		def set_station
 			@station = Station.find_by_slug(params[:station_slug])
 			
