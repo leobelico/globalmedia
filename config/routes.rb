@@ -78,6 +78,7 @@ Rails.application.routes.draw do
     end
     resources :hits do 
       get :graph, on: :collection
+      post :graph, on: :collection
     end
     resources :banners
     resources :relationships, param: :slug 

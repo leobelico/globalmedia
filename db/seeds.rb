@@ -507,6 +507,22 @@ Station.all.each do |station|
 	end
 end
 
+Article.all.each do |article|
+	for i in 0..10
+		hit = Hit.create({
+			number: Random.rand(500),
+			article_id: article.id
+		})
+		hit.created_at = DateTime.now - (rand * 200)
+		hit.save
+		hit = Hit.create({
+			number: Random.rand(500),
+			article_id: article.id
+		})
+		hit.created_at = DateTime.now - (rand * 200)
+		hit.save
+	end
+end 
 User.all.each do |user|
 	user.update_attributes(
 		banners_permission: true, 

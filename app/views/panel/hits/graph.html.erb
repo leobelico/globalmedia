@@ -1,25 +1,65 @@
 <div class="panel__header">
 </div>
-<div class="table card">
-	<%= form_tag(graph_panel_hits_path, method: :get, class: "admin-form") do %>
-		<div class="field">
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div class="table card graphs">
+	<%= form_for(:hit, url: graph_panel_hits_path, html: { class: "admin-form"}) do |f| %>		
+		<div class="field field--section">
 			
 			<label for="">Sección:</label>
-			<%= select_tag "section_id", options_from_collection_for_select(Section.all, "id", "name") %>
+			<%= f.select "section_id", options_from_collection_for_select(Section.all, "id", "name") %>
 		</div> 		
+	<div class="multifield">
 		<div class="field field--datetime">
 			<label for="">Fecha de inicio:</label>
 			<div class="field">
-				<%= date_select("initial_date", options: { start_year: 2015 })%>
+				<%= f.date_select(:initial_date, options: { start_year: 2015 })%>
 			</div>
 		</div>
 		<div class="field field--datetime">
 			<label for="">Fecha de fin:</label>
 			<div class="field">
-				<%= date_select("end_date", options: { start_year: 2015 })%>
+				<%= f.date_select(:end_date, options: { start_year: 2015 })%>
 			</div>
 		</div>
-		<%= submit_tag("Buscar") %>
 
+	</div>
+		<div class="field">
+			<%= f.submit "Buscar", class: "button" %>
+		</div>
 	<% end %>
 </div>
+<% if @hits.count > 0 %>
+	<div class="table card graphs">
+		<div id="chart"></div>
+
+	</div>
+<% end %>
+
+<script>
+	<% if @hits.count > 0 %>
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+     function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        	['Año y Mes', 'Vistas a Página'],
+			<% @hits.each.with_index do |records, index| %>
+				<% if index != @hits.count - 1 and @hits.count > 1 %>['<%= I18n.t("date.month_names")[records[0][0]].humanize %>\n<%= records[0][1] %>',  <%= records[1].map { |h| h[:number] }.sum %>],
+	        	<% else %>['<%= I18n.t("date.month_names")[records[0][0]].humanize %>\n<%= records[0][1] %>',  <%= records[1].map { |h| h[:number] }.sum %>]
+	        	<% end %>
+
+		<% end %>
+        ]);
+		var options = {
+			title: 'Vistas a Página',
+			// curveType: 'function',
+			legend: { position: 'bottom' }
+		};
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart'));
+
+        chart.draw(data, options);
+	}
+    <% end %>
+</script>
