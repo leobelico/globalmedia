@@ -1,6 +1,10 @@
 <div class="panel__header">
+	<h4 class="panel__title">Vistas a Página</h4>
+	<div class="panel__actions">
+		<%= link_to "Ir a Objetivos", panel_hit_objectives_path, class: "button" %>
+		<%= link_to "Consulta de Gráficas", graph_panel_hits_path, class: "button" %>
+	</div>	
 </div>
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <div class="table card graphs">
@@ -26,12 +30,15 @@
 
 	</div>
 		<div class="field">
-			<%= f.submit "Buscar", class: "button" %>
+			<%= f.submit "Consultar gráfica", class: "button" %>
 		</div>
 	<% end %>
 </div>
 <% if @hits.count > 0 %>
 	<div class="table card graphs">
+		<% if @hits.count > 1 %>
+			<h4 class="title"><%= @hits.first[1][1].article.section %></h4>
+		<% end %>
 		<div id="chart"></div>
 
 	</div>
@@ -52,7 +59,7 @@
 		<% end %>
         ]);
 		var options = {
-			title: 'Vistas a Página',
+			title: 'Sección <%= @hits.first[1][1].article.section %>',
 			// curveType: 'function',
 			legend: { position: 'bottom' }
 		};

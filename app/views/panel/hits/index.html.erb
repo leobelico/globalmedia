@@ -2,6 +2,7 @@
 	<h4 class="panel__title">Vistas a Página</h4>
 	<div class="panel__actions">
 		<%= link_to "Ir a Objetivos", panel_hit_objectives_path, class: "button" %>
+		<%= link_to "Consulta de Gráficas", graph_panel_hits_path, class: "button" %>
 	</div>	
 </div>
 <div class="table card">
@@ -45,9 +46,5 @@
 	</div>
 
 <% end %>
-
-
-
-
-
 </div>
+<%= will_paginate @hits, class: "card admin-pagination" %>
