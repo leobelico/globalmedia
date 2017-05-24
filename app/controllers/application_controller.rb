@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   end
 
   
-   autocomplete :article, :name, full: true
+  autocomplete :article, :name, full: true
 
   def get_autocomplete_items(parameters)
       items = active_record_get_autocomplete_items(parameters)

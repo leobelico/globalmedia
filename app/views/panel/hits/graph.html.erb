@@ -1,0 +1,25 @@
+<div class="panel__header">
+</div>
+<div class="table card">
+	<%= form_tag(graph_panel_hits_path, method: :get, class: "admin-form") do %>
+		<div class="field">
+			
+			<label for="">Sección:</label>
+			<%= select_tag "section_id", options_from_collection_for_select(Section.all, "id", "name") %>
+		</div> 		
+		<div class="field field--datetime">
+			<label for="">Fecha de inicio:</label>
+			<div class="field">
+				<%= date_select("initial_date", options: { start_year: 2015 })%>
+			</div>
+		</div>
+		<div class="field field--datetime">
+			<label for="">Fecha de fin:</label>
+			<div class="field">
+				<%= date_select("end_date", options: { start_year: 2015 })%>
+			</div>
+		</div>
+		<%= submit_tag("Buscar") %>
+
+	<% end %>
+</div>

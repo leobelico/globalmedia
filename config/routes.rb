@@ -76,7 +76,9 @@ Rails.application.routes.draw do
       get :autocomplete_article_name, on: :collection
       
     end
-    resources :hits
+    resources :hits do 
+      get :graph, on: :collection
+    end
     resources :banners
     resources :relationships, param: :slug 
     resources :hit_objectives
