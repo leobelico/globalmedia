@@ -7,7 +7,7 @@
 <meta property="og:description" 	content="<%= article.short_description %> <%= truncate(article.plain_text, length: 300) %>"/>
 <meta property="og:locale" 			content="es_MX"/>
 <meta property="article:author" 	content="https://www.facebook.com/GlobalMediaSLP/?fref=ts"/>
-<meta property="article:section"	content="Articulo"/>
+<meta property="article:section"	content="<%= article.section %>"/>
 
 <meta property="og:url" content="<%= article_url(article) %>"/>
 <meta property="og:image" itemprop="image" content="http:<%= image_url article.image %>"/>
@@ -21,7 +21,7 @@
 <meta name="twitter:card" 			content="summary_large_image"/>
 <meta name="twitter:site" 			content="@globalmediamx"/>
 <meta name="twitter:title" 			content="<%= article.name %>"/>
-<meta name="twitter:description" 	content="<%= truncate(article.short_description, length: 50)  %>"/>
+<meta name="twitter:description" 	content="<%= article.short_description %> <%= truncate(article.plain_text, length: 300) %>"/>
 <meta name="twitter:creator" 		content="@globalmediamx"/>
 <meta name="twitter:image:src" 		content="<%= image_url article.image %>"/>
 <meta name="twitter:image:alt" 		content="<%= truncate(article.short_description, length: 50)  %>"/>

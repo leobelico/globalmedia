@@ -14,13 +14,16 @@ class TitlepageController < ApplicationController
 	end
 
 	def about_us 
+		if Section.find_by(name: "Acerca de")
+			@articles = Article.where(published: true, articable_id: Section.find_by(name: "Acerca de").id).paginate(page: params[:page], per_page: 10)
+		end
 	end
 	def index
 		@highlights = Highlight.all.order(order: "ASC")
 		search = Hashtag.find_by_name("#ESNOTICIA")
 		@its_news = ArticlesHashtag.where(hashtag_id: search).last(10)
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')
-		@sections = Section.where("name != 'Último Momento' AND name != 'Ultimo Momento' AND name != 'Denuncia Global' AND name != 'Estaciones' AND name != 'Colaboradores' AND name != 'Investigación Especial' AND name != 'INVESTIGACIÓN ESPECIAL' AND name != 'COLABORADORES' AND name != 'ESTACIONES'").order(order: "ASC")
+		@sections = Section.where("name != 'Último Momento' AND name != 'Acerca de' AND name != 'Ultimo Momento' AND name != 'Denuncia Global' AND name != 'Estaciones' AND name != 'Colaboradores' AND name != 'Investigación Especial' AND name != 'INVESTIGACIÓN ESPECIAL' AND name != 'COLABORADORES' AND name != 'ESTACIONES'").order(order: "ASC")
 
 		relationships_investigations = Relationship.order(created_at: "ASC").where(relationship_type: "Investigation")
 
