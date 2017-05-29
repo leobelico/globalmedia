@@ -4,6 +4,10 @@
 	align-items:  flex-start; 
 	justify-content:  flex-start; 
 	width:  100%; 
+	.special-articles__type .link {
+		padding-left:  0px; 
+		width:  12px; 
+	}
 	.latest-news__header {
 		display:  flex; 
 		flex-direction:  row; 

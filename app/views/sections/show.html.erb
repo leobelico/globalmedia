@@ -10,8 +10,11 @@
 		<% end %>
 
 		<% if @highlight %>
-			
-			<div class="section__highlight">
+			<% if @section.color %>
+				<div class="section__highlight" style="border-bottom:  solid 4px <%= @section.color %>">
+			<% else %>
+				<div class="section__highlight">
+			<% end %>
 				<%= link_to @highlight, class: "image" do %>
 					<%= image_tag @highlight.image %>
 				<% end %>

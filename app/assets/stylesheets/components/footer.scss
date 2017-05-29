@@ -12,6 +12,8 @@
 	flex-direction:  row; 
 	align-items:  flex-start; 
 	justify-content:  space-between; 
+	position:  relative; 
+	padding-bottom:  36px; 
 }
 .footer__column {
 	display:  flex; 
@@ -24,3 +26,10 @@
 		align-items:  flex-end; 
 	}
 }
+.disclaimer { 
+	max-width:  300px; 
+	font-size:  11.5px; 
+	margin-top:  144px;  
+ 	color:  #ffffff; 
+ 	opacity:  .33; 
+} 	
