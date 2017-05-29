@@ -4,7 +4,7 @@
 <meta property="og:site_name" 		content="GlobalMedia"/>
 <meta property="fb:app_id"      	content="502512736803830" /> 
 <meta property="og:title" content="<%= article.name %>" />
-<meta property="og:description" 	content="<%= article.short_description %>\n\n<%= truncate(article.plain_text, length: 300) %>"/>
+<meta property="og:description" 	content="<%= article.short_description %> <%= truncate(article.plain_text, length: 300) %>"/>
 <meta property="og:locale" 			content="es_MX"/>
 <meta property="article:author" 	content="https://www.facebook.com/GlobalMediaSLP/?fref=ts"/>
 <meta property="article:section"	content="Articulo"/>
