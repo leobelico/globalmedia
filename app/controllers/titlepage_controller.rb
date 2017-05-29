@@ -15,7 +15,7 @@ class TitlepageController < ApplicationController
 
 	def about_us 
 		if Section.find_by(name: "Acerca de")
-			@articles = Article.where(published: true, articable_id: Section.find_by(name: "Acerca de").id).paginate(page: params[:page], per_page: 10)
+			@articles = Article.where(published: true, articable_id: Section.find_by(name: "Acerca de").id).paginate(page: params[:page], per_page: 9)
 		end
 	end
 	def index

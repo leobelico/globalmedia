@@ -3,7 +3,33 @@
 		<h4 class="section__title">Acerca de</h4>
 		<% if @articles %>
 			<div class="about-us">
-				<%= @articles.first %>
+	<div class="note note--display">
+		<h1 class="title"><%= @articles.first.name %></h1>	
+		<p class="short-description"><%= @articles.first.short_description %></p>
+		<div class="article__info">
+			<p class="date"><%= @articles.first.created_at.strftime("%m:%M %p %A %e %B, %Y") %></p>
+			<%= render "components/social-media-links", article: @articles.first %>
+			
+		</div>
+		<div class="hashtags-container">
+			<%= render @articles.first.hashtags %>
+		</div>
+
+		<% if @articles.first.video_url != "" %> 
+			<div class="iframe">
+				<iframe width="650" height="415" src="<%= @articles.first.	video_url %>" frameborder="0" allowfullscreen></iframe>
+			</div>
+		<% else %>		
+			<% if @articles.first.image %>
+				<%= image_tag @articles.first.image, class: "main-image" %>
+			<% end %>
+		<% end %>
+
+		<div id="quill-container" class="quill--article">	
+		</div>
+
+
+	</div>
 			</div>
 			<div class="interface--row">
 				
@@ -24,3 +50,8 @@
 	</div>	
 	<%= render "components/sidebar", article: "global", banner: "" %>
 </div>
+<script>
+	var content = <%= raw(@articles.first.note) %>;
+	var container = document.getElementById("quill-container")
+	display_quill_note(content, container);
+</script>
