@@ -87,7 +87,7 @@
 	<p class="related-articles"><strong class="related-articles__title">Artículos relacionados:</strong><br><% related_by_hashtags(@article).each do |article| %><br><%= link_to truncate(article.name, length:  80), article, class: "related-article" %><% end %></p>
 </template>
 
-
+<script async defer src="https://platform.instagram.com/en_US/embeds.js"></script>
 
 <script>
 	var content = <%= raw(@article.note) %>;
