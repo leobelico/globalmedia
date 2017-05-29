@@ -153,6 +153,7 @@ Rails.application.routes.draw do
           get "search"
         end
       end
+      resources :podcasts, only: [:index]
       resources :stations, only: [:index, :show]
       resources :cameras, only: [:index]
       # , to: "api/v1/articles#most_visited"
