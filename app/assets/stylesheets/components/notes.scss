@@ -81,8 +81,32 @@
 	.ql-editor {
 		padding:  0; 
 	}
+	.instagram {
+		width:  auto; 
+		height:  auto; 
+		margin-top:  8px; 
+		margin-bottom:  8px; 
+		display:  flex; 
+		flex-direction:  column; 
+		align-items:  center; 
+		iframe {
+			border:  none; 
+			width:  500px;
+			height:  580px; 
+			max-width:  100%; 
+
+		}
+	}
+}
+.ql-instagram {
+	background-image: image-url("quill/instagram.svg") !important;
+	background-size:  70% 70% !important; 
+	background-position:  center center !important; 
+
+	background-repeat:  no-repeat !important;
 }
 .ql-editor {
+
 	.tweet, 
 	.embed-content {
 		width:  100%; 
@@ -92,6 +116,22 @@
 		iframe {
 			margin-left:  auto !important; 
 			margin-right:  auto !important; 
+		}
+	}
+	.instagram {
+		width:  auto; 
+		height:  auto; 
+		margin-top:  8px; 
+		margin-bottom:  8px; 
+		display:  flex; 
+		flex-direction:  column; 
+		align-items:  center; 
+		iframe {
+			border:  none; 
+			width:  500px;
+			height:  580px; 
+			max-width:  100%; 
+
 		}
 	}
 	p {

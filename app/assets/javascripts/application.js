@@ -29,10 +29,12 @@
 // 
 //= require libraries/quill/blots/Tweet 
 //= require libraries/quill/blots/EmbedContent 
-// require libraries/quill/blots/Instagram 
+//= require libraries/quill/blots/Instagram 
 // 
 // 
+//  QUILL FUNCTIONS
 // 
+//= require libraries/quill/functions/createInstagramEmbed 
 // 
 //  COMPONENTS 
 // 
