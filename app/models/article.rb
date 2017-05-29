@@ -19,7 +19,9 @@ class Article < ApplicationRecord
   def to_param
     slug
   end
-
+  def raw_note 
+    ActionController::Base.helpers.raw(self.note)
+  end
   def total_hits_in_current_month
     self.hits.where(created_at: 1.months.ago..Time.now).sum(:number)
   end
