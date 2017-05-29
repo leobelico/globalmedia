@@ -33,7 +33,7 @@ class Article < ApplicationRecord
     def associate_tags
       if hashtags_names
         self.hashtags.delete_all
-        hashtags_names.split(" ").each do |name|
+        hashtags_names.split(", ").each do |name|
           self.hashtags << Hashtag.find_or_create_by( name: name )
         end
       end
