@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_sections
 
   def get_sections 
-    @sections = Section.where("name != 'Último Momento' AND name != 'Ultimo Momento' AND name != 'Denuncia Global' AND name != 'Estaciones' AND name != 'Colaboradores' AND name != 'Investigación Especial' AND name != 'INVESTIGACIÓN ESPECIAL' AND name != 'COLABORADORES' AND name != 'ESTACIONES'")
+    @sections = Section.where("name != 'Último Momento' AND name != 'Acerca de' AND name != 'Ultimo Momento' AND name != 'Denuncia Global' AND name != 'Estaciones' AND name != 'Colaboradores' AND name != 'Investigación Especial' AND name != 'INVESTIGACIÓN ESPECIAL' AND name != 'COLABORADORES' AND name != 'ESTACIONES'")
   end
 
   def related_by_hashtags(article)

@@ -1,14 +1,26 @@
 <div class="interface--row">
 	<div class="main-content">
 		<h4 class="section__title">Acerca de</h4>
-		<div class="about-us">
-			<img src="http://www.sothebys.com/content/dam/sothebys-pages/blogs/ModernImpressions/2017/2/klimt-bauerngarten_banner.jpg.webrend.1920.350.jpeg" alt="">
-			
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem possimus ipsa suscipit, rerum officia! Necessitatibus quo iusto debitis, at deserunt ipsum eaque ab vel aspernatur modi nemo distinctio. Labore, obcaecati!</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem possimus ipsa suscipit, rerum officia! Necessitatibus quo iusto debitis, at deserunt ipsum eaque ab vel aspernatur modi nemo distinctio. Labore, obcaecati!</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem possimus ipsa suscipit, rerum officia! Necessitatibus quo iusto debitis, at deserunt ipsum eaque ab vel aspernatur modi nemo distinctio. Labore, obcaecati!</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem possimus ipsa suscipit, rerum officia! Necessitatibus quo iusto debitis, at deserunt ipsum eaque ab vel aspernatur modi nemo distinctio. Labore, obcaecati!</p>
-		</div>
+		<% if @articles %>
+			<div class="about-us">
+				<%= @articles.first %>
+			</div>
+			<div class="interface--row">
+				
+				<div class="section main-content"> 
+
+		 			<div class="section-articles-container">
+						
+						<% @articles.each do |article|%>
+							<%= render "components/section-article", article: article %>
+						<% end %>
+					</div>
+
+					<%= will_paginate @articles, class: "site-pagination" %>
+				</div>
+			</div>
+		<% end %>
+
 	</div>	
 	<%= render "components/sidebar", article: "global", banner: "" %>
 </div>
