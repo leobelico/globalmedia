@@ -50,15 +50,16 @@ class ApplicationController < ActionController::Base
   def related_by_hashtags(article)
     
     if article.hashtags.count == 1
-       @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ article.hashtags.first.id} AND articles.published = true").last(3).uniq
+       @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ article.hashtags.first.id} AND articles.published = true AND articles.id != #{article.id}").last(3).uniq
+
     end
 
     if article.hashtags.count == 2
-      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id }) AND articles.published = true").last(3).uniq
+      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id }) AND articles.published = true AND articles.id != #{article.id}").last(3).uniq
     end 
     
     if article.hashtags.count >= 3
-      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.third.id }) AND articles.published = true").last(3).uniq
+      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.third.id }) AND articles.published = true AND articles.id != #{article.id}").last(3).uniq
     end 
     # @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
    

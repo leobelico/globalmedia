@@ -18,6 +18,32 @@
 .ui-helper-hidden-accessible div {
 	display:  none; 
 }
+.button--add-fields {
+	background-color:  $tertiary; 
+	padding:  12px 18px; 
+	box-sizing:  border-box;
+	display:  flex; 
+}
+.field--file {
+	input:first-of-type {
+		margin-bottom:  8px; 
+	}
+	a {
+		padding:  12px 18px; 
+		background-color:  $red; 
+		color:  #ffffff; 
+		border-radius:  4px; 
+		margin-top:  8px; 
+	}
+}
+.gallery-form {
+	.button {
+		margin-bottom:  8px; 
+	}
+}
+.button {
+	display:  block;
+}
 .field {
 	display:  flex; 
 	flex-direction:  column; 
