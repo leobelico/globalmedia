@@ -43,7 +43,7 @@ class Panel::ArticlesController < ApplicationController
 				@article.update_attributes(published: true) 
 
 			end
-			redirect_to @article
+			redirect_to edit_panel_article_path(@article)
 		else
 			respond_to do |format|
 				format.json { render :json => { :error_message => @article.errors.full_messages }, :status => :unprocessable_entity }
