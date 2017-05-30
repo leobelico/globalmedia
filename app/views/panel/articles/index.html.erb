@@ -59,7 +59,11 @@
 
 			<p class="table__cell f-3"><%= truncate(article.short_description, length: 40) %></p>	
 			<%= link_to article.section, panel_section_path(article.section), class: "table__cell" %>
-			<p class="table__cell"><%= article.user.full_name %></p>	
+			<% if article.user %>
+				<p class="table__cell"><%= article.user.full_name %></p>	
+			<% else %>
+				<p class="table__cell">--</p>
+			<% end %>
 			
 			<p class="table__cell">
 				<% total = 0 %>

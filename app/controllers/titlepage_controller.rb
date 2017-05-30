@@ -18,6 +18,31 @@ class TitlepageController < ApplicationController
 			@articles = Article.where(published: true, articable_id: Section.find_by(name: "Acerca de").id).paginate(page: params[:page], per_page: 9)
 		end
 	end
+
+	def set_slug
+		Section.all.each do |section|
+			ret = section.name.strip
+
+	      #blow away apostrophes
+	      ret.gsub! /['`]/,""
+
+	      ret.gsub! /[.]/,""
+	      # @ --> at, and & --> and
+	      ret.gsub! /\s*@\s*/, " en "
+	      ret.gsub! /\s*&\s*/, " y "
+
+	      #replace all non alphanumeric, underscore or periods with underscore
+	       ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '_'  
+
+	       #convert double underscores to single
+	       ret.gsub! /_+/,"_"
+
+	       #strip off leading/trailing underscore
+	       ret.gsub! /\A[_\.]+|[_\.]+\z/,""
+	       section.update_attributes(slug: ret)
+		end
+	end
+
 	def index
 		@highlights = Highlight.all.order(order: "ASC")
 		search = Hashtag.find_by_name("#ESNOTICIA")

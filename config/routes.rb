@@ -174,6 +174,8 @@ Rails.application.routes.draw do
   end
   
 
+  get 'set_slug', to: "titlepage#set_slug"
+  post 'set_slug', to: "titlepage#set_slug"
 
 
   
