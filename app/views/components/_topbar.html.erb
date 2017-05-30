@@ -1,5 +1,4 @@
 <div class="topbar">
-	<%= link_to "global media", root_path, class: "topbar__link" %>
 	<% if Relationship.find_by(relationship_type: "Investigation") %>
 		<%= link_to "investigación especial", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "topbar__link" %>
 	<% end %>
