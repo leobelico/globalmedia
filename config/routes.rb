@@ -58,7 +58,8 @@ Rails.application.routes.draw do
       post :publish_now
       get :publish_now
       get :autocomplete_article_name, on: :collection
-    
+      get :gallery_images
+      post :gallery_images
     end
     resources :stations, param: :slug do 
       resources :timetables 

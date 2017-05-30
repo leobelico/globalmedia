@@ -1,12 +1,52 @@
 <div class="gallery">
-	<div class="gallery__image"></div>
+	<div class="gallery__image">
+		<img src="">
+	</div>
 	<div class="gallery__controls">
-		<div class="next"></div>
 		<div class="previous"></div>
+
+		<div class="next"></div>
 	</div>
 </div>
+<script>
+	$(document).on("click", function(event) {
+		if( $(event.target).is(".gallery__thumbnail") ) {
+			TweenMax.set(".gallery", { display:  "flex" }); 
+			TweenMax.to(".gallery", .6, { opacity: 1, pointerEvents: "all" });
+			$(".gallery__image img").attr("src", $(event.target).attr("src"));
+			current_image = $(event.target).data("image");
+			console.log(current_image); 
+		}	
+		if($(event.target).is(".gallery__image") && !($(event.target).is(".gallery__image img") || $(event.target).is(".gallery__controls") || $(event.target).is(".gallery__controls *"))) {
+			TweenMax.to(".gallery", .6, { opacity: 0, pointerEvents: "none", onComplete: function(){
+				TweenMax.set(".gallery", { display:  "none" }); 
+			} });
+		}
+		if( $(event.target).is(".gallery__controls .next") ) {		
+			console.log($(".gallery__thumbnail").length); 
+			console.log(current_image); 
+			if ($(".gallery__thumbnail").length > current_image) {
+				$(".gallery__image img").attr("src", $(".gallery__thumbnail").eq(current_image + 1).attr("src")); 				
+				current_image++;
+			} else {
+				$(".gallery__image img").attr("src", $(".gallery__thumbnail").eq(0).attr("src"));
+				current_image = 0; 
+			}
+		}
+		if( $(event.target).is(".gallery__controls .previous") ) {		
+			console.log($(".gallery__thumbnail").length); 
+			console.log(current_image); 
+			if (0 < current_image) {
+				$(".gallery__image img").attr("src", $(".gallery__thumbnail").eq(current_image - 1).attr("src")); 				
+				current_image--;
+			} else {
+				$(".gallery__image img").attr("src", $(".gallery__thumbnail").eq($(".gallery__thumbnail").length).attr("src"));
+				current_image = $(".gallery__thumbnail").length; 
+			}
+		}
+	}); 
+</script>
 <div class="interface--row">
-
 	<div class="note note--display">
 		<% if @article.exclusive? %>
 			<p class="exclusive--note">Exclusiva</p>
@@ -46,7 +86,13 @@
 
 		<div id="quill-container" class="quill--article">	
 		</div>
-
+		<% if @article.images.count > 0  %>
+			<div class="gallery__thumbnails">
+				<% @article.images.each_with_index do |image, index| %>
+					<%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
+				<% end %>	
+			</div>
+		<% end %>
 		<!-- NOTAS DEL PROGRAMADOR-->
 			<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
 

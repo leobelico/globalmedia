@@ -1,0 +1,51 @@
+<div class="panel__header">
+  <h2 class="title panel__title"><span class="current">Añadir galería a nota</span></h2>
+  <div class="panel__actions">
+    <button class="button">Guardar galería</button>
+  </div>
+</div>
+<form id="fields-for-s3">
+  <% @s3_direct_post.fields.map do |name, value| %>
+    <input type="hidden" name="<%= name %>" value="<%= value %>" />
+  <% end %>
+</form> 
+<%= form_for [:panel, @article], multipart: true, html: { class: 'directUpload admin-form card gallery-form', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } } do |f| %>
+  	<% if @article.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+            <ul>
+              <% @article.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+    <% end %>
+
+      <% if !@article.new_record? %>
+        <%= f.fields_for :images do |builder| %>
+          <div class= "field field--file" >
+            <label>Imagen:</label>
+            <%= builder.text_field :src, disabled: true %>
+            <%= builder.file_field :src %>
+            <%= builder.hidden_field :imageable_type, value: "article" %>
+            <%= builder.hidden_field :_destroy %>
+            <%= link_to_remove_fields 'Eliminar', f, "delete" %>
+        
+          </div>
+        <% end %>
+
+      <% end %>
+
+        <%= link_to_add_fields "Añadir Imagen Adicional", f, :images, "button--add-fields", "Añadir Imagen"%>
+    </div>
+ 
+    <%= f.submit "Guardar artículo", class:"" %>
+<% end %>
+
+<%= render "components/s3_form_js" %>
+
+<script>
+  button = $("button.button");
+  form = $(".directUpload");
+  saveFormOnButtonClick(button, form); 
+</script>

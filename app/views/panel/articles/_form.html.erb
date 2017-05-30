@@ -87,18 +87,6 @@
 			<%= f.autocomplete_field(:hashtags_names,  autocomplete_hashtag_name_panel_hashtags_path, :id_element => 'hashtags', class: "search-bar", placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", type: "search", value: @hashtags, :"data-delimiter"  => ', ', id: 'hashtags') %>
 		</div>
 	</div>
-	
-<!-- 	<div class="card admin-form form--article ">
-		
-		<h3 >Images</h3>
-		<div>
-			<%= link_to_add_fields "Añadir imagen", f, :images, "create__add-button", "Add a Product Image"%>
-			<%= f.fields_for :images, class: "field-builder" do |builder| %>
-				
-				
-			<% end %>
-		</div>
-	</div> -->
 <% end %>
 <script>
 	char_count();
