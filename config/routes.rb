@@ -177,6 +177,9 @@ Rails.application.routes.draw do
   get 'set_slug', to: "titlepage#set_slug"
   post 'set_slug', to: "titlepage#set_slug"
 
+  get 'set_image', to: "titlepage#set_image"
+  post 'set_image', to: "titlepage#set_image"
+
 
   
 

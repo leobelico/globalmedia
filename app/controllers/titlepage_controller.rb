@@ -20,26 +20,18 @@ class TitlepageController < ApplicationController
 	end
 
 	def set_slug
-		Section.all.each do |section|
-			ret = section.name.strip
+		Article.where('id > 390').each do |article|
+			Images.where('article_id > 390').each do |image|
+		       article.update_attributes(image: image.src)
+			end
+		end
+	end
 
-	      #blow away apostrophes
-	      ret.gsub! /['`]/,""
-
-	      ret.gsub! /[.]/,""
-	      # @ --> at, and & --> and
-	      ret.gsub! /\s*@\s*/, " en "
-	      ret.gsub! /\s*&\s*/, " y "
-
-	      #replace all non alphanumeric, underscore or periods with underscore
-	       ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '_'  
-
-	       #convert double underscores to single
-	       ret.gsub! /_+/,"_"
-
-	       #strip off leading/trailing underscore
-	       ret.gsub! /\A[_\.]+|[_\.]+\z/,""
-	       section.update_attributes(slug: ret)
+	def set_image
+		Images.where('article_id > 390').each do |image|
+			field = 'http://globalmedia.mx/images/multimedia/' + image.src
+	       
+	       image.update_attributes(src: field)
 		end
 	end
 
