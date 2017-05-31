@@ -58,7 +58,11 @@
 				<p class="author">Por <%= @article.author.name %></p>
 
 			<% else %>
-				<p class="author">Por <%= @article.user.full_name %></p>
+				<% if @article.user %>
+					<p class="author">Por <%= @article.user.full_name %></p>
+				<% else %>
+					<p class="author">--</p>
+				<% end %>
 			<% end %>
 			<p class="date"><%= @article.created_at.strftime("%m:%M %p %A %e %B, %Y") %></p>
 			<% if @article.articable_type == "Section" %>
