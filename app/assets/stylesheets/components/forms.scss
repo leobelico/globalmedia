@@ -3,6 +3,10 @@
 	display:  block; 
 	text-align:  center; 
 }
+.form-title {
+	width:  100%; 
+	margin-top:  18px; 
+}
 .session-form {
 	display:  flex; 
 	flex-direction:  column; 
@@ -55,6 +59,14 @@
 }
 .field:last-of-type {
 	margin-bottom:  0; 
+}
+.multicheckbox-container {
+	width:  100%; 
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  flex-start; 
+	flex-wrap:  wrap; 
+	margin-top:  18px; 
 }
 .multifield {
 	display:  flex; 

@@ -1,6 +1,8 @@
 class Station < ApplicationRecord
 	validates :name, :image, :stream_url, presence: true
 	has_many :timetables, dependent: :delete_all
+  has_many :section_banners, as: :seleccionable
+
 	accepts_nested_attributes_for :timetables, reject_if: proc { |attributes| attributes['name'].blank? }, :allow_destroy => true
   has_many :article_relationships, dependent: :nullify, as: :articable
   has_many :podcasts, dependent: :delete_all

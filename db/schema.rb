@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170529034154) do
+ActiveRecord::Schema.define(version: 20170531194730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20170529034154) do
     t.boolean  "titlepage",   default: false
     t.string   "client"
     t.string   "url"
+    t.boolean  "active",      default: false
   end
 
   create_table "cameras", force: :cascade do |t|
@@ -206,6 +207,7 @@ ActiveRecord::Schema.define(version: 20170529034154) do
     t.string   "color",      default: "#1b2d41"
     t.integer  "order"
     t.integer  "old_id"
+    t.boolean  "visible",    default: false
   end
 
   create_table "stations", force: :cascade do |t|

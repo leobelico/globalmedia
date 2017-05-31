@@ -22,6 +22,13 @@ class Panel::BannersController < ApplicationController
 				p "creating"
 				SectionBanner.create(banner: @banner, sectionable_id: section.id, sectionable_type: "Section")
 			end
+			stations =  Station.where(id: params[:all_stations])
+			p "cuenta de secciones"
+			p stations.count
+			stations.each do |station|
+				p "creating"
+				SectionBanner.create(banner: @banner, sectionable_id: station.id, sectionable_type: "Station")
+			end
 			redirect_to panel_banner_path(@banner)
 		else
 			render action: "new"
@@ -42,6 +49,14 @@ class Panel::BannersController < ApplicationController
 			sections.each do |section|
 				SectionBanner.create(banner: @banner, sectionable_id: section.id, sectionable_type: "Section")
 			end
+
+			stations =  Station.where(id: params[:all_stations])
+			p "cuenta de staciones"
+			p stations.count
+			stations.each do |station|
+				p "creating"
+				SectionBanner.create(banner: @banner, sectionable_id: station.id, sectionable_type: "Station")
+			end
 			redirect_to panel_banner_path(@banner)
 		else
 			render action: "edit"
@@ -55,7 +70,7 @@ class Panel::BannersController < ApplicationController
 
 	private
 		def banner_params
-			params.require(:banner).permit(:large_image, :small_image, :size, :name, :client, :global, :titlepage, :url)
+			params.require(:banner).permit(:large_image, :small_image, :size, :name, :client, :global, :titlepage, :url, :active)
 		end
 
 		def set_banner

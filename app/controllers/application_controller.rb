@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_sections
 
   def get_sections 
-    @sections = Section.where("name != 'Último Momento' AND name != 'Acerca de' AND name != 'Ultimo Momento' AND name != 'Denuncia Global' AND name != 'Estaciones' AND name != 'Colaboradores' AND name != 'Investigación Especial' AND name != 'INVESTIGACIÓN ESPECIAL' AND name != 'COLABORADORES' AND name != 'ESTACIONES'")
+    @sections = Section.where(visible: true)
   end
 
   def related_by_hashtags(article)
@@ -227,13 +227,16 @@ class ApplicationController < ActionController::Base
   def get_banner(section, section_type, size)
     if section_type == "Global" or section_type == "TitlePage"
       if section_type == "Global"
-        @banner = Banner.where(global: true, size: size).last
+        @banner = Banner.where(global: true, size: size, active: true).last
       else
-        @banner = Banner.where(titlepage: true, size: size).last
+        @banner = Banner.where(titlepage: true, size: size, active: true).last
 
       end 
     else
-      @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where(" section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}'").last
+      p "GRANDEEEEEEEE"
+      @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where("banners.active = 'true' AND section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}'").last
+      p "banner ilse"
+      p @banner
     end
 
   end

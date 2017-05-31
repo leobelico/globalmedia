@@ -114,9 +114,11 @@
 				<!-- VÏNCULO PARA VER MAS -->
 				<% link_to "Ver más", station_articles_path(@station.slug) %>		
 			</div>
-
-
+			<% if get_banner(@station, "Station", "Grande") %>
+				<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
+			<% end %>
 		</div>
+
 		<%= render "components/stations-sidebar", facebook: @station.facebook, twitter: @station.twitter %>
 
 	</div>
