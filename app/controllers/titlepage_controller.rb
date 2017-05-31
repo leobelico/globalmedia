@@ -21,14 +21,14 @@ class TitlepageController < ApplicationController
 
 	def set_slug
 		Article.where('id > 390').each do |article|
-			Images.where('article_id > 390').each do |image|
+			Image.where('article_id > 390').each do |image|
 		       article.update_attributes(image: image.src)
 			end
 		end
 	end
 
 	def set_image
-		Images.where('article_id > 390').each do |image|
+		Image.where('article_id > 390').each do |image|
 			field = 'http://globalmedia.mx/images/multimedia/' + image.src
 	       
 	       image.update_attributes(src: field)
