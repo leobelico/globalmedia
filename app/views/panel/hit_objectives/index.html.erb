@@ -1,5 +1,5 @@
 <div class="panel__header">
-	<h2 class="title panel__title"><span class="current">Objetivos de <%= Time.now.strftime("%B") %></span></h2>
+	<h2 class="title panel__title"><span class="current">Objetivos de <%= l(Time.now, format: "%B") %></span></h2>
 	<div class="panel__actions">
 
 		<% if @hit_objectives.count > 0 %>	

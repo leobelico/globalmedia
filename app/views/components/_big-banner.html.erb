@@ -1,9 +1,6 @@
 <% if banner != "" %>
-	
 	<%= link_to banner.url, class: "banner--big" do %>
-		<img 
-			src="<%= banner.large_image %>" 
-			srcset="<%= banner.large_image %> 1024w, <%= banner.small_image %> 1023w"
-			alt="<%= banner.name %>">
+		<%= image_tag banner.small_image, class: "banner-image--mobile", alt: banner.name %>
+		<%= image_tag banner.large_image, class: "banner-image--desktop", alt: banner.name %>
 	<% end %>
 <% end %>

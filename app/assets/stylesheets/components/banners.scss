@@ -2,16 +2,46 @@
 	width:  100%;  
 	height:  auto; 
 	margin-bottom:  16px; 
+	img {
+		width:  100%; 
+		height: auto; 
+	}
 }
 .banner--medium {
 	width:  100%;  
 	height:  auto; 
 	margin-top:  16px; 
 	margin-bottom:  16px; 
+	img {
+		width:  100%; 
+		height: auto; 
+	}
 }
 .banner--small {
 	width:  100%;  
 	height:  auto; 
 	margin-top:  16px; 
 	margin-bottom:  16px; 
+	img {
+		width:  100%; 
+		height: auto; 
+	}
+}
+@media screen and (min-width: 1024px) {
+
+	.banner-image--mobile {
+		display: none; 
+	}
+	.banner-image--desktop {
+		display: block; 
+	}
+}
+@media screen and (max-width: 1023px) {
+
+	.banner-image--mobile {
+		display: block; 
+	}
+	.banner-image--desktop {
+		display: none; 
+	}
 }

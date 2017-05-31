@@ -9,11 +9,11 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <div class="table card graphs">
-	<%= form_for(:hit, url: graph_panel_hits_path, html: { class: "admin-form"}) do |f| %>		
+	<%= form_for(:hit, url: author_graph_panel_hits_path, html: { class: "admin-form"}) do |f| %>		
 		<div class="field field--section">
 			
 			<label for="">Sección:</label>
-			<%= f.select "section_id", options_from_collection_for_select(Section.all, "id", "name") %>
+			<%= f.select "author_id", options_from_collection_for_select(Author.all, "id", "name") %>
 		</div> 		
 	<div class="multifield">
 		<div class="field field--datetime">
@@ -38,40 +38,31 @@
 <% if @hits.count > 0 %>
 	<div class="table card graphs">
 		<% if @hits.count > 1 %>
-			<h4 class="title"><%= @hits.first[1][1].article.section %></h4>
+			<h4 class="title"><%= @hits.first[1][1].article.author.name %></h4>
 		<% end %>
 		<div id="chart"></div>
 
 	</div>
 <% end %>
-
 <script>
 	<% if @hits.count > 0 %>
 	google.charts.load('current', {'packages':['line']});
 	google.charts.setOnLoadCallback(drawChart);
      function drawChart() {
         var data = google.visualization.arrayToDataTable([
-        	['Fechas', 'Vistas a Página', 'Objetivos'],
+        	['Fechas', 'Vistas a Página'],
 			<% @hits.each.with_index do |records, index| %>
 				<% record_date = l(records[0][0], format: "S%W, %B %Y") %>
 				<% record_hits = records[1].map { |h| h[:number] }.sum %>
-				<% number = 0 %>
 
-				<% @hit_objectives.each_with_index do |month, index| %>
-					<% if month[0][0].strftime("%Y%m") == records[0][0].strftime("%Y%m") %>
-						<% number = month[1][0].objective %>
-					<% end %>
-
-				<% end %>
-
-				<% if index != @hits.count - 1 and @hits.count > 1 %>['<%= record_date %>', <%= record_hits %>, <%= number %>],
-	        	<% else %>['<%= record_date %>', <%= record_hits %>, <%= number %>]
+				<% if index != @hits.count - 1 and @hits.count > 1 %>['<%= record_date %>', <%= record_hits %>],
+	        	<% else %>['<%= record_date %>', <%= record_hits %>]
 	        	<% end %>
 
 		<% end %>
         ]);
 		var options = {
-			title: 'Sección <%= @hits.first[1][1].article.section %>',
+			title: '<%= @hits.first[1][1].article.author.name %>',
 			// curveType: 'function',
 			legend: { position: 'bottom' }
 		};

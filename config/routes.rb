@@ -80,6 +80,8 @@ Rails.application.routes.draw do
     resources :hits do 
       get :graph, on: :collection
       post :graph, on: :collection
+      get :author_graph, on: :collection
+      post :author_graph, on: :collection
     end
     resources :banners
     resources :relationships, param: :slug 
