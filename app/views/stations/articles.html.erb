@@ -6,19 +6,13 @@
 		
 		<div class="section-articles-container">
 			
-			<% @articles.each do |article|%>
-				<%= render "components/section-article", article: article %>
+			<% @relationships.each do |relationship|%>
+				<%= render "components/section-article", article: relationship.article %>
 			<% end %>
 		</div>
 
-		<%= will_paginate @articles, class: "site-pagination" %>
+		<%= will_paginate @relationships, class: "site-pagination" %>
 
-		<!-- NOTAS DEL PROGRAMADOR-->
-			<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
-
-			<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
-		<!-- -->
-		<!--  -->
 	</div>
 
 </div>

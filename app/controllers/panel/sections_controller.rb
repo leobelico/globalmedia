@@ -2,7 +2,7 @@ class Panel::SectionsController < ApplicationController
 	before_action :authenticate_user!
 	# load_and_authorize_resource
 	before_action :check_news_chief
-	before_action :set_section, only: [:show, :edit, :update, :destroy]
+	before_action :set_section, only: [:show, :edit, :update, :destroy, :set_highlight_from_id]
 	autocomplete :article, :name, full: true
 	
 	def index
@@ -10,6 +10,7 @@ class Panel::SectionsController < ApplicationController
 
 	end
 	#SectionHighlight.create(article_id: article.id, section: section.id)
+
 	def set_highlight_and_recomendations
 		if params[:highlight]
 			article = Article.find(params[:highlight])

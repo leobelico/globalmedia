@@ -87,9 +87,16 @@
 				<%= image_tag @article.image, class: "main-image" %>
 			<% end %>
 		<% end %>
-
-		<div id="quill-container" class="quill--article">	
-		</div>
+		<% if !@article.note.empty? %>
+			<div id="quill-container" class="quill--article">
+			</div>
+		<% elsif @article.note_old != nil and @article.note.empty? %>
+			<div class="quill--article article--old">
+			</div>
+			<script>
+				$(".quill--article").html("<%= @article.note_old %>"); 
+			</script>
+		<% end %>
 		<% if @article.images.count > 0  %>
 			<div class="gallery__thumbnails">
 				<% @article.images.each_with_index do |image, index| %>
@@ -102,7 +109,6 @@
 
 			<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
 		<!-- -->
-		
 
 		<% if get_banner(@article.articable, @article.articable_type, "Grande" ) %>
 
@@ -140,19 +146,21 @@
 <script async defer src="https://platform.instagram.com/en_US/embeds.js"></script>
 
 <script>
-	var content = <%= raw(@article.note) %>;
-	var container = document.getElementById("quill-container")
-	display_quill_note(content, container);
+	<% if @article.note %>
+		var content = <%= raw(@article.note) %>;
+		var container = document.getElementById("quill-container")
+		display_quill_note(content, container);
 
-	<% if related_by_hashtags(@article).count > 0 %>
-		var numberOfParagraphs = $("#quill-container p").length; 
+		<% if related_by_hashtags(@article).count > 0 %>
+			var numberOfParagraphs = $("#quill-container p").length; 
 
-		var middle = parseInt(Math.ceil(numberOfParagraphs/2)); 
-		var relatedArticles = document.querySelector("#related-articles");
-		var clone = document.importNode(relatedArticles.content, true); 
+			var middle = parseInt(Math.ceil(numberOfParagraphs/2)); 
+			var relatedArticles = document.querySelector("#related-articles");
+			var clone = document.importNode(relatedArticles.content, true); 
 
-		$("#quill-container p:nth-of-type("+middle+")").after(clone);
-		// $("#quill-container > p:nth-of-type("+middle+")");
+			$("#quill-container p:nth-of-type("+middle+")").after(clone);
+			// $("#quill-container > p:nth-of-type("+middle+")");
+		<% end %>
 	<% end %>
 
 

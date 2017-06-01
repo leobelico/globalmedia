@@ -12,10 +12,25 @@
 	text-align:  center; 
 	color: #424242; 
 }
+.rotated {
+	font-size:  10px; 
+	transform-origin:  0% 100% 0%; 
+	transform: rotateZ(-45deg) translate(-8px, -50%);
+}
+.permission {
+	width:  24px !important; 
+	font-size:  10.5px; 
+	flex: 1 !important;
+	margin-right:  8px !important; 
+	img {
+		max-height:  24px; 
+	} 
+}
 .table__row {
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
+	position:  relative; 
 	&:first-of-type {
 		color:  #595959; 
 		font-size:  14px; 

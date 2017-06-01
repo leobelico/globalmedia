@@ -18,12 +18,12 @@ Rails.application.routes.draw do
   resources :stations do 
     get "articles", to: "stations#articles"
   end
+
   resources :cameras
   
   get "collaborators", to: "relationships#collaborators"
   get "about_us", to: "titlepage#about_us"
 
-  
   get "panel", to: "panel/panel#panel"
 
   authenticated :user do 
@@ -60,7 +60,10 @@ Rails.application.routes.draw do
       get :autocomplete_article_name, on: :collection
       get :gallery_images
       post :gallery_images
+      post :set_highlight_from_id
+      post :set_recommendation_from_id
     end
+    post "set_highlight_from_id", to: "articles#set_highlight_from_id"
     resources :stations, param: :slug do 
       resources :timetables 
       resources :podcasts 
@@ -70,6 +73,7 @@ Rails.application.routes.draw do
       get :select_highlights
       post :select_highlights
       post :set_highlight
+      
 
       get :select_global_recommendations
       post :select_global_recommendations
@@ -182,6 +186,7 @@ Rails.application.routes.draw do
   get 'set_image', to: "titlepage#set_image"
   post 'set_image', to: "titlepage#set_image"
 
+  get '/:id', to: 'stations#show'    
 
   
 
