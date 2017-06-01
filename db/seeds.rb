@@ -92,7 +92,7 @@ images = [
 ]
 authors = Author.create([
 	{name: "Ninguno", logo: "insert logo here"},
-	{name: "Globalmedia", logo: "insert logo here"}
+	{name: "Globalmedia", logo: "insert logo here"},
 	{name: "Harry Potter", logo: images[3]},
 	{name: "Hermione Granger", logo: images[3]},
 	{name: "Ron Weasley", logo: images[3]},
