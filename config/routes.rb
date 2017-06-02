@@ -182,7 +182,7 @@ Rails.application.routes.draw do
   get 'set_image', to: "titlepage#set_image"
   post 'set_image', to: "titlepage#set_image"
 
-
+  get 'publish_highlights', to: "titlepage#publish_highlights"
   
 
 end

@@ -8,12 +8,16 @@
 	<div class="table__row">
 		<p class="table__cell">Posición:</p>
 		<p class="table__cell">Artículo:</p>
+		<p class="table__cell">¿Publicado?:</p>
+		<p class="table__cell">Programado:</p>
 		<p class="table__cell">Cambiar nota:</p>
 	</div>
 	<% @highlights.each do |highlight| %>
 		<div class="table__row">
 			<div class="table__cell"><%= highlight.order %> </div>
 			<div class="table__cell"><%= link_to highlight.article.name, highlight.article %></div>
+			<div class="table__cell"><%= highlight.published %></div>
+			<div class="table__cell"><%= highlight.scheduled_time %></div>
 			<%= link_to "Cambiar nota", edit_panel_highlight_path(highlight), class: "table__cell edit" %>
 
 		</div>
