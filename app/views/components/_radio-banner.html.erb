@@ -1,6 +1,6 @@
 <div class="radio-banner__tune-in">Sintoniza en este momento</div>
 <div class="radio-banner">
-	<%= get_current_programs.each do |program| %>
+	<% get_current_programs.each do |program| %>
 		<%= link_to ("/" + program.station.slug), class: "radio-program" do %>
 			<%= image_tag program.image %>
 		<% end %>
