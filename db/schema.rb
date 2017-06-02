@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531194730) do
+ActiveRecord::Schema.define(version: 20170601222314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170531194730) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "name",                      default: ""
-    t.jsonb    "note",                      default: ""
+    t.text     "note",                      default: ""
     t.text     "short_description",         default: ""
     t.integer  "articable_id"
     t.string   "articable_type"
@@ -48,8 +48,9 @@ ActiveRecord::Schema.define(version: 20170531194730) do
     t.string   "video_url",                 default: ""
     t.integer  "author_id"
     t.boolean  "exclusive",                 default: false
-    t.text     "note_old"
+    t.text     "note_old",                  default: ""
     t.integer  "old_id"
+    t.text     "_extra_props"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
     t.index ["author_id"], name: "index_articles_on_author_id", using: :btree
     t.index ["keyword_id"], name: "index_articles_on_keyword_id", using: :btree
@@ -122,10 +123,12 @@ ActiveRecord::Schema.define(version: 20170531194730) do
   end
 
   create_table "highlights", force: :cascade do |t|
-    t.integer  "order",      default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "order",          default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "article_id"
+    t.datetime "scheduled_time"
+    t.boolean  "published",      default: false
     t.index ["article_id"], name: "index_highlights_on_article_id", using: :btree
   end
 
@@ -147,10 +150,11 @@ ActiveRecord::Schema.define(version: 20170531194730) do
 
   create_table "images", force: :cascade do |t|
     t.string   "src"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "article_id"
     t.integer  "old_id"
+    t.text     "_extra_props"
     t.index ["article_id"], name: "index_images_on_article_id", using: :btree
   end
 
@@ -200,14 +204,15 @@ ActiveRecord::Schema.define(version: 20170531194730) do
   end
 
   create_table "sections", force: :cascade do |t|
-    t.string   "name",       default: ""
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.string   "name",         default: ""
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "slug"
-    t.string   "color",      default: "#1b2d41"
+    t.string   "color",        default: "#1b2d41"
     t.integer  "order"
     t.integer  "old_id"
-    t.boolean  "visible",    default: false
+    t.text     "_extra_props"
+    t.boolean  "visible",      default: false
   end
 
   create_table "stations", force: :cascade do |t|

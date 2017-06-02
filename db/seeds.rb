@@ -261,27 +261,33 @@ p "----------------------"
 highlights = Highlight.create([
 	{
 		order: 1,
-		article: articles_new[1]
+		article: articles_new[1],
+		published: true
 	},
 	{
 		order: 2,
-		article: articles_new[2]
+		article: articles_new[2],
+		published: true
 	},
 	{
 		order: 3,
-		article: articles_new[3]
+		article: articles_new[3],
+		published: true
 	},
 	{
 		order: 4,
-		article: articles_new[4]
+		article: articles_new[4],
+		published: true
 	},
 	{
 		order: 5,
-		article: articles_new[5]
+		article: articles_new[5],
+		published: true
 	},
 	{
 		order: 6,
-		article: articles_new[6]
+		article: articles_new[6],
+		published: true
 	}
 ])
 
