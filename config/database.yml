@@ -28,7 +28,7 @@ default: &default
 development:
   adapter: postgresql
   encoding: utf8
-  database: gm
+  database: global_media
   username: postgres
   password: codepelm-319
   host: localhost

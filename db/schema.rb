@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170601222314) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "name",                      default: ""
-    t.text     "note",                      default: ""
+    t.jsonb    "note",                      default: ""
     t.text     "short_description",         default: ""
     t.integer  "articable_id"
     t.string   "articable_type"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20170601222314) do
     t.string   "video_url",                 default: ""
     t.integer  "author_id"
     t.boolean  "exclusive",                 default: false
-    t.text     "note_old",                  default: ""
+    t.text     "note_old"
     t.integer  "old_id"
     t.text     "_extra_props"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
@@ -211,8 +211,8 @@ ActiveRecord::Schema.define(version: 20170601222314) do
     t.string   "color",        default: "#1b2d41"
     t.integer  "order"
     t.integer  "old_id"
-    t.text     "_extra_props"
     t.boolean  "visible",      default: false
+    t.text     "_extra_props"
   end
 
   create_table "stations", force: :cascade do |t|

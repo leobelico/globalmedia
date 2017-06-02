@@ -44,7 +44,15 @@
 
 	</div>
 <% end %>
-
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Mes:</p>
+		<p class="table__cell">Objetivo:</p>
+		<p class="table__cell">Hits:</p>
+		<p class="table__cell">Cumplimiento:</p>
+	</div>
+	
+</div>
 <script>
 	<% if @hits.count > 0 %>
 	google.charts.load('current', {'packages':['line']});
