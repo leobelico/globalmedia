@@ -42,7 +42,7 @@ html,
 body {
 	height:  100%; 
 	width:  100%; 
-	font-family: "Open Sans", sans-serif; 
+	font-family: "Merriweather", sans-serif; 
 }
 @media screen and (max-width:  1023px) {
 	iframe {
@@ -199,6 +199,7 @@ body {
 @import "components/global-complaint-videos"; 
 @import "components/gallery"; 
 
+@import "components/admin/buttons"; 
 @import "components/admin/admin-sidebar"; 
 @import "components/admin/admin-pagination"; 
 @import "components/admin/admin-panel"; 

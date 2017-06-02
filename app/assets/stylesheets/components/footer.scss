@@ -13,7 +13,7 @@
 	align-items:  flex-start; 
 	justify-content:  space-between; 
 	position:  relative; 
-	padding-bottom:  36px; 
+	padding-bottom:  144px; 
 }
 .footer__column {
 	display:  flex; 
@@ -27,9 +27,13 @@
 	}
 }
 .disclaimer { 
-	max-width:  300px; 
+	max-width:  calc(100% - 36px); 
 	font-size:  11.5px; 
-	margin-top:  144px;  
  	color:  #ffffff; 
  	opacity:  .33; 
+ 	position:  absolute;
+ 	bottom:  18px; 
+ 	left:  50%; 
+ 	text-align:  center;
+ 	transform:  translateX(-50%);
 } 	

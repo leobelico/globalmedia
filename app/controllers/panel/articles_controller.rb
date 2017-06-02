@@ -21,6 +21,24 @@ class Panel::ArticlesController < ApplicationController
 			
 		end
 	end
+	def set_highlight_from_id  
+		article = Article.find(params[:article_id])
+		if article.highlight == false
+			article.update_attributes(highlight: true)
+		else
+			article.update_attributes(highlight: false)
+		end	
+		render json: { article: article }, status: :ok
+	end
+	def set_recommendation_from_id  
+		article = Article.find(params[:article_id])
+		if article.global_recommendation == false
+			article.update_attributes(global_recommendation: true)
+		else
+			article.update_attributes(global_recommendation: false)
+		end	
+		render json: { article: article }, status: :ok
+	end
 	def gallery_images
 
 	end

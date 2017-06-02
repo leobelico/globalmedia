@@ -148,6 +148,8 @@ class ApplicationController < ActionController::Base
 
   def get_current_programs
     time = Time.now
+    p "TIME"
+    p time.strftime( "%H:%M")
     if time.sunday? 
       @timetables = Timetable.includes(:station).where("sunday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
     end
@@ -169,13 +171,17 @@ class ApplicationController < ActionController::Base
     end
    
     if time.friday? 
-      @timetables = Timetable.includes(:station).where("friday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
+      p "FRIDAY"
+      @timetables = Timetable.includes(:station).where("friday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time }'").order("stations.frequency asc").first(7)
+      p "TIMETABLESSSSSSSSSS"
+      p @timetables
+      p @timetables.count
     end
    
     if time.saturday? 
       @timetables = Timetable.includes(:station).where("saturday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
     end
-   
+   p "THE TIMETABLESSSSSSSSSS"
     p @timetables
   end
 

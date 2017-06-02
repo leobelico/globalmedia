@@ -23,6 +23,7 @@
 //= require libraries/videojs/video.min
 //= require libraries/videojs/hls
 //= require components/media-cache-cleaner
+//= require components/buttons
 // 
 // 
 // QUILL BLOTS
@@ -49,6 +50,11 @@
 //= require components/copy-to-clipboard
 //= require components/mobile-menu
 
+$(document).on("click", function(event){
+	if ($(event.target).is("[data-link]")){
+		window.location.href = $(event.target).data("link");
+	}
+}); 
 
 function add_fields(link, association, content) { 
 //

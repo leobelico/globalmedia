@@ -92,13 +92,13 @@ images = [
 ]
 authors = Author.create([
 	{name: "Ninguno", logo: "insert logo here"},
-	{name: "Globalmedia", logo: "insert logo here"}
-	# {name: "Harry Potter", logo: images[3]},
-	# {name: "Hermione Granger", logo: images[3]},
-	# {name: "Ron Weasley", logo: images[3]},
-	# {name: "Fred Weasley", logo: images[3]},
-	# {name: "George Weasley", logo: images[3]},
-	# {name: "Ginny Weasley", logo: images[3]},
+	{name: "Globalmedia", logo: "insert logo here"},
+	{name: "Harry Potter", logo: images[3]},
+	{name: "Hermione Granger", logo: images[3]},
+	{name: "Ron Weasley", logo: images[3]},
+	{name: "Fred Weasley", logo: images[3]},
+	{name: "George Weasley", logo: images[3]},
+	{name: "Ginny Weasley", logo: images[3]},
 ])	
 Section.all.each do |section|
 	for i in 0..20

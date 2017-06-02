@@ -29,17 +29,12 @@ class SectionsController < ApplicationController
    		most_visited(@section.id).each do |article|
    			most_visited << article.id
    		end
-   		@highlight = Article.where(articable_id: @section.id, highlight: true).last
+   		@highlight = Article.where(articable_id: @section.id, highlight: true, published: true).order(updated_at: "DESC").first
   		@articles = Article.find(articles - r_articles - most_visited).paginate(page: params[:page], per_page: 20)
-  		
-
-
 
 	end
 
-
-	private
-		
+	private		
 
 		def set_section
 			@section = Section.find_by_slug(params[:slug])

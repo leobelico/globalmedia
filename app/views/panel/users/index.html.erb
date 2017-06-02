@@ -6,52 +6,59 @@
 </div>
 <div class="table card">
 	<div class="table__row">
-		<p class="table__cell f-2">Nombre:</p>
-		<p class="table__cell f-3">Email:</p>
-		<p class="table__cell super-small">Crear Notas:</p>
-		<p class="table__cell super-small">Eliminar Notas:</p>
-		<p class="table__cell super-small">Banners:</p>
-		<p class="table__cell super-small">Hits:</p>
-		<p class="table__cell super-small">Denuncia Global:</p>
-		<p class="table__cell super-small">Estaciones:</p>
-		<p class="table__cell super-small">Controles Remotos:</p>
-		<p class="table__cell super-small">Usuarios:</p>
-		<p class="table__cell super-small">Jefe de Noticias:</p>
+		<p class="table__cell f-5">Nombre y correo:</p>
+		<p class="table__cell permission rotated">Crear Notas:</p>
+		<p class="table__cell permission rotated">Eliminar Notas:</p>
+		<p class="table__cell permission rotated">Banners:</p>
+		<p class="table__cell permission rotated">Hits:</p>
+		<p class="table__cell permission rotated">Denuncia Global:</p>
+		<p class="table__cell permission rotated">Estaciones:</p>
+		<p class="table__cell permission rotated">Controles Remotos:</p>
+		<p class="table__cell permission rotated">Usuarios:</p>
+		<p class="table__cell permission rotated">Jefe de Noticias:</p>
+		<p class="table__cell permission">Editar:</p>
+
+		<p class="table__cell permission">Eliminar:</p>
 
 	</div>
 	<% @users.each do |user| %>
 		<div class="table__row">
-			<%= link_to user.full_name, panel_user_path(user), class: "table__cell f-2" %>
-			<p class="table__cell f-3"><%= user.email %></p>	
-			
-			<p class="table__cell boolean">
+			<%= link_to panel_user_path(user), class: "table__cell f-5" do %>
+				<%= user.full_name %><br>
+				<%= truncate(user.email, length: 20) %>
+			<% end %>
+
+			<p class="table__cell permission">
 				<%= image_tag (user.create_articles_permission.to_s + ".svg") %>
 			</p>	
-			<p class="table__cell boolean">
+			<p class="table__cell permission">
 				<%= image_tag (user.destroy_articles_permission.to_s + ".svg") %>
 			</p>
-			<p class="table__cell boolean">
+			<p class="table__cell permission">
 				<%= image_tag (user.banners_permission.to_s + ".svg") %>
 			</p>
-			<p class="table__cell boolean">
+			<p class="table__cell permission">
 				<%= image_tag (user.hits_permission.to_s + ".svg") %>
 			</p>
-			<p class="table__cell boolean">
+			<p class="table__cell permission">
 				<%= image_tag (user.video_complaints_permission.to_s + ".svg") %>
 			</p>
-			<p class="table__cell boolean">
+			<p class="table__cell permission">
 				<%= image_tag (user.radio_stations_permission.to_s + ".svg") %>
 			</p>
-			<p class="table__cell boolean">
+			<p class="table__cell permission">
 				<%= image_tag (user.remote_controls_permission.to_s + ".svg") %>
 			</p>
-			<p class="table__cell boolean">
+			<p class="table__cell permission">
 				<%= image_tag (user.user_permission.to_s + ".svg") %>
 
 			</p>
-			<p class="table__cell boolean">
+			<p class="table__cell permission">
 				<%= image_tag (user.is_news_chief.to_s + ".svg") %>
 			</p>
+			
+			<%= link_to "Editar", edit_panel_user_path(user), class: "table__cell boolean edit" %>
+			<%= link_to "Eliminar", panel_user_path(user), method: :delete, data: { confirm: "¿Estás seguro de querer elminiar el usuario?" }, class: "table__cell boolean delete" %>
 			
 		</div>
 	<% end %>

@@ -1,7 +1,7 @@
 .special-articles-container {
 	display:  flex;
 	flex-direction:  row; 
-	align-items:  flex-start;
+	align-items:  stretch;
 	justify-content:  space-between;
 	margin-bottom:  32px; 
 	width:  100%; 
@@ -53,12 +53,18 @@
 	font-weight:  900; 
 	margin-top:  12px; 
 	margin-bottom:  12px; 
+	cursor:  pointer; 
 }
 .special-articles__image {
 	width:  100%; 
 	height:  280px; 
 	object-fit:  cover; 
 	object-position:  center center; 
+	cursor:  pointer; 
+	margin-top:  auto; 
+}
+.special-articles iframe {
+	margin-top:  auto; 
 }
 .special-articles__article {
 	font-size:  14px; 

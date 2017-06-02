@@ -44,6 +44,8 @@ class Panel::UsersController < ApplicationController
 	end
 
 	def destroy
+		@user.destroy
+		redirect_to panel_users_path
 	end
 
 	
