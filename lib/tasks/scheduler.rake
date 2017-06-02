@@ -1,7 +1,6 @@
 desc "This task is called by the Heroku scheduler add-on to publish the articles"
 task :publish_articles => :environment do
   articles = Article.where("scheduled_time >= ? AND scheduled_time <= ? AND draft = ?", Time.now.beginning_of_minute, Time.now.end_of_minute, 1)
-
   articles.update_all(published: true)
 end
 
@@ -10,7 +9,7 @@ task :remove_hashtags => :environment do
   hashtags.update_all(selected: false)
 end
 
-task :publish_highlights
+task :publish_highlights => :environment do
 	Highlight.where("scheduled_time >= ? AND scheduled_time <= ? AND published = ?", Time.now.beginning_of_minute, Time.now.end_of_minute, false).all.each do |highlight|
 			highlights_to_remove = Highlight.where(published: true, order: highlight.order)
 			#highlights_to_remove.update_all(published: false)
