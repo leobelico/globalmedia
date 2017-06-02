@@ -8,7 +8,7 @@ class Panel::HashtagsController < ApplicationController
 		@hashtags = Hashtag.order(updated_at: "DESC")
 	end
 	def selecting_hashtags
-		@hashtags = Hashtag.where(selected: true).last(4)
+		@hashtags = Hashtag.where(selected: true).order(updated_at: "DESC").last(4)
 	end
 
 	def set_selected
