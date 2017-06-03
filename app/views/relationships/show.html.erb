@@ -9,7 +9,7 @@
 				<p class="relationship__description"><%= @relationship.description %></p>
 				<%= image_tag @relationship.image, class: "relationship__image" %>
 			</div>
-			<% @relationship.article_relationships.each do |relationship|%>
+			<% @relationship.article_relationships.reverse.each do |relationship|%>
 					<%= render "components/horizontal-note", article: relationship.article %>
 				
 			<% end %>

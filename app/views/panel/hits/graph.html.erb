@@ -46,12 +46,34 @@
 <% end %>
 <div class="table card">
 	<div class="table__row">
-		<p class="table__cell">Mes:</p>
+		<p class="table__cell">Semana del Año y Mes:</p>
 		<p class="table__cell">Objetivo:</p>
 		<p class="table__cell">Hits:</p>
 		<p class="table__cell">Cumplimiento:</p>
 	</div>
-	
+<% @hits.each.with_index do |records, index| %>
+				<% record_date = l(records[0][0], format: "S%W, %B %Y") %>
+				<% record_hits = records[1].map { |h| h[:number] }.sum %>
+				<% number = 0 %>
+
+				<% @hit_objectives.each_with_index do |month, index| %>
+					<% if month[0][0].strftime("%Y%m") == records[0][0].strftime("%Y%m") %>
+						<% number = month[1][0].objective %>
+					<% end %>
+
+				<% end %>
+
+				<% if index != @hits.count - 1 and @hits.count > 1 %>
+					<div class="table__row">
+						
+						<div class="table__cell"><%= record_date %></div>
+						<div class="table__cell"><%= number %></div>
+						<div class="table__cell"><%= record_hits %></div>
+						<div class="table__cell"><%= (number.to_f/record_hits.to_f)*100 %>%</div>
+					</div>
+	        	<% end %>
+
+		<% end %>
 </div>
 <script>
 	<% if @hits.count > 0 %>
