@@ -53,14 +53,19 @@
 	}
 	.banner__next, 
 	.banner__previous {
-		height: 36px; 
-		width: 36px; 
+		height: 24px; 
+		width: 24px; 
+		opacity:  .46;
 		// background:  #f0f0f0; 
 		position:  absolute; 
 		top:  50%; 
 		border-top:  solid 2px $primary;  
 		border-right:  solid 2px $primary; 
 		transform-origin:  50% 50%;  
+		transition:  all .3s ease; 
+		&:hover {
+			opacity:  1; 
+		}
 	}
 	.banner__next {
 		left:  24px; 

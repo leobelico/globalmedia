@@ -50,19 +50,27 @@
 	google.charts.setOnLoadCallback(drawChart);
      function drawChart() {
         var data = google.visualization.arrayToDataTable([
-        	['Fechas', 'Vistas a Página'],
+        	['Fechas', 'Vistas a Página', 'Objetivos'],
 			<% @hits.each.with_index do |records, index| %>
 				<% record_date = l(records[0][0], format: "S%W, %B %Y") %>
 				<% record_hits = records[1].map { |h| h[:number] }.sum %>
+				<% number = 0 %>
 
-				<% if index != @hits.count - 1 and @hits.count > 1 %>['<%= record_date %>', <%= record_hits %>],
-	        	<% else %>['<%= record_date %>', <%= record_hits %>]
+				<% @hit_objectives.each_with_index do |month, index| %>
+					<% if month[0][0].strftime("%Y%m") == records[0][0].strftime("%Y%m") %>
+						<% number = month[1][0].objective %>
+					<% end %>
+
+				<% end %>
+
+				<% if index != @hits.count - 1 and @hits.count > 1 %>['<%= record_date %>', <%= record_hits %>, <%= number %>],
+	        	<% else %>['<%= record_date %>', <%= record_hits %>, <%= number %>]
 	        	<% end %>
 
 		<% end %>
         ]);
 		var options = {
-			title: '<%= @hits.first[1][1].article.author.name %>',
+			title: 'Sección <%= @hits.first[1][1].article.section %>',
 			// curveType: 'function',
 			legend: { position: 'bottom' }
 		};
@@ -72,6 +80,7 @@
         chart.draw(data, google.charts.Line.convertOptions(options));
 	}
     <% end %>
+    
 </script>
 
 

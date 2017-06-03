@@ -1,0 +1,26 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Objetivos </span> / <span>Editar</span></h2>
+	<div class="panel__actions">
+		<button class="button">Guardar </button>
+	</div>
+</div>
+<%= form_for :hit_objectives, url: {action: 'update_multiple', controller: "panel/hit_objectives"}, html: { class: "admin-form card" } do -%>
+  
+  
+    <% @hit_objectives.each_with_index do |objective, index| %>
+      <%= fields_for "hit_objectives[]", objective, index: objective.id do |f| %>
+
+        <div class="field">
+          <label><%= Section.find_by(id: index + 1).name %></label><br>
+          
+          <%= f.text_field :objective %><br>
+         
+        </div>
+      <% end %>
+  <% end %>
+ <% end %>
+ <script> 
+ 	button = $("button.button"); 
+ 	form = $("form.admin-form.card"); 
+ 	saveFormOnButtonClick(button, form);
+ </script>

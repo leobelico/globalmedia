@@ -14,6 +14,10 @@
 			<%= link_to "Objetivos de Sección", new_panel_hit_objective_path, class: "button" %>	
 		<% end %>
 
+		<% if @author_hit_objectives.count > 0 %>	
+			<%= link_to "Editar objetivos de Sección",  panel_hit_objectives_edit_author_objectives_path, class: "button" %>
+		<% end %>
+
 		<% if @author_hit_objectives.count > 0 and (Time.now.strftime("%B") != @author_hit_objectives.last.created_at.strftime("%B")) %> 
 			<%= link_to "Objetivos de Autor", panel_hit_objectives_new_author_objectives_path, class: "button" %>	
 		<% end %>

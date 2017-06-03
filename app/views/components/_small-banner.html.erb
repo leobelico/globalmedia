@@ -73,26 +73,32 @@
 				if (direction == "next") {
 					TweenMax.to($prevSlide, time, {
 						// left: "-100%"
-						opacity: 0
+						opacity: 0, 
+						pointerEvents: "none"
 					});
 					TweenMax.fromTo($currentSlide, time, {
 						// left: "100%"
-						opacity: 0
+						opacity: 0, 
+						pointerEvents: "none"
 					}, {
 						// left: "0"
-						opacity: 1
+						opacity: 1,
+						pointerEvents: "all"
 					});
 				} else {
 					TweenMax.to($prevSlide, time, {
 						// left: "100%"
-						opacity: 0
+						opacity: 0,
+						pointerEvents: "none"
 					});
 					TweenMax.fromTo($currentSlide, time, {
 						// left: "-100%"
-						opacity: 0
+						opacity: 0,
+						pointerEvents: "none"
 					}, {
 						// left: "0"
-						opacity: 1
+						opacity: 1,
+						pointerEvents: "all"
 					});
 				}
 				TweenMax.delayedCall(time, function() {

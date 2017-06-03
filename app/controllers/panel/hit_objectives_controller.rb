@@ -63,6 +63,10 @@ class Panel::HitObjectivesController < ApplicationController
 		@hit_objectives = HitObjective.last(Section.all.count)
 	end
 
+	def edit_author_objectives
+		@hit_objectives = HitObjective.last(Author.all.count)
+	end
+
 	def update_multiple
 		@hit_objectives = HitObjective.last(Section.all.count)
 		#kw = params[:hit_objective].map{|e| {id: e[:id], hit_objective: e[:hit_objective]}}

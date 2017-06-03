@@ -13,7 +13,20 @@
 	.social-media__tag {
 		color:  #ffffff; 
 	}
+	br {
+		display: none; 
+	}
 }
+@media screen and (max-width:  1023px) {
+	.topbar {
+		align-items:  center; 
+		
+		br {
+			display:  initial; 
+		}
+	} 
+}
+
 .topbar__link {
 	font-family: "Open Sans", sans-serif; 
 	font-size:  14px; 
