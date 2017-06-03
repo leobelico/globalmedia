@@ -116,7 +116,7 @@
 					<% end %>
 				</div>
 			<% end %>
-			<% if get_banner(@station, "Station", "Grande") %>
+			<% if get_banner(@station, "Station", "Grande").count > 0 %>
 				<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
 			<% end %>
 		</div>

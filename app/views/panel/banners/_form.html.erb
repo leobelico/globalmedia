@@ -108,6 +108,33 @@
 			<% end %>
 			
 		<% end %>
+		</div>		
+
+		<h4 class="form-title">Camaras:</h4>
+		<div class="multicheckbox-container">
+			
+		<% Camera.all.each do |camera| %>
+			<% if @banner.new_record? %>
+				<div class="field field--checkbox">
+					<label><%= camera.name %></label>
+					<%= check_box_tag :all_cameras, camera.id, false, :name => '[all_cameras][]' %>
+				</div>
+			<% else %>
+				<% if SectionBanner.where(sectionable_id: camera.id, banner: @banner).count == 0 %>
+					<div class="field field--checkbox">
+						<label><%= camera.name %></label>	
+						<%= check_box_tag :all_cameras, camera.id, false, :name => '[all_cameras][]' %> 
+					</div>
+				<% else %>
+					<div class="field field--checkbox">
+						<label><%= camera.name %></label>
+						<%= check_box_tag :all_cameras, camera.id, true, :name => '[all_cameras][]' %> 
+						
+					</div>
+				<% end %>
+			<% end %>
+			
+		<% end %>
 		</div>
 
 	</div>

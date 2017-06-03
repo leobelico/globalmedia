@@ -2,7 +2,8 @@ class Panel::HitObjectivesController < ApplicationController
 	before_action :authenticate_user!, except: [:show_keyword]
 	
 	def index
-		@hit_objectives = HitObjective.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month)	
+		@hit_objectives = HitObjective.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month, author_id: nil)	
+		@author_hit_objectives = HitObjective.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month, section_id: nil)	
 	end
 
 	def new
@@ -12,14 +13,31 @@ class Panel::HitObjectivesController < ApplicationController
 	      @hit_objectives << HitObjective.new
 	    end
 	end
+	def new_author_objectives
+		@hit_objectives = []
+
+	    Author.count.times do
+	      @hit_objectives << HitObjective.new
+	    end
+	end
 
 	def create
-		params["hit_objectives"].each do |hit_objective|
-	    	
-	    	HitObjective.create(hit_objective_params(hit_objective))
-	    	
+		if params["hit_objectives"]
+			params["hit_objectives"].each do |hit_objective|
+		    	
+		    	HitObjective.create(hit_objective_params(hit_objective))
+		    	
+	 	 	end
  	 	end
- 	 	
+ 	 	if params["author_hit_objectives"]	
+
+			params["author_hit_objectives"].each do |hit_objective|
+		    	
+		    	HitObjective.create(hit_objective_params(hit_objective))
+		    	
+	 	 	end
+
+ 	 	end
  	 	redirect_to panel_hit_objectives_path
 	end
 
@@ -55,7 +73,7 @@ class Panel::HitObjectivesController < ApplicationController
 
 	private
 		def hit_objective_params(my_params)
-    		my_params.permit(:objective, :section_id)
+    		my_params.permit(:objective, :section_id, :author_id)
   		end
 
   		def get_all_hit_objectives

@@ -3,14 +3,22 @@
 	<div class="panel__actions">
 
 		<% if @hit_objectives.count > 0 %>	
-			<%= link_to "Editar objetivos",  panel_edit_multiple_hit_objectives_path, class: "button" %>
+			<%= link_to "Editar objetivos de Sección",  panel_edit_multiple_hit_objectives_path, class: "button" %>
 		<% end %>
 
+
 		<% if @hit_objectives.count > 0 and (Time.now.strftime("%B") != @hit_objectives.last.created_at.strftime("%B")) %> 
-			<%= link_to "Nuevos Objetivos", new_panel_hit_objective_path, class: "button" %>	
+			<%= link_to "Objetivos de Sección", new_panel_hit_objective_path, class: "button" %>	
 		<% end %>
 		<% if @hit_objectives.count == 0 %>
-			<%= link_to "Nuevos Objetivos", new_panel_hit_objective_path, class: "button" %>	
+			<%= link_to "Objetivos de Sección", new_panel_hit_objective_path, class: "button" %>	
+		<% end %>
+
+		<% if @author_hit_objectives.count > 0 and (Time.now.strftime("%B") != @author_hit_objectives.last.created_at.strftime("%B")) %> 
+			<%= link_to "Objetivos de Autor", panel_hit_objectives_new_author_objectives_path, class: "button" %>	
+		<% end %>
+		<% if @author_hit_objectives.count == 0 %>
+			<%= link_to "Objetivos de Autor", panel_hit_objectives_new_author_objectives_path, class: "button" %>	
 		<% end %>
 	</div>
 </div>
@@ -30,6 +38,28 @@
 			<p class="table__cell"><%= objective.section.total_hits_in_current_month %></p>
 			<% percentage = 0.0 %>
 			<% percentage = objective.section.total_hits_in_current_month.to_f/objective.objective.to_f %>
+			<% percentage = percentage*100 %>
+			<% percentage = percentage.round(2) %>
+			<p class="table__cell"><%= percentage %>%</p>
+		</div>
+	<% end %>
+</div>	
+
+<div class="table card">
+
+	<div class="table__row">
+		<p class="table__cell f-4">Autor:</p>
+		<p class="table__cell">Objetivo del mes:</p>
+		<p class="table__cell">Vistas del mes:</p>
+		<p class="table__cell">Porcentaje:</p>
+	</div>
+	<% @author_hit_objectives.each do |objective| %>
+		<div class="table__row">
+			<p class="table__cell f-4"><%= objective.author.name %></p>
+			<p class="table__cell"><%= objective.objective %></p>
+			<p class="table__cell"><%= objective.author.total_hits_in_current_month %></p>
+			<% percentage = 0.0 %>
+			<% percentage = objective.author.total_hits_in_current_month.to_f/objective.objective.to_f %>
 			<% percentage = percentage*100 %>
 			<% percentage = percentage.round(2) %>
 			<p class="table__cell"><%= percentage %>%</p>

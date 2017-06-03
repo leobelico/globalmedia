@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601222314) do
+ActiveRecord::Schema.define(version: 20170603182102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,8 @@ ActiveRecord::Schema.define(version: 20170601222314) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "section_id"
+    t.integer  "author_id"
+    t.index ["author_id"], name: "index_hit_objectives_on_author_id", using: :btree
     t.index ["section_id"], name: "index_hit_objectives_on_section_id", using: :btree
   end
 
@@ -295,6 +297,7 @@ ActiveRecord::Schema.define(version: 20170601222314) do
   add_foreign_key "articles", "keywords"
   add_foreign_key "articles", "users"
   add_foreign_key "highlights", "articles"
+  add_foreign_key "hit_objectives", "authors"
   add_foreign_key "hit_objectives", "sections"
   add_foreign_key "hits", "articles"
   add_foreign_key "images", "articles"

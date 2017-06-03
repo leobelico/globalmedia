@@ -18,31 +18,31 @@
 
 	<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
 <!-- -->
-<% if get_banner(@article.articable, @article.articable_type, "Chico" ) %>
+<% if get_banner(@article.articable, @article.articable_type, "Chico" ).count > 0 %>
 	Banner Chico: <%= get_banner(@article.articable, @article.articable_type, "Chico" ).name %>
 	<br/>
 <% else %>
-	<% if get_banner(@article.articable, "Global", "Chico" ) %>
+	<% if get_banner(@article.articable, "Global", "Chico" ).count > 0 %>
 		Banner Chico: <%= get_banner(@article.articable, "Global", "Chico" ).name %>
 	<% end %>
 	<br/>
 <% end %>
 
-<% if get_banner(@article.articable, @article.articable_type, "Mediano" ) %>
+<% if get_banner(@article.articable, @article.articable_type, "Mediano" ).count > 0 %>
 
 	Banner Mediano: <%= get_banner(@article.articable, @article.articable_type, "Mediano" ).name  %><br/>
 <% else %>
-	<% if get_banner(@article.articable, "Global", "Mediano" ) %>
+	<% if get_banner(@article.articable, "Global", "Mediano" ).count > 0 %>
 		Banner Mediano: <%= get_banner(@article.articable, "Global", "Mediano" ).name %>
 	<% end %>
 	<br/>
 <% end %>
 
-<% if get_banner(@article.articable, @article.articable_type, "Grande" ) %>
+<% if get_banner(@article.articable, @article.articable_type, "Grande" ).count > 0 %>
 
 	Banner Grande: <%= get_banner(@article.articable, @article.articable_type, "Grande" ).name  %><br/>
 <% else %>
-	<% if get_banner(@article.articable, "Global", "Grande" ) %>
+	<% if get_banner(@article.articable, "Global", "Grande" ).count > 0 %>
 		Banner Grande: <%= get_banner(@article.articable, "Global", "Grande" ).name %>
 	<% end %>
 	<br/>

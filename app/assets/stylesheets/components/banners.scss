@@ -27,6 +27,50 @@
 		height: auto; 
 	}
 }
+
+.banners-container {
+	width:  100%; 
+	height:  auto; 
+	margin-top:  8px; 
+	margin-bottom:  16px; 
+	display:  flex; 
+	position:  relative; 
+	a {
+		background-color:  #fafafa; 
+	}
+	a:not(:first-of-type) {
+		position:  absolute; 
+		top:  0; 
+		left:  0; 
+		height:  100%; 
+		width:  100%; 
+		img {
+			height:  100%;
+			width:  100%; 
+			object-fit:  contain; 
+			object-position:  center center; 
+		}
+	}
+	.banner__next, 
+	.banner__previous {
+		height: 36px; 
+		width: 36px; 
+		// background:  #f0f0f0; 
+		position:  absolute; 
+		top:  50%; 
+		border-top:  solid 2px $primary;  
+		border-right:  solid 2px $primary; 
+		transform-origin:  50% 50%;  
+	}
+	.banner__next {
+		left:  24px; 
+		transform: translateY(-50%) rotateZ(-135deg) ;
+	}
+	.banner__previous {
+		right:  24px; 
+		transform:  translateY(-50%) rotateZ(45deg);
+	}
+}
 @media screen and (min-width: 1024px) {
 
 	.banner-image--mobile {

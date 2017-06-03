@@ -47,6 +47,9 @@ Rails.application.routes.draw do
     patch "update_multiple_keywords", to: "keywords#update_multiple"
     post "update_multiple_keywords", to: "keywords#update_multiple"
 
+    get "hit_objectives/new_author_objectives", to: "hit_objectives#new_author_objectives"
+    post "hit_objectives/new_author_objectives", to: "hit_objectives#new_author_objectives"
+
     get "edit_multiple_hit_objectives", to: "hit_objectives#edit_multiple"
     #post "edit_multiple_hit_objectives", to: "hit_objectives#edit_multiple"
     get "update_multiple_hit_objectives", to: "hit_objectives#update_multiple"

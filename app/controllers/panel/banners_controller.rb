@@ -29,6 +29,14 @@ class Panel::BannersController < ApplicationController
 				p "creating"
 				SectionBanner.create(banner: @banner, sectionable_id: station.id, sectionable_type: "Station")
 			end
+
+			cameras =  Camera.where(id: params[:all_cameras])
+			p "cuenta de secciones"
+			p cameras.count
+			cameras.each do |camera|
+				p "creating"
+				SectionBanner.create(banner: @banner, sectionable_id: camera.id, sectionable_type: "Camera")
+			end
 			redirect_to panel_banner_path(@banner)
 		else
 			render action: "new"
@@ -56,6 +64,15 @@ class Panel::BannersController < ApplicationController
 			stations.each do |station|
 				p "creating"
 				SectionBanner.create(banner: @banner, sectionable_id: station.id, sectionable_type: "Station")
+			end
+
+
+			cameras =  Camera.where(id: params[:all_cameras])
+			p "cuenta de secciones"
+			p cameras.count
+			cameras.each do |camera|
+				p "creating"
+				SectionBanner.create(banner: @banner, sectionable_id: camera.id, sectionable_type: "Camera")
 			end
 			redirect_to panel_banner_path(@banner)
 		else
