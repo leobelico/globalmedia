@@ -2,8 +2,9 @@ class Panel::HitObjectivesController < ApplicationController
 	before_action :authenticate_user!, except: [:show_keyword]
 	
 	def index
-		@hit_objectives = HitObjective.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month, author_id: nil)	
-		@author_hit_objectives = HitObjective.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month, section_id: nil)	
+		@hit_objectives = HitObjective.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month, author_id: nil, user_id: nil)	
+		@author_hit_objectives = HitObjective.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month, section_id: nil, user_id: nil)	
+		@user_hit_objectives = HitObjective.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month, section_id: nil, author_id: nil)	
 	end
 
 	def new
@@ -21,22 +22,29 @@ class Panel::HitObjectivesController < ApplicationController
 	    end
 	end
 
+	def new_user_objectives
+		@hit_objectives = []
+
+	    User.count.times do
+	      @hit_objectives << HitObjective.new
+	    end
+	end
+
 	def create
 		if params["hit_objectives"]
 			params["hit_objectives"].each do |hit_objective|
-		    	
 		    	HitObjective.create(hit_objective_params(hit_objective))
-		    	
 	 	 	end
  	 	end
  	 	if params["author_hit_objectives"]	
-
 			params["author_hit_objectives"].each do |hit_objective|
-		    	
 		    	HitObjective.create(hit_objective_params(hit_objective))
-		    	
 	 	 	end
-
+ 	 	end
+ 	 	if params["user_hit_objectives"]	
+			params["user_hit_objectives"].each do |hit_objective|
+		    	HitObjective.create(hit_objective_params(hit_objective))
+	 	 	end
  	 	end
  	 	redirect_to panel_hit_objectives_path
 	end
@@ -66,6 +74,9 @@ class Panel::HitObjectivesController < ApplicationController
 	def edit_author_objectives
 		@hit_objectives = HitObjective.last(Author.all.count)
 	end
+	def edit_user_objectives
+		@hit_objectives = HitObjective.last(User.all.count)
+	end
 
 	def update_multiple
 		@hit_objectives = HitObjective.last(Section.all.count)
@@ -74,10 +85,24 @@ class Panel::HitObjectivesController < ApplicationController
     	redirect_to panel_hit_objectives_path
 	end
 
+	def author_update_multiple
+		@hit_objectives = HitObjective.last(Author.all.count)
+		#kw = params[:hit_objective].map{|e| {id: e[:id], hit_objective: e[:hit_objective]}}
+		HitObjective.update(params[:author_hit_objectives].keys, params[:author_hit_objectives].values)
+    	redirect_to panel_hit_objectives_path
+	end
+
+	def user_update_multiple
+		@hit_objectives = HitObjective.last(User.all.count)
+		#kw = params[:hit_objective].map{|e| {id: e[:id], hit_objective: e[:hit_objective]}}
+		HitObjective.update(params[:user_hit_objectives].keys, params[:user_hit_objectives].values)
+    	redirect_to panel_hit_objectives_path
+	end
+
 
 	private
 		def hit_objective_params(my_params)
-    		my_params.permit(:objective, :section_id, :author_id)
+    		my_params.permit(:objective, :section_id, :author_id, :user_id)
   		end
 
   		def get_all_hit_objectives
