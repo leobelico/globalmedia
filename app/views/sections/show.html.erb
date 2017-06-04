@@ -10,8 +10,11 @@
 		<% end %>
 
 		<% if @highlight %>
-			
-			<div class="section__highlight">
+			<% if @section.color %>
+				<div class="section__highlight" style="border-bottom:  solid 4px <%= @section.color %>">
+			<% else %>
+				<div class="section__highlight">
+			<% end %>
 				<%= link_to @highlight, class: "image" do %>
 					<%= image_tag @highlight.image %>
 				<% end %>
@@ -43,11 +46,11 @@
 
 
 
-		<% if get_banner(@section, "Section", "Grande" ) %>
+		<% if get_banner(@section, "Section", "Grande" ).count > 0 %>
 
 			<%=render "components/big-banner", banner: get_banner(@section, "Section", "Grande" )  %>
 		<% else %>
-			<% if get_banner(@section, "Global", "Grande" ) %>
+			<% if get_banner(@section, "Global", "Grande" ).count > 0 %>
 				<%= render "components/big-banner", banner: get_banner(@section, "Global", "Grande" ) %>
 			<% end %>
 			<br/>
@@ -79,10 +82,10 @@
 
 	</div>
 	<% if @section.articles.count > 0 %>
-		<% if get_banner(@section, "Section", "Mediano" ) %>
+		<% if get_banner(@section, "Section", "Mediano" ).count > 0 %>
 			<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Section", "Mediano" ) %>
 		<% else %>
-			<% if get_banner(@section, "Global", "Mediano" ) %>
+			<% if get_banner(@section, "Global", "Mediano" ).count > 0 %>
 				<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Global", "Mediano" ) %>
 				
 			<% else %>

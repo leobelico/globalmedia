@@ -21,6 +21,10 @@
 		<label>Cliente del Banner</label>
 		<%= f.text_field :client %>
 	</div>
+	<div class="field field--checkbox">
+		<label>Activo</label>
+		<%= f.check_box :active %>
+	</div>
 	
 	<div class="field field--string">
 		<label>Imagen para Escritorio</label>
@@ -52,7 +56,9 @@
 			<%= f.check_box :titlepage %>
 		</div>
 
-		<!-- <h4>Secciones:</h4> -->
+		<h4 class="form-title">Secciones:</h4>
+		<div class="multicheckbox-container">
+			
 		<% Section.all.each do |section| %>
 			<% if @banner.new_record? %>
 				<div class="field field--checkbox">
@@ -74,7 +80,63 @@
 				<% end %>
 			<% end %>
 			
+		<% end %>		
+		</div>
+
+		<h4 class="form-title">Estaciones:</h4>
+		<div class="multicheckbox-container">
+			
+		<% Station.all.each do |station| %>
+			<% if @banner.new_record? %>
+				<div class="field field--checkbox">
+					<label><%= station.name %></label>
+					<%= check_box_tag :all_stations, station.id, false, :name => '[all_stations][]' %>
+				</div>
+			<% else %>
+				<% if SectionBanner.where(sectionable_id: station.id, banner: @banner).count == 0 %>
+					<div class="field field--checkbox">
+						<label><%= station.name %></label>	
+						<%= check_box_tag :all_stations, station.id, false, :name => '[all_stations][]' %> 
+					</div>
+				<% else %>
+					<div class="field field--checkbox">
+						<label><%= station.name %></label>
+						<%= check_box_tag :all_stations, station.id, true, :name => '[all_stations][]' %> 
+						
+					</div>
+				<% end %>
+			<% end %>
+			
 		<% end %>
+		</div>		
+
+		<h4 class="form-title">Camaras:</h4>
+		<div class="multicheckbox-container">
+			
+		<% Camera.all.each do |camera| %>
+			<% if @banner.new_record? %>
+				<div class="field field--checkbox">
+					<label><%= camera.name %></label>
+					<%= check_box_tag :all_cameras, camera.id, false, :name => '[all_cameras][]' %>
+				</div>
+			<% else %>
+				<% if SectionBanner.where(sectionable_id: camera.id, banner: @banner).count == 0 %>
+					<div class="field field--checkbox">
+						<label><%= camera.name %></label>	
+						<%= check_box_tag :all_cameras, camera.id, false, :name => '[all_cameras][]' %> 
+					</div>
+				<% else %>
+					<div class="field field--checkbox">
+						<label><%= camera.name %></label>
+						<%= check_box_tag :all_cameras, camera.id, true, :name => '[all_cameras][]' %> 
+						
+					</div>
+				<% end %>
+			<% end %>
+			
+		<% end %>
+		</div>
+
 	</div>
 	
 <% end %>

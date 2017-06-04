@@ -44,21 +44,22 @@ class ApplicationController < ActionController::Base
   helper_method :get_sections
 
   def get_sections 
-    @sections = Section.where("name != 'Último Momento' AND name != 'Ultimo Momento' AND name != 'Denuncia Global' AND name != 'Estaciones' AND name != 'Colaboradores' AND name != 'Investigación Especial' AND name != 'INVESTIGACIÓN ESPECIAL' AND name != 'COLABORADORES' AND name != 'ESTACIONES'")
+    @sections = Section.where(visible: true)
   end
 
   def related_by_hashtags(article)
     
     if article.hashtags.count == 1
-       @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ article.hashtags.first.id} AND articles.published = true").last(3).uniq
+       @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ article.hashtags.first.id} AND articles.published = true AND articles.id != #{article.id}").last(3).uniq
+
     end
 
     if article.hashtags.count == 2
-      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id }) AND articles.published = true").last(3).uniq
+      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id }) AND articles.published = true AND articles.id != #{article.id}").last(3).uniq
     end 
     
     if article.hashtags.count >= 3
-      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.third.id }) AND articles.published = true").last(3).uniq
+      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.third.id }) AND articles.published = true AND articles.id != #{article.id}").last(3).uniq
     end 
     # @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
    
@@ -147,6 +148,8 @@ class ApplicationController < ActionController::Base
 
   def get_current_programs
     time = Time.now
+    p "TIME"
+    p time.strftime( "%H:%M")
     if time.sunday? 
       @timetables = Timetable.includes(:station).where("sunday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
     end
@@ -168,13 +171,17 @@ class ApplicationController < ActionController::Base
     end
    
     if time.friday? 
-      @timetables = Timetable.includes(:station).where("friday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
+      p "FRIDAY"
+      @timetables = Timetable.includes(:station).where("friday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time }'").order("stations.frequency asc").first(7)
+      p "TIMETABLESSSSSSSSSS"
+      p @timetables
+      p @timetables.count
     end
    
     if time.saturday? 
       @timetables = Timetable.includes(:station).where("saturday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
     end
-   
+   p "THE TIMETABLESSSSSSSSSS"
     p @timetables
   end
 
@@ -226,13 +233,16 @@ class ApplicationController < ActionController::Base
   def get_banner(section, section_type, size)
     if section_type == "Global" or section_type == "TitlePage"
       if section_type == "Global"
-        @banner = Banner.where(global: true, size: size).last
+        @banners = Banner.where(global: true, size: size, active: true).reverse
       else
-        @banner = Banner.where(titlepage: true, size: size).last
+        @banners = Banner.where(titlepage: true, size: size, active: true).reverse
 
       end 
     else
-      @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where(" section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}'").last
+      p "GRANDEEEEEEEE"
+      @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where("banners.active = 'true' AND section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}'").reverse
+      p "banner ilse"
+      p @banner
     end
 
   end

@@ -19,7 +19,9 @@ class Article < ApplicationRecord
   def to_param
     slug
   end
-
+  def raw_note 
+    ActionController::Base.helpers.raw(self.note)
+  end
   def total_hits_in_current_month
     self.hits.where(created_at: 1.months.ago..Time.now).sum(:number)
   end
@@ -31,7 +33,7 @@ class Article < ApplicationRecord
     def associate_tags
       if hashtags_names
         self.hashtags.delete_all
-        hashtags_names.split(" ").each do |name|
+        hashtags_names.split(", ").each do |name|
           self.hashtags << Hashtag.find_or_create_by( name: name )
         end
       end

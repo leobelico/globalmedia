@@ -3,6 +3,10 @@
 	display:  block; 
 	text-align:  center; 
 }
+.form-title {
+	width:  100%; 
+	margin-top:  18px; 
+}
 .session-form {
 	display:  flex; 
 	flex-direction:  column; 
@@ -18,6 +22,32 @@
 .ui-helper-hidden-accessible div {
 	display:  none; 
 }
+.button--add-fields {
+	background-color:  $tertiary; 
+	padding:  12px 18px; 
+	box-sizing:  border-box;
+	display:  flex; 
+}
+.field--file {
+	input:first-of-type {
+		margin-bottom:  8px; 
+	}
+	a {
+		padding:  12px 18px; 
+		background-color:  $red; 
+		color:  #ffffff; 
+		border-radius:  4px; 
+		margin-top:  8px; 
+	}
+}
+.gallery-form {
+	.button {
+		margin-bottom:  8px; 
+	}
+}
+.button {
+	display:  block;
+}
 .field {
 	display:  flex; 
 	flex-direction:  column; 
@@ -29,6 +59,14 @@
 }
 .field:last-of-type {
 	margin-bottom:  0; 
+}
+.multicheckbox-container {
+	width:  100%; 
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  flex-start; 
+	flex-wrap:  wrap; 
+	margin-top:  18px; 
 }
 .multifield {
 	display:  flex; 

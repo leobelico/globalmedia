@@ -3,9 +3,9 @@ class Panel::ArticlesController < ApplicationController
 	# load_and_authorize_resource
 	before_action :check_create_permission, only: [:new, :create, :edit, :update]
 	before_action :check_delete_permission, only: [:destroy]
-	before_action :set_article, only: [:show, :edit, :update, :destroy]
+	before_action :set_article, only: [:show, :edit, :gallery_images, :update, :destroy]
 	autocomplete :article, :name, full: true
-	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
+	before_action :set_s3_direct_post, only: [:new, :create, :edit, :gallery_images, :update]
 	
 	def publish_now
 		@article = Article.find_by(slug: params[:article_slug])
@@ -21,7 +21,27 @@ class Panel::ArticlesController < ApplicationController
 			
 		end
 	end
+	def set_highlight_from_id  
+		article = Article.find(params[:article_id])
+		if article.highlight == false
+			article.update_attributes(highlight: true)
+		else
+			article.update_attributes(highlight: false)
+		end	
+		render json: { article: article }, status: :ok
+	end
+	def set_recommendation_from_id  
+		article = Article.find(params[:article_id])
+		if article.global_recommendation == false
+			article.update_attributes(global_recommendation: true)
+		else
+			article.update_attributes(global_recommendation: false)
+		end	
+		render json: { article: article }, status: :ok
+	end
+	def gallery_images
 
+	end
 	def new
 		@article = Article.new
 	end
@@ -43,7 +63,7 @@ class Panel::ArticlesController < ApplicationController
 				@article.update_attributes(published: true) 
 
 			end
-			redirect_to @article
+			redirect_to edit_panel_article_path(@article)
 		else
 			respond_to do |format|
 				format.json { render :json => { :error_message => @article.errors.full_messages }, :status => :unprocessable_entity }
@@ -58,26 +78,34 @@ class Panel::ArticlesController < ApplicationController
 	def edit
 		if @article.hashtags.count > 0	
 			@hashtags = ""
-			@article.hashtags.each do |hashtag|
-				@hashtags = @hashtags + " " + hashtag.name
+			@article.hashtags.each_with_index do |hashtag, index|
+				if index > 0
+					@hashtags = @hashtags + ", " + hashtag.name
+				else
+					@hashtags = hashtag.name
+				end
 			end
 		end
 	end
 
 	def update
-		@article.note = params[:article][:note]
-		somedate = Time.zone.local(params[:scheduled_time_1i].to_i, 
-                        params[:scheduled_time_2i].to_i,
-                        params[:scheduled_time_3i].to_i,
-                        params[:scheduled_time_4i].to_i,
-                        params[:scheduled_time_5i].to_i, 0)
-
+		if params[:article][:note]
+			@article.note = params[:article][:note]
+		end
+		if params[:scheduled_time_1i]
+			somedate = Time.zone.local(params[:scheduled_time_1i].to_i, 
+	                        params[:scheduled_time_2i].to_i,
+	                        params[:scheduled_time_3i].to_i,
+	                        params[:scheduled_time_4i].to_i,
+	                        params[:scheduled_time_5i].to_i, 0)
+		end
 
 		if @article.update(article_params)
-			@article.update_attributes(scheduled_time: somedate)
+			if somedate 
+				@article.update_attributes(scheduled_time: somedate)
+			end
 			if @article.draft == 0 or @article.draft == -1 
 				@article.update_attributes(published: false)
-
 			end
 			if @article.draft == 2
 				@article.update_attributes(published: true)
@@ -118,6 +146,9 @@ class Panel::ArticlesController < ApplicationController
 
 		def set_article
 			@article = Article.find_by_slug(params[:slug])
+			if params[:article_slug] 
+				@article = Article.find_by_slug(params[:article_slug])
+			end
 			rescue ActiveRecord::RecordNotFound
 				flash[:alert] = "La página que estabas buscando no existe."
 				redirect_to root_url

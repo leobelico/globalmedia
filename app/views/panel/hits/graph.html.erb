@@ -2,7 +2,8 @@
 	<h4 class="panel__title">Vistas a Página</h4>
 	<div class="panel__actions">
 		<%= link_to "Ir a Objetivos", panel_hit_objectives_path, class: "button" %>
-		<%= link_to "Consulta de Gráficas", graph_panel_hits_path, class: "button" %>
+		<%= link_to "Gráficas por Sección", graph_panel_hits_path, class: "button" %>
+		<%= link_to "Gráficas por Autor", author_graph_panel_hits_path, class: "button" %>
 	</div>	
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -43,17 +44,58 @@
 
 	</div>
 <% end %>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Semana del Año y Mes:</p>
+		<p class="table__cell">Objetivo:</p>
+		<p class="table__cell">Hits:</p>
+		<p class="table__cell">Cumplimiento:</p>
+	</div>
+<% @hits.each.with_index do |records, index| %>
+				<% record_date = l(records[0][0], format: "S%W, %B %Y") %>
+				<% record_hits = records[1].map { |h| h[:number] }.sum %>
+				<% number = 0 %>
 
+				<% @hit_objectives.each_with_index do |month, index| %>
+					<% if month[0][0].strftime("%Y%m") == records[0][0].strftime("%Y%m") %>
+						<% number = month[1][0].objective %>
+					<% end %>
+
+				<% end %>
+
+				<% if index != @hits.count - 1 and @hits.count > 1 %>
+					<div class="table__row">
+						
+						<div class="table__cell"><%= record_date %></div>
+						<div class="table__cell"><%= number %></div>
+						<div class="table__cell"><%= record_hits %></div>
+						<div class="table__cell"><%= (number.to_f/record_hits.to_f)*100 %>%</div>
+					</div>
+	        	<% end %>
+
+		<% end %>
+</div>
 <script>
 	<% if @hits.count > 0 %>
-	google.charts.load('current', {'packages':['corechart']});
+	google.charts.load('current', {'packages':['line']});
 	google.charts.setOnLoadCallback(drawChart);
      function drawChart() {
         var data = google.visualization.arrayToDataTable([
-        	['Año y Mes', 'Vistas a Página'],
+        	['Fechas', 'Vistas a Página', 'Objetivos'],
 			<% @hits.each.with_index do |records, index| %>
-				<% if index != @hits.count - 1 and @hits.count > 1 %>['<%= I18n.t("date.month_names")[records[0][0]].humanize %>\n<%= records[0][1] %>',  <%= records[1].map { |h| h[:number] }.sum %>],
-	        	<% else %>['<%= I18n.t("date.month_names")[records[0][0]].humanize %>\n<%= records[0][1] %>',  <%= records[1].map { |h| h[:number] }.sum %>]
+				<% record_date = l(records[0][0], format: "S%W, %B %Y") %>
+				<% record_hits = records[1].map { |h| h[:number] }.sum %>
+				<% number = 0 %>
+
+				<% @hit_objectives.each_with_index do |month, index| %>
+					<% if month[0][0].strftime("%Y%m") == records[0][0].strftime("%Y%m") %>
+						<% number = month[1][0].objective %>
+					<% end %>
+
+				<% end %>
+
+				<% if index != @hits.count - 1 and @hits.count > 1 %>['<%= record_date %>', <%= record_hits %>, <%= number %>],
+	        	<% else %>['<%= record_date %>', <%= record_hits %>, <%= number %>]
 	        	<% end %>
 
 		<% end %>
@@ -64,9 +106,14 @@
 			legend: { position: 'bottom' }
 		};
 
-        var chart = new google.visualization.LineChart(document.getElementById('chart'));
+        var chart = new google.charts.Line(document.getElementById('chart'));
 
-        chart.draw(data, options);
+        chart.draw(data, google.charts.Line.convertOptions(options));
 	}
     <% end %>
 </script>
+
+
+
+
+

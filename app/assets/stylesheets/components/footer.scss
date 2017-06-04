@@ -12,6 +12,8 @@
 	flex-direction:  row; 
 	align-items:  flex-start; 
 	justify-content:  space-between; 
+	position:  relative; 
+	padding-bottom:  144px; 
 }
 .footer__column {
 	display:  flex; 
@@ -24,3 +26,14 @@
 		align-items:  flex-end; 
 	}
 }
+.disclaimer { 
+	max-width:  calc(100% - 36px); 
+	font-size:  11.5px; 
+ 	color:  #ffffff; 
+ 	opacity:  .33; 
+ 	position:  absolute;
+ 	bottom:  18px; 
+ 	left:  50%; 
+ 	text-align:  center;
+ 	transform:  translateX(-50%);
+} 	

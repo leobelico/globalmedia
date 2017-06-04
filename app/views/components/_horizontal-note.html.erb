@@ -1,4 +1,5 @@
 <div class="horizontal-article">
+	
 	<%= image_tag article.image, class: "article__image" %>
 	<div class="article__information">
 		<%= link_to article, class: "wrapper-link" do %>
@@ -9,7 +10,9 @@
 				<span class="author">Por <%= article.author.name %></p>
 
 			<% else %>
-				<span class="author">Por <%= article.user.full_name %></p>
+				<% if article.user %>
+					<span class="author">Por <%= article.user.full_name %></p>
+				<% end %>
 			<% end %>
 
 

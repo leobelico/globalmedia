@@ -3,7 +3,7 @@
 	    <input type="hidden" name="<%= name %>" value="<%= value %>" />
 	<% end %>
 </form>
-<%= form_for [:panel, @station, @podcast], html: { class: "card admin-form directUpload", remote: true, data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }} do |f| %>
+<%= form_for [:panel, @station, @podcast], multipart: true, authenticity_token: true, html: { class: "card admin-form directUpload", remote: true, data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }} do |f| %>
 	<% if @podcast.errors.any? %>	
 		<h5 class="small-title"><%= pluralize(@podcast.errors.count, "errores") %></h5>
 			<ul class="errors">

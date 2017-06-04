@@ -5,6 +5,12 @@
 		margin-bottom:  18px; 
 	}
 }
+.article--old {
+	p {
+		margin-bottom:  8px; 
+		line-height:  175%; 
+	}
+}
 .exclusive--note {
 	width:  100%; 
 	padding:  12px; 
@@ -30,6 +36,9 @@
 	}
 	.section {
 		font-weight:  900; 
+	}
+	.social-media {
+		margin-left:  auto; 
 	}
 }
 .author {
@@ -78,8 +87,45 @@
 	.ql-editor {
 		padding:  0; 
 	}
+	.instagram {
+		// width:  100%;  
+		// max-width:  500px; 
+		// height:  600px;   
+		width:  auto; 
+		height:  auto; 
+		margin-top:  8px; 
+		margin-bottom:  8px; 
+		display:  flex; 
+		flex-direction:  column; 
+		align-items:  center; 
+		justify-content:  center; 
+		position:  relative; 
+		iframe {
+			border:  none;
+			display:  block;  
+			width:  400px; 
+			height:  600px; 
+
+			// width:  100%; 
+			// height:  auto; 
+			// min-height:  600px;  
+			// margin:  auto; 
+			.Embed {
+				margin:  auto; 
+				height:  auto; 
+			}
+		}
+	}
+}
+.ql-instagram {
+	background-image: image-url("quill/instagram.svg") !important;
+	background-size:  70% 70% !important; 
+	background-position:  center center !important; 
+
+	background-repeat:  no-repeat !important;
 }
 .ql-editor {
+
 	.tweet, 
 	.embed-content {
 		width:  100%; 
@@ -91,11 +137,27 @@
 			margin-right:  auto !important; 
 		}
 	}
+	.instagram {
+		width:  auto; 
+		height:  auto; 
+		margin-top:  8px; 
+		margin-bottom:  8px; 
+		display:  flex; 
+		flex-direction:  column; 
+		align-items:  center; 
+		iframe {
+			border:  none; 
+			width:  100%;
+			height:  100%; 
+			// max-width:  100%; 
+
+		}
+	}
 	p {
 		font-size:  18px; 
 		line-height:  28px; 
 		font-weight:  400; 
-		font-family:  "Open Sans", sans-serif; 
+		font-family:  "Merriweather", sans-serif; 
 	}
 	strong {
 		font-weight:  700; 

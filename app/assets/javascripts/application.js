@@ -23,16 +23,19 @@
 //= require libraries/videojs/video.min
 //= require libraries/videojs/hls
 //= require components/media-cache-cleaner
+//= require components/buttons
 // 
 // 
 // QUILL BLOTS
 // 
 //= require libraries/quill/blots/Tweet 
 //= require libraries/quill/blots/EmbedContent 
-// require libraries/quill/blots/Instagram 
+//= require libraries/quill/blots/Instagram 
 // 
 // 
+//  QUILL FUNCTIONS
 // 
+//= require libraries/quill/functions/createInstagramEmbed 
 // 
 //  COMPONENTS 
 // 
@@ -47,17 +50,22 @@
 //= require components/copy-to-clipboard
 //= require components/mobile-menu
 
+$(document).on("click", function(event){
+	if ($(event.target).is("[data-link]")){
+		window.location.href = $(event.target).data("link");
+	}
+}); 
 
 function add_fields(link, association, content) { 
 //
     var new_id = new Date().getTime();  
     var regexp = new RegExp("new_" + association, "g");  
     $(link).parent().append(content.replace(regexp, new_id));
-    TweenMax.to(".field-builder", 1.2, {maxHeight: 200})
+    TweenMax.to(".field-builder", 1.2, {maxHeight: 200, overflow:  "hidden"})
 }
 
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val("1");
   $(link).closest(".field-builder").hide();
-  TweenMax.to($(link).parent(), .6, { height:  0});
+  TweenMax.to($(link).parent(), .6, { height:  0, overflow:  "hidden", marginBottom:  0});
 }

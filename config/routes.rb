@@ -18,12 +18,12 @@ Rails.application.routes.draw do
   resources :stations do 
     get "articles", to: "stations#articles"
   end
+
   resources :cameras
   
   get "collaborators", to: "relationships#collaborators"
   get "about_us", to: "titlepage#about_us"
 
-  
   get "panel", to: "panel/panel#panel"
 
   authenticated :user do 
@@ -47,19 +47,45 @@ Rails.application.routes.draw do
     patch "update_multiple_keywords", to: "keywords#update_multiple"
     post "update_multiple_keywords", to: "keywords#update_multiple"
 
+    get "hit_objectives/new_author_objectives", to: "hit_objectives#new_author_objectives"
+    post "hit_objectives/new_author_objectives", to: "hit_objectives#new_author_objectives"
+
+    get "hit_objectives/new_user_objectives", to: "hit_objectives#new_user_objectives"
+    post "hit_objectives/new_user_objectives", to: "hit_objectives#new_user_objectives"
+
     get "edit_multiple_hit_objectives", to: "hit_objectives#edit_multiple"
+    get "edit_multiple_author_objectives", to: "hit_objectives#edit_author_objectives"
+    get "edit_user_objectives", to: "hit_objectives#edit_user_objectives"
+
+
     #post "edit_multiple_hit_objectives", to: "hit_objectives#edit_multiple"
     get "update_multiple_hit_objectives", to: "hit_objectives#update_multiple"
     patch "update_multiple_hit_objectives", to: "hit_objectives#update_multiple"
     post "update_multiple_hit_objectives", to: "hit_objectives#update_multiple"
+
+    get "author_update_multiple_hit_objectives", to: "hit_objectives#author_update_multiple"
+    patch "author_update_multiple_hit_objectives", to: "hit_objectives#author_update_multiple"
+    post "author_update_multiple_hit_objectives", to: "hit_objectives#author_update_multiple"
+
+    get "user_update_multiple_hit_objectives", to: "hit_objectives#user_update_multiple"
+    patch "user_update_multiple_hit_objectives", to: "hit_objectives#user_update_multiple"
+    post "user_update_multiple_hit_objectives", to: "hit_objectives#user_update_multiple"
+
+
+
+
     resources :highlights, param: :slug
 
     resources :articles, param: :slug do 
       post :publish_now
       get :publish_now
       get :autocomplete_article_name, on: :collection
-    
+      get :gallery_images
+      post :gallery_images
+      post :set_highlight_from_id
+      post :set_recommendation_from_id
     end
+    post "set_highlight_from_id", to: "articles#set_highlight_from_id"
     resources :stations, param: :slug do 
       resources :timetables 
       resources :podcasts 
@@ -69,6 +95,7 @@ Rails.application.routes.draw do
       get :select_highlights
       post :select_highlights
       post :set_highlight
+      
 
       get :select_global_recommendations
       post :select_global_recommendations
@@ -79,6 +106,10 @@ Rails.application.routes.draw do
     resources :hits do 
       get :graph, on: :collection
       post :graph, on: :collection
+      get :author_graph, on: :collection
+      post :author_graph, on: :collection
+      get :user_graph, on: :collection
+      post :user_graph, on: :collection
     end
     resources :banners
     resources :relationships, param: :slug 
@@ -153,6 +184,7 @@ Rails.application.routes.draw do
           get "search"
         end
       end
+      resources :podcasts, only: [:index]
       resources :stations, only: [:index, :show]
       resources :cameras, only: [:index]
       # , to: "api/v1/articles#most_visited"
@@ -172,7 +204,14 @@ Rails.application.routes.draw do
   end
   
 
+  get 'set_slug', to: "titlepage#set_slug"
+  post 'set_slug', to: "titlepage#set_slug"
 
+  get 'set_image', to: "titlepage#set_image"
+  post 'set_image', to: "titlepage#set_image"
+
+  get 'publish_highlights', to: "titlepage#publish_highlights"
+  get '/:id', to: 'stations#show'    
 
   
 

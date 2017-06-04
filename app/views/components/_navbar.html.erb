@@ -7,17 +7,17 @@
 		<div class="dropdown__options">
 			<p class="dropdown__section">Radio</p>
 			<% get_radio_stations.each do |radio| %>
-				<%= link_to radio.name, radio, class: "dropdown__link" %>
+				<%= link_to radio.name, ("/" + radio.slug), class: "dropdown__link" %>
 				<div class="dropdown__underline"></div>
 			<% end %>	
 			<p class="dropdown__section">T.V.</p>
 			<% get_video_stations.each do |video| %>
-				<%= link_to video.name, video, class: "dropdown__link" %>
+				<%= link_to video.name, ("/" + video.slug), class: "dropdown__link" %>
 				<div class="dropdown__underline"></div>
 			<% end %>
 			<p class="dropdown__section">Noticieros</p>
 			<% get_news_stations.each do |news| %>
-				<%= link_to news.name, news, class: "dropdown__link" %>
+				<%= link_to news.name, ("/" + news.slug), class: "dropdown__link" %>
 				<div class="dropdown__underline"></div>
 			<% end %>
 		</div>

@@ -42,7 +42,10 @@ class StationsController < ApplicationController
 	end
 
 	def articles 
-		@articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Station' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Station'").order(created_at: "DESC").paginate(page: params[:page], per_page: 10)
+		# @articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Station' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Station'").order(created_at: "DESC").paginate(page: params[:page], per_page: 10)
+		@relationships = @station.article_relationships.paginate(page: params[:page], per_page: 12)
+		p "-------------------"
+		# p @articles
 		# @articles = []
 		# @station.article_relationships.each do |relationship| 
 		# 	@articles << relationship.article

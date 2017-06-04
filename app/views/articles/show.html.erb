@@ -1,12 +1,52 @@
 <div class="gallery">
-	<div class="gallery__image"></div>
+	<div class="gallery__image">
+		<img src="">
+	</div>
 	<div class="gallery__controls">
-		<div class="next"></div>
 		<div class="previous"></div>
+
+		<div class="next"></div>
 	</div>
 </div>
+<script>
+	$(document).on("click", function(event) {
+		if( $(event.target).is(".gallery__thumbnail") ) {
+			TweenMax.set(".gallery", { display:  "flex" }); 
+			TweenMax.to(".gallery", .6, { opacity: 1, pointerEvents: "all" });
+			$(".gallery__image img").attr("src", $(event.target).attr("src"));
+			current_image = $(event.target).data("image");
+			console.log(current_image); 
+		}	
+		if($(event.target).is(".gallery__image") && !($(event.target).is(".gallery__image img") || $(event.target).is(".gallery__controls") || $(event.target).is(".gallery__controls *"))) {
+			TweenMax.to(".gallery", .6, { opacity: 0, pointerEvents: "none", onComplete: function(){
+				TweenMax.set(".gallery", { display:  "none" }); 
+			} });
+		}
+		if( $(event.target).is(".gallery__controls .next") ) {		
+			console.log($(".gallery__thumbnail").length); 
+			console.log(current_image); 
+			if ($(".gallery__thumbnail").length > current_image) {
+				$(".gallery__image img").attr("src", $(".gallery__thumbnail").eq(current_image + 1).attr("src")); 				
+				current_image++;
+			} else {
+				$(".gallery__image img").attr("src", $(".gallery__thumbnail").eq(0).attr("src"));
+				current_image = 0; 
+			}
+		}
+		if( $(event.target).is(".gallery__controls .previous") ) {		
+			console.log($(".gallery__thumbnail").length); 
+			console.log(current_image); 
+			if (0 < current_image) {
+				$(".gallery__image img").attr("src", $(".gallery__thumbnail").eq(current_image - 1).attr("src")); 				
+				current_image--;
+			} else {
+				$(".gallery__image img").attr("src", $(".gallery__thumbnail").eq($(".gallery__thumbnail").length).attr("src"));
+				current_image = $(".gallery__thumbnail").length; 
+			}
+		}
+	}); 
+</script>
 <div class="interface--row">
-
 	<div class="note note--display">
 		<% if @article.exclusive? %>
 			<p class="exclusive--note">Exclusiva</p>
@@ -18,14 +58,19 @@
 				<p class="author">Por <%= @article.author.name %></p>
 
 			<% else %>
-				<p class="author">Por <%= @article.user.full_name %></p>
+				<% if @article.user %>
+					<p class="author">Por <%= @article.user.full_name %></p>
+				<% else %>
+					<p class="author">--</p>
+				<% end %>
 			<% end %>
-			<p class="date"><%= @article.created_at.strftime("%m:%M %p %A %e %B, %Y") %></p>
+			<p class="date"><%= l(@article.created_at, format: "%H:%M %A %e %B, %Y") %></p>
 			<% if @article.articable_type == "Section" %>
 				<%= link_to @article.section, section_path(Section.find_by_name(@article.section)), class: "section" %>
 			<% end %>
+			<%= render "components/social-media-links", article: @article %>
+			
 		</div>
-		<%= render "components/social-media-links", article: @article %>
 		<% if @article.keyword %>
 			<div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
 		<% end %>
@@ -42,22 +87,34 @@
 				<%= image_tag @article.image, class: "main-image" %>
 			<% end %>
 		<% end %>
-
-		<div id="quill-container" class="quill--article">	
-		</div>
-
+		<% if !@article.note.empty? %>
+			<div id="quill-container" class="quill--article">
+			</div>
+		<% elsif @article.note_old != nil and @article.note.empty? %>
+			<div class="quill--article article--old">
+			</div>
+			<script>
+				$(".quill--article").html("<%= @article.note_old %>"); 
+			</script>
+		<% end %>
+		<% if @article.images.count > 0  %>
+			<div class="gallery__thumbnails">
+				<% @article.images.each_with_index do |image, index| %>
+					<%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
+				<% end %>	
+			</div>
+		<% end %>
 		<!-- NOTAS DEL PROGRAMADOR-->
 			<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
 
 			<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
 		<!-- -->
-		
 
-		<% if get_banner(@article.articable, @article.articable_type, "Grande" ) %>
+		<% if get_banner(@article.articable, @article.articable_type, "Grande" ).count > 0 %>
 
 			<%= render "components/big-banner", article: @article, banner: get_banner(@article.articable, @article.articable_type, "Grande" )  %>
 		<% else %>
-			<% if get_banner(@article.articable, "Global", "Grande" ) %>
+			<% if get_banner(@article.articable, "Global", "Grande" ).count > 0 %>
 				<%= render "components/big-banner", article: @article, banner: get_banner(@article.articable, "Global", "Grande" ) %>
 			<% else %>
 				<%= render "components/big-banner", article: @article, banner: "" %>
@@ -69,10 +126,10 @@
 
 	</div>
 
-	<% if get_banner(@article.articable, @article.articable_type, "Mediano" ) %>
+	<% if get_banner(@article.articable, @article.articable_type, "Mediano" ).count > 0 %>
 		<%= render "components/sidebar", article: @article, banner: get_banner(@article.articable, @article.articable_type, "Mediano" ) %>
 	<% else %>
-		<% if get_banner(@article.articable, "Global", "Mediano" ) %>
+		<% if get_banner(@article.articable, "Global", "Mediano" ).count > 0 %>
 			<%= render "components/sidebar", article: @article, banner: get_banner(@article.articable, "Global", "Mediano" ) %>
 		<% else %>
 			<%= render "components/sidebar", article: @article, banner: ""  %>
@@ -86,22 +143,24 @@
 	<p class="related-articles"><strong class="related-articles__title">Artículos relacionados:</strong><br><% related_by_hashtags(@article).each do |article| %><br><%= link_to truncate(article.name, length:  80), article, class: "related-article" %><% end %></p>
 </template>
 
-
+<script async defer src="https://platform.instagram.com/en_US/embeds.js"></script>
 
 <script>
-	var content = <%= raw(@article.note) %>;
-	var container = document.getElementById("quill-container")
-	display_quill_note(content, container);
+	<% if @article.note %>
+		var content = <%= raw(@article.note) %>;
+		var container = document.getElementById("quill-container")
+		display_quill_note(content, container);
 
-	<% if related_by_hashtags(@article).count > 0 %>
-		var numberOfParagraphs = $("#quill-container p").length; 
+		<% if related_by_hashtags(@article).count > 0 %>
+			var numberOfParagraphs = $("#quill-container p").length; 
 
-		var middle = parseInt(Math.ceil(numberOfParagraphs/2)); 
-		var relatedArticles = document.querySelector("#related-articles");
-		var clone = document.importNode(relatedArticles.content, true); 
+			var middle = parseInt(Math.ceil(numberOfParagraphs/2)); 
+			var relatedArticles = document.querySelector("#related-articles");
+			var clone = document.importNode(relatedArticles.content, true); 
 
-		$("#quill-container p:nth-of-type("+middle+")").after(clone);
-		// $("#quill-container > p:nth-of-type("+middle+")");
+			$("#quill-container p:nth-of-type("+middle+")").after(clone);
+			// $("#quill-container > p:nth-of-type("+middle+")");
+		<% end %>
 	<% end %>
 
 
