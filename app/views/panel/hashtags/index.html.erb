@@ -1,41 +1,40 @@
 <div class="panel__header">
 	<h2 class="title panel__title"><span class="current">Palabras #EsNoticia</span></h2>
 	<div class="panel__actions">
-		<%= link_to "Escoger hashtags", panel_selecting_hashtags_path, class: "button" %>
+		<%= link_to "Buscar hashtags", panel_selecting_hashtags_path, class: "button" %>
 	</div>
 </div>
 <div class="table card">
 	<div class="table__row">
 		<div class="table__cell">Nombre:</div>
-		<div class="table__cell boolean">Activo:</div>
+		<div class="table__cell">Activo:</div>
 		<div class="table__cell">Fecha:</div>
 	</div>
 	<% @hashtags.each do |hashtag| %>
 	<div class="table__row">
 		<p class="table__cell"><%= hashtag.name %></p>
-		<p class="table__cell boolean">	
-			<% if hashtag.selected %>
-				<div class="table__cell">
-					<div class="toggle toggle--active set-hashtag"  data-id="<%= hashtag.id %>" data-hashtag="<%= hashtag.name %>">
-						<div class="toggle__button"></div>
-						<div class="toggle__indicator"></div>
-						<div class="toggle__background"></div>
-					</div>
+		<% if hashtag.selected %>
+			<div class="table__cell">
+				<div class="toggle toggle--active switch-hashtag"  data-id="<%= hashtag.id %>" data-hashtag="<%= hashtag.name %>">
+					<div class="toggle__button"></div>
+					<div class="toggle__indicator"></div>
+					<div class="toggle__background"></div>
 				</div>
-			<% else %>
-				<div class="table__cell">
-					<div class="toggle toggle--inactive set-hashtag"  data-id="<%= hashtag.id %>" data-hashtag="<%= hashtag.name %>">
-						<div class="toggle__button"></div>
-						<div class="toggle__indicator"></div>
-						<div class="toggle__background"></div>
-					</div>
+			</div>
+		<% else %>
+			<div class="table__cell">
+				<div class="toggle toggle--inactive switch-hashtag"  data-id="<%= hashtag.id %>" data-hashtag="<%= hashtag.name %>">
+					<div class="toggle__button"></div>
+					<div class="toggle__indicator"></div>
+					<div class="toggle__background"></div>
 				</div>
-			<% end %>
-		</p>
+			</div>
+		<% end %>
 		<p class="table__cell"><%= hashtag.selected_on %></p>
 	</div>
 	<% end %>
 </div>
+<%= will_paginate @hashtags, class: "card admin-pagination" %>
 	
 <script>
 	TweenMax.to(".toggle.toggle--active .toggle__button", .3, { x: 25, ease: Power2.easeOut });

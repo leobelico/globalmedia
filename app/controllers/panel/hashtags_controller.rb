@@ -5,12 +5,26 @@ class Panel::HashtagsController < ApplicationController
 	autocomplete :hashtag, :name, full: true
 	
 	def index
-		@hashtags = Hashtag.order(updated_at: "DESC")
+		@hashtags = Hashtag.order(updated_at: "DESC").paginate(page: params[:page], per_page: 200)
 	end
 	def selecting_hashtags
 		@hashtags = Hashtag.where(selected: true).order(updated_at: "DESC").last(4)
 	end
+	def switch_hashtag 
+		hashtag = Hashtag.find(params[:id])
 
+		if hashtag.selected
+			hashtag.update_attributes(selected: false)
+		else
+			if Hashtag.where(selected: true).count > 3
+				oldest_hashtag = Hashtag.where(selected: true).order(selected_on: "DESC").last
+				oldest_hashtag.update_attributes(selected: false)
+			end
+
+			hashtag.update_attributes(selected: true, selected_on: Time.now)
+		end
+		render json: { hashtag: hashtag }, status: :ok
+	end
 	def set_selected
 		Hashtag.all.update_all(selected: false)
 

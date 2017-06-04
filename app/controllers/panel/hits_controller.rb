@@ -38,7 +38,7 @@ class Panel::HitsController < ApplicationController
 		if params.count >= 3
 			initial_date = Date.new params[:hit]["initial_date(1i)"].to_i, params[:hit]["initial_date(2i)"].to_i, params[:hit]["initial_date(3i)"].to_i
 			end_date	 = Date.new params[:hit]["end_date(1i)"].to_i, params[:hit]["end_date(2i)"].to_i, params[:hit]["end_date(3i)"].to_i
-			author_id	= params[:hit][:author_id]
+			user_id	= params[:hit][:user_id]
 			@hits = Hit.search_by_user(initial_date, end_date, params[:hit][:user_id])
 			@hit_objectives = HitObjective.where("created_at >= '#{initial_date.beginning_of_day}' AND created_at <= '#{end_date.end_of_day}' AND user_id = '#{user_id}'").group_by { |l| [l.created_at.beginning_of_week, l.created_at.month, l.created_at.year] }
     	else

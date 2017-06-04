@@ -117,8 +117,10 @@ Rails.application.routes.draw do
     resources :controls
     resources :hashtags, only: :index do
       get :autocomplete_hashtag_name, on: :collection
-
+      get :switch_hashtag, on: :collection
+      post :switch_hashtag, on: :collection
     end
+
 
 
     get "new_collaborator", to: "relationships#new_collaborator"

@@ -5,13 +5,11 @@
 		<% if @hit_objectives.count > 0 %>	
 			<%= link_to "Objetivos de Sección",  panel_edit_multiple_hit_objectives_path, class: "button" %>
 		<% end %>
-
-
 		<% if @hit_objectives.count > 0 and (Time.now.strftime("%B") != @hit_objectives.last.created_at.strftime("%B")) %> 
 			<%= link_to "Objetivos de Sección", new_panel_hit_objective_path, class: "button" %>	
 		<% end %>
 		<% if @hit_objectives.count == 0 %>
-			<%= link_to "Objetivos de Sección", new_panel_hit_objective_path, class: "button" %>	
+			<%= link_to "Nuevos Objetivos de Sección", new_panel_hit_objective_path, class: "button" %>	
 		<% end %>
 
 		<% if @author_hit_objectives.count > 0 %>	
@@ -19,7 +17,7 @@
 		<% end %>
 
 		<% if @author_hit_objectives.count > 0 and (Time.now.strftime("%B") != @author_hit_objectives.last.created_at.strftime("%B")) %> 
-			<%= link_to "Objetivos de Autores", panel_hit_objectives_new_author_objectives_path, class: "button" %>	
+			<%= link_to "Nuevos Objetivos de Autores", panel_hit_objectives_new_author_objectives_path, class: "button" %>	
 		<% end %>
 		<% if @author_hit_objectives.count == 0 %>
 			<%= link_to "Objetivos de Autores", panel_hit_objectives_new_author_objectives_path, class: "button" %>	
@@ -30,7 +28,7 @@
 		<% end %>
 
 		<% if @user_hit_objectives.count > 0 and (Time.now.strftime("%B") != @user_hit_objectives.last.created_at.strftime("%B")) %> 
-			<%= link_to "Objetivos de Usuarios", panel_hit_objectives_new_user_objectives_path, class: "button" %>	
+			<%= link_to "Nuevos Objetivos de Usuarios", panel_hit_objectives_new_user_objectives_path, class: "button" %>	
 		<% end %>
 		<% if @user_hit_objectives.count == 0 %>
 			<%= link_to "Objetivos de Usuarios", panel_hit_objectives_new_user_objectives_path, class: "button" %>	
