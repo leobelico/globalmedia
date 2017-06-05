@@ -50,11 +50,30 @@ Rails.application.routes.draw do
     get "hit_objectives/new_author_objectives", to: "hit_objectives#new_author_objectives"
     post "hit_objectives/new_author_objectives", to: "hit_objectives#new_author_objectives"
 
+    get "hit_objectives/new_user_objectives", to: "hit_objectives#new_user_objectives"
+    post "hit_objectives/new_user_objectives", to: "hit_objectives#new_user_objectives"
+
     get "edit_multiple_hit_objectives", to: "hit_objectives#edit_multiple"
+    get "edit_multiple_author_objectives", to: "hit_objectives#edit_author_objectives"
+    get "edit_user_objectives", to: "hit_objectives#edit_user_objectives"
+
+
     #post "edit_multiple_hit_objectives", to: "hit_objectives#edit_multiple"
     get "update_multiple_hit_objectives", to: "hit_objectives#update_multiple"
     patch "update_multiple_hit_objectives", to: "hit_objectives#update_multiple"
     post "update_multiple_hit_objectives", to: "hit_objectives#update_multiple"
+
+    get "author_update_multiple_hit_objectives", to: "hit_objectives#author_update_multiple"
+    patch "author_update_multiple_hit_objectives", to: "hit_objectives#author_update_multiple"
+    post "author_update_multiple_hit_objectives", to: "hit_objectives#author_update_multiple"
+
+    get "user_update_multiple_hit_objectives", to: "hit_objectives#user_update_multiple"
+    patch "user_update_multiple_hit_objectives", to: "hit_objectives#user_update_multiple"
+    post "user_update_multiple_hit_objectives", to: "hit_objectives#user_update_multiple"
+
+
+
+
     resources :highlights, param: :slug
 
     resources :articles, param: :slug do 
@@ -89,6 +108,8 @@ Rails.application.routes.draw do
       post :graph, on: :collection
       get :author_graph, on: :collection
       post :author_graph, on: :collection
+      get :user_graph, on: :collection
+      post :user_graph, on: :collection
     end
     resources :banners
     resources :relationships, param: :slug 
@@ -96,8 +117,10 @@ Rails.application.routes.draw do
     resources :controls
     resources :hashtags, only: :index do
       get :autocomplete_hashtag_name, on: :collection
-
+      get :switch_hashtag, on: :collection
+      post :switch_hashtag, on: :collection
     end
+
 
 
     get "new_collaborator", to: "relationships#new_collaborator"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170603182102) do
+ActiveRecord::Schema.define(version: 20170603233413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,8 +48,6 @@ ActiveRecord::Schema.define(version: 20170603182102) do
     t.string   "video_url",                 default: ""
     t.integer  "author_id"
     t.boolean  "exclusive",                 default: false
-    t.text     "note_old"
-    t.integer  "old_id"
     t.text     "_extra_props"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
     t.index ["author_id"], name: "index_articles_on_author_id", using: :btree
@@ -138,8 +136,10 @@ ActiveRecord::Schema.define(version: 20170603182102) do
     t.datetime "updated_at",             null: false
     t.integer  "section_id"
     t.integer  "author_id"
+    t.integer  "user_id"
     t.index ["author_id"], name: "index_hit_objectives_on_author_id", using: :btree
     t.index ["section_id"], name: "index_hit_objectives_on_section_id", using: :btree
+    t.index ["user_id"], name: "index_hit_objectives_on_user_id", using: :btree
   end
 
   create_table "hits", force: :cascade do |t|
@@ -155,7 +155,6 @@ ActiveRecord::Schema.define(version: 20170603182102) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "article_id"
-    t.integer  "old_id"
     t.text     "_extra_props"
     t.index ["article_id"], name: "index_images_on_article_id", using: :btree
   end
@@ -212,9 +211,8 @@ ActiveRecord::Schema.define(version: 20170603182102) do
     t.string   "slug"
     t.string   "color",        default: "#1b2d41"
     t.integer  "order"
-    t.integer  "old_id"
-    t.boolean  "visible",      default: false
     t.text     "_extra_props"
+    t.boolean  "visible",      default: false
   end
 
   create_table "stations", force: :cascade do |t|
@@ -299,6 +297,7 @@ ActiveRecord::Schema.define(version: 20170603182102) do
   add_foreign_key "highlights", "articles"
   add_foreign_key "hit_objectives", "authors"
   add_foreign_key "hit_objectives", "sections"
+  add_foreign_key "hit_objectives", "users"
   add_foreign_key "hits", "articles"
   add_foreign_key "images", "articles"
   add_foreign_key "podcasts", "stations"

@@ -1,0 +1,126 @@
+<div class="panel__header">
+	<h4 class="panel__title">Vistas a Página</h4>
+	<div class="panel__actions">
+		<%= link_to "Ir a Objetivos", panel_hit_objectives_path, class: "button" %>
+		<%= link_to "Gráficas por Sección", graph_panel_hits_path, class: "button" %>
+		<%= link_to "Gráficas por Autor", author_graph_panel_hits_path, class: "button" %>
+		<%= link_to "Gráficas por Usuario", user_graph_panel_hits_path, class: "button" %>
+	</div>	
+</div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div class="table card graphs">
+	<%= form_for(:hit, url: user_graph_panel_hits_path, html: { class: "admin-form"}) do |f| %>		
+		<div class="field field--section">
+			
+			<label for="">Sección:</label>
+			<%= f.select "user_id", options_from_collection_for_select(User.all, "id", "full_name") %>
+		</div> 		
+	<div class="multifield">
+		<div class="field field--datetime">
+			<label for="">Fecha de inicio:</label>
+			<div class="field">
+				<%= f.date_select(:initial_date, options: { start_year: 2015 })%>
+			</div>
+		</div>
+		<div class="field field--datetime">
+			<label for="">Fecha de fin:</label>
+			<div class="field">
+				<%= f.date_select(:end_date, options: { start_year: 2015 })%>
+			</div>
+		</div>
+
+	</div>
+		<div class="field">
+			<%= f.submit "Consultar gráfica", class: "button" %>
+		</div>
+	<% end %>
+</div>
+<% if @hits.count > 0 %>
+	<div class="table card graphs">
+		<% if @hits.count > 1 %>
+			<h4 class="title"><%= @hits.first[1][1].article.user.full_name %></h4>
+		<% end %>
+		<div id="chart"></div>
+
+	</div>
+<% end %>
+
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Semana del Año y Mes:</p>
+		<p class="table__cell">Hits:</p>
+		<p class="table__cell">Objetivo:</p>
+		<p class="table__cell">Cumplimiento:</p>
+	</div>
+	<% @hits.each.with_index do |records, index| %>
+			<% record_date = l(records[0][0], format: "S%W, %B %Y") %>
+			<% record_hits = records[1].map { |h| h[:number] }.sum %>
+			<% number = 0 %>
+
+			<% @hit_objectives.each_with_index do |month, index| %>
+				<% if month[0][0].strftime("%Y%m") == records[0][0].strftime("%Y%m") %>
+					<% number = month[1][0].objective %>
+				<% end %>
+
+			<% end %>		
+			<% if index != @hits.count - 1 and @hits.count > 1 %>
+				<div class="table__row">
+					
+					<div class="table__cell"><%= record_date %></div>
+					<div class="table__cell"><%= record_hits %></div>
+					<% if number == 0 %>
+						<div class="table__cell">N/A</div>
+						<div class="table__cell">N/A</div>
+					<% else %>
+						<div class="table__cell"><%= number %></div>
+						<div class="table__cell"><%= (number.to_f/record_hits.to_f)*100 %>%</div>
+					<% end %>
+				</div>
+	    	<% end %>
+
+	<% end %>
+</div>
+<script>
+	<% if @hits.count > 0 %>
+	google.charts.load('current', {'packages':['line']});
+	google.charts.setOnLoadCallback(drawChart);
+     function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        	['Fechas', 'Vistas a Página', 'Objetivos'],
+			<% @hits.each.with_index do |records, index| %>
+				<% record_date = l(records[0][0], format: "S%W, %B %Y") %>
+				<% record_hits = records[1].map { |h| h[:number] }.sum %>
+				<% number = 0 %>
+
+				<% @hit_objectives.each_with_index do |month, index| %>
+					<% if month[0][0].strftime("%Y%m") == records[0][0].strftime("%Y%m") %>
+						<% number = month[1][0].objective %>
+					<% end %>
+
+				<% end %>
+
+				<% if index != @hits.count - 1 and @hits.count > 1 %>['<%= record_date %>', <%= record_hits %>, <%= number %>],
+	        	<% else %>['<%= record_date %>', <%= record_hits %>, <%= number %>]
+	        	<% end %>
+
+		<% end %>
+        ]);
+		var options = {
+			title: 'Sección <%= @hits.first[1][1].article.user.full_name %>',
+			// curveType: 'function',
+			legend: { position: 'bottom' }
+		};
+
+        var chart = new google.charts.Line(document.getElementById('chart'));
+
+        chart.draw(data, google.charts.Line.convertOptions(options));
+	}
+    <% end %>
+    
+</script>
+
+
+
+
+

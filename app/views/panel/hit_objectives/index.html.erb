@@ -3,26 +3,35 @@
 	<div class="panel__actions">
 
 		<% if @hit_objectives.count > 0 %>	
-			<%= link_to "Editar objetivos de Sección",  panel_edit_multiple_hit_objectives_path, class: "button" %>
+			<%= link_to "Objetivos de Sección",  panel_edit_multiple_hit_objectives_path, class: "button" %>
 		<% end %>
-
-
 		<% if @hit_objectives.count > 0 and (Time.now.strftime("%B") != @hit_objectives.last.created_at.strftime("%B")) %> 
 			<%= link_to "Objetivos de Sección", new_panel_hit_objective_path, class: "button" %>	
 		<% end %>
 		<% if @hit_objectives.count == 0 %>
-			<%= link_to "Objetivos de Sección", new_panel_hit_objective_path, class: "button" %>	
+			<%= link_to "Nuevos Objetivos de Sección", new_panel_hit_objective_path, class: "button" %>	
 		<% end %>
 
 		<% if @author_hit_objectives.count > 0 %>	
-			<%= link_to "Editar objetivos de Sección",  panel_hit_objectives_edit_author_objectives_path, class: "button" %>
+			<%= link_to "Objetivos de Autor",  panel_edit_multiple_author_objectives_path, class: "button" %>
 		<% end %>
 
 		<% if @author_hit_objectives.count > 0 and (Time.now.strftime("%B") != @author_hit_objectives.last.created_at.strftime("%B")) %> 
-			<%= link_to "Objetivos de Autor", panel_hit_objectives_new_author_objectives_path, class: "button" %>	
+			<%= link_to "Nuevos Objetivos de Autores", panel_hit_objectives_new_author_objectives_path, class: "button" %>	
 		<% end %>
 		<% if @author_hit_objectives.count == 0 %>
-			<%= link_to "Objetivos de Autor", panel_hit_objectives_new_author_objectives_path, class: "button" %>	
+			<%= link_to "Objetivos de Autores", panel_hit_objectives_new_author_objectives_path, class: "button" %>	
+		<% end %>
+
+		<% if @user_hit_objectives.count > 0 %>	
+			<%= link_to "Objetivos de Usuarios",  panel_edit_user_objectives_path, class: "button" %>
+		<% end %>
+
+		<% if @user_hit_objectives.count > 0 and (Time.now.strftime("%B") != @user_hit_objectives.last.created_at.strftime("%B")) %> 
+			<%= link_to "Nuevos Objetivos de Usuarios", panel_hit_objectives_new_user_objectives_path, class: "button" %>	
+		<% end %>
+		<% if @user_hit_objectives.count == 0 %>
+			<%= link_to "Objetivos de Usuarios", panel_hit_objectives_new_user_objectives_path, class: "button" %>	
 		<% end %>
 	</div>
 </div>
@@ -64,6 +73,28 @@
 			<p class="table__cell"><%= objective.author.total_hits_in_current_month %></p>
 			<% percentage = 0.0 %>
 			<% percentage = objective.author.total_hits_in_current_month.to_f/objective.objective.to_f %>
+			<% percentage = percentage*100 %>
+			<% percentage = percentage.round(2) %>
+			<p class="table__cell"><%= percentage %>%</p>
+		</div>
+	<% end %>
+</div>
+
+<div class="table card">
+
+	<div class="table__row">
+		<p class="table__cell f-4">Usuario/Editor:</p>
+		<p class="table__cell">Objetivo del mes:</p>
+		<p class="table__cell">Vistas del mes:</p>
+		<p class="table__cell">Porcentaje:</p>
+	</div>
+	<% @user_hit_objectives.each do |objective| %>
+		<div class="table__row">
+			<p class="table__cell f-4"><%= objective.user.full_name %></p>
+			<p class="table__cell"><%= objective.objective %></p>
+			<p class="table__cell"><%= objective.user.total_hits_in_current_month %></p>
+			<% percentage = 0.0 %>
+			<% percentage = objective.user.total_hits_in_current_month.to_f/objective.objective.to_f %>
 			<% percentage = percentage*100 %>
 			<% percentage = percentage.round(2) %>
 			<p class="table__cell"><%= percentage %>%</p>

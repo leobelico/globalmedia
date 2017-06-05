@@ -71,6 +71,7 @@
 				</div>
 
 			</div>
+		<% if @station.playlist_1 != "" %>
 			<div class="radio-banner__tune-in">Playlists recomendadas para ti</div>
 			<div class="playlists">
 				<% if @station.playlist_1 != "" %>
@@ -94,6 +95,7 @@
 					</a>
 				<% end %>
 			</div>
+		<% end	%>
 			<div class="radio-banner__tune-in">Otros como tú están escuchando</div>
 			<div class="station__recommendations">
 				<% @recommendations.each do |recommendation| %>

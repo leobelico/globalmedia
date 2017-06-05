@@ -27,8 +27,27 @@ $(document).on("click touchstart", function(event){
 		console.log("set recommendation")
 		setRecommendation(event.target); 
 	}
+	if ($(event.target).is(".switch-hashtag")){
+		console.log("switch-hashtag")
+		switchHashtag(event.target); 
+	}
 });
-
+function switchHashtag(target) {
+	$.ajax({
+		url: '/panel/hashtags/switch_hashtag',
+		type: 'POST',
+		data: {id: $(target).data("id")},
+	})
+	.done(function() {
+		console.log("success");
+	})
+	.fail(function() {
+		console.log("error");
+	})
+	.always(function() {
+		console.log("complete");
+	});
+}
 function setHighlight(target) {
 	$.ajax({
 		url: '/panel/articles/'+$(target).data("slug")+'/set_highlight_from_id',
