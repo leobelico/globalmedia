@@ -10,13 +10,13 @@
 	// padding-right:  9px; 	
 	box-sizing:  border-box; 
 	position:  relative; 
-	border:  dotted 1px #000; 
+	border:  solid 1px #dbdbdb; 
 	// border-right:  dotted 1px #000; 
 	background-color:  #ffffff; 
 
 	transition:  all .3s ease; 
 		box-shadow: 0 3px 3px rgba(0,0,0,.15);
-	
+
 	&:hover {
 		transform:  translateY(-6px);
 	}
