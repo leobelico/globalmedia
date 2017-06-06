@@ -33,7 +33,6 @@
 	padding-bottom:  8px; 
 	border-top:  solid 1px #e0e0e0; 
 	border-bottom:  solid 1px #e0e0e0; 
-
 	.author, 
 	.date, 
 	.section {
@@ -46,11 +45,7 @@
 		margin-left:  auto; 
 	}
 }
-.author {
-	font-size:  13.5px; 
-	font-style:  italic; 
-	color:  #616161; 
-}
+
 .short-description {
 	color:  #000000; 
 	font-size:  14px; 
@@ -89,6 +84,7 @@
 }
 #quill-container {
 	width:  100%;
+	margin-bottom:  18px; 
 	.ql-editor {
 		padding:  0; 
 	}

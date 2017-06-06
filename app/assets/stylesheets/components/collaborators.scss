@@ -5,6 +5,10 @@
 	justify-content:  flex-start; 
 	width:  100%; 
 	margin-top:  12px; 
+	padding-top:  8px; 
+	padding-bottom:  8px; 
+	border-top:  dotted 1px $tertiary; 
+	border-bottom:  dotted 1px $tertiary; 
 }
 .collaborator__image {
 	height:  72px; 
@@ -18,16 +22,28 @@
 .collaborator__info {
 	display:  flex; 
 	flex-direction:  column; 
-	.note__title {
-		font-weight:  600; 
-		color:  #000000; 
+	.note__title { 
+		color:  #424242; 
 		font-size:  14px; 
+		order: 1; 
 	}
 	.note__author {
 		font-style:  italic; 
 		font-weight:  400;
-		font-size:  11.5px; 
-		color:  #424242; 
+		font-size:  21px; 
+		color:  #000000; 
 		margin-top:  4px;
+		order: -1;
+		margin-bottom:  8px;  
+	}
+}
+.special-articles--collaborators {
+	.special-articles__type {
+		.type {
+			color:  #000000; 
+		}	
+		.link {
+			background:  #000000; 
+		}
 	}
 }

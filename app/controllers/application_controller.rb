@@ -192,7 +192,7 @@ class ApplicationController < ActionController::Base
   end
 
   def latest_news
-    @articles = Article.where(published: true).last(6).reverse
+    @articles = Article.where(published: true).last(8).reverse
   end
   
   def get_section_highlight(id)

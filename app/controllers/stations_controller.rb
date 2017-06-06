@@ -7,7 +7,7 @@ class StationsController < ApplicationController
 		@news_channels = Station.where(news: true).order(frequency: "ASC")
 	end
 	def show
-		@recommendations = Station.where("id != '#{@station.id}'").last(7)
+		@recommendations = Station.where("id != '#{@station.id}' AND news = 'false'").last(7)
 	    time = Time.now
 	    if time.sunday? 
 	      @timetables = Timetable.where("(sunday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").first(5)
