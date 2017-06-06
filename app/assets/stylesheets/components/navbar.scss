@@ -1,7 +1,7 @@
 .navbar {
 	width:  100%; 
 	max-width:  $interface-width; 
-	background: $secondary; 
+	background: $tertiary; 
 	height:  40px; 
 	margin-left:  auto; 
 	margin-right:  auto; 
@@ -60,7 +60,7 @@
 	align-items:  flex-start; 
 	justify-content:  flex-start; 
 	flex-wrap:  wrap; 
-	background-color:  $secondary;  
+	background-color:  $tertiary;  
 	position:  relative; 
 	.navbar__link {
 		margin:  0px; 
@@ -71,7 +71,7 @@
 	position:  absolute; 
 	top:  40px; 
 	left:  0px; 
-	background-color:  $secondary; 
+	background-color:  $tertiary; 
 	width:  200px;  
 }
 .dropdown__link {

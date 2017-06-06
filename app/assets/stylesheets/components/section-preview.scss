@@ -47,6 +47,10 @@
 	box-sizing:  border-box; 
 	border:  dotted 1px #000000; 
 	background-color:  #ffffff; 
+	transition:  all .3s ease; 
+	&:hover {
+		transform:  translateY(-6px); 
+	}
 	.small-title {
 		margin-bottom:  8px; 
 		margin-top:  8px; 

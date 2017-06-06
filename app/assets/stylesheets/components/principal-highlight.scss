@@ -3,20 +3,27 @@
 	flex-direction:  row; 
 	align-items:  stretch; 
 	justify-content:  flex-start; 
-	width:  751px; 
+	width:  751px;
 	box-sizing:  border-box;  
 	margin-bottom:  16px; 
-	padding-bottom:  9px; 
-	padding-right:  9px; 	
+	padding:  9px; 
+	// padding-right:  9px; 	
 	box-sizing:  border-box; 
 	position:  relative; 
-	border-bottom:  dotted 1px #000; 
-	border-right:  dotted 1px #000; 
+	border:  dotted 1px #000; 
+	// border-right:  dotted 1px #000; 
 	background-color:  #ffffff; 
+
+	transition:  all .3s ease; 
+		box-shadow: 0 3px 3px rgba(0,0,0,.15);
+	
+	&:hover {
+		transform:  translateY(-6px);
+	}
 	.principal-highlight__info {
 		margin-left:  16px; 
 		.title {
-			font-size:  21px;
+			font-size:  30px;
 		}
 		.author {
 			display:  none; 
@@ -24,7 +31,7 @@
 	}
 }
 .principal-highlight__image {
-	width:  496px;
+	width:  478px;
 	margin-top:  0; 
 	margin-bottom:  0; 
 	flex-shrink: 0; 
