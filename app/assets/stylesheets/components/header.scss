@@ -22,6 +22,10 @@
 	max-height:  72px; 
 	height:  auto; 
 	overflow:  hidden; 
+	* {
+		font-family: 'Pragati Narrow', sans-serif;
+		letter-spacing:  2px; 
+	}
 }
 .header__container {
 	display:  flex; 
