@@ -36,8 +36,8 @@
 			<iframe src="<%= articles.first.video_url %>" frameborder="0" allowfullscreen width="100%" height="280px"></iframe>	
 		<% end %>
 	<% end %>
-	<%= link_to truncate(articles[0].name, length:  50), articles[0], class: "special-articles__article" %>
+	<%= link_to truncate(articles[0].name, length:  60), articles[0], class: "special-articles__article" %>
 	<% articles[1..-1].each do |article| %>
-		<%= link_to truncate(article.name, length: 50), article, class: "special-articles__article" %>
+		<%= link_to truncate(article.name, length: 60), article, class: "special-articles__article" %>
 	<% end %>
 </div>
