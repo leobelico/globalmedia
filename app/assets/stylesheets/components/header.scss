@@ -71,7 +71,15 @@
 .exchange-rate__name {
 	font-weight:  bold; 
 }
+.time {
+	color:  #ffffff; 
+	margin-top:  auto; 
+	margin-bottom:  auto; 
+}
 @media screen and (max-width:  1023px) {
+	time {
+		display:  none; 
+	}
 	.menu-trigger {
 		display:  flex;
 		flex-direction:  column; 
