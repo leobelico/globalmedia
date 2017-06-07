@@ -13,7 +13,7 @@
 			<% if @section.color %>
 				<div class="section__highlight" style="border-bottom:  solid 4px <%= @section.color %>">
 			<% else %>
-				<div class="section__highlight">
+				<div class="section__highlight ui-card">
 			<% end %>
 				<%= link_to @highlight, class: "image" do %>
 					<%= image_tag @highlight.image %>

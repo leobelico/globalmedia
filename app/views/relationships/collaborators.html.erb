@@ -3,7 +3,7 @@
 		<h4 class="section__title">Colaboradores</h4>
 		<div class="section-articles-container">
 			<% @collaborators.each do |collaborator| %>
-				<%= link_to collaborator, class: "station-preview" do %>
+				<%= link_to collaborator, class: "station-preview ui-card" do %>
 					<%= image_tag collaborator.image, class: "station-preview__image" %>
 					<h4 class="station-preview__name"><%= collaborator.name %></h4>
 				<% end %>

@@ -4,8 +4,8 @@
 			<p class="section__small-title">Investigación Especial</p>
 		<% end %>
 		<h1 class="section__title"><%= @relationship.name %></h1>
-		<div class="section-articles-container ">
-			<div class="relationship">
+		<div class="section-articles-container">
+			<div class="relationship ui-card">
 				<p class="relationship__description"><%= @relationship.description %></p>
 				<%= image_tag @relationship.image, class: "relationship__image" %>
 			</div>

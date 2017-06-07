@@ -21,7 +21,9 @@
 	transition:  all .3s ease; 
 	box-shadow: $box-shadow;
 	background-color:  #ffffff; 
-
+	iframe {
+		width:  100%; 
+	}
 	&:hover {
 		transform:  translateY(-6px);
 	}
