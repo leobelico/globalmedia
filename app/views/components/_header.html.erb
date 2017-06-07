@@ -26,6 +26,7 @@
 				    var yn = today.getFullYear();
 				    m = checkTime(m);
 				    dn = checkTime(dn);
+				    dmn = today.getDate();
 				    mn = checkTime(mn);
 				    yn = checkTime(yn);
 				    if (dn == 0) { day = "Lunes"; }
@@ -47,7 +48,7 @@
 				    if (mn == 9) { month = "Octubre" };
 				    if (mn == 10) { month = "Noviembre" };
 				    if (mn == 11) { month = "Diciembre" };
-				    time_string = h + ":" + m + " " + day + " de " + month + ", " + yn; 
+				    time_string = day + " " + dmn + " de " + month + ", " + yn + "<br>" + h + ":" + m + " horas "; 
 
 				    document.getElementById('time').innerHTML = time_string;
 				    var t = setTimeout(startTime, 500);
