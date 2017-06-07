@@ -149,7 +149,11 @@
 			<%= yield %>
 		</div>
 	<% else %>
-	 	<div class="interface">
+		<% if controller_name == "articles" and action_name == "show" %>
+		 	<div class="interface interface--white">
+		<% else %>
+		 	<div class="interface">
+		<% end %>
 			<% if !panel_url %>
 				<%= render "components/radio-banner" if !user_signed_in? || !panel_url %>
 				<%= render "components/its-news" if get_todays_keywords.count > 0  %>

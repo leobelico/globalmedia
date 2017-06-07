@@ -3,7 +3,7 @@
 	flex-direction:  row; 
 	align-items:  stretch;
 	justify-content:  space-between;
-	margin-bottom:  32px; 
+	margin-bottom:  18px; 
 	width:  100%; 
 }
 .special-articles {
@@ -12,6 +12,14 @@
 	align-items:  flex-start; 
 	justify-content:  flex-start; 
 	width:  496px; 
+	padding:  16px; 
+	box-sizing:  border-box; 
+	border:  solid 1px #dbdbdb; 
+
+	background-color:  #ffffff; 
+
+	box-shadow: $box-shadow;
+
 }
 .special-articles__type {
 	display:  flex; 
