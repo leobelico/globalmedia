@@ -124,13 +124,27 @@
 		<script>
 			var navflag = false; 
 			$(window).scroll(function() {
-				if ($(window).scrollTop() > 144 && navflag == false && $(window).width() > 1023) {
-					TweenMax.to(".header--wrapper", .3, { maxHeight: 0 })
-					navflag = true;
-				}
-				if ($(window).scrollTop() < 144 && navflag == true && $(window).width() > 1023) {
-					TweenMax.to(".header--wrapper", .3, { maxHeight: 72 })
-					navflag = false;
+				if ($(window).width() > 1023) {
+
+					if ($(window).scrollTop() > 144 && navflag == false) {
+						TweenMax.to(".header--wrapper", .3, { maxHeight: 0 })
+						navflag = true;
+					} 
+					if ($(window).scrollTop() < 144 && navflag == true) {
+						TweenMax.to(".header--wrapper", .3, { maxHeight: 72 })
+						navflag = false;
+					}
+				} 
+				if ($(window).width() < 1024) {
+					if ($(window).scrollTop() > 72 && navflag == false) {
+						var he = $(".header").height()-32;
+						TweenMax.to(".header", .3, { maxHeight: he });
+						navflag = true;
+					}
+					if ($(window).scrollTop() < 72 && navflag == true) {
+						TweenMax.to(".header", .3, { maxHeight: ($(".header").height()) });
+						navflag = false;
+					}
 				}
 			});
 		</script>

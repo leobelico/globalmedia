@@ -87,7 +87,7 @@ class Panel::BannersController < ApplicationController
 
 	private
 		def banner_params
-			params.require(:banner).permit(:large_image, :small_image, :size, :name, :client, :global, :titlepage, :url, :active)
+			params.require(:banner).permit(:large_image, :small_image, :size, :name, :client, :global, :titlepage, :url, :active, :expiry_date)
 		end
 
 		def set_banner

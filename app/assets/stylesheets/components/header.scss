@@ -78,7 +78,7 @@
 	text-align:  right; 
 }
 @media screen and (max-width:  1023px) {
-	time {
+	.time {
 		display:  none; 
 	}
 	.menu-trigger {
@@ -137,7 +137,7 @@
 		align-items:  flex-start; 
 		justify-content:  flex-start; 
 		padding:  8px; 
-		background-color:  $quaternary; 
+		background-color:  $tertiary; 
 		img {
 			display:  none; 
 		} 

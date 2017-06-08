@@ -30,7 +30,10 @@
 					<% if camera.cover %>
 						
 						<%= image_tag camera.cover, class: "camera__image" %>
+					<% else %>
+						<div class="camera__image"></div>
 					<% end %>
+					<p class="camera__name"><%= camera.name %></p>
 				<% end %>
 			<% end %>
 		</div>

@@ -26,11 +26,23 @@
 		<%= f.check_box :active %>
 	</div>
 	
+	<div class="field field--datetime">
+		<label>Fecha de expiración</label>
+		<div class="field">			
+			<%= f.datetime_select :expiry_date %>
+		</div>
+	</div>
+
+	<% if @banner.small_image %>
+		<%= image_tag @banner.large_image, class: "form-image-preview" %>
+	<% end %>
 	<div class="field field--string">
 		<label>Imagen para Escritorio</label>
 		<%= f.file_field :large_image %>
 	</div>
-	
+	<% if @banner.small_image %>
+		<%= image_tag @banner.small_image, class: "form-image-preview" %>
+	<% end %>
 	<div class="field field--string">
 		<label>Imagen para móviles</label>
 		<%= f.file_field :small_image %>
@@ -141,3 +153,26 @@
 	
 <% end %>
 <%= render "components/s3_form_js" %>
+<script>
+	$("input[type=file]").each(function(){
+		var $input = $(this);
+		$input.change(function(){
+		    var reader = new FileReader();
+		    $(reader).on("load", function(event){
+		    	$input.parents(".field").before('<img style="width:  100%; heigth:  auto;  margin-bottom:  8px; " src="' + event.target.result +'">')
+		    });
+			reader.readAsDataURL(this.files[0]);
+		});
+	});  
+	// document.getElementById("files").onchange = function () {
+ //    var reader = new FileReader();
+
+	//     reader.onload = function (e) {
+	//         // get loaded data and render thumbnail.
+	//         document.getElementById("image").src = e.target.result;
+	//     };
+
+	//     // read the image file as a data URL.
+	//     reader.readAsDataURL(this.files[0]);
+	// };
+</script>

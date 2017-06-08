@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170603233413) do
+ActiveRecord::Schema.define(version: 20170607171238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20170603233413) do
     t.string   "client"
     t.string   "url"
     t.boolean  "active",      default: false
+    t.datetime "expiry_date"
   end
 
   create_table "cameras", force: :cascade do |t|

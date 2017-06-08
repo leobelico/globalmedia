@@ -95,12 +95,17 @@
 			<%= f.check_box	 :news %>
 		</div>
 		<div class="multifield">
-			
-			<div class="field">	
+			<div class="field">
+				<% if @station.image %>
+					<%= image_tag @station.image, class: "form-image-preview" %>
+				<% end %>
 				<label>Imagen (logo):</label>
 				<%= f.file_field :image %>
 			</div>
-			<div class="field">	
+			<div class="field">
+				<% if @station.image %>
+					<%= image_tag @station.image_preview, class: "form-image-preview" %>
+				<% end %>	
 				<label>Imagen para Facebook:</label>
 				<%= f.file_field :image_preview %>
 			</div>
@@ -186,6 +191,7 @@
 					
 				</div>
 				<div class="field">
+				
 					<label>Imagen para banner programático:</label>
 					<%= builder.file_field :image %>
 				</div>

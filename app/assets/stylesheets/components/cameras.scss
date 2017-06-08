@@ -35,18 +35,23 @@
 	flex-direction:  row; 
 	align-items:  flex-start; 
 	justify-content:  space-between; 
-	flex-wrap:  wrap; 
+	flex-wrap:  wrap;
+	.camera__name {
+		margin-top:  8px; 
+	} 
 }
 
 .camera.camera--grid {
 	width:  211.33px;
-	height:  140px; 
-	background:  #dbdbdb; 
+	height:  auto; 
 	margin-bottom:  8px; 
+	.camera__image {
+		background:  #dbdbdb; 
+	}
 }
 .camera__image {
 	width:  100%;
-	height: 100%; 
+	height: 140px; 
 	object-fit:  cover; 
 	object-position:  center center; 
 }
