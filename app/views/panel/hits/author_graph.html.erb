@@ -73,7 +73,7 @@
 						<div class="table__cell">N/A</div>
 					<% else %>
 						<div class="table__cell"><%= number %></div>
-						<div class="table__cell"><%= (number.to_f/record_hits.to_f)*100 %>%</div>
+						<div class="table__cell"><%= (record_hits.to_f/number.to_f)*100 %>%</div>
 					<% end %>
 				</div>
 	    	<% end %>
