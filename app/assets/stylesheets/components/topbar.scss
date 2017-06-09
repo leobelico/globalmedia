@@ -37,6 +37,20 @@
 	padding-left:  9px; 
 	border-right:  solid 1px #ffffff; 
 }
+.topbar__link:after {
+	position:  absolute; 
+	top:  18px; 
+	left:  10px; 
+	height:  2px; 
+	width:  0px; 
+	background:  #ffffff;
+	content: ' ';
+	display: block; 
+	transition:  all .3s ease; 
+}
+.topbar__link:hover:after {
+	width:  50px; 
+}
 .topbar .social-media {
 	margin-left: auto;
 }

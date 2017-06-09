@@ -4,7 +4,7 @@ class Panel::HitsController < ApplicationController
 	# load_and_authorize_resource
 	def index
 		@hits = Hit.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month).paginate(page: params[:page], per_page: 20)
-		@hit_objectives = HitObjective.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month)	
+		@hit_objectives = HitObjective.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month).reverse	
 	end
 	def graph
 		if params.count >= 3
