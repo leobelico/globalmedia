@@ -3,4 +3,5 @@ class ArticleSerializer < ActiveModel::Serializer
   belongs_to :section, each_serializer: SectionSerializer 
   belongs_to :author, each_serializer: AuthorSerializer  
   has_many :hashtags, each_serializer: HashtagSerializer
+  has_many :images, serializer: ImageSerializer
 end

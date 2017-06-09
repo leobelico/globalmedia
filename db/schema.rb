@@ -48,11 +48,24 @@ ActiveRecord::Schema.define(version: 20170607171238) do
     t.string   "video_url",                 default: ""
     t.integer  "author_id"
     t.boolean  "exclusive",                 default: false
+    t.text     "note_old"
+    t.integer  "old_id"
     t.text     "_extra_props"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
     t.index ["author_id"], name: "index_articles_on_author_id", using: :btree
     t.index ["keyword_id"], name: "index_articles_on_keyword_id", using: :btree
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
+  end
+
+  create_table "articles2", primary_key: "old_id", id: :text, force: :cascade do |t|
+    t.integer  "id"
+    t.text     "name"
+    t.datetime "created_at"
+    t.text     "short_description"
+    t.text     "note_old"
+    t.string   "slug",              limit: 100
+    t.integer  "articable_id"
+    t.text     "_extra_props"
   end
 
   create_table "articles_hashtags", force: :cascade do |t|
@@ -156,8 +169,16 @@ ActiveRecord::Schema.define(version: 20170607171238) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "article_id"
+    t.integer  "old_id"
     t.text     "_extra_props"
     t.index ["article_id"], name: "index_images_on_article_id", using: :btree
+  end
+
+  create_table "images2", primary_key: "old_id", id: :text, force: :cascade do |t|
+    t.integer "id"
+    t.text    "src"
+    t.integer "article_id"
+    t.text    "_extra_props"
   end
 
   create_table "keywords", force: :cascade do |t|
@@ -212,8 +233,15 @@ ActiveRecord::Schema.define(version: 20170607171238) do
     t.string   "slug"
     t.string   "color",        default: "#1b2d41"
     t.integer  "order"
+    t.integer  "old_id"
     t.text     "_extra_props"
     t.boolean  "visible",      default: false
+  end
+
+  create_table "sections2", primary_key: "old_id", id: :text, force: :cascade do |t|
+    t.integer "id"
+    t.text    "name"
+    t.text    "_extra_props"
   end
 
   create_table "stations", force: :cascade do |t|
