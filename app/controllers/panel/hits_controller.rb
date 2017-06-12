@@ -15,6 +15,10 @@ class Panel::HitsController < ApplicationController
 
 			@hit_objectives = HitObjective.where("created_at >= '#{initial_date.beginning_of_day}' AND created_at <= '#{end_date.end_of_day}' AND section_id = '#{section_id}'").group_by { |l| [l.created_at.beginning_of_week, l.created_at.month, l.created_at.year] }
 			# @hits = Hit.joins("INNER JOIN articles ON articles.id = hits.article_id WHERE articles.articable_id = #{params[:section_id]} AND hits.created_at >= '#{params[:initial_date]}' AND hits.created_at <= '#{params[:end_date]}'")	
+			if !end_date.valid_date? or !initial_date.valid_date? 
+				render action: "graph"
+				flash[:alert] = "La página que estabas buscando no existe."
+			end
     	else
     		@hits = []
     		@hit_objectives = []
@@ -28,6 +32,10 @@ class Panel::HitsController < ApplicationController
 			author_id	= params[:hit][:author_id]
 			@hits = Hit.search_by_user(initial_date, end_date, params[:hit][:author_id])
 			@hit_objectives = HitObjective.where("created_at >= '#{initial_date.beginning_of_day}' AND created_at <= '#{end_date.end_of_day}' AND author_id = '#{author_id}'").group_by { |l| [l.created_at.beginning_of_week, l.created_at.month, l.created_at.year] }
+			if !end_date.valid_date? or !initial_date.valid_date? 
+				render action: "author_graph"
+				flash[:alert] = "La página que estabas buscando no existe."
+			end
     	else
     		@hits = []
     		@hit_objectives = []
@@ -41,6 +49,10 @@ class Panel::HitsController < ApplicationController
 			user_id	= params[:hit][:user_id]
 			@hits = Hit.search_by_user(initial_date, end_date, params[:hit][:user_id])
 			@hit_objectives = HitObjective.where("created_at >= '#{initial_date.beginning_of_day}' AND created_at <= '#{end_date.end_of_day}' AND user_id = '#{user_id}'").group_by { |l| [l.created_at.beginning_of_week, l.created_at.month, l.created_at.year] }
+			if !end_date.valid_date? or !initial_date.valid_date? 
+				render action: "user_graph"
+				flash[:alert] = "La página que estabas buscando no existe."
+			end
     	else
     		@hits = []
     		@hit_objectives = []
