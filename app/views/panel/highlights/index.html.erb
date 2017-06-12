@@ -16,7 +16,7 @@
 		<div class="table__row">
 			<div class="table__cell"><%= highlight.order %> </div>
 			<div class="table__cell"><%= link_to highlight.article.name, highlight.article %></div>
-			<div class="table__cell"><%= highlight.published %></div>
+			<div class="table__cell"><% if highlight.published %>Activo<% else %>Inactivo<% end %></div>
 			<div class="table__cell"><%= highlight.scheduled_time %></div>
 			<%= link_to "Cambiar nota", edit_panel_highlight_path(highlight), class: "table__cell edit" %>
 
