@@ -35,7 +35,7 @@
 			<p class="table__cell"><%= control.contract_state %></p>
 			<p class="table__cell"><%= control.agent_name %></p>
 			<p class="table__cell"><%= control.observations[0..40] %></p>
-			<p class="table__cell"><%= control.datasheet %></p>
+			<p class="table__cell"><% if control.datasheet %>Activo<% else %>Inactivo<% end %></p>
 
 			<%= link_to "Editar", edit_panel_control_path(control), class: "table__cell edit" %>
 			<%= link_to "Delete", panel_control_path(control), method: :delete, data: { confirm: "¿Estas seguro de querer eliminar el banenr? Esta acción no se puede deshacer." }, class: "table__cell delete" %>
