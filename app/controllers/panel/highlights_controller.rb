@@ -7,7 +7,7 @@ class Panel::HighlightsController < ApplicationController
 	autocomplete :article, :name, full: true
 	before_action :get_all_highlights, only: [:new, :create, :edit, :update]
 	def index
-		@highlights = Highlight.where("highlights.order < 7").order(order: "ASC", published: "DESC")
+		@highlights = Highlight.where("highlights.order < 7").order(published: "DESC", order: "ASC")
 	end
 
 	def new
