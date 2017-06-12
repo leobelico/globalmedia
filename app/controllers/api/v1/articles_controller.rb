@@ -73,7 +73,7 @@ class Api::V1::ArticlesController < Api::BaseController
 	    end 
 	    # @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
 	   
-	    json_response(@articles)
+	    render json: @articles, adapter: :json, per_page: 20
 
 	end
 
@@ -81,7 +81,7 @@ class Api::V1::ArticlesController < Api::BaseController
 		search = Hashtag.find(params[:id])
 		# @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
 		@articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ search.id} AND articles.published = true").paginate(page: params[:page], per_page: 20)
-		json_response(@articles)
+		render json: @articles, adapter: :json, per_page: 20
 	end
 
 	private 

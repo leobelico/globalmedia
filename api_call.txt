@@ -12,6 +12,6 @@ curl -H "Accept: application/json" -H "Content-type: application/json" -H "Autho
 
 curl -H "Accept: application/json" -H "Content-type: application/json" http://localhost:3000/api/v1/search_hashtag/1
 
-curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"id":"1"}' http://localhost:3000/api/v1/search_hashtag/
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"id":"1"}' http://localhost:3000/api/v1/search_hashtag?page=1
 
-curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"article_id":"1"}' http://localhost:3000/api/v1/related_by_hashtag/
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"article_id":"1"}' http://localhost:3000/api/v1/related_by_hashtags?page=1
