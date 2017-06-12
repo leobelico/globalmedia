@@ -5,7 +5,7 @@ class Panel::HashtagsController < ApplicationController
 	autocomplete :hashtag, :name, full: true
 	
 	def index
-		@hashtags = Hashtag.order(selected: "DESC", updated_at: "DESC").paginate(page: params[:page], per_page: 200)
+		@hashtags = Hashtag.order(selected: "DESC", updated_at: "DESC", created_at: "DESC").paginate(page: params[:page], per_page: 200)
 	end
 	def selecting_hashtags
 		@hashtags = Hashtag.where(selected: true).order(updated_at: "DESC").last(4)
