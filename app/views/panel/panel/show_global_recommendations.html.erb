@@ -12,7 +12,7 @@
 			<div class="field">
 			
 			<label>Global Recomienda #1</label>
-				<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: get_global_recommendations.first.name )%>
+				<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", required: true, type: "search", value: get_global_recommendations.first.name)%>
 				<%= f.hidden_field :first_article_id, :id => "first_article_id", value: get_global_recommendations.first.id %>
 			</div>
 
@@ -20,7 +20,7 @@
 			<div class="field">
 		
 				<label>Global Recomienda #1</label>
-				<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+				<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", required: true, type: "search" ) %>
 				<%= f.hidden_field :first_article_id, :id => "first_article_id" %>
 
 			</div>
@@ -30,7 +30,7 @@
 			<div class="field">
 				
 				<label>Global Recomienda #2</label>
-				<%= f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: get_global_recommendations.second.name ) %>
+				<%= f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", required: true, type: "search", value: get_global_recommendations.second.name ) %>
 				<%= f.hidden_field :second_article_id, :id => "second_article_id", value: get_global_recommendations.second.id %>
 			</div>
 
