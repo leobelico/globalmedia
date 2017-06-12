@@ -57,6 +57,33 @@ class Api::V1::ArticlesController < Api::BaseController
       json_response(@articles)
     end
 
+    def related_by_hashtags
+    	article = Article.find(params[:article_id])
+	    if article.hashtags.count == 1
+	       @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ article.hashtags.first.id} AND articles.published = true AND articles.id != #{params[:article_id]}").last(3).uniq
+
+	    end
+
+	    if article.hashtags.count == 2
+	      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id }) AND articles.published = true AND articles.id != #{params[:article_id]}").last(3).uniq
+	    end 
+	    
+	    if article.hashtags.count >= 3
+	      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.third.id }) AND articles.published = true AND articles.id != #{params[:article_id]}").last(3).uniq
+	    end 
+	    # @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
+	   
+	    json_response(@articles)
+
+	end
+
+	def search_hashtag
+		search = Hashtag.find(params[:id])
+		# @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
+		@articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ search.id} AND articles.published = true").paginate(page: params[:page], per_page: 20)
+		json_response(@articles)
+	end
+
 	private 
 		def set_article
 			@article = Article.where(published: true).find(params[:id])

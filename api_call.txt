@@ -8,3 +8,10 @@ curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -
 
 
 curl -H "Accept: application/json" -H "Content-type: application/json" -H "Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0OTI4Mjg0ODR9.X20DM8uFO5O4gbrz83RB_5EEE2aNtlq5dgLHR7K_p0I" -X POST -d '{"affle_id":"1"}'r http://localhost:3000/api/v1/favorites
+
+
+curl -H "Accept: application/json" -H "Content-type: application/json" http://localhost:3000/api/v1/search_hashtag/1
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"id":"1"}' http://localhost:3000/api/v1/search_hashtag/
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"article_id":"1"}' http://localhost:3000/api/v1/related_by_hashtag/
