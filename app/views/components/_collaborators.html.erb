@@ -4,7 +4,7 @@
 		<%= link_to "Ir a sección", collaborators_path, class: "link" %>
 	</div>
 	<% articles.each do |article| %>
-			<% if article..article_relationships.where(articable_type: "Relationship").first.articable %>
+			<% if article.article_relationships.where(articable_type: "Relationship").first.articable %>
 
 				<%= link_to article, class: "collaborator-note" do %>
 					
