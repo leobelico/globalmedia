@@ -16,7 +16,10 @@
 	<% @banners.each do |banner| %>
 		<div class="table__row">
 			<%= link_to banner.name, panel_banner_path(banner), class: "table__cell" %>
+			<% if banner.expiry_date %>
 			<p class="table__cell"><%= l(banner.expiry_date, format: "%A, %d %b %Y %l:%M") %></p>
+			<% else %>
+			<p class="table__cell"></p>
 			<p class="table__cell"><%= l(banner.created_at, format: "%A, %d %b %Y %l:%M") %></p>
 			<p class="table__cell"><%= l(banner.updated_at, format: "%A, %d %b %Y %l:%M") %></p>
 			<%= link_to "Editar", edit_panel_banner_path(banner), class: "table__cell edit" %>
