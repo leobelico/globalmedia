@@ -21,7 +21,7 @@
 		<div class="field field--datetime">
 			<label for="">Fecha de inicio:</label>
 			<div class="field">
-				<%= f.date_select(:initial_date, options: { start_year: 2015 })%>
+				<%= f.date_select(:initial_date, options: { start_year: 2015}, selected: DateTime.now.beginning_of_year )%>
 			</div>
 		</div>
 		<div class="field field--datetime">

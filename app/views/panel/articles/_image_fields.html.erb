@@ -9,3 +9,22 @@
 <script type="text/javascript">
 	new_fields();
 </script> 
+<script>
+	$("input[type=file]").each(function(){
+		var $input = $(this);
+		if ($input.parents(".field").find("img").length == 0) {
+
+			$input.before('<img class="form__image-preview">');
+		}
+
+		$input.change(function(){
+		    var reader = new FileReader();
+		    $(reader).on("load", function(event){
+
+			    	$input.parents(".field").find("img").attr('src',  event.target.result); 
+			    	$input.parents(".field").find("img").css("display", "block"); 
+		    });
+			reader.readAsDataURL(this.files[0]);
+		});
+	});  
+</script>

@@ -66,6 +66,9 @@
 
 		<% if @article.image %>
 			<div class="field field--string">
+				<% if @article.image != "" %>
+					<%= image_tag @article.image, class: "form__image-preview shown" %>
+				<% end %>
 				<label>Imagen principal acutal</label>
 				<input type="text" disabled value="<%= @article.image %>">
 			</div>	
@@ -96,5 +99,24 @@
 <script>
 	char_count();
 	initialize_quill(); 
+</script>
+<script>
+	$("input[type=file]").each(function(){
+		var $input = $(this);
+		if ($input.parents(".field").find("img").length == 0) {
+
+			$input.before('<img class="form__image-preview">');
+		}
+
+		$input.change(function(){
+		    var reader = new FileReader();
+		    $(reader).on("load", function(event){
+
+			    	$input.parents(".field").find("img").attr('src',  event.target.result); 
+			    	$input.parents(".field").find("img").css("display", "block"); 
+		    });
+			reader.readAsDataURL(this.files[0]);
+		});
+	});  
 </script>
 <%= render "components/s3_form_js" %>
