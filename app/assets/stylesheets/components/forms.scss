@@ -319,3 +319,16 @@ input:focus {
 		}
 	}
 }
+.form__image-preview {
+	height:  280px; 
+	width:  400px; 
+	object-fit:  contain; 
+	object-position:  center center; 
+	margin-left:  auto; 
+	margin-right:  auto; 
+	margin-bottom:   8px; 
+	display:  none; 
+	&.shown {
+		display:  block; 
+	}
+}

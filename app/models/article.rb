@@ -19,6 +19,11 @@ class Article < ApplicationRecord
   def to_param
     slug
   end
+  def html_note 
+    self.plain_text.prepend("<p>")
+    self.plain_text << "</p>"
+    self.plain_text.gsub(/\n/, '<br>')
+  end
   def raw_note 
     ActionController::Base.helpers.raw(self.note)
   end

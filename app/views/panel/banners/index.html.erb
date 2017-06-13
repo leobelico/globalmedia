@@ -7,18 +7,20 @@
 <div class="table card">
 	<div class="table__row">
 		<p class="table__cell">Nombre:</p>
+		<p class="table__cell">Fecha de expiración:</p>
 		<p class="table__cell">Fecha de creación:</p>
 		<p class="table__cell">Fecha de última modificación:</p>
 		<p class="table__cell">Editar:</p>
-		<p class="table__cell">Delete:</p>
+		<p class="table__cell">Eliminar:</p>
 	</div>
 	<% @banners.each do |banner| %>
 		<div class="table__row">
 			<%= link_to banner.name, panel_banner_path(banner), class: "table__cell" %>
-			<p class="table__cell"><%= banner.created_at.strftime("%A, %d %b %Y %l:%M %p") %></p>
-			<p class="table__cell"><%= banner.updated_at.strftime("%A, %d %b %Y %l:%M %p") %></p>
+			<p class="table__cell"><%= l(banner.expiry_date, format: "%A, %d %b %Y %l:%M") %></p>
+			<p class="table__cell"><%= l(banner.created_at, format: "%A, %d %b %Y %l:%M") %></p>
+			<p class="table__cell"><%= l(banner.updated_at, format: "%A, %d %b %Y %l:%M") %></p>
 			<%= link_to "Editar", edit_panel_banner_path(banner), class: "table__cell edit" %>
-			<%= link_to "Delete", panel_banner_path(banner), method: :delete, data: { confirm: "¿Estas seguro de querer eliminar el banenr? Esta acción no se puede deshacer." }, class: "table__cell delete" %>
+			<%= link_to "Eliminar", panel_banner_path(banner), method: :delete, data: { confirm: "¿Estas seguro de querer eliminar el banenr? Esta acción no se puede deshacer." }, class: "table__cell delete" %>
 		</div>
 	<% end %>	
 </div>

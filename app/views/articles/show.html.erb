@@ -87,6 +87,13 @@
 				<%= image_tag @article.image, class: "main-image" %>
 			<% end %>
 		<% end %>
+		<% if @article.images.count > 0  %>
+			<div class="gallery__thumbnails">
+				<% @article.images.each_with_index do |image, index| %>
+					<%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
+				<% end %>	
+			</div>
+		<% end %>
 		<% if !@article.note.empty? %>
 			<div id="quill-container" class="quill--article">
 			</div>
@@ -97,13 +104,7 @@
 				$(".quill--article").html("<%= @article.note_old %>"); 
 			</script>
 		<% end %>
-		<% if @article.images.count > 0  %>
-			<div class="gallery__thumbnails">
-				<% @article.images.each_with_index do |image, index| %>
-					<%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
-				<% end %>	
-			</div>
-		<% end %>
+
 		<!-- NOTAS DEL PROGRAMADOR-->
 			<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
 

@@ -8,7 +8,8 @@
 	<div class="table__row">
 		<div class="table__cell">Nombre:</div>
 		<div class="table__cell">Activo:</div>
-		<div class="table__cell">Fecha:</div>
+		<div class="table__cell">Fecha de selección:</div>
+		<div class="table__cell">Fecha de creación:</div>
 	</div>
 	<% @hashtags.each do |hashtag| %>
 	<div class="table__row">
@@ -31,6 +32,7 @@
 			</div>
 		<% end %>
 		<p class="table__cell"><%= hashtag.selected_on %></p>
+		<p class="table__cell"><%= hashtag.created_at %></p>
 	</div>
 	<% end %>
 </div>
