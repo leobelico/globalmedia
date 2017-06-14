@@ -1,7 +1,7 @@
 <% article ||=  "nuva.rocks" %>
 
 <div class="social-media" data-article="<%= article_url(article) %>">
-	<%= link_to ("whatsapp://send?text=" + article.name + " - " + article_url(article)), class: "social-media__link whatsapp", target: "_blank" do %>
+	<%= link_to ("whatsapp://send?text=" + article.name + " - " + article_url(article)), data: { action: "share/whatsapp/share" }, class: "social-media__link whatsapp", target: "_blank" do %>
 		<%= image_tag "whatsapp.svg" %>
 	<% end %>
 	<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
