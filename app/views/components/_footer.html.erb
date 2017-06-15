@@ -4,6 +4,11 @@
 		
 	</div>
 	<div class="footer-column">
+		<div class="footer__row">
+			<% Section.where(visible: true).each do  |section| %>
+				<%= link_to section.name, section, class: "footer__section-link" %>
+			<% end %>
+		</div>
 	</div>
 	<p class="disclaimer">2016 Global Media Comunicaciones. Todos los derechos reservados. <br><br>Prohibida la reproducción total o parcial, incluyendo cualquier medio electrónico o mágnetico.</p>
 	

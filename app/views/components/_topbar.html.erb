@@ -1,4 +1,7 @@
 <div class="topbar">
+	<%= link_to root_path, class: "logo-container" do %>
+		<%= image_tag "logo-white.svg" %>
+	<% end %>
 	<% if Relationship.find_by(relationship_type: "Investigation") %>
 		<%= link_to "investigación especial", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "topbar__link" %>
 	<% end %>

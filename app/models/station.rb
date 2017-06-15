@@ -23,7 +23,7 @@ class Station < ApplicationRecord
       ret.gsub! /\s*&\s*/, " y "
 
       #replace all non alphanumeric, underscore or periods with underscore
-       ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, ''  
+       ret.gsub! /\s*[^A-Za-z0-9ÁáÉéÍíÓóÚú\.\-]\s*/, ''  
 
        #convert double underscores to single
        ret.gsub! /_+/,"-"

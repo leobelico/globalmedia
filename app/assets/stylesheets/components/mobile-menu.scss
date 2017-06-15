@@ -12,7 +12,7 @@
 		z-index:  75; 
 		padding:  8px; 
 		padding-top:  132px;
-		background:  $primary;
+		background:  #f5f5f5;
 		position:  fixed; 
 		top:  -100%; 
 		left:  0px; 
@@ -20,6 +20,15 @@
 		width:  100%; 
 		box-sizing:  border-box; 
 		overflow:  scroll;
+		.mobile-menu__row {
+			display:  flex; 
+			flex-direction:  row; 
+			justify-content:  space-between; 
+			width:  100%; 
+			.mobile-menu__column {
+				width:  calc(50% - 9px); 
+			}
+		}
 		.mobile-menu__section {
 			margin-bottom:  12px; 
 			display:  flex; 
@@ -28,15 +37,15 @@
 			.section__title {
 				font-size:  18px;
 				font-weight:  900; 
-				color:  #ffffff; 
-				border-bottom:  solid 2px #ffffff; 
+				color:  $tertiary; 
+				border-bottom:  solid 2px $tertiary; 
 				margin-top:  0px; 
 				margin-bottom:  8px; 
 				padding-bottom:  8px; 
 			}
 			.mobile-menu__link {
 				font-size:  18px; 
-				color:  #ffffff; 
+				color:  #000000; 
 				margin-bottom:  8px;
 				flex: 1;  
 			}

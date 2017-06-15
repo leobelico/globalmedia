@@ -16,17 +16,7 @@
 				</div>
 			
 			</div>
-			<div class="stream">
-				<div class="stream__info">
-					<% if timetables.count > 1 %>
-						<%= image_tag timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
-						<p><strong><%= timetables.first.name %></strong>
-						   <br> <br><%= timetables.first.description %></p>
-					<% end %>
 
-				</div>
-				
-			</div>	
 			<% if !@station.video? and !@station.news? %>
 				<audio controls autoplay id="audio" controlsList="nodownload">
 					<source src="<%= @station.stream_url %>" type="audio/mpeg">	
@@ -44,6 +34,17 @@
 				</script>
 
 			<% end %>
+			<div class="stream">
+				<div class="stream__info">
+					<% if timetables.count > 1 %>
+						<%= image_tag timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
+						<p><strong><%= timetables.first.name %></strong>
+						   <br> <br><%= timetables.first.description %></p>
+					<% end %>
+
+				</div>
+				
+			</div>	
 			<div class="podcasts">
 				<h4 class="small-label">Podcasts</h4>
 				<% station.podcasts.last(3).each do |podcast| %>

@@ -332,3 +332,8 @@ input:focus {
 		display:  block; 
 	}
 }
+.controls {
+	.table__cell {
+		flex: 1; 
+	}
+}

@@ -1,3 +1,6 @@
+<% if @breaking_article != nil %>
+	<%= render "components/breaking-news" %>	
+<% end %>
 <div class="highlights-container">	
 	<% @highlights.each do |highlight| %>
 		<% if highlight.order == 1 %>

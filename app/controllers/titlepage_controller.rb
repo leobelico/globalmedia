@@ -36,6 +36,7 @@ class TitlepageController < ApplicationController
 	end
 
 	def index
+		@breaking_article = Section.where(visible: true).find_by(name: "Último Momento").articles.last
 		@highlights = Highlight.where(published: true).order(order: "ASC")
 		search = Hashtag.find_by_name("#ESNOTICIA")
 		@its_news = ArticlesHashtag.where(hashtag_id: search).last(10)
@@ -67,9 +68,8 @@ class TitlepageController < ApplicationController
 		@complaints = Article.where(articable_id: section.id, published: true).order(updated_at: "ASC").last(6)
 
 
-		@collaborator_articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator'").order(created_at: "DESC").first(5)
-
-		
+		@collaborator_articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator' ORDER BY article_relationships.created_at DESC")
+			# .order(created_at: "DESC").first(5)
 	end
 
 	def publish_highlights

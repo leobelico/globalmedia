@@ -114,7 +114,10 @@ Rails.application.routes.draw do
     resources :banners
     resources :relationships, param: :slug 
     resources :hit_objectives
-    resources :controls
+    resources :controls do 
+      get :done, on: :collection
+    end
+    # get "panel/controls/done", to: "panel/controls#done"
     resources :hashtags, only: :index do
       get :autocomplete_hashtag_name, on: :collection
       get :switch_hashtag, on: :collection

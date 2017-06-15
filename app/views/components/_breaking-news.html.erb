@@ -1,4 +1,16 @@
 <div class="breaking-news">
 	<p class="breaking-news__tag">Último Momento</p>
-	
+	<div class="breaking-news__article">
+		<div class="article__info">
+			<%= link_to	@breaking_article, class: "link" do %>
+				<h4><%= @breaking_article.name %></h4>	
+				<p><%= @breaking_article.short_description %></p>
+			<% end %>
+			<%= render "components/social-media-links", article: @breaking_article %>	
+		</div>
+		<%= link_to	@breaking_article do %>
+		
+			<%= image_tag @breaking_article.image, class: "breaking-news__image" %>
+		<% end %>
+	</div>
 </div>
