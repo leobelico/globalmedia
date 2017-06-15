@@ -38,7 +38,7 @@ class TitlepageController < ApplicationController
 	def index
 		bns =  Section.where(visible: true, name: "Último Momento").last
 		if bns
-			@breaking_article = bns.last.articles.last
+			@breaking_article = bns.articles.last
 		else	
 			@breaking_article = nil
 		end
