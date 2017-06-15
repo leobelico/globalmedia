@@ -36,7 +36,12 @@ class TitlepageController < ApplicationController
 	end
 
 	def index
-		@breaking_article = Section.where(visible: true).find_by(name: "Último Momento").articles.last
+		bns =  Section.where(visible: true, name: "Último Momento").last
+		if bns
+			@breaking_article = bns.last.articles.last
+		else	
+			@breaking_article = nil
+		end
 		@highlights = Highlight.where(published: true).order(order: "ASC")
 		search = Hashtag.find_by_name("#ESNOTICIA")
 		@its_news = ArticlesHashtag.where(hashtag_id: search).last(10)
