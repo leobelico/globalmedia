@@ -88,13 +88,32 @@
 	.time {
 		display:  none; 
 	}
-	.menu-trigger {
-		display:  flex;
-		flex-direction:  column; 
+	.menu-button {
 		width:  50%; 
 		height:  100%; 
 		position:  relative; 
-		margin-left:  auto; 
+		display:  flex; 
+		flex-direction:  row; 
+		align-items:  center; 
+		position:  relative; 
+			margin-left:  auto; 
+		* {
+			pointer-events:  none; 			
+		}
+		p {
+			margin-right:  8px; 
+			text-transform:  uppercase; 
+			font-weight:  700; 
+			color:  #ffffff; 
+			margin-left:  auto; 
+		}
+	}
+	.menu-trigger {
+		display:  flex;
+		flex-direction:  column; 
+		width:  36px;  
+		height:  100%; 
+		position:  relative; 
 		margin-top:  0px; 
 		margin-bottom:  0px; 
 		margin-right:  12px;
