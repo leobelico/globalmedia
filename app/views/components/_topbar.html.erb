@@ -5,11 +5,14 @@
 	<% if Relationship.find_by(relationship_type: "Investigation") %>
 		<%= link_to "investigación especial", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "topbar__link" %>
 	<% end %>
+	<% @opinion = Section.find_by(name: "Columnas del día") %>
+	<% if @opinion %>
+		<%= link_to "Opinión", section_path(@opinion), class: "topbar__link" %>
+	<% end %>
 	<%= link_to "denuncia global", section_path(Section.find_by(name: "Denuncia Global")), class: "topbar__link" %>
 	<%= link_to cameras_path, class: "topbar__link" do %>
 		tráfico <br>san luis
 	<% end %>
-
 	<div class="social-media">
 		<p class="social-media__tag">Síguenos</p>
 		<%= link_to "https://twitter.com/globalmediamx", class: "social-media__link", target: "_blank" do %>

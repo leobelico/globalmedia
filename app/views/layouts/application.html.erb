@@ -10,8 +10,7 @@
 	
 
 
-	<link href="https://fonts.googleapis.com/css?family=Pragati+Narrow|Slabo+27px" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=Pragati+Narrow|Slabo+27px|Martel:900" rel="stylesheet">
 
 	<script src="https://platform.twitter.com/widgets.js" async></script>
 
@@ -128,12 +127,14 @@
 
 					if ($(window).scrollTop() > 144 && navflag == false) {
 						TweenMax.to(".header--wrapper", .3, { maxHeight: 0 }); 
-						TweenMax.to(".logo-container img", .3, { width: 101.5 })
+						TweenMax.to(".logo-container img", .3, { width: 101.5 });
+						TweenMax.to(".navbar, .dropdown-link, .dropdown", .3, { backgroundColor: "#212121" });
 						navflag = true;
 					} 
 					if ($(window).scrollTop() < 144 && navflag == true) {
 						TweenMax.to(".header--wrapper", .3, { maxHeight: 72 })
 						TweenMax.to(".logo-container img", .3, { width: 0 })
+						TweenMax.to(".navbar, .dropdown-link, .dropdown", .3, { backgroundColor: "#2768d1" });
 						navflag = false;
 					}
 				} 

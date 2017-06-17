@@ -7,6 +7,10 @@
 
 	<% articles.each do |article| %>
 		<%= link_to article, class: "latest-news__article" do %>
+			<div class="clock">
+				<div class="hours"></div>
+				<div class="minutes"></div>
+			</div>
 			<p class="article__time"><%= article.created_at.strftime("%H:%M") %></p>
 			<p class="article__title"><%= truncate(article.name, length: 55) %></p>
 		<% end %>

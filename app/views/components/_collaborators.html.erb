@@ -1,21 +1,21 @@
 <div class="special-articles">
 	<div class="special-articles__type">
-		<p class="type">Colaboradores</p>
+		<p class="type">Columnas del día</p>
 		<%= link_to "Ir a sección", collaborators_path, class: "link" %>
 	</div>
 	<% articles.each do |article| %>
 			<% if article.article_relationships.where(articable_type: "Relationship").first.articable %>
 
 				<%= link_to article, class: "collaborator-note" do %>
-					
-					<%= image_tag article.article_relationships.where(articable_type: "Relationship").first.articable.image, class: "collaborator__image" %>
-					
 
 					<div class="collaborator__info">
-						<p class="note__title"><%= truncate(article.name, length: 60) %></p>
+						<p class="note__title"><%= truncate(article.name, length: 200) %></p>
 						<p class="note__author"><%= article.article_relationships.where(articable_type: "Relationship").first.articable.name %></p>
 
 					</div>
+					
+					<%= image_tag article.article_relationships.where(articable_type: "Relationship").first.articable.image, class: "collaborator__image" %>
+					
 				<% end %>
 			<% end %>	
 

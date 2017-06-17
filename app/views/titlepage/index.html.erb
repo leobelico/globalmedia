@@ -14,16 +14,6 @@
 <% if get_banner("", "TitlePage", "Grande" ) %>
 	<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
 <% end %>
-
-
-<div class="special-articles-container">
-	<% if @investigation_articles.count > 0 %>
-		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
-	<% end %>
-	<% if @complaints %>
-		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: @complaints.reverse %>
-	<% end %>
-</div>
 <div class="special-articles-container">
 	<div class="special-articles">
 	
@@ -43,6 +33,15 @@
 		<%= render "components/collaborators", articles: @collaborator_articles %>
 	</div>
 </div>
+<div class="special-articles-container">
+	<% if @investigation_articles.count > 0 %>
+		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
+	<% end %>
+	<% if @complaints %>
+		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: @complaints.reverse %>
+	<% end %>
+</div>
+
 
 
 <% @sections.each do |section| %>

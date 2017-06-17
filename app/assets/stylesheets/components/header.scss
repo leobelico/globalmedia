@@ -46,10 +46,17 @@
 	left:  12px; 
 	top:  50%; 
 	transform:  translateY(-50%);
-	height:  44px; 
+	height:  144px; 
+	width:  324px; 
 	img {
 		height:  100%; 
 		width:  auto; 
+	}
+}
+@media screen and (max-width:  1023px) {
+	.header__logo {
+		width:  auto; 
+		height:  44px;
 	}
 }
 .exchange-rate, 

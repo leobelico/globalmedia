@@ -1,4 +1,4 @@
-<div class="radio-banner__tune-in">Sintoniza en este momento</div>
+<div class="radio-banner__tune-in no-border"><div class="led"></div>Sintoniza en este momento</div>
 <div class="radio-banner">
 	<% get_current_programs.each do |program| %>
 		<%= link_to ("/" + program.station.slug), class: "radio-program" do %>
@@ -6,3 +6,12 @@
 		<% end %>
 	<% end %>
 </div>
+<script>
+	function led_timeline(){
+		var led = $(".led");
+		var led_tl = new TimelineMax({ repeat: -1 });
+		led_tl.add(TweenMax.set(led, { opacity: 0, delay: .8 }));
+		led_tl.add(TweenMax.set(led, { opacity: 1, delay: .8 }));
+	}
+	led_timeline(); 
+</script>
