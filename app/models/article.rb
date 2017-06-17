@@ -31,7 +31,11 @@ class Article < ApplicationRecord
     self.hits.where(created_at: 1.months.ago..Time.now).sum(:number)
   end
   def section 
-    self.articable.name 
+    if self.articable
+      self.articable.name 
+    else 
+      return nil 
+    end
   end
 
   private
