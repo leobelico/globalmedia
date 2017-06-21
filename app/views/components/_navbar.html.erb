@@ -22,20 +22,17 @@
 			<% end %>
 		</div>
 	</div>
-	<% if Section.find_by(name: "San Luis") %>
-		<%= link_to "San Luis", section_path(Section.find_by(name: "San Luis")), class: "navbar__link" %>
+	<% if Section.find_by(name: "Metrópoli") %>
+		<%= link_to "Metrópoli", section_path(Section.find_by(name: "Metrópoli")), class: "navbar__link" %>
 	<% end %>
-	<% if Section.find_by(name: "Seguridad") %>
-		<%= link_to "Seguridad", section_path(Section.find_by(name: "Seguridad")), class: "navbar__link" %>
+	<% if Section.find_by(name: "México") %>
+		<%= link_to "México", section_path(Section.find_by(name: "México")), class: "navbar__link" %>
 	<% end %>
-	<% if Section.find_by(name: "Nacional") %>
-		<%= link_to "Nacional", section_path(Section.find_by(name: "Nacional")), class: "navbar__link" %>
+	<% if Section.find_by(name: "Mundo") %>
+		<%= link_to "Mundo", section_path(Section.find_by(name: "Mundo")), class: "navbar__link" %>
 	<% end %>
-	<% if Section.find_by(name: "Internacional") %>
-		<%= link_to "Internacional", section_path(Section.find_by(name: "Internacional")), class: "navbar__link" %>
-	<% end %>
-	<% if Section.find_by(name: "Negocios") %>		
-		<%= link_to "Negocios", section_path(Section.find_by(name: "Negocios")), class: "navbar__link" %>
+	<% if Section.find_by(name: "Business") %>		
+		<%= link_to "Business", section_path(Section.find_by(name: "Business")), class: "navbar__link" %>
 	<% end %>
 	<div class="dropdown">
 		<p class="navbar__link">Táctica</p>
@@ -52,5 +49,5 @@
 		</div>
 	</div>
 	<%= link_to "Colaboradores", collaborators_path, class: "navbar__link" %>
-	<%= link_to "Acerca de", about_us_path, class: "navbar__link" %>
+	<% link_to "Acerca de", about_us_path, class: "navbar__link" %>
 </div>

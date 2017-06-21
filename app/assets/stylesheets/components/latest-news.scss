@@ -1,3 +1,6 @@
+.sidebar .latest-news {
+	margin-top:  18px !important; 
+}
 .latest-news {
 	display:  flex; 
 	flex-direction:  column; 
@@ -76,22 +79,31 @@
 		flex-direction:  row; 
 		align-items:  center; 
 		justify-content:  flex-start;  
-		padding:  4px 0; 	
+		padding:  5px 0; 	
 		.article__time {
 			font-weight:  900; 
 			color:  #646464; 
 			width:  48px;
 			margin-right:  6px;  
 			border-bottom:  dotted 1px #757575; 
-			padding-bottom:  8px; 
-			padding-top:  8px; 
+			padding-bottom:  6px; 
+			padding-top:  6px; 
 		}
 		.article__title {
 			flex: 1; 
+			font-size:  14.5px; 
+			line-height:  95%; 
+			span {
+				margin-top:  2px; 
+				font-size:  11px; 
+				color:  #757575; 
+				font-weight:  bold; 
+			}
 		}
 	}
 
 	.latest-news__article:nth-of-type(1) {
+		margin-top:  18px; 
 		.article__time { 
 			color:  $red; 
 			border-bottom:  dotted 1px $red; 

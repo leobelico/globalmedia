@@ -26,7 +26,7 @@
 		}
 		.title {
 			margin-bottom:  auto; 
-			font-size:  21px; 
+			font-size:  19px; 
 			line-height:  125%; 
 			margin-top:  8px;
 			font-family:  "Martel";
@@ -43,6 +43,7 @@
 		.short-description {
 			margin-top:  8px; 
 			margin-bottom:  18px; 
+			font-size:  14px; 
 		}
 		.social-media {
 			margin-top:  auto !important;
@@ -68,7 +69,7 @@
 		.short-description {
 			-webkit-line-clamp: 2;
 			// white-space: nowrap;
-			max-height:  36px; 
+			max-height:  32px; 
 			overflow: hidden;
 			text-overflow: ellipsis;
 

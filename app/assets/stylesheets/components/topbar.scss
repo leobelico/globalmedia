@@ -16,6 +16,9 @@
 	br {
 		display: none; 
 	}
+	.home-container {
+		display:  none; 
+	}
 	.logo-container {
 		// max-width:  0px; 
 		// overflow:  hidden; 
@@ -33,6 +36,11 @@
 @media screen and (max-width:  1023px) {
 	.topbar {
 		align-items:  center; 
+		.home-container {
+			display:  flex; 
+			height:  18px; 
+			width:  18px; 
+		}	
 		
 		br {
 			display:  initial; 
@@ -47,15 +55,19 @@
 	font-family: 'Pragati Narrow', sans-serif;
 	font-size:  16px; 
 	color:  #ffffff; 
+	text-align:  center; 
 	text-transform:  uppercase; 
 	// margin-right:  18px; 
 	padding-right:  9px; 
 	padding-left:  9px; 
 	border-right:  solid 1px #ffffff; 
+	&:last-of-type {
+		margin-right:  8px; 
+	}
 }
 .topbar__link:after {
 	position:  absolute; 
-	top:  18px; 
+	bottom:  -4px; 
 	left:  10px; 
 	height:  2px; 
 	width:  0px; 
@@ -93,7 +105,7 @@
 	padding:  6px 8px; 
 	font-size:  14px;
 	text-align:  right; 
-	margin-left:  18px; 
+	margin-left:  8px; 
 	border:  solid 1px #dbdbdb;
 }
 @media screen and (max-width:  1023px) {

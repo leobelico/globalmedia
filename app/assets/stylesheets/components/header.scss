@@ -99,7 +99,7 @@
 		flex-direction:  row; 
 		align-items:  center; 
 		position:  relative; 
-			margin-left:  auto; 
+		margin-left:  auto; 
 		* {
 			pointer-events:  none; 			
 		}
@@ -123,6 +123,7 @@
 		padding-top:  13px;
 		padding-bottom:  13px;
 		box-sizing:  border-box;
+		display:  none; 
 		div {
 			width:  36px; 
 			right:  0px;
