@@ -58,7 +58,11 @@
 			<p class="table__cell"><% if article.scheduled_time %><%= article.scheduled_time.strftime("%B %d, %Y %H:%M") %><% end %></p>
 
 			<p class="table__cell f-3"><%= truncate(article.short_description, length: 40) %></p>	
-			<%= link_to article.section, panel_section_path(article.section), class: "table__cell" %>
+			<% if article.section %>
+				<%= link_to article.section, panel_section_path(article.section), class: "table__cell" %>
+			<% else %>
+				<p class="table__cell">Ninguna</p>
+			<% end %>
 			<% if article.user %>
 				<p class="table__cell"><%= article.user.full_name %></p>	
 			<% else %>
