@@ -34,6 +34,9 @@
 	<% if Section.find_by(name: "Business") %>		
 		<%= link_to "Business", section_path(Section.find_by(name: "Business")), class: "navbar__link" %>
 	<% end %>
+	<% if Section.find_by(name: "Tecnología") %>		
+		<%= link_to "Tecnología", section_path(Section.find_by(name: "Tecnología")), class: "navbar__link" %>
+	<% end %>
 	<div class="dropdown">
 		<p class="navbar__link">Táctica</p>
 		<div class="dropdown__options">
