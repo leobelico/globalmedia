@@ -10,7 +10,7 @@ class SectionsController < ApplicationController
 	end
 	
 	def sports
-		@local = Section.find_by(slug: "Táctica Local") 
+		@local = Section.find_by(name: "Táctica Local") 
 		@intl = Section.find_by(name: "Táctica Nacional e Internacional") 
 		@local_articles = @local.articles.last(3)
 		@intl_articles = @intl.articles.last(3)
