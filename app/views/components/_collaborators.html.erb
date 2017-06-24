@@ -4,20 +4,26 @@
 		<%= link_to "Ir a sección", collaborators_path, class: "link" %>
 	</div>
 	<% articles.each do |article| %>
-			<% if article.article_relationships.where(articable_type: "Relationship").first.articable %>
+		<% if article.article_relationships.where(articable_type: "Relationship").first.articable %>
 
-				<%= link_to article, class: "collaborator-note" do %>
+			<%= link_to article, class: "collaborator-preview" do %>
 
-					<div class="collaborator__info">
-						<p class="note__title"><%= truncate(article.name, length: 200) %></p>
-						<p class="note__author"><%= article.article_relationships.where(articable_type: "Relationship").first.articable.name %></p>
-
-					</div>
-					
+				<div class="collaborator__head">
 					<%= image_tag article.article_relationships.where(articable_type: "Relationship").first.articable.image, class: "collaborator__image" %>
-					
-				<% end %>
-			<% end %>	
+					<div class="collaborator__info">
+						
+						<h4 class="collaborator__title"><%= truncate(article.name, length: 200) %></h4>
+						<p class="collaborator__name"><%= article.article_relationships.where(articable_type: "Relationship").first.articable.name %></p>
+					</div>
+
+				</div>
+				<p class="collaborator__excerpt"><%= truncate(article.short_description, length:  120) %></p> 
+				
+				
+			<% end %>
+
+
+		<% end %>	
 
 	<% end %>
 </div>

@@ -31,27 +31,16 @@
 	<% if Section.find_by(name: "Mundo") %>
 		<%= link_to "Mundo", section_path(Section.find_by(name: "Mundo")), class: "navbar__link" %>
 	<% end %>
-	<% if Section.find_by(name: "Business") %>		
-		<%= link_to "Business", section_path(Section.find_by(name: "Business")), class: "navbar__link" %>
+	<% if Section.find_by(name: "Negocios") %>		
+		<%= link_to "Negocios", section_path(Section.find_by(name: "Negocios")), class: "navbar__link" %>
 	<% end %>
+	<%= link_to "Táctica", tactica_path, class: "navbar__link" %>
 	<% if Section.find_by(name: "Tecnología") %>		
 		<%= link_to "Tecnología", section_path(Section.find_by(name: "Tecnología")), class: "navbar__link" %>
 	<% end %>
-	<%= link_to "Táctica", tactica_path, class: "navbar__link" %>
-<!-- 	<div class="dropdown">
-		<p class="navbar__link">Táctica</p>
-		<div class="dropdown__options">
-			<% if Section.find_by(name: "Táctica Local") %>
-				<%= link_to "Táctica Local", section_path(Section.find_by(name: "Táctica Local")), class: "dropdown__link" %>
-				<div class="dropdown__underline"></div>
-			<% end %>
-			<% if Section.find_by(name: "Táctica Nacional e Internacional") %>
-				<%= link_to "Táctica Nacional e Internacional", section_path(Section.find_by(name: "Táctica Nacional e Internacional")), class: "dropdown__link" %>
-				<div class="dropdown__underline"></div>
-			<% end %>
 
-		</div>
-	</div> -->
 	<%= link_to "Colaboradores", collaborators_path, class: "navbar__link" %>
-	<% link_to "Acerca de", about_us_path, class: "navbar__link" %>
-</div>
+
+	<% if Section.find_by(name: "Entretenimiento") %>		
+		<%= link_to "Entretenimiento", section_path(Section.find_by(name: "Entretenimiento")), class: "navbar__link" %>
+	<% end %></div>

@@ -6,7 +6,7 @@
 	<% end %>
 	<div class="sp__articles">
 		<% if highlight and highlight != ""%>
-			<div class="sp__article">
+			<div class="sp__article ui-card">
 				<%= link_to highlight, class: "sp__image-link" do %>
 					<%= image_tag highlight.image, class: "sp__image" %>
 				<% end %>
@@ -21,7 +21,7 @@
 		<% end %>
 
 		<% articles.each do |article|%>	
-			<div class="sp__article">
+			<div class="sp__article ui-card">
 				<%= link_to article, class: "sp__image-link" do %>
 					<% if article.exclusive? %>
 						<p class="exclusive">EXCLUSIVA</p>

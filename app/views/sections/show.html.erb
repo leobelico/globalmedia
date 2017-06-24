@@ -71,10 +71,10 @@
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("México").id, 3) , section_name: "México", highlight: "" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
 			<% when "Entretenimiento" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Táctica").id, 3) , section_name: "Táctica", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Táctica Nacional e Internacional").id, 3) , section_name: "Táctica Nacional e Internacional", highlight: "" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Tecnología").id, 3) , section_name: "Tecnología", highlight: "" %>
 				
-			<% when "Táctica" %>
+			<% when "Táctica Nacional e Internacional" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
 
