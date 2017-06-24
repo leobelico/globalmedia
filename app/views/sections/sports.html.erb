@@ -2,40 +2,21 @@
 	
 	<div class="section main-content"> 
 
-		<h1 class="section__title" style="color:  <%= @section.color %>; border-bottom:  solid 4px <%= @section.color %>"><%= @section.name %></h1>
-	
-		<% if @section.name == "Denuncia Global" or @section.name == "DENUNCIA GLOBAL" %>
-			<%= render "components/global_complaint_videos", article: @articles.first %>
-				
-		<% end %>
-
-		<% if @highlight %>
-			<% if @section.color %>
-				<div class="section__highlight" style="border-bottom:  solid 4px <%= @section.color %>">
-			<% else %>
-				<div class="section__highlight ui-card">
-			<% end %>
-				<%= link_to @highlight, class: "image" do %>
-					<%= image_tag @highlight.image %>
-				<% end %>
-				<%= link_to @highlight, class: "section-article__info" do %>
-					<h4 class="small-title semibold"><%= @highlight.name %></h4>
-					<p class="short-description"><%= @highlight.short_description %></p>
-				<% end %>
-				<%= render "components/social-media-links", article: @highlight %>
-			</div>
-		<% end %>
-
-
+		<h1 class="section__title" style="color:  <%= @intl.color %>; border-bottom:  solid 4px <%= @intl.color %>"><%= @intl.name %></h1>
 		<div class="section-articles-container">
-			
-			<% @articles.each do |article|%>
+			<% @intl_articles.each do |article|%>
 				<%= render "components/section-article", article: article %>
 			<% end %>
 		</div>
+		<%= link_to "Ver más", section_path(@intl), class: "view-more" %>
 
-		<%= will_paginate @articles, class: "site-pagination" %>
-
+		<h1 class="section__title" style="color:  <%= @local.color %>; border-bottom:  solid 4px <%= @local.color %>"><%= @local.name %></h1>
+		<div class="section-articles-container">
+			<% @local_articles.each do |article|%>
+				<%= render "components/section-article", article: article %>
+			<% end %>
+		</div>
+		<%= link_to "Ver más", section_path(@local), class: "view-more" %>
 		<!-- NOTAS DEL PROGRAMADOR-->
 			<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
 
@@ -46,18 +27,18 @@
 
 
 
-		<% if get_banner(@section, "Section", "Grande" ).count > 0 %>
+		<% if get_banner(@intl, "Section", "Grande" ).count > 0 %>
 
-			<%=render "components/big-banner", banner: get_banner(@section, "Section", "Grande" )  %>
+			<%=render "components/big-banner", banner: get_banner(@intl, "Section", "Grande" )  %>
 		<% else %>
-			<% if get_banner(@section, "Global", "Grande" ).count > 0 %>
-				<%= render "components/big-banner", banner: get_banner(@section, "Global", "Grande" ) %>
+			<% if get_banner(@intl, "Global", "Grande" ).count > 0 %>
+				<%= render "components/big-banner", banner: get_banner(@intl, "Global", "Grande" ) %>
 			<% end %>
 			<br/>
 		<% end %>
 		<div class="radio-banner__tune-in" style="margin-top:  8px; ">También te puede interesar:</div>
 
-		<% case @section.name %>
+		<% case @intl.name %>
 			<% when "Metrópoli" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("México").id, 3) , section_name: "México", highlight: "" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Mundo").id, 3) , section_name: "Mundo", highlight: "" %>
@@ -66,7 +47,7 @@
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Mundo").id, 3) , section_name: "Mundo", highlight: "" %>
 			<% when "Mundo" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Táctica Nacional e Internacional").id, 3) , section_name: "Táctica Nacional e Internacional", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Táctica").id, 3) , section_name: "Táctica", highlight: "" %>
 			<% when "Business" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("México").id, 3) , section_name: "México", highlight: "" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
@@ -74,7 +55,11 @@
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Táctica").id, 3) , section_name: "Táctica", highlight: "" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Tecnología").id, 3) , section_name: "Tecnología", highlight: "" %>
 				
-			<% when "Táctica" %>
+			<% when "Táctica Nacional e Internacional" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
+
+			<% when "Táctica Local" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
 				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
 
@@ -85,15 +70,15 @@
 		<% end %>
 
 	</div>
-	<% if @section.articles.count > 0 %>
-		<% if get_banner(@section, "Section", "Mediano" ).count > 0 %>
-			<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Section", "Mediano" ) %>
+	<% if @intl.articles.count > 0 %>
+		<% if get_banner(@intl, "Section", "Mediano" ).count > 0 %>
+			<%= render "components/sidebar", article: @intl.articles.first, banner: get_banner(@intl, "Section", "Mediano" ) %>
 		<% else %>
-			<% if get_banner(@section, "Global", "Mediano" ).count > 0 %>
-				<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Global", "Mediano" ) %>
+			<% if get_banner(@intl, "Global", "Mediano" ).count > 0 %>
+				<%= render "components/sidebar", article: @intl.articles.first, banner: get_banner(@intl, "Global", "Mediano" ) %>
 				
 			<% else %>
-				<%= render "components/sidebar", article: @articles.first, banner: "" %>
+				<%= render "components/sidebar", article: @intl.articles.first, banner: "" %>
 			<% end %>
 		<% end %>
 	<% end %>

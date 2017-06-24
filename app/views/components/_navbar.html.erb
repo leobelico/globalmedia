@@ -37,7 +37,8 @@
 	<% if Section.find_by(name: "Tecnología") %>		
 		<%= link_to "Tecnología", section_path(Section.find_by(name: "Tecnología")), class: "navbar__link" %>
 	<% end %>
-	<div class="dropdown">
+	<%= link_to "Táctica", tactica_path, class: "navbar__link" %>
+<!-- 	<div class="dropdown">
 		<p class="navbar__link">Táctica</p>
 		<div class="dropdown__options">
 			<% if Section.find_by(name: "Táctica Local") %>
@@ -50,7 +51,7 @@
 			<% end %>
 
 		</div>
-	</div>
+	</div> -->
 	<%= link_to "Colaboradores", collaborators_path, class: "navbar__link" %>
 	<% link_to "Acerca de", about_us_path, class: "navbar__link" %>
 </div>

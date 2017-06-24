@@ -1,6 +1,6 @@
 require 'will_paginate/array'
 class SectionsController < ApplicationController
-	before_action :authenticate_user!, except: [:index, :show]
+	before_action :authenticate_user!, except: [:index, :show, :sports]
 	before_action :set_section, only: [:show, :edit, :update, :destroy]
 	
 	def admin_show
@@ -9,6 +9,12 @@ class SectionsController < ApplicationController
 		
 	end
 	
+	def sports
+		@local = Section.find_by(name: "Táctica Local") 
+		@intl = Section.find_by(name: "Táctica Nacional e Internacional") 
+		@local_articles = @local.articles.last(3)
+		@intl_articles = @intl.articles.last(3)
+	end
 
 	def show
 		#articles = @section.articles	
