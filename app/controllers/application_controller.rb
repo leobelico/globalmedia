@@ -254,7 +254,12 @@ class ApplicationController < ActionController::Base
   def most_visited(id)
     section = Section.find(id)
     #@hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
-    articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND hits.created_at > ? AND hits.created_at < ?", 2.hours.ago, Time.now)
+    if section.name != "Entretenimiento" or section.name != "Táctica Nacional e Internacional" or section.name != "Entretenimiento" or section.name != "Farándula"
+      articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND hits.created_at > ? AND hits.created_at < ?", 2.hours.ago, Time.now)
+    else  
+      articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND articles.section != 'Táctica Local' AND articles.section != 'Táctica Nacional e Internacional' AND articles.section != 'Entretenimiento' AND articles.section != 'Farándula' AND hits.created_at > ? AND hits.created_at < ?", 2.hours.ago, Time.now)
+    end
+    # Táctica Nacional, Internacional, Farándula, Entretenimiento 
 
     recommendations = SectionHighlight.where(section: section)
     re = []
