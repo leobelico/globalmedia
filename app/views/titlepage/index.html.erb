@@ -72,3 +72,9 @@
 		<%= render "components/big-banner", banner: get_banner("", "Global", "Grande" )  %>
 	<% end %>
 <% end %>
+<script>
+	setTimeout(function(){
+	   window.location.reload(1);
+	   console.log("reloading");
+	}, 1200000);
+</script>

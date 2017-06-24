@@ -7,16 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 sections = Section.first_or_create([
-	{name: "San Luis"},
-	{name: "Seguridad"},
-	{name: "Nacional"},
-	{name: "Internacional"},
+	{name: "Metrópoli"},
+	{name: "México"},
+	{name: "Mundo"},
 	{name: "Farándula"},
 	{name: "Táctica Local"},
 	{name: "Táctica Nacional e Internacional"},
-	{name: "Negocios"},
-	{name: "Estados"},
-	{name: "Actualidad"},
+	{name: "Business"},
+	{name: "Entretenimiento"},
+	{name: "Tecnología"},
 	{name: "Último Momento"},
 	{name: "Denuncia Global"},
 	{name: "Acerca de"}
