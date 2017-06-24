@@ -19020,7 +19020,8 @@ module.exports = {
 			<% end %>
 		</div>
 
-		<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3), section_name: "San Luis", section_name: "San Luis", highlight: "" %>
+		<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3), section_name: "Metrópoli", section_name: "Metrópoli", highlight: "" %>
+		<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3), section_name: "México", section_name: "Metrópoli", highlight: "" %>
 		
 		<script>
 			player = videojs('stream'); 
