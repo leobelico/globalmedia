@@ -4,7 +4,7 @@
 		<%= link_to "Ir a sección", section_path(Section.find_by(name: section_name)), class: "link" %>
 	</div>
 	<% articles.each do |article| %>
-		<div class="section-recommendations__article">
+		<div class="section-recommendations__article ui-card">
 			<%= link_to article, class: "wrapper-link" do %>
 				<%= image_tag article.image, class: "section-recommendations__image" %>
 				<% if article.exclusive? %>
