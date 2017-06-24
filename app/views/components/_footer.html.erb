@@ -3,12 +3,11 @@
 		<%= image_tag "logo-white.svg" %>
 		
 	</div>
-	<div class="footer-column">
-		<div class="footer__row">
-			<% Section.where(visible: true).each do  |section| %>
-				<%= link_to section.name, section, class: "footer__section-link" %>
-			<% end %>
-		</div>
+	<div class="footer__column">
+		<%= link_to "Inicio", root_path, class: "footer__section-link" %>
+		<%= link_to "Contáctanos", corporativo_path(Section.find_by(name: "Contáctanos").slug), class: "footer__section-link" %>
+		<%= link_to "Anunciate con nosotros", corporativo_path(Section.find_by(name: "Anunciate con nosotros").slug), class: "footer__section-link" %>
+		<%= link_to "Quiénes Somos", corporativo_path(Section.find_by(name: "Quiénes Somos").slug), class: "footer__section-link" %>
 	</div>
 	<p class="disclaimer">2016 Global Media Comunicaciones. Todos los derechos reservados. <br><br>Prohibida la reproducción total o parcial, incluyendo cualquier medio electrónico o mágnetico.</p>
 	

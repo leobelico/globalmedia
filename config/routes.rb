@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :sections, only: [:show], param: :slug
   get "tactica", to: "sections#sports"
+  get "corporativo", to: "sections#corporation"
   resources :relationships
   resources :stations do 
     get "articles", to: "stations#articles"

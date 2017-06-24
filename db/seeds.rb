@@ -18,7 +18,9 @@ sections = Section.first_or_create([
 	{name: "Tecnología"},
 	{name: "Último Momento"},
 	{name: "Denuncia Global"},
-	{name: "Acerca de"}
+	{name: "Quiénes Somos"},
+	{name: "Contáctanos"},
+	{name: "Anunciate con nosotros"}
 ])	
 
 

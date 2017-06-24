@@ -1,0 +1,115 @@
+<div class="interface--row">
+	
+	<div class="section main-content"> 
+
+		<h1 class="section__title" style="color:  <%= @section.color %>; border-bottom:  solid 4px <%= @section.color %>"><%= @section.name %></h1>
+	
+
+		<% if @highlight %>
+			<h1 class="title"><%= @highlight.name %></h1>	
+			<p class="short-description"><%= @highlight.short_description %></p>
+			<div class="article__info">
+				<% if @highlight.author and @highlight.author.name != "Ninguno" %>
+					<p class="author">Por <%= @highlight.author.name %></p>
+
+				<% else %>
+					<% if @highlight.user %>
+						<p class="author">Por <%= @highlight.user.full_name %></p>
+					<% else %>
+						<p class="author">--</p>
+					<% end %>
+				<% end %>
+				<p class="date"><%= l(@highlight.created_at, format: "%H:%M %A %e %B, %Y") %></p>
+				<% if @highlight.articable_type == "Section" %>
+					<%= link_to @highlight.section, section_path(Section.find_by_name(@highlight.section)), class: "section" %>
+				<% end %>
+				<%= render "components/social-media-links", article: @highlight %>
+				
+			</div>
+			<% if @highlight.keyword %>
+				<div class="keyword-container">#EsNoticia: <%= @highlight.keyword.keyword %></div>
+			<% end %>
+			<div class="hashtags-container">
+				<%= render @highlight.hashtags %>
+			</div>
+
+			<% if @highlight.video_url != "" %> 
+				<div class="iframe">
+					<iframe width="650" height="415" src="<%= @highlight.	video_url %>" frameborder="0" allowfullscreen></iframe>
+				</div>
+			<% else %>		
+				<% if @highlight.image %>
+					<%= image_tag @highlight.image, class: "main-image" %>
+				<% end %>
+			<% end %>
+			<% if @highlight.images.count > 0  %>
+				<div class="gallery__thumbnails">
+					<% @highlight.images.each_with_index do |image, index| %>
+						<%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
+					<% end %>	
+				</div>
+			<% end %>
+			<% if !@highlight.note.empty? %>
+				<div id="quill-container" class="quill--article">
+				</div>
+			<% elsif @highlight.note_old != nil and @highlight.note.empty? %>
+				<div class="quill--article article--old">
+				</div>
+				<script>
+					$(".quill--article").html("<%= @highlight.note_old %>"); 
+				</script>
+			<% end %>
+		<% end %>
+
+
+		<div class="section-articles-container">
+			
+			<% @articles.each do |article|%>
+				<%= render "components/section-article", article: article %>
+			<% end %>
+		</div>
+		<script>
+			<% if @note %>
+				var content = <%= raw(@note) %>;
+				var container = document.getElementById("quill-container")
+				display_quill_note(content, container);
+			<% end %>
+
+		</script>
+		<%= will_paginate @articles, class: "site-pagination" %>
+
+		<!-- NOTAS DEL PROGRAMADOR-->
+			<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
+
+			<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
+		<!-- -->
+		<!--  -->
+
+
+
+
+		<% if get_banner(@section, "Section", "Grande" ).count > 0 %>
+
+			<%=render "components/big-banner", banner: get_banner(@section, "Section", "Grande" )  %>
+		<% else %>
+			<% if get_banner(@section, "Global", "Grande" ).count > 0 %>
+				<%= render "components/big-banner", banner: get_banner(@section, "Global", "Grande" ) %>
+			<% end %>
+			<br/>
+		<% end %>
+
+	</div>
+	<% if @section.articles.count > 0 %>
+		<% if get_banner(@section, "Section", "Mediano" ).count > 0 %>
+			<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Section", "Mediano" ) %>
+		<% else %>
+			<% if get_banner(@section, "Global", "Mediano" ).count > 0 %>
+				<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Global", "Mediano" ) %>
+				
+			<% else %>
+				<%= render "components/sidebar", article: @articles.first, banner: "" %>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>
+

@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 class SectionsController < ApplicationController
-	before_action :authenticate_user!, except: [:index, :show, :sports]
-	before_action :set_section, only: [:show, :edit, :update, :destroy]
+	before_action :authenticate_user!, except: [:index, :show, :sports, :corporation]
+	before_action :set_section, only: [:corporation, :show, :edit, :update, :destroy]
 	
 	def admin_show
 		@section = Section.find(params[:format])
@@ -10,12 +10,20 @@ class SectionsController < ApplicationController
 	end
 	
 	def sports
-		@local = Section.find_by(name: "Táctica Local") 
+		@local = Section.find_by(slug: "Táctica Local") 
 		@intl = Section.find_by(name: "Táctica Nacional e Internacional") 
 		@local_articles = @local.articles.last(3)
 		@intl_articles = @intl.articles.last(3)
 	end
+	def corporation 
+		@section = Section.find_by(slug: params[:format])
+   		@highlight = Article.where(articable_id: @section.id, highlight: true, published: true).order(updated_at: "DESC").first
+		@articles = @section.articles.paginate(page: params[:page], per_page: 3)
+		if @highlight
+			@note = @highlight.note
+		end
 
+	end 
 	def show
 		#articles = @section.articles	
 		r_articles = []

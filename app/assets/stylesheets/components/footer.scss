@@ -34,6 +34,10 @@
 	display:  flex; 
 	flex-direction:  column; 
 	flex:  1; 
+	* {
+		color:  #ffffff; 
+		margin-bottom:  8px; 
+	}
 	&:first-of-type {
 		align-items:  flex-start; 
 	}
