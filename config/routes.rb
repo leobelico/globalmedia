@@ -191,6 +191,8 @@ Rails.application.routes.draw do
           get "search"
         end
       end
+      resources :devices, only: [:create]
+      resources :banners, only: [:index]
       resources :podcasts, only: [:index]
       resources :stations, only: [:index, :show]
       resources :cameras, only: [:index]
