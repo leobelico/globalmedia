@@ -41,6 +41,7 @@
 	.datetime {
 		font-size:  11px; 
 		margin-bottom:  8px; 
+		margin-top:  auto; 
 	}
 	.short-description {
 		font-weight:  400; 
@@ -55,7 +56,8 @@
 .section-article__info {
 	display:  flex; 
 	flex-direction:  column; 
-	width:  100%; 
+	width:  100%;  
+	flex-grow:  1; 
 }
 .section-article__image {
 	width:  100%; 

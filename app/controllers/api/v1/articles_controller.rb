@@ -4,6 +4,10 @@ class Api::V1::ArticlesController < Api::BaseController
 		@articles = Article.where(published: true).order(created_at: "DESC") 
     	paginate json: @articles, adapter: :json, per_page: 20
 	end
+	def highlights 
+		# @highlights = Highlight.where(published: true).order(order: "ASC")
+		@articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = article_id").where("articles.published = true AND highlight.published = true")
+	end
 	def show 
 		if @article 
 			json_response(@article, :ok)

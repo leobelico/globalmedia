@@ -69,6 +69,14 @@
 .sp__article:first-child {
 	width:  320px;
 }
+.sp__info {
+	display:  flex; 
+	flex-direction:  column; 
+	flex-grow:  1; 
+	.social-media {
+		margin-top:  AUTO; 
+	}
+}
 @media screen and (max-width:  1023px) {
 	.section-preview,
 	.sp__articles {

@@ -32,7 +32,7 @@ development:
   username: postgres
   password: codepelm-319
   host: localhost
-  port: 5432
+  port: 5431
   pool: 10
 
   # The specified database role being used to connect to postgres.
