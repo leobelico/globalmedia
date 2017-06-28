@@ -6,7 +6,12 @@ class Api::V1::ArticlesController < Api::BaseController
 	end
 	def highlights 
 		# @highlights = Highlight.where(published: true).order(order: "ASC")
-		@articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = article_id").where("articles.published = true AND highlight.published = true")
+		@articles = Article.joins("INNER JOIN highlights ON highlights.article_id = articles.id WHERE highlights.published = true")
+		if @articles 
+			json_response(@articles, :ok)
+		else
+			render json: { error: "Not found" }, status: :not_found
+		end
 	end
 	def show 
 		if @article 
