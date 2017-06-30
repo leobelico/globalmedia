@@ -2,7 +2,7 @@
 	
 	<div class="section main-content"> 
 
-		<h1 class="section__title" style="color:  <%= @intl.color %>; border-bottom:  solid 4px <%= @intl.color %>"><%= @intl.name %></h1>
+		<h1 class="section__title" style="background-color:  <%= @intl.color %>; "><%= @intl.name %></h1>
 		<div class="section-articles-container">
 			<% @intl_articles.each do |article|%>
 				<%= render "components/section-article", article: article %>
@@ -10,7 +10,7 @@
 		</div>
 		<%= link_to "Ver más", section_path(@intl), class: "view-more" %>
 
-		<h1 class="section__title" style="color:  <%= @local.color %>; border-bottom:  solid 4px <%= @local.color %>"><%= @local.name %></h1>
+		<h1 class="section__title" style="background-color:  <%= @local.color %>;"><%= @local.name %></h1>
 		<div class="section-articles-container">
 			<% @local_articles.each do |article|%>
 				<%= render "components/section-article", article: article %>

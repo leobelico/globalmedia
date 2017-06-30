@@ -1,13 +1,26 @@
 .section__title {
 	font-size:  36px; 
 	font-weight:  900; 
-	color:  $tertiary; 
-	width:  100%; 
+	color:  #ffffff; 
+	width:  calc(100% - 24px); 
+	background:  $tertiary;
+	box-sizing:  border-box; 
 	margin-top:  18px; 
-	padding-bottom:  18px; 
+	padding:  18px; 
+	padding-left:  28px; 
+	margin-left:  24px; 
 	margin-bottom:  18px; 
-	border-bottom:  solid 4px $tertiary;
-
+	// border-bottom:  solid 4px $tertiary;
+	&:before {
+		position:absolute;
+	    left:-11px;
+	    top:  0; 
+	    content:" ";
+	    width:24px;
+	    height:100%;
+	    background: $tertiary;
+	    transform:skew(-15deg,0deg);
+	}
 }
 .section__small-title {
 	font-size:  18px; 

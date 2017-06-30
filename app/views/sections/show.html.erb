@@ -2,7 +2,7 @@
 	
 	<div class="section main-content"> 
 
-		<h1 class="section__title" style="color:  <%= @section.color %>; border-bottom:  solid 4px <%= @section.color %>"><%= @section.name %></h1>
+		<h1 class="section__title" style="background-color:  <%= @section.color %>;"><%= @section.name %></h1>
 	
 		<% if @section.name == "Denuncia Global" or @section.name == "DENUNCIA GLOBAL" %>
 			<%= render "components/global_complaint_videos", article: @articles.first %>
