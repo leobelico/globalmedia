@@ -19,7 +19,7 @@
 			.sp__articles {
 			}
 		}
-		&:nth-of-type(odd) {
+		&:nth-of-type(even) {
 			.sp__header {
 				flex-direction:  row-reverse; 
 				.sp__link {
