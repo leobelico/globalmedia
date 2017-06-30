@@ -69,7 +69,7 @@
 	}
 	.special-articles__article {
 		&:before {
-			content: url('search-blue.svg');  
+			content: url('assets/search-blue.svg');  
 			display:  block; 
 			position:  absolute; 
 			top:  calc(50% - 8px); 
@@ -108,7 +108,7 @@
 	width:  100%; 
 	padding-left:  16px; 
 	&:before {
-		content: url('warning.svg'); 
+		content: url('assets/warning.svg'); 
 		display:  block; 
 		position:  absolute; 
 		top:  calc(50% - 8px);

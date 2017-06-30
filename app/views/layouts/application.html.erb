@@ -117,6 +117,7 @@
 		<%= render "components/navbar" if !panel_url %>
 	</div>
 	<%= render "components/mobile-menu" if !panel_url %>
+	<%= render "components/stations-floating-bar" if !panel_url %>
 	<%= render "components/admin/admin-floating-bar" if !panel_url and user_signed_in? %>
 	
 	<% if !panel_url %>
@@ -139,10 +140,10 @@
 						navflag = false;
 					}
 				} 
-				if ($(window).width() > 1365) {
+				if ($(window).width() > 1260) {
 					if ($(window).scrollTop() > 144 && newsflag == false ) {
 						newsflag = true;
-						TweenMax.fromTo(".floating-news", .3, {
+						TweenMax.fromTo(".floating-news, .stations-floating-bar", .3, {
 							opacity: 0, 
 							pointerEvents:  "none", 
 							y: -24
@@ -153,7 +154,7 @@
 						});
 					} else if ($(window).scrollTop() < 144 && newsflag == true ) {
 						newsflag = false;
-						TweenMax.fromTo(".floating-news", .3, {
+						TweenMax.fromTo(".floating-news, .stations-floating-bar", .3, {
 							opacity: 1, 
 							pointerEvents:  "all", 
 							y: 0

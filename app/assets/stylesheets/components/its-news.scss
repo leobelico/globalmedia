@@ -45,7 +45,7 @@
 .floating-news {
 	display:  none; 
 }
-@media screen and (min-width:  1366px) {
+@media screen and (min-width:  1260px) {
 
 	.floating-news {
 		display:  flex; 
@@ -58,7 +58,8 @@
 		opacity:  0; 
 		pointer-events:  none; 
 		.its-news__hashtag {
-			margin-bottom:  8px; 
+			margin-bottom:  8px;
+			padding:  8px;  
 		}
 		.its-news__news {
 			display:  flex; 
@@ -66,8 +67,9 @@
 			align-items:  flex-end; 
 			a {
 				background:  #FFD600; 
-				padding:  7px 18px; 
+				padding:  8px; 
 				margin-bottom:  8px; 
+				font-size:  13.5px; 
 			} 
 		}
 	}
