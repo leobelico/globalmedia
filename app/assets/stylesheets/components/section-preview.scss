@@ -1,3 +1,6 @@
+.section-previews-container {
+	width:  100%; 	
+}
 .section-preview {
 	width:  100%; 
 	display:  flex; 
@@ -8,6 +11,25 @@
 	padding:  8px; 
 	.social-media {
 		margin-top:  auto; 
+	}
+}
+@media screen and (min-width:  1024px) {	
+	.section-preview {
+		&:nth-of-type(odd) {
+			.sp__articles {
+			}
+		}
+		&:nth-of-type(odd) {
+			.sp__header {
+				flex-direction:  row-reverse; 
+				.sp__link {
+					text-align:  left; 
+				}
+			}
+			.sp__articles {
+				flex-direction:  row-reverse; 	
+			}
+		}
 	}
 }
 .sp__header {

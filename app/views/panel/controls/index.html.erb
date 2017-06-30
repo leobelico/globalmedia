@@ -21,7 +21,7 @@
 		<p class="table__cell">Nombre del Agente:</p>
 		<p class="table__cell">Hoja de Datos:</p>
 		<p class="table__cell">Editar:</p>
-		<p class="table__cell">Delete:</p>
+		<!-- <p class="table__cell">Delete:</p> -->
 	</div>
 	<% @controls.each do |control| %>
 		<div class="table__row">
@@ -40,7 +40,7 @@
 			<p class="table__cell"><% if control.datasheet %>Activo<% else %>Inactivo<% end %></p>
 
 			<%= link_to "Editar", edit_panel_control_path(control), class: "table__cell edit" %>
-			<%= link_to "Eliminar", panel_control_path(control), method: :delete, data: { confirm: "¿Estas seguro de querer eliminar el banenr? Esta acción no se puede deshacer." }, class: "table__cell delete" %>
+			<%# link_to "Eliminar", panel_control_path(control), method: :delete, data: { confirm: "¿Estas seguro de querer eliminar el banenr? Esta acción no se puede deshacer." }, class: "table__cell delete" %>
 		</div>
 	<% end %>	
 </div>
