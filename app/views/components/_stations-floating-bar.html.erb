@@ -4,4 +4,9 @@
 			<%= image_tag station.image %>
 		<% end %>
 	<% end %>
+	<% get_video_stations.each do |station| %>
+		<%= link_to station, class: "station-link" do %>
+			<%= image_tag station.image %>
+		<% end %>
+	<% end %>
 </div>

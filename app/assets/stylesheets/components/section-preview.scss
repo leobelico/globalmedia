@@ -18,6 +18,13 @@
 		&:nth-of-type(odd) {
 			.sp__articles {
 			}
+			.section-preview__header .section-preview__name {
+				margin-right:  auto; 
+				margin-top:  auto; 
+			}
+			.sp__bg-img	{
+				transform:  scaleX(-1);
+			}
 		}
 		&:nth-of-type(even) {
 			.sp__header {
@@ -29,6 +36,11 @@
 			.sp__articles {
 				flex-direction:  row-reverse; 	
 			}
+
+			.section-preview__header .section-preview__name {
+				margin-left:  auto; 
+				margin-top:  auto; 
+			}
 		}
 	}
 }
@@ -38,6 +50,28 @@
 	flex-direction:  row; 
 	align-items:  center; 
 	justify-content:  space-between; 
+}
+.section-preview__header {
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  flex-start; 
+	justify-content:  space-between; 
+	position:  relative; 
+	height:  28px; 
+	width:  100%; 
+	.sp__bg-img	{
+		width:  100%; 
+		height:  100%; 
+		position:  absolute; 
+		object-fit:  fill; 
+	}
+}
+.section-preview__name {
+	position:  relative; 
+	font-weight:  bold; 
+	text-transform:  uppercase; 
+	color:  $tertiary; 
+	z-index:  100; 
 }
 .sp__name {
 	font-weight:  900; 

@@ -37,6 +37,18 @@
 		margin-bottom:  18px;  
 	}
 }
+.recommendation__header {
+	position:  relative; 
+	.rh__title {
+		position:  absolute; 
+		top:  8px; 
+		right:  8px; 
+		font-size:  36px; 
+		font-weight:  bold; 
+		font-family:  'Pragati Narrow', sans-serif; 
+		color:  #000000 !important; 
+	}
+}
 .recommendation__image {
 	width:  100%; 
 	height:  180px; 
