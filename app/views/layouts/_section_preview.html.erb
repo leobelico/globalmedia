@@ -1,13 +1,14 @@
 <div class="section-preview">
 
-	<%= link_to section, class: "section-preview__header " do %>
-		<%= image_tag "section-preview-background.svg", class: "sp__bg-img" %>
-		<div class="section-preview__name" style="color: <%= section.color %>"><%= section.name %></div>
-		<!-- <p class="sp__link" style="background-color: <%= section.color %>">Ir a sección</p> -->
+	<%= link_to section, class: "sp__header " do %>
+		<div class="skews">
+			<div class="sp__skew sp__skew-1"></div>
+			<div class="sp__skew sp__skew-2"></div>
+			<div class="sp__skew sp__skew-3"></div>
+		</div>
+		<div class="sp__name" style="background-color: <%= section.color %>"><%= section.name %></div>
+		<p class="sp__link" style="background-color: <%= section.color %>"><%= section.description %> ladfasdfasdf</p>
 	<% end %>
-	<p class="section-preview__description">
-		<%= section.description %>
-	</p>
 	<div class="sp__articles">
 		<% if highlight and highlight != ""%>
 			<div class="sp__article ui-card">

@@ -8,18 +8,13 @@
 	align-items:  flex-start; 
 	justify-content:  flex-start;  
 	box-sizing: border-box; 
-	padding:  8px; 
+	padding-top:  8px; 
+	padding-bottom:  8px; 
 	.social-media {
 		margin-top:  auto; 
 	}
 }
-.section-preview__description {
-	// margin-bottom:  8px; 
-	width:  100%; 
-	font-size:  14.5px; 
-	line-height:  125%; 
-	margin-top:  8px; 
-}
+
 @media screen and (min-width:  1024px) {	
 	.section-preview {
 		&:nth-of-type(odd) {
@@ -28,9 +23,6 @@
 			.section-preview__header .section-preview__name {
 				margin-right:  auto; 
 				margin-top:  auto; 
-			}
-			.sp__bg-img	{
-				transform:  scaleX(-1);
 			}
 		}
 		&:nth-of-type(even) {
@@ -51,52 +43,67 @@
 		}
 	}
 }
-
+.skews {
+	display:  flex; 
+	width:  54px; 
+	z-index:  1; 
+}
+.section-preview:nth-of-type(even) {
+	.skews {
+		transform:  skewX(15deg);
+		margin-right:  4px; 
+		flex-direction:  row-reverse; 
+	}
+	.sp__name {
+		padding-right:  24px; 
+		margin-right:  -6px; 
+	}
+}
+.section-preview:nth-of-type(odd) {
+	.skews {
+		transform:  skewX(-15deg);
+		margin-left:  4px; 
+	}
+	.sp__name {
+		padding-left:  24px; 
+		padding-right:  24px; 
+		margin-left:  -6px; 
+	}
+}
+.sp__skew-1 { background: #e9e9e9; }
+.sp__skew-2 { background: $tertiary;  }
+.sp__skew-3 { background: #000000; }
+.sp__skew {
+	z-index: 1; 
+	display:  flex; 
+	// height:  32px; 
+	height:  100%; 
+	width:  18px; 
+}
 .sp__header {
 	width:  100%; 
 	display:  flex; 
 	flex-direction:  row; 
-	align-items:  center; 
+	align-items:  stretch; 
 	justify-content:  space-between; 
-}
-.section-preview__header {
-	display:  flex; 
-	flex-direction:  row; 
-	align-items:  flex-start; 
-	justify-content:  space-between; 
-	position:  relative; 
-	height:  42px; 
-	width:  100%; 
-	.sp__bg-img	{
-		width:  100%; 
-		height:  100%; 
-		position:  absolute; 
-		object-fit:  fill; 
-		object-position: center center; 
-	}
-}
-.section-preview__name {
-	position:  relative; 
-	font-weight:  bold; 
-	text-transform:  uppercase; 
-	color:  $tertiary; 
-	z-index:  100; 
-	font-size:  21px; 
 }
 .sp__name {
 	font-weight:  900; 
 	font-size:  18px; 
-	color:  $primary; 
+	padding:  8px; 
+	background:  $primary; 
+	color:  #ffffff; 
 	text-transform:  uppercase; 
 	letter-spacing:  2px; 
+	width:  auto; 
 }
 .sp__link {
 	text-align:  right; 
 	font-size:  14px; 
 	color:  #ffffff; 
-	background:  $primary; 
-	padding:  8px; 
-	width: 768px;
+	padding:  10px; 
+	width: auto;
+	flex: 1; 
 }
 .sp__articles {
 	margin-top:  15px; 
