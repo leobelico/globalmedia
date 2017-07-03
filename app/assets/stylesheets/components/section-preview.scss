@@ -13,6 +13,13 @@
 		margin-top:  auto; 
 	}
 }
+.section-preview__description {
+	// margin-bottom:  8px; 
+	width:  100%; 
+	font-size:  14.5px; 
+	line-height:  125%; 
+	margin-top:  8px; 
+}
 @media screen and (min-width:  1024px) {	
 	.section-preview {
 		&:nth-of-type(odd) {
@@ -44,6 +51,7 @@
 		}
 	}
 }
+
 .sp__header {
 	width:  100%; 
 	display:  flex; 
@@ -57,13 +65,14 @@
 	align-items:  flex-start; 
 	justify-content:  space-between; 
 	position:  relative; 
-	height:  28px; 
+	height:  42px; 
 	width:  100%; 
 	.sp__bg-img	{
 		width:  100%; 
 		height:  100%; 
 		position:  absolute; 
 		object-fit:  fill; 
+		object-position: center center; 
 	}
 }
 .section-preview__name {
@@ -72,6 +81,7 @@
 	text-transform:  uppercase; 
 	color:  $tertiary; 
 	z-index:  100; 
+	font-size:  21px; 
 }
 .sp__name {
 	font-weight:  900; 

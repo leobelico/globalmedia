@@ -5,6 +5,9 @@
 		<div class="section-preview__name" style="color: <%= section.color %>"><%= section.name %></div>
 		<!-- <p class="sp__link" style="background-color: <%= section.color %>">Ir a sección</p> -->
 	<% end %>
+	<p class="section-preview__description">
+		<%= section.description %>
+	</p>
 	<div class="sp__articles">
 		<% if highlight and highlight != ""%>
 			<div class="sp__article ui-card">
