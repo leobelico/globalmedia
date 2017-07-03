@@ -59,35 +59,67 @@
 
 		<% case @section.name %>
 			<% when "Metrópoli" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("México").id, 3) , section_name: "México", highlight: "" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Mundo").id, 3) , section_name: "Mundo", highlight: "" %>
+				<% if Section.where("México").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("México").id, 3) , section_name: "México", highlight: "" %>
+				<% end %>
+				<% if Section.where("Mundo").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Mundo").id, 3) , section_name: "Mundo", highlight: "" %>
+				<% end %>
 			<% when "México" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Mundo").id, 3) , section_name: "Mundo", highlight: "" %>
+				<% if Section.where("Metrópoli").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
+				<% end %>
+				<% if Section.where("Mundo").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Mundo").id, 3) , section_name: "Mundo", highlight: "" %>
+				<% end %>
 			<% when "Mundo" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Táctica Nacional e Internacional").id, 3) , section_name: "Táctica Nacional e Internacional", highlight: "" %>
-			<% when "Business" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("México").id, 3) , section_name: "México", highlight: "" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
+				<% if Section.where("Entretenimiento").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
+				<% end %>
+				<% if Section.where("Táctica Nacional e Internacional").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Táctica Nacional e Internacional").id, 3) , section_name: "Táctica Nacional e Internacional", highlight: "" %>
+				<% end %>
+
+			<% when "Negocios" %>
+				<% if Section.where(name: "México").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("México").id, 3) , section_name: "México", highlight: "" %>
+				<% end %>
+				<% if Section.where(name: "Metrópoli").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
+				<% end %>
 			<% when "Entretenimiento" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Táctica Nacional e Internacional").id, 3) , section_name: "Táctica Nacional e Internacional", highlight: "" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Tecnología").id, 3) , section_name: "Tecnología", highlight: "" %>
+				<% if Section.where(name: "Táctica Internacional").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Táctica Internacional").id, 3) , section_name: "Táctica Internacional", highlight: "" %>
+				<% end %>
+				<% if Section.where(name: "Tecnología").count > 0 %>
+
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Tecnología").id, 3) , section_name: "Tecnología", highlight: "" %>
+				<% end %>
 				
 			<% when "Táctica Nacional e Internacional" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
-
+				<% if Section.where(name: "Metrópoli").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
+				<% end %>
+				<% if Section.where(name: "Entretenimiento").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
+				<% end %>
 			<% when "Táctica Local" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
+				<% if Section.where("Metrópoli").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
+				<% end %>
+				<% if Section.where("Entretenimiento").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
+				<% end %>
 
 			<% when "Tecnología" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
-				<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
+				<% if Section.where("Metrópoli").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
+				<% end %>
+				<% if Section.where("Entretenimiento").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
+				<% end %>
 
 		<% end %>
-
 	</div>
 	<% if @section.articles.count > 0 %>
 		<% if get_banner(@section, "Section", "Mediano" ).count > 0 %>
