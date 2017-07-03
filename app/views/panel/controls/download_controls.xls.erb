@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Cliente</Data></Cell>
+        <Cell><Data ss:Type="String">Fecha Inicial:</Data></Cell>
+        <Cell><Data ss:Type="String">Fecha Final:</Data></Cell>
+        <Cell><Data ss:Type="String">Nombre del Evento:</Data></Cell>
+        <Cell><Data ss:Type="String">Dirección:</Data></Cell>
+         <Cell><Data ss:Type="String">Estación:</Data></Cell>
+        <Cell><Data ss:Type="String">Unidad:</Data></Cell>
+        <Cell><Data ss:Type="String">Técnicos:</Data></Cell>
+        <Cell><Data ss:Type="String">Observaciones:</Data></Cell>
+        <Cell><Data ss:Type="String">Agente:</Data></Cell>
+        <Cell><Data ss:Type="String">Número de Contrato:</Data></Cell>
+        <Cell><Data ss:Type="String">Estatus del Contrato:</Data></Cell>
+        <Cell><Data ss:Type="String">Hoja de Datos:</Data></Cell>
+      </Row>
+    <% @controls.each do |control| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= control.client_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= control.init_date %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= control.end_date %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= control.event_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= control.event_address %></Data></Cell>
+         <Cell><Data ss:Type="String"><%= control.station_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= control.unit_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= control.techs %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= control.observations %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= control.agent_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= control.contract_number %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= control.contract_state %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= control.datasheet %></Data></Cell>
+        
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

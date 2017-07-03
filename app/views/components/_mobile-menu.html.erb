@@ -3,7 +3,7 @@
 		<div class="mobile-menu__column">
 			
 			<div class="mobile-menu__section">
-				<h4 class="section__title">Secciones:</h4>
+				<h4 class="mobile-menu__section-title">Secciones:</h4>
 				<% get_sections.each do |section| %>
 					<%= link_to section.name, section, class: "mobile-menu__link" %>
 				<% end %>
@@ -12,19 +12,19 @@
 		<div class="mobile-menu__column">
 
 			<div class="mobile-menu__section">
-				<h4 class="section__title">Radio:</h4>
+				<h4 class="mobile-menu__section-title">Radio:</h4>
 				<% get_radio_stations.each do |station| %>
 					<%= link_to station.name, station, class: "mobile-menu__link" %>
 				<% end %>
 			</div>
 			<div class="mobile-menu__section">
-				<h4 class="section__title">T.V:</h4>
+				<h4 class="mobile-menu__section-title">T.V:</h4>
 				<% get_video_stations.each do |station| %>
 					<%= link_to station.name, station, class: "mobile-menu__link" %>
 				<% end %>
 			</div>
 			<div class="mobile-menu__section">
-				<h4 class="section__title">Noticieros:</h4>
+				<h4 class="mobile-menu__section-title">Noticieros:</h4>
 				<% get_news_stations.each do |station| %>
 					<%= link_to station.name, station, class: "mobile-menu__link" %>
 				<% end %>

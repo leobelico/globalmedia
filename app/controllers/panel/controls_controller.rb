@@ -13,7 +13,13 @@ class Panel::ControlsController < ApplicationController
 	def new
 		@control = Control.new	
 	end
+	def download_controls
+		@controls = Control.all
 
+		respond_to do |format|
+    		format.xls 
+  		end
+	end
 	def create
 		@control = Control.new(control_params)
 		if @control.save

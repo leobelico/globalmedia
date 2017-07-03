@@ -225,3 +225,20 @@
 		}
 	}
 }
+@media screen and (max-width:  350px) {
+	.header__container {
+		box-sizing:  border-box; 
+		align-items:  center; 
+		height:  30px; 
+	}
+	.container--2 {
+		p, span {
+			font-size:  12.5px; 
+			margin-top:  auto; 
+			margin-bottom:  auto; 
+		}
+		a {
+			margin-bottom:  -4px; 
+		}
+	}
+}

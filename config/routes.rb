@@ -118,6 +118,7 @@ Rails.application.routes.draw do
     resources :hit_objectives
     resources :controls do 
       get :done, on: :collection
+      get :download_controls, on: :collection
     end
     # get "panel/controls/done", to: "panel/controls#done"
     resources :hashtags, only: :index do
