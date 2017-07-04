@@ -1,5 +1,11 @@
 <div class="section-recommendations">
 	<div class="special-articles__type">
+		<div class="skews">
+			<div class="sp__skew sp__skew-1"></div>
+			<div class="sp__skew sp__skew-2"></div>
+			<div class="sp__skew sp__skew-3"></div>
+		</div>
+
 		<p class="type"><%= section_name %></p>
 		<%= link_to "Ir a sección", section_path(Section.find_by(name: section_name)), class: "link" %>
 	</div>
