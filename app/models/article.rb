@@ -37,6 +37,13 @@ class Article < ApplicationRecord
       return nil 
     end
   end
+  def section_color 
+    if self.articable
+      self.articable.color
+    else
+      return nil
+    end
+  end
 
   private
     def associate_tags

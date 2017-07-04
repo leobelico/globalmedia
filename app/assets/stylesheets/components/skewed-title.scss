@@ -1,0 +1,38 @@
+.skewed-title {
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  stretch; 
+	justify-content:  space-between; 
+	width:  100%; 
+	margin-bottom:  8px; 
+	.skews {
+		display:  flex; 
+		flex-direction:  row; 
+		align-items:  stretch; 
+		transform:  skewX(-15deg); 
+		margin-left:  4px;  
+		.skew { 
+			height:  100%; 
+			width:  18px; 
+		}
+		.skew--gray { background: #616161; }
+		.skew--blue { background: $tertiary;  }
+		.skew--black { background: #000000; }
+	}
+	.sk__title {
+		width:  auto; 
+		color:  #ffffff; 
+		background-color:  $tertiary; 
+		padding:  8px 24px; 
+		font-size:  18px; 
+		margin-left:  -6px; 
+	}
+	.sk__link {
+		flex:  1; 
+		text-align:  right; 
+		font-size:  14px; 
+		padding:  10px;
+		color:  #ffffff; 
+		background:  $tertiary;  
+	}
+}
