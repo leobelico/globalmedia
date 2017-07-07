@@ -11,9 +11,14 @@ class SectionsController < ApplicationController
 	
 	def sports
 		@local = Section.find_by(name: "Táctica Local") 
-		@intl = Section.find_by(name: "Táctica Nacional e Internacional") 
-		@local_articles = @local.articles.last(3)
-		@intl_articles = @intl.articles.last(3)
+		if Section.find_by(name: "Táctica Nacional e Internacional")
+			@intl = Section.find_by(name: "Táctica Nacional e Internacional") 
+			@intl_articles = @intl.articles.last(3)
+		end 
+		if Section.find_by(name: "Táctica Local")
+			@local = Section.find_by(name: "Táctica Local") 
+			@local_articles = @local.articles.last(3)
+		end
 	end
 	def corporation 
 		@section = Section.find_by(slug: params[:format])
