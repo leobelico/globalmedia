@@ -13,7 +13,9 @@
 					<div class="collaborator__info">
 						
 						<h4 class="collaborator__title"><%= truncate(article.name, length: 200) %></h4>
-						<p class="collaborator__name"><%= article.article_relationships.where(articable_type: "Relationship").first.articable.name %></p>
+						<p class="collaborator__name"><%= article.article_relationships.where(articable_type: "Relationship").first.articable.name %>
+							<%= image_tag "collaborator-dent.svg", class: "collaborator__dent" %>
+						</p>
 					</div>
 
 				</div>
