@@ -117,7 +117,7 @@
 .dropdown__radio {
 	max-width:  676px;
 	width:  676px;
-	display:  flex; 
+	display:  none; 
 	flex-direction:  row; 
 	flex-wrap:  wrap;
 	align-items:  center;
@@ -128,7 +128,14 @@
 		width: auto;
 		display:  flex;
 		flex-direction: 	row;
-		align-items:  flex-start;
+		align-items:  center;
+		img {
+			height:  60px;
+			width:  60px; 
+			object-fit:  contain;
+			object-position:  center center;
+			margin-right:  8px;
+		}
 	}
 }
 @media screen and (max-width:  1023px) {

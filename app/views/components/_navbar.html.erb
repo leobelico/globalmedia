@@ -8,21 +8,31 @@
 			<p class="dropdown__section">Radio</p>
 			<% get_radio_stations.each do |radio| %>
 				<%= link_to ("/" + radio.slug), target: "_blank"  do %>
-					<p class="dropdown__link"><%= radio.name %></p>
+					<p class="dropdown__link">
+						<%= image_tag radio.image %>	
+						<label><%= radio.name %></label>	
+					</p>
 					<div class="dropdown__underline"></div>
 				<% end %>			
 			<% end %>	
 			<p class="dropdown__section">T.V.</p>
 			<% get_video_stations.each do |video| %>
 				<%= link_to ("/" + video.slug), target: "_blank" do %>
-					<p class="dropdown__link"><%= video.name %></p>
+					<p class="dropdown__link">
+						<%= image_tag video.image %>	
+						<label><%= video.name %></label>
+						
+					</p>
 					<div class="dropdown__underline"></div>
 				<% end %>			
 			<% end %>
 			<p class="dropdown__section">Noticieros</p>
 			<% get_news_stations.each do |news| %>
 				<%= link_to ("/" + news.slug), target: "_blank" do %>
-					<p class="dropdown__link"><%= news.name %></p>
+					<p class="dropdown__link">
+						<%= image_tag news.image %>
+						<label><%= news.name %></label>	
+					</p>
 					<div class="dropdown__underline"></div>
 				<% end %>	
 			<% end %>
