@@ -6,6 +6,9 @@
 	</div>
 
 	<% articles.each do |article| %>
+			<% if article.section != "Quiénes somos" and  article.section != "Contáctanos" and article.section != "Anunciate con nosotros"  %>
+				
+			<% end %>
 		<%= link_to article, class: "latest-news__article" do %>
 			<div class="clock">
 				<div class="hours"></div>

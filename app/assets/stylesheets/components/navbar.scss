@@ -102,6 +102,10 @@
 	display:  flex; 
 	flex-direction:  column; 
 }
+.dropdown:hover > .dropdown__options.horizontal {
+	display:  flex; 
+	flex-direction:  row; 
+}
 .dropdown__section {
 	color:  #ffffff; 
 	text-transform:  uppercase; 

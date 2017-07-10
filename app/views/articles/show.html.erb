@@ -53,30 +53,36 @@
 		<% end %>
 		<h1 class="title"><%= @article.name %></h1>	
 		<p class="short-description"><%= @article.short_description %></p>
-		<div class="article__info">
-			<% if @article.author and @article.author.name != "Ninguno" %>
-				<p class="author">Por <%= @article.author.name %></p>
 
-			<% else %>
-				<% if @article.user %>
-					<p class="author">Por <%= @article.user.full_name %></p>
+		<% if @article.section != "Contáctanos" and @article.section != "Anunciate con nosotros" and @article.section != "Quiénes Somos" %>
+
+			<div class="article__info">
+				<% if @article.author and @article.author.name != "Ninguno" %>
+					<p class="author">Por <%= @article.author.name %></p>
+
 				<% else %>
-					<p class="author">--</p>
+					<% if @article.user %>
+						<p class="author">Por <%= @article.user.full_name %></p>
+					<% else %>
+						<p class="author">--</p>
+					<% end %>
 				<% end %>
+				<p class="date"><%= l(@article.created_at, format: "%H:%M %A %e %B, %Y") %></p>
+				<% if @article.articable_type == "Section" %>
+					<%= link_to @article.section, section_path(Section.find_by_name(@article.section)), class: "section" %>
+				<% end %>
+				<%= render "components/social-media-links", article: @article %>
+				
+			</div>
+			<% if @article.keyword %>
+				<div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
 			<% end %>
-			<p class="date"><%= l(@article.created_at, format: "%H:%M %A %e %B, %Y") %></p>
-			<% if @article.articable_type == "Section" %>
-				<%= link_to @article.section, section_path(Section.find_by_name(@article.section)), class: "section" %>
-			<% end %>
-			<%= render "components/social-media-links", article: @article %>
-			
-		</div>
-		<% if @article.keyword %>
-			<div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
+			<div class="hashtags-container">
+				<%= render @article.hashtags %>
+			</div>
+
 		<% end %>
-		<div class="hashtags-container">
-			<%= render @article.hashtags %>
-		</div>
+
 
 		<% if @article.video_url != "" %> 
 			<div class="iframe">
