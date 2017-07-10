@@ -4,21 +4,27 @@
 	<% end %>
 	<div class="dropdown">
 		<%= link_to "Radio y TV", stations_path, class: "navbar__link" %>
-		<div class="dropdown__options">
+		<div class="dropdown__options dropdown__radio">
 			<p class="dropdown__section">Radio</p>
 			<% get_radio_stations.each do |radio| %>
-				<%= link_to radio.name, ("/" + radio.slug), class: "dropdown__link", target: "_blank" %>
-				<div class="dropdown__underline"></div>
+				<%= link_to ("/" + radio.slug), target: "_blank"  do %>
+					<p class="dropdown__link"><%= radio.name %></p>
+					<div class="dropdown__underline"></div>
+				<% end %>			
 			<% end %>	
 			<p class="dropdown__section">T.V.</p>
 			<% get_video_stations.each do |video| %>
-				<%= link_to video.name, ("/" + video.slug), class: "dropdown__link", target: "_blank" %>
-				<div class="dropdown__underline"></div>
+				<%= link_to ("/" + video.slug), target: "_blank" do %>
+					<p class="dropdown__link"><%= video.name %></p>
+					<div class="dropdown__underline"></div>
+				<% end %>			
 			<% end %>
 			<p class="dropdown__section">Noticieros</p>
 			<% get_news_stations.each do |news| %>
-				<%= link_to news.name, ("/" + news.slug), class: "dropdown__link", target: "_blank" %>
-				<div class="dropdown__underline"></div>
+				<%= link_to ("/" + news.slug), target: "_blank" do %>
+					<p class="dropdown__link"><%= news.name %></p>
+					<div class="dropdown__underline"></div>
+				<% end %>	
 			<% end %>
 		</div>
 	</div>
