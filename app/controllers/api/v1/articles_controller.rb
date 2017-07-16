@@ -86,6 +86,10 @@ class Api::V1::ArticlesController < Api::BaseController
 
 	end
 
+	def get_global_recommendations
+	    @articles = Article.where(global_recommendation: true, published: true).order(updated_at: "ASC").last(4)
+  	end
+
 	def search_hashtag
 		search = Hashtag.find(params[:id])
 		# @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
