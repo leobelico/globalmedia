@@ -88,6 +88,7 @@ class Api::V1::ArticlesController < Api::BaseController
 
 	def get_global_recommendations
 	    @articles = Article.where(global_recommendation: true, published: true).order(updated_at: "ASC").last(4)
+	    render json: @articles, adapter: :json
   	end
 
 	def search_hashtag
