@@ -206,6 +206,8 @@ Rails.application.routes.draw do
       get "latest_collaborator_articles", to: "articles#latest_collaborator_articles"
       get "latest_special_investigation_articles", to: "articles#latest_special_investigation_articles"
       get "latest_complaints_articles", to: "articles#latest_complaints_articles"
+      get "get_global_recommendations", to: "articles#get_global_recommendations"
+      
       get "search", to: "articles#search"
       post "search", to: "articles#search"
 
