@@ -218,6 +218,7 @@ Rails.application.routes.draw do
       post "related_by_hashtags", to: "articles#related_by_hashtags"
       get "search_hashtag", to: "articles#search_hashtag"
       post "search_hashtag", to: "articles#search_hashtag"
+      
     end
   end
   
