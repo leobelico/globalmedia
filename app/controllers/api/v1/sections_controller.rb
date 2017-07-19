@@ -1,7 +1,7 @@
 class Api::V1::SectionsController < Api::BaseController
 	before_action :set_section, only: [:show]
 	def index 
-	    @sections = Section.where("name != 'Último Momento' AND name != 'Ultimo Momento' AND name != 'Denuncia Global' AND name != 'Estaciones' AND name != 'Colaboradores' AND name != 'Investigación Especial' AND name != 'INVESTIGACIÓN ESPECIAL' AND name != 'COLABORADORES' AND name != 'ESTACIONES'")
+	    @sections = Section.where("visible = true AND name != 'Último Momento' AND name != 'Ultimo Momento' AND name != 'Denuncia Global' AND name != 'Estaciones' AND name != 'Colaboradores' AND name != 'Investigación Especial' AND name != 'INVESTIGACIÓN ESPECIAL' AND name != 'COLABORADORES' AND name != 'ESTACIONES'")
 	    json_response(@sections, :ok)
 	end
 	def show 
