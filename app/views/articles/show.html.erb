@@ -78,7 +78,7 @@
 				<div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
 			<% end %>
 			<div class="hashtags-container">
-				<%= render @article.hashtags %>
+				<p>Hablamos de:</p> <%= render @article.hashtags %>
 			</div>
 
 		<% end %>
@@ -131,7 +131,7 @@
 		<div class="radio-banner__tune-in" style="margin-top:  8px; ">También te puede interesar:</div>
 		<% render "components/section-recommendations", articles: get_latest_articles_per_section(Section.find_by_name(@article.section).id, 3), section_name: @article.section, highlight: "" %>
 		<% case @article.section %>
-			<% when "Metrópoli" %>
+			<% when "San Luis" %>
 				<% if Section.where(name: "México").count > 0 %>
 					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("México").id, 3) , section_name: "México", highlight: "" %>
 				<% end %>
@@ -139,8 +139,8 @@
 					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Mundo").id, 3) , section_name: "Mundo", highlight: "" %>
 				<% end %>
 			<% when "México" %>
-				<% if Section.where(name: "Metrópoli").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
+				<% if Section.where(name: "San Luis").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3) , section_name: "San Luis", highlight: "" %>
 				<% end %>
 				<% if Section.where(name: "Mundo").count > 0 %>
 					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Mundo").id, 3) , section_name: "Mundo", highlight: "" %>
@@ -157,8 +157,8 @@
 				<% if Section.where(name: "México").count > 0 %>
 					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("México").id, 3) , section_name: "México", highlight: "" %>
 				<% end %>
-				<% if Section.where(name: "Metrópoli").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
+				<% if Section.where(name: "San Luis").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3) , section_name: "San Luis", highlight: "" %>
 				<% end %>
 			<% when "Entretenimiento" %>
 				<% if Section.where(name: "Táctica Internacional").count > 0 %>
@@ -170,23 +170,23 @@
 				<% end %>
 				
 			<% when "Táctica Nacional e Internacional" %>
-				<% if Section.where(name: "Metrópoli").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
+				<% if Section.where(name: "San Luis").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3) , section_name: "San Luis", highlight: "" %>
 				<% end %>
 				<% if Section.where(name: "Entretenimiento").count > 0 %>
 					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
 				<% end %>
 			<% when "Táctica Local" %>
-				<% if Section.where(name: "Metrópoli").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
+				<% if Section.where(name: "San Luis").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3) , section_name: "San Luis", highlight: "" %>
 				<% end %>
 				<% if Section.where(name: "Entretenimiento").count > 0 %>
 					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
 				<% end %>
 
 			<% when "Tecnología" %>
-				<% if Section.where(name: "Metrópoli").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Metrópoli").id, 3) , section_name: "Metrópoli", highlight: "" %>
+				<% if Section.where(name: "San Luis").count > 0 %>
+					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3) , section_name: "San Luis", highlight: "" %>
 				<% end %>
 				<% if Section.where(name: "Entretenimiento").count > 0 %>
 					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>

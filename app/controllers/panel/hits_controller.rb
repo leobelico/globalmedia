@@ -8,12 +8,12 @@ class Panel::HitsController < ApplicationController
 	end
 	def graph
 		if params.count >= 3
-			initial_date = Date.valid_date?(params[:hit]["initial_date(1i)"].to_i, params[:hit]["initial_date(2i)"].to_i, params[:hit]["initial_date(3i)"].to_i)
-			end_date	 = Date.valid_date?(params[:hit]["end_date(1i)"].to_i, params[:hit]["end_date(2i)"].to_i, params[:hit]["end_date(3i)"].to_i)
-			p "initial_date"
-			p initial_date
-			p "end_date"
-			p end_date
+			initial_date_validation = Date.valid_date?(params[:hit]["initial_date(1i)"].to_i, params[:hit]["initial_date(2i)"].to_i, params[:hit]["initial_date(3i)"].to_i)
+			end_date_validation	 = Date.valid_date?(params[:hit]["end_date(1i)"].to_i, params[:hit]["end_date(2i)"].to_i, params[:hit]["end_date(3i)"].to_i)
+			if initial_date_validation == true and end_date_validation == true 
+				initial_date = Date.new(params[:hit]["initial_date(1i)"].to_i, params[:hit]["initial_date(2i)"].to_i, params[:hit]["initial_date(3i)"].to_i)
+				end_date	 = Date.new(params[:hit]["end_date(1i)"].to_i, params[:hit]["end_date(2i)"].to_i, params[:hit]["end_date(3i)"].to_i)
+			end
 			section_id	= params[:hit][:section_id]
 			if initial_date and end_date
 				@hits = Hit.search(initial_date, end_date, params[:hit][:section_id])
@@ -32,8 +32,12 @@ class Panel::HitsController < ApplicationController
 	end
 	def author_graph
 		if params.count >= 3
-			initial_date = Date.valid_date?(params[:hit]["initial_date(1i)"].to_i, params[:hit]["initial_date(2i)"].to_i, params[:hit]["initial_date(3i)"].to_i)
-			end_date	 = Date.valid_date?(params[:hit]["end_date(1i)"].to_i, params[:hit]["end_date(2i)"].to_i, params[:hit]["end_date(3i)"].to_i)
+			initial_date_validation = Date.valid_date?(params[:hit]["initial_date(1i)"].to_i, params[:hit]["initial_date(2i)"].to_i, params[:hit]["initial_date(3i)"].to_i)
+			end_date_validation	 = Date.valid_date?(params[:hit]["end_date(1i)"].to_i, params[:hit]["end_date(2i)"].to_i, params[:hit]["end_date(3i)"].to_i)
+			if initial_date_validation == true and end_date_validation == true
+				initial_date = Date.new(params[:hit]["initial_date(1i)"].to_i, params[:hit]["initial_date(2i)"].to_i, params[:hit]["initial_date(3i)"].to_i)
+				end_date	 = Date.new(params[:hit]["end_date(1i)"].to_i, params[:hit]["end_date(2i)"].to_i, params[:hit]["end_date(3i)"].to_i)				
+			end
 			author_id	= params[:hit][:author_id]
 			if initial_date and end_date
 				@hits = Hit.search_by_user(initial_date, end_date, params[:hit][:author_id])
@@ -50,8 +54,12 @@ class Panel::HitsController < ApplicationController
 	end
 	def user_graph
 		if params.count >= 3
-			initial_date = Date.valid_date?(params[:hit]["initial_date(1i)"].to_i, params[:hit]["initial_date(2i)"].to_i, params[:hit]["initial_date(3i)"].to_i)
-			end_date	 = Date.valid_date?(params[:hit]["end_date(1i)"].to_i, params[:hit]["end_date(2i)"].to_i, params[:hit]["end_date(3i)"].to_i)
+			initial_date_validation = Date.valid_date?(params[:hit]["initial_date(1i)"].to_i, params[:hit]["initial_date(2i)"].to_i, params[:hit]["initial_date(3i)"].to_i)
+			end_date_validation	 = Date.valid_date?(params[:hit]["end_date(1i)"].to_i, params[:hit]["end_date(2i)"].to_i, params[:hit]["end_date(3i)"].to_i)
+			if initial_date_validation == true and end_date_validation == true
+				initial_date = Date.new(params[:hit]["initial_date(1i)"].to_i, params[:hit]["initial_date(2i)"].to_i, params[:hit]["initial_date(3i)"].to_i)
+				end_date	 = Date.new(params[:hit]["end_date(1i)"].to_i, params[:hit]["end_date(2i)"].to_i, params[:hit]["end_date(3i)"].to_i)
+			end
 			user_id	= params[:hit][:user_id]
 			if initial_date and end_date
 				@hits = Hit.search_by_user(initial_date, end_date, params[:hit][:user_id])

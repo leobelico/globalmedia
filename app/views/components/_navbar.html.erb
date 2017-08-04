@@ -38,8 +38,8 @@
 			<% end %>
 		</div>
 	</div>
-	<% if Section.find_by(name: "Metrópoli") %>
-		<%= link_to "Metrópoli", section_path(Section.find_by(name: "Metrópoli")), class: "navbar__link" %>
+	<% if Section.find_by(name: "San Luis") %>
+		<%= link_to "San Luis", section_path(Section.find_by(name: "San Luis")), class: "navbar__link" %>
 	<% end %>
 	<% if Section.find_by(name: "México") %>
 		<%= link_to "México", section_path(Section.find_by(name: "México")), class: "navbar__link" %>
