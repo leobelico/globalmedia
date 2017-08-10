@@ -10,7 +10,6 @@
 				<%= link_to ("/" + radio.slug), target: "_blank"  do %>
 					<p class="dropdown__link">
 						<%= image_tag radio.image %>	
-						<label><%= radio.name %></label>	
 					</p>
 					<div class="dropdown__underline"></div>
 				<% end %>			
@@ -20,7 +19,6 @@
 				<%= link_to ("/" + video.slug), target: "_blank" do %>
 					<p class="dropdown__link">
 						<%= image_tag video.image %>	
-						<label><%= video.name %></label>
 						
 					</p>
 					<div class="dropdown__underline"></div>
@@ -31,7 +29,6 @@
 				<%= link_to ("/" + news.slug), target: "_blank" do %>
 					<p class="dropdown__link">
 						<%= image_tag news.image %>
-						<label><%= news.name %></label>	
 					</p>
 					<div class="dropdown__underline"></div>
 				<% end %>	

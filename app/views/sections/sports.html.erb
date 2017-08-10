@@ -8,7 +8,7 @@
 				<%= render "components/section-article", article: article %>
 			<% end %>
 		</div>
-		<%= link_to "Ver más", section_path(@intl), class: "view-more" %>
+		<%= link_to "Ver más notas", section_path(@intl), class: "view-more" %>
 
 		<h1 class="section__title" style="background-color:  <%= @local.color %>;"><%= @local.name %></h1>
 		<div class="section-articles-container">
@@ -16,7 +16,7 @@
 				<%= render "components/section-article", article: article %>
 			<% end %>
 		</div>
-		<%= link_to "Ver más", section_path(@local), class: "view-more" %>
+		<%= link_to "Ver más notas", section_path(@local), class: "view-more" %>
 		<!-- NOTAS DEL PROGRAMADOR-->
 			<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
 

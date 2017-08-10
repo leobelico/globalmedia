@@ -114,7 +114,7 @@
 				
 					<!-- VÏNCULO PARA VER MAS -->
 					<% if @station.article_relationships.count > 3 %>
-						<%= link_to "Ver más", station_articles_path(@station.slug), class: "view-more" %>		
+						<%= link_to "Ver más notas", station_articles_path(@station.slug), class: "view-more" %>		
 					<% end %>
 				</div>
 			<% end %>
