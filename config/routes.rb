@@ -93,7 +93,9 @@ Rails.application.routes.draw do
       resources :podcasts 
     end
     resources :timetables, only: [:show, :destroy] 
+
     resources :sections, param: :slug do 
+      
       get :select_highlights
       post :select_highlights
       post :set_highlight
@@ -104,6 +106,7 @@ Rails.application.routes.draw do
       post :set_global_recommendations
       get :autocomplete_article_name, on: :collection
       
+      resources :related_sections
     end
     resources :hits do 
       get :graph, on: :collection

@@ -44,6 +44,36 @@
 		<label>Visible:</label>
 		<%= f.check_box :visible %>
 	</div>
+
+	<div class="banner-sections">
+
+
+		<h4 class="form-title">Secciones:</h4>
+		<div class="multicheckbox-container">
+
+		<% Section.all.each do |section| %>
+			<% if @section.new_record? %>
+				<div class="field field--checkbox">
+					<label><%= section.name %></label>
+					<%= check_box_tag :all_sections, section.id, false, :name => '[all_sections][]' %>
+				</div>
+			<% else %>
+				<% if RelatedSection.where(section_id: @section.id, section_reference_id: section.id).count == 0 %>
+					<div class="field field--checkbox">
+						<label><%= section.name %></label>	
+						<%= check_box_tag :all_sections, section.id, false, :name => '[all_sections][]' %> 
+					</div>
+				<% else %>
+					<div class="field field--checkbox">
+						<label><%= section.name %></label>
+						<%= check_box_tag :all_sections, section.id, true, :name => '[all_sections][]' %> 
+						
+					</div>
+				<% end %>
+			<% end %>
+			
+		<% end %>
+	</div>
 <% end %>
 
 <script>

@@ -5,6 +5,8 @@ class Section < ApplicationRecord
   	has_many :section_banners, as: :seleccionable
   	has_many :hits_objectives
 	validates :name, presence: true
+	has_many :related_sections
+	has_many :related_sections, class_name: 'RelatedSection', :foreign_key => 'section_reference'
 
 	def to_param
     	slug

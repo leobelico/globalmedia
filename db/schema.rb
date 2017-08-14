@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170804032905) do
+ActiveRecord::Schema.define(version: 20170814163637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,15 @@ ActiveRecord::Schema.define(version: 20170804032905) do
     t.index ["station_id"], name: "index_podcasts_on_station_id", using: :btree
   end
 
+  create_table "related_sections", force: :cascade do |t|
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "section_reference_id"
+    t.integer  "section_id"
+    t.index ["section_id"], name: "index_related_sections_on_section_id", using: :btree
+    t.index ["section_reference_id"], name: "index_related_sections_on_section_reference_id", using: :btree
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.string   "name",              default: ""
     t.string   "image",             default: ""
@@ -312,6 +321,8 @@ ActiveRecord::Schema.define(version: 20170804032905) do
   add_foreign_key "hits", "articles"
   add_foreign_key "images", "articles"
   add_foreign_key "podcasts", "stations"
+  add_foreign_key "related_sections", "sections"
+  add_foreign_key "related_sections", "sections", column: "section_reference_id"
   add_foreign_key "section_banners", "banners"
   add_foreign_key "section_highlights", "articles"
   add_foreign_key "section_highlights", "sections"
