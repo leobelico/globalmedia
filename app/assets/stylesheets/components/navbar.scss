@@ -122,6 +122,9 @@
 	flex-wrap:  wrap;
 	align-items:  center;
 	background:  #f5f5f5; 
+	* {
+		color:  $tertiary;
+	}
 	.dropdown__section {
 		width:  100%;
 	}
