@@ -1,5 +1,5 @@
 
-<% if !banner.empty? and banner.articable.count > 0 %>
+<% if !banner.empty? %>
 	<div class="banners-container slider">
 		<% banner.each do |b| %>
 			<%= link_to b.url, class: "banner--medium slider-item" do %>
