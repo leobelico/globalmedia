@@ -18,6 +18,7 @@ class SectionsController < ApplicationController
 		if Section.find_by(name: "Táctica Internacional")
 			@intl = Section.find_by(name: "Táctica Internacional") 
 			@intl_articles = @intl.articles.last(6)
+			@related_sections = RelatedSection.where(section: @intl)
 		end 
 		if Section.find_by(name: "Táctica Local")
 			@local = Section.find_by(name: "Táctica Local") 
