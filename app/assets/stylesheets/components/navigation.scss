@@ -1,9 +1,7 @@
 .top-padder {
 	width:  100%; 
 	height:  155px; 
-	display:  block;
-	overflow:  hidden;  
-	box-sizing:  border-box; 
+	display:  block; 
 }
 .navigation {
 	position:  fixed; 
@@ -13,8 +11,6 @@
 	flex-direction:  column; 
 	align-items:  center; 
 	z-index:  100; 
-	overflow:  hidden; 
-	box-sizing:  border-box; 
 }
 @media screen and (max-width:  1023px) {
 	.top-padder { height:  132px }
