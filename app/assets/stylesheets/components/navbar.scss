@@ -74,6 +74,7 @@
 	top:  40px; 
 	left:  0px; 
 	background-color:  $tertiary; 
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
 	width:  200px;  
 }
 .dropdown__link {
@@ -121,7 +122,12 @@
 	flex-direction:  row; 
 	flex-wrap:  wrap;
 	align-items:  center;
-	background:  #f5f5f5; 
+	background:  #ffffff;
+	border-right:  solid 8px #000000; 
+	border-bottom:  solid 8px #000000; 
+	.line {
+		width:  100%; 
+	}
 	* {
 		color:  $tertiary;
 	}
@@ -134,8 +140,8 @@
 		flex-direction: 	row;
 		align-items:  center;
 		img {
-			height:  60px;
-			width:  60px; 
+			width:  72px; 
+			height:  64px;
 			object-fit:  contain;
 			object-position:  center center;
 			margin-right:  8px;
