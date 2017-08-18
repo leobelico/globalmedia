@@ -56,16 +56,6 @@
 	<% end %> 
 
 </div>
-<!-- 
-<% if get_banner("", "TitlePage", "Mediano" ).count > 0 %>
-	<img src="<%= get_banner("", "TitlePage", "Mediano" ).large_image  %>" alt="">
-<% else %>
-	<% if get_banner("", "Global", "Mediano" ).count > 0 %>
-		<img src="<%= get_banner("", "Global", "Mediano" ).large_image %>" alt="">
-	<% end %>
-<% end %>
-
- -->
 
 <% if get_banner("", "TitlePage", "Grande" ).count > 0 %>
 	<%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande" )  %>
