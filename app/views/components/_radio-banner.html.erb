@@ -1,5 +1,7 @@
 <div class="radio-banner__tune-in no-border"><div class="led"></div>Sintoniza en este momento</div>
 <div class="radio-banner">
+	<%= action_name %>
+	<%= controller_name %>
 	<% get_current_programs.each do |program| %>
 		<% if action_name == "show" and controller_name == "stations" %>
 			<%= link_to ("/" + program.station.slug), class: "radio-program", target: "_top" do %>
