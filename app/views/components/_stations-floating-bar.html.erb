@@ -1,7 +1,7 @@
 <div class="stations-floating-bar">
 <div class="radio-banner__tune-in no-border"><div class="led"></div>Sintoniza en <br>este momento</div>
-	<%= controller.controller_name %>
-	<%= controller.action_name %>
+	<%= controller_name %>
+	<%= action_name %>
 	<% get_current_programs.each do |program| %>
 
 		<% if controller.controller_name == "stations" && controller.action_name == "show" %>
