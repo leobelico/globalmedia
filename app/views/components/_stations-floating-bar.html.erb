@@ -2,7 +2,7 @@
 <div class="radio-banner__tune-in no-border"><div class="led"></div>Sintoniza en <br>este momento</div>
 
 	<% get_current_programs.each do |program| %>
-		<% if current_page?(controller: 'stations', action: 'edit') %>
+		<% if controller.controller_name == "stations" && controller.action_name == "show" %>
 			<%= link_to ("/" + program.station.slug), class: "station-link" do %>
 				<%= image_tag program.image %>
 			<% end %>
