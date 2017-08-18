@@ -2,7 +2,7 @@
 <div class="radio-banner">
 	<% get_current_programs.each do |program| %>
 		<% if action_name == "show" and controller_name == "stations" %>
-			<%= link_to ("/" + program.station.slug), class: "radio-program" do %>
+			<%= link_to ("/" + program.station.slug), class: "radio-program", target: "_top" do %>
 				<%= image_tag program.image %>
 			<% end %>
 		<% else %>
