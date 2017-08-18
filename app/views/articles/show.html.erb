@@ -128,70 +128,11 @@
 
 			<% end %>
 		<% end %>
-		<div class="radio-banner__tune-in" style="margin-top:  8px; ">También te puede interesar:</div>
-		<% render "components/section-recommendations", articles: get_latest_articles_per_section(Section.find_by_name(@article.section).id, 3), section_name: @article.section, highlight: "" %>
-		<% case @article.section %>
-			<% when "San Luis" %>
-				<% if Section.where(name: "México").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("México").id, 3) , section_name: "México", highlight: "" %>
-				<% end %>
-				<% if Section.where(name: "Mundo").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Mundo").id, 3) , section_name: "Mundo", highlight: "" %>
-				<% end %>
-			<% when "México" %>
-				<% if Section.where(name: "San Luis").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3) , section_name: "San Luis", highlight: "" %>
-				<% end %>
-				<% if Section.where(name: "Mundo").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Mundo").id, 3) , section_name: "Mundo", highlight: "" %>
-				<% end %>
-			<% when "Mundo" %>
-				<% if Section.where(name: "Entretenimiento").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
-				<% end %>
-				<% if Section.where(name: "Táctica Nacional e Internacional").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Táctica Nacional e Internacional").id, 3) , section_name: "Táctica Nacional e Internacional", highlight: "" %>
-				<% end %>
+		<% if @related_sections.count > 0 %>
+			<% @related_sections.each do |related_section| %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(related_section.section_reference_id, 3), section_name: related_section.section_reference.name, highlight: "" %>
 
-			<% when "Negocios" %>
-				<% if Section.where(name: "México").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("México").id, 3) , section_name: "México", highlight: "" %>
-				<% end %>
-				<% if Section.where(name: "San Luis").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3) , section_name: "San Luis", highlight: "" %>
-				<% end %>
-			<% when "Entretenimiento" %>
-				<% if Section.where(name: "Táctica Internacional").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Táctica Internacional").id, 3) , section_name: "Táctica Internacional", highlight: "" %>
-				<% end %>
-				<% if Section.where(name: "Tecnología").count > 0 %>
-
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Tecnología").id, 3) , section_name: "Tecnología", highlight: "" %>
-				<% end %>
-				
-			<% when "Táctica Nacional e Internacional" %>
-				<% if Section.where(name: "San Luis").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3) , section_name: "San Luis", highlight: "" %>
-				<% end %>
-				<% if Section.where(name: "Entretenimiento").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
-				<% end %>
-			<% when "Táctica Local" %>
-				<% if Section.where(name: "San Luis").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3) , section_name: "San Luis", highlight: "" %>
-				<% end %>
-				<% if Section.where(name: "Entretenimiento").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
-				<% end %>
-
-			<% when "Tecnología" %>
-				<% if Section.where(name: "San Luis").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3) , section_name: "San Luis", highlight: "" %>
-				<% end %>
-				<% if Section.where(name: "Entretenimiento").count > 0 %>
-					<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("Entretenimiento").id, 3) , section_name: "Entretenimiento", highlight: "" %>
-				<% end %>
-
+			<% end %>
 		<% end %>
 
 	</div>

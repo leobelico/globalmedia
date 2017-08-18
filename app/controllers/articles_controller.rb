@@ -26,6 +26,10 @@ class ArticlesController < ApplicationController
 
 			end
 		end
+		@related_sections = RelatedSection.where(section: Section.find_by(name: @article.section))
+		p "-------------------------------"
+		p @article.section
+		p @related_sections
 	end
 
 	
