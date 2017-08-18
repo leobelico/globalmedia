@@ -10,23 +10,42 @@
 			</div>
 		</div>
 		<div class="mobile-menu__column">
-
 			<div class="mobile-menu__section">
 				<h4 class="mobile-menu__section-title">Radio:</h4>
-				<% get_radio_stations.each do |station| %>
-					<%= link_to station.name, station, class: "mobile-menu__link" %>
+				<% if action_name == "show" and controller_name == "stations" %>
+					<% get_radio_stations.each do |station| %>
+						<%= link_to station.name, station, class: "mobile-menu__link" %>
+					<% end %>
+				<% else %>
+					<% get_radio_stations.each do |station| %>
+						<%= link_to station.name, station, class: "mobile-menu__link", target: "_blank" %>
+					<% end %>
 				<% end %>
 			</div>
 			<div class="mobile-menu__section">
 				<h4 class="mobile-menu__section-title">T.V:</h4>
-				<% get_video_stations.each do |station| %>
-					<%= link_to station.name, station, class: "mobile-menu__link" %>
+				<% if action_name == "show" and controller_name == "stations" %>
+
+				
+					<% get_video_stations.each do |station| %>
+						<%= link_to station.name, station, class: "mobile-menu__link" %>
+					<% end %>
+				<% else %>
+					<% get_video_stations.each do |station| %>
+						<%= link_to station.name, station, class: "mobile-menu__link", target: "_blank" %>
+					<% end %>
 				<% end %>
 			</div>
 			<div class="mobile-menu__section">
 				<h4 class="mobile-menu__section-title">Noticieros:</h4>
-				<% get_news_stations.each do |station| %>
-					<%= link_to station.name, station, class: "mobile-menu__link" %>
+				<% if action_name == "show" and controller_name == "stations" %>
+					<% get_news_stations.each do |station| %>
+						<%= link_to station.name, station, class: "mobile-menu__link" %>
+					<% end %>
+				<% else %>
+					<% get_news_stations.each do |station| %>
+						<%= link_to station.name, station, class: "mobile-menu__link", target: "_blank" %>
+					<% end %>
 				<% end %>
 			</div>
 		</div>
