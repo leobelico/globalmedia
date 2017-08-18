@@ -2,8 +2,14 @@
 <div class="radio-banner__tune-in no-border"><div class="led"></div>Sintoniza en <br>este momento</div>
 
 	<% get_current_programs.each do |program| %>
-		<%= link_to ("/" + program.station.slug), class: "station-link", target: "_blank" do %>
-			<%= image_tag program.image %>
+		<% if current_page?(controller: 'stations', action: 'edit') %>
+			<%= link_to ("/" + program.station.slug), class: "station-link" do %>
+				<%= image_tag program.image %>
+			<% end %>
+		<% else %>
+			<%= link_to ("/" + program.station.slug), class: "station-link", target: "_blank" do %>
+				<%= image_tag program.image %>
+			<% end %>
 		<% end %>
 	<% end %>
 </div>
