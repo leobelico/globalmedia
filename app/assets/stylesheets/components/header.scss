@@ -30,12 +30,17 @@
 		top:  50%; 
 		transform:  translateY(-50%); 
 		position:  absolute; 
-		display:  flex;
+		display:  none;
 		z-index:  80; 
 	}
 	* {
 		font-family: 'Pragati Narrow', sans-serif;
 		font-size:  16px; 
+	}
+}
+@media screen and (max-width:  1024px) {
+	.header .stations-link {
+		display:  flex; 
 	}
 }
 .header__container {

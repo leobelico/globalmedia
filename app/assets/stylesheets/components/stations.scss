@@ -17,7 +17,7 @@
 	.station-preview__image {
 		width:   206px; 
 		height:  206px; 
-		object-fit:  cover; 
+		object-fit:  contain; 
 		object-position:  center center; 
 		margin-bottom:  12px; 
 	}
