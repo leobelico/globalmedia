@@ -28,6 +28,7 @@
 				font-weight:  700; 
 				color:  #000000; 
 				margin-bottom:  8px; 
+				font-family:  "Martel";
 				height:  48px; 
 			}
 			.updated-at {
@@ -72,6 +73,16 @@
 			}
 			.description {
 				max-width:  90%; 
+			}
+		}
+	}
+	.breaking-news-3,
+	.breaking-news-4 {
+		.breaking-news__article {
+			.title {
+				height:  72px; 
+				text-overflow:  ellipsis; 
+				overflow:  hidden; 
 			}
 		}
 	}
