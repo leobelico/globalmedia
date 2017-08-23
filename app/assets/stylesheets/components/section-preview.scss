@@ -193,3 +193,13 @@
 		}
 	}
 }
+@media screen and(max-width:  768px) {
+	.section-preview {
+		.sp__name {
+			width:  100%; 
+		}	
+		.sp__link {
+			display:  none; 
+		}
+	}
+}

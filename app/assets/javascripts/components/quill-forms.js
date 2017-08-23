@@ -55,6 +55,7 @@ function submit_form(action, slug, event, go_to_gallery){
         video_url: $("#article_video_url").val(),
         author_id: $("#article_author_id").val(),
         exclusive: $("#article_exclusive").val(), 
+        breaking_news: $("#breaking_news").val(), 
         images: {  }
       },
         scheduled_time_3i: $("#article_scheduled_time_3i").val(),

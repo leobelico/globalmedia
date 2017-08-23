@@ -1,16 +1,32 @@
 <div class="breaking-news">
 	<p class="breaking-news__tag">Último Momento</p>
-	<div class="breaking-news__article">
-		<div class="article__info">
-			<%= link_to	@breaking_article, class: "link" do %>
-				<h4><%= @breaking_article.name %></h4>	
-				<p><%= @breaking_article.short_description %></p>
+	
+	<% if @breaking_news.count == 0 %>
+		<div class="breaking-news-0">
+	<% elsif @breaking_news.count == 1 %>
+		<div class="breaking-news-1">
+	<% elsif @breaking_news.count == 2 %>
+		<div class="breaking-news-2">
+	<% elsif @breaking_news.count == 3 %>
+		<div class="breaking-news-3">
+	<% elsif @breaking_news.count == 4 %>
+		<div class="breaking-news-4">
+	<% end %>
+			<% @breaking_news.each do |breaking_news| %>
+				<div class="breaking-news__article">
+					<%= link_to breaking_news do %>
+						<%= image_tag breaking_news.image, class: "breaking-news__image" %>
+					<% end %>
+					<div class="article-info">
+						<%= link_to breaking_news do %>
+							<h4 class="title"><%= breaking_news.name %></h4>
+							<p class="updated-at">Hace <%= time_ago_in_words(breaking_news.updated_at) %></p>
+							<p class="description"><%= truncate(breaking_news.short_description, length:  200) %></p>
+						<% end %>
+						<%= render "components/social-media-links", article: breaking_news %>	
+					</div>
+				</div>
 			<% end %>
-			<%= render "components/social-media-links", article: @breaking_article %>	
 		</div>
-		<%= link_to	@breaking_article do %>
-		
-			<%= image_tag @breaking_article.image, class: "breaking-news__image" %>
-		<% end %>
-	</div>
+
 </div>

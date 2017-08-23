@@ -38,9 +38,9 @@ class TitlepageController < ApplicationController
 	def index
 		bns =  Section.where(visible: true, name: "Último Momento").last
 		if bns
-			@breaking_article = bns.articles.last
+			@breaking_news = bns.articles.where(breaking_news: true).order(updated_at: "ASC").first(4)
 		else	
-			@breaking_article = nil
+			@breaking_news = nil 
 		end
 		@highlights = Highlight.where(published: true).order(order: "ASC")
 		search = Hashtag.find_by_name("#ESNOTICIA")

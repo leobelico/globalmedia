@@ -46,28 +46,42 @@
 				
 			</div>	
 			<div class="podcasts">
-				<h4 class="small-label">Podcasts</h4>
-				<% station.podcasts.last(3).each do |podcast| %>
-					<div class="podcast">
-						<h4 class="podcast__title"><%= podcast.name %></h4>
-						<audio controls>
-							<source src="<%= podcast.stream_url %>" controlsList="nodownload"> 
-						</audio>
-					</div>
+				<% if station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).count > 0 %>
+					<h4 class="small-label">Podcasts del día</h4>
+					<% station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).each do |podcast| %>
+						<div class="podcast">
+							<h4 class="podcast__title"><%= podcast.name %></h4>
+							<audio controls>
+								<source src="<%= podcast.stream_url %>" controlsList="nodownload"> 
+							</audio>
+						</div>
+					<% end %>
+				<% end %>
+				<% if station.podcasts.count > 0 %>				
+					<h4 class="small-label">Podcasts más recientes</h4>
+					<% station.podcasts.last(4)[1..4].each do |podcast| %>
+						<div class="podcast">
+							<h4 class="podcast__title"><%= podcast.name %></h4>
+							<audio controls>
+								<source src="<%= podcast.stream_url %>" controlsList="nodownload"> 
+							</audio>
+						</div>
+					<% end %>
 				<% end %>
 			</div>
-			<div class="radio-banner__tune-in">Lo más reciente</div>
+			<% if station.article_relationships.count > 0 %>
+				
+				<div class="radio-banner__tune-in">Lo más reciente</div>
 
-			<% image_tag station.image_preview %>
+				<div class="station__articles">
+					<% station.article_relationships.last(3).each do |relationship| %>
+						<%= render "components/horizontal-note", article: relationship.article %>
+					<% end %>
 
-			<div class="station__articles">
-				<% station.article_relationships.last(3).each do |relationship| %>
-					<%= render "components/horizontal-note", article: relationship.article %>
-				<% end %>
-
-				<!-- VÏNCULO PARA VER MAS -->
-				<% link_to "Ver más notas", station_articles_path(station.slug) %>		
-			</div>
+					<!-- VÏNCULO PARA VER MAS -->
+					<% link_to "Ver más notas", station_articles_path(station.slug) %>		
+				</div>
+			<% end %>
 		</div>
 	</div>
 	<%= render "components/stations-sidebar", facebook: station.facebook, twitter: station.twitter %>
