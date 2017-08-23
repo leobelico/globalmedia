@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
 
 		# @article.note
 		@note = @article.note
-	
+	 
 		if !user_signed_in? and @article.published == false 
 			redirect_to root_url
 		end
@@ -30,6 +30,7 @@ class ArticlesController < ApplicationController
 		p "-------------------------------"
 		p @article.section
 		p @related_sections
+		@collaborator_articles = nil 
 	end
 
 	

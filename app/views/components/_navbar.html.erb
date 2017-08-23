@@ -5,7 +5,7 @@
 	<div class="dropdown">
 		<%= link_to "Radio y TV", stations_path, class: "navbar__link" %>
 		<div class="dropdown__options dropdown__radio">
-			<p class="dropdown__section">estaciones de radio:</p>
+			<p class="dropdown__section">estaciones de radio</p>
 			<hr class="line">
 			<% get_radio_stations.each do |radio| %>
 				<%= link_to ("/" + radio.slug), target: "_blank"  do %>
