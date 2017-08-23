@@ -39,6 +39,11 @@
 }
 .recommendation__header {
 	position:  relative; 
+	img {
+		height:  36px; 
+		max-width:  100%;
+		margin-bottom:  8px;  
+	}
 	.rh__title {
 		position:  absolute; 
 		top:  8px; 

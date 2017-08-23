@@ -9,7 +9,7 @@
 	position:  relative;
 	display:  flex; 
 	flex-direction:  column; 
-	border:  solid 1px #000000; 
+	border:  ridge 4px #e9e9e9; 
 	.breaking-news-0 {
 		display:  none; 
 	}
@@ -95,7 +95,8 @@
 		.breaking-news__article {
 			width:  calc(25% - 6.6px); 
 			.title {
-				height:  72px; 
+				height:  72px;
+				font-size:  18px;  
 			}  
 		}
 	}
