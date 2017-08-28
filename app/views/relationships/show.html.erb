@@ -5,10 +5,11 @@
 		<% end %>
 		<h1 class="section__title"><%= @relationship.name %></h1>
 		<div class="section-articles-container">
-			<div class="relationship ui-card">
+			<%= link_to @relationship.article_relationships.first.article, class: "relationship ui-card" do	%>
 				<p class="relationship__description"><%= @relationship.description %></p>
 				<%= image_tag @relationship.image, class: "relationship__image" %>
-			</div>
+			<% end %>
+
 			<% @relationship.article_relationships.reverse.each do |relationship|%>
 					<%= render "components/horizontal-note", article: relationship.article %>
 				

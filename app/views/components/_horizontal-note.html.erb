@@ -1,6 +1,8 @@
 <div class="horizontal-article ui-card">
+	<%= link_to article, class: "article__image" do %>
 	
-	<%= image_tag article.image, class: "article__image" %>
+		<%= image_tag article.image, class: "article__image" %>
+	<% end %>
 	<div class="article__information">
 		<%= link_to article, class: "wrapper-link" do %>
 			<h4 class="small-title semibold"><%= article.name %></h4>
@@ -18,7 +20,7 @@
 
 				
 			<p class="datetime">Hace <%= distance_of_time_in_words(Time.now, (article.created_at)) %></p>
-			<p class="short-description"><%= truncate(article.short_description, length: 120) %></p> 	
+			<p class="short-description"><%= truncate(article.short_description, length: 90) %></p> 	
 		<% end %>
 		<%= render "components/social-media-links", article: article %>
 	</div>

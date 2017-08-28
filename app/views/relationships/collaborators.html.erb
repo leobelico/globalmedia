@@ -18,6 +18,13 @@
 				<% end %>
 			<% end %>
 		</div>
+		<% if @related_sections.count > 0 %>
+			<div class="radio-banner__tune-in" style="margin-top:  8px; ">También te puede interesar:</div>
+			<% @related_sections.each do |related_section| %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(related_section.section_reference_id, 3), section_name: related_section.section_reference.name, highlight: "" %>
+
+			<% end %>
+		<% end %>		
 	</div>
 	<%= render "components/sidebar", article: "global", banner: "" %>
 </div>

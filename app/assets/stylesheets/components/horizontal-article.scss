@@ -8,9 +8,14 @@
 	.article__image  {
 		width:  250px; 
 		height:  180px;
-		background:  #fafafa;  
-		object-fit:  cover; 
-		object-position:  center center; 
+		flex-shrink:  0; 
+		img {
+			height:  100%; 
+			width:  100%; 
+			background:  #fafafa;  
+			object-fit:  cover; 
+			object-position:  center center; 
+		}
 	}
 	.article__information {
 		display:  flex; 
