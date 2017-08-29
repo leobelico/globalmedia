@@ -39,7 +39,15 @@ class Api::V1::ArticlesController < Api::BaseController
 		render json: @articles, adapter: :json, per_page: 20 
 
 	end
+	def latest_special_investigation 
+		@investigation = Relationship.where(relationship_type: "Investigation").last
+		if @investigation 
+			json_response(@investigation, :ok)
+		else
+			render json: { error: "Not found" }, status: :not_found
+		end
 
+	end	
 	def latest_special_investigation_articles
 
 		@articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Investigation'").order(created_at: "DESC") 
