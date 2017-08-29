@@ -29,6 +29,12 @@ class Api::V1::ArticlesController < Api::BaseController
 		
 		#relationship = @relationship.article_relationships
 		@articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator'").order(created_at: "DESC") 
+
+		@articles.each do |article|
+			collaborator_name = article.article_relationships.where(articable_type: "Relationship").first.articable.name 
+			collaborator_image = article.article_relationships.where(articable_type: "Relationship").first.articable.image 
+			@article_images << [collaborator_name, collaborator_image]
+		end
 		#@articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship'")
 
 		#Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship'").order(created_at: "DESC") 
@@ -36,7 +42,7 @@ class Api::V1::ArticlesController < Api::BaseController
 		#@articles = @articles.where()
 		#<% @relationship.article_relationships.each do |relationship| %>
 		
-		render json: @articles, adapter: :json, per_page: 20 
+		render json: { @articles, @article_images }, adapter: :json, per_page: 20 
 
 	end
 	def latest_special_investigation 
