@@ -196,7 +196,8 @@ Rails.application.routes.draw do
         end
       end
       resources :devices, only: [:create]
-      resources :banners, only: [:index, :get_banners]
+      resources :banners, only: [:index]
+      get "get_banners", to: "banners#get_banners"
       resources :podcasts, only: [:index]
       resources :stations, only: [:index, :show]
       resources :cameras, only: [:index]
