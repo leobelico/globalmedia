@@ -5,17 +5,41 @@
 	<div class="dropdown">
 		<%= link_to "Radio y TV", stations_path, class: "navbar__link" %>
 		<div class="dropdown__options dropdown__radio">
-			<p class="dropdown__section">estaciones de radio</p>
-			<hr class="line">
-			<% get_radio_stations.each do |radio| %>
-				<%= link_to ("/" + radio.slug), target: "_blank"  do %>
-					<p class="dropdown__link">
-						<%= image_tag radio.image %>	
-					</p>
-					<div class="dropdown__underline"></div>
-				<% end %>			
-			<% end %>	
 			<div class="dropdown__row">
+				
+				<div class="dropdown__col">
+					<p class="dropdown__section">estaciones de radio</p>
+					<hr class="line">
+					<div class="dropdown__row">
+					
+						<% get_radio_stations.each do |radio| %>
+							<%= link_to ("/" + radio.slug), target: "_blank"  do %>
+								<p class="dropdown__link">
+									<%= image_tag radio.image %>	
+								</p>
+								<div class="dropdown__underline"></div>
+							<% end %>			
+						<% end %>	
+					</div>
+				</div>
+				<div class="dropdown__col row--tv">
+					<p class="dropdown__section">Canal de Televisión</p>
+					<hr class="line">
+					<div class="dropdown__row">
+						
+						<% get_video_stations.each do |video| %>
+							<%= link_to ("/" + video.slug), target: "_blank" do %>
+								<p class="dropdown__link">
+									<%= image_tag video.image %>	
+									
+								</p>
+								<div class="dropdown__underline"></div>
+							<% end %>			
+						<% end %>
+					</div>
+				</div>
+			</div>
+<!-- 			<div class="dropdown__row">
 				<div class="dropdown__col">
 					
 					<p class="dropdown__section">Noticieros</p>
@@ -48,29 +72,45 @@
 						<% end %>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<div class="dropdown__row radio-row">
-				<div class="dropdown__col">
-					<div class="line"></div>
-					<%= image_tag "programs/imagen.png" %>		
-					<%= image_tag "programs/rmx.png" %>		
-					<div class="line"></div>
-					
-					<%= image_tag "programs/BANNER IMAGEN 1.png" %>		
-					<%= image_tag "programs/BANNER RMX.PNG" %>		
-					<%= image_tag "programs/BANNER IMAGEN 2.png" %>		
-				</div>
-				<div class="dropdown__col">
+
+				<!-- <div class="dropdown__col"> -->
+				<% if Station.find_by(name: "TRIÓN") %>
+					<% trion = Station.find_by(name: "TRIÓN") %>
+				<% end %>
+				<%= link_to trion, class: "dropdown__col" %>
+					<p class="dropdown__section">Noticieros</p>
 					<div class="line"></div>
 					<%= image_tag "programs/trion.png" %>		
 					<div class="line"></div>
 					<%= image_tag "programs/BANNER TRION 1.png" %>		
 					<%= image_tag "programs/BANNER TRION 2.png" %>		
 					<%= image_tag "programs/BANNER TRION 3.png" %>		
-					<%= image_tag "programs/BANNER TRION 4.png" %>		
-					
+					<%= image_tag "programs/BANNER TRION 4.png" %>
+				<% end %>	
+					<!-- 
+				</div> -->
+				<div class="dropdown__col dropdown__col--half">
+					<div class="line"></div>
+					<%= image_tag "programs/rmx.png" %>		
+					<div class="line"></div>
+					<%= image_tag "programs/BANNER RMX.PNG" %>		
+					<%= image_tag "programs/BANNER RMX.PNG", style: "visibility: hidden" %>		
+					<%= image_tag "programs/BANNER RMX.PNG", style: "visibility: hidden" %>		
 				</div>
 				<div class="dropdown__col">
+					<div class="line"></div>
+					<%= image_tag "programs/imagen.png" %>		
+					<div class="line"></div>
+					
+					<%= image_tag "programs/BANNER IMAGEN 1.png" %>		
+					<%= image_tag "programs/BANNER IMAGEN 4.png" %>		
+					<%= image_tag "programs/BANNER IMAGEN 2.png" %>		
+					<%= image_tag "programs/BANNER IMAGEN 3.png" %>		
+				</div>
+
+				<div class="dropdown__col dropdown__col--half">
 					<div class="line"></div>
 					<%= image_tag "programs/wfm.png" %>		
 					<div class="line"></div>
