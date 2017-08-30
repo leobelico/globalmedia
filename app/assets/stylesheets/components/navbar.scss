@@ -121,9 +121,7 @@
 	flex-direction:  row; 
 	align-items:  flex-start; 
 	box-sizing:  border-box; 
-	.dropdown__col {
-		display:  flex; 
-		flex-direction:  row; 
+	.dropdown__col { 
 		width:  50%; 
 		flex: 1; 
 		.line {
@@ -149,7 +147,7 @@
 .dropdown__radio {
 	max-width:  768px;
 	width:  768px;
-	display:  flex; 
+	display:  none; 
 	flex-direction:  row; 
 	flex-wrap:  wrap;
 	align-items:  center;
