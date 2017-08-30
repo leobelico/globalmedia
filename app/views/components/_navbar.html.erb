@@ -78,16 +78,26 @@
 				<!-- <div class="dropdown__col"> -->
 				<% if Station.find_by(name: "TRIÓN") %>
 					<% trion = Station.find_by(name: "TRIÓN") %>
-					<%= link_to trion, class: "dropdown__col" do %>
 						<p class="dropdown__section">Noticieros</p>
 						<div class="line"></div>
 						<%= image_tag "programs/trion.png" %>		
 						<div class="line"></div>
+					<%= link_to trion do %>
 						<%= image_tag "programs/BANNER TRION 1.png" %>		
-						<%= image_tag "programs/BANNER TRION 2.png" %>		
-						<%= image_tag "programs/BANNER TRION 3.png" %>		
-						<%= image_tag "programs/BANNER TRION 4.png" %>
 					<% end %>	
+					<%= link_to trion do %>
+						<%= image_tag "programs/BANNER TRION 2.png" %>		
+					<% end %>	
+					<%= link_to trion do %>
+						<%= image_tag "programs/BANNER TRION 3.png" %>	
+					<% end %>	
+				<% end %>
+
+				<% if Station.find_by(name: "Héctor Trejo") %>
+					<% hector = Station.find_by(name: "Héctor Trejo") %>
+					<%= link_to hector do %>
+						<%= image_tag "programs/BANNER TRION 4.png" %>
+					<% end %>
 				<% end %>
 					<!-- 
 				</div> -->
@@ -107,20 +117,51 @@
 					<div class="line"></div>
 					<%= image_tag "programs/imagen.png" %>		
 					<div class="line"></div>
+					<% if Station.find_by(name: "IMAGEN") %>
+						<% imagen = Station.find_by(name: "IMAGEN") %>
+						<%= link_to imagen do %>
+							<%= image_tag "programs/BANNER IMAGEN 1.png" %>		
+						<% end %>
+						<%= link_to imagen do %>
+						
+							<%= image_tag "programs/BANNER IMAGEN 4.png" %>		
+						<% end %>
+					<% end %>
+					<% if Station.find_by(name: "Eva María Camacho") %>
+						<% maria = Station.find_by(name: "Eva María Camacho") %>
+						<%= link_to maria do %>
+							<%= image_tag "programs/BANNER IMAGEN 2.png" %>		
+						<% end %>
+					<% end %>
+					<% if imagen %>
+						<%= link_to imagen do %>
+							<%= image_tag "programs/BANNER IMAGEN 3.png" %>		
+						<% end %>
+
+					<% end %>
 					
-					<%= image_tag "programs/BANNER IMAGEN 1.png" %>		
-					<%= image_tag "programs/BANNER IMAGEN 4.png" %>		
-					<%= image_tag "programs/BANNER IMAGEN 2.png" %>		
-					<%= image_tag "programs/BANNER IMAGEN 3.png" %>		
 				</div>
 
 				<div class="dropdown__col dropdown__col--half">
 					<div class="line"></div>
 					<%= image_tag "programs/wfm.png" %>		
 					<div class="line"></div>
-					<%= image_tag "programs/BANNER WFM 1.png" %>		
-					<%= image_tag "programs/BANNER WFM 2.png" %>		
-					<%= image_tag "programs/BANNER WFM 3.png" %>		
+
+					<% if Station.find_by(name: "Erika Salgado") %>
+						<% erika = Station.find_by(name: "Erika Salgado") %>
+						<%= link_to erika do %>
+							<%= image_tag "programs/BANNER WFM 1.png" %>		
+						<% end %>
+					<% end %>	
+					<% if Station.find_by(name: "WFM") %>
+						<% wfm = Station.find_by(name: "WFM") %>
+						<%= link_to wfm do %>
+							<%= image_tag "programs/BANNER WFM 2.png" %>
+						<% end %>
+						<%= link_to wfm do %>
+							<%= image_tag "programs/BANNER WFM 3.png" %>	
+						<% end %>
+					<% end %>
 					
 				</div>
 			</div>
