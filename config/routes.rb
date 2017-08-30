@@ -76,7 +76,7 @@ Rails.application.routes.draw do
     post "user_update_multiple_hit_objectives", to: "hit_objectives#user_update_multiple"
 
 
-
+    resources :notifications
 
     resources :highlights, param: :slug
 

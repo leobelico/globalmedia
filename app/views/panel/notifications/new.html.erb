@@ -1,0 +1,24 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span>Podcasts/ </span><span class="current">Nuevo Podcast</span></h2>
+	<div class="panel__actions">	
+		<button class="button">Crear podcast</button>
+	</div>
+</div>
+
+<%= form_for [:panel, @notification] do |f| %>
+	
+	
+	<div class="field field--string">
+		<label>Título</label>
+		<%= f.text_field :title %>
+	</div>
+	<div class="field field--string">
+		<label>Archivo del stream</label>
+		<%= f.text_area :body %>
+	</div>
+		
+<% end %>
+
+<script>
+	saveFormOnButtonClick($("button.button"), $("form")); 
+</script>
