@@ -8,7 +8,8 @@ class TitlepageController < ApplicationController
 			redirect_to @article
       	end	
 	end
-	
+	def privacy_policy 
+	end
 	def search_results
 		@articles = Article.where('lower(name) LIKE ? AND published = ? ', "%#{params[:format]}%", true).paginate(page: params[:page], per_page: 20)
 	end

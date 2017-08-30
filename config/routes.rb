@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "titlepage#index"
-  
+  get "privacy_policy", to: "titlepage#privacy_policy"
+  get "stations_supervisor", to: "titlepage#stations_supervisor"
+
   resources :articles, param: :slug, only: [:show] do
       get :search_hashtag, on: :collection
   end
