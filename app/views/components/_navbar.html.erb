@@ -78,27 +78,31 @@
 				<!-- <div class="dropdown__col"> -->
 				<% if Station.find_by(name: "TRIÓN") %>
 					<% trion = Station.find_by(name: "TRIÓN") %>
+					<%= link_to trion, class: "dropdown__col" do %>
+						<p class="dropdown__section">Noticieros</p>
+						<div class="line"></div>
+						<%= image_tag "programs/trion.png" %>		
+						<div class="line"></div>
+						<%= image_tag "programs/BANNER TRION 1.png" %>		
+						<%= image_tag "programs/BANNER TRION 2.png" %>		
+						<%= image_tag "programs/BANNER TRION 3.png" %>		
+						<%= image_tag "programs/BANNER TRION 4.png" %>
+					<% end %>	
 				<% end %>
-				<%= link_to trion, class: "dropdown__col" do %>
-					<p class="dropdown__section">Noticieros</p>
-					<div class="line"></div>
-					<%= image_tag "programs/trion.png" %>		
-					<div class="line"></div>
-					<%= image_tag "programs/BANNER TRION 1.png" %>		
-					<%= image_tag "programs/BANNER TRION 2.png" %>		
-					<%= image_tag "programs/BANNER TRION 3.png" %>		
-					<%= image_tag "programs/BANNER TRION 4.png" %>
-				<% end %>	
 					<!-- 
 				</div> -->
-				<div class="dropdown__col dropdown__col--half">
-					<div class="line"></div>
-					<%= image_tag "programs/rmx.png" %>		
-					<div class="line"></div>
-					<%= image_tag "programs/BANNER RMX.PNG" %>		
-					<%= image_tag "programs/BANNER RMX.PNG", style: "visibility: hidden" %>		
-					<%= image_tag "programs/BANNER RMX.PNG", style: "visibility: hidden" %>		
-				</div>
+				<% if Station.find_by(name: "RMX") %>
+					<% rmx = Station.find_by(name: "RMX") %>
+					<%= link_to rmx, class: "dropdown__col dropdown__col dropdown__col--half" do %>
+						<div class="line"></div>
+						<%= image_tag "programs/rmx.png" %>		
+						<div class="line"></div>
+						<%= image_tag "programs/BANNER RMX.PNG" %>		
+						<%= image_tag "programs/BANNER RMX.PNG", style: "visibility: hidden" %>		
+						<%= image_tag "programs/BANNER RMX.PNG", style: "visibility: hidden" %>		
+					<% end %>
+				<% end %>
+
 				<div class="dropdown__col">
 					<div class="line"></div>
 					<%= image_tag "programs/imagen.png" %>		
