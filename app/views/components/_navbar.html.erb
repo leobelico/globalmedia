@@ -79,7 +79,7 @@
 				<% if Station.find_by(name: "TRIÓN") %>
 					<% trion = Station.find_by(name: "TRIÓN") %>
 				<% end %>
-				<%= link_to trion, class: "dropdown__col" %>
+				<%= link_to trion, class: "dropdown__col" do %>
 					<p class="dropdown__section">Noticieros</p>
 					<div class="line"></div>
 					<%= image_tag "programs/trion.png" %>		
