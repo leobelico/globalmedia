@@ -15,27 +15,62 @@
 					<div class="dropdown__underline"></div>
 				<% end %>			
 			<% end %>	
-			<p class="dropdown__section">canal de Televisión</p>
-			<hr class="line">
-			<% get_video_stations.each do |video| %>
-				<%= link_to ("/" + video.slug), target: "_blank" do %>
-					<p class="dropdown__link">
-						<%= image_tag video.image %>	
-						
-					</p>
-					<div class="dropdown__underline"></div>
-				<% end %>			
-			<% end %>
-			<p class="dropdown__section">Noticieros</p>
-			<hr class="line">
-			<% get_news_stations.each do |news| %>
-				<%= link_to ("/" + news.slug), target: "_blank" do %>
-					<p class="dropdown__link">
-						<%= image_tag news.image %>
-					</p>
-					<div class="dropdown__underline"></div>
-				<% end %>	
-			<% end %>
+			<div class="dropdown__row">
+				<div class="dropdown__col">
+					<p class="dropdown__section">canal de Televisión</p>
+					<hr class="line">
+					<% get_video_stations.each do |video| %>
+						<%= link_to ("/" + video.slug), target: "_blank" do %>
+							<p class="dropdown__link">
+								<%= image_tag video.image %>	
+								
+							</p>
+							<div class="dropdown__underline"></div>
+						<% end %>			
+					<% end %>
+				</div>
+				<div class="dropdown__col">
+					
+					<p class="dropdown__section">Noticieros</p>
+					<hr class="line">
+					<% get_news_stations.each do |news| %>
+						<%= link_to ("/" + news.slug), target: "_blank" do %>
+							<p class="dropdown__link">
+								<%= image_tag news.image %>
+							</p>
+							<div class="dropdown__underline"></div>
+						<% end %>	
+					<% end %>
+				</div>
+			</div>
+			<div class="dropdown__row radio-row">
+				<div class="dropdown__col">
+					<%= image_tag "programs/imagen.png" %>		
+					<%= image_tag "programs/rmx.png" %>		
+					
+					<div class="line"></div>
+					<%= image_tag "programs/BANNER IMAGEN 1.png" %>		
+					<%= image_tag "programs/BANNER RMX.PNG" %>		
+					<%= image_tag "programs/BANNER IMAGEN 2.png" %>		
+				</div>
+				<div class="dropdown__col">
+					<%= image_tag "programs/trion.png" %>		
+					<div class="line"></div>
+					<%= image_tag "programs/BANNER TRION 1.png" %>		
+					<%= image_tag "programs/BANNER TRION 2.png" %>		
+					<%= image_tag "programs/BANNER TRION 3.png" %>		
+					<%= image_tag "programs/BANNER TRION 4.png" %>		
+					
+				</div>
+				<div class="dropdown__col">
+					<%= image_tag "programs/wfm.png" %>		
+					<div class="line"></div>
+					<%= image_tag "programs/BANNER WFM 1.png" %>		
+					<%= image_tag "programs/BANNER WFM 2.png" %>		
+					<%= image_tag "programs/BANNER WFM 3.png" %>		
+					
+				</div>
+			</div>
 		</div>
 	</div>
 	<% if Section.find_by(name: "San Luis") %>
