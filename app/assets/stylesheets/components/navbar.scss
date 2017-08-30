@@ -122,6 +122,8 @@
 	align-items:  flex-start; 
 	box-sizing:  border-box; 
 	.dropdown__col {
+		display:  flex; 
+		flex-direction:  row; 
 		width:  50%; 
 		flex: 1; 
 		.line {
