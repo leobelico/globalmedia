@@ -136,7 +136,7 @@
 		flex-wrap:  wrap;
 		width:  33%;  
 		a{
-		width:  112px; 
+			width:  112px; 
 			height:  70px;
 		}
 		img {
@@ -184,6 +184,11 @@
 			object-position:  center center;
 			margin-right:  8px;
 		}
+	}
+}
+.rmx {
+	img {
+		margin-bottom:  0px !important; 
 	}
 }
 .row--tv {

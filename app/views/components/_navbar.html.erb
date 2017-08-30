@@ -70,7 +70,7 @@
 				</div>
 				<% if Station.find_by(name: "RMX") %>
 					<% rmx = Station.find_by(name: "RMX") %>
-					<%= link_to rmx, class: "dropdown__col dropdown__col--half" do %>
+					<%= link_to rmx, class: "dropdown__col dropdown__col--half rmx" do %>
 						<div class="line"></div>
 						<%= image_tag "programs/rmx.png" %>		
 						<div class="line"></div>
