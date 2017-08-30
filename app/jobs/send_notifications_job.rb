@@ -5,14 +5,27 @@ class SendNotificationsJob < ApplicationJob
     sns = Aws::SNS::Client.new
 
 	Device.where(operating_system: "ios").each do |device|
-		endpoint = sns.create_platform_endpoint(platform_application_arn: "arn:aws:sns:us-west-1:568746846919:app/APNS_SANDBOX/Global", token: device.token)
-				
+		
 			
-		iphone_notification = {
+		endpoint = sns.create_platform_endpoint(platform_application_arn: "arn:aws:sns:us-west-1:568746846919:app/APNS_SANDBOX/Global", token: device.token)
+		
+		
+		if notification.wants_keys?
+			p "quiere llaves"
+			iphone_notification = {
 			aps: {
-				alert: notification.body, sound: true, bagde: 0, extra: {}
+				alert: notification.body, sound: true, bagde: 0, extra: { key: notification.key,
+            	key_id: notification.key_id }
+				}
 			}
-		}
+		else
+			iphone_notification = {
+				aps: {
+					alert: notification.body, sound: true, bagde: 0, extra: {}
+				}
+			}
+		end
+		
 
 		message = {
 			default: notification.body,

@@ -202,7 +202,7 @@ Rails.application.routes.draw do
       get "get_banners", to: "banners#get_banners"
       resources :podcasts, only: [:index]
       resources :stations, only: [:index, :show]
-      resources :cameras, only: [:index]
+      resources :cameras, only: [:index, :show]
       # , to: "api/v1/articles#most_visited"
 
       resources :sections, only: [:index, :show] do 

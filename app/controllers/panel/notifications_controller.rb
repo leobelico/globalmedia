@@ -27,7 +27,7 @@ class Panel::NotificationsController < ApplicationController
 
 	private
 		def notification_params
-			params.require(:notification).permit(:title, :body)
+			params.require(:notification).permit(:title, :body, :key, :key_id, :wants_keys)
 		end
 
 		def set_notification

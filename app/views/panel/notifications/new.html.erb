@@ -16,6 +16,22 @@
 		<label>Archivo del stream</label>
 		<%= f.text_area :body %>
 	</div>
+	
+	<div class="field field--string">
+		<label>¿Quieres abrir un artículo?</label>
+
+		<%= f.check_box :wants_keys %>
+	</div>
+
+	<div class="field field--string">
+		<label>Sección para abrir</label>
+		<%= f.text_field :key %>
+	</div>
+
+	<div class="field field--string">
+		<label>ID</label>
+		<%= f.text_field :key_id %>
+	</div>
 		
 <% end %>
 
