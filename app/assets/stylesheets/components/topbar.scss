@@ -8,10 +8,11 @@
 	align-items:  center; 
 	justify-content:  flex-start; 
 	padding:  6px 12px; 
-	background:  #12478c; 
+	// background:  #12478c; 
+	background:  #dbdbdb; 
 	box-sizing:  border-box;
 	.social-media__tag {
-		color:  #ffffff; 
+		color:  #212121; 
 	}
 	br {
 		display: none; 
@@ -54,13 +55,13 @@
 .topbar__link {
 	font-family: 'Pragati Narrow', sans-serif;
 	font-size:  16px; 
-	color:  #ffffff; 
+	color:  #424242; 
 	text-align:  center; 
 	text-transform:  uppercase; 
 	// margin-right:  18px; 
 	padding-right:  9px; 
 	padding-left:  9px; 
-	border-right:  solid 1px #ffffff; 
+	border-right:  solid 1px #424242; 
 	&:last-of-type {
 		margin-right:  8px; 
 	}
