@@ -1,6 +1,6 @@
 desc "This task is called by the Heroku scheduler add-on to publish the articles"
 task :publish_articles => :environment do
-  articles = Article.where("scheduled_time >= ? AND scheduled_time <= ? AND draft = ?", DateTime.now - 10.minutes, DateTime.now.end_of_minute, 1)
+  articles = Article.where("scheduled_time >= ? AND scheduled_time <= ? AND draft = ?", (DateTime.now - 10.minutes).beginning_of_minute, DateTime.now.end_of_minute, 1)
   articles.update_all(published: true)
 end
 
