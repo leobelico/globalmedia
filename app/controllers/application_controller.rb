@@ -210,7 +210,7 @@ class ApplicationController < ActionController::Base
 
     current_article = []
     if session[:article_id]
-      if !Article.find(session[:article_id]).blank?
+      if Article.exists?(session[:article_id])
         current_article << Article.find(session[:article_id])
       end
     end
@@ -223,7 +223,7 @@ class ApplicationController < ActionController::Base
 
     current_article = []
     if session[:article_id]
-      if !Article.find(session[:article_id]).blank?
+      if Article.exists?(session[:article_id])
         current_article << Article.find(session[:article_id])
       end
     end
@@ -275,8 +275,8 @@ class ApplicationController < ActionController::Base
     current_article = []
     
     if session[:article_id]
-      if !Article.find(session[:article_id]).blank?
-        current_article << Article.find(session[:article_id])
+      if Article.exists?(session[:article_id])
+         current_article << Article.find(session[:article_id])
       end
     end
 
