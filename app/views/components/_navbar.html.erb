@@ -5,41 +5,137 @@
 	<div class="dropdown">
 		<%= link_to "Radio y TV", stations_path, class: "navbar__link" %>
 		<div class="dropdown__options dropdown__radio">
-			<p class="dropdown__section">Radio</p>
-			<% get_radio_stations.each do |radio| %>
-				<%= link_to ("/" + radio.slug), target: "_blank"  do %>
-					<p class="dropdown__link">
-						<%= image_tag radio.image %>	
-						<label><%= radio.name %></label>	
-					</p>
-					<div class="dropdown__underline"></div>
-				<% end %>			
-			<% end %>	
-			<p class="dropdown__section">T.V.</p>
-			<% get_video_stations.each do |video| %>
-				<%= link_to ("/" + video.slug), target: "_blank" do %>
-					<p class="dropdown__link">
-						<%= image_tag video.image %>	
-						<label><%= video.name %></label>
+			<div class="dropdown__row">
+				
+				<div class="dropdown__col">
+					<p class="dropdown__section">estaciones de radio</p>
+					<hr class="line">
+					<div class="dropdown__row">
+					
+						<% get_radio_stations.each do |radio| %>
+							<%= link_to ("/" + radio.slug), target: "_blank"  do %>
+								<p class="dropdown__link">
+									<%= image_tag radio.image %>	
+								</p>
+								<div class="dropdown__underline"></div>
+							<% end %>			
+						<% end %>	
+					</div>
+				</div>
+				<div class="dropdown__col row--tv">
+					<p class="dropdown__section">Canal de Televisión</p>
+					<hr class="line">
+					<div class="dropdown__row">
 						
-					</p>
-					<div class="dropdown__underline"></div>
-				<% end %>			
-			<% end %>
-			<p class="dropdown__section">Noticieros</p>
-			<% get_news_stations.each do |news| %>
-				<%= link_to ("/" + news.slug), target: "_blank" do %>
-					<p class="dropdown__link">
-						<%= image_tag news.image %>
-						<label><%= news.name %></label>	
-					</p>
-					<div class="dropdown__underline"></div>
-				<% end %>	
-			<% end %>
+						<% get_video_stations.each do |video| %>
+							<%= link_to ("/" + video.slug), target: "_blank" do %>
+								<p class="dropdown__link">
+									<%= image_tag video.image %>	
+									
+								</p>
+								<div class="dropdown__underline"></div>
+							<% end %>			
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+			<div class="dropdown__row radio-row">
+
+				<div class="dropdown__col">
+				<% if Station.find_by(name: "TRIÓN") %>
+					<% trion = Station.find_by(name: "TRIÓN") %>
+						<p class="dropdown__section">Noticieros</p>
+						<div class="line"></div>
+						<%= image_tag "programs/trion.png" %>		
+						<div class="line"></div>
+					<%= link_to trion do %>
+						<%= image_tag "programs/BANNER TRION 1.png" %>		
+					<% end %>	
+					<%= link_to trion do %>
+						<%= image_tag "programs/BANNER TRION 2.png" %>		
+					<% end %>	
+					<%= link_to trion do %>
+						<%= image_tag "programs/BANNER TRION 3.png" %>	
+					<% end %>	
+				<% end %>
+
+				<% if Station.find_by(name: "Héctor Trejo") %>
+					<% hector = Station.find_by(name: "Héctor Trejo") %>
+					<%= link_to hector do %>
+						<%= image_tag "programs/BANNER TRION 4.png" %>
+					<% end %>
+				<% end %>
+					
+				</div>
+				<% if Station.find_by(name: "RMX") %>
+					<% rmx = Station.find_by(name: "RMX") %>
+					<%= link_to rmx, class: "dropdown__col dropdown__col--half rmx" do %>
+						<div class="line"></div>
+						<%= image_tag "programs/rmx.png" %>		
+						<div class="line"></div>
+						<%= image_tag "programs/BANNER RMX.PNG" %>		
+						<%= image_tag "programs/BANNER RMX.PNG", style: "visibility: hidden" %>		
+						<%= image_tag "programs/BANNER RMX.PNG", style: "visibility: hidden" %>		
+					<% end %>
+				<% end %>
+
+				<div class="dropdown__col">
+					<div class="line"></div>
+					<%= image_tag "programs/imagen.png" %>		
+					<div class="line"></div>
+					<% if Station.find_by(name: "IMAGEN") %>
+						<% imagen = Station.find_by(name: "IMAGEN") %>
+						<%= link_to imagen do %>
+							<%= image_tag "programs/BANNER IMAGEN 1.png" %>		
+						<% end %>
+						<%= link_to imagen do %>
+						
+							<%= image_tag "programs/BANNER IMAGEN 4.png" %>		
+						<% end %>
+					<% end %>
+					<% if Station.find_by(name: "Eva María Camacho") %>
+						<% maria = Station.find_by(name: "Eva María Camacho") %>
+						<%= link_to maria do %>
+							<%= image_tag "programs/BANNER IMAGEN 2.png" %>		
+						<% end %>
+					<% end %>
+					<% if imagen %>
+						<%= link_to imagen do %>
+							<%= image_tag "programs/BANNER IMAGEN 3.png" %>		
+						<% end %>
+
+					<% end %>
+					
+				</div>
+
+				<div class="dropdown__col dropdown__col--half">
+					<div class="line"></div>
+					<%= image_tag "programs/wfm.png" %>		
+					<div class="line"></div>
+
+					<% if Station.find_by(name: "Erika Salgado") %>
+						<% erika = Station.find_by(name: "Erika Salgado") %>
+						<%= link_to erika do %>
+							<%= image_tag "programs/BANNER WFM 1.png" %>		
+						<% end %>
+					<% end %>	
+					<% if Station.find_by(name: "WFM") %>
+						<% wfm = Station.find_by(name: "WFM") %>
+						<%= link_to wfm do %>
+							<%= image_tag "programs/BANNER WFM 2.png" %>
+						<% end %>
+						<%= link_to wfm do %>
+							<%= image_tag "programs/BANNER WFM 3.png" %>	
+						<% end %>
+					<% end %>
+					
+				</div>
+			</div>
 		</div>
 	</div>
-	<% if Section.find_by(name: "Metrópoli") %>
-		<%= link_to "Metrópoli", section_path(Section.find_by(name: "Metrópoli")), class: "navbar__link" %>
+	<% if Section.find_by(name: "San Luis") %>
+		<%= link_to "San Luis", section_path(Section.find_by(name: "San Luis")), class: "navbar__link" %>
 	<% end %>
 	<% if Section.find_by(name: "México") %>
 		<%= link_to "México", section_path(Section.find_by(name: "México")), class: "navbar__link" %>

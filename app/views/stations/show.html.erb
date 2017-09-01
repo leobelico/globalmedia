@@ -16,10 +16,10 @@
 						<a target="_blank" href="https://twitter.com/home?status=<%= truncate(@station.name, length: 80) %>%20%2D%20<%= url_encode(station_url(@station)) %>" class="social-media__link twitter">
 							<%= image_tag "twitter.svg" %>
 						</a>
-						<a class="social-media__link copy" target="_self">	
+						<a class="social-media__link copy" target="_self" data-clipboard-text="<%= station_url(@station) %>">	
 							<input class="hidden" value="<%= station_url(@station) %>">
 							<%= image_tag "copy.svg" %>
-						</a>
+						</a> 
 					</div>
 
 				</div>
@@ -114,7 +114,7 @@
 				
 					<!-- VÏNCULO PARA VER MAS -->
 					<% if @station.article_relationships.count > 3 %>
-						<%= link_to "Ver más", station_articles_path(@station.slug), class: "view-more" %>		
+						<%= link_to "Ver más notas", station_articles_path(@station.slug), class: "view-more" %>		
 					<% end %>
 				</div>
 			<% end %>

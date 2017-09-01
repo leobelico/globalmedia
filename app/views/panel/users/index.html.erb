@@ -1,5 +1,5 @@
 <div class="panel__header">
-	<h2 class="title panel__title"><span class="current">Usuarios</span></h2>
+	<h2 class="title panel__title"><span class="current">Editores</span></h2>
 	<div class="panel__actions">
 		<%= link_to "Nuevo Usuario", new_panel_user_path, class: "button" %>
 	</div>
@@ -14,7 +14,7 @@
 		<p class="table__cell permission rotated">Denuncia Global:</p>
 		<p class="table__cell permission rotated">Estaciones:</p>
 		<p class="table__cell permission rotated">Controles Remotos:</p>
-		<p class="table__cell permission rotated">Usuarios:</p>
+		<p class="table__cell permission rotated">Editores:</p>
 		<p class="table__cell permission rotated">Jefe de Noticias:</p>
 		<p class="table__cell permission">Editar:</p>
 
@@ -64,7 +64,7 @@
 	<% end %>
 	<% if @users.count == 0 %>
 		<div class="table__row">
-			<p class="table__cell table__empty">No hay usuarios para mostrar</p>
+			<p class="table__cell table__empty">No hay Editores para mostrar</p>
 		</div>
 	<% end %>
 </div>

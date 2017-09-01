@@ -24,14 +24,14 @@
 		<% end %>
 
 		<% if @user_hit_objectives.count > 0 %>	
-			<%= link_to "Objetivos de Usuarios",  panel_edit_user_objectives_path, class: "button" %>
+			<%= link_to "Objetivos de Editores",  panel_edit_user_objectives_path, class: "button" %>
 		<% end %>
 
 		<% if @user_hit_objectives.count > 0 and (Time.now.strftime("%B") != @user_hit_objectives.last.created_at.strftime("%B")) %> 
-			<%= link_to "Nuevos Objetivos de Usuarios", panel_hit_objectives_new_user_objectives_path, class: "button" %>	
+			<%= link_to "Nuevos Objetivos de Editores", panel_hit_objectives_new_user_objectives_path, class: "button" %>	
 		<% end %>
 		<% if @user_hit_objectives.count == 0 %>
-			<%= link_to "Objetivos de Usuarios", panel_hit_objectives_new_user_objectives_path, class: "button" %>	
+			<%= link_to "Objetivos de Editores", panel_hit_objectives_new_user_objectives_path, class: "button" %>	
 		<% end %>
 	</div>
 </div>

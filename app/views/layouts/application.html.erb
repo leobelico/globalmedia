@@ -118,6 +118,7 @@
 	</div>
 	<%= render "components/mobile-menu" if !panel_url %>
 	<%= render "components/stations-floating-bar" if !panel_url %>
+
 	<%= render "components/admin/admin-floating-bar" if !panel_url and user_signed_in? %>
 	
 	<% if !panel_url %>
@@ -204,6 +205,29 @@
 	<script>
 		$(document).on('turbolinks:click', function(event) {
 			clear_media();
+		});
+	</script>
+	<script>
+		var clipboard = new Clipboard('.copy');
+	
+		$(document).on("click touchend", function(event){
+			if ( $(event.target).is(".copy") ) {
+				// clipboard.copy($(event.target).find("input").val());
+				var clipboard = new Clipboard('.copy');
+				
+				TweenMax.fromTo(".copied-link", .3, {
+					y: -36, 
+					opacity:  0
+				},{
+					y: 0, 
+					opacity: 1
+				});
+				TweenMax.to(".copied-link", .3, {
+					y: 36, 
+					opacity:  0,
+					delay: 1
+				})
+			}
 		});
 	</script>
   </body>

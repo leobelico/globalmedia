@@ -162,6 +162,15 @@ class Panel::SectionsController < ApplicationController
 	def update
 	
 		if @section.update(section_params)
+
+			sections =  Section.where(id: params[:all_sections])
+			p "cuenta de secciones"
+			p sections.count
+			RelatedSection.where(section_id: @section.id).delete_all
+			sections.each do |section|
+				p "creating"
+				RelatedSection.create(section_id: @section.id, section_reference_id: section.id)
+			end
 			redirect_to @section
 		else
 			render action: "edit"
@@ -177,7 +186,7 @@ class Panel::SectionsController < ApplicationController
 
 	private
 		def section_params
-			params.require(:section).permit(:name, :description, :color, :order, :visible)
+			params.require(:section).permit(:name, :description, :color, :order, :visible, :facebook, :twitter)
 		end
 
 		def set_section

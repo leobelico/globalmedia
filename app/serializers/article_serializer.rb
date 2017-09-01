@@ -1,5 +1,5 @@
 class ArticleSerializer < ActiveModel::Serializer
-  attributes :id, :name, :created_at, :scheduled_time, :short_description, :plain_text, :html_note, :image, :video_url, :exclusive
+  attributes :id, :name, :created_at, :scheduled_time, :short_description, :raw_note, :image, :video_url, :exclusive, :slug
   belongs_to :section, each_serializer: SectionSerializer 
   belongs_to :author, each_serializer: AuthorSerializer  
   has_many :hashtags, each_serializer: HashtagSerializer

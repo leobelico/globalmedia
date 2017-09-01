@@ -45,6 +45,12 @@
 		align-items:  flex-end; 
 	}
 }
+@media screen and (max-width: 1024px) {
+	.footer {
+		flex-direction:  column !important; 
+		align-items:  center; 
+	}
+}
 .disclaimer { 
 	max-width:  calc(100% - 36px); 
 	font-size:  11.5px; 

@@ -29,6 +29,12 @@ class Api::V1::ArticlesController < Api::BaseController
 		
 		#relationship = @relationship.article_relationships
 		@articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator'").order(created_at: "DESC") 
+		@article_images = {}
+		@articles.each_with_index do |article, index|
+			collaborator_name = article.article_relationships.where(articable_type: "Relationship").first.articable.name 
+			collaborator_image = article.article_relationships.where(articable_type: "Relationship").first.articable.image 
+			@article_images[index] = { name: collaborator_name, image:  collaborator_image }
+		end
 		#@articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship'")
 
 		#Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship'").order(created_at: "DESC") 
@@ -36,10 +42,18 @@ class Api::V1::ArticlesController < Api::BaseController
 		#@articles = @articles.where()
 		#<% @relationship.article_relationships.each do |relationship| %>
 		
-		render json: @articles, adapter: :json, per_page: 20 
+		render json: { articles: @articles, article_images: @article_images }, adapter: :json, per_page: 20 
 
 	end
+	def latest_special_investigation 
+		@investigation = Relationship.where(relationship_type: "Investigation").last
+		if @investigation 
+			json_response(@investigation, :ok)
+		else
+			render json: { error: "Not found" }, status: :not_found
+		end
 
+	end	
 	def latest_special_investigation_articles
 
 		@articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Investigation'").order(created_at: "DESC") 
@@ -88,6 +102,7 @@ class Api::V1::ArticlesController < Api::BaseController
 
 	def get_global_recommendations
 	    @articles = Article.where(global_recommendation: true, published: true).order(updated_at: "ASC").last(4)
+	    render json: @articles, adapter: :json
   	end
 
 	def search_hashtag

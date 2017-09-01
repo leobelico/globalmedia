@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "titlepage#index"
-  
+  get "privacy_policy", to: "titlepage#privacy_policy"
+  get "stations_supervisor", to: "titlepage#stations_supervisor"
+
   resources :articles, param: :slug, only: [:show] do
       get :search_hashtag, on: :collection
   end
@@ -74,7 +76,7 @@ Rails.application.routes.draw do
     post "user_update_multiple_hit_objectives", to: "hit_objectives#user_update_multiple"
 
 
-
+    resources :notifications
 
     resources :highlights, param: :slug
 
@@ -93,7 +95,9 @@ Rails.application.routes.draw do
       resources :podcasts 
     end
     resources :timetables, only: [:show, :destroy] 
+
     resources :sections, param: :slug do 
+      
       get :select_highlights
       post :select_highlights
       post :set_highlight
@@ -104,6 +108,7 @@ Rails.application.routes.draw do
       post :set_global_recommendations
       get :autocomplete_article_name, on: :collection
       
+      resources :related_sections
     end
     resources :hits do 
       get :graph, on: :collection
@@ -194,9 +199,10 @@ Rails.application.routes.draw do
       end
       resources :devices, only: [:create]
       resources :banners, only: [:index]
+      get "get_banners", to: "banners#get_banners"
       resources :podcasts, only: [:index]
       resources :stations, only: [:index, :show]
-      resources :cameras, only: [:index]
+      resources :cameras, only: [:index, :show]
       # , to: "api/v1/articles#most_visited"
 
       resources :sections, only: [:index, :show] do 
@@ -204,6 +210,7 @@ Rails.application.routes.draw do
       end
       get "highlights", to: "articles#highlights"
       get "latest_collaborator_articles", to: "articles#latest_collaborator_articles"
+      get "latest_special_investigation", to: "articles#latest_special_investigation"
       get "latest_special_investigation_articles", to: "articles#latest_special_investigation_articles"
       get "latest_complaints_articles", to: "articles#latest_complaints_articles"
       get "get_global_recommendations", to: "articles#get_global_recommendations"

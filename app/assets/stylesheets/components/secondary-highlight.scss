@@ -74,9 +74,9 @@
 @media screen and (min-width:  1024px) {
 	.principal-highlight + .secondary-highlight {
 		.short-description {
-			-webkit-line-clamp: 2;
+			-webkit-line-clamp: 4;
 			// white-space: nowrap;
-			max-height:  32px; 
+			max-height:  64px; 
 			overflow: hidden;
 			text-overflow: ellipsis;
 

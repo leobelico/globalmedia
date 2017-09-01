@@ -1,0 +1,40 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span>Notificaciones / </span><span class="current">Nueva notificación</span></h2>
+	<div class="panel__actions">	
+		<button class="button">Mandar notificación</button>
+	</div>
+</div>
+
+<%= form_for [:panel, @notification], class: "admin-form card" do |f| %>
+	
+	
+	<div class="field field--string">
+		<label>Título</label>
+		<%= f.text_field :title %>
+	</div>
+	<div class="field field--string">
+		<label>Archivo del stream</label>
+		<%= f.text_area :body %>
+	</div>
+	
+	<div class="field field--string">
+		<label>¿Quieres abrir un artículo?</label>
+
+		<%= f.check_box :wants_keys %>
+	</div>
+
+	<div class="field field--string">
+		<label>Sección para abrir</label>
+		<%= f.text_field :key %>
+	</div>
+
+	<div class="field field--string">
+		<label>ID</label>
+		<%= f.text_field :key_id %>
+	</div>
+		
+<% end %>
+
+<script>
+	saveFormOnButtonClick($("button.button"), $("form")); 
+</script>

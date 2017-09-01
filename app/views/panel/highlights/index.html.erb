@@ -8,23 +8,45 @@
 	<div class="table__row">
 		<p class="table__cell">Posición:</p>
 		<p class="table__cell">Artículo:</p>
-		<p class="table__cell">¿Publicado?:</p>
+		<p class="table__cell">Estado:</p>
 		<p class="table__cell">Programado:</p>
 		<p class="table__cell">Cambiar nota:</p>
 	</div>
-	<% @highlights.each do |highlight| %>
+	<% @highlights.where(published: true).each do |highlight| %>
 		<div class="table__row">
 			<div class="table__cell"><%= highlight.order %> </div>
 			<div class="table__cell"><%= link_to highlight.article.name, highlight.article %></div>
 			<div class="table__cell"><% if highlight.published %>Activo<% else %>Inactivo<% end %></div>
 			<div class="table__cell"><%= highlight.scheduled_time %></div>
 			<%= link_to "Cambiar nota", edit_panel_highlight_path(highlight), class: "table__cell edit" %>
-
 		</div>
 	<% end %>
 	<% if @highlights.count == 0 %>
 		<div class="table__row">
 			<div class="table__cell table__empty">No hay notas destacadas.</div>
+		</div>
+	<% end %>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Posición:</p>
+		<p class="table__cell">Artículo:</p>
+		<p class="table__cell">Estado:</p>
+		<p class="table__cell">Programado:</p>
+		<p class="table__cell">Cambiar nota:</p>
+	</div>
+	<% @highlights.where(published: false).each do |highlight| %>
+		<div class="table__row">
+			<div class="table__cell"><%= highlight.order %> </div>
+			<div class="table__cell"><%= link_to highlight.article.name, highlight.article %></div>
+			<div class="table__cell"><% if highlight.published %>Activo<% else %>Inactivo<% end %></div>
+			<div class="table__cell"><%= highlight.scheduled_time %></div>
+			<%= link_to "Cambiar nota", edit_panel_highlight_path(highlight), class: "table__cell edit" %>
+		</div>
+	<% end %>
+	<% if @highlights.count == 0 %>
+		<div class="table__row">
+			<div class="table__cell table__empty">No hay notas destacadas inactivas.</div>
 		</div>
 	<% end %>
 </div>
