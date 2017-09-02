@@ -16,6 +16,7 @@ class Panel::NotificationsController < ApplicationController
 		# AWS = Aws::Credentials.new('AKIAIIK57E6XREQWWYQQ', 'CP1BwWcZB+DPqiuZK8K6z3J2Z4KUDRMy/f/VcBQR')
 		@notification = Notification.new(notification_params)
 		if @notification.save
+
 			SendNotificationsJob.perform_later @notification
 			redirect_to panel_notifications_path
 		else

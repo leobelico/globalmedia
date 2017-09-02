@@ -7,7 +7,7 @@ class SendNotificationsJob < ApplicationJob
 	Device.where(operating_system: "ios").each do |device|
 		
 			
-		endpoint = sns.create_platform_endpoint(platform_application_arn: "arn:aws:sns:us-west-1:568746846919:app/APNS_SANDBOX/Global", token: device.token)
+		endpoint = sns.create_platform_endpoint(platform_application_arn: "arn:aws:sns:us-west-1:123129123171:app/APNS_SANDBOX/GlobalMediaDev", token: device.token)
 		
 		
 		if notification.wants_keys?
