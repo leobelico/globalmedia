@@ -76,7 +76,12 @@ Rails.application.routes.draw do
     post "user_update_multiple_hit_objectives", to: "hit_objectives#user_update_multiple"
 
 
-    resources :notifications
+    resources :notifications do 
+      get :autocomplete_article_name, on: :collection
+      get :autocomplete_station_name, on: :collection
+      get :autocomplete_camera_name, on: :collection
+
+    end
 
     resources :highlights, param: :slug
 

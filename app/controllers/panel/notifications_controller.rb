@@ -3,6 +3,9 @@ class Panel::NotificationsController < ApplicationController
 	before_action :authenticate_user!
 	# load_and_authorize_resource
 
+	autocomplete :article, :name, full: true
+	autocomplete :station, :name, full: true
+	autocomplete :camera, :name, full: true
 
 	def index
 		@notifications = Notification.all

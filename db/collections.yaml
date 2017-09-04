@@ -1,0 +1,59 @@
+global_media_migration:
+  secciones:
+    :columns:
+      - id: 
+        :source: _id
+        :type: TEXT
+      - section_id:
+        :source: idsecciones
+        :type: INTEGER
+      - name: 
+        :source: nombre
+        :type: TEXT
+    :meta:
+     :table: sections
+     :extra_props: true
+  notas:
+    :columns:
+      - id: 
+        :source: _id
+        :type: TEXT
+      - idNotas:
+        :source: notes_id
+        :type: INTEGER
+      - name: 
+        :source: titulo
+        :type: TEXT
+      - created_at:
+        :source: fecha_inicio
+        :type: TIMESTAMP
+      - short_description:
+        :source: resumen
+        :type: TEXT
+      - note_old:
+        :source: notaCompleta
+        :type: TEXT
+      - slug:
+        :source: alias
+        :type: VARCHAR(100)
+      - articable_id:
+        :source: idsecciones
+        :type: INTEGER
+    :meta:
+     :table: articles
+     :extra_props: true
+  test:
+  imagenes:
+    :columns:
+      - id: 
+        :source: _id
+        :type: TEXT
+      - src: 
+        :source: imagenMain
+        :type: TEXT
+      - article_id:
+        :source: idnotas
+        :type: INTEGER
+    :meta:
+     :table: images
+     :extra_props: true
