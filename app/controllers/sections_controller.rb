@@ -40,12 +40,12 @@ class SectionsController < ApplicationController
 		r_articles = []
     	SectionHighlight.where(section: @section).each do |section| 
       
-       		 r_articles << section.article.id
+       		r_articles << section.article.id
       
    		 end
 
    		articles = []
-   		Article.where(articable_id: @section.id, published: true, note_old: "").each do |article|
+   		Article.where(articable_id: @section.id, published: true).last(200).each do |article|
    			articles << article.id
    		end
 
