@@ -2,7 +2,7 @@ class CamerasController < ApplicationController
 	before_action :set_camera, only: [:show]
 
 	def index
-		@cameras = Camera.all
+		@cameras = Camera.all.order(name: "DESC")
 	end
 	def show 
 	end

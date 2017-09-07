@@ -40,8 +40,6 @@ class ApplicationController < ActionController::Base
   helper_method :get_video_stations
   helper_method :get_news_stations
   
-
- 
   helper_method :related_by_hashtags
   helper_method :get_sections
 
@@ -194,7 +192,7 @@ class ApplicationController < ActionController::Base
   end
 
   def latest_news
-    @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where("published = true AND sections.visible = true").last(8).reverse
+    @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where("published = true AND sections.visible = true").first(8)
     # @articles = Article.where("published = true").last(8).reverse
   end
   
