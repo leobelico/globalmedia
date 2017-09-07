@@ -2,21 +2,8 @@
 	<div class="main-content">
 		<h4 class="section__title">Colaboradores</h4>
 		<div class="section-articles-container">
-			<% @collaborators.each do |collaborator| %>
-				<%= link_to collaborator, class: "collaborator-preview ui-card" do %>
-					<div class="collaborator__head">
-						
-						<%= image_tag collaborator.image, class: "collaborator__image" %>
-						<div class="collaborator__info">
-							
-							<h4 class="collaborator__title"><%= truncate(collaborator.article_relationships.last.article.name, length:  55) %></h4>
-							<p class="collaborator__name"><%= collaborator.name %></p>
-					
-						</div>
-					</div>
-					<p class="collaborator__excerpt"><%= truncate(collaborator.article_relationships.last.article.short_description, length:  120) %></p> 
-				<% end %>
-			<% end %>
+			<%= @collaborators %>
+
 		</div>
 		<% if @related_sections.count > 0 %>
 			<div class="radio-banner__tune-in" style="margin-top:  8px; ">También te puede interesar:</div>
