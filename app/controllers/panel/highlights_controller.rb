@@ -17,7 +17,7 @@ class Panel::HighlightsController < ApplicationController
 	def create
 
 		@highlight = Highlight.new(highlight_params)
-		article = Article.find_by_name(params[:highlight][:article_id])
+		article = Article.find(params[:article_id])
 		if article
 			the_h = Highlight.where(order: params[:highlight][:order])
 			articles_already_in_highlight = Highlight.where(article: article)
@@ -62,6 +62,7 @@ class Panel::HighlightsController < ApplicationController
 						if the_h.first.update_attributes(article: article, order: params[:highlight][:order], scheduled_time: scheduled_time)
 							redirect_to panel_highlights_path
 						else
+							flash[:error] = "1"
 							render action: "new"
 						end
 						
@@ -70,6 +71,7 @@ class Panel::HighlightsController < ApplicationController
 					if @highlight.update_attributes(article: article, order: params[:highlight][:order], scheduled_time: scheduled_time)
 						redirect_to panel_highlights_path
 					else
+						flash[:error] = "2"
 						render action: "new"
 
 					end
