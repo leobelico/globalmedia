@@ -14,10 +14,6 @@ class HighlightsController < ApplicationController
 		@highlight = Highlight.new(highlight_params)
 		article = Article.find_by_name(params[:highlight][:article_id])
 		@highlight.article = article
-		if @highlight.created_at >= scheduled_time 
-			Highlight.where(order: @highlight.order).update_attribute(published: false)
-			@highlight.update_attribute(published: true)
-		end
 		if @highlight.save
 			redirect_to panel_highlights_path
 		else
@@ -35,11 +31,6 @@ class HighlightsController < ApplicationController
 		article = Article.find_by_name(params[:highlight][:article_id])
 		
 		@highlight.article = article
-
-		if @highlight.created_at >= scheduled_time 
-			Highlight.where(order: @highlight.order).update_attribute(published: false)
-			@highlight.update_attribute(published: true)
-		end
 		if @highlight.update(highlight_params)
 			redirect_to panel_highlights_path
 		else
