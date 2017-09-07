@@ -45,7 +45,7 @@ class SectionsController < ApplicationController
    		 end
 
    		articles = []
-   		Article.where(articable_id: @section.id, published: true).each do |article|
+   		Article.where(articable_id: @section.id, published: true, note_old: "").each do |article|
    			articles << article.id
    		end
 
