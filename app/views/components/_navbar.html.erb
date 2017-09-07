@@ -43,8 +43,8 @@
 			<div class="dropdown__row radio-row">
 
 				<div class="dropdown__col">
-				<% if Station.find_by(name: "TRIÓN") %>
-					<% trion = Station.find_by(name: "TRIÓN") %>
+				<% if Station.find_by(name: "Trión") %>
+					<% trion = Station.find_by(name: "Trión") %>
 						<p class="dropdown__section">Noticieros</p>
 						<div class="line"></div>
 						<%= image_tag "programs/trion.png" %>		
@@ -84,8 +84,8 @@
 					<div class="line"></div>
 					<%= image_tag "programs/imagen.png" %>		
 					<div class="line"></div>
-					<% if Station.find_by(name: "IMAGEN") %>
-						<% imagen = Station.find_by(name: "IMAGEN") %>
+					<% if Station.find_by(name: "Imagen") %>
+						<% imagen = Station.find_by(name: "Imagen") %>
 						<%= link_to imagen do %>
 							<%= image_tag "programs/BANNER IMAGEN 1.jpg" %>		
 						<% end %>

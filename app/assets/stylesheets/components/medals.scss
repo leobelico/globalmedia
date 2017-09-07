@@ -1,0 +1,41 @@
+.medals-container {
+	display:  flex; 
+	flex-direction:  row; 
+	flex-wrap:  wrap;
+	align-items:  stretch; 
+	justify-content:  space-between; 
+	.medal.card {
+		display:  flex; 
+		flex-direction:  column;
+		align-items:  center; 
+		width:  calc(50% - 9px);
+		margin-top:  0; 
+		margin-left:  0;
+		box-sizing:  border-box;
+		margin-bottom:  18px;
+		.medal__type {
+			font-size:  14px; 
+			font-weight:  normal; 
+			color:  #757575; 
+			margin-bottom:  4px; 
+		}
+		.medal__medal {
+			height:  144px; 
+			width:  144px; 
+			img {
+				height:  100%;
+				width:  100%; 
+				object-fit:  contain; 
+				object-position:  center center;
+			}
+		}
+		.medal__date {
+			font-size:  11px; 
+			font-weight:  normal;
+		}
+		.medal__goal {
+			font-size:  14px; 
+			font-weight:  bold;
+		}
+	}
+}

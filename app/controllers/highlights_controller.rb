@@ -62,6 +62,5 @@ class HighlightsController < ApplicationController
 
 		def get_autocomplete_items(parameters)
       		items = active_record_get_autocomplete_items(parameters)
-      		items = items.where(published: true)
   		end
 end
