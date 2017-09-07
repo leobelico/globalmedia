@@ -192,7 +192,8 @@ class ApplicationController < ActionController::Base
   end
 
   def latest_news
-    @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where("published = true AND sections.visible = true").first(8).reverse
+    # @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").order(created_at: "ASC").where("published = true AND sections.visible = true").first(8).reverse
+    @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where("published = true AND sections.visible = true").order(created_at: "ASC").last(8).reverse
     # @articles = Article.where("published = true").last(8).reverse
   end
   
