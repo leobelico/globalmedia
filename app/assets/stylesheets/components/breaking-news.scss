@@ -13,6 +13,8 @@
 	.breaking-news-0 {
 		display:  none; 
 	}
+
+
 	.breaking-news-1,
 	.breaking-news-2,
 	.breaking-news-3,
@@ -53,10 +55,6 @@
 	.breaking-news-2,
 	.breaking-news-3,
 	.breaking-news-4 {
-		.description {
-
-			display:  none; 
-		}
 	}
 	.breaking-news-2,
 	.breaking-news-3,
@@ -96,8 +94,15 @@
 			width:  calc(25% - 6.6px); 
 			.title {
 				height:  72px;
-				font-size:  18px;  
+				font-size:  14px;  
 			}  
+		}
+	}
+}
+.breaking-news-1 {
+	.breaking-news__article {
+		.breaking-news__image {
+			width:  100%; 
 		}
 	}
 }

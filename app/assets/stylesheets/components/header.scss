@@ -23,6 +23,7 @@
 	max-height:  72px; 
 	height:  auto; 
 	overflow:  hidden; 
+
 	.stations-link {
 		height:  21px; 
 		margin-left:  auto;  
@@ -61,8 +62,8 @@
 	left:  12px; 
 	top:  50%; 
 	transform:  translateY(-50%);
-	height:  144px; 
-	width:  324px; 
+	height:  100%; 
+	width:  auto; 
 	img {
 		height:  100%; 
 		width:  auto; 
