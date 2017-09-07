@@ -84,7 +84,7 @@
 
 		<div class="field">
 			<label>Hashtags: </label>
-			<%= f.autocomplete_field(:hashtags_names,  autocomplete_hashtag_name_panel_hashtags_path, :id_element => 'hashtags', class: "search-bar", placeholder: "Por ejemplo: #ESNOTICIA, #GLOBALMEDIA, #NUVAROCKS", type: "search", value: @hashtags, :"data-delimiter"  => ', ', id: 'hashtags') %>
+			<%= f.autocomplete_field(:hashtags_names,  autocomplete_hashtag_name_panel_hashtags_path, :id_element => 'hashtags', class: "search-bar", placeholder: "Por ejemplo: TECNOLOGÍA, PROGRAMACIÓN, NOTICIAS, MÉXICO", type: "search", value: @hashtags, :"data-delimiter"  => ', ', id: 'hashtags') %>
 		</div>
 		<div class="field field--string">
 			<label>Imagen principal</label>
