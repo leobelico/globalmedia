@@ -21,7 +21,7 @@
 						<%= link_to breaking_news do %>
 							<h4 class="title"><%= breaking_news.name %></h4>
 							<p class="updated-at">Hace <%= time_ago_in_words(breaking_news.updated_at) %></p>
-							<p class="description"><%= truncate(breaking_news.short_description, length:  200) %></p>
+							<p class="description"><%= truncate(breaking_news.short_description, length:  120) %></p>
 						<% end %>
 						<%= render "components/social-media-links", article: breaking_news %>	
 					</div>
