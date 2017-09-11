@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
     before_save :set_full_name
     has_many :articles, dependent: :nullify
-    has_many :hits, dependent: :delete_all
+    # has_many :hits, dependent: :delete_all
     has_many :hits_objectives, dependent: :delete_all
     validates :email, :first_name, :last_name, :role, presence: true
     def superadmin?
