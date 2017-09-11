@@ -1,9 +1,9 @@
 <%= form_for [:panel, @user], html: { class: "admin-form card" } do |f| %>
 	<% if @user.errors.any? %>
 		<div >
-			<label><%= pluralize(@admin.errors.count, "error") %></label>
+			<label><%= pluralize(@user.errors.count, "error") %></label>
 			<ul>
-				<% @admin.errors.full_messages.each do |msg| %>
+				<% @user.errors.full_messages.each do |msg| %>
 					<li><%= msg %></li>
 				<% end %>
 			</ul>
