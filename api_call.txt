@@ -1,5 +1,5 @@
 glatest_collaborator_articles
-
+laal
 curl -H http://localhost:3000/api/v1/latest_collaborator_articles?page=1
 
 curl http://localhost:3000/api/v1/latest_special_investigation_articles?page=1
