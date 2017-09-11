@@ -55,7 +55,7 @@ class SectionsController < ApplicationController
    			most_visited << article.id
    		end
    		@highlight = Article.where(articable_id: @section.id, highlight: true, published: true).order(updated_at: "DESC").first
-  		@articles = Article.find(articles - r_articles - most_visited).paginate(page: params[:page], per_page: 21)
+  		@articles = Article.find(articles - r_articles).paginate(page: params[:page], per_page: 21)
 
 	end
 

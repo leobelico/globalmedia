@@ -25,19 +25,14 @@
 		* {
 			font-family: Arial, Helvetica, sans-serif; 
 		}
-		.title {
+		.title, .title span {
 			font-size:  26px;
 			font-family:  "Martel";
-			 -ms-word-break: break-all;
-			     word-break: break-all;
-
-			     /* Non standard for webkit */
-			     word-break: break-word;
-
-			-webkit-hyphens: auto;
-			   -moz-hyphens: auto;
-			    -ms-hyphens: auto;
-			        hyphens: auto;
+			hyphens:  none; 
+			break-word:  keep-all; 
+		}
+		.title span {
+			width:  100%; 
 		}
 		.author {
 			display:  none; 
