@@ -1,7 +1,7 @@
 class Panel::UsersController < ApplicationController
 	before_action :authenticate_user!
 	before_action :authenticate_user_permission
-	before_action :set_user, only: [:show, :edit, :update]
+	before_action :set_user, only: [:show, :edit, :update, :destroy]
 	
 	def index
 		@users = User.all.order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
