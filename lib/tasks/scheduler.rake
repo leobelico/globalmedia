@@ -30,6 +30,9 @@ task :publish_highlights => :environment do
 			seventh.first.update_attributes(published: false)
 		end
 		highlight.update_attributes(published: true)
+		if Article.exists?(highlight.article_id)
+			Article.find(highlight.article_id).update_attribute(:published, true)
+		end
 
 	end
 end
