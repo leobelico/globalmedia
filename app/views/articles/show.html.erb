@@ -107,7 +107,7 @@
 			<div class="quill--article article--old">
 			</div>
 			<script>
-				$(".quill--article").html("<%= @article.note_old %>"); 
+				$(".quill--article").html("<%= raw @article.note_old %>"); 
 			</script>
 		<% end %>
 
