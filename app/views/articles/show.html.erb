@@ -105,9 +105,10 @@
 			</div>
 		<% elsif @article.note_old != nil and @article.note.empty? %>
 			<div class="quill--article article--old">
+				<%= simple_format @article.note_old %>
 			</div>
 			<script>
-				$(".quill--article").html("<%= raw @article.note_old %>"); 
+				// $(".quill--article").html("<%= simple_format @article.note_old %>"); 
 			</script>
 		<% end %>
 
