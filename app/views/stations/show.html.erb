@@ -29,11 +29,9 @@
 					<source src="<%= @station.stream_url %>" type="audio/mpeg">	
 				</audio>
 			<% else %>	
-				<script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
-
-				<script src="http://vjs.zencdn.net/6.2.7/video.js"></script>
-				
-				<script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js"></script>
+				<script src="http://vjs.zencdn.net/5.10.1/video.js"></script>
+<!-- 				
+				<script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js"></script> -->
 				<script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
 				<video id="stream" class="video-js vjs-default-skin" controls preload="auto" width="650" height="308" 
 				data-setup='{}' autoplay>
