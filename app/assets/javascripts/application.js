@@ -20,8 +20,6 @@
 //= require libraries/money
 //= require libraries/quill/quill.min 
 //= require libraries/clipboard.js/clipboard.min 
-//= require libraries/videojs/video.min
-//= require libraries/videojs/hls
 //= require components/media-cache-cleaner
 //= require components/buttons
 // 
