@@ -41,7 +41,9 @@
 				</video>
 
 				<script>
-					player = videojs('stream');
+					player = videojs('stream',{
+					  techOrder: ["flash", "html5"]
+					});
 				</script>
 
 			<% end %>	
