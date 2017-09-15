@@ -11,7 +11,7 @@
 		  if(Hls.isSupported()) {
 		    var video = document.getElementById('video');
 		    var hls = new Hls();
-		    hls.loadSource('<%= camera.stream %>');
+		    hls.loadSource('<%= @camera.stream %>');
 		    hls.attachMedia(video);
 		    hls.on(Hls.Events.MANIFEST_PARSED,function() {
 		      video.play();
@@ -29,7 +29,7 @@
 		<% end %>
 
 		<div class="playlists">
-			<% Camera.last(4).each do |camera| %>
+			<% Camera.order("RANDOM()").limit(4).each do |camera| %>
 				<% if camera.cover %>
 					<%= link_to camera_path(camera), class: "playlist" do %>
 						<%= image_tag camera.cover %>
