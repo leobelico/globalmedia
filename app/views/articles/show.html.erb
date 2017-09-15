@@ -67,7 +67,7 @@
 						<p class="author">--</p>
 					<% end %>
 				<% end %>
-				<% if article.scheduled_time? %>
+				<% if @article.scheduled_time? %>
 					<p class="date"><%= l(@article.scheduled_time, format: "%H:%M %A %e %B, %Y") %></p>
 				<% else %>
 					<p class="date"><%= l(@article.created_at, format: "%H:%M %A %e %B, %Y") %></p>
