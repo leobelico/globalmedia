@@ -67,7 +67,11 @@
 						<p class="author">--</p>
 					<% end %>
 				<% end %>
-				<p class="date"><%= l(@article.created_at, format: "%H:%M %A %e %B, %Y") %></p>
+				<% if article.scheduled_time? %>
+					<p class="date"><%= l(@article.scheduled_time, format: "%H:%M %A %e %B, %Y") %></p>
+				<% else %>
+					<p class="date"><%= l(@article.created_at, format: "%H:%M %A %e %B, %Y") %></p>
+				<% end %>
 				<% if @article.articable_type == "Section" %>
 					<%= link_to @article.section, section_path(Section.find_by_name(@article.section)), class: "section" %>
 				<% end %>

@@ -110,11 +110,11 @@
 .dropdown__section {
 	color:  #ffffff; 
 	text-transform:  uppercase; 
-	padding:  12px 12px; 
+	padding:  12px 6px; 
 	font-size:  18px; 
-	color:  $tertiary; 
+	color:  $tertiary !important; 
 	font-weight:  bold !important;
-	border-bottom:  solid 4px rgba(255,255,255,.33);
+	border-bottom:  solid 2px rgba(255,255,255,.33);
 }
 .dropdown__row {
 	width:  100%; 
@@ -129,6 +129,10 @@
 			width:  90%; 
 		}
 	}
+}
+.dropdown__section.radio-title {
+	font-size:  24px !important; 
+	margin-top:  8px !important; 
 }
 .radio-row {
 	.dropdown__col {
@@ -164,9 +168,10 @@
 	border-right:  solid 8px #dbdbdb; 
 	border-bottom:  solid 8px #dbdbdb; 
 	.line {
-		width:  50%; 
+		width:  100%; 
 		margin-right:  50%; 
-		height:  4px; 
+		height:  2px; 
+		background:  #000000; 
 	}
 	* {
 		color:  #000000;
