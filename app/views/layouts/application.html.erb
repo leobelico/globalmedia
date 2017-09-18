@@ -225,7 +225,7 @@
 		    <%= yield %>
 	 	</div>
  	<% end %>
-	<%= render "components/footer" if !panel_url %>
+	<%# render "components/footer" if !panel_url %>
 	<script>
 		$(document).on('turbolinks:click', function(event) {
 			clear_media();
