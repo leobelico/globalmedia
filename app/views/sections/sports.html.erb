@@ -4,7 +4,7 @@
 
 		<h1 class="section__title" style="background-color:  <%= @intl.color %>; "><%= @intl.name %></h1>
 		<div class="section-articles-container">
-			<% @intl_articles.each do |article|%>
+			<% @intl_articles.reverse.each do |article|%>
 				<%= render "components/section-article", article: article %>
 			<% end %>
 		</div>
@@ -12,7 +12,7 @@
 
 		<h1 class="section__title" style="background-color:  <%= @local.color %>;"><%= @local.name %></h1>
 		<div class="section-articles-container">
-			<% @local_articles.each do |article|%>
+			<% @local_articles.reverse.each do |article|%>
 				<%= render "components/section-article", article: article %>
 			<% end %>
 		</div>

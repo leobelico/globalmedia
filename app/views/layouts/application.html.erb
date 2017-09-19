@@ -1,21 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Global Media - Noticias</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
     <%= csrf_meta_tags %>
+	<% if !(controller_name == "articles" and action_name == "show") %>
+	    <title>Global Media - Noticias</title>
+		<meta name="description" content="GlobalMedia te informa">
+	<% end %>
+	<meta name="keywords" content="GlobalMedia,noticias,México,San Luis Potosí,Vanguardia,Negocios">
+	<meta name="author" content="GlobalMedia">
 
-
-	<%= render 'application/favicon' %>
-	
-
-
-	<link href="https://fonts.googleapis.com/css?family=Pragati+Narrow|Martel:900" rel="stylesheet">
-
-	<script src="https://platform.twitter.com/widgets.js" async></script>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 	<% if controller_name == "articles" and action_name == "show" %>
 		<%= render "components/article_meta_tags", article: @article %>
@@ -23,7 +19,35 @@
 	<% if controller_name == "stations" and action_name == "show" %>
 		<%= render "components/station_meta_tags", station: @station %>
 	<% end %>
+	
+	<%= render 'application/favicon' %>
+	
 
+
+	<link href="https://fonts.googleapis.com/css?family=Pragati+Narrow|Martel:900" rel="stylesheet">
+
+	<script src="https://platform.twitter.com/widgets.js" async></script>
+	<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+	<!-- Global Site Tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106606454-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments)};
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-106606454-1');
+	</script>
+	<!-- Start Alexa Certify Javascript -->
+	<script type="text/javascript">
+	_atrk_opts = { atrk_acct:"TmlPj1a8wt00q2", domain:"globalmedia.mx",dynamic: true};
+	(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+	</script>
+	<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=TmlPj1a8wt00q2" style="display:none" height="1" width="1" alt="" /></noscript>
+	<!-- End Alexa Certify Javascript -->  	
 	<script>
 
 
@@ -137,7 +161,7 @@
 					if ($(window).scrollTop() < 144 && navflag == true) {
 						TweenMax.to(".header--wrapper", .3, { maxHeight: 72 })
 						TweenMax.to(".logo-container img", .3, { width: 0 })
-						TweenMax.to(".navbar, .dropdown-link, .dropdown", .3, { backgroundColor: "#2768d1" });
+						TweenMax.to(".navbar, .dropdown-link, .dropdown", .3, { backgroundColor: "#424242" });
 						navflag = false;
 					}
 				} 

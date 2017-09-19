@@ -58,7 +58,7 @@ class SectionsController < ApplicationController
    		@highlight = Article.where(articable_id: @section.id, highlight: true, published: true).order(updated_at: "DESC").first
   		# @articles = Article.find(articles - r_articles).paginate(page: params[:page], per_page: 21)
   		if @highlight 
-	  		@articles = Article.where("article_id != ? AND published = true AND articable_id = ?", @highlight.id, @section.id).order(created_at: "DESC").paginate(page: params[:page], per_page: 21)
+	  		@articles = Article.where("id != ? AND published = true AND articable_id = ?", @highlight.id, @section.id).order(created_at: "DESC").paginate(page: params[:page], per_page: 21)
   		else
 	  		@articles = Article.where("published = true AND articable_id = ?", @section.id).order(created_at: "DESC").paginate(page: params[:page], per_page: 21)
   		end

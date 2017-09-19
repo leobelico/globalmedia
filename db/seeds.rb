@@ -459,17 +459,30 @@ collaborator_articles = ArticleRelationship.create([
 ]) 
 stations_image = "https://cdn.dribbble.com/users/482851/screenshots/2717061/radio.gif"
 stations_image_2 = "https://cdn.dribbble.com/users/229993/screenshots/2924148/spaceradio4dr.jpg"
-stations_name = "Estación "
+# stations_name = "Estación "
 stream_url = "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1xtra_mf_p"
 video_stream = "http://38.96.148.213:1935/CamarasGlobal/Camara1.sdp/playlist.m3u8"
 playlist_image = "https://images.8tracks.com/cover/i/008/729/179/bedcovers1-8272.jpg?rect=0,0,540,540&q=98&fm=jpg&fit=max"
 playlist = "https://open.spotify.com/user/spotifycharts/playlist/37i9dQZEVXbO3qyFxbkOE1"
 
-for i in 0..6
+stations_names = [
+	"Erika Salgado",
+	"Eva María Camacho",
+	"Héctor Trejo",
+	"Imagen",
+	"Ke Buena",
+	"Los 40",
+	"RMX",
+	"Trión",
+	"VIVECANAL",
+	"WFM"
+]  
+# name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+for i in 0..stations_names.size
 	station = Station.create(
 		{
-			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
 			image: stations_image,
+			name: stations_names[i],
 			stream_url: stream_url, 
 			playlist_1: playlist,
 			playlist_1_image: playlist_image,
@@ -482,26 +495,26 @@ for i in 0..6
 		}
 	)
 end
-for i in 0..2
-	station = Station.create(
-		{
-			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
-			image: stations_image_2,
-			stream_url: video_stream,
-			news: true
-		}
-	)
-end
-for i in 0..2
-	station = Station.create(
-		{
-			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
-			image: stations_image_2,
-			stream_url: video_stream,
-			video: true
-		}
-	)
-end
+# for i in 0..2
+# 	station = Station.create(
+# 		{
+# 			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+# 			image: stations_image_2,
+# 			stream_url: video_stream,
+# 			news: true
+# 		}
+# 	)
+# end
+# for i in 0..2
+# 	station = Station.create(
+# 		{
+# 			name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
+# 			image: stations_image_2,
+# 			stream_url: video_stream,
+# 			video: true
+# 		}
+# 	)
+# end
 
 timetable_image = "http://www.sothebys.com/content/dam/sothebys-pages/blogs/ModernImpressions/2017/2/klimt-bauerngarten_banner.jpg.webrend.1920.350.jpeg"
 Station.all.each do |station|

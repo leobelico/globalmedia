@@ -2,6 +2,7 @@ class RelationshipsController < ApplicationController
 	before_action :set_relationship
 
 	def show 
+			
 	end
 	def collaborators
 		@collaborators = Relationship.where(relationship_type: "Collaborator").order(created_at: "DESC").paginate(page: params[:page], per_page: 20)

@@ -25,13 +25,13 @@
 
 	<% if articles.first.video_url == "" %>
 		<% if title == "Denuncia Global" %>
-			<iframe src="https://www.youtube.com/embed/tY1sVM1nfrY?list=PLdsuxs51rfhAAmwdXo9AoUdUs-Q1Ju8Uf" frameborder="0" allowfullscreen width="100%" height="280px"></iframe>	
+			<iframe width="100%" height="280" src="https://www.youtube.com/embed/videoseries?list=PLdsuxs51rfhAAmwdXo9AoUdUs-Q1Ju8Uf" frameborder="0" allowfullscreen></iframe>	
 		<% else %>
 			<%= image_tag Relationship.where(relationship_type: "Investigation").last.image, class: "special-articles__image", data: { link: relationship_path(Relationship.where(relationship_type: "Investigation").last) } %>
 		<% end %>
 	<% else %>
 		<% if type == "#DENUNCIAGLOBAL" %>
-			<iframe src="https://www.youtube.com/embed/tY1sVM1nfrY?list=PLdsuxs51rfhAAmwdXo9AoUdUs-Q1Ju8Uf" frameborder="0" allowfullscreen width="100%" height="280px"></iframe>	
+			<iframe width="100%" height="280" src="https://www.youtube.com/embed/videoseries?list=PLdsuxs51rfhAAmwdXo9AoUdUs-Q1Ju8Uf" frameborder="0" allowfullscreen></iframe>	
 		<% else %>
 			<iframe src="<%= articles.first.video_url %>" frameborder="0" allowfullscreen width="100%" height="280px"></iframe>	
 		<% end %>

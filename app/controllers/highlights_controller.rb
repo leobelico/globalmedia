@@ -1,6 +1,6 @@
 class HighlightsController < ApplicationController
 	before_action :set_highlight, only: [:edit, :update, :destroy]
-	autocomplete :article, :name, full: true
+	autocomplete :article, :name, full: true, limit: 100
 	before_action :get_all_highlights, only: [:new, :create, :edit, :update]
 	def index
 		@highlights = Highlight.all

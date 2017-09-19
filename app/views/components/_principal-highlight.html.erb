@@ -11,7 +11,12 @@
 			<% if article.section != nil %>
 				<p class="section-and-author"><span class="section"><%= article.section %></span> - 
 			<% end %>
-			<span class="datetime"><%= distance_of_time_in_words(Time.now, (article.created_at)) %></span>
+			<% if article.scheduled_time? %>
+				
+				<span class="datetime"><%= distance_of_time_in_words(Time.now, (article.scheduled_time)) %></span>
+			<% else %>
+				<span class="datetime"><%= distance_of_time_in_words(Time.now, (article.created_at)) %></span>
+			<% end %>
 
 			<% if article.author and article.author.name != "Ninguno" %>
 				<span class="author">Por <%= article.author.name %></p>
