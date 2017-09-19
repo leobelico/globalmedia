@@ -6,7 +6,7 @@ class Api::V1::ArticlesController < Api::BaseController
 	end
 	def highlights 
 		# @highlights = Highlight.where(published: true).order(order: "ASC")
-		@articles = Article.joins("INNER JOIN highlights ON highlights.article_id = articles.id WHERE highlights.published = true").order(order: "ASC")
+		@articles = Article.joins("INNER JOIN highlights ON highlights.article_id = articles.id WHERE highlights.published = true").order("highlights.order ASC")
 		if @articles 
 			json_response(@articles, :ok)
 		else
