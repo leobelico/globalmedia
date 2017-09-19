@@ -6,7 +6,7 @@ class Api::V1::ArticlesController < Api::BaseController
 	end
 	def highlights 
 		# @highlights = Highlight.where(published: true).order(order: "ASC")
-		@articles = Article.joins("INNER JOIN highlights ON highlights.article_id = articles.id WHERE highlights.published = true")
+		@articles = Article.joins("INNER JOIN highlights ON highlights.article_id = articles.id WHERE highlights.published = true").order(order: "ASC")
 		if @articles 
 			json_response(@articles, :ok)
 		else
@@ -21,7 +21,7 @@ class Api::V1::ArticlesController < Api::BaseController
 		end
 	end
 	def most_visited 
-	    @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND hits.created_at > ? AND hits.created_at < ?", 2.hours.ago, Time.now).last(6)
+	    @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND hits.created_at > ? AND hits.created_at < ?", 2.hours.ago, Time.now).first(6)
 	    json_response(@articles, :ok)
 	end
 
