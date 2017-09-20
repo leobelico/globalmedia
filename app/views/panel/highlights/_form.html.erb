@@ -7,27 +7,26 @@
 				<% end %>
 			</ul>
 	<% end %>
-<!-- 	<label>Highlights ya establecidos:</label>
-	<% @highlights.each do |highlight| %>
-		Posición: <%= highlight.order %> Artículo: <%= link_to highlight.article.name, highlight.article %>
-	<% end %> -->
 
 	<div class="field">	
 		<label>Posición del Highlight:</label>
 		<%= f.select :order, options_for_select((1..6).step(1), @highlight.order)%>
 	</div>
-	<div class="field">
+	<div class="field field--string">
 		
 		<label>Artículo:</label>
-		<% if @highlight.new_record? %>
-			<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
-			<%= hidden_field_tag :article_id, :id => "article_id", class:"search-results", style:"background-color:#fff;" %> 
-		<% else %>
-			<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @highlight.article.name) %>
-			<%= f.hidden_field :article_id, :id => "article_id", value: @highlight.article.id %>
+		<%= f.text_field :article_id %>		
+		<% if false %>
+			<% if @highlight.new_record? %>
+				<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
+				<%= hidden_field_tag :article_id, :id => "article_id", class:"search-results", style:"background-color:#fff;" %> 
+			<% else %>
+				<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @highlight.article.name) %>
+				<%= f.hidden_field :article_id, :id => "article_id", value: @highlight.article.id %>
+
+			<% end %>
 
 		<% end %>
-
 
 	</div>
 	<div class="field field--datetime">
