@@ -17,7 +17,7 @@ class Panel::HighlightsController < ApplicationController
 	def create
 
 		@highlight = Highlight.new(highlight_params)
-		article = Article.find(params[:article_id])
+		article = Article.find(params[:highlight][:article_id])
 		if article
 			the_h = Highlight.where(order: params[:highlight][:order])
 			articles_already_in_highlight = Highlight.where(article: article)

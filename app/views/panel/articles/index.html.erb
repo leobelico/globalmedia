@@ -18,14 +18,14 @@
 		<p class="table__cell">Estatus:</p>
 		<p class="table__cell">Programado:</p>
 
-		<p class="table__cell f-3">Extracto:</p>
+		<p class="table__cell">ID:</p>
 		<p class="table__cell">Sección:</p>
 		<p class="table__cell">Escritor:</p>
 		<p class="table__cell">Vistas:</p>
 		<p class="table__cell">Fecha:</p>
 		<p class="table__cell edit">Editar:</p>
 		<% if current_user.is_news_chief? %>
-			<p class="table__cell">Publicar Ahora</p>
+			<p class="table__cell">Publicar:</p>
 		<% end %>
 		<% if current_user.destroy_articles_permission? %>
 			<p class="table__cell delete">Eliminar:</p>
@@ -57,7 +57,7 @@
 			
 			<p class="table__cell"><% if article.scheduled_time %><%= article.scheduled_time.strftime("%B %d, %Y %H:%M") %><% end %></p>
 
-			<p class="table__cell f-3"><%= truncate(article.short_description, length: 40) %></p>	
+			<p class="table__cell"><%= article.id %></p>	
 			<% if article.section %>
 				<%= link_to article.section, panel_section_path(article.section), class: "table__cell" %>
 			<% else %>
