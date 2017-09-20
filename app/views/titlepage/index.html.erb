@@ -10,12 +10,15 @@
 		<% end %>
 	<% end %>
 </div>
-
-<% if get_banner("", "TitlePage", "Grande" ).count > 0 %>
-	<%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande" )  %>
-<% else %>
-	<% if get_banner("", "Global", "Grande" ).count > 0 %>
-		<%= render "components/big-banner", banner: get_banner("", "Global", "Grande" )  %>
+<!-- FALSE -->
+<% if false %>
+	
+	<% if get_banner("", "TitlePage", "Grande" ).count > 0 %>
+		<%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande" )  %>
+	<% else %>
+		<% if get_banner("", "Global", "Grande" ).count > 0 %>
+			<%= render "components/big-banner", banner: get_banner("", "Global", "Grande" )  %>
+		<% end %>
 	<% end %>
 <% end %>
 
