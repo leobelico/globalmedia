@@ -48,11 +48,9 @@ class ApplicationController < ActionController::Base
     @sections = Section.where(visible: true)
   end
 
-  def related_by_hashtags(article)
-    
+  def related_by_hashtags(article)   
     if article.hashtags.count == 1
        @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ article.hashtags.first.id} AND articles.published = true AND articles.id != #{article.id}").last(3).uniq
-
     end
 
     if article.hashtags.count == 2
