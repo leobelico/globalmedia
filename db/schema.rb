@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170830032154) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "name",                      default: ""
-    t.text     "note",                      default: ""
+    t.jsonb    "note",                      default: ""
     t.text     "short_description",         default: ""
     t.integer  "articable_id"
     t.string   "articable_type"
@@ -48,8 +48,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.string   "video_url",                 default: ""
     t.integer  "author_id"
     t.boolean  "exclusive",                 default: false
-    t.text     "note_old",                  default: ""
-    t.integer  "old_id"
     t.text     "_extra_props"
     t.boolean  "breaking_news"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
@@ -161,18 +159,11 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.index ["article_id"], name: "index_hits_on_article_id", using: :btree
   end
 
-  create_table "imagenes", id: false, force: :cascade do |t|
-    t.string  "id",         limit: 34
-    t.string  "imagenmain", limit: 10000
-    t.integer "idnotas"
-  end
-
   create_table "images", force: :cascade do |t|
     t.string   "src"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "article_id"
-    t.integer  "old_id"
     t.text     "_extra_props"
     t.index ["article_id"], name: "index_images_on_article_id", using: :btree
   end
@@ -182,16 +173,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.string   "slug",       default: ""
-  end
-
-  create_table "notas", id: false, force: :cascade do |t|
-    t.bigserial "idnotas",                      null: false
-    t.string    "titulo",       limit: 100
-    t.string    "fecha_inicio", limit: 24
-    t.string    "resumen",      limit: 10000
-    t.string    "notacompleta", limit: 1500000
-    t.string    "alias",        limit: 100
-    t.integer   "idsecciones"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -232,11 +213,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.string   "relationship_type", default: ""
   end
 
-  create_table "secciones", id: false, force: :cascade do |t|
-    t.bigserial "idsecciones",            null: false
-    t.string    "name",        limit: 20
-  end
-
   create_table "section_banners", force: :cascade do |t|
     t.integer  "sectionable_id"
     t.string   "sectionable_type"
@@ -263,7 +239,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.string   "slug"
     t.string   "color",        default: "#1b2d41"
     t.integer  "order"
-    t.integer  "old_id"
     t.text     "_extra_props"
     t.boolean  "visible",      default: false
     t.text     "description"
