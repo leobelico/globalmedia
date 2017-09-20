@@ -209,7 +209,7 @@ class ApplicationController < ActionController::Base
   end
   
   def get_section_highlight(id)
-    p "get_section_highlight"
+    p "finish get_section_highlight " + id.to_s
 
     # section = Section.find(id)
     @article = Article.where(articable_id: id, highlight: true).first

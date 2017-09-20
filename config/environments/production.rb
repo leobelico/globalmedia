@@ -24,6 +24,8 @@ Rails.application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
+
+  config.public_file_server.enabled = false
   # config.assets.css_compressor = :sass
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
@@ -103,7 +105,7 @@ Rails.application.configure do
     openssl_verify_mode:'none'
   }
  
-  config.secret_key_base = "6ad3eeef7086a2e130612281529d047e9f8b5906a3281ef1669946c6e5b6692d2c8b247655108340833d9937ee90d1681ab58eaceda5b4665d8d188522ef658d"
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
     
   
   config.web_socket_server_url = "wss://global-media.herokuapp.com/cable" 
