@@ -129,8 +129,9 @@ class ApplicationController < ActionController::Base
   def get_articles_per_section(id, last_number)
     section = Section.find(id)
     # section.
-    @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true").order(created_at: "ASC").last(last_number).reverse
     print "finish get_articles_per_section"
+    
+    @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true").order(created_at: "ASC").last(last_number).reverse
   end
   def get_latest_articles_per_section(id, quantity)
     section = Section.find(id)
@@ -244,7 +245,7 @@ class ApplicationController < ActionController::Base
 
   def get_todays_keywords
     p "finish todays_keywords"
-    
+
     @keywords = Hashtag.where(selected: true).last(4)
 
   end
