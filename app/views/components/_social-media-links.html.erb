@@ -7,13 +7,10 @@
 	<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
 		<%= image_tag "facebook.svg" %>				
 	</a>	
-<!-- 	<a target="_blank" href="
-	http://twitter.com/share?text=Estoy%20%leyendo%20%en%20%GlobalMedia:%20%2D%20&url=<%= url_encode(article_url(article)) %>" class="social-media__link twitter">
- -->
+
 	<a href="https://twitter.com/share?url=<%= url_encode(article_url(article)) %>&via=GlobalMediaMx&text=Estoy%20leyendo%20en%20GlobalMedia%3A%20-" class="social-media__link twitter" target="_blank">
 		<%= image_tag "twitter.svg" %>
 	</a>
-	<!-- </a> -->
 	<a class="social-media__link copy" target="_self" data-clipboard-text="<%= article_url(article) %>">	
 		<input class="hidden" value="<%= article_url(article) %>">
 		<%= image_tag "copy.svg" %>
