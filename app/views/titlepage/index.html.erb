@@ -10,16 +10,36 @@
 		<% end %>
 	<% end %>
 </div>
-<!-- FALSE -->
-<% if false %>
-	<% if get_banner("", "TitlePage", "Grande" ).count > 0 %>
-		<%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande" )  %>
-	<% else %>
-		<% if get_banner("", "Global", "Grande" ).count > 0 %>
-			<%= render "components/big-banner", banner: get_banner("", "Global", "Grande" )  %>
-		<% end %>
-	<% end %>
+<% if get_banner("", "TitlePage", "Grande" ) %>
+	<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
 <% end %>
+<div class="special-articles-container">
+	<div class="special-articles">
+	
+		<%= render "components/latest-news", articles: latest_news  %>
+
+		<% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
+			<%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
+		<% else %>
+			<% if get_banner("", "Global", "Chico" ).count > 0 %>
+				<%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
+			<% end %>
+		<% end %>
+
+		
+	</div>
+	<div class="special-articles--collaborators">
+		<%= render "components/collaborators", articles: @collaborator_articles %>
+	</div>
+</div>
+<div class="special-articles-container">
+	<% if @investigation_articles.count > 0 %>
+		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
+	<% end %>
+	<% if @complaints %>
+		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: @complaints.reverse %>
+	<% end %>
+</div>
 
 <div class="section-previews-container">
 	
@@ -36,3 +56,10 @@
 
 </div>
 
+<% if get_banner("", "TitlePage", "Grande" ).count > 0 %>
+	<%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande" )  %>
+<% else %>
+	<% if get_banner("", "Global", "Grande" ).count > 0 %>
+		<%= render "components/big-banner", banner: get_banner("", "Global", "Grande" )  %>
+	<% end %>
+<% end %>
