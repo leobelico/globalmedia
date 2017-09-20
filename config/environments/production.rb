@@ -102,7 +102,10 @@ Rails.application.configure do
     password: ENV["GMAIL_PASSWORD"],
     openssl_verify_mode:'none'
   }
-
+ 
+  config.secret_key_base = "6ad3eeef7086a2e130612281529d047e9f8b5906a3281ef1669946c6e5b6692d2c8b247655108340833d9937ee90d1681ab58eaceda5b4665d8d188522ef658d"
+    
+  
   config.web_socket_server_url = "wss://global-media.herokuapp.com/cable" 
   config.action_cable.allowed_request_origins = ['https://global-media.herokuapp.com', 'http://global-media.herokuapp.com' , 'http://globalmedia.mx', 'http://www.globalmedia.mx', 'https://globalmedia.mx', 'https://www.globalmedia.mx']
 end
