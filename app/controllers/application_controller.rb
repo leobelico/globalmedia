@@ -203,9 +203,10 @@ class ApplicationController < ActionController::Base
   end
   
   def get_section_highlight(id)
+    p "get_section_highlight"
+
     section = Section.find(id)
     @article = Article.where(articable: section, highlight: true).first
-    p "get_section_highlight"
   end
 
   def get_recommendations_per_section(id)
@@ -221,9 +222,10 @@ class ApplicationController < ActionController::Base
         current_article << Article.find(session[:article_id])
       end
     end
+    p "get_recommendations_per_section"
+
     return @articles - current_article
     #SectionHighlight.where(section: section).last(3)
-    p "get_recommendations_per_section"
 
   end
 
@@ -241,8 +243,9 @@ class ApplicationController < ActionController::Base
   end
 
   def get_todays_keywords
-    @keywords = Hashtag.where(selected: true).last(4)
     p "finish todays_keywords"
+    
+    @keywords = Hashtag.where(selected: true).last(4)
 
   end
 

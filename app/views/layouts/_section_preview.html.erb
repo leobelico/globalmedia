@@ -12,8 +12,10 @@
 	<div class="sp__articles">
 		<% if highlight and highlight != ""%>
 			<div class="sp__article ui-card">
-				<%= link_to highlight, class: "sp__image-link" do %>
-					<%= image_tag highlight.image, class: "sp__image" %>
+				<% if highlight.image %>
+					<%= link_to highlight, class: "sp__image-link" do %>
+						<%= image_tag highlight.image, class: "sp__image" %>
+					<% end %>
 				<% end %>
 				<div class="sp__info">
 					
