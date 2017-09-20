@@ -28,9 +28,11 @@
 
 		
 	</div>
-	<div class="special-articles--collaborators">
-		<%= render "components/collaborators", articles: @collaborator_articles %>
-	</div>
+	<% if false %>
+		<div class="special-articles--collaborators">
+			<%= render "components/collaborators", articles: @collaborator_articles %>
+		</div>
+	<% end %>
 </div>
 <div class="special-articles-container">
 	<% if @investigation_articles.count > 0 %>

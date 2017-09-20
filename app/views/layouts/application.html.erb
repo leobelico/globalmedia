@@ -48,7 +48,7 @@
 	</script>
 	<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=TmlPj1a8wt00q2" style="display:none" height="1" width="1" alt="" /></noscript>
 	<!-- End Alexa Certify Javascript -->  	
-	<script>
+	<script async>
 
 
 		var bindFacebookEvents, initializeFacebookSDK, loadFacebookSDK, restoreFacebookRoot, saveFacebookRoot;
@@ -218,7 +218,7 @@
 		 	<div class="interface">
 		<% end %>
 			<% if !panel_url %>
-				<%# render "components/radio-banner" if !user_signed_in? || !panel_url %>
+				<%= render "components/radio-banner" if !user_signed_in? || !panel_url %>
 				<%= render "components/its-news" if get_todays_keywords.count > 0  %>
 				<%= render "components/breaking-news" if false %>
 			<% end %>

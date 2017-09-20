@@ -71,10 +71,10 @@ class TitlepageController < ApplicationController
 		p @investigation_articles
 
  		section = Section.find_by_name("Denuncia Global")
-		@complaints = Article.where(articable_id: section.id, published: true).order(updated_at: "ASC").last(6)
+		# @complaints = Article.where(articable_id: section.id, published: true).order(updated_at: "ASC").last(6)
 
 
-		@collaborator_articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator' ORDER BY article_relationships.created_at DESC")[0..4]
+		# @collaborator_articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator' ORDER BY article_relationships.created_at DESC")[0..4]
 			# .order(created_at: "DESC").first(5)
 	end
 
