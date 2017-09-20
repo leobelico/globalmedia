@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
       @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.third.id }) AND articles.published = true AND articles.id != #{article.id}").last(3).uniq
     end 
     # @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
-   
+    print "finish related_by_hashtags"
     return @articles
 
   end
@@ -129,8 +129,9 @@ class ApplicationController < ActionController::Base
   def get_articles_per_section(id, last_number)
     section = Section.find(id)
     # section.
-    @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true").order(created_at: "ASC").last(last_number).reverse
+    print "finish get_articles_per_section"
 
+    @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true").order(created_at: "ASC").last(last_number).reverse
   end
   def get_latest_articles_per_section(id, quantity)
     section = Section.find(id)
@@ -142,6 +143,7 @@ class ApplicationController < ActionController::Base
     end
     
     @articles = articles - re
+    p "finish get_latest_articles_per_section"
     return @articles.last(3)
 
   end
@@ -187,18 +189,25 @@ class ApplicationController < ActionController::Base
   end
 
   def al_momento(not_repeat_highlight, not_repeat_recommendation, not_repeat_outstading, last_number)
-  	if not_repeat_highlight
+    p "finish al_momento"
+  	
+    if not_repeat_highlight
   		@articles = Article.order(created_at: "ASC").joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where('highlights.article_id IS NULL AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true').order(created_at: "DESC").last(last_number).reverse
   	end
+
   end
 
   def latest_news
+    p "finish latet news"
+
     # @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").order(created_at: "ASC").where("published = true AND sections.visible = true").first(8).reverse
     @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where("published = true AND sections.visible = true").order(created_at: "ASC").last(8).reverse
     # @articles = Article.where("published = true").last(8).reverse
   end
   
   def get_section_highlight(id)
+    p "get_section_highlight"
+
     section = Section.find(id)
     @article = Article.where(articable: section, highlight: true).first
   end
@@ -216,8 +225,11 @@ class ApplicationController < ActionController::Base
         current_article << Article.find(session[:article_id])
       end
     end
+    p "finish get_recommendations_per_section"
+
     return @articles - current_article
     #SectionHighlight.where(section: section).last(3)
+
   end
 
   def get_global_recommendations
@@ -229,12 +241,15 @@ class ApplicationController < ActionController::Base
         current_article << Article.find(session[:article_id])
       end
     end
-
+    p "finish global_recommendation"
     return @articles - current_article
   end
 
   def get_todays_keywords
+    p "finish todays_keywords"
+
     @keywords = Hashtag.where(selected: true).last(4)
+
   end
 
   def get_banner(section, section_type, size)
@@ -283,7 +298,10 @@ class ApplicationController < ActionController::Base
     end
 
     @articles = articles - re - current_article
+    p "finish most_visited"
+    
     return @articles.last(3)
+
   end
 
   def set_article
