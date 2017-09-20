@@ -66,5 +66,9 @@ Rails.application.configure do
     password: ENV["GMAIL_PASSWORD"],
     openssl_verify_mode:'none'
   }
+
+  Rails.application.configure do 
+    config.action_cable.url = "ws://localhost:3000/cable"
+  end 
   
 end
