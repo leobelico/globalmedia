@@ -208,14 +208,14 @@ class ApplicationController < ActionController::Base
   def get_section_highlight(id)
     p "get_section_highlight"
 
-    section = Section.find(id)
-    @article = Article.where(articable: section, highlight: true).first
+    # section = Section.find(id)
+    @article = Article.where(articable_id: id, highlight: true).first
   end
 
   def get_recommendations_per_section(id)
-    section = Section.find(id)
+    # section = Section.find(id)
     @articles = []
-    SectionHighlight.where(section: section).each do |section| 
+    SectionHighlight.where(section_id: id).each do |section| 
         @articles << section.article
     end
 
