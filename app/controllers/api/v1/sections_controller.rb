@@ -10,7 +10,7 @@ class Api::V1::SectionsController < Api::BaseController
 
 	def get_articles 
 		section = Section.find(params[:section_id]) 
-		@articles = section.articles.where(published: true).order(created_at: "ASC")
+		@articles = section.articles.where(published: true).order(created_at: "DESC")
     	paginate json: @articles, adapter: :json, per_page: 20
 	end
 	private 
