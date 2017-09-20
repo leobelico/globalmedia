@@ -63,6 +63,7 @@ end
 # end
 
 group :development do
+  gem 'rack-mini-profiler'
   gem 'derailed'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   # gem 'rails_real_favicon'

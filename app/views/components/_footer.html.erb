@@ -5,15 +5,7 @@
 	</div>
 	<div class="footer__column">
 		<%= link_to "Inicio", root_path, class: "footer__section-link" %>
-		<% if Section.find(1019) %>
-			<%= link_to "Contáctanos", corporativo_path(Section.find(1019).slug), class: "footer__section-link" %>
-		<% end %>
-		<% if Section.find(1017) %>
-			<%= link_to "Anunciate con nosotros", corporativo_path(Section.find(1017).slug), class: "footer__section-link" %>
-		<% end %>
-		<% if Section.find(1018) %>
-			<%= link_to "Quiénes Somos", corporativo_path(Section.find(1018).slug), class: "footer__section-link" %>
-		<% end %>
+		
 	</div>
 	<p class="disclaimer">2016 Global Media Comunicaciones. Todos los derechos reservados. <br><br>Prohibida la reproducción total o parcial, incluyendo cualquier medio electrónico o mágnetico. <br><br> <%= link_to "Aviso de Privacidad", privacy_policy_path %>  - <%= link_to "Responsable de Estaciones", stations_supervisor_path %>
 	<br><br>

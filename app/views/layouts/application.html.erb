@@ -27,14 +27,14 @@
 	<link href="https://fonts.googleapis.com/css?family=Pragati+Narrow|Martel:900" rel="stylesheet">
 
 	<script src="https://platform.twitter.com/widgets.js" async></script>
-	<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+	<script src="https://cdn.jsdelivr.net/npm/hls.js@latest" async></script>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 	<!-- Global Site Tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106606454-1"></script>
-	<script>
+	<script async>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments)};
 	  gtag('js', new Date());
