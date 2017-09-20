@@ -130,11 +130,14 @@ class ApplicationController < ActionController::Base
   end
 
   def get_articles_per_section(id, last_number)
-    section = Section.find(id)
+    # section = Section.find(id)
     # section.
     print "finish get_articles_per_section"
 
-    @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true").order(created_at: "ASC").last(last_number).reverse
+    #@articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true").order(created_at: "ASC").last(last_number).reverse
+
+    @articles = Article.where(articable_id: id).last(last_number)
+
   end
   def get_latest_articles_per_section(id, quantity)
     section = Section.find(id)
