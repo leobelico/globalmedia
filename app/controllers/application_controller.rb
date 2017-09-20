@@ -130,7 +130,7 @@ class ApplicationController < ActionController::Base
     section = Section.find(id)
     # section.
     print "finish get_articles_per_section"
-    
+
     @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true").order(created_at: "ASC").last(last_number).reverse
   end
   def get_latest_articles_per_section(id, quantity)
@@ -189,18 +189,20 @@ class ApplicationController < ActionController::Base
   end
 
   def al_momento(not_repeat_highlight, not_repeat_recommendation, not_repeat_outstading, last_number)
-  	if not_repeat_highlight
+    p "finish al_momento"
+  	
+    if not_repeat_highlight
   		@articles = Article.order(created_at: "ASC").joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where('highlights.article_id IS NULL AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true').order(created_at: "DESC").last(last_number).reverse
   	end
-    p "finish al_momento"
 
   end
 
   def latest_news
+    p "finish latet news"
+
     # @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").order(created_at: "ASC").where("published = true AND sections.visible = true").first(8).reverse
     @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where("published = true AND sections.visible = true").order(created_at: "ASC").last(8).reverse
     # @articles = Article.where("published = true").last(8).reverse
-    p "finish latet news"
   end
   
   def get_section_highlight(id)
@@ -223,7 +225,7 @@ class ApplicationController < ActionController::Base
         current_article << Article.find(session[:article_id])
       end
     end
-    p "get_recommendations_per_section"
+    p "finish get_recommendations_per_section"
 
     return @articles - current_article
     #SectionHighlight.where(section: section).last(3)
@@ -296,9 +298,10 @@ class ApplicationController < ActionController::Base
     end
 
     @articles = articles - re - current_article
+    p "finish most_visited"
+    
     return @articles.last(3)
 
-    p "finish most_visited"
   end
 
   def set_article
