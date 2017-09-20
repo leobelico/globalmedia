@@ -13,9 +13,9 @@ class ArticlesController < ApplicationController
 		if !user_signed_in? and @article.published == false 
 			redirect_to root_url
 		end
-		# if !user_signed_in? and @article.published == true
+		if !user_signed_in? and @article.published == true
 
-			
+			SaveHitsJob.perform_later @article
 		# 	session[:current_position] = "Articles"
 		# 	last_hit = Hit.where(article: @article, created_at: 2.hours.ago..Time.now).last
 
@@ -26,7 +26,7 @@ class ArticlesController < ApplicationController
 		# 		Hit.create(number: 1, article: @article)
 
 		# 	end
-		# end
+		end
 		@related_sections = RelatedSection.where(section: Section.find_by(name: @article.section))
 		p "-------------------------------"
 		p @article.section

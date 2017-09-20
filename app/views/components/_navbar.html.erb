@@ -9,10 +9,10 @@
 				<div class="dropdown__col">
 					<p class="dropdown__section radio-title">Juvenil</p>
 					<div class="line"></div>
-						<%= link_to root_path + "/stations/Los40" do %>
+						<%= link_to "http://globalmedia.mx/stations/Los40" do %>
 							<%= image_tag "programs/los 40.jpg" %>		
 						<% end %>
-						<%= link_to root_path + "/stations/RMX" do %>
+						<%= link_to "http://globalmedia.mx/stations/RMX" do %>
 							<%= image_tag "programs/rmx.png" %>		
 						<% end %>
 				</div>
@@ -20,7 +20,7 @@
 					<p class="dropdown__section radio-title">Contemporáneo</p>
 					<div class="line"></div>
 					
-						<%= link_to root_path + "/stations/WFM" do %>
+						<%= link_to "http://globalmedia.mx/stations/WFM" do %>
 							<%= image_tag "programs/wfm.png" %>		
 						<% end %>
 					
@@ -29,7 +29,7 @@
 					<p class="dropdown__section radio-title">Regional</p>
 					<div class="line"></div>
 					
-						<%= link_to root_path + "/stations/KeBuena" do %>
+						<%= link_to "http://globalmedia.mx/stations/KeBuena" do %>
 							<%= image_tag "programs/ke buena.jpg" %>		
 						<% end %>
 						
@@ -58,25 +58,25 @@
 				<div class="dropdown__col">
 					<p class="dropdown__section radio-title">Noticieros</p>
 					<div class="line"></div>
-						<%= link_to root_path + "/stations/Trión" do %>
+						<%= link_to "http://globalmedia.mx/stations/Trión" do %>
 							<%= image_tag "programs/trion.png" %>		
 						<% end %>
-						<%= link_to root_path + "/stations/RMX" do %>
+						<%= link_to "http://globalmedia.mx/stations/RMX" do %>
 							<%= image_tag "programs/rmx.png" %>		
 						<% end %>
-						<%= link_to root_path + "/stations/ImagenRadio" do %>
+						<%= link_to "http://globalmedia.mx/stations/ImagenRadio" do %>
 							<%= image_tag "programs/imagen.png" %>		
 						<% end %>
-						<%= link_to root_path + "/stations/WFM" do %>
+						<%= link_to "http://globalmedia.mx/stations/WFM" do %>
 							<%= image_tag "programs/wfm.png" %>		
 						<% end %>
-						<%= link_to root_path + "/stations/NOTICIASDELANOCHECONHECTORTREJO" do %>
+						<%= link_to "http://globalmedia.mx/stations/NOTICIASDELANOCHECONHECTORTREJO" do %>
 							<%= image_tag "programs/BANNER-TRION-4.jpg" %>		
 						<% end %>
-						<%= link_to root_path + "/stations/ERIKASALGADOENWFM" do %>
+						<%= link_to "http://globalmedia.mx/stations/ERIKASALGADOENWFM" do %>
 							<%= image_tag "programs/BANNER-WFM-1.png" %>		
 						<% end %>
-						<%= link_to root_path + "/stations/IMAGENINFORMATIVACONEVAMARÍACAMACHOM" do %>
+						<%= link_to "http://globalmedia.mx/stations/IMAGENINFORMATIVACONEVAMARÍACAMACHOM" do %>
 							<%= image_tag "programs/BANNER-IMAGEN-2.png" %>		
 						<% end %>
 
@@ -86,14 +86,14 @@
 			</div>
 		</div>
 	</div>
-		<%= link_to "San Luis", section_path(root_path + "/sections/San-Luis"), class: "navbar__link" %>
-		<%= link_to "México", section_path(root_path + "/sections/MÉXICO"), class: "navbar__link" %>
-		<%= link_to "Mundo", section_path(root_path + "/sections/MUNDO"), class: "navbar__link" %>
-		<%= link_to "Negocios", section_path(root_path + "/sections/Negocios"), class: "navbar__link" %>
+		<%= link_to "San Luis",  "http://globalmedia.mx/sections/San-Luis", class: "navbar__link" %>
+		<%= link_to "México", "http://globalmedia.mx/sections/MÉXICO", class: "navbar__link" %>
+		<%= link_to "Mundo", "http://globalmedia.mx/sections/MUNDO", class: "navbar__link" %>
+		<%= link_to "Negocios", "http://globalmedia.mx/sections/Negocios", class: "navbar__link" %>
 		<%= link_to "Táctica", tactica_path, class: "navbar__link" %>
-		<%= link_to "Tecnología", section_path(root_path + "/sections/TECNOLOGIA"), class: "navbar__link" %>
+		<%= link_to "Tecnología", "http://globalmedia.mx/sections/TECNOLOGIA", class: "navbar__link" %>
 
 		<%= link_to "Colaboradores", collaborators_path, class: "navbar__link" %>
 
-		<%= link_to "Entretenimiento", section_path(root_path + "/sections/ENTRETENIMIENTO"), class: "navbar__link" %>
+		<%= link_to "Entretenimiento", "http://globalmedia.mx/sections/ENTRETENIMIENTO", class: "navbar__link" %>
 	</div>
