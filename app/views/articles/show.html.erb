@@ -182,7 +182,7 @@
 		var container = document.getElementById("quill-container")
 		display_quill_note(content, container);
 
-		<% if false and related_by_hashtags(@article).count > 0 %>
+		<% if related_by_hashtags(@article).count > 0 %>
 			var numberOfParagraphs = $("#quill-container p").length; 
 
 			var middle = parseInt(Math.ceil(numberOfParagraphs/2)); 
