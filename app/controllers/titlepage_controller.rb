@@ -37,12 +37,12 @@ class TitlepageController < ApplicationController
 	end
 
 	def index
-		bns =  Section.where(visible: true, name: "Último Momento").last
-		if bns
-			@breaking_news = bns.articles.where(breaking_news: true).order(updated_at: "ASC").first(4)
-		else	
-			@breaking_news = nil 
-		end
+		# bns =  Section.where(visible: true, name: "Último Momento").last
+		# if bns
+		# 	@breaking_news = bns.articles.where(breaking_news: true).order(updated_at: "ASC").first(4)
+		# else	
+		# 	@breaking_news = nil 
+		# end
 		@highlights = Highlight.where(published: true).order(order: "ASC")
 		search = Hashtag.find_by_name("#ESNOTICIA")
 		@its_news = ArticlesHashtag.where(hashtag_id: search).last(10)
@@ -70,6 +70,7 @@ class TitlepageController < ApplicationController
 		# p "INVESTIGATION ARTICLES"
 		# p @investigation_articles
 		@investigation_articles = []
+		@breaking_news = nil 
  		# section = Section.find_by_name("Denuncia Global")
 		#@complaints = Article.where(articable_id: section.id, published: true).order(updated_at: "ASC").last(6)
 

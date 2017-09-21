@@ -136,7 +136,7 @@ class ApplicationController < ActionController::Base
 
     #@articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true").order(created_at: "ASC").last(last_number).reverse
 
-    @articles = Article.where(articable_id: id).last(last_number)
+    @articles = Article.where(articable_id: id, created_at: Time.now.beginning_of_month..Time.now.end_of_month).last(last_number)
 
   end
   def get_latest_articles_per_section(id, quantity)
@@ -207,7 +207,7 @@ class ApplicationController < ActionController::Base
     p "finish latet news"
 
     # @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").order(created_at: "ASC").where("published = true AND sections.visible = true").first(8).reverse
-    @articles = Article.where(published: true).order(created_at: "ASC").last(8).reverse
+    @articles = Article.where(published: true, created_at: Time.now.beginning_of_month..Time.now.end_of_month).order(created_at: "ASC").last(8).reverse
     # @articles = Article.where("published = true").last(8).reverse
   end
   
