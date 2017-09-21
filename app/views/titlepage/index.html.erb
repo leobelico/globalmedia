@@ -13,6 +13,7 @@
 <% if get_banner("", "TitlePage", "Grande" ) %>
 	<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
 <% end %>
+<% if false %>
 <div class="special-articles-container">
 	<% if false %>
 		<% if @investigation_articles.count > 0 %>
@@ -22,12 +23,14 @@
 	<div class="special-articles">
 		<% if false %>
 			<%= render "components/latest-news", articles: latest_news  %>
-		<% end %>
-		<% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
-			<%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
-		<% else %>
-			<% if get_banner("", "Global", "Chico" ).count > 0 %>
-				<%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
+		
+
+			<% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
+				<%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
+			<% else %>
+				<% if get_banner("", "Global", "Chico" ).count > 0 %>
+					<%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
+				<% end %>
 			<% end %>
 		<% end %>
 
@@ -40,6 +43,7 @@
 		</div>
 	<% end %>
 </div>
+<% end %>
 <div class="special-articles-container">
 	<% if false %>
 		<%  if @investigation_articles.count > 0 %>
