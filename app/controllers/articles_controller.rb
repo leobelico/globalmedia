@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
 		end
 		if !user_signed_in? and @article.published == true
 
-			SaveHitsJob.perform_now @article
+			SaveHitsJob.perform_later @article
 		# 	session[:current_position] = "Articles"
 		# 	last_hit = Hit.where(article: @article, created_at: 2.hours.ago..Time.now).last
 
