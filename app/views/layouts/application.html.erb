@@ -141,7 +141,7 @@
 		<%= render "components/navbar" if !panel_url %>
 	</div>
 	<%= render "components/mobile-menu" if !panel_url %>
-	<%# render "components/stations-floating-bar" if !panel_url %>
+	<%= render "components/stations-floating-bar" if !panel_url %>
 
 	<%= render "components/admin/admin-floating-bar" if !panel_url and user_signed_in? %>
 	
