@@ -13,6 +13,7 @@
 <% if get_banner("", "TitlePage", "Grande" ) %>
 	<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
 <% end %>
+<% if false %>
 <div class="special-articles-container">
 	<% if false %>
 		<% if @investigation_articles.count > 0 %>
@@ -42,6 +43,7 @@
 		</div>
 	<% end %>
 </div>
+<% end %>
 <div class="special-articles-container">
 	<% if false %>
 		<%  if @investigation_articles.count > 0 %>
