@@ -10,9 +10,10 @@
 	<% end %>
 	<%= link_to "Columnas de hoy", collaborators_path, class: "topbar__link" %>
 	<%= link_to "denuncia global", section_path(root_path + "/sections/Denuncia-Global"), class: "topbar__link" %>
-	<%= link_to cameras_path, class: "topbar__link" do %>
+	<a href="" class="topbar__link popup" onmouseover="popup(this)" onmouseout="popupout(this)">
 		tráfico san luis
-	<% end %>
+		<span class="popuptext" id="myPopup">Próximamente</span>
+	</a>
 	<div class="social-media">
 		<p class="social-media__tag">Síguenos</p>
 		<%= link_to "https://twitter.com/globalmediamx", class: "social-media__link", target: "_blank" do %>

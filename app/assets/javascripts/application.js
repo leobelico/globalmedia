@@ -67,3 +67,11 @@ function remove_fields(link) {
   $(link).closest(".field-builder").hide();
   TweenMax.to($(link).parent(), .6, { height:  0, overflow:  "hidden", marginBottom:  0});
 }
+
+function popup(x){
+  $('.popuptext').toggleClass("show");
+}
+
+function popupout(x){
+  $('.popuptext').toggleClass("show");
+}
