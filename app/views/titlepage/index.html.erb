@@ -22,12 +22,14 @@
 	<div class="special-articles">
 		<% if false %>
 			<%= render "components/latest-news", articles: latest_news  %>
-		<% end %>
-		<% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
-			<%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
-		<% else %>
-			<% if get_banner("", "Global", "Chico" ).count > 0 %>
-				<%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
+		
+
+			<% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
+				<%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
+			<% else %>
+				<% if get_banner("", "Global", "Chico" ).count > 0 %>
+					<%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
+				<% end %>
 			<% end %>
 		<% end %>
 
