@@ -14,10 +14,11 @@
 	<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
 <% end %>
 <div class="special-articles-container">
-	<% if @investigation_articles.count > 0 %>
-		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
+	<% if false %>
+		<% if @investigation_articles.count > 0 %>
+			<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
+		<% end %>
 	<% end %>
-	
 	<div class="special-articles">
 		
 		<%= render "components/latest-news", articles: latest_news  %>
@@ -40,8 +41,10 @@
 	<% end %>
 </div>
 <div class="special-articles-container">
-	<% if false and @investigation_articles.count > 0 %>
-		<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
+	<% if false %>
+		<%  @investigation_articles.count > 0 %>
+			<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
+		<% end %>
 	<% end %>
 	<% if @complaints %>
 		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: @complaints.reverse %>
