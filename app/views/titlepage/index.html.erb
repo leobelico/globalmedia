@@ -20,9 +20,9 @@
 		<% end %>
 	<% end %>
 	<div class="special-articles">
-		
-		<%= render "components/latest-news", articles: latest_news  %>
-
+		<% if false %>
+			<%= render "components/latest-news", articles: latest_news  %>
+		<% end %>
 		<% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
 			<%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
 		<% else %>
