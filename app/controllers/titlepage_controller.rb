@@ -69,8 +69,8 @@ class TitlepageController < ApplicationController
 		# end
 		# p "INVESTIGATION ARTICLES"
 		# p @investigation_articles
-
- 		# section = Section.find_by_name("Denuncia Global")
+		@investigation_articles = []
+ 		section = Section.find_by_name("Denuncia Global")
 		#@complaints = Article.where(articable_id: section.id, published: true).order(updated_at: "ASC").last(6)
 
 
