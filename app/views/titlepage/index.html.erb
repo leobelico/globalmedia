@@ -42,7 +42,7 @@
 </div>
 <div class="special-articles-container">
 	<% if false %>
-		<%  @investigation_articles.count > 0 %>
+		<%  if @investigation_articles.count > 0 %>
 			<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
 		<% end %>
 	<% end %>
