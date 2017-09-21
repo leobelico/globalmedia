@@ -47,7 +47,7 @@ class TitlepageController < ApplicationController
 		search = Hashtag.find_by_name("#ESNOTICIA")
 		@its_news = ArticlesHashtag.where(hashtag_id: search).last(10)
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')
-		# @sections = Section.where("visible = 'true' AND name != 'Último Momento'").order(order: "ASC")
+		@sections = Section.where("visible = 'true' AND name != 'Último Momento'").order(order: "ASC")
 
 		# relationships_investigations = Relationship.order(created_at: "ASC").where(relationship_type: "Investigation")
 
@@ -70,7 +70,7 @@ class TitlepageController < ApplicationController
 		# p "INVESTIGATION ARTICLES"
 		# p @investigation_articles
 		@investigation_articles = []
- 		section = Section.find_by_name("Denuncia Global")
+ 		# section = Section.find_by_name("Denuncia Global")
 		#@complaints = Article.where(articable_id: section.id, published: true).order(updated_at: "ASC").last(6)
 
 
