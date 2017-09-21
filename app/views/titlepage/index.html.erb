@@ -61,7 +61,7 @@
 	<% @sections.each do |section| %>
 
 		
-		<% if false and section.articles.count > 0 %>
+		<% if section.articles.count > 0 %>
 			<% if get_section_highlight(section.id) %>
 				<%= render "/layouts/section_preview", articles: get_articles_per_section(section.id, 3), section: section, highlight: get_section_highlight(section.id) %>
 			<% else %>
