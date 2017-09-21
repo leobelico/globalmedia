@@ -1,25 +1,28 @@
 <div class="sidebar">
-	<%= render "components/latest-news", articles: latest_news %>
-	<% if article != "global" %>
-		<% if  get_recommendations_per_section(Section.find_by_name(article.section).id).size == 0 %>
-			<%= render "components/recommendations", articles: get_global_recommendations %>
+	<% if false %>
+		
+		<%= render "components/latest-news", articles: latest_news %>
+		<% if article != "global" %>
+			<% if  get_recommendations_per_section(Section.find_by_name(article.section).id).size == 0 %>
+				<%= render "components/recommendations", articles: get_global_recommendations %>
+			<% else %>
+				<%= render "components/recommendations", articles: get_recommendations_per_section(Section.find_by_name(article.section).id) %>
+			<% end %>
+			
 		<% else %>
-			<%= render "components/recommendations", articles: get_recommendations_per_section(Section.find_by_name(article.section).id) %>
+			<%= render "components/recommendations", articles: get_global_recommendations %>
+			
 		<% end %>
-		
-	<% else %>
-		<%= render "components/recommendations", articles: get_global_recommendations %>
-		
+		<% if article != "" and article != "global" %>
+			<%= render "components/most-visited", articles: most_visited(Section.find_by_name(article.section).id) %>
+		<% else %>
+			<%= render "components/most-visited", articles: most_visited(3) %>
+		<% end %>
+		<% if banner != "" and banner != nil %>
+			<%= render "components/medium-banner", banner: banner %>
+		<% end %>
+		<br>
 	<% end %>
-	<% if article != "" and article != "global" %>
-		<%= render "components/most-visited", articles: most_visited(Section.find_by_name(article.section).id) %>
-	<% else %>
-		<%= render "components/most-visited", articles: most_visited(3) %>
-	<% end %>
-	<% if banner != "" and banner != nil %>
-		<%= render "components/medium-banner", banner: banner %>
-	<% end %>
-	<br>
 	<% if  article != "" and article != "global" and article.articable.facebook? %>
 		<div class="fb-page" data-href="<%= article.articable.facebook %>" data-tabs="timeline" data-width="342" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/GlobalMediaSLP" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/GlobalMediaSLP"></a></blockquote></div>
 	<% else %>
