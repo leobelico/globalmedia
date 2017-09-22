@@ -138,6 +138,7 @@ class ApplicationController < ActionController::Base
 
     @articles = Article.where("published = true AND articable_id = ?", id).order(created_at: "ASC").last(last_number).reverse
 
+
   end
   def get_latest_articles_per_section(id, quantity)
     section = Section.find(id)
