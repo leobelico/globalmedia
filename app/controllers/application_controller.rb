@@ -139,7 +139,6 @@ class ApplicationController < ActionController::Base
 
    #@articles = Article.where(articable_id: id, created_at: Time.now.beginning_of_month..Time.now.end_of_month).first(last_number)
 
-
   end
   def get_latest_articles_per_section(id, quantity)
     section = Section.find(id)
