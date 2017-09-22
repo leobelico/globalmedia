@@ -60,14 +60,14 @@
 
 	<% @sections.each do |section| %>
 
-		<%= render "/layouts/section_preview", articles: get_articles_per_section(section.id, 4), section: section, highlight: "" %>
-		<% if false and section.articles.count > 0 %>
+		
+		
 			<% if get_section_highlight(section.id) %>
 				<%= render "/layouts/section_preview", articles: get_articles_per_section(section.id, 3), section: section, highlight: get_section_highlight(section.id) %>
 			<% else %>
 				<%= render "/layouts/section_preview", articles: get_articles_per_section(section.id, 4), section: section, highlight: get_section_highlight(section.id) %>
 			<% end %>
-		<% end %>
+		
 	<% end %> 
 
 </div>
