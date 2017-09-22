@@ -62,7 +62,7 @@ end
 #   gem 'heroku-deflater'
 # end
 gem 'rack-mini-profiler'
-gem 'sys-proctable'
+# gem 'sys-proctable'
 #gem 'memory_profiler'
 #gem 'flamegraph'
 #gem 'stackprof'     # For Ruby MRI 2.1+
