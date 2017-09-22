@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -62,10 +62,11 @@ end
 #   gem 'heroku-deflater'
 # end
 gem 'rack-mini-profiler'
-gem 'memory_profiler'
-gem 'flamegraph'
-gem 'stackprof'     # For Ruby MRI 2.1+
-gem 'fast_stack'    # For Ruby MRI 2.0
+# gem 'sys-proctable'
+#gem 'memory_profiler'
+#gem 'flamegraph'
+#gem 'stackprof'     # For Ruby MRI 2.1+
+#gem 'fast_stack'    # For Ruby MRI 2.0
 group :development do
   gem 'derailed'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.

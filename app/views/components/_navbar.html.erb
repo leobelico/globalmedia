@@ -7,49 +7,34 @@
 		<div class="dropdown__options dropdown__radio">
 			<div class="dropdown__row radio-row">
 				<div class="dropdown__col">
-					<p class="dropdown__section radio-title">Juvenil</p>
+					<p class="dropdown__section radio-title">Radio</p>
 					<div class="line"></div>
-						<%= link_to "http://globalmedia.mx/stations/Los40" do %>
+						<%= link_to "http://globalmedia.mx/stations/Los40", target:"_blank" do %>
 							<%= image_tag "programs/los 40.jpg" %>		
 						<% end %>
-						<%= link_to "http://globalmedia.mx/stations/RMX" do %>
+						<%= link_to "http://globalmedia.mx/stations/RMX", target:"_blank" do %>
 							<%= image_tag "programs/rmx.png" %>		
 						<% end %>
-				</div>
-				<div class="dropdown__col">
-					<p class="dropdown__section radio-title">Contemporáneo</p>
-					<div class="line"></div>
-					
-						<%= link_to "http://globalmedia.mx/stations/WFM" do %>
+						<%= link_to "http://globalmedia.mx/stations/WFM", target:"_blank" do %>
 							<%= image_tag "programs/wfm.png" %>		
 						<% end %>
-					
-				</div>
-				<div class="dropdown__col">
-					<p class="dropdown__section radio-title">Regional</p>
-					<div class="line"></div>
-					
-						<%= link_to "http://globalmedia.mx/stations/KeBuena" do %>
+						<%= link_to "http://globalmedia.mx/stations/KeBuena", target:"_blank" do %>
 							<%= image_tag "programs/ke buena.jpg" %>		
 						<% end %>
-						
-				</div>
-			</div>
-			<div class="dropdown__row radio-row">
-				<div class="dropdown__col">
-					<p class="dropdown__section radio-title">Informativa</p>
-					<div class="line"></div>
-						<%= link_to root_path + "/stations/ImagenRadio" do %>
+						<%= link_to "http://globalmedia.mx/stations/ImagenRadio", target:"_blank" do %>
 							<%= image_tag "programs/imagen.png" %>		
 						<% end %>
-						<%= link_to root_path + "/stations/Trión" do %>
+						<%= link_to "http://globalmedia.mx/stations/Trión", target:"_blank" do %>
 							<%= image_tag "programs/trion.png" %>		
 						<% end %>
 				</div>
+				
+			</div>
+			<div class="dropdown__row radio-row">
 				<div class="dropdown__col">
 					<p class="dropdown__section radio-title">TV</p>
 					<div class="line"></div>
-						<%= link_to  root_path + "/stations/VIVECANAL" do %>
+						<%= link_to "http://globalmedia.mx/stations/VIVECANAL" do %>
 							<%= image_tag "programs/vivecanal.png" %>		
 						<% end %>
 				</div>
@@ -58,18 +43,6 @@
 				<div class="dropdown__col">
 					<p class="dropdown__section radio-title">Noticieros</p>
 					<div class="line"></div>
-						<%= link_to "http://globalmedia.mx/stations/Trión" do %>
-							<%= image_tag "programs/trion.png" %>		
-						<% end %>
-						<%= link_to "http://globalmedia.mx/stations/RMX" do %>
-							<%= image_tag "programs/rmx.png" %>		
-						<% end %>
-						<%= link_to "http://globalmedia.mx/stations/ImagenRadio" do %>
-							<%= image_tag "programs/imagen.png" %>		
-						<% end %>
-						<%= link_to "http://globalmedia.mx/stations/WFM" do %>
-							<%= image_tag "programs/wfm.png" %>		
-						<% end %>
 						<%= link_to "http://globalmedia.mx/stations/NOTICIASDELANOCHECONHECTORTREJO" do %>
 							<%= image_tag "programs/BANNER-TRION-4.jpg" %>		
 						<% end %>
