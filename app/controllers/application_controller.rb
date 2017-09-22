@@ -136,7 +136,7 @@ class ApplicationController < ActionController::Base
 
     #@articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("highlights.article_id IS NULL AND articles.articable_id = #{section.id} AND articles.highlight = false AND articles.global_recommendation = false AND articles.published = true").order(created_at: "ASC").last(last_number).reverse
 
-    @articles = Article.where("published = true AND articable_id = ?", id).order(created_at: "DESC").last(last_number)
+    @articles = Article.where(articable_id: id, created_at: Time.now.beginning_of_month..Time.now.end_of_month).first(last_number)
 
   end
   def get_latest_articles_per_section(id, quantity)
