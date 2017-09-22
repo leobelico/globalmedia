@@ -216,7 +216,7 @@ class ApplicationController < ActionController::Base
     p "finish get_section_highlight " + id.to_s
 
     # section = Section.find(id)
-    @article = Article.where(articable_id: id, highlight: true, created_at: Time.now.beginning_of_month..Time.now.end_of_month).first
+    @article = Article.where(articable_id: id, highlight: true, created_at: Time.now.beginning_of_month..Time.now.end_of_month).order(updated_at: "DESC").first
   end
 
   def get_recommendations_per_section(id)
