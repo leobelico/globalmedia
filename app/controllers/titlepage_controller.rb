@@ -44,8 +44,7 @@ class TitlepageController < ApplicationController
 		# 	@breaking_news = nil 
 		# end
 		@highlights = Highlight.where(published: true).order(order: "ASC")
-		search = Hashtag.find_by_name("#ESNOTICIA")
-		@its_news = ArticlesHashtag.where(hashtag_id: search).last(10)
+		
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')
 		@sections = Section.where("visible = 'true' AND name != 'Último Momento'").order(order: "ASC")
 

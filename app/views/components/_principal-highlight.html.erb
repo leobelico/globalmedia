@@ -8,9 +8,7 @@
 	<div class="article-preview__info principal-highlight__info">
 		<%= link_to article do %>
 			<h4 class="title semibold jtextfill"><span><%= article.name %></span>	</h4>	
-			<% if article.section != nil %>
 				<p class="section-and-author"><span class="section"><%= article.section %></span> - 
-			<% end %>
 			<% if article.scheduled_time? %>
 				
 				<span class="datetime"><%= distance_of_time_in_words(Time.now, (article.scheduled_time)) %></span>
