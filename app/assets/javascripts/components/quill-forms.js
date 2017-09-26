@@ -2,15 +2,19 @@ $(document).on("click", function(event){
   if ( $(event.target).is(".save-article") ) {
     if ( $(event.target).attr("data-slug") ){      
       submit_form("update", $(event.target).data("slug"), event); 
+      TweenMax.set($(event.target), { pointerEvents: "none" })
     } else {
       submit_form("create", "", event); 
+      TweenMax.set($(event.target), { pointerEvents: "none" })
     }
   }  
   if ( $(event.target).is(".add-gallery") ) {
     if ( $(event.target).attr("data-slug") ){      
       submit_form("update", $(event.target).data("slug"), event, true); 
+      TweenMax.set($(event.target), { pointerEvents: "none" })
     } else {
       submit_form("create", "", event, false); 
+      TweenMax.set($(event.target), { pointerEvents: "none" })
     }
   }
 }); 
