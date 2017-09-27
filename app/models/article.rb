@@ -3,7 +3,8 @@ class Article < ApplicationRecord
   belongs_to :keyword, optional: true
   has_many :section_highlights, dependent: :delete_all
   belongs_to :author, optional: true
-  validates :name, :short_description, :image, presence: true
+  validates :name, :short_description, :image, presence: true, uniqueness: { scope: :name,
+    message: "Ya existe una nota con ese nombre" }
 
 	attr_accessor :hashtags_names, :the_note
 
