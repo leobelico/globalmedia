@@ -17,71 +17,78 @@ class Panel::HighlightsController < ApplicationController
 	def create
 
 		@highlight = Highlight.new(highlight_params)
-		article = Article.find(params[:highlight][:article_id])
-		if article
-			the_h = Highlight.where(order: params[:highlight][:order])
-			articles_already_in_highlight = Highlight.where(article: article)
-			scheduled_time = Time.new params[:highlight]["scheduled_time(1i)"].to_i, params[:highlight]["scheduled_time(2i)"].to_i, params[:highlight]["scheduled_time(3i)"].to_i, params[:highlight]["scheduled_time(4i)"].to_i, params[:highlight]["scheduled_time(5i)"].to_i 
-			if articles_already_in_highlight.count <= 0
-			
-				#if we are publishing the highlight now
+		active_and_programmed = Highlight.where(scheduled_time: params[:highlight][:scheduled_time], article_id: params[:highlight][:article_id]).count
+		if active_and_programmed == 0 
+
+			article = Article.find(params[:highlight][:article_id])
+			if article
+				the_h = Highlight.where(order: params[:highlight][:order])
+				articles_already_in_highlight = Highlight.where(article: article)
+				scheduled_time = Time.new params[:highlight]["scheduled_time(1i)"].to_i, params[:highlight]["scheduled_time(2i)"].to_i, params[:highlight]["scheduled_time(3i)"].to_i, params[:highlight]["scheduled_time(4i)"].to_i, params[:highlight]["scheduled_time(5i)"].to_i 
+				if articles_already_in_highlight.count <= 0
 				
-				if scheduled_time >= Time.now.beginning_of_minute and scheduled_time <= Time.now.end_of_minute
-					if the_h.count <= 0
-						@highlight.article = article
-						if @highlight.save
-							redirect_to panel_highlights_path
+					#if we are publishing the highlight now
+					
+					if scheduled_time >= Time.now.beginning_of_minute and scheduled_time <= Time.now.end_of_minute
+						if the_h.count <= 0
+							@highlight.article = article
+							if @highlight.save
+								redirect_to panel_highlights_path
+							else
+								render action: "new"
+							end
 						else
-							render action: "new"
+							highlights = Highlight.where(published: true).last(6)
+							counter = the_h.first.order
+							p "HIGHLIGHTSSS"
+							p highlights
+
+							p "counter"
+							p counter
+							highlights.each do |h|
+								p "ciclo"
+								p h.order
+								if h.order == counter and counter < 6
+									p "Entrando en el if"
+									h_to_mod = Highlight.where(order: counter + 1, published: true).first
+									p h_to_mod
+									p h_to_mod.article.name
+									h_to_mod.update_attributes(article_id: h.article.id)
+									p "MODIFICADO"
+									p h_to_mod
+									p h_to_mod.article.name
+									
+								end
+								counter = counter + 1
+							end
+							the_h.first.article_id = article.id
+							if the_h.first.update_attributes(article: article, order: params[:highlight][:order], scheduled_time: scheduled_time)
+								redirect_to panel_highlights_path
+							else
+								flash[:error] = "1"
+								render action: "new"
+							end
+							
 						end
 					else
-						highlights = Highlight.where(published: true).last(6)
-						counter = the_h.first.order
-						p "HIGHLIGHTSSS"
-						p highlights
-
-						p "counter"
-						p counter
-						highlights.each do |h|
-							p "ciclo"
-							p h.order
-							if h.order == counter and counter < 6
-								p "Entrando en el if"
-								h_to_mod = Highlight.where(order: counter + 1, published: true).first
-								p h_to_mod
-								p h_to_mod.article.name
-								h_to_mod.update_attributes(article_id: h.article.id)
-								p "MODIFICADO"
-								p h_to_mod
-								p h_to_mod.article.name
-								
-							end
-							counter = counter + 1
-						end
-						the_h.first.article_id = article.id
-						if the_h.first.update_attributes(article: article, order: params[:highlight][:order], scheduled_time: scheduled_time)
+						if @highlight.update_attributes(article: article, order: params[:highlight][:order], scheduled_time: scheduled_time)
 							redirect_to panel_highlights_path
 						else
-							flash[:error] = "1"
+							flash[:error] = "2"
 							render action: "new"
+
 						end
-						
 					end
 				else
-					if @highlight.update_attributes(article: article, order: params[:highlight][:order], scheduled_time: scheduled_time)
-						redirect_to panel_highlights_path
-					else
-						flash[:error] = "2"
-						render action: "new"
+					flash[:error] = "Ya está ese artículo en las notas destacadas."
+					render action: "new"
 
-					end
 				end
-			else
-				flash[:error] = "Ya está ese artículo en las notas destacadas."
-				render action: "new"
 
 			end
-
+		else	
+			flash[:notice] = "Ya está la misma nota programada en portada."
+			render action: "new"
 		end
 	end
 
