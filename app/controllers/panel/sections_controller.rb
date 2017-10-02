@@ -121,7 +121,7 @@ class Panel::SectionsController < ApplicationController
 		expire_fragment "section_articles"
 
 		@section = Section.find_by_slug(params[:section_slug])
-		Article.where(section: @section).update_all(highlight: false)
+		Article.where(articable_id: @section.id).update_all(highlight: false)
 		
 		article = Article.find(params[:panel][:article_id])
 		article.update_attributes(highlight: true)
