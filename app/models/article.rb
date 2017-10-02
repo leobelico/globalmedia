@@ -31,13 +31,13 @@ class Article < ApplicationRecord
   def total_hits_in_current_month
     self.hits.where(created_at: 1.months.ago..Time.now).sum(:number)
   end
-  def section 
-    if self.articable
-      self.articable.name 
-    else 
-      return nil 
-    end
-  end
+  # def section 
+  #   if self.articable
+  #     self.articable.name 
+  #   else 
+  #     return nil 
+  #   end
+  # end
   def section_color 
     if self.articable
       self.articable.color

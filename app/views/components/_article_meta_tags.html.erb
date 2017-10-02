@@ -8,7 +8,7 @@
 <meta property="og:description" 	content="<%= article.short_description %> <%= truncate(article.plain_text, length: 300) %>"/>
 <meta property="og:locale" 			content="es_MX"/>
 <meta property="article:author" 	content="https://www.facebook.com/GlobalMediaSLP/?fref=ts"/>
-<meta property="article:section"	content="<%= article.section %>"/>
+<meta property="article:section"	content="<%= article.articable.name %>"/>
 
 <meta property="og:url" content="<%= article_url(article) %>"/>
 <meta property="og:image" itemprop="image" content="http:<%= URI.parse(URI.encode(image_url article.image)) %>"/>

@@ -27,10 +27,8 @@ class ArticlesController < ApplicationController
 
 		# 	end
 		end
-		@related_sections = RelatedSection.where(section: Section.find_by(name: @article.section))
-		p "-------------------------------"
-		p @article.section
-		p @related_sections
+		@related_sections = RelatedSection.where(section: Section.find(@article.articable_id))
+		
 		@collaborator_articles = nil 
 	end
 

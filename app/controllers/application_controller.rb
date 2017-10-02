@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
       @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.third.id }) AND articles.published = true AND articles.id != #{article.id}").last(3).uniq
     end 
     # @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
-    print "finish related_by_hashtags"
+    # print "finish related_by_hashtags"
     return @articles
 
   end
@@ -132,7 +132,7 @@ class ApplicationController < ActionController::Base
   def get_articles_per_section(id, last_number)
     # section = Section.find(id)
     # section.
-    print "finish get_articles_per_section"
+    # print "finish get_articles_per_section"
 
     # @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = #{id} AND articles.highlight = false AND articles.published = true", Time.now.beginning_of_month, Time.now.end_of_month).order(created_at: "ASC").last(last_number).reverse
 
@@ -153,7 +153,7 @@ class ApplicationController < ActionController::Base
     end
     
     @articles = articles - re
-    p "finish get_latest_articles_per_section"
+    # p "finish get_latest_articles_per_section"
     return @articles.last(3)
 
   end
@@ -161,8 +161,8 @@ class ApplicationController < ActionController::Base
 
   def get_current_programs
     time = Time.now
-    p "TIME"
-    p time.strftime( "%H:%M")
+    # p "TIME"
+    # p time.strftime( "%H:%M")
     if time.sunday? 
       @timetables = Timetable.includes(:station).where("sunday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
     end
@@ -184,18 +184,18 @@ class ApplicationController < ActionController::Base
     end
    
     if time.friday? 
-      p "FRIDAY"
+      # p "FRIDAY"
       @timetables = Timetable.includes(:station).where("friday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time }'").order("stations.frequency asc").first(7)
-      p "TIMETABLESSSSSSSSSS"
-      p @timetables
-      p @timetables.count
+      # p "TIMETABLESSSSSSSSSS"
+      # p @timetables
+      # p @timetables.count
     end
    
     if time.saturday? 
       @timetables = Timetable.includes(:station).where("saturday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
     end
-   p "THE TIMETABLESSSSSSSSSS"
-    p @timetables
+   # p "THE TIMETABLESSSSSSSSSS"
+    @timetables
   end
 
   def al_momento(not_repeat_highlight, not_repeat_recommendation, not_repeat_outstading, last_number)
@@ -208,15 +208,16 @@ class ApplicationController < ActionController::Base
   end
 
   def latest_news
-    p "finish latet news"
+    
+    # @articles = Article.where(published: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).order(created_at: "ASC").last(8).reverse
+    
+    @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where(published: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).select('articles.name, articles.created_at, articles.scheduled_time, articles.articable_id, articles.articable_type, articles.slug, sections.name AS section_name').order(created_at: "ASC").last(8).reverse
 
-    # @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").order(created_at: "ASC").where("published = true AND sections.visible = true").first(8).reverse
-    @articles = Article.where(published: true, created_at: Time.now.beginning_of_month..Time.now.end_of_month).order(created_at: "ASC").last(8).reverse
-    # @articles = Article.where("published = true").last(8).reverse
+
   end
   
   def get_section_highlight(id)
-    p "finish get_section_highlight " + id.to_s
+    # p "finish get_section_highlight " + id.to_s
 
     # section = Section.find(id)
     @article = Article.where(articable_id: id, highlight: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).order(updated_at: "DESC").first
@@ -235,7 +236,7 @@ class ApplicationController < ActionController::Base
         current_article << Article.find(session[:article_id])
       end
     end
-    p "finish get_recommendations_per_section"
+    # p "finish get_recommendations_per_section"
 
     return @articles - current_article
     #SectionHighlight.where(section: section).last(3)
@@ -243,20 +244,13 @@ class ApplicationController < ActionController::Base
   end
 
   def get_global_recommendations
-    @articles = Article.where(global_recommendation: true, published: true).order(updated_at: "ASC").last(4)
+    @articles = Article.where("global_recommendation = ? AND published = ? AND id != ? ", true, true, session[:article_id]).order(updated_at: "ASC").last(4)
 
-    current_article = []
-    if session[:article_id]
-      if Article.exists?(session[:article_id])
-        current_article << Article.find(session[:article_id])
-      end
-    end
-    p "finish global_recommendation"
-    return @articles - current_article
+   
   end
 
   def get_todays_keywords
-    p "finish todays_keywords"
+    # p "finish todays_keywords"
 
     @keywords = Hashtag.where(selected: true).last(4)
 
@@ -274,11 +268,11 @@ class ApplicationController < ActionController::Base
 
       end 
     else
-      p "GRANDEEEEEEEE"
+      # p "GRANDEEEEEEEE"
       # @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where("banners.active = 'true' AND section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}'").reverse
       @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where("banners.active = 'true' AND section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}' AND banners.expiry_date > '#{time}'").reverse
-      p "banner ilse"
-      p @banner
+      # p "banner ilse"
+      # p @banner
     end
 
   end
@@ -287,28 +281,13 @@ class ApplicationController < ActionController::Base
     section = Section.find(id)
     #@hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
     if section.name != "Entretenimiento" or section.name != "Táctica Nacional e Internacional" or section.name != "Entretenimiento" or section.name != "Farándula"
-      articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND hits.created_at > ? AND hits.created_at < ?", 2.hours.ago, Time.now)
+      articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND hits.created_at > ? AND hits.created_at < ? AND articles.id != ?", 2.hours.ago, Time.now, session[:article_id])
     else  
-      articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND articles.section != 'Táctica Local' AND articles.section != 'Táctica Nacional e Internacional' AND articles.section != 'Entretenimiento' AND articles.section != 'Farándula' AND hits.created_at > ? AND hits.created_at < ?", 2.hours.ago, Time.now)
+      articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND articles.section != 'Táctica Local' AND articles.section != 'Táctica Nacional e Internacional' AND articles.section != 'Entretenimiento' AND articles.section != 'Farándula' AND hits.created_at > ? AND hits.created_at < ? AND articles.id != ?", 2.hours.ago, Time.now, session[:article_id])
     end
     # Táctica Nacional, Internacional, Farándula, Entretenimiento 
 
-    recommendations = SectionHighlight.where(section: section)
-    re = []
-    recommendations.each do |r|     
-      re << r.article
-    end
-
-    current_article = []
     
-    if session[:article_id]
-      if Article.exists?(session[:article_id])
-         current_article << Article.find(session[:article_id])
-      end
-    end
-
-    @articles = articles - re - current_article
-    p "finish most_visited"
     
     return @articles.last(3)
 

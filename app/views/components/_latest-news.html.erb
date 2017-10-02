@@ -4,9 +4,11 @@
 		<p class="link">&nbsp; </p>
 
 	</div>
-
+	<div id="latest_news" >
+		
+	</div>
 	<% articles.each do |article| %>
-		<% if article.section != "Quiénes somos" and  article.section != "Contáctanos" and article.section != "Anunciate con nosotros"  %>
+		<% if article.articable_id != 1019   %>
 					
 			<%= link_to article, class: "latest-news__article" do %>
 				<div class="clock">
@@ -18,9 +20,10 @@
 				<% else %>
 					<p class="article__time"><%= article.created_at.strftime("%H:%M") %></p>
 				<% end %>
-				<p class="article__title"><%= truncate(article.name, length: 55) %><br><span><%= article.section %></span></p>
+				<p class="article__title"><%= truncate(article.name, length: 55) %><br><span><%= article.section_name %></span></p>
 			<% end %>
 		<% end %>
 		
 	<% end %>
 </div>
+
