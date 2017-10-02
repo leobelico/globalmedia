@@ -11,7 +11,7 @@
 	<% end %>
 	<meta name="keywords" content="GlobalMedia,noticias,México,San Luis Potosí,Vanguardia,Negocios">
 	<meta name="author" content="GlobalMedia">
-
+	<%= action_cable_meta_tag %>
 
 	<% if controller_name == "articles" and action_name == "show" %>
 		<%= render "components/article_meta_tags", article: @article %>
