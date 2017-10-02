@@ -171,7 +171,7 @@
 
 
 <template id="related-articles">
-	<% if related_by_hashtags(@article).count > 0 %>
+	<% if related_by_hashtags(@article) != nil %>
 		<p class="related-articles"><strong class="related-articles__title">Artículos relacionados:</strong><br><% related_by_hashtags(@article).each do |article| %><br><%= link_to truncate(article.name, length:  80), article, class: "related-article" %><% end %></p>
 	<% end %>
 </template>
