@@ -118,6 +118,8 @@ class Panel::SectionsController < ApplicationController
 
 	end
 	def set_highlight
+		expire_fragment "section_articles"
+
 		@section = Section.find_by_slug(params[:section_slug])
 		@section.articles.each do |article|
 			article.update_attributes(highlight: false)
