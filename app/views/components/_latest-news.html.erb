@@ -20,7 +20,7 @@
 				<% else %>
 					<p class="article__time"><%= article.created_at.strftime("%H:%M") %></p>
 				<% end %>
-				<p class="article__title"><%= truncate(article.name, length: 55) %><br><span><%= article.articable.name_name %></span></p>
+				<p class="article__title"><%= truncate(article.name, length: 55) %><br><span><%= article.section_name %></span></p>
 			<% end %>
 		<% end %>
 		
