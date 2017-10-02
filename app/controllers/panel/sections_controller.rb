@@ -121,9 +121,8 @@ class Panel::SectionsController < ApplicationController
 		expire_fragment "section_articles"
 
 		@section = Section.find_by_slug(params[:section_slug])
-		@section.articles.each do |article|
-			article.update_attributes(highlight: false)
-		end 
+		Article.where(section: @section).update_all(highlight: false)
+		
 		article = Article.find(params[:panel][:article_id])
 		article.update_attributes(highlight: true)
 		redirect_to panel_section_path(@section)
