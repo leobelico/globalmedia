@@ -60,6 +60,7 @@ class Panel::ArticlesController < ApplicationController
 		if @article.save
 			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s) 
 			if @article.draft == 2
+				expire_fragment "recent_articles"
 				@article.update_attributes(published: true) 
 
 			end
