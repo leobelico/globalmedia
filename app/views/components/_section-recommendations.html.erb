@@ -1,6 +1,6 @@
 <div class="section-recommendations">
 	<% if articles.first %>
-		<%= link_to section_path(articles.first.section), class: "skewed-title" do %>
+		<%= link_to section_path(articles.first.articable.name), class: "skewed-title" do %>
 			<div class="skews">
 				<div class="skew skew--gray"></div>
 				<div class="skew skew--blue"></div>

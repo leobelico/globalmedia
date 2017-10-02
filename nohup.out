@@ -20,3 +20,7 @@
 
 2288:M 02 Oct 13:43:36.439 # Server started, Redis version 3.2.9
 2288:M 02 Oct 13:43:36.439 * The server is now ready to accept connections on port 6379
+2288:M 02 Oct 14:43:37.009 * 1 changes in 3600 seconds. Saving...
+2288:M 02 Oct 14:43:37.010 * Background saving started by pid 3007
+3007:C 02 Oct 14:43:37.055 * DB saved on disk
+2288:M 02 Oct 14:43:37.114 * Background saving terminated with success

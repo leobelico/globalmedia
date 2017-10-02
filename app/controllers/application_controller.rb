@@ -208,11 +208,12 @@ class ApplicationController < ActionController::Base
   end
 
   def latest_news
-    # p "finish latet news"
+    
+    # @articles = Article.where(published: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).order(created_at: "ASC").last(8).reverse
+    
+    @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where(published: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).select('articles.name, articles.created_at, articles.scheduled_time, articles.articable_id, articles.articable_type, articles.slug, sections.name AS section_name').order(created_at: "ASC").last(8).reverse
 
-    # @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").order(created_at: "ASC").where("published = true AND sections.visible = true").first(8).reverse
-    @articles = Article.where(published: true, created_at: Time.now.beginning_of_month..Time.now.end_of_month).order(created_at: "ASC").last(8).reverse
-    # @articles = Article.where("published = true").last(8).reverse
+
   end
   
   def get_section_highlight(id)
@@ -243,16 +244,9 @@ class ApplicationController < ActionController::Base
   end
 
   def get_global_recommendations
-    @articles = Article.where(global_recommendation: true, published: true).order(updated_at: "ASC").last(4)
+    @articles = Article.where("global_recommendation = ? AND published = ? AND id != ? ", true, true, session[:article_id]).order(updated_at: "ASC").last(4)
 
-    current_article = []
-    if session[:article_id]
-      if Article.exists?(session[:article_id])
-        current_article << Article.find(session[:article_id])
-      end
-    end
-    # p "finish global_recommendation"
-    return @articles - current_article
+   
   end
 
   def get_todays_keywords
@@ -287,28 +281,13 @@ class ApplicationController < ActionController::Base
     section = Section.find(id)
     #@hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
     if section.name != "Entretenimiento" or section.name != "Táctica Nacional e Internacional" or section.name != "Entretenimiento" or section.name != "Farándula"
-      articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND hits.created_at > ? AND hits.created_at < ?", 2.hours.ago, Time.now)
+      articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND hits.created_at > ? AND hits.created_at < ? AND articles.id != ?", 2.hours.ago, Time.now, session[:article_id])
     else  
-      articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND articles.section != 'Táctica Local' AND articles.section != 'Táctica Nacional e Internacional' AND articles.section != 'Entretenimiento' AND articles.section != 'Farándula' AND hits.created_at > ? AND hits.created_at < ?", 2.hours.ago, Time.now)
+      articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = false AND articles.section != 'Táctica Local' AND articles.section != 'Táctica Nacional e Internacional' AND articles.section != 'Entretenimiento' AND articles.section != 'Farándula' AND hits.created_at > ? AND hits.created_at < ? AND articles.id != ?", 2.hours.ago, Time.now, session[:article_id])
     end
     # Táctica Nacional, Internacional, Farándula, Entretenimiento 
 
-    recommendations = SectionHighlight.where(section: section)
-    re = []
-    recommendations.each do |r|     
-      re << r.article
-    end
-
-    current_article = []
     
-    if session[:article_id]
-      if Article.exists?(session[:article_id])
-         current_article << Article.find(session[:article_id])
-      end
-    end
-
-    @articles = articles - re - current_article
-    # p "finish most_visited"
     
     return @articles.last(3)
 

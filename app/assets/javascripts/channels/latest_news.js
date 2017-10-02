@@ -1,9 +1,9 @@
 
-//= require cable
-//= require_self
-//= require_tree .
+// //= require cable
+// //= require_self
+// //= require_tree .
 
-console.log("kjdeoidio");
-this.App = {};
+// console.log("kjdeoidio");
+// this.App = {};
 
-App.cable = ActionCable.createConsumer();  
+// App.cable = ActionCable.createConsumer();  
