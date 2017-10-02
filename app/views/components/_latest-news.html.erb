@@ -4,8 +4,20 @@
 		<p class="link">&nbsp; </p>
 
 	</div>
-	<%= ArticlesJob.perform_later %>
-	<div id="latest-news">
+	<div id="latest_news" >
+		
 	</div>
+	<%= Resque.enqueue(ArticlesJob) %>
+		
 	
 </div>
+
+<script type="text/javascript">
+	function update_info(article_name, section) {
+		console.log("lalalala");
+		$('#latest_news').append('<p class="article__title">' + article_name.substring(0,55) + '<br><span>' + section + '</span></p>');
+		
+
+	}
+
+</script>

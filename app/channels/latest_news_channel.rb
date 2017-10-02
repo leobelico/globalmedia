@@ -1,6 +1,6 @@
 class LatestNewsChannel < ApplicationCable::Channel  
 	def subscribed
-    	stream_from 'latest_news'
+    	stream_from 'latest'
   	end
 
 end 

@@ -42,9 +42,10 @@ gem 'rack-cors'
 gem 'rack-attack'
 gem 'simple_command'
 gem 'api-pagination', "4.4.0"
-
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
+
+gem 'resque', require: 'resque/server'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
