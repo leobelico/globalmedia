@@ -1,7 +1,7 @@
-class ArticlesJob 
-  @queue = :latest_news
+class ArticlesJob < ApplicationJob
+  queue_as :default
 
-  def self.perform()
+  def perform()
     @articles = Article.where(published: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).order(created_at: "ASC").last(8).reverse
     print "Calling serve"
     print @articles.first.name
@@ -15,8 +15,8 @@ class ArticlesJob
     	end
     end
 
-    # print "Finish"
-    # return @articles
+    print "Finish"
+    return @articles
   end
 
   def latest_news
