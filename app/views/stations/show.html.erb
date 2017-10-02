@@ -111,7 +111,9 @@
 
 				<div class="station__articles">
 					<% @station.article_relationships.last(3).each do |relationship| %>
-						<%= render "components/horizontal-note", article: relationship.article %>
+						<% if relationship.article %>
+							<%= render "components/horizontal-note", article: relationship.article %>
+						<% end %>
 					<% end %>
 				
 					<!-- VÏNCULO PARA VER MAS -->

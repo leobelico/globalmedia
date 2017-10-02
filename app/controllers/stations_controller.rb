@@ -65,7 +65,9 @@ class StationsController < ApplicationController
 	          	redirect_to root_url
 		end
 		def set_station
-			@station = Station.find_by(slug: params[:id])
+			print "PARAMSSSS"
+			print params[:id]
+			@station = Station.where('slug ILIKE ?', params[:id]).first
 			rescue  ActiveRecord::RecordNotFound
 	          	flash[:alert] = "No encontramos lo que estabas buscando"
 	          	redirect_to root_url
