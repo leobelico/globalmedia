@@ -36,7 +36,7 @@
 				  if(Hls.isSupported()) {
 				    var video = document.getElementById('video');
 				    var hls = new Hls();
-				    hls.loadSource('<%= station.stream_url %>');
+				    hls.loadSource('rtmp://38.96.148.213:1935/vivecanaltest/myStream.sdp');
 				    hls.attachMedia(video);
 				    hls.on(Hls.Events.MANIFEST_PARSED,function() {
 				      video.play();

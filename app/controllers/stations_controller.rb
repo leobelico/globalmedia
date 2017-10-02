@@ -7,37 +7,41 @@ class StationsController < ApplicationController
 		@news_channels = Station.where(news: true).order(frequency: "ASC")
 	end
 	def show
-		@recommendations = Station.where("id != '#{@station.id}' AND news = 'false'").last(7)
-	    time = Time.now
-	    if time.sunday? 
-	      @timetables = Timetable.where("(sunday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
-	    end
+		if params[:tag]
+			redirect_to search_results_path(params[:tag])
+		else
+			@recommendations = Station.where("id != '#{@station.id}' AND news = 'false'").last(7)
+		    time = Time.now
+		    if time.sunday? 
+		      @timetables = Timetable.where("(sunday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
+		    end
+		   
+		    if time.monday? 
+		      @timetables = Timetable.where("(monday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
+		    end
+		   
+		    if time.tuesday? 
+		      @timetables = Timetable.where("(tuesday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
+		    end
+		   
+		    if time.wednesday? 
+		      @timetables = Timetable.where("(wednesday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
+		    end
+		   
+		    if time.thursday? 
+		      @timetables = Timetable.where("(thursday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
+		    end
+		   
+		    if time.friday? 
+		      @timetables = Timetable.where("(friday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
+		    end
+		   
+		    if time.saturday? 
+		      @timetables = Timetable.where("(saturday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
+		    end
+		end
 	   
-	    if time.monday? 
-	      @timetables = Timetable.where("(monday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
-	    end
-	   
-	    if time.tuesday? 
-	      @timetables = Timetable.where("(tuesday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
-	    end
-	   
-	    if time.wednesday? 
-	      @timetables = Timetable.where("(wednesday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
-	    end
-	   
-	    if time.thursday? 
-	      @timetables = Timetable.where("(thursday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
-	    end
-	   
-	    if time.friday? 
-	      @timetables = Timetable.where("(friday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
-	    end
-	   
-	    if time.saturday? 
-	      @timetables = Timetable.where("(saturday = 'true' AND (streaming_hour < '#{time}' AND end_streaming_hour > '#{time}') OR streaming_hour > '#{time}') AND station_id = '#{@station.id}'").order(streaming_hour: "ASC").first(5)
-	    end
-	   
-	    p @timetables
+	    # p @timetables
 
 	end
 
@@ -56,8 +60,14 @@ class StationsController < ApplicationController
 	private 
 		def set_station_on_id 
 			@station = Station.find_by(slug: params[:station_id])
+			rescue  ActiveRecord::RecordNotFound
+	          	flash[:alert] = "No encontramos lo que estabas buscando"
+	          	redirect_to root_url
 		end
 		def set_station
 			@station = Station.find_by(slug: params[:id])
+			rescue  ActiveRecord::RecordNotFound
+	          	flash[:alert] = "No encontramos lo que estabas buscando"
+	          	redirect_to root_url
 		end
 end
