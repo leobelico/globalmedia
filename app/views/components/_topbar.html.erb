@@ -9,7 +9,7 @@
 		<%= link_to "investigación especial", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "topbar__link" %>
 	<% end %>
 	<%= link_to "Columnas de hoy", collaborators_path, class: "topbar__link" %>
-	<%= link_to "denuncia global", section_path(root_path + "Denuncia-Global"), class: "topbar__link" %>
+	<%= link_to "denuncia global", section_path("Denuncia-Global"), class: "topbar__link" %>
 	<a href="" class="topbar__link popup" onmouseover="popup(this)" onmouseout="popupout(this)">
 		tráfico san luis
 		<span class="popuptext" id="myPopup">Próximamente</span>
