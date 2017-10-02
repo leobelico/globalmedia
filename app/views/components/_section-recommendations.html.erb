@@ -1,13 +1,14 @@
 <div class="section-recommendations">
-
-	<%= link_to section_path(articles.first.section), class: "skewed-title" do %>
-		<div class="skews">
-			<div class="skew skew--gray"></div>
-			<div class="skew skew--blue"></div>
-			<div class="skew skew--black"></div>
-		</div>
-		<div class="sk__title" style="background-color: <%= articles.first.section_color %>"><%= section_name %></div>
-		<div class="sk__link" style="background-color: <%= articles.first.section_color %>">Ir a sección</div>
+	<% if articles.first %>
+		<%= link_to section_path(articles.first.section), class: "skewed-title" do %>
+			<div class="skews">
+				<div class="skew skew--gray"></div>
+				<div class="skew skew--blue"></div>
+				<div class="skew skew--black"></div>
+			</div>
+			<div class="sk__title" style="background-color: <%= articles.first.section_color %>"><%= section_name %></div>
+			<div class="sk__link" style="background-color: <%= articles.first.section_color %>">Ir a sección</div>
+		<% end %>
 	<% end %>
 	<% articles.each do |article| %>
 		<div class="section-recommendations__article ui-card">

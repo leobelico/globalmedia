@@ -30,20 +30,17 @@
 				</audio>
 			<% else %>	
 
-				<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-				<video id="video"></video>
-				<script>
-				  if(Hls.isSupported()) {
-				    var video = document.getElementById('video');
-				    var hls = new Hls();
-				    hls.loadSource('rtmp://38.96.148.213:1935/vivecanaltest/myStream.sdp');
-				    hls.attachMedia(video);
-				    hls.on(Hls.Events.MANIFEST_PARSED,function() {
-				      video.play();
-				  });
-				 }
-				</script>
 
+				  <video id="video" class="video-js" controls  preload="auto" width="640" height="264" data-setup='{"techorder" : ["flash"] }'>
+				   		<source src="rtmp://38.96.148.213:1935/vivecanaltest/myStream.sdp" type="video/sdp">
+				  		<source src="http://38.96.148.213:1935/vivecanaltest/myStream.sdp/playlist.m3u8" type="application/x-mpegURL">
+
+				  </video>
+					<script>
+
+						var player = videojs('video');
+						player.play();
+					</script>
 
 			<% end %>	
 			<div class="program__info">
