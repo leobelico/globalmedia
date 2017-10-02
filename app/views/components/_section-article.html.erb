@@ -1,5 +1,5 @@
 <div class="section-article">
-	<% if (article.section == "Denuncia Global" or article.section == "DENUNCIA GLOBAL") and article.video_url != "" %>
+	<% if (article.articable.name == "Denuncia Global" or article.articable.name == "DENUNCIA GLOBAL") and article.video_url != "" %>
 		<iframe width="208.67" height="140" src="<%= article.video_url %>" frameborder="0" allowfullscreen></iframe>
 	<% else %>
 		<%= link_to article, class: "sa-img-link" do %>

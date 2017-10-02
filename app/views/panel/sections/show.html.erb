@@ -84,7 +84,7 @@
 				TweenMax.to(".toggle.toggle--active .toggle__button", .3, { x: 25, ease: Power2.easeOut });
 				TweenMax.to(".toggle.toggle--active .toggle__background", .425, { scale: "0", ease: Power2.easeOut });
 			</script>
-<!-- 			<% if article.section_highlights.count == 0 %>
+<!-- 			<% if article.articable.name_highlights.count == 0 %>
 				<p class="table__cell"><%= check_box_tag :all_recommendations, article.id, false, :name => '[all_recommendations][]' %></p>
 			<% else %>
 				<p class="table__cell"><%= check_box_tag :all_recommendations, article.id, true, :name => '[all_recommendations][]' %></p>
@@ -104,7 +104,7 @@
 		<div class="table__row">
 			<%= link_to truncate(recommendation.article.name, length:  40), recommendation.article, class: "table__cell" %>
 			<p class="table__cell"><%= truncate(recommendation.article.short_description, length:  60) %></p>
-			<p class="table__cell"><%= recommendation.article.section %></p>
+			<p class="table__cell"><%= recommendation.article.articable.name %></p>
 		</div>
 	<% end %>
 </div>

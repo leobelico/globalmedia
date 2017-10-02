@@ -40,7 +40,7 @@
 <% if @hits.count > 0 %>
 	<div class="table card graphs">
 		<% if @hits.count > 1 %>
-			<h4 class="title"><%= @hits.first[1][1].article.section %></h4>
+			<h4 class="title"><%= @hits.first[1][1].article.articable.name %></h4>
 		<% end %>
 		<div id="chart"></div>
 
@@ -107,7 +107,7 @@
 		<% end %>
         ]);
 		var options = {
-			title: 'Sección <%= @hits.first[1][1].article.section %>',
+			title: 'Sección <%= @hits.first[1][1].article.articable.name %>',
 			// curveType: 'function',
 			legend: { position: 'bottom' }
 		};

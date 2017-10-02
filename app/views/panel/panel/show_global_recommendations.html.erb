@@ -94,7 +94,7 @@
 		<div class="table__row">
 			<%= link_to truncate(article.name, length:  40), article, class: "table__cell" %>
 			<p class="table__cell"><%= truncate(article.short_description, length:  60) %></p>
-			<p class="table__cell"><%= article.section %></p>
+			<p class="table__cell"><%= article.articable.name %></p>
 		</div>
 	<% end %>
 </div>

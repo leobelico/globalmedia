@@ -13,7 +13,7 @@
 		
 		Global Recomienda
 		
-		<% if article.section_highlights.count == 0 %>
+		<% if article.articable.name_highlights.count == 0 %>
 			<%= check_box_tag :all_recommendations, article.id, false, :name => '[all_recommendations][]' %>
 		<% else %>
 			<%= check_box_tag :all_recommendations, article.id, true, :name => '[all_recommendations][]' %>
