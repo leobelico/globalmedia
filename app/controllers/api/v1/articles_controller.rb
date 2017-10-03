@@ -21,7 +21,7 @@ class Api::V1::ArticlesController < Api::BaseController
 		end
 	end
 	def most_visited 
-	    @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ? AND articles.id != ?", false,2.hours.ago, Time.now, session[:article_id]).order("hits.number").last(6)
+	    @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ?", false,2.hours.ago, Time.now).order("hits.number").last(6)
 	    json_response(@articles, :ok)
 	end
 
