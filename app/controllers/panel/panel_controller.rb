@@ -8,7 +8,7 @@ class Panel::PanelController < ApplicationController
 
 
 	def set_global_recommendations
-		expire_fragment "global_recommendations"
+		expire_fragment "global-recommendations"
 
 		articles_in_highlights = Article.where(global_recommendation: true)
 		articles_in_highlights.update_all(global_recommendation: false)
