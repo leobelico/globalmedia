@@ -304,10 +304,10 @@ class ApplicationController < ActionController::Base
       @article = Article.find_by_slug(params[:slug])
       if @article 
         session[:article_id] = @article.id
+      else
+        redirect_to root_url
       end
       
-      rescue ActiveRecord::RecordNotFound
-        flash[:alert] = "La página que estabas buscando no existe."
-        redirect_to root_url
+     
     end
 end
