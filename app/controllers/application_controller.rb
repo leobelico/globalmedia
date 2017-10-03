@@ -280,8 +280,9 @@ class ApplicationController < ActionController::Base
   def most_visited(id)
     #@hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
 
-    @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ? AND articles.id != ?", false,2.hours.ago, Time.now, session[:article_id]).order(created_at: "ASC").last(3).reverse
+    @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ? AND articles.id != ?", false,2.hours.ago, Time.now, session[:article_id]).order("hits.number").last(3)
 
+    
 
     
     # Táctica Nacional, Internacional, Farándula, Entretenimiento 
