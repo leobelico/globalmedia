@@ -136,7 +136,7 @@
 
 			<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
 		<!-- -->
-		<div class="fb-comments" data-href="<%= request.original_url %>" data-numposts="5"></div>
+		<div class="fb-comments" data-href="<%= request.original_url.force_encoding 'UTF-8' %>" data-numposts="5"></div>
 		<% if get_banner(@article.articable, @article.articable_type, "Grande" ).count > 0 %>
 
 			<%= render "components/big-banner", article: @article, banner: get_banner(@article.articable, @article.articable_type, "Grande" )  %>
