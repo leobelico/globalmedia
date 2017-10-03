@@ -35,7 +35,7 @@ gem 'aws-sdk', "2.2.8"
 gem 'will_paginate', "~>3.0.5"
 gem 'autoprefixer-rails'
 gem "cancan"
-
+gem 'connection_pool'
 gem 'jwt'
 gem 'active_model_serializers'
 gem 'rack-cors'
