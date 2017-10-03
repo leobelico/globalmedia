@@ -107,7 +107,10 @@ Rails.application.configure do
   }
  
   config.secret_key_base = ENV["SECRET_KEY_BASE"]
-    
+  
+  if ENV["MEMCACHEDCLOUD_SERVERS"]
+    config.cache_store = :dalli_store, ENV["MEMCACHEDCLOUD_SERVERS"].split(','), { :username => ENV["MEMCACHEDCLOUD_USERNAME"], :password => ENV["MEMCACHEDCLOUD_PASSWORD"] }
+  end
  
 
   config.web_socket_server_url = "wss://global-media.herokuapp.com/cable" 
