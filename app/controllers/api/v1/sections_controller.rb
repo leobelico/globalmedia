@@ -5,7 +5,10 @@ class Api::V1::SectionsController < Api::BaseController
 	    json_response(@sections, :ok)
 	end
 	def show 
-    	paginate json: @section.articles.where(published: true).order(created_at: "DESC"), adapter: :json, per_page: 20		
+		@articles = Article.where(articable_id: @section.id).order(created_at: "DESC")
+		# p "articles"
+		# p @articles
+    	paginate json: @articles, adapter: :json, per_page: 20		
 	end
 
 	def get_articles 
