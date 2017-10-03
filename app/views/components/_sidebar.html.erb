@@ -2,7 +2,7 @@
 	<% cache  "recent_articles" do %>
 		<%= render "components/latest-news",articles: latest_news %>
 	<% end %>
-	<% if true %>
+	<% if false %>
 		<% cache  "global_recommendations" do %>
 			<%= render "components/recommendations", articles: get_global_recommendations %>
 		<% end %>	
