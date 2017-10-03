@@ -73,7 +73,7 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-  config.cache_store = :dalli_store
+
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
@@ -108,7 +108,8 @@ Rails.application.configure do
  
   config.secret_key_base = ENV["SECRET_KEY_BASE"]
     
-  
+ 
+
   config.web_socket_server_url = "wss://global-media.herokuapp.com/cable" 
   config.action_cable.allowed_request_origins = ['https://global-media.herokuapp.com', 'http://global-media.herokuapp.com' , 'http://globalmedia.mx', 'http://www.globalmedia.mx', 'https://globalmedia.mx', 'https://www.globalmedia.mx']
 end
