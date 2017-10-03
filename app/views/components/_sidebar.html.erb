@@ -1,10 +1,10 @@
 <div class="sidebar">
-	<% if false %>
+	<% if true %>
 	<% cache  "recent_articles" do %>
 		<%= render "components/latest-news",articles: latest_news %>
 	<% end %>
 	<% end %>
-	<% if false %>
+	<% if true %>
 		<% cache  "global_recommendations" do %>
 			<%= render "components/recommendations", articles: get_global_recommendations %>
 		<% end %>	
