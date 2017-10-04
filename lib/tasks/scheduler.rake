@@ -4,9 +4,9 @@ task :publish_articles => :environment do
   articles = Article.where("scheduled_time >= ? AND scheduled_time <= ? AND draft = ?", (DateTime.now - 10.minutes).beginning_of_minute, DateTime.now.end_of_minute, 1)
   articles.update_all(published: true)
   if articles.count > 0
-		expire_fragment("views/recent_articles/4381510a0eaa79cbea05a12261235818")
-		expire_fragment("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
-	# Rails.cache.flush
+		# expire_fragment("views/recent_articles/4381510a0eaa79cbea05a12261235818")
+		# expire_fragment("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
+	Rails.cache.flush
 	
 
 
