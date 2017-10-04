@@ -5,15 +5,15 @@
 	<% end %>
 	<% end %>
 	<% if true %>
-		<% cache  "global-recommendations" do %>
+		<% cache  "global_recommendations" do %>
 			<%= render "components/recommendations", articles: get_global_recommendations %>
 		<% end %>	
 		<% if article != "" and article != "global" %>
-			<% cache("most-visited", expires_in: 2.hour) do %>
+			<% cache("most_visited", expires_in: 2.hour) do %>
 				<%= render "components/most-visited", articles: most_visited(Section.find(article.articable_id)) %>
 			<% end %>
 		<% else %>
-			<% cache("most-visited", expires_in: 2.hour) do %>
+			<% cache("most_visited", expires_in: 2.hour) do %>
 				<%= render "components/most-visited", articles: most_visited(3) %>
 			<% end %>
 		<% end %>

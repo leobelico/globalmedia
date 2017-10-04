@@ -8,7 +8,7 @@ class Panel::PanelController < ApplicationController
 
 
 	def set_global_recommendations
-		Rails.cache.flush
+		Rails.cache.clear
 		
 
 		articles_in_highlights = Article.where(global_recommendation: true)

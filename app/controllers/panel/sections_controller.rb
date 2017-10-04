@@ -118,7 +118,7 @@ class Panel::SectionsController < ApplicationController
 
 	end
 	def set_highlight
-		Rails.cache.flush
+		Rails.cache.clear
 		
 
 		@section = Section.find_by_slug(params[:section_slug])
