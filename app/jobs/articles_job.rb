@@ -11,7 +11,7 @@ class ArticlesJob < ApplicationJob
     	if article.section != "Quiénes somos" and  article.section != "Contáctanos" and article.section != "Anunciate con nosotros"
     		print "calling server"
     		print article.name
-    		 ActionCable.server.broadcast 'latest', article_name: article.name, section: article.section
+    		 # ActionCable.server.broadcast 'latest', article_name: article.name, section: article.section
     	end
     end
 
