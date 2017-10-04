@@ -114,6 +114,6 @@ Rails.application.configure do
   end
  
 
-  config.web_socket_server_url = "wss://global-media.herokuapp.com/cable" 
-  config.action_cable.allowed_request_origins = ['https://global-media.herokuapp.com', 'http://global-media.herokuapp.com' , 'http://globalmedia.mx', 'http://www.globalmedia.mx', 'https://globalmedia.mx', 'https://www.globalmedia.mx']
+  # config.web_socket_server_url = "wss://global-media.herokuapp.com/cable" 
+  # config.action_cable.allowed_request_origins = ['https://global-media.herokuapp.com', 'http://global-media.herokuapp.com' , 'http://globalmedia.mx', 'http://www.globalmedia.mx', 'https://globalmedia.mx', 'https://www.globalmedia.mx']
 end
