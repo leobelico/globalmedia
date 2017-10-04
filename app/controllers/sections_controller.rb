@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 class SectionsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show, :sports, :corporation]
-	before_action :set_section, only: [:corporation, :show, :edit, :update, :destroy]
+	before_action :set_section, only: [:show, :edit, :update, :destroy]
 	
 	def admin_show
 		@section = Section.find(params[:format])
