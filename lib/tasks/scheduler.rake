@@ -6,6 +6,9 @@ task :publish_articles => :environment do
   if articles.count > 0
 	expire_fragment "recent_articles"
 	expire_fragment "section_articles"
+	Rails.cache.delete('recent_articles')
+	Rails.cache.delete('section_articles')
+
 
   end
 end
