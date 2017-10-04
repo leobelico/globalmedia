@@ -138,6 +138,7 @@ class ApplicationController < ActionController::Base
 
      @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = #{id} AND articles.highlight = false AND articles.published = true", (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).order(created_at: "ASC").last(last_number).reverse
 
+     
 
 
    #@articles = Article.where(articable_id: id, created_at: Time.now.beginning_of_month..Time.now.end_of_month).first(last_number)
