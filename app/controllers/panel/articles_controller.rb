@@ -10,7 +10,8 @@ class Panel::ArticlesController < ApplicationController
 	def publish_now
 		@article = Article.find_by(slug: params[:article_slug])
 		@article.update_attributes(published: true, draft: 1)
-		Rails.cache.clear
+		expire_fragment("views/recent_articles/4381510a0eaa79cbea05a12261235818")
+		expire_fragment("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
 		
 		redirect_to panel_articles_path
 	end
@@ -64,7 +65,8 @@ class Panel::ArticlesController < ApplicationController
 
 			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s) 
 			if @article.draft == 2
-				Rails.cache.clear
+				expire_fragment("views/recent_articles/4381510a0eaa79cbea05a12261235818")
+				expire_fragment("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
 				
 
 				@article.update_attributes(published: true) 
@@ -126,7 +128,8 @@ class Panel::ArticlesController < ApplicationController
 
 	def destroy
 		@article.destroy
-		Rails.cache.clear
+		expire_fragment("views/recent_articles/4381510a0eaa79cbea05a12261235818")
+		expire_fragment("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
 		
 		redirect_to panel_articles_path
 		rescue ActiveRecord::InvalidForeignKey

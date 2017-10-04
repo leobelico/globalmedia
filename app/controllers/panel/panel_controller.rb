@@ -8,8 +8,9 @@ class Panel::PanelController < ApplicationController
 
 
 	def set_global_recommendations
-		Rails.cache.clear
-		
+		expire_fragment("views/global-recommendations/54f7eee5cf33ab592d78a02aade03259")
+		# expire_fragment("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
+		# views/section_articles/c9e9bc761f258191703f09bb6e30110c
 
 		articles_in_highlights = Article.where(global_recommendation: true)
 		articles_in_highlights.update_all(global_recommendation: false)
