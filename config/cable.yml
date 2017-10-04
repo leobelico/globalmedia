@@ -6,4 +6,4 @@ test:
 
 production:
   adapter: redis
-  url: redis://redistogo:1293abfb0e0c941b3a8badf16c88182c@angelfish.redistogo.com:10926/
+  # url: redis://redistogo:1293abfb0e0c941b3a8badf16c88182c@angelfish.redistogo.com:10926/

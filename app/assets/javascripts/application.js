@@ -23,7 +23,7 @@
 //= require libraries/clipboard.js/clipboard.min 
 //= require components/media-cache-cleaner
 //= require components/buttons
-//= require_tree ./channels
+// require_tree ./channels
 // 
 // 
 // QUILL BLOTS

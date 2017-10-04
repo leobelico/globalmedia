@@ -43,7 +43,7 @@ gem 'rack-attack'
 gem 'simple_command'
 gem 'api-pagination', "4.4.0"
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 3.0'
+#gem 'redis', '~> 3.0'
 gem 'dalli'
 # gem 'dalli-store-extensions', :git => "git://github.com/defconomicron/dalli-store-extensions.git"
 # gem 'resque', require: 'resque/server'
@@ -63,13 +63,14 @@ end
 # group :production do  
 #   gem 'heroku-deflater'
 # end
-gem 'rack-mini-profiler'
 # gem 'sys-proctable'
 #gem 'memory_profiler'
 #gem 'flamegraph'
 #gem 'stackprof'     # For Ruby MRI 2.1+
 #gem 'fast_stack'    # For Ruby MRI 2.0
 group :development do
+  gem 'rack-mini-profiler'
+
   gem 'derailed'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   # gem 'rails_real_favicon'
