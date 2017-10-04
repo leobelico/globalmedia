@@ -62,12 +62,12 @@ class Panel::ArticlesController < ApplicationController
 
 		if @article.save
 
-			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s) 
+			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s, published_at: @article.created_at) 
 			if @article.draft == 2
 				Rails.cache.clear
 				
 
-				@article.update_attributes(published: true, published_at: @article.created_at) 
+				@article.update_attributes(published: true) 
 
 			end
 			redirect_to edit_panel_article_path(@article)
