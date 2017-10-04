@@ -10,10 +10,8 @@ class Panel::ArticlesController < ApplicationController
 	def publish_now
 		@article = Article.find_by(slug: params[:article_slug])
 		@article.update_attributes(published: true, draft: 1)
-		Rails.cache.delete('recent_articles')
-		Rails.cache.delete('section_articles')
-		expire_fragment "recent_articles"
-		expire_fragment "section_articles"
+		Rails.cache.flush
+		
 		redirect_to panel_articles_path
 	end
 	def index
@@ -66,8 +64,8 @@ class Panel::ArticlesController < ApplicationController
 
 			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s) 
 			if @article.draft == 2
-				Rails.cache.delete('recent_articles')
-				Rails.cache.delete('section_articles')
+				Rails.cache.flush
+				
 
 				@article.update_attributes(published: true) 
 
@@ -128,8 +126,8 @@ class Panel::ArticlesController < ApplicationController
 
 	def destroy
 		@article.destroy
-		Rails.cache.delete('recent_articles')
-		Rails.cache.delete('section_articles')
+		Rails.cache.flush
+		
 		redirect_to panel_articles_path
 		rescue ActiveRecord::InvalidForeignKey
     		flash[:notice] = "No se puede eliminar porque es nota de portada o recomendación global"

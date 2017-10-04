@@ -118,9 +118,9 @@ class Panel::SectionsController < ApplicationController
 
 	end
 	def set_highlight
-		expire_fragment "section_articles"
-		Rails.cache.delete('section_articles')
+		Rails.cache.flush
 		
+
 		@section = Section.find_by_slug(params[:section_slug])
 		Article.where(articable_id: @section.id).update_all(highlight: false)
 		
