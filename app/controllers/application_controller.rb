@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
     redirect_to panel_path, :alert => exception.message
   end
 
-  before_action do
-    if user_signed_in?
-      Rack::MiniProfiler.authorize_request
-    end
-  end
+  # before_action do
+  #   if user_signed_in?
+  #     # Rack::MiniProfiler.authorize_request
+  #   end
+  # end
 
   autocomplete :article, :name, full: true
 
