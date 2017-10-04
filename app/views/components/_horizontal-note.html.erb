@@ -7,8 +7,9 @@
 		<div class="article__information">
 			<%= link_to article, class: "wrapper-link" do %>
 				<h4 class="small-title semibold"><%= article.name %></h4>
-				<p class="section-and-author"><span class="section"><%= article.articable.name %></span> - 
-
+				<% if article.articable %>
+					<p class="section-and-author"><span class="section"><%= article.articable.name %></span> - 
+				<% end %>
 				<% if article.author != nil %>
 					<% if article.author.name != "Ninguno" %>
 						<span class="author">Por <%= article.author.name %></p>
