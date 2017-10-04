@@ -69,8 +69,9 @@ class SectionsController < ApplicationController
 
 		def set_section
 			@section = Section.find_by_slug(params[:slug])
-			rescue ActiveRecord::RecordNotFound
-				flash[:alert] = "La página que estabas buscando no existe."
+			if @section
+			else
 				redirect_to root_url
+			end
 		end
 end
