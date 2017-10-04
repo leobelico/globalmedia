@@ -10,8 +10,8 @@
 
 			<h4 class="title semibold"><%= article.name %></h4>	
 				<p class="section-and-author"><span class="section"><%= article.articable.name %></span> - 
-			<% if article.scheduled_time? %>
-				<span class="datetime"><%= distance_of_time_in_words(Time.now, (article.scheduled_time)) %></span>
+			<% if article.published_at? %>
+				<span class="datetime"><%= distance_of_time_in_words(Time.now, (article.published_at)) %></span>
 			<% else %>
 				<span class="datetime"><%= distance_of_time_in_words(Time.now, (article.created_at)) %></span>
 				

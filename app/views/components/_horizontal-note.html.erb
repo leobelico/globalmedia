@@ -21,8 +21,8 @@
 				<% end %>
 
 
-				<% if article.scheduled_time? %>
-					<p class="datetime"><%= distance_of_time_in_words(Time.now, (article.scheduled_time)) %></p>
+				<% if article.published_at? %>
+					<p class="datetime"><%= distance_of_time_in_words(Time.now, (article.published_at)) %></p>
 				<% else %>
 					<p class="datetime"><%= distance_of_time_in_words(Time.now, (article.created_at)) %></p>
 					
