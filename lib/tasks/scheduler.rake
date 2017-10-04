@@ -6,9 +6,9 @@ task :publish_articles => :environment do
   if articles.count > 0
 		# cache.delete("views/recent_articles/4381510a0eaa79cbea05a12261235818")
 		# cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
-	# Rails.cache.flush
-	Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
-	Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
+		Rails.cache.flush
+	# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
+	# Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
 	
 
 

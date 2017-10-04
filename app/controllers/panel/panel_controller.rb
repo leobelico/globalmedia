@@ -8,8 +8,8 @@ class Panel::PanelController < ApplicationController
 
 
 	def set_global_recommendations
-		# Rails.cache.clear
-		cache.delete("views/global-recommendations/54f7eee5cf33ab592d78a02aade03259")
+		Rails.cache.clear
+		# cache.delete("views/global-recommendations/54f7eee5cf33ab592d78a02aade03259")
 		
 
 		articles_in_highlights = Article.where(global_recommendation: true)

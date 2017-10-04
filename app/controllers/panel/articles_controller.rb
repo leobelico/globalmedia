@@ -10,9 +10,9 @@ class Panel::ArticlesController < ApplicationController
 	def publish_now
 		@article = Article.find_by(slug: params[:article_slug])
 		@article.update_attributes(published: true, draft: 1, published_at: DateTime.now)
-		# Rails.cache.clear
-		Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
-		Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
+		Rails.cache.clear
+		# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
+		# Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
 		redirect_to panel_articles_path
 	end
 	def index
@@ -65,9 +65,9 @@ class Panel::ArticlesController < ApplicationController
 
 			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s, published_at: @article.created_at) 
 			if @article.draft == 2
-				# Rails.cache.clear
-				Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
-				Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
+				Rails.cache.clear
+				# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
+				# Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
 
 				@article.update_attributes(published: true) 
 
@@ -128,9 +128,9 @@ class Panel::ArticlesController < ApplicationController
 
 	def destroy
 		@article.destroy
-		# Rails.cache.clear
-		Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
-		Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
+		Rails.cache.clear
+		# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
+		# Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
 		redirect_to panel_articles_path
 		rescue ActiveRecord::InvalidForeignKey
     		flash[:notice] = "No se puede eliminar porque es nota de portada o recomendación global"
