@@ -144,9 +144,10 @@ class ApplicationController < ActionController::Base
 
   end
   def get_latest_articles_per_section(id, quantity)
-    section = Section.find(id)
-    articles = Article.where(articable_id: section.id, global_recommendation: false, published: true)
-    recommendations = SectionHighlight.where(section: section)
+    # section = Section.find(id)
+    articles = Article.where(articable_id: id, global_recommendation: false, published: true).order(created_at: "DESC")
+
+    recommendations = SectionHighlight.where(section_id: id)
     re = []
     recommendations.each do |r|
       re << r.article
