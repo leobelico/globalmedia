@@ -145,17 +145,13 @@ class ApplicationController < ActionController::Base
   end
   def get_latest_articles_per_section(id, quantity)
     # section = Section.find(id)
-    articles = Article.where(articable_id: id, global_recommendation: false, published: true).order(created_at: "DESC")
+    articles = Article.joins("LEFT JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.article_id IS NULL AND articles.articable_id = ? AND articles.global_recommendation = ? AND articles.published = ?", 1, false, true).order(created_at: "DESC").first(3)
 
-    recommendations = SectionHighlight.where(section_id: id)
-    re = []
-    recommendations.each do |r|
-      re << r.article
-    end
-    
-    @articles = articles - re
+
+
+  
     # p "finish get_latest_articles_per_section"
-    return @articles.last(3)
+    return @articles
 
   end
 
