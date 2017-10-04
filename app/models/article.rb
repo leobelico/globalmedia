@@ -9,7 +9,8 @@ class Article < ApplicationRecord
 	attr_accessor :hashtags_names, :the_note
 
   has_and_belongs_to_many :hashtags, uniq: true
-  before_save :associate_tags, :to_slug
+  before_save :associate_tags
+  before_create :to_slug
   
   belongs_to :user, optional: true
   has_many :article_relationships, dependent: :delete_all
