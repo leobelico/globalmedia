@@ -212,6 +212,8 @@ class ApplicationController < ActionController::Base
     @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where(published: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).select('articles.name, articles.created_at, articles.scheduled_time, articles.articable_id, articles.articable_type, articles.slug, sections.name AS section_name').order(created_at: "ASC").last(8).reverse
 
 
+
+
   end
   
   def get_section_highlight(id)

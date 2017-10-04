@@ -9,7 +9,7 @@ class Panel::ArticlesController < ApplicationController
 	
 	def publish_now
 		@article = Article.find_by(slug: params[:article_slug])
-		@article.update_attributes(published: true, draft: 1)
+		@article.update_attributes(published: true, draft: 1, published_at: DateTime.now)
 		Rails.cache.clear
 		
 		redirect_to panel_articles_path
@@ -67,7 +67,7 @@ class Panel::ArticlesController < ApplicationController
 				Rails.cache.clear
 				
 
-				@article.update_attributes(published: true) 
+				@article.update_attributes(published: true, published_at: @article.created_at) 
 
 			end
 			redirect_to edit_panel_article_path(@article)
