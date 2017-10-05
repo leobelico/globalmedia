@@ -66,7 +66,7 @@ class Panel::ArticlesController < ApplicationController
 
 			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s, published_at: @article.created_at) 
 			if @article.draft == 2
-				expires_action :latest_news
+			
 				# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
 				# Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
 
