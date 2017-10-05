@@ -49,7 +49,18 @@ class ApplicationController < ActionController::Base
   helper_method :related_by_hashtags
   helper_method :get_sections
   helper_method :get_investigation_articles
+  helper_method :get_collaborators
+  helper_method :get_complaints
 
+  def get_complaints
+    @complaints = Article.where(articable_id: 11, published: true).order(updated_at: "ASC").last(6).reverse
+  end
+
+  def get_collaborators
+    @collaborator_articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator' ORDER BY article_relationships.created_at DESC")[0..4]
+
+  end
+  
   def get_sections 
     @sections = Section.where(visible: true)
   end

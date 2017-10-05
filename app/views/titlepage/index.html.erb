@@ -17,15 +17,8 @@
 	<% end %>
 <% end %>
 
-<% if true %>
 <div class="special-articles-container">
-	<% if true %>
-		<% cache(get_investigation_articles) do %>
-			<% if get_investigation_articles.count > 0 %>
-				<%= render "components/special-articles", type: "Investigación Especial", title: get_investigation_articles.last.article_relationships.last.articable.name, articles: get_investigation_articles %>
-			<% end %>
-		<% end %>
-	<% end %>
+	
 	<div class="special-articles">
 		<% if true %>
 			<% cache(latest_news) do %>
@@ -43,21 +36,24 @@
 		
 	</div>
 
-	<% if false %>
-		<div class="special-articles--collaborators">
-			<%= render "components/collaborators", articles: @collaborator_articles %>
-		</div>
-	<% end %>
-</div>
-<% end %>
-<div class="special-articles-container">
-	<% if false %>
-		<%  if @investigation_articles.count > 0 %>
-			<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
+	<% if true %>
+		<% cache(get_collaborators) do %>
+			<div class="special-articles--collaborators">
+				<%= render "components/collaborators", articles: get_collaborators %>
+			</div>
 		<% end %>
 	<% end %>
-	<% if @complaints %>
-		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: @complaints.reverse %>
+</div>
+<div class="special-articles-container">
+		<% cache(get_investigation_articles) do %>
+			<% if get_investigation_articles.count > 0 %>
+				<%= render "components/special-articles", type: "Investigación Especial", title: get_investigation_articles.last.article_relationships.last.articable.name, articles: get_investigation_articles %>
+			<% end %>
+		<% end %>
+	<% cache(get_complaints) do %>
+		<% if get_complaints %>
+			<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: get_complaints %>
+		<% end %>
 	<% end %>
 </div>
 

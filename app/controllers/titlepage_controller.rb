@@ -48,34 +48,8 @@ class TitlepageController < ApplicationController
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')
 		@sections = Section.where("visible = 'true' AND name != 'Último Momento'").order(order: "ASC")
 
-		# relationships_investigations = Relationship.order(created_at: "ASC").where(relationship_type: "Investigation")
-
-		# p "relationships_investigations"
-		# p relationships_investigations
-		# 	@investigation_articles = []
-		
-		# if relationships_investigations
-		# 	relationships_investigations.last(1).each do |relationship|
-		# 		@investigation_name = relationship.name
-		# 		relationship.article_relationships.last(6).each do |r|
-		# 			# p "ARTICLELALA"
-		# 			# p r.article
-		# 			@investigation_articles << r.article
-		# 		end
-		# 	end
-
-
-		# end
-		# p "INVESTIGATION ARTICLES"
-		# p @investigation_articles
-		@investigation_articles = []
 		@breaking_news = nil 
- 		# section = Section.find_by_name("Denuncia Global")
-		#@complaints = Article.where(articable_id: section.id, published: true).order(updated_at: "ASC").last(6)
-
-
-		#@collaborator_articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator' ORDER BY article_relationships.created_at DESC")[0..4]
-			# .order(created_at: "DESC").first(5)
+ 		
 	end
 
 	def publish_highlights
