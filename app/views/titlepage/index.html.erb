@@ -1,18 +1,23 @@
 <% if @breaking_news != nil %>
 	<%= render "components/breaking-news" %>	
 <% end %>
-<div class="highlights-container">	
-	<% @highlights.each do |highlight| %>
-		<% if highlight.order == 1 %>
-			<%= render "components/principal-highlight", article: highlight.article %>
-		<% else %>
-			<%= render "components/secondary-highlight", article: highlight.article %>
+<% cache(@highlights) do %>
+	<div class="highlights-container">	
+		<% @highlights.each do |highlight| %>
+			<% if highlight.order == 1 %>
+				<%= render "components/principal-highlight", article: highlight.article %>
+			<% else %>
+				<%= render "components/secondary-highlight", article: highlight.article %>
+			<% end %>
 		<% end %>
-	<% end %>
-</div>
-<% if get_banner("", "TitlePage", "Grande" ) %>
-	<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
+	</div>
 <% end %>
+<% cache(get_banner("global", "TitlePage", "Grande")) do %>
+	<% if get_banner("global", "TitlePage", "Grande") %>
+		<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
+	<% end %>
+<% end %>
+
 <% if true %>
 <div class="special-articles-container">
 	<% if true %>
@@ -27,14 +32,13 @@
 			<% cache(latest_news) do %>
 				<%= render "components/latest-news", articles: latest_news  %>
 			<% end %>
-
-			<% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
-				<%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
-			<% else %>
-				<% if get_banner("", "Global", "Chico" ).count > 0 %>
-					<%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
+				<% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
+					<%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
+				<% else %>
+					<% if get_banner("", "Global", "Chico" ).count > 0 %>
+						<%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
+					<% end %>
 				<% end %>
-			<% end %>
 		<% end %>
 
 		
@@ -73,11 +77,10 @@
 
 
 </div>
-
-<% if get_banner("", "TitlePage", "Grande" ).count > 0 %>
-	<%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande" )  %>
-<% else %>
-	<% if get_banner("", "Global", "Grande" ).count > 0 %>
-		<%= render "components/big-banner", banner: get_banner("", "Global", "Grande" )  %>
+	<% if get_banner("", "TitlePage", "Grande" ).count > 0 %>
+		<%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande" )  %>
+	<% else %>
+		<% if get_banner("", "Global", "Grande" ).count > 0 %>
+			<%= render "components/big-banner", banner: get_banner("", "Global", "Grande" )  %>
+		<% end %>
 	<% end %>
-<% end %>
