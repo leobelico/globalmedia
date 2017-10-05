@@ -133,6 +133,8 @@
 					</script>
 				<% end %>
 
+	<% end %>
+	
 				<!-- NOTAS DEL PROGRAMADOR-->
 					<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
 
@@ -179,7 +181,6 @@
 				<p class="related-articles"><strong class="related-articles__title">Artículos relacionados:</strong><br><% related_by_hashtags(@article).each do |article| %><br><%= link_to truncate(article.name, length:  80), article, class: "related-article" %><% end %></p>
 			<% end %>
 		</template>
-	<% end %>
 <% else %>
 	<div class="interface--row">
 		<div class="note note--display">
