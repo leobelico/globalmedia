@@ -7,8 +7,9 @@
 	<% if true %>
 	
 			<%= render "components/recommendations", articles: get_global_recommendations %>
-
-		<%= render "components/most-visited", articles: most_visited %>
+		<% cache(most_visited, expires_in: 2.hours) do %>
+			<%= render "components/most-visited", articles: most_visited %>
+		<% end %>
 		<% if banner != "" and banner != nil %>
 			<%= render "components/medium-banner", banner: banner %>
 		<% end %>
