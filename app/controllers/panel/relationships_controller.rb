@@ -71,6 +71,8 @@ class Panel::RelationshipsController < ApplicationController
 	end
 
 	def set_investigation_articles
+		expires_action :get_investigation_articles
+		
 		investigation = Relationship.find(params[:panel][:investigation_id])
 		
 		first_article = Article.find(params[:panel][:first_article_id])
