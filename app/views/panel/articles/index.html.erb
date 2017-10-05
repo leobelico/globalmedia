@@ -57,8 +57,9 @@
 			
 			<p class="table__cell"><% if article.scheduled_time %><%= article.scheduled_time.strftime("%B %d, %Y %H:%M") %><% end %></p>
 
-			<p class="table__cell"><%= article.id %></p>	
-			<% if article.articable.name %>
+			<p class="table__cell"><%= article.id %></p>
+		 	
+			<% if article.articable and article.articable.name %>
 				<%= link_to article.articable.name, panel_section_path(article.articable.name), class: "table__cell" %>
 			<% else %>
 				<p class="table__cell">Ninguna</p>
