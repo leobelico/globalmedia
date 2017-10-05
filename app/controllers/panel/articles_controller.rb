@@ -10,7 +10,7 @@ class Panel::ArticlesController < ApplicationController
 	def publish_now
 		@article = Article.find_by(slug: params[:article_slug])
 		@article.update_attributes(published: true, draft: 1, published_at: DateTime.now)
-		expires_action :latest_news
+		# expires_action :latest_news
 		# Rails.cache.clear
 		# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
 		# Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
