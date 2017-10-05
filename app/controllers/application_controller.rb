@@ -48,7 +48,11 @@ class ApplicationController < ActionController::Base
   
   helper_method :related_by_hashtags
   helper_method :get_sections
+  helper_method :get_investigation_articles
 
+  caches_action :get_investigation_articles
+  caches_action :latest_news
+  caches_action :get_global_recommendations
   def get_sections 
     @sections = Section.where(visible: true)
   end
@@ -69,6 +73,10 @@ class ApplicationController < ActionController::Base
     # print "finish related_by_hashtags"
     return @articles
 
+  end
+
+  def get_investigation_articles
+    @articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id").joins("INNER JOIN relationships ON article_relationships.articable_id = relationships.id").where("relationships.relationship_type ='Investigation' AND relationships.id = ?", Relationship.order(created_at: "ASC").where(relationship_type: "Investigation").last.id ).last(6).reverse
   end
 
 
@@ -283,13 +291,6 @@ class ApplicationController < ActionController::Base
     #@hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
 
     @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ? AND articles.id != ?", false,2.hours.ago, Time.now, session[:article_id]).order("hits.number").last(3)
-
-   
-
-
-
-    
-
     
     # Táctica Nacional, Internacional, Farándula, Entretenimiento 
 
