@@ -52,7 +52,7 @@ class Panel::ArticlesController < ApplicationController
 
 	def create
 
-		@article = Articles.new(article_params)
+		@article = Article.new(article_params)
 		@article.user = current_user
 		somedate = Time.zone.local(params[:scheduled_time_1i].to_i, 
                         params[:scheduled_time_2i].to_i,
