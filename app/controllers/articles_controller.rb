@@ -16,20 +16,12 @@ class ArticlesController < ApplicationController
 		if !user_signed_in? and @article.published == true
 
 			SaveHitsJob.perform_later @article
-		# 	session[:current_position] = "Articles"
-		# 	last_hit = Hit.where(article: @article, created_at: 2.hours.ago..Time.now).last
-
-		# 	if last_hit
-		# 		last_hit.update_attributes(number: last_hit.number + 1)
-		# 	else
-		# 		#no hay ningún hit entonces lo creamos
-		# 		Hit.create(number: 1, article: @article)
-
-		# 	end
+		
 		end
 		@related_sections = RelatedSection.where(section: Section.find(@article.articable_id))
 		
 		@collaborator_articles = nil 
+		
 	end
 
 	
