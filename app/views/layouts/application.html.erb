@@ -137,12 +137,15 @@
 	<% end %>
 	<p class="copied-link">Vínculo copiado</p>
 	<div class="navigation">
-		
-		<%= render "components/topbar" if !panel_url %>	
+		<% cache "header", expires_in: 1.year do %>
+			<%= render "components/topbar" if !panel_url %>	
+		<% end %>
 		<%= render "components/header" if !user_signed_in? || !panel_url %>
 		<%= render "components/navbar" if !panel_url %>
 	</div>
-	<%= render "components/mobile-menu" if !panel_url %>
+	<% cache "mobile-menu", expires_in: 1.year do %>
+		<%= render "components/mobile-menu" if !panel_url %>
+	<% end %>
 	<%= render "components/stations-floating-bar" if !panel_url %>
 
 	<%= render "components/admin/admin-floating-bar" if !panel_url and user_signed_in? %>
