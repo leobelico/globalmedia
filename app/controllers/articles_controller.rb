@@ -18,8 +18,9 @@ class ArticlesController < ApplicationController
 			SaveHitsJob.perform_later @article
 		
 		end
-		@related_sections = RelatedSection.where(section: Section.find(@article.articable_id))
-		
+		if @article.articable_id
+			@related_sections = RelatedSection.where(section: Section.find(@article.articable_id))
+		end
 		@collaborator_articles = nil 
 		
 	end
