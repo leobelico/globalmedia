@@ -50,9 +50,6 @@ class ApplicationController < ActionController::Base
   helper_method :get_sections
   helper_method :get_investigation_articles
 
-  caches_action :get_investigation_articles
-  caches_action :latest_news
-  caches_action :get_global_recommendations
   def get_sections 
     @sections = Section.where(visible: true)
   end
@@ -217,7 +214,7 @@ class ApplicationController < ActionController::Base
     
     # @articles = Article.where(published: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).order(created_at: "ASC").last(8).reverse
     
-    @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where("articles.published = ? AND articles.created_at >= ? AND articles.created_at <= ? AND articles.published_at IS NOT NULL", true, (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).select('articles.name, articles.created_at, articles.scheduled_time, articles.published_at, articles.articable_id, articles.articable_type, articles.slug, sections.name AS section_name').order(published_at: "ASC").order(published_at: :asc).last(8).reverse
+    @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where("articles.published = ? AND articles.created_at >= ? AND articles.created_at <= ? AND articles.published_at IS NOT NULL", true, (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).select('articles.name, articles.created_at, articles.scheduled_time, articles.published_at, articles.articable_id, articles.articable_type, articles.slug, sections.name AS section_name, articles.updated_at').order(published_at: "ASC").order(published_at: :asc).last(8).reverse
 
     
 
@@ -254,8 +251,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_global_recommendations
-    @articles = Article.where("global_recommendation = ? AND published = ? AND id != ? ", true, true, session[:article_id]).order(updated_at: "ASC").last(3)
-
+    @articles = Article.where("global_recommendation = ? AND published = ? AND id != ? ", true, true, session[:article_id]).order(updated_at: "ASC").last(3)  
    
   end
 
@@ -287,7 +283,7 @@ class ApplicationController < ActionController::Base
 
   end
 
-  def most_visited(id)
+  def most_visited
     #@hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
 
     @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ? AND articles.id != ?", false,2.hours.ago, Time.now, session[:article_id]).order("hits.number").last(3)

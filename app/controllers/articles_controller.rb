@@ -30,6 +30,7 @@ class ArticlesController < ApplicationController
 		@related_sections = RelatedSection.where(section: Section.find(@article.articable_id))
 		
 		@collaborator_articles = nil 
+		@recommendation_articles = Article.where("global_recommendation = ? AND published = ? AND id != ? ", true, true, session[:article_id]).order(updated_at: "ASC").limit(3)
 	end
 
 	

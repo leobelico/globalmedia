@@ -221,7 +221,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sys-proctable (1.1.5)
     sys-proctable (1.1.5-universal-aix-5)
     sys-proctable (1.1.5-universal-mingw32)
     thor (0.19.4)

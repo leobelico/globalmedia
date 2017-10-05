@@ -16,14 +16,17 @@
 <% if true %>
 <div class="special-articles-container">
 	<% if true %>
-		<% if @investigation_articles.count > 0 %>
-			<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
+		<% cache(get_investigation_articles) do %>
+			<% if get_investigation_articles.count > 0 %>
+				<%= render "components/special-articles", type: "Investigación Especial", title: get_investigation_articles.last.article_relationships.last.articable.name, articles: get_investigation_articles %>
+			<% end %>
 		<% end %>
 	<% end %>
 	<div class="special-articles">
 		<% if true %>
-			<%= render "components/latest-news", articles: latest_news  %>
-		
+			<% cache(latest_news) do %>
+				<%= render "components/latest-news", articles: latest_news  %>
+			<% end %>
 
 			<% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
 				<%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
@@ -61,9 +64,9 @@
 				
 				<% if get_section_highlight(section.id) %>
 					
-						<%= render "/layouts/section_preview", articles: get_articles_per_section(section.id, 3), section: section, highlight: get_section_highlight(section.id) %>
+						<%= render "/layouts/section_preview", articles: get_articles_per_section(section.id, 3), section: section, highlight: get_section_highlight(section.id), cached: true %>
 				<% else %>
-						<%= render "/layouts/section_preview", articles: get_articles_per_section(section.id, 4), section: section, highlight: get_section_highlight(section.id) %>
+						<%= render "/layouts/section_preview", articles: get_articles_per_section(section.id, 4), section: section, highlight: get_section_highlight(section.id), cached: true %>
 				<% end %>
 			
 		<% end %> 
