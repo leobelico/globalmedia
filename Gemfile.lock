@@ -18,6 +18,8 @@ GEM
       rack-test (~> 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    actionpack-action_caching (1.2.0)
+      actionpack (>= 4.0.0, < 6)
     actionview (5.0.6)
       activesupport (= 5.0.6)
       builder (~> 3.1)
@@ -219,6 +221,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sys-proctable (1.1.5)
     sys-proctable (1.1.5-universal-aix-5)
     sys-proctable (1.1.5-universal-mingw32)
     thor (0.19.4)
@@ -250,6 +253,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  actionpack-action_caching
   active_model_serializers
   api-pagination (= 4.4.0)
   autoprefixer-rails

@@ -45,6 +45,7 @@ gem 'api-pagination', "4.4.0"
 # Use Redis adapter to run Action Cable in production
 #gem 'redis', '~> 3.0'
 gem 'dalli'
+gem 'actionpack-action_caching'
 # gem 'dalli-store-extensions', :git => "git://github.com/defconomicron/dalli-store-extensions.git"
 # gem 'resque', require: 'resque/server'
 # Use ActiveModel has_secure_password
