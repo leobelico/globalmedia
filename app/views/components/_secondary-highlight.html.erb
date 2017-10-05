@@ -9,7 +9,9 @@
 		<%= link_to article, class: "ainf" do %>
 
 			<h4 class="title semibold"><%= article.name %></h4>	
+			<% if article.articable %>
 				<p class="section-and-author"><span class="section"><%= article.articable.name %></span> - 
+			<% end %>
 			<% if article.published_at? %>
 				<span class="datetime"><%= distance_of_time_in_words(Time.now, (article.published_at)) %></span>
 			<% else %>

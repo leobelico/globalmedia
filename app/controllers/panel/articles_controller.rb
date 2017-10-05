@@ -64,7 +64,7 @@ class Panel::ArticlesController < ApplicationController
 
 		if @article.save
 
-			@article.update_attributes(slug: @article.slug + "-" + @article.id.to_s, published_at: @article.created_at) 
+			@article.update_attribute(:published_at, @article.created_at) 
 			if @article.draft == 2
 			
 				# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
