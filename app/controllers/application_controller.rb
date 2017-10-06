@@ -300,9 +300,13 @@ class ApplicationController < ActionController::Base
   end
 
   def set_article
-      @article = Article.find_by_slug(params[:slug])
-      if @article 
-        session[:article_id] = @article.id
+     if params[:slug].valid_encoding?
+        @article = Article.find_by_slug(params[:slug])
+        if @article 
+          session[:article_id] = @article.id
+        else
+          redirect_to root_url
+        end
       else
         redirect_to root_url
       end

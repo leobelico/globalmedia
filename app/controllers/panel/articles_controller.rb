@@ -158,6 +158,7 @@ class Panel::ArticlesController < ApplicationController
 		end
 
 		def set_article
+			
 			@article = Article.find_by_slug(params[:slug])
 			if params[:article_slug] 
 				@article = Article.find_by_slug(params[:article_slug])
