@@ -49,9 +49,30 @@ class ApplicationController < ActionController::Base
   helper_method :related_by_hashtags
   helper_method :get_sections
   helper_method :get_investigation_articles
+  helper_method :get_collaborators
+  helper_method :get_complaints
+  helper_method :get_section_articles
 
+  def get_complaints
+    @complaints = Article.where(articable_id: 11, published: true).order(updated_at: "ASC").last(6).reverse
+  end
+
+  def get_collaborators
+    @collaborator_articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator' ORDER BY article_relationships.created_at DESC")[0..4]
+
+  end
+
+  def get_section_articles(id)
+
+
+    Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = #{id} AND articles.published = true", (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).order(highlight: :asc, created_at: :asc).last(4).reverse
+     
+
+  end
+  
   def get_sections 
-    @sections = Section.where(visible: true)
+    @articles = Article.joins("LEFT JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.article_id IS NULL AND articles.articable_id = ? AND articles.global_recommendation = ? AND articles.published = ?", 1, false, true).order(created_at: "DESC").first(3)
+    
   end
 
   def related_by_hashtags(article)   

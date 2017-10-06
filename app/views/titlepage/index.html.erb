@@ -17,15 +17,8 @@
 	<% end %>
 <% end %>
 
-<% if true %>
 <div class="special-articles-container">
-	<% if true %>
-		<% cache(get_investigation_articles) do %>
-			<% if get_investigation_articles.count > 0 %>
-				<%= render "components/special-articles", type: "Investigación Especial", title: get_investigation_articles.last.article_relationships.last.articable.name, articles: get_investigation_articles %>
-			<% end %>
-		<% end %>
-	<% end %>
+	
 	<div class="special-articles">
 		<% if true %>
 			<% cache(latest_news) do %>
@@ -43,36 +36,75 @@
 		
 	</div>
 
-	<% if false %>
-		<div class="special-articles--collaborators">
-			<%= render "components/collaborators", articles: @collaborator_articles %>
-		</div>
-	<% end %>
-</div>
-<% end %>
-<div class="special-articles-container">
-	<% if false %>
-		<%  if @investigation_articles.count > 0 %>
-			<%= render "components/special-articles", type: "Investigación Especial", title: @investigation_name, articles: @investigation_articles.reverse %>
+	<% if true %>
+		<% cache(get_collaborators) do %>
+			<div class="special-articles--collaborators">
+				<%= render "components/collaborators", articles: get_collaborators %>
+			</div>
 		<% end %>
 	<% end %>
-	<% if @complaints %>
-		<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: @complaints.reverse %>
+</div>
+<div class="special-articles-container">
+		<% cache(get_investigation_articles) do %>
+			<% if get_investigation_articles.count > 0 %>
+				<%= render "components/special-articles", type: "Investigación Especial", title: get_investigation_articles.last.article_relationships.last.articable.name, articles: get_investigation_articles %>
+			<% end %>
+		<% end %>
+	<% cache(get_complaints) do %>
+		<% if get_complaints %>
+			<%= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: get_complaints %>
+		<% end %>
 	<% end %>
 </div>
 
 <div class="section-previews-container">
 	
-		<% @sections.each do |section| %>
-				
-				<% if get_section_highlight(section.id) %>
-					
-						<%= render "/layouts/section_preview", articles: get_articles_per_section(section.id, 3), section: section, highlight: get_section_highlight(section.id) %>
-				<% else %>
-						<%= render "/layouts/section_preview", articles: get_articles_per_section(section.id, 4), section: section, highlight: get_section_highlight(section.id) %>
-				<% end %>
+	<!-- SAN LUIS -->
+	<% cache(get_section_articles(1)) do %>
+		<%= render "/layouts/section_preview", articles: get_section_articles(1), section: Section.find(1) %>
+	<% end %>
+
+	<!-- MÉXICO -->
+	<% cache(get_section_articles(3)) do %>
+		<%= render "/layouts/section_preview", articles: get_section_articles(3), section: Section.find(3) %>
+	<% end %>
+
+	<!-- MUNDO -->
+	<% cache(get_section_articles(4)) do %>
+		<%= render "/layouts/section_preview", articles: get_section_articles(4), section: Section.find(4) %>
+	<% end %>
+
+	<!-- Negocios -->
+	<% cache(get_section_articles(7)) do %>
+		<%= render "/layouts/section_preview", articles: get_section_articles(7), section: Section.find(7) %>
+	<% end %>
+
+	<!-- Tactica local -->
+	<% cache(get_section_articles(1025)) do %>
+		<%= render "/layouts/section_preview", articles: get_section_articles(1025), section: Section.find(1025) %>
+	<% end %>
+
+	<!-- Tecnologia -->
+	<% cache(get_section_articles(1013)) do %>
+		<%= render "/layouts/section_preview", articles: get_section_articles(1013), section: Section.find(1013) %>
+	<% end %>
+
+	<!-- Espectaculos -->
+	<% cache(get_section_articles(5)) do %>
+		<%= render "/layouts/section_preview", articles: get_section_articles(5), section: Section.find(5) %>
+	<% end %>
+
+	<!-- Tacnac e in -->
+	<% cache(get_section_articles(1024)) do %>
+		<%= render "/layouts/section_preview", articles: get_section_articles(1024), section: Section.find(1024) %>
+	<% end %>
+
+	<!-- Entretenimiento -->
+	<% cache(get_section_articles(21)) do %>
+		<%= render "/layouts/section_preview", articles: get_section_articles(21), section: Section.find(21) %>
+	<% end %>
 			
-		<% end %> 
+	
 
 
 </div>
