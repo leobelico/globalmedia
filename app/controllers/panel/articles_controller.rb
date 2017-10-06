@@ -29,7 +29,9 @@ class Panel::ArticlesController < ApplicationController
 		article = Article.find(params[:article_id])
 		if article.highlight == false
 			article.update_attributes(highlight: true)
+			Article.where('id != ? and articable_id = ?', article.id, article.articable_id).update_all(highlight: false)
 		else
+
 			article.update_attributes(highlight: false)
 		end	
 		render json: { article: article }, status: :ok
