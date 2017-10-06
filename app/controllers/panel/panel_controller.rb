@@ -9,7 +9,7 @@ class Panel::PanelController < ApplicationController
 
 	def set_global_recommendations
 		# Rails.cache.clear
-		expires_action :get_global_recommendations
+		# expires_action :get_global_recommendations
 		# cache.delete("views/global-recommendations/54f7eee5cf33ab592d78a02aade03259")
 		
 
