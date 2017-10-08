@@ -114,12 +114,14 @@
 						<%= image_tag @article.image, class: "main-image" %>
 					<% end %>
 				<% end %>
-				<% if @article.images.count > 0  %>
-					<div class="gallery__thumbnails">
-						<% @article.images.each_with_index do |image, index| %>
-							<%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
-						<% end %>	
-					</div>
+				<% cache @article.images do %>
+					<% if @article.images.count > 0  %>
+						<div class="gallery__thumbnails">
+							<% @article.images.each_with_index do |image, index| %>
+								<%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
+							<% end %>	
+						</div>
+					<% end %>
 				<% end %>
 				<% if !@article.note.empty? %>
 					<div id="quill-container" class="quill--article">
