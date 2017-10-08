@@ -181,6 +181,11 @@ class Panel::SectionsController < ApplicationController
 	end
 
 	def destroy
+		if @section.id == 1 or @section.id == 3 or @section.id == 4 or @section.id == 7 or @section.id == 5 or @section.id == 21 or @section.id == 1013 or @section.id == 1024 or @section.id == 1025 
+			flash[:notice] = "Borrar está sección hará que crashee la página principal, llama a tu desarrollador"
+			redirect_to root_url
+
+		end 
 		SectionHighlight.where(section: @section).delete_all
 		HitObjective.where(section: @section).delete_all
 		@section.destroy
