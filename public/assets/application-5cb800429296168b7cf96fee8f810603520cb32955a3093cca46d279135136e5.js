@@ -14834,54 +14834,10 @@ return t.dispatch("turbolinks:before-render",{data:{newBody:e}})},r.prototype.no
     define(ActionCable);
   }
 }).call(this);
-// Action Cable provides the framework to deal with WebSockets in Rails.
-// You can generate new channels where WebSocket features live using the rails generate channel command.
-//
 
 
 
 
-(function() {
-  this.App || (this.App = {});
-
-  App.cable = ActionCable.createConsumer();
-
-}).call(this);
-
-
-
-
-
-// console.log("kjdeoidio");
-// this.App = {};
-
-// App.cable = ActionCable.createConsumer();  
-console.log("holllaaa");
-App.messages = App.cable.subscriptions.create('LatestNewsChannel', {  
-	connected: function() {
-		console.log("connected");
-	},
-  received: function(data) {
-  	console.log("received");
-    return $('#latest_news').append(this.renderMessage(data));
-  },
-
-  renderMessage: function(data) {
-  	console.log("diehfi");
-    console.log(data);
-  	console.log("rendering");
-  	update_info(data.article_name, data.section)
-    // return '<p class="article__title">' + data.article_name.substring(0,55) + '<br><span>' + data.section + '</span></p>';
-  }
-});
-(function() {
-
-
-}).call(this);
-(function() {
-
-
-}).call(this);
 /*!
  * VERSION: 1.19.1
  * DATE: 2017-01-17
