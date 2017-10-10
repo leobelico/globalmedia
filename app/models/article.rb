@@ -49,7 +49,11 @@ class Article < ApplicationRecord
 
   private
     def associate_tags
-      self._extra_props = self._extra_props + " "
+      if self.note_old
+        self.note_old = self.note_old + " "
+      else
+        self.note_old = " "
+      end
       if hashtags_names
         self.hashtags.delete_all
         hashtags_names.split(", ").each do |name|
