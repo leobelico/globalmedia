@@ -98,15 +98,10 @@
 					<% if @article.keyword %>
 						<div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
 					<% end %>
-					<% cache @article.hashtags do %>
 						<div class="hashtags-container">
-							<p>Hablamos de:</p> 
-							<% @article.hashtags.each do |hashtag| %>
-								<%= link_to hashtag.name, search_hashtag_articles_path(@article, search: "#{hashtag.id}"), class: "link" %>
-
-							<% end %>
+							<p>Hablamos de:</p> <%= render @article.hashtags %>
 						</div>
-					<% end %>
+					
 
 				<% end %>
 

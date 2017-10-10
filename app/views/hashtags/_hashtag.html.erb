@@ -1,3 +1,5 @@
+<% cache hashtag do %>
 
-<%= link_to hashtag.name, search_hashtag_articles_path(@article, search: "#{hashtag.id}"), class: "link" %>
+	<%= link_to hashtag.name, search_hashtag_articles_path(@article, search: "#{hashtag.id}"), class: "link" %>
+<% end %>
 
