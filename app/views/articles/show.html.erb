@@ -101,7 +101,7 @@
 					<% cache @article.hashtags do %>
 						<div class="hashtags-container">
 							<p>Hablamos de:</p> 
-							<% @articles.hashtags.each do |hashtag| %>
+							<% @article.hashtags.each do |hashtag| %>
 								<%= link_to hashtag.name, search_hashtag_articles_path(@article, search: "#{hashtag.id}"), class: "link" %>
 
 							<% end %>
