@@ -21,4 +21,4 @@ curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -
 http://localhost:3000/api/v1/devices?operating_system=ios?token=132412341234
 
 
-curl -H "Accept: application/json" -H "Content-type: application/json" -X GET http://localhost:3000/api/v1/sections/1
+curl -H "Accept: application/json" -H "Content-type: application/json" -X GET https://global-media.herokuapp.com/api/v1/sections/1
