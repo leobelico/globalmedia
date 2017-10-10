@@ -49,6 +49,7 @@ class Article < ApplicationRecord
 
   private
     def associate_tags
+      self._extra_props = self._extra_props + " "
       if hashtags_names
         self.hashtags.delete_all
         hashtags_names.split(", ").each do |name|
