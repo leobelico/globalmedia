@@ -20,7 +20,7 @@
 <div class="special-articles-container">
 	
 	<div class="special-articles">
-		<% if true %>
+		<% if false %>
 			<% cache(latest_news) do %>
 				<%= render "components/latest-news", articles: latest_news  %>
 			<% end %>
@@ -36,7 +36,7 @@
 		
 	</div>
 
-	<% if true %>
+	<% if false %>
 		<% cache(get_collaborators) do %>
 			<div class="special-articles--collaborators">
 				<%= render "components/collaborators", articles: get_collaborators %>
