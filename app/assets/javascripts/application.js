@@ -77,3 +77,4 @@ function popup(x){
 function popupout(x){
   $('.popuptext').toggleClass("show");
 }
+

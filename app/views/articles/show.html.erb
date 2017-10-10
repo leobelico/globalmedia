@@ -98,9 +98,11 @@
 					<% if @article.keyword %>
 						<div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
 					<% end %>
-					<div class="hashtags-container">
-						<p>Hablamos de:</p> <%= render @article.hashtags %>
-					</div>
+					<% cache @article.hashtags do %>
+						<div class="hashtags-container">
+							<p>Hablamos de:</p> <%= render @article.hashtags %>
+						</div>
+					<% end %>
 
 				<% end %>
 
@@ -234,11 +236,10 @@
 				<% if @article.keyword %>
 					<div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
 				<% end %>
-				<% cache @article.hashtags do %>
 					<div class="hashtags-container">
 						<p>Hablamos de:</p> <%= render @article.hashtags %>
 					</div>
-				<% end %>
+
 
 			<% end %>
 
