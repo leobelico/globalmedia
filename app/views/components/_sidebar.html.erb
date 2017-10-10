@@ -1,10 +1,10 @@
 <div class="sidebar">
-	<% if true %>
+	<% if false %>
 		<% cache(latest_news) do %>
 			<%= render "components/latest-news",articles: latest_news %>
 		<% end %>
 	<% end %>
-	<% if true %>
+	<% if false %>
 	
 		
 		<% cache(most_visited, expires_in: 2.hours) do %>
