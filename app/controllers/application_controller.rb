@@ -252,21 +252,23 @@ class ApplicationController < ActionController::Base
   end
 
   def get_recommendations_per_section(id)
+
     # section = Section.find(id)
-    @articles = []
-    SectionHighlight.where(section_id: id).each do |section| 
-        @articles << section.article
-    end
+    @articles = Article.joins("INNER JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.section_id = ? AND articles.id != ?", id, session[:article_id]).last(3)
+    # @articles = []
+    # SectionHighlight.where(section_id: id).each do |section| 
+    #     @articles << section.article
+    # end
 
-    current_article = []
-    if session[:article_id]
-      if Article.exists?(session[:article_id])
-        current_article << Article.find(session[:article_id])
-      end
-    end
-    # p "finish get_recommendations_per_section"
+    # current_article = []
+    # if session[:article_id]
+    #   if Article.exists?(session[:article_id])
+    #     current_article << Article.find(session[:article_id])
+    #   end
+    # end
+    # # p "finish get_recommendations_per_section"
 
-    return @articles - current_article
+    # return @articles - current_article
     #SectionHighlight.where(section: section).last(3)
 
   end
