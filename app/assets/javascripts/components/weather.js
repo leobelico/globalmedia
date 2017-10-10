@@ -31,7 +31,7 @@ var geolocation_error = function(){
  //  		console.log(JSON.stringify(data, null, 2));
 	// });
 	if (geolocation == undefined) {
-		geolocation = { coords: { latitude: 22.1566, longitude: -100.9855} }; 
+		geolocation = { coords: { latitude: 22.1236633, longitude: -101.0262821} }; 
 		geolocation_success(geolocation); 
 	} 
 	//else {
@@ -41,7 +41,7 @@ var geolocation_error = function(){
 }
 //var error_counter = 0; 
 // var geolocation = navigator.geolocation.getCurrentPosition(geolocation_success, geolocation_error); 
-		geolocation = { coords: { latitude: 22.1566, longitude: -100.9855} }; 
+		geolocation = { coords: { latitude: 22.1236633, longitude: -101.0262821} }; 
 	geolocation_success(geolocation)
 		
 // $.getJSON('https://freegeoip.net/json/?callback=?', function(data) {
