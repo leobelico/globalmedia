@@ -16,11 +16,9 @@
 		<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
 	<% end %>
 <% end %>
-<% if false %>
 <div class="special-articles-container">
 	
 	<div class="special-articles">
-		<% if false %>
 			<% cache(latest_news) do %>
 				<%= render "components/latest-news", articles: latest_news  %>
 			<% end %>
@@ -31,21 +29,16 @@
 						<%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
 					<% end %>
 				<% end %>
-		<% end %>
 
 		
 	</div>
 
-	<% if false %>
 		<% cache(get_collaborators) do %>
 			<div class="special-articles--collaborators">
 				<%= render "components/collaborators", articles: get_collaborators %>
 			</div>
 		<% end %>
-	<% end %>
 </div>
-<% end %>
-<% if false %>
 <div class="special-articles-container">
 		<% cache(get_investigation_articles) do %>
 			<% if get_investigation_articles.count > 0 %>
@@ -58,7 +51,6 @@
 		<% end %>
 	<% end %>
 </div>
-<% end %>
 <div class="section-previews-container">
 	
 	<!-- SAN LUIS -->

@@ -9,7 +9,7 @@ var weather_success = function(data){
 }
 var geolocation_success = function(geolocation){
 	// console.log("qiehroiwey");
-	
+
 	// $.getJSON('https://freegeoip.net/json/?callback=?', function(data) {
 	// 	console.log("lalalala");
 
@@ -31,7 +31,7 @@ var geolocation_error = function(){
  //  		console.log(JSON.stringify(data, null, 2));
 	// });
 	if (geolocation == undefined) {
-		geolocation = { coords: { latitude: 22.1236633, longitude: -101.0262821} }; 
+		geolocation = { coords: { latitude: 22.1566, longitude: -100.9855} }; 
 		geolocation_success(geolocation); 
 	} 
 	//else {
@@ -41,10 +41,9 @@ var geolocation_error = function(){
 }
 //var error_counter = 0; 
 // var geolocation = navigator.geolocation.getCurrentPosition(geolocation_success, geolocation_error); 
-		geolocation = { coords: { latitude: 22.1236633, longitude: -101.0262821} }; 
-	geolocation_success(geolocation)
-		
-// $.getJSON('https://freegeoip.net/json/?callback=?', function(data) {
-// 	geolocation = { coords: { latitude: data.latitude, longitude: data.longitude} }; 
 
-// });
+$.getJSON('https://freegeoip.net/json/?callback=?', function(data) {
+	geolocation = { coords: { latitude: data.latitude, longitude: data.longitude} }; 
+
+	geolocation_success(geolocation)
+});
