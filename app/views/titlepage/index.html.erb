@@ -3,7 +3,6 @@
 		<%= render "components/breaking-news" %>	
 	<% end %>
 <% end %>
-	<% cache @highlights do %>
 		<div class="highlights-container">	
 			<% @highlights.each do |highlight| %>
 				<% if highlight.order == 1 %>
@@ -13,7 +12,6 @@
 				<% end %>
 			<% end %>
 		</div>
-	<% end %>
 
 <% cache(get_banner("global", "TitlePage", "Grande")) do %>
 	<% if get_banner("global", "TitlePage", "Grande") %>
