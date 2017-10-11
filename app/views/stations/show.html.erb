@@ -30,25 +30,25 @@
 				</audio>
 			<% else %>	
 
-				<div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
-					<script type="text/javascript">
-						WowzaPlayer.create('playerElement',
-						    {
-						    "license":"PLAY1-dpVaV-HjcGP-nkchr-Fzukp-R8XQp",
-						    "title":"Global%20Media",
-						    "description":"",
-						    "sourceURL":"http%3A%2F%2F38.96.148.213%3A1935%2Fvivecanaltest%2FmyStream.sdp%2Fplaylist.m3u8",
-						    "autoPlay":false,
-						    "volume":"75",
-						    "mute":false,
-						    "loop":false,
-						    "audioOnly":false,
-						    "uiShowQuickRewind":true,
-						    "uiQuickRewindSeconds":"30"
-						    }
-						);
-						</script>
+2
+				  <video id="video" class="video-js" controls  preload="auto" width="640" height="264">
+				  		<!-- <source src="https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced.sdp" type="video/sdp"> -->
+				  		<!-- <source src="https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8" type="application/x-mpegURL"> -->
 
+				   		<!-- <source src="rtmp://38.96.148.213:1935/vivecanaltest/myStream.sdp" type="video/sdp"> -->
+				  		<!-- <source src="http://38.96.148.213:1935/vivecanaltest/myStream.sdp/playlist.m3u8" type="application/x-mpegURL"> -->
+						<source src="http://38.96.148.213:1935/vivecanaltest/myStream.sdp/playlist.m3u8" type="application/x-mpegURL">
+
+						<source src="rtmp://38.96.148.213:1935/vivecanaltest/myStream.sdp" type="video/sdp">
+				  </video>
+					<script>
+
+						var player = videojs('video', {techOrder: ['flash', 'html5']});
+						player.load(); 
+						player.play();
+					</script>
+					
+					
 			<% end %>	
 			<div class="program__info">
 				
@@ -105,7 +105,6 @@
 				<% end %>
 			</div>
 		<% end	%>
-
 			<div class="radio-banner__tune-in">También puedes disfrutar</div>
 			<div class="station__recommendations">
 				<% @recommendations.each do |recommendation| %>
@@ -130,10 +129,8 @@
 					<% end %>
 				</div>
 			<% end %>
-			<% cache get_banner(@station, "Station", "Grande") do %>
-				<% if get_banner(@station, "Station", "Grande").count > 0 %>
-					<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
-				<% end %>
+			<% if get_banner(@station, "Station", "Grande").count > 0 %>
+				<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
 			<% end %>
 		</div>
 
@@ -141,8 +138,5 @@
 
 	</div>
 <% else %>
-		<% cache [@station, @timetables] do %>
-
-			<%= render "news-station", station: @station, timetables: @timetables %>
-		<% end %>
+	<%= render "news-station", station: @station, timetables: @timetables %>
 <% end %>
