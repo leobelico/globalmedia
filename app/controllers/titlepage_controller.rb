@@ -37,12 +37,8 @@ class TitlepageController < ApplicationController
 	end
 
 	def index
-		bns =  Section.where(visible: true, name: "Último Momento").last
-		if bns
-			@breaking_news = bns.articles.where(breaking_news: true).order(updated_at: "ASC").first(4)
-		else	
-			@breaking_news = nil 
-		end
+		@breaking_news = Article.joins("INNER JOIN sections ON articles.articable_id = sections.id").where("articles.breaking_news = ? AND articles.articable_id = ? AND sections.visible = ?", true, 10, true).order("articles.updated_at ASC").first(4)
+		
 		@highlights = Highlight.where(published: true).order(order: "ASC")
 		
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')

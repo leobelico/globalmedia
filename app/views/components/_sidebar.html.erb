@@ -3,8 +3,22 @@
 		<% cache(latest_news) do %>
 			<%= render "components/latest-news",articles: latest_news %>
 		<% end %>
+		<% cache(get_global_recommendations) do %>
+
+			<%= render "components/recommendations", articles: get_global_recommendations %>
+		<% end %>
+
+		<% cache(most_visited, expires_in: 2.hours) do %>
+			<%= render "components/most-visited", articles: most_visited %>
+		<% end %>
+		<% cache banner do %>
+			<% if banner != "" and banner != nil %>
+				<%= render "components/medium-banner", banner: banner %>
+			<% end %>
+			<br>
+		<% end %>
 	<% end %>
-	<% if true %>
+	<% if false %>
 		<% if article != "global" %>
 			<% if  get_recommendations_per_section(article.articable_id).size == 0 %>
 				<%= render "components/recommendations", articles: get_global_recommendations %>
