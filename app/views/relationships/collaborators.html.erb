@@ -2,7 +2,6 @@
 	<div class="main-content">
 		<h4 class="section__title">Colaboradores</h4>
 		<div class="section-articles-container">
-
 			<% @collaborators.each do |collaborator| %>
 				<% if collaborator.article_relationships.count > 0 %>
 					<%= link_to collaborator, class: "collaborator-preview ui-card" do %>

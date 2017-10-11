@@ -104,6 +104,7 @@
 				<% end %>
 			</div>
 		<% end	%>
+
 			<div class="radio-banner__tune-in">También puedes disfrutar</div>
 			<div class="station__recommendations">
 				<% @recommendations.each do |recommendation| %>
@@ -128,8 +129,10 @@
 					<% end %>
 				</div>
 			<% end %>
-			<% if get_banner(@station, "Station", "Grande").count > 0 %>
-				<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
+			<% cache get_banner(@station, "Station", "Grande") do %>
+				<% if get_banner(@station, "Station", "Grande").count > 0 %>
+					<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
+				<% end %>
 			<% end %>
 		</div>
 
@@ -137,5 +140,7 @@
 
 	</div>
 <% else %>
-	<%= render "news-station", station: @station, timetables: @timetables %>
+	<% cache [@station, @timetables] do %>
+		<%= render "news-station", station: @station, timetables: @timetables %>
+	<% end %>
 <% end %>

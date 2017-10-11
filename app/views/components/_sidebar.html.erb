@@ -7,6 +7,16 @@
 
 			<%= render "components/recommendations", articles: get_global_recommendations %>
 		<% end %>
+
+		<% cache(most_visited, expires_in: 2.hours) do %>
+			<%= render "components/most-visited", articles: most_visited %>
+		<% end %>
+		<% cache banner do %>
+			<% if banner != "" and banner != nil %>
+				<%= render "components/medium-banner", banner: banner %>
+			<% end %>
+			<br>
+		<% end %>
 	<% end %>
 	<% if false %>
 		<% if article != "global" %>
