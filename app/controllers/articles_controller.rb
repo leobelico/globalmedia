@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
 	def search_hashtag
 		@search = Hashtag.find(params[:search])
 		# @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
-		@articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ params[:search] } AND articles.published = true").order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
+		@articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ params[:search] } AND articles.published = true").order(created_at: "DESC").paginate(page: params[:page], per_page: 8)
 	end
 
 	private
