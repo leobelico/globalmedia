@@ -19,9 +19,8 @@
 //= require libraries/gsap/TweenMax.min
 //= require libraries/money
 //= require libraries/quill/quill.min 
-//= require libraries/videojs/video.min
 //= require libraries/clipboard.js/clipboard.min 
-//= require components/media-cache-cleaner
+// require components/media-cache-cleaner
 //= require components/buttons
 // require_tree ./channels
 // 
