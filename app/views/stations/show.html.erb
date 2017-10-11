@@ -133,14 +133,12 @@
 				<% if get_banner(@station, "Station", "Grande").count > 0 %>
 					<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
 				<% end %>
-			<% end %>
+			c<% end %>
 		</div>
 
 		<%= render "components/stations-sidebar", facebook: @station.facebook, twitter: @station.twitter %>
 
 	</div>
 <% else %>
-	<% cache [@station, @timetables] do %>
 		<%= render "news-station", station: @station, timetables: @timetables %>
-	<% end %>
 <% end %>
