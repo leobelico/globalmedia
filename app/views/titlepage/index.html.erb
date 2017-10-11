@@ -16,11 +16,11 @@
 		<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
 	<% end %>
 <% end %>
-<% if false %>
+<% if true %>
 <div class="special-articles-container">
 	
 	<div class="special-articles">
-		<% if false %>
+		<% if true %>
 			<% cache(latest_news) do %>
 				<%= render "components/latest-news", articles: latest_news  %>
 			<% end %>
@@ -36,7 +36,7 @@
 		
 	</div>
 
-	<% if false %>
+	<% if true %>
 		<% cache(get_collaborators) do %>
 			<div class="special-articles--collaborators">
 				<%= render "components/collaborators", articles: get_collaborators %>
