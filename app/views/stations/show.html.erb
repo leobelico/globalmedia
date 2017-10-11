@@ -145,3 +145,26 @@
 			<%= render "news-station", station: @station, timetables: @timetables %>
 		<% end %>
 <% end %>
+
+<script type="text/javascript">
+	function requestFlashPermission() {
+	    var iframe = document.createElement('iframe');
+	    iframe.src = 'https://get.adobe.com/flashplayer';
+	    iframe.sandbox = '';
+	    document.body.appendChild(iframe);
+	    document.body.removeChild(iframe);
+	}
+
+
+	var isNewChrome = (navigator.userAgent.match(/Chrom(e|ium)\/(\d+)/) || [])[2] > 56
+	    && !/Mobile/i.test(navigator.userAgent);
+	    var isNewFirefox = (navigator.userAgent.match(/Fireforx\/(\d+)/));
+	    
+	var canRequestPermission =  isNewChrome || isNewFirefox;
+
+	if (!swfobject.hasFlashPlayerVersion('10') && canRequestPermission) {
+	    requestFlashPermission();
+	    // Chrome requires user's click in order to allow iframe embeding
+	    $(window).one('click', requestFlashPermission);
+	}
+</script>
