@@ -141,7 +141,8 @@
 
 	</div>
 <% else %>
-	<% cache [@station, @timetables] do %>
-		<%= render "news-station", station: @station, timetables: @timetables %>
-	<% end %>
+		<% cache [@station, @timetables] do %>
+
+			<%= render "news-station", station: @station, timetables: @timetables %>
+		<% end %>
 <% end %>
