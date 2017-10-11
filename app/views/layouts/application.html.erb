@@ -23,19 +23,20 @@
 	<%= render 'application/favicon' %>
 	<script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 	<script src="https://vjs.zencdn.net/6.2.7/video.js"></script>			
-	<!-- <script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.11.0/videojs-contrib-hls.js"></script> -->
+	<script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.11.0/videojs-contrib-hls.js"></script> -->
 
 	<link href="https://fonts.googleapis.com/css?family=Pragati+Narrow|Martel:900" rel="stylesheet">
 
 	<script src="https://platform.twitter.com/widgets.js" async></script>
-	<script src="https://cdn.jsdelivr.net/npm/hls.js@latest" async></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" async></script> -->
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload', cache: 'cached/all' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', cache: 'cached/all' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload', cache: "cached/all" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', cache: "cached/all" %>
 
 	<!-- Global Site Tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106606454-1"></script>
+	<!-- <script type="text/javascript" src="//player.wowza.com/player/latest/wowzaplayer.min.js"></script> -->
 	<script async>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments)};

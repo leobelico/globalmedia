@@ -23,5 +23,10 @@ module Globalmedia
             resource '*', :headers => :any, :methods => [:get, :post, :options]
         end
     end
+
+    config.action_dispatch.default_headers = {
+        'Access-Control-Allow-Origin' => 'http://38.96.148.213:1935/vivecanaltest/myStream.sdp/playlist.m3u8',
+        'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
+      }
   end
 end

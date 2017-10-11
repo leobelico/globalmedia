@@ -30,7 +30,7 @@
 				</audio>
 			<% else %>	
 
-
+2
 				  <video id="video" class="video-js" controls  preload="auto" width="640" height="264">
 				  		<!-- <source src="https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced.sdp" type="video/sdp"> -->
 				  		<!-- <source src="https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8" type="application/x-mpegURL"> -->
@@ -47,7 +47,8 @@
 						player.load(); 
 						player.play();
 					</script>
-
+					
+					
 			<% end %>	
 			<div class="program__info">
 				
@@ -104,7 +105,6 @@
 				<% end %>
 			</div>
 		<% end	%>
-
 			<div class="radio-banner__tune-in">También puedes disfrutar</div>
 			<div class="station__recommendations">
 				<% @recommendations.each do |recommendation| %>
@@ -129,10 +129,8 @@
 					<% end %>
 				</div>
 			<% end %>
-			<% cache get_banner(@station, "Station", "Grande") do %>
-				<% if get_banner(@station, "Station", "Grande").count > 0 %>
-					<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
-				<% end %>
+			<% if get_banner(@station, "Station", "Grande").count > 0 %>
+				<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
 			<% end %>
 		</div>
 
@@ -140,6 +138,7 @@
 
 	</div>
 <% else %>
+
 		<% cache [@station, @timetables] do %>
 
 			<%= render "news-station", station: @station, timetables: @timetables %>
@@ -160,7 +159,7 @@
 	    && !/Mobile/i.test(navigator.userAgent);
 	    var isNewFirefox = (navigator.userAgent.match(/Fireforx\/(\d+)/));
 	    
-	var canRequestPermission =  isNewChrome || isNewFirefox;
+	var canRequestPermission =  isNewChrome;
 
 	if (!swfobject.hasFlashPlayerVersion('10') && canRequestPermission) {
 	    requestFlashPermission();
@@ -168,3 +167,4 @@
 	    $(window).one('click', requestFlashPermission);
 	}
 </script>
+
