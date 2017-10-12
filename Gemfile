@@ -46,6 +46,7 @@ gem 'api-pagination', "4.4.0"
 #gem 'redis', '~> 3.0'
 gem 'dalli'
 gem "rack-timeout"
+gem 'newrelic_rpm'
 #gem 'unicorn'
 # gem 'actionpack-action_caching'
 # gem 'dalli-store-extensions', :git => "git://github.com/defconomicron/dalli-store-extensions.git"
