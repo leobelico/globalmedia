@@ -1,7 +1,7 @@
 <% if !banner.empty? %>
 	<div class="banners-container slider">
 		<% banner.each do |b| %>
-			<%= link_to b.url, class: "banner--big slider-item" do %>
+			<%= link_to b.url, class: "banner--big slider-item", target:"_blank" do %>
 				<%= image_tag b.small_image, class: "banner-image--mobile", alt: b.name %>
 				<%= image_tag b.large_image, class: "banner-image--desktop", alt: b.name %>
 			<% end %>

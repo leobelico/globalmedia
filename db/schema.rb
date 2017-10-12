@@ -14,23 +14,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "unaccent"
-
-  create_table "advertisements", force: :cascade do |t|
-    t.integer  "client_id",                              null: false
-    t.string   "name",         limit: 255,               null: false
-    t.string   "path",         limit: 255,               null: false
-    t.text     "link_to",                                null: false
-    t.string   "initial_date", limit: 255,               null: false
-    t.string   "expiry_date",  limit: 255,               null: false
-    t.datetime "created_at",               precision: 0
-    t.datetime "updated_at",               precision: 0
-    t.string   "type",         limit: 255
-    t.integer  "priority"
-    t.string   "desc",         limit: 255
-    t.integer  "topic_id"
-    t.integer  "featured_in"
-  end
 
   create_table "article_relationships", force: :cascade do |t|
     t.datetime "created_at",     null: false
@@ -44,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170830032154) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "name",                      default: ""
-    t.text     "note",                      default: ""
+    t.jsonb    "note",                      default: ""
     t.text     "short_description",         default: ""
     t.integer  "articable_id"
     t.string   "articable_type"
@@ -65,8 +48,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.string   "video_url",                 default: ""
     t.integer  "author_id"
     t.boolean  "exclusive",                 default: false
-    t.text     "note_old",                  default: ""
-    t.integer  "old_id"
     t.text     "_extra_props"
     t.boolean  "breaking_news"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
@@ -115,22 +96,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.string   "cover"
   end
 
-  create_table "clients", force: :cascade do |t|
-    t.string   "name",          limit: 255,               null: false
-    t.string   "contact_name",  limit: 255,               null: false
-    t.string   "contact_phone", limit: 255,               null: false
-    t.string   "contact_email", limit: 255,               null: false
-    t.datetime "created_at",                precision: 0
-    t.datetime "updated_at",                precision: 0
-  end
-
-  create_table "colors", force: :cascade do |t|
-    t.string   "section",    limit: 255,               null: false
-    t.string   "hex",        limit: 255,               null: false
-    t.datetime "created_at",             precision: 0
-    t.datetime "updated_at",             precision: 0
-  end
-
   create_table "controls", force: :cascade do |t|
     t.datetime "init_date"
     t.datetime "end_date"
@@ -149,47 +114,11 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.datetime "updated_at",                      null: false
   end
 
-  create_table "covers", force: :cascade do |t|
-    t.string   "month",                limit: 255,               null: false
-    t.string   "front_cover",          limit: 255,               null: false
-    t.string   "back_cover",           limit: 255,               null: false
-    t.string   "front_cover_redirect", limit: 255,               null: false
-    t.string   "back_cover_redirect",  limit: 255,               null: false
-    t.datetime "created_at",                       precision: 0
-    t.datetime "updated_at",                       precision: 0
-    t.integer  "year"
-  end
-
   create_table "devices", force: :cascade do |t|
     t.string   "token"
     t.string   "operating_system"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-  end
-
-  create_table "emails", force: :cascade do |t|
-    t.string   "name",              limit: 255,               null: false
-    t.string   "company",           limit: 255
-    t.string   "phone",             limit: 255,               null: false
-    t.string   "email",             limit: 255,               null: false
-    t.string   "event_type",        limit: 255
-    t.string   "event_starts",      limit: 255
-    t.string   "event_reception",   limit: 255
-    t.string   "event_address",     limit: 255
-    t.string   "reception_address", limit: 255
-    t.string   "celebrated",        limit: 255
-    t.string   "message",           limit: 255,               null: false
-    t.datetime "created_at",                    precision: 0
-    t.datetime "updated_at",                    precision: 0
-    t.string   "type",              limit: 255
-  end
-
-  create_table "galleries", force: :cascade do |t|
-    t.string   "name",       limit: 255,               null: false
-    t.string   "desc",       limit: 255,               null: false
-    t.string   "event_date", limit: 255,               null: false
-    t.datetime "created_at",             precision: 0
-    t.datetime "updated_at",             precision: 0
   end
 
   create_table "hashtags", force: :cascade do |t|
@@ -198,13 +127,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.datetime "updated_at",                  null: false
     t.boolean  "selected",    default: false
     t.datetime "selected_on"
-  end
-
-  create_table "headers", force: :cascade do |t|
-    t.string   "place",      limit: 255,               null: false
-    t.string   "path",       limit: 255,               null: false
-    t.datetime "created_at",             precision: 0
-    t.datetime "updated_at",             precision: 0
   end
 
   create_table "highlights", force: :cascade do |t|
@@ -237,27 +159,13 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.index ["article_id"], name: "index_hits_on_article_id", using: :btree
   end
 
-  create_table "imagenes", id: false, force: :cascade do |t|
-    t.string  "id",         limit: 34
-    t.string  "imagenmain", limit: 10000
-    t.integer "idnotas"
-  end
-
   create_table "images", force: :cascade do |t|
     t.string   "src"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "article_id"
-    t.integer  "old_id"
     t.text     "_extra_props"
     t.index ["article_id"], name: "index_images_on_article_id", using: :btree
-  end
-
-  create_table "issuus", force: :cascade do |t|
-    t.string   "name",       limit: 255,               null: false
-    t.string   "link",       limit: 255,               null: false
-    t.datetime "created_at",             precision: 0
-    t.datetime "updated_at",             precision: 0
   end
 
   create_table "keywords", force: :cascade do |t|
@@ -265,21 +173,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.string   "slug",       default: ""
-  end
-
-  create_table "migrations", force: :cascade do |t|
-    t.string  "migration", limit: 255, null: false
-    t.integer "batch",                 null: false
-  end
-
-  create_table "notas", id: false, force: :cascade do |t|
-    t.bigserial "idnotas",                      null: false
-    t.string    "titulo",       limit: 100
-    t.string    "fecha_inicio", limit: 24
-    t.string    "resumen",      limit: 10000
-    t.string    "notacompleta", limit: 1500000
-    t.string    "alias",        limit: 100
-    t.integer   "idsecciones"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -292,74 +185,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.boolean  "wants_keys", default: false
   end
 
-  create_table "oauth_access_tokens", id: :string, limit: 100, force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "client_id",                            null: false
-    t.string   "name",       limit: 255
-    t.text     "scopes"
-    t.boolean  "revoked",                              null: false
-    t.datetime "created_at",             precision: 0
-    t.datetime "updated_at",             precision: 0
-    t.datetime "expires_at",             precision: 0
-    t.index ["user_id"], name: "oauth_access_tokens_user_id_index", using: :btree
-  end
-
-  create_table "oauth_auth_codes", id: :string, limit: 100, force: :cascade do |t|
-    t.integer  "user_id",                  null: false
-    t.integer  "client_id",                null: false
-    t.text     "scopes"
-    t.boolean  "revoked",                  null: false
-    t.datetime "expires_at", precision: 0
-  end
-
-  create_table "oauth_clients", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "name",                   limit: 255,               null: false
-    t.string   "secret",                 limit: 100,               null: false
-    t.text     "redirect",                                         null: false
-    t.boolean  "personal_access_client",                           null: false
-    t.boolean  "password_client",                                  null: false
-    t.boolean  "revoked",                                          null: false
-    t.datetime "created_at",                         precision: 0
-    t.datetime "updated_at",                         precision: 0
-    t.index ["user_id"], name: "oauth_clients_user_id_index", using: :btree
-  end
-
-  create_table "oauth_personal_access_clients", force: :cascade do |t|
-    t.integer  "client_id",                null: false
-    t.datetime "created_at", precision: 0
-    t.datetime "updated_at", precision: 0
-    t.index ["client_id"], name: "oauth_personal_access_clients_client_id_index", using: :btree
-  end
-
-  create_table "oauth_refresh_tokens", id: :string, limit: 100, force: :cascade do |t|
-    t.string   "access_token_id", limit: 100,               null: false
-    t.boolean  "revoked",                                   null: false
-    t.datetime "expires_at",                  precision: 0
-    t.index ["access_token_id"], name: "oauth_refresh_tokens_access_token_id_index", using: :btree
-  end
-
-  create_table "password_resets", id: false, force: :cascade do |t|
-    t.string   "email",      limit: 255,               null: false
-    t.string   "token",      limit: 255,               null: false
-    t.datetime "created_at",             precision: 0
-    t.index ["email"], name: "password_resets_email_index", using: :btree
-    t.index ["token"], name: "password_resets_token_index", using: :btree
-  end
-
-  create_table "picture_tag", force: :cascade do |t|
-    t.integer "picture_id", null: false
-    t.integer "tag_id",     null: false
-  end
-
-  create_table "pictures", force: :cascade do |t|
-    t.text     "path",                     null: false
-    t.datetime "created_at", precision: 0
-    t.datetime "updated_at", precision: 0
-    t.integer  "post_id"
-    t.integer  "gallery_id"
-  end
-
   create_table "podcasts", force: :cascade do |t|
     t.string   "name",       default: ""
     t.string   "stream_url", default: ""
@@ -367,23 +192,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.datetime "updated_at",              null: false
     t.integer  "station_id"
     t.index ["station_id"], name: "index_podcasts_on_station_id", using: :btree
-  end
-
-  create_table "post_tag", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "tag_id",  null: false
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.integer  "author_id",                                            null: false
-    t.string   "topic_id",   limit: 255,                               null: false
-    t.string   "title",      limit: 255,                               null: false
-    t.text     "body",                                                 null: false
-    t.datetime "created_at",             precision: 0
-    t.datetime "updated_at",             precision: 0
-    t.boolean  "featured",                             default: false, null: false
-    t.string   "brief",      limit: 255
-    t.string   "event_date", limit: 255
   end
 
   create_table "related_sections", force: :cascade do |t|
@@ -403,19 +211,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.datetime "updated_at",                     null: false
     t.string   "slug",              default: ""
     t.string   "relationship_type", default: ""
-  end
-
-  create_table "reports", force: :cascade do |t|
-    t.integer  "picture_id",                           null: false
-    t.string   "email",      limit: 255,               null: false
-    t.string   "reason",     limit: 255,               null: false
-    t.datetime "created_at",             precision: 0
-    t.datetime "updated_at",             precision: 0
-  end
-
-  create_table "secciones", id: false, force: :cascade do |t|
-    t.bigserial "idsecciones",            null: false
-    t.string    "name",        limit: 20
   end
 
   create_table "section_banners", force: :cascade do |t|
@@ -444,21 +239,11 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.string   "slug"
     t.string   "color",        default: "#1b2d41"
     t.integer  "order"
-    t.integer  "old_id"
     t.text     "_extra_props"
     t.boolean  "visible",      default: false
     t.text     "description"
     t.string   "facebook"
     t.string   "twitter"
-  end
-
-  create_table "social_media", force: :cascade do |t|
-    t.string   "name",       limit: 255,               null: false
-    t.string   "alt",        limit: 255,               null: false
-    t.string   "url",        limit: 255,               null: false
-    t.string   "path",       limit: 255,               null: false
-    t.datetime "created_at",             precision: 0
-    t.datetime "updated_at",             precision: 0
   end
 
   create_table "stations", force: :cascade do |t|
@@ -485,12 +270,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.string   "image_preview",    default: ""
   end
 
-  create_table "tags", force: :cascade do |t|
-    t.string   "topic",      limit: 255,               null: false
-    t.datetime "created_at",             precision: 0
-    t.datetime "updated_at",             precision: 0
-  end
-
   create_table "timetables", force: :cascade do |t|
     t.time     "streaming_hour"
     t.string   "name",               default: ""
@@ -510,15 +289,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.string   "broadcaster_image"
     t.text     "description",        default: ""
     t.index ["station_id"], name: "index_timetables_on_station_id", using: :btree
-  end
-
-  create_table "topics", force: :cascade do |t|
-    t.string   "name",       limit: 255,               null: false
-    t.string   "desc",       limit: 255
-    t.string   "path",       limit: 255,               null: false
-    t.datetime "created_at",             precision: 0
-    t.datetime "updated_at",             precision: 0
-    t.integer  "order"
   end
 
   create_table "users", force: :cascade do |t|
@@ -549,13 +319,6 @@ ActiveRecord::Schema.define(version: 20170830032154) do
     t.boolean  "is_news_chief",               default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  end
-
-  create_table "videos", force: :cascade do |t|
-    t.integer  "post_id",                              null: false
-    t.string   "url",        limit: 255,               null: false
-    t.datetime "created_at",             precision: 0
-    t.datetime "updated_at",             precision: 0
   end
 
   add_foreign_key "article_relationships", "articles"
