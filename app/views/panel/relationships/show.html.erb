@@ -26,7 +26,7 @@
 		<div class="table__cell">Eliminar:</div>
 	</div>
 	 
-	@relationship.article_relationships.each do |relationship| %>
+	<% @relationship.article_relationships.each do |relationship| %>
 		<% if relationship.article %>
 			<div class="table__row">
 				<%= link_to truncate(relationship.article.name, length:  60), relationship.article, class: "table__cell" %>
