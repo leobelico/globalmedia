@@ -51,6 +51,8 @@ class Panel::RelationshipsController < ApplicationController
 	def update
 		
 		if @relationship.update(relationship_params)
+			if @relationship.article_relationships.last
+				@relationship.article_relationships.last.article.update_attribute(:name, @relationship.article_relationships.last.article.name + " ")
 			
 				redirect_to panel_relationship_path(@relationship)
 			
