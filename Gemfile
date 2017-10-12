@@ -11,7 +11,7 @@ gem 'rails', '~> 5.0.2'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+# gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -46,6 +46,7 @@ gem 'api-pagination', "4.4.0"
 #gem 'redis', '~> 3.0'
 gem 'dalli'
 gem "rack-timeout"
+gem 'unicorn'
 # gem 'actionpack-action_caching'
 # gem 'dalli-store-extensions', :git => "git://github.com/defconomicron/dalli-store-extensions.git"
 # gem 'resque', require: 'resque/server'
