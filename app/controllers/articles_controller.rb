@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
 		
 		end
 		if @article.articable_id
-			@related_sections = RelatedSection.where(section: Section.find(@article.articable_id))
+			@related_sections = RelatedSection.where(section_id: @article.articable_id)
 		end
 		@collaborator_articles = nil 
 		
