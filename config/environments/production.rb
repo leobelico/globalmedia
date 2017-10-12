@@ -43,7 +43,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -114,6 +114,6 @@ Rails.application.configure do
   end
  
 
-  config.web_socket_server_url = "wss://global-media.herokuapp.com/cable" 
-  config.action_cable.allowed_request_origins = ['https://global-media.herokuapp.com', 'http://global-media.herokuapp.com' , 'http://globalmedia.mx', 'http://www.globalmedia.mx', 'https://globalmedia.mx', 'https://www.globalmedia.mx']
+  # config.web_socket_server_url = "wss://global-media.herokuapp.com/cable" 
+  # config.action_cable.allowed_request_origins = ['https://global-media.herokuapp.com', 'http://global-media.herokuapp.com' , 'http://globalmedia.mx', 'http://www.globalmedia.mx', 'https://globalmedia.mx', 'https://www.globalmedia.mx']
 end

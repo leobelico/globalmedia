@@ -1,37 +1,39 @@
-<div class="topbar">
-	<%= link_to root_path, class: "logo-container" do %>
-		<%= image_tag "logo-black.svg" %>
-	<% end %>
-	<%= link_to root_path, class: "home-container" do %>
-		<%= image_tag "home.svg" %>
-	<% end %>
-	<% if Relationship.find_by(relationship_type: "Investigation") %>
-		<%= link_to "investigación especial", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "topbar__link" %>
-	<% end %>
-	<%= link_to "Columnas de hoy", collaborators_path, class: "topbar__link" %>
-	<%= link_to "denuncia global", section_path("Denuncia-Global"), class: "topbar__link" %>
-	<a href="" class="topbar__link popup" onmouseover="popup(this)" onmouseout="popupout(this)">
-		tráfico san luis
-		<span class="popuptext" id="myPopup">Próximamente</span>
-	</a>
-	<div class="social-media">
-		<p class="social-media__tag">Síguenos</p>
-		<%= link_to "https://twitter.com/globalmediamx", class: "social-media__link", target: "_blank" do %>
-			<%= image_tag "twitter.svg" %>
+<% cache("topbar", expires_in: 1.year)do %>
+	<div class="topbar">
+		<%= link_to root_path, class: "logo-container" do %>
+			<%= image_tag "logo-black.svg" %>
 		<% end %>
-		<%= link_to "https://www.facebook.com/GlobalMediaSLP/?fref=ts", class: "social-media__link", target: "_blank" do %>
-			<%= image_tag "facebook.svg" %>
+		<%= link_to root_path, class: "home-container" do %>
+			<%= image_tag "home.svg" %>
 		<% end %>
-	</div>
-	<div class="search">
-		 <% if !request.original_url.include? "users/password" and !request.original_url.include? "users/sign_in"%>
-			<%= form_for :article, url: {controller: "titlepage", action: 'search_article'}  do |f|%>
-	          <%= f.autocomplete_field(:articable_id, autocomplete_article_name_path, :id_element => '#article_id', class: "search__box", placeholder: "Búsqueda", type: "search", value: "" ) %>
-				<%= image_tag "search.svg", class: "search__image" %>
-		          <%= hidden_field_tag :article_id, :id => "article_id" %>
-	       		<%= image_tag "search.svg", class: "search__image" %>
+		<% if Relationship.find_by(relationship_type: "Investigation") %>
+			<%= link_to "investigación especial", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "topbar__link" %>
+		<% end %>
+		<%= link_to "Columnas de hoy", collaborators_path, class: "topbar__link" %>
+		<%= link_to "denuncia global", section_path("Denuncia-Global"), class: "topbar__link" %>
+		<a href="" class="topbar__link popup" onmouseover="popup(this)" onmouseout="popupout(this)">
+			tráfico san luis
+			<span class="popuptext" id="myPopup">Próximamente</span>
+		</a>
+		<div class="social-media">
+			<p class="social-media__tag">Síguenos</p>
+			<%= link_to "https://twitter.com/globalmediamx", class: "social-media__link", target: "_blank" do %>
+				<%= image_tag "twitter.svg" %>
+			<% end %>
+			<%= link_to "https://www.facebook.com/GlobalMediaSLP/?fref=ts", class: "social-media__link", target: "_blank" do %>
+				<%= image_tag "facebook.svg" %>
+			<% end %>
+		</div>
+<% end %>
+		<div class="search">
+			 <% if !request.original_url.include? "users/password" and !request.original_url.include? "users/sign_in"%>
+				<%= form_for :article, url: {controller: "titlepage", action: 'search_article'}  do |f|%>
+		          <%= f.autocomplete_field(:articable_id, autocomplete_article_name_path, :id_element => '#article_id', class: "search__box", placeholder: "Búsqueda", type: "search", value: "" ) %>
+					<%= image_tag "search.svg", class: "search__image" %>
+			          <%= hidden_field_tag :article_id, :id => "article_id" %>
+		       		<%= image_tag "search.svg", class: "search__image" %>
+		        <% end %>
 	        <% end %>
-        <% end %>
-		
+			
+		</div>
 	</div>
-</div>

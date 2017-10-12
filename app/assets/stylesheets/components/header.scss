@@ -67,6 +67,8 @@
 	img {
 		height:  100%; 
 		width:  100%; 
+		object-fit:  contain; 
+		object-position:  0% 0%; 
 	}
 }
 @media screen and (max-width:  1023px) {

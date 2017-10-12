@@ -118,7 +118,9 @@ class Panel::SectionsController < ApplicationController
 
 	end
 	def set_highlight
-		expire_fragment "section_articles"
+		# Rails.cache.clear
+		# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
+		# Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
 
 		@section = Section.find_by_slug(params[:section_slug])
 		Article.where(articable_id: @section.id).update_all(highlight: false)
@@ -179,6 +181,11 @@ class Panel::SectionsController < ApplicationController
 	end
 
 	def destroy
+		if @section.id == 1 or @section.id == 3 or @section.id == 4 or @section.id == 7 or @section.id == 5 or @section.id == 21 or @section.id == 1013 or @section.id == 1024 or @section.id == 1025 
+			flash[:notice] = "Borrar está sección hará que crashee la página principal, llama a tu desarrollador"
+			redirect_to root_url
+
+		end 
 		SectionHighlight.where(section: @section).delete_all
 		HitObjective.where(section: @section).delete_all
 		@section.destroy

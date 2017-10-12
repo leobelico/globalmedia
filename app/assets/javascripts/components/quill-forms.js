@@ -20,7 +20,7 @@ $(document).on("click", function(event){
 }); 
 
 function submit_form(action, slug, event, go_to_gallery){
-
+  console.log($("#article_articable_id").val());
   console.log(editor.getContents()) 
   console.log(editor.getText())
 

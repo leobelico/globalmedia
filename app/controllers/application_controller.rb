@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
     redirect_to panel_path, :alert => exception.message
   end
 
-  before_action do
-    if user_signed_in?
-      Rack::MiniProfiler.authorize_request
-    end
-  end
+  # before_action do
+  #   if user_signed_in?
+  #     # Rack::MiniProfiler.authorize_request
+  #   end
+  # end
 
   autocomplete :article, :name, full: true
 
@@ -48,9 +48,31 @@ class ApplicationController < ActionController::Base
   
   helper_method :related_by_hashtags
   helper_method :get_sections
+  helper_method :get_investigation_articles
+  helper_method :get_collaborators
+  helper_method :get_complaints
+  helper_method :get_section_articles
 
+  def get_complaints
+    @complaints = Article.where(articable_id: 11, published: true).order(updated_at: "ASC").last(6).reverse
+  end
+
+  def get_collaborators
+    @collaborator_articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator' ORDER BY article_relationships.created_at DESC")[0..4]
+
+  end
+
+  def get_section_articles(id)
+
+
+    Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = #{id} AND articles.published = true", (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).order(highlight: :asc, created_at: :asc).last(4).reverse
+     
+
+  end
+  
   def get_sections 
-    @sections = Section.where(visible: true)
+    @articles = Article.joins("LEFT JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.article_id IS NULL AND articles.articable_id = ? AND articles.global_recommendation = ? AND articles.published = ?", 1, false, true).order(created_at: "DESC").first(3)
+    
   end
 
   def related_by_hashtags(article)   
@@ -69,6 +91,10 @@ class ApplicationController < ActionController::Base
     # print "finish related_by_hashtags"
     return @articles
 
+  end
+
+  def get_investigation_articles
+    @articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id").joins("INNER JOIN relationships ON article_relationships.articable_id = relationships.id").where("relationships.relationship_type ='Investigation' AND relationships.id = ?", Relationship.order(created_at: "ASC").where(relationship_type: "Investigation").last.id ).order("article_relationships.created_at ASC").last(6).reverse
   end
 
 
@@ -138,23 +164,21 @@ class ApplicationController < ActionController::Base
 
      @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = #{id} AND articles.highlight = false AND articles.published = true", (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).order(created_at: "ASC").last(last_number).reverse
 
+     
 
 
    #@articles = Article.where(articable_id: id, created_at: Time.now.beginning_of_month..Time.now.end_of_month).first(last_number)
 
   end
   def get_latest_articles_per_section(id, quantity)
-    section = Section.find(id)
-    articles = Article.where(articable_id: section.id, global_recommendation: false, published: true)
-    recommendations = SectionHighlight.where(section: section)
-    re = []
-    recommendations.each do |r|
-      re << r.article
-    end
-    
-    @articles = articles - re
+    # section = Section.find(id)
+    articles = Article.joins("LEFT JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.article_id IS NULL AND articles.articable_id = ? AND articles.global_recommendation = ? AND articles.published = ?", 1, false, true).order(created_at: "DESC").first(3)
+
+
+
+  
     # p "finish get_latest_articles_per_section"
-    return @articles.last(3)
+    return @articles
 
   end
 
@@ -211,7 +235,11 @@ class ApplicationController < ActionController::Base
     
     # @articles = Article.where(published: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).order(created_at: "ASC").last(8).reverse
     
-    @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where(published: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).select('articles.name, articles.created_at, articles.scheduled_time, articles.articable_id, articles.articable_type, articles.slug, sections.name AS section_name').order(created_at: "ASC").last(8).reverse
+    @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where("articles.published = ? AND articles.created_at >= ? AND articles.created_at <= ? AND articles.published_at IS NOT NULL", true, (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).select('articles.name, articles.created_at, articles.scheduled_time, articles.published_at, articles.articable_id, articles.articable_type, articles.slug, sections.name AS section_name, articles.updated_at').order(published_at: "ASC").order(published_at: :asc).last(8).reverse
+
+    
+
+
 
 
   end
@@ -224,28 +252,29 @@ class ApplicationController < ActionController::Base
   end
 
   def get_recommendations_per_section(id)
+
     # section = Section.find(id)
-    @articles = []
-    SectionHighlight.where(section_id: id).each do |section| 
-        @articles << section.article
-    end
+    @articles = Article.joins("INNER JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.section_id = ? AND articles.id != ?", id, session[:article_id]).last(3)
+    # @articles = []
+    # SectionHighlight.where(section_id: id).each do |section| 
+    #     @articles << section.article
+    # end
 
-    current_article = []
-    if session[:article_id]
-      if Article.exists?(session[:article_id])
-        current_article << Article.find(session[:article_id])
-      end
-    end
-    # p "finish get_recommendations_per_section"
+    # current_article = []
+    # if session[:article_id]
+    #   if Article.exists?(session[:article_id])
+    #     current_article << Article.find(session[:article_id])
+    #   end
+    # end
+    # # p "finish get_recommendations_per_section"
 
-    return @articles - current_article
+    # return @articles - current_article
     #SectionHighlight.where(section: section).last(3)
 
   end
 
   def get_global_recommendations
-    @articles = Article.where("global_recommendation = ? AND published = ? AND id != ? ", true, true, session[:article_id]).order(updated_at: "ASC").last(4)
-
+    @articles = Article.where("global_recommendation = ? AND published = ? AND id != ? ", true, true, session[:article_id]).order(updated_at: "ASC").last(3)  
    
   end
 
@@ -277,17 +306,10 @@ class ApplicationController < ActionController::Base
 
   end
 
-  def most_visited(id)
+  def most_visited
     #@hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
 
     @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ? AND articles.id != ?", false,2.hours.ago, Time.now, session[:article_id]).order("hits.number").last(3)
-
-   
-
-
-
-    
-
     
     # Táctica Nacional, Internacional, Farándula, Entretenimiento 
 
@@ -301,9 +323,13 @@ class ApplicationController < ActionController::Base
   end
 
   def set_article
-      @article = Article.find_by_slug(params[:slug])
-      if @article 
-        session[:article_id] = @article.id
+     if params[:slug].valid_encoding?
+        @article = Article.find_by_slug(params[:slug])
+        if @article 
+          session[:article_id] = @article.id
+        else
+          redirect_to root_url
+        end
       else
         redirect_to root_url
       end

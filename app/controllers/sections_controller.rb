@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 class SectionsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show, :sports, :corporation]
-	before_action :set_section, only: [:corporation, :show, :edit, :update, :destroy]
+	before_action :set_section, only: [:show, :edit, :update, :destroy]
 	
 	def admin_show
 		@section = Section.find(params[:format])
@@ -37,30 +37,15 @@ class SectionsController < ApplicationController
 	def show
 		#articles = @section.articles	
 		@related_sections = RelatedSection.where(section: @section)
-		r_articles = []
-    	SectionHighlight.where(section: @section).each do |section| 
-      
-       		r_articles << section.article.id
-      
-   		 end
+		
 
-   		# articles = []
-   		# Article.where(articable_id: @section.id, published: true).last(200).reverse.each do |article|
-   		# 	articles << article.id
-   		# end
-
-   		# most_visited = []
-
-   		# most_visited(@section.id).each do |article|
-   		# 	most_visited << article.id
-   		# end
-   		
+   
    		@highlight = Article.where(articable_id: @section.id, highlight: true, published: true).order(updated_at: "DESC").first
   		# @articles = Article.find(articles - r_articles).paginate(page: params[:page], per_page: 21)
   		if @highlight 
-	  		@articles = Article.where("id != ? AND published = true AND articable_id = ?", @highlight.id, @section.id).order(created_at: "DESC").paginate(page: params[:page], per_page: 21)
+	  		@articles = Article.where("id != ? AND published = true AND articable_id = ?", @highlight.id, @section.id).order(created_at: "DESC").paginate(page: params[:page], per_page: 12)
   		else
-	  		@articles = Article.where("published = true AND articable_id = ?", @section.id).order(created_at: "DESC").paginate(page: params[:page], per_page: 21)
+	  		@articles = Article.where("published = true AND articable_id = ?", @section.id).order(created_at: "DESC").paginate(page: params[:page], per_page: 12)
   		end
 
 	end

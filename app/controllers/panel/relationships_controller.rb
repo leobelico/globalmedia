@@ -51,7 +51,9 @@ class Panel::RelationshipsController < ApplicationController
 	def update
 		
 		if @relationship.update(relationship_params)
-			
+			if @relationship.article_relationships.last
+				@relationship.article_relationships.last.article.update_attribute(:name, @relationship.article_relationships.last.article.name + " ")
+			end
 				redirect_to panel_relationship_path(@relationship)
 			
 		else
@@ -71,6 +73,8 @@ class Panel::RelationshipsController < ApplicationController
 	end
 
 	def set_investigation_articles
+		# expires_action :get_investigation_articles
+		
 		investigation = Relationship.find(params[:panel][:investigation_id])
 		
 		first_article = Article.find(params[:panel][:first_article_id])

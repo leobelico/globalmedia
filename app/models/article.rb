@@ -9,7 +9,8 @@ class Article < ApplicationRecord
 	attr_accessor :hashtags_names, :the_note
 
   has_and_belongs_to_many :hashtags, uniq: true
-  before_save :associate_tags, :to_slug
+  before_save :associate_tags
+  before_create :to_slug
   
   belongs_to :user, optional: true
   has_many :article_relationships, dependent: :delete_all
@@ -48,6 +49,11 @@ class Article < ApplicationRecord
 
   private
     def associate_tags
+      if self.note_old
+        self.note_old = self.note_old + " "
+      else
+        self.note_old = " "
+      end
       if hashtags_names
         self.hashtags.delete_all
         hashtags_names.split(", ").each do |name|

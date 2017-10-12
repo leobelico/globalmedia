@@ -1,42 +1,44 @@
-<div class="principal-highlight">
-	<%= link_to article, class: "principal-highlight__image" do %>
-		<%= image_tag article.image %>
-		<% if article.exclusive? %>
-			<p class="exclusive">EXCLUSIVA</p>
-		<% end %>
-	<% end %>
-	<div class="article-preview__info principal-highlight__info">
-		<%= link_to article do %>
-			<h4 class="title semibold jtextfill"><span><%= article.name %></span>	</h4>	
-				<p class="section-and-author"><span class="section"><%= article.articable.name %></span> - 
-			<% if article.scheduled_time? %>
-				
-				<span class="datetime"><%= distance_of_time_in_words(Time.now, (article.scheduled_time)) %></span>
-			<% else %>
-				<span class="datetime"><%= distance_of_time_in_words(Time.now, (article.created_at)) %></span>
+<% cache article do %>
+	<div class="principal-highlight">
+		<%= link_to article, class: "principal-highlight__image" do %>
+			<%= image_tag article.image %>
+			<% if article.exclusive? %>
+				<p class="exclusive">EXCLUSIVA</p>
 			<% end %>
-
- 	
-			<hr class="line">
-			<p class="short-description"><%= truncate(article.short_description, length: 240) %></p> 	
 		<% end %>
-		<div class="social-media" data-article="<%= article_url(article) %>">
-			<%= link_to ("whatsapp://send?text= Estoy leyendo en GlobalMedia: " + article_url(article)), data: { action: "share/whatsapp/share" }, class: "social-media__link whatsapp", target: "_blank" do %>
-				<%= image_tag "whatsapp.svg" %>
-			<% end %>
-			<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
-				<%= image_tag "facebook.svg" %>				
-			</a>	
+		<div class="article-preview__info principal-highlight__info">
+			<%= link_to article do %>
+				<h4 class="title semibold jtextfill"><span><%= article.name %></span>	</h4>	
+					<p class="section-and-author"><span class="section"><%= article.articable.name %></span> - 
+				<% if article.published_at? %>
+					
+					<span class="datetime"><%= distance_of_time_in_words(Time.now, (article.published_at)) %></span>
+				<% else %>
+					<span class="datetime"><%= distance_of_time_in_words(Time.now, (article.created_at)) %></span>
+				<% end %>
 
-			<a href="https://twitter.com/share?url=<%= url_encode(article_url(article)) %>&via=GlobalMediaMx&text=Estoy%20leyendo%20en%20GlobalMedia%3A%20-" class="social-media__link twitter" target="_blank">
-				<%= image_tag "twitter.svg" %>
-			</a>
-			<a class="social-media__link copy" target="_self" data-clipboard-text="<%= article_url(article) %>">	
-				<input class="hidden" value="<%= article_url(article) %>">
-				<%= image_tag "copy.svg" %>
-			</a> 
+	 	
+				<hr class="line">
+				<p class="short-description"><%= truncate(article.short_description, length: 240) %></p> 	
+			<% end %>
+			<div class="social-media" data-article="<%= article_url(article) %>">
+				<%= link_to ("whatsapp://send?text= Estoy leyendo en GlobalMedia: " + article_url(article)), data: { action: "share/whatsapp/share" }, class: "social-media__link whatsapp", target: "_blank" do %>
+					<%= image_tag "whatsapp.svg" %>
+				<% end %>
+				<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
+					<%= image_tag "facebook.svg" %>				
+				</a>	
+
+				<a href="https://twitter.com/share?url=<%= url_encode(article_url(article)) %>&via=GlobalMediaMx&text=Estoy%20leyendo%20en%20GlobalMedia%3A%20-" class="social-media__link twitter" target="_blank">
+					<%= image_tag "twitter.svg" %>
+				</a>
+				<a class="social-media__link copy" target="_self" data-clipboard-text="<%= article_url(article) %>">	
+					<input class="hidden" value="<%= article_url(article) %>">
+					<%= image_tag "copy.svg" %>
+				</a> 
+			</div>
+
+			
 		</div>
-
-		
 	</div>
-</div>
+<% end %>
