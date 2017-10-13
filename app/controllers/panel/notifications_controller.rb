@@ -8,7 +8,7 @@ class Panel::NotificationsController < ApplicationController
 	autocomplete :camera, :name, full: true
 
 	def index
-		@notifications = Notification.all
+		@notifications = Notification.order(created_at: :desc).first(10)
 	end
 
 	def new
