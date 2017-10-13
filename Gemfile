@@ -67,13 +67,14 @@ end
 # group :production do  
 #   gem 'heroku-deflater'
 # end
-# gem 'sys-proctable'
-#gem 'memory_profiler'
-#gem 'flamegraph'
-#gem 'stackprof'     # For Ruby MRI 2.1+
-#gem 'fast_stack'    # For Ruby MRI 2.0
-group :development do
+gem 'sys-proctable'
+gem 'memory_profiler'
+gem 'flamegraph'
+gem 'stackprof'     # For Ruby MRI 2.1+
+gem 'fast_stack'    # For Ruby MRI 2.0
   gem 'rack-mini-profiler'
+
+group :development do
 
   gem 'derailed'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.

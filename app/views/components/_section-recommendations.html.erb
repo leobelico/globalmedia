@@ -1,37 +1,37 @@
 <div class="section-recommendations">
 	<% if articles.first %>
-		<%= link_to section_path(articles.first.articable.name), class: "skewed-title" do %>
+		<%= link_to section_path(articles.first[4] ), class: "skewed-title" do %>
 			<div class="skews">
 				<div class="skew skew--gray"></div>
 				<div class="skew skew--blue"></div>
 				<div class="skew skew--black"></div>
 			</div>
-			<div class="sk__title" style="background-color: <%= articles.first.section_color %>"><%= section_name %></div>
-			<div class="sk__link" style="background-color: <%= articles.first.section_color %>">Ir a sección</div>
+			<div class="sk__title" style="background-color: #1b2d41;"><%= section_name %></div>
+			<div class="sk__link" style="background-color: #1b2d41;">Ir a sección</div>
 		<% end %>
 	<% end %>
-	<% articles.each do |article| %>
+	<% articles.each do |name, image, exclusive, slug| %>
 		<div class="section-recommendations__article ui-card">
-			<%= link_to article, class: "wrapper-link" do %>
-				<%= image_tag article.image, class: "section-recommendations__image" %>
-				<% if article.exclusive? %>
+			<%= link_to article_path(slug), class: "wrapper-link" do %>
+				<%= image_tag image, class: "section-recommendations__image" %>
+				<% if exclusive == true %>
 					<p class="exclusive">EXCLUSIVA</p>
 				<% end %>
-				<h4 class="small-title"><%= article.name %></h4>
+				<h4 class="small-title"><%= name %></h4>
 			<% end %>
-			<div class="social-media" data-article="<%= article_url(article) %>">
-				<%= link_to ("whatsapp://send?text= Estoy leyendo en GlobalMedia: " + article_url(article)), data: { action: "share/whatsapp/share" }, class: "social-media__link whatsapp", target: "_blank" do %>
+			<div class="social-media" data-article="<%= article_url(slug) %>">
+				<%= link_to ("whatsapp://send?text= Estoy leyendo en GlobalMedia: " + article_url(slug)), data: { action: "share/whatsapp/share" }, class: "social-media__link whatsapp", target: "_blank" do %>
 					<%= image_tag "whatsapp.svg" %>
 				<% end %>
 				<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
 					<%= image_tag "facebook.svg" %>				
 				</a>	
 
-				<a href="https://twitter.com/share?url=<%= url_encode(article_url(article)) %>&via=GlobalMediaMx&text=Estoy%20leyendo%20en%20GlobalMedia%3A%20-" class="social-media__link twitter" target="_blank">
+				<a href="https://twitter.com/share?url=<%= url_encode(article_url(slug)) %>&via=GlobalMediaMx&text=Estoy%20leyendo%20en%20GlobalMedia%3A%20-" class="social-media__link twitter" target="_blank">
 					<%= image_tag "twitter.svg" %>
 				</a>
-				<a class="social-media__link copy" target="_self" data-clipboard-text="<%= article_url(article) %>">	
-					<input class="hidden" value="<%= article_url(article) %>">
+				<a class="social-media__link copy" target="_self" data-clipboard-text="<%= article_url(slug) %>">	
+					<input class="hidden" value="<%= article_url(slug) %>">
 					<%= image_tag "copy.svg" %>
 				</a> 
 			</div>

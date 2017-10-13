@@ -77,18 +77,19 @@ class ApplicationController < ActionController::Base
 
   def related_by_hashtags(article)   
     if article.hashtags.count == 1
-       @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ article.hashtags.first.id} AND articles.published = true AND articles.id != #{article.id}").last(3).uniq
+       @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND articles_hashtags.hashtag_id = #{ article.hashtags.first.id} AND articles.published = true AND articles.id != #{article.id}").pluck("articles.name, articles.slug").last(3).uniq
     end
 
     if article.hashtags.count == 2
-      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id }) AND articles.published = true AND articles.id != #{article.id}").last(3).uniq
+      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id }) AND articles.published = true AND articles.id != #{article.id}").pluck("articles.name, articles.slug").last(3).uniq
     end 
     
     if article.hashtags.count >= 3
-      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.third.id }) AND articles.published = true AND articles.id != #{article.id}").last(3).uniq
+      @articles = Article.joins("INNER JOIN articles_hashtags ON articles_hashtags.article_id = articles.id AND (articles_hashtags.hashtag_id = #{ article.hashtags.first.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.second.id } OR articles_hashtags.hashtag_id = #{ article.hashtags.third.id }) AND articles.published = true AND articles.id != #{article.id}").pluck("articles.name, articles.slug").last(3).uniq
     end 
     # @hashtags = ArticlesHashtag.where(hashtag_id:params[:search])
     # print "finish related_by_hashtags"
+    # p @articles
     return @articles
 
   end
@@ -156,13 +157,11 @@ class ApplicationController < ActionController::Base
   end
 
   def get_articles_per_section(id, last_number)
-    # section = Section.find(id)
-    # section.
-    # print "finish get_articles_per_section"
+    
 
-    # @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = #{id} AND articles.highlight = false AND articles.published = true", Time.now.beginning_of_month, Time.now.end_of_month).order(created_at: "ASC").last(last_number).reverse
+     @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = #{id} AND articles.highlight = false AND articles.published = true", (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).order(created_at: "ASC").pluck("articles.name, articles.image, articles.exclusive, articles.slug, articles.articable_id").last(last_number).reverse
 
-     @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = #{id} AND articles.highlight = false AND articles.published = true", (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).order(created_at: "ASC").last(last_number).reverse
+      
 
      
 
