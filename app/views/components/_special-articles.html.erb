@@ -6,11 +6,11 @@
 
 	<% if type == "#DENUNCIAGLOBAL" %>
 
-		<%= link_to section_path(Section.find_by(name: "Denuncia Global")), class: "special-articles__type" do %>
+		<%= link_to section_path("Denuncia-Global"), class: "special-articles__type" do %>
 			<p class="type">#DENUNCIAGLOBAL</p>
 			<div class="link">Ir a sección</div>		
 		<% end %>
-		<h4 class="special-articles__title" data-link="<%= section_path(Section.find_by(name: "Denuncia Global")) %>"><%= articles.first.name %></h4>
+		<h4 class="special-articles__title" data-link="<%= section_path("Denuncia-Global") %>"><%= articles.first.name %></h4>
 	<% else %>
 		
 		<%= link_to relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "special-articles__type" do %>

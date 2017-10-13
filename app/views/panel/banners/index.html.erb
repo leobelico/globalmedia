@@ -13,7 +13,7 @@
 		<p class="table__cell">Editar:</p>
 		<p class="table__cell">Eliminar:</p>
 	</div>
-	<% @banners.each do |banner| %>
+	<% @banners.find_each do |banner| %>
 		<div class="table__row">
 			<%= link_to banner.name, panel_banner_path(banner), class: "table__cell" %>
 			<% if banner.expiry_date %>

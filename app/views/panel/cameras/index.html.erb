@@ -11,7 +11,7 @@
 		<div class="table__cell">Editar:</div>
 		<div class="table__cell">Eliminar:</div>
 	</div>
-	<% @cameras.each do |camera| %>
+	<% @cameras.find_each do |camera| %>
 		<div class="table__row">
 			<%= link_to camera.name, camera_path(camera), class: "table__cell f-2" %>
 			<p class="table__cell f-3"><%= camera.location %></p>	

@@ -25,7 +25,7 @@
 		</div>
 		<div class="camera-grid">
 
-			<% @cameras.each do |camera| %>
+			<% @cameras.find_each do |camera| %>
 				<%= link_to camera_path(camera), class: "camera camera--grid" do %>
 					<% if camera.cover %>
 						

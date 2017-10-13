@@ -11,7 +11,7 @@
 		<p class="table__cell">Fecha:</p>
 		
 	</div>
-		<% @notifications.each do |notification| %>
+		<% @notifications.find_each do |notification| %>
 			<div class="table__row">
 				<div class="table__cell"><%= notification.title %></div>
 				<div class="table__cell"><%= notification.body %></div>

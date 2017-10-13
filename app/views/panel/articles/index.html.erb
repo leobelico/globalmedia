@@ -32,7 +32,7 @@
 		<% end %>
 
 	</div>
-	<% @articles.each do |article| %>
+	<% @articles.find_each do |article| %>
 		<div class="table__row">
 			<%= link_to article.name, article, class: "table__cell f-2" %>
 
