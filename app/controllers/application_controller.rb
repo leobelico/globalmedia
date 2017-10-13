@@ -161,7 +161,7 @@ class ApplicationController < ActionController::Base
 
      @articles = Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = #{id} AND articles.highlight = false AND articles.published = true", (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).order(created_at: "ASC").pluck("articles.name, articles.image, articles.exclusive, articles.slug, articles.articable_id").last(last_number).reverse
 
-      
+
 
      
 
@@ -234,7 +234,7 @@ class ApplicationController < ActionController::Base
     
     # @articles = Article.where(published: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).order(created_at: "ASC").last(8).reverse
     
-    @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where("articles.published = ? AND articles.created_at >= ? AND articles.created_at <= ? AND articles.published_at IS NOT NULL", true, (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).select('articles.name, articles.created_at, articles.scheduled_time, articles.published_at, articles.articable_id, articles.articable_type, articles.slug, sections.name AS section_name, articles.updated_at').order(published_at: "ASC").order(published_at: :asc).last(8).reverse
+    @articles = Article.joins("INNER JOIN sections ON sections.id = articles.articable_id").where("articles.published = ? AND articles.created_at >= ? AND articles.created_at <= ? AND articles.published_at IS NOT NULL", true, (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).select('articles.name, articles.created_at, articles.scheduled_time, articles.published_at, articles.articable_id, articles.articable_type, articles.slug, sections.name AS section_name, articles.updated_at').sort_by{ |t| t.published_at }.last(8).reverse
 
     
 
