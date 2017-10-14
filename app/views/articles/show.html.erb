@@ -73,7 +73,7 @@
 						<% else %>
 							<p class="date"><%= l(@article.created_at, format: "%H:%M %A %e %B, %Y") %></p>
 						<% end %>
-						<% if @article.articable_type == "Section" %>
+						<% if @article.articable_type == "Section" and @article.articable %>
 							<%= link_to @article.articable.name, section_path(Section.find(@article.articable_id)), class: "section" %>
 						<% end %>
 						<div class="social-media" data-article="<%= article_url(@article) %>">
@@ -114,13 +114,11 @@
 						<%= image_tag @article.image, class: "main-image" %>
 					<% end %>
 				<% end %>
-					<% if @article.images.count > 0  %>
 						<div class="gallery__thumbnails">
 							<% @article.images.each_with_index do |image, index| %>
 								<%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
 							<% end %>	
 						</div>
-					<% end %>
 				<% if !@article.note.empty? %>
 					<div id="quill-container" class="quill--article">
 					</div>
@@ -177,7 +175,10 @@
 		<template id="related-articles">
 
 			<% if @article.created_at > ("2017-09-10").to_date %>
-				<p class="related-articles"><strong class="related-articles__title">Artículos relacionados:</strong><br><% related_by_hashtags(@article).each do |name, slug| %><br><%= link_to truncate(name, length:  80), article_path(slug), class: "related-article" %><% end %></p>
+				<% cache [@article, related_by_hashtags(@article)] do %>
+					<p class="related-articles"><strong class="related-articles__title">Artículos relacionados:</strong><br><% related_by_hashtags(@article).each do |name, slug, id| %><% if @article.id != id %><br><%= link_to truncate(name, length:  80), article_path(slug), class: "related-article" %><% end %><% end %></p>
+
+				<% end %>
 			<% end %>
 		</template>
 
