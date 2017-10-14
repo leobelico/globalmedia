@@ -75,8 +75,10 @@ class ApplicationController < ActionController::Base
     
   end
 
-  def related_by_hashtags(article)   
-    @articles = article.hashtags.first.articles.last(4).pluck(:name, :slug, :id)
+  def related_by_hashtags(article) 
+    if article.hashtags.first  
+      @articles = article.hashtags.first.articles.last(4).pluck(:name, :slug, :id)
+    end
     if @articles.count == 0 and article.hashtags.second
       @articles = article.hashtags.second.articles.last(4).pluck(:name, :slug, :id)
 

@@ -43,7 +43,7 @@
 		<div class="section-articles-container">
 			
 			<% @articles.each do |article|%>
-				<% if !article.highlight? %>
+				<% if article != @articles.first %>
 					<%= render "components/section-article", article: article %>
 				<% end %>
 			<% end %>
