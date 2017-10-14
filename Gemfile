@@ -64,9 +64,9 @@ group :development, :test do
 
 end
 
-# group :production do  
-#   gem 'heroku-deflater'
-# end
+group :production do  
+  gem 'heroku-deflater'
+end
 # gem 'sys-proctable'
 # gem 'memory_profiler'
 # gem 'flamegraph'

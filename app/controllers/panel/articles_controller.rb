@@ -170,7 +170,9 @@ class Panel::ArticlesController < ApplicationController
 				redirect_to root_url
 		end
 		def set_s3_direct_post
-    		@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+			one_year_in_seconds = 365 * 24 * 60 * 60
+			one_year_from_now = Time.now + one_year_in_seconds
+    		@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read', expires: one_year_from_now.httpdate, cache_control: "max-age=#{one_year_in_seconds}")
   		end
 
   		def get_autocomplete_items(parameters)
