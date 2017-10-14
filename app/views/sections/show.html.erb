@@ -9,7 +9,6 @@
 				
 		<% end %>
 
-		<% if @articles.first.highlight? %>
 			<% if @section.color %>
 				<div class="section__highlight" style="border-bottom:  solid 4px <%= @section.color %>">
 			<% else %>
@@ -39,7 +38,6 @@
 					</a> 
 				</div>
 			</div>
-		<% end %>
 
 			
 		<div class="section-articles-container">

@@ -37,7 +37,7 @@ class SectionsController < ApplicationController
 	def show
 		#articles = @section.articles	
 		@related_sections = RelatedSection.where(section: @section)	
-  		@articles = Article.where("published = true AND articable_id = ?", @section.id).order(highlight: :desc, created_at: :desc).paginate(page: params[:page], per_page: 14)
+  		@articles = Article.where("published = true AND articable_id = ?", @section.id).order(highlight: :desc, created_at: :desc).paginate(page: params[:page], per_page: 13)
 
 	end
 
