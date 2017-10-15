@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_section_articles
 
   def get_complaints
-    @complaints = Article.where(articable_id: 11, published: true).order(updated_at: "ASC").limit(100).last(6).reverse
+    @complaints = Article.where(articable_id: 11, published: true).limit(100).order(updated_at: "ASC").last(6).reverse
   end
 
   def get_collaborators
@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
   def get_section_articles(id)
 
 
-    Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = #{id} AND articles.published = true", (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).order(highlight: :asc, created_at: :asc).limit(100).last(4).reverse
+    Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = #{id} AND articles.published = true", (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).limit(100).order(highlight: :asc, created_at: :asc).last(4).reverse
      
 
   end
@@ -96,7 +96,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_investigation_articles
-    @articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id").joins("INNER JOIN relationships ON article_relationships.articable_id = relationships.id").where("relationships.relationship_type ='Investigation' AND relationships.id = ?", Relationship.order(created_at: "ASC").where(relationship_type: "Investigation").last.id ).order("article_relationships.created_at ASC").limit(100).last(6).reverse
+    @articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id").joins("INNER JOIN relationships ON article_relationships.articable_id = relationships.id").where("relationships.relationship_type ='Investigation' AND relationships.id = ?", Relationship.order(created_at: "ASC").where(relationship_type: "Investigation").last.id ).limit(100).order("article_relationships.created_at ASC").last(6).reverse
   end
 
 
@@ -160,7 +160,7 @@ class ApplicationController < ActionController::Base
   def get_articles_per_section(id, last_number)
     
 
-     @articles = Article.where(articable_id: id).order(created_at: "ASC").limit(100).last(last_number).reverse
+     @articles = Article.where(articable_id: id).limit(100).order(created_at: "ASC").last(last_number).reverse
 
 
 
@@ -171,7 +171,7 @@ class ApplicationController < ActionController::Base
   end
   def get_latest_articles_per_section(id, quantity)
     # section = Section.find(id)
-    articles = Article.joins("LEFT JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.article_id IS NULL AND articles.articable_id = ? AND articles.global_recommendation = ? AND articles.published = ?", 1, false, true).order(created_at: "DESC").limit(100).first(3)
+    articles = Article.joins("LEFT JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.article_id IS NULL AND articles.articable_id = ? AND articles.global_recommendation = ? AND articles.published = ?", 1, false, true).limit(100).order(created_at: "DESC").first(3)
 
 
 
