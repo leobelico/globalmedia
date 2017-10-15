@@ -80,14 +80,16 @@
 		<% end %>
 
 	</div>
-		<% if get_banner(@section, "Section", "Mediano" ).count > 0 %>
-			<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Section", "Mediano" ) %>
-		<% else %>
-			<% if get_banner(@section, "Global", "Mediano" ).count > 0 %>
-				<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Global", "Mediano" ) %>
-				
+		<% if false %>
+			<% if get_banner(@section, "Section", "Mediano" ).count > 0 %>
+				<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Section", "Mediano" ) %>
 			<% else %>
-				<%= render "components/sidebar", article: @articles.first, banner: "" %>
+				<% if get_banner(@section, "Global", "Mediano" ).count > 0 %>
+					<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Global", "Mediano" ) %>
+					
+				<% else %>
+					<%= render "components/sidebar", article: @articles.first, banner: "" %>
+				<% end %>
 			<% end %>
 		<% end %>
 </div>

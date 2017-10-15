@@ -311,7 +311,6 @@ class ApplicationController < ActionController::Base
 
     @articles = Article.limit(4000).joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ?", false,2.hours.ago, Time.now).order("hits.number").last(3)
 
-    
     # Táctica Nacional, Internacional, Farándula, Entretenimiento 
 
 #1427 
