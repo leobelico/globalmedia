@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_section_articles
 
   def get_complaints
-    @complaints = Article.where(articable_id: 11, published: true).order(updated_at: "ASC").last(6).reverse
+    @complaints = Article.where(articable_id: 11, published: true).order(updated_at: "ASC").limit(100).last(6).reverse
   end
 
   def get_collaborators
@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
   end
   
   def get_sections 
-    @articles = Article.joins("LEFT JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.article_id IS NULL AND articles.articable_id = ? AND articles.global_recommendation = ? AND articles.published = ?", 1, false, true).order(created_at: "DESC").first(3)
+    @articles = Article.joins("LEFT JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.article_id IS NULL AND articles.articable_id = ? AND articles.global_recommendation = ? AND articles.published = ?", 1, false, true).limit(100).order(created_at: "DESC").first(3)
     
   end
 
@@ -96,7 +96,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_investigation_articles
-    @articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id").joins("INNER JOIN relationships ON article_relationships.articable_id = relationships.id").where("relationships.relationship_type ='Investigation' AND relationships.id = ?", Relationship.order(created_at: "ASC").where(relationship_type: "Investigation").last.id ).order("article_relationships.created_at ASC").last(6).reverse
+    @articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id").joins("INNER JOIN relationships ON article_relationships.articable_id = relationships.id").where("relationships.relationship_type ='Investigation' AND relationships.id = ?", Relationship.order(created_at: "ASC").where(relationship_type: "Investigation").last.id ).order("article_relationships.created_at ASC").limit(100).last(6).reverse
   end
 
 
@@ -273,7 +273,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_global_recommendations
-    @articles = Article.where("global_recommendation = ? AND published = ? AND id != ? ", true, true, session[:article_id]).order(updated_at: "ASC").last(3)  
+    @articles = Article.where("global_recommendation = ? AND published = ? AND id != ? ", true, true, session[:article_id]).limit(100).order(updated_at: "ASC").last(3)  
    
   end
 
