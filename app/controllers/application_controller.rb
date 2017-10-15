@@ -234,7 +234,7 @@ class ApplicationController < ActionController::Base
     
     # @articles = Article.where(published: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).order(created_at: "ASC").last(8).reverse
     
-    @articles = Article.where(published: true).order(published_at: "ASC").last(8).reverse
+    @articles = Article.limit(100).where(published: true).order(published_at: "ASC").last(8).reverse
 
     
 
