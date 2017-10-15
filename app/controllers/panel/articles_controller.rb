@@ -143,7 +143,7 @@ class Panel::ArticlesController < ApplicationController
 
 	def search_hashtag
 		@search = Hashtag.find(params[:search])
-		@hashtags = ArticlesHashtag.where(hashtag_id:params[:search]).limit(20)
+		@hashtags = ArticlesHashtag.where(hashtag_id:params[:search]).limit(20	)
 		
 
 	end
