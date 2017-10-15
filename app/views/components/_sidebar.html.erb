@@ -1,8 +1,6 @@
 <div class="sidebar">
 	<% if true %>
-		<% cache(latest_news) do %>
 			<%= render "components/latest-news",articles: latest_news %>
-		<% end %>
 		<% cache(get_global_recommendations) do %>
 
 			<%= render "components/recommendations", articles: get_global_recommendations %>

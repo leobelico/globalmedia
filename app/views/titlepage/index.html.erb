@@ -23,7 +23,6 @@
 	
 	<div class="special-articles">
 		<% if true %>
-			<% cache(latest_news) do %>
 				<%= render "components/latest-news", articles: latest_news  %>
 			<% end %>
 				<% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
@@ -33,7 +32,6 @@
 						<%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
 					<% end %>
 				<% end %>
-		<% end %>
 
 		
 	</div>
