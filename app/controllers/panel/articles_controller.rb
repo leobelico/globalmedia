@@ -21,7 +21,7 @@ class Panel::ArticlesController < ApplicationController
 			@articles = Article.where('lower(name) LIKE ?', "%#{params[:name]}%").paginate(page: params[:page], per_page: 20)
 			# p(params[:name])
 		else 
-			@articles = Article.all.order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
+			@articles = Article.limit(1000).order(created_at: "DESC").paginate(page: params[:page], per_page: 20)
 			
 		end
 	end
