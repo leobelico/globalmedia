@@ -15,7 +15,10 @@
 					<div class="hours"></div>
 					<div class="minutes"></div>
 				</div>
-				
+				<% if article.published_at %>
+					<p class="article__time"><%= article.published_at.strftime("%H:%M") %></p>	
+				<% else %>
+				<% end %>
 				<p class="article__title"><%= truncate(article.name, length: 55) %><br></p>
 			<% end %>
 		<% end %>
