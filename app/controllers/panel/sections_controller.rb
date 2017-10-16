@@ -22,19 +22,6 @@ class Panel::SectionsController < ApplicationController
 			articles =  Article.where(id: params[:all_recommendations])
 			articles_in_highlights = SectionHighlight.where( section: articles.first.articable).order(created_at: "ASC")
 			
-			# if articles_in_highlights.count > 0
-			# 	get_first_h = SectionHighlight.where(section: articles.first.articable).last(articles_in_highlights.count - 3)
-			# 		get_first_h.each do |h|
-			#  			h.destroy
-			#  		end 
-			# 	articles.each do |this_article|
-			#  		SectionHighlight.create(article_id: this_article.id, section_id: this_article.articable.id )
-			#  	end
-			# else
-			# 	articles.each do |this_article|
-			#  		SectionHighlight.create(article_id: this_article.id, section_id: this_article.articable.id )
-			#  	end
-			# end
 
 				articles.each do |this_article|
 					created = false
@@ -86,7 +73,7 @@ class Panel::SectionsController < ApplicationController
 
 	def show
 		
-		@highlight_article = Article.where(articable_id: @section.id, highlight: true).first
+		@highlight_article = CoverArticle.where(section_id: @section.id, article_highlight: true).first
 
 		@highlights = SectionHighlight.where(section: @section).order(updated_at: "DESC")
 		@recommendations = SectionHighlight.where(section: @section)
@@ -127,7 +114,26 @@ class Panel::SectionsController < ApplicationController
 		
 		article = Article.find(params[:panel][:article_id])
 		article.update_attributes(highlight: true)
-		redirect_to panel_section_path(@section)
+
+
+		if Section.where(visible: true).include?(article.articable)
+			if CoverArticle.count < 10
+				last_article = CoverArticle.where(section_id: article.articable_id, article_highlight: true)
+				if last_article
+					last_article.delete_all
+				end
+				
+				CoverArticle.create(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, section_id: article.articable_id, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
+			else
+				last_article = CoverArticle.where(section_id: article.articable_id, article_highlight: true)
+				if last_article
+					last_article.delete_all
+				end
+				CoverArticle.create(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, section_id: article.articable_id, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
+			end
+		end
+
+		redirect_to panel_section_path(article.articable)
 
 	end
 

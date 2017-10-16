@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016173403) do
+ActiveRecord::Schema.define(version: 20171016192645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,23 @@ ActiveRecord::Schema.define(version: 20171016173403) do
     t.boolean  "datasheet",       default: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+  end
+
+  create_table "cover_articles", force: :cascade do |t|
+    t.string   "name",                default: ""
+    t.string   "article_slug",        default: ""
+    t.string   "article_image",       default: ""
+    t.integer  "section_id"
+    t.integer  "article_id"
+    t.boolean  "article_highlight",   default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.datetime "published_at"
+    t.string   "section_slug"
+    t.string   "section_name"
+    t.string   "section_description"
+    t.string   "section_color"
+    t.boolean  "article_exclusive",   default: false
   end
 
   create_table "devices", force: :cascade do |t|

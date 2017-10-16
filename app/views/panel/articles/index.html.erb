@@ -75,8 +75,10 @@
 			</p>	
 			<p class="table__cell"><%= article.created_at.strftime("%B %d, %Y") %></p>
 			<%= link_to	"Editar", edit_panel_article_path(article), class: "table__cell edit" %>
-			<% if current_user.is_news_chief? %>
+			<% if current_user.is_news_chief? and !article.published? %>
 				<%= link_to	"Publicar Ahora", panel_article_publish_now_path(article), class: "table__cell edit", data: { confirm: "¿Estás seguro? Esta acción publicará la nota inmediatamente" } %>
+			<% else %>
+				<p class= "table__cell">Publicado</p>
 			
 			<% end %>
 			<% if current_user.destroy_articles_permission? %>

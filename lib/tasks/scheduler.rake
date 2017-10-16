@@ -9,6 +9,23 @@ task :publish_articles => :environment do
 		else
 			last_article = LatestArticle.order(published_at: :asc).last(8).reverse.last.destroy
 			LatestArticle.create(article_id: article.id, article_slug: article.slug, name: article.name, section_name: article.articable.name, section_slug: article.articable.slug, published_at: article.published_at)
+		end
+
+		if Section.where(visible: true).include?(article.articable)
+			if CoverArticle.count < 10
+				last_article = CoverArticle.where(section_id: article.articable_id, article_highlight: true)
+				if last_article
+					last_article.delete_all
+				end
+				
+				CoverArticle.create(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, section_id: article.articable_id, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
+			else
+				last_article = CoverArticle.where(section_id: article.articable_id).last.reverse
+				if last_article
+					if last_article.destroy
+				end
+				CoverArticle.create(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, section_id: article.articable_id, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
+			end
 		end	
 	end
   
@@ -48,7 +65,7 @@ end
 
 
 task :most_visited => :environment do 
-	articles = Article.limit(4000).joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ?", false,2.hours.ago, Time.now).order("hits.number").last(4)
+	articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ?", false,2.hours.ago, Time.now).order("hits.number").last(4)
 	if MostVisitedArticle.all.count >= 1
 		MostVisitedArticle.destroy_all
 	end
