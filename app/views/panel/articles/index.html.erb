@@ -71,7 +71,7 @@
 			<% end %>
 			
 			<p class="table__cell">
-				<%= article.hits.sum(:number) %>
+				<%= article.hits.sum(&:number) %>
 			</p>	
 			<p class="table__cell"><%= article.created_at.strftime("%B %d, %Y") %></p>
 			<%= link_to	"Editar", edit_panel_article_path(article), class: "table__cell edit" %>
