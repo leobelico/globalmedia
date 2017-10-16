@@ -1,6 +1,6 @@
 <div class="sidebar">
-	<% cache get_global_recommendations do %>
-		<%= render "components/recommendations", articles: get_global_recommendations %>
+	<% cache get_global_recommendations(0) do %>
+		<%= render "components/recommendations", articles: get_global_recommendations(0) %>
 	<% end %>
 	<% cache facebook do %>
 

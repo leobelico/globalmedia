@@ -250,7 +250,6 @@ class ApplicationController < ActionController::Base
   end
 
   def get_global_recommendations(id)
-    print "IDDDD " + id.to_s
     
     if id != 0
       @articles = GlobalRecommendationArticle.where(section_id: id).last(3) 
