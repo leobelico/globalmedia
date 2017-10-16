@@ -47,15 +47,17 @@
 
 
 	</div>
-	<% if @intl.articles.count > 0 %>
-		<% if get_banner(@intl, "Section", "Mediano" ).count > 0 %>
-			<%= render "components/sidebar", article: @intl.articles.first, banner: get_banner(@intl, "Section", "Mediano" ) %>
-		<% else %>
-			<% if get_banner(@intl, "Global", "Mediano" ).count > 0 %>
-				<%= render "components/sidebar", article: @intl.articles.first, banner: get_banner(@intl, "Global", "Mediano" ) %>
-				
+	<% if false %>
+		<% if @intl.articles.count > 0 %>
+			<% if get_banner(@intl, "Section", "Mediano" ).count > 0 %>
+				<%= render "components/sidebar", article: @intl.articles.first, banner: get_banner(@intl, "Section", "Mediano" ) %>
 			<% else %>
-				<%= render "components/sidebar", article: @intl.articles.first, banner: "" %>
+				<% if get_banner(@intl, "Global", "Mediano" ).count > 0 %>
+					<%= render "components/sidebar", article: @intl.articles.first, banner: get_banner(@intl, "Global", "Mediano" ) %>
+					
+				<% else %>
+					<%= render "components/sidebar", article: @intl.articles.first, banner: "" %>
+				<% end %>
 			<% end %>
 		<% end %>
 	<% end %>

@@ -55,6 +55,7 @@ class ApplicationController < ActionController::Base
 
   def get_complaints
     @complaints = Article.limit(4000).where(articable_id: 11, published: true).order(updated_at: "ASC").last(6).reverse
+
   end
 
   def get_collaborators
@@ -65,7 +66,7 @@ class ApplicationController < ActionController::Base
   def get_section_articles(id)
 
 
-    Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = 1 AND articles.published = true", (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).order(highlight: :asc, created_at: :asc).last(4).reverse     
+    Article.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articles.id").where("articles.created_at >= ? AND articles.created_at <= ? AND highlights.article_id IS NULL AND articles.articable_id = #{id} AND articles.published = true", (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).order(highlight: :asc, created_at: :asc).last(4).reverse     
 
   end
   
@@ -274,7 +275,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_global_recommendations
-    @articles = Article.where("global_recommendation = ? AND published = ? AND id != ? ", true, true, session[:article_id]).order(updated_at: "ASC").last(3)  
+    @articles = Article.where("global_recommendation = ? AND published = ?", true, true).order(updated_at: "ASC").last(3)  
 
   end
 
@@ -309,9 +310,8 @@ class ApplicationController < ActionController::Base
   def most_visited
     #@hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
 
-    @articles = Article.limit(4000).joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ?", false,2.hours.ago, Time.now).order("hits.number").last(3)
+    @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ?", false,2.hours.ago, Time.now).order("hits.number").last(3)
 
-    
     # Táctica Nacional, Internacional, Farándula, Entretenimiento 
 
 #1427 

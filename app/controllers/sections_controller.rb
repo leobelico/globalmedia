@@ -10,18 +10,18 @@ class SectionsController < ApplicationController
 	end
 	
 	def sports
-		if Section.find_by(name: "Táctica Nacional e Internacional")
-			@intl = Section.find_by(name: "Táctica Nacional e Internacional") 
+		if Section.find(name: 1024)
+			@intl = Section.find(name: 1024) 
 			@intl_articles = @intl.articles.last(6)
 			@related_sections = RelatedSection.where(section: @intl)
 		end 
-		if Section.find_by(name: "Táctica Internacional")
-			@intl = Section.find_by(name: "Táctica Internacional") 
-			@intl_articles = @intl.articles.last(6)
-			@related_sections = RelatedSection.where(section: @intl)
-		end 
-		if Section.find_by(name: "Táctica Local")
-			@local = Section.find_by(name: "Táctica Local") 
+		# if Section.find_by(name: "Táctica Internacional")
+		# 	@intl = Section.find(name: "Táctica Internacional") 
+		# 	@intl_articles = @intl.articles.last(6)
+		# 	@related_sections = RelatedSection.where(section: @intl)
+		# end 
+		if Section.find(1025)
+			@local = Section.find(1025) 
 			@local_articles = @local.articles.last(6)
 		end
 	end

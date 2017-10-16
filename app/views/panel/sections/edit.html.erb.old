@@ -25,9 +25,9 @@
 		
 		<label>Artículo:</label>
 		<% if @highlight.new_record? %>
-			<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
+			<%= f.autocomplete_field(:article_id, autocomplete_article_slug_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
 		<% else %>
-			<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @highlight.article.name) %>
+			<%= f.autocomplete_field(:article_id, autocomplete_article_slug_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @highlight.article.name) %>
 		<% end %>
 	</div>
 <% end %>

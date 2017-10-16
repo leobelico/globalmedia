@@ -12,16 +12,19 @@
 			<div class="field">
 			
 			<label>Global Recomienda #1</label>
-				<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", required: true, type: "search", value: get_global_recommendations.first.name)%>
-				<%= f.hidden_field :first_article_id, :id => "first_article_id", value: get_global_recommendations.first.id %>
+				<% f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", required: true, type: "search", value: get_global_recommendations.first.name)%>
+				<% f.hidden_field :first_article_id, :id => "first_article_id", value: get_global_recommendations.first.id %>
+				<%= f.text_field :first_article_id, placeholder: "Coloca el id del artículo" %>
 			</div>
 
 		<% else %>
 			<div class="field">
 		
 				<label>Global Recomienda #1</label>
-				<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", required: true, type: "search" ) %>
-				<%= f.hidden_field :first_article_id, :id => "first_article_id" %>
+				<% f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", required: true, type: "search" ) %>
+				<% f.hidden_field :first_article_id, :id => "first_article_id" %>
+				<%= f.text_field :first_article_id, placeholder: "Coloca el id del artículo" %>
+
 
 			</div>
 		<% end %>
@@ -30,16 +33,20 @@
 			<div class="field">
 				
 				<label>Global Recomienda #2</label>
-				<%= f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", required: true, type: "search", value: get_global_recommendations.second.name ) %>
-				<%= f.hidden_field :second_article_id, :id => "second_article_id", value: get_global_recommendations.second.id %>
+				<% f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", required: true, type: "search", value: get_global_recommendations.second.name ) %>
+				<% f.hidden_field :second_article_id, :id => "second_article_id", value: get_global_recommendations.second.id %>
+				<%= f.text_field :second_article_id, placeholder: "Coloca el id del artículo" %>
+
 			</div>
 
 		<% else %>
 			<div class="field">
 		
 				<label>Global Recomienda #2</label>
-				<%= f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
-				<%= f.hidden_field :second_article_id, :id => "second_article_id" %>
+				<% f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+				<% f.hidden_field :second_article_id, :id => "second_article_id" %>
+				<%= f.text_field :second_article_id, placeholder: "Coloca el id del artículo" %>
+
 
 			</div>
 		<% end %>
@@ -48,16 +55,20 @@
 			<div class="field">
 				
 				<label>Global Recomienda #3</label>
-				<%= f.autocomplete_field(:third_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#third_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: get_global_recommendations.third.name  ) %>
-				<%= f.hidden_field :third_article_id, :id => "third_article_id", value: get_global_recommendations.third.id %> 
+				<% f.autocomplete_field(:third_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#third_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: get_global_recommendations.third.name  ) %>
+				<% f.hidden_field :third_article_id, :id => "third_article_id", value: get_global_recommendations.third.id %> 
+				<%= f.text_field :third_article_id, placeholder: "Coloca el id del artículo" %>
+
 
 			</div>
 		<% else %>
 			<div class="field">
 		
 				<label>Global Recomienda #3</label>
-				<%= f.autocomplete_field(:third_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#third_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
-				<%= f.hidden_field :third_article_id, :id => "third_article_id" %>
+				<% f.autocomplete_field(:third_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#third_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+				<% f.hidden_field :third_article_id, :id => "third_article_id" %>
+				<%= f.text_field :third_article_id, placeholder: "Coloca el id del artículo" %>
+
 
 			</div>
 		<% end %>
@@ -65,20 +76,26 @@
 		<div class="field">
 		
 		<label>Global Recomienda #1</label>
-		<%= f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
-		<%= f.hidden_field :first_article_id, :id => "first_article_id" %>
+		<% f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+		<% f.hidden_field :first_article_id, :id => "first_article_id" %>
+		<%= f.text_field :first_article_id, placeholder: "Coloca el id del artículo" %>
+
 	</div>
 	<div class="field">
 		
 		<label>Global Recomienda #2</label>
-		<%= f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
-		<%= f.hidden_field :second_article_id, :id => "second_article_id" %>
+		<% f.autocomplete_field(:second_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#second_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+		<% f.hidden_field :second_article_id, :id => "second_article_id" %>
+		<%= f.text_field :second_article_id, placeholder: "Coloca el id del artículo" %>
+
 	</div>
 	<div class="field">
 		
 		<label>Global Recomienda #3</label>
-		<%= f.autocomplete_field(:third_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#third_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
-		<%= f.hidden_field :third_article_id, :id => "third_article_id" %>
+		<% f.autocomplete_field(:third_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#third_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+		<% f.hidden_field :third_article_id, :id => "third_article_id" %>
+		<%= f.text_field :third_article_id, placeholder: "Coloca el id del artículo" %>
+
 
 	</div>
 	<% end %>
@@ -88,13 +105,11 @@
 	<div class="table__row">
 		<p class="table__cell">Recomendaciones actuales:</p>
 		<p class="table__cell">Extracto:</p>
-		<p class="table__cell">Sección:</p>
 	</div>
 	<% get_global_recommendations.each do |article| %>
 		<div class="table__row">
 			<%= link_to truncate(article.name, length:  40), article, class: "table__cell" %>
 			<p class="table__cell"><%= truncate(article.short_description, length:  60) %></p>
-			<p class="table__cell"><%= article.articable.name %></p>
 		</div>
 	<% end %>
 </div>
