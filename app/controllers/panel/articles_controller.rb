@@ -10,10 +10,12 @@ class Panel::ArticlesController < ApplicationController
 	def publish_now
 		@article = Article.find_by(slug: params[:article_slug])
 		@article.update_attributes(published: true, draft: 1, published_at: DateTime.now)
-		# expires_action :latest_news
-		# Rails.cache.clear
-		# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
-		# Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
+		if LatestArticle.count < 8
+			LatestArticle.create(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
+		else
+			last_article = LatestArticle.order(published_at: :asc).last(8).reverse.last.destroy
+			LatestArticle.create(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
+		end	
 		redirect_to panel_articles_path
 	end
 	def index
@@ -62,18 +64,19 @@ class Panel::ArticlesController < ApplicationController
                         params[:scheduled_time_4i].to_i,
                         params[:scheduled_time_5i].to_i, 0)
 		@article.scheduled_time = somedate
+		if params[:article][:draft].to_i == 2
+			@article.published = true	
+		end
 
-
+		@article.published_at = Time.now
 		if @article.save
-
-			@article.update_attribute(:published_at, @article.created_at) 
-			if @article.draft == 2
-			
-				# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
-				# Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
-
-				@article.update_attributes(published: true) 
-
+			if @article.published? 	
+				if LatestArticle.count < 8
+					LatestArticle.create(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
+				else
+					last_article = LatestArticle.order(published_at: :asc).last(8).reverse.last.destroy
+					LatestArticle.create(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
+				end	
 			end
 			redirect_to edit_panel_article_path(@article)
 		else
@@ -112,16 +115,32 @@ class Panel::ArticlesController < ApplicationController
 	                        params[:scheduled_time_5i].to_i, 0)
 		end
 
+		if somedate 
+			@article.scheduled_time = somedate
+		end
+
+		if params[:article][:draft].to_i == 0 or params[:article][:draft].to_i == -1
+			@article.published = false
+		end
+
+		if params[:article][:draft].to_i == 2
+			@article.published = true
+		end
+
 		if @article.update(article_params)
-			if somedate 
-				@article.update_attributes(scheduled_time: somedate)
-			end
-			if @article.draft == 0 or @article.draft == -1 
-				@article.update_attributes(published: false)
-			end
-			if @article.draft == 2
-				@article.update_attributes(published: true)
-				p "PUBLICADO"
+			if @article.published? 	
+				does_article_exists = LatestArticle.where(article_id: @article.id)
+				if does_article_exists.count <= 0
+					#el artículo no existe entonces hay que crearlo
+					if LatestArticle.count < 8
+						LatestArticle.create(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
+					else
+						last_article = LatestArticle.order(published_at: :asc).last(8).reverse.last.destroy
+						LatestArticle.create(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
+					end	
+				else
+					does_article_exists.first.update_attributes(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
+				end
 			end
 			redirect_to @article
 		else
