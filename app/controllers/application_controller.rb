@@ -274,7 +274,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_global_recommendations
-    @articles = Article.where("global_recommendation = ? AND published = ? AND id != ? ", true, true, session[:article_id]).order(updated_at: "ASC").last(3)  
+    @articles = Article.where("global_recommendation = ? AND published = ?", true, true).order(updated_at: "ASC").last(3)  
 
   end
 

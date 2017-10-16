@@ -158,7 +158,7 @@
 
 			</div>
 
-			<% if false %>
+			<% if true %>
 				<% if get_banner(@article.articable, @article.articable_type, "Mediano" ).count > 0 %>
 					<%= render "components/sidebar", article: @article, banner: get_banner(@article.articable, @article.articable_type, "Mediano" ) %>
 				<% else %>
