@@ -66,6 +66,8 @@
 		<%= render "/layouts/section_preview", articles: get_section_articles(1), section: Section.find(1) %>
 	<% end %>
 
+	
+
 	<!-- MÉXICO -->
 	<% cache(get_section_articles(3)) do %>
 		<%= render "/layouts/section_preview", articles: get_section_articles(3), section: Section.find(3) %>

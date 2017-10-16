@@ -6,8 +6,8 @@
 	<div class="articles-container">
 		
 		<% articles.each do |article| %>
-			<%= link_to article_path(article), class: "recommendation" do %>
-				<%= image_tag article.image, class: "recommendation__image" %>
+			<%= link_to article_path(article.article_slug), class: "recommendation" do %>
+				<%= image_tag article.article_image, class: "recommendation__image" %>
 				<h4 class="recommendation__title"><%= article.name %></h4>
 			<% end %>
 		<% end %>

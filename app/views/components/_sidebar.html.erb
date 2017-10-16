@@ -3,9 +3,9 @@
 		<% cache(latest_news) do %>
 			<%= render "components/latest-news",articles: latest_news %>
 		<% end %>
-		<% cache(get_global_recommendations) do %>
+		<% cache(get_global_recommendations(article.articable_id)) do %>
 
-			<%= render "components/recommendations", articles: get_global_recommendations %>
+			<%= render "components/recommendations", articles: get_global_recommendations(article.articable_id) %>
 		<% end %>
 
 		<% cache(most_visited, expires_in: 2.hours) do %>
@@ -18,27 +18,7 @@
 			<br>
 		<% end %>
 	<% end %>
-	<% if false %>
-		<% if article != "global" %>
-			<% if  get_recommendations_per_section(article.articable_id).size == 0 %>
-				<%= render "components/recommendations", articles: get_global_recommendations %>
-			<% else %>
-				<%= render "components/recommendations", articles: get_recommendations_per_section(article.articable_id) %>
-			<% end %>
-			
-		<% else %>
-			<%= render "components/recommendations", articles: get_global_recommendations %>
-			
-		<% end %>
-		
-		<% cache(most_visited, expires_in: 2.hours) do %>
-			<%= render "components/most-visited", articles: most_visited %>
-		<% end %>
-		<% if banner != "" and banner != nil %>
-			<%= render "components/medium-banner", banner: banner %>
-		<% end %>
-		<br>
-	<% end %>
+	
 	<% if  article != "" and article != "global" and article.articable and article.articable.facebook? %>
 		<div class="fb-page" data-href="<%= article.articable.facebook %>" data-tabs="timeline" data-width="342" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/GlobalMediaSLP" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/GlobalMediaSLP"></a></blockquote></div>
 	<% else %>

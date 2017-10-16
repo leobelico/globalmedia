@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171015164242) do
+ActiveRecord::Schema.define(version: 20171016192645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,11 +119,39 @@ ActiveRecord::Schema.define(version: 20171015164242) do
     t.datetime "updated_at",                      null: false
   end
 
+  create_table "cover_articles", force: :cascade do |t|
+    t.string   "name",                default: ""
+    t.string   "article_slug",        default: ""
+    t.string   "article_image",       default: ""
+    t.integer  "section_id"
+    t.integer  "article_id"
+    t.boolean  "article_highlight",   default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.datetime "published_at"
+    t.string   "section_slug"
+    t.string   "section_name"
+    t.string   "section_description"
+    t.string   "section_color"
+    t.boolean  "article_exclusive",   default: false
+  end
+
   create_table "devices", force: :cascade do |t|
     t.string   "token"
     t.string   "operating_system"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "global_recommendation_articles", force: :cascade do |t|
+    t.string   "name",                  default: ""
+    t.string   "article_slug",          default: ""
+    t.string   "article_image",         default: ""
+    t.integer  "section_id"
+    t.boolean  "global_recommendation", default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "article_id"
   end
 
   create_table "hashtags", force: :cascade do |t|
@@ -178,6 +206,25 @@ ActiveRecord::Schema.define(version: 20171015164242) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.string   "slug",       default: ""
+  end
+
+  create_table "latest_articles", force: :cascade do |t|
+    t.string   "name",         default: ""
+    t.string   "article_slug", default: ""
+    t.string   "section_name", default: ""
+    t.string   "section_slug", default: ""
+    t.integer  "article_id"
+    t.datetime "published_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "most_visited_articles", force: :cascade do |t|
+    t.string   "name",          default: ""
+    t.string   "article_slug",  default: ""
+    t.string   "article_image", default: ""
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "notifications", force: :cascade do |t|

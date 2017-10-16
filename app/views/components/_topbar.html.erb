@@ -28,7 +28,8 @@
 		<div class="search">
 			 <% if !request.original_url.include? "users/password" and !request.original_url.include? "users/sign_in"%>
 				<%= form_for :article, url: {controller: "titlepage", action: 'search_article'}  do |f|%>
-		          <%= f.autocomplete_field(:articable_id, autocomplete_article_name_path, :id_element => '#article_id', class: "search__box", placeholder: "Búsqueda", type: "search", value: "" ) %>
+		          <% f.autocomplete_field(:articable_id, autocomplete_article_name_path, :id_element => '#article_id', class: "search__box", placeholder: "Búsqueda", type: "search", value: "" ) %>
+		          <%= f.text_field :articable_id, class: "search__box", placeholder: "Búsqueda", type: "search", value: ""  %>
 					<%= image_tag "search.svg", class: "search__image" %>
 			          <%= hidden_field_tag :article_id, :id => "article_id" %>
 		       		<%= image_tag "search.svg", class: "search__image" %>

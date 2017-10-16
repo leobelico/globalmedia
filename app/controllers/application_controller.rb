@@ -52,10 +52,16 @@ class ApplicationController < ActionController::Base
   helper_method :get_collaborators
   helper_method :get_complaints
   helper_method :get_section_articles
+  helper_method :get_cover_articles
 
+  def get_cover_articles(id)
+    CoverArticle.joins("LEFT OUTER JOIN highlights ON highlights.article_id = cover_articles.article_id").where("cover_articles.section_id = #{id} AND highlights.article_id IS NULL").order(article_highlight: :asc, published_at: :asc).last(4).reverse    
+
+    
+  end
   def get_complaints
-    @complaints = Article.limit(4000).where(articable_id: 11, published: true).order(updated_at: "ASC").last(6).reverse
-
+    
+   @complaints = Section.find(11).articles.order(updated_at: "ASC").last(6).reverse
   end
 
   def get_collaborators
@@ -234,15 +240,8 @@ class ApplicationController < ActionController::Base
 
   def latest_news
     
-    # @articles = Article.where(published: true, created_at: (Date.today - 1.month).beginning_of_month..(Date.today).end_of_month).order(created_at: "ASC").last(8).reverse
+    @articles = LatestArticle.all.sort_by{ |t| t.published_at }.last(8).reverse
     
-    @articles = Article.limit(2000).joins("INNER JOIN sections ON sections.id = articles.articable_id").where("articles.published = ? AND articles.created_at >= ? AND articles.created_at <= ? AND articles.published_at IS NOT NULL", true, (Date.today - 1.month).beginning_of_month, (Date.today).end_of_month).select('articles.name, articles.created_at, articles.scheduled_time, articles.published_at, articles.articable_id, articles.articable_type, articles.slug, sections.name AS section_name, articles.updated_at').sort_by{ |t| t.published_at }.last(8).reverse
-
-
-    
-
-
-
   end
   
   def get_section_highlight(id)
@@ -253,30 +252,21 @@ class ApplicationController < ActionController::Base
   end
 
   def get_recommendations_per_section(id)
-
-    # section = Section.find(id)
     @articles = Article.joins("INNER JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.section_id = ? AND articles.id != ?", id, session[:article_id]).last(3)
-    # @articles = []
-    # SectionHighlight.where(section_id: id).each do |section| 
-    #     @articles << section.article
-    # end
-
-    # current_article = []
-    # if session[:article_id]
-    #   if Article.exists?(session[:article_id])
-    #     current_article << Article.find(session[:article_id])
-    #   end
-    # end
-    # # p "finish get_recommendations_per_section"
-
-    # return @articles - current_article
-    #SectionHighlight.where(section: section).last(3)
-
   end
 
-  def get_global_recommendations
-    @articles = Article.where("global_recommendation = ? AND published = ?", true, true).order(updated_at: "ASC").last(3)  
+  def get_global_recommendations(id)
+    
+    if id != 0
+      @articles = GlobalRecommendationArticle.where(section_id: id).last(3) 
+      if @articles.count == 0
+        @articles = GlobalRecommendationArticle.where(global_recommendation: true).last(3) 
+      end
+    else
+      @articles = GlobalRecommendationArticle.where(global_recommendation: true).last(3) 
+    end 
 
+    return @articles
   end
 
   def get_todays_keywords
@@ -310,8 +300,8 @@ class ApplicationController < ActionController::Base
   def most_visited
     #@hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
 
-    @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ?", false,2.hours.ago, Time.now).order("hits.number").last(3)
-
+    @articles = MostVisitedArticle.all
+    
     # Táctica Nacional, Internacional, Farándula, Entretenimiento 
 
 #1427 
