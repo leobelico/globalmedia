@@ -45,3 +45,17 @@ task :publish_highlights => :environment do
 
 	end
 end
+
+
+task :most_visited => :environment do 
+	articles = Article.limit(4000).joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ?", false,2.hours.ago, Time.now).order("hits.number").last(4)
+	if MostVisitedArticle.all.count >= 1
+		MostVisitedArticle.destroy_all
+	end
+	articles.each do |article|
+		if article.global_recommendation == false
+			MostVisitedArticle.create(article_slug: article.slug, name: article.name, article_image: article.image)
+		end
+	end
+
+end
