@@ -28,5 +28,25 @@
 			<% end %>
 		<% end %>		
 	</div>
-	<%= render "components/sidebar", article: "global", banner: "" %>
+	<div class="sidebar">
+	<% if true %>
+		<% cache(latest_news) do %>
+			<%= render "components/latest-news",articles: latest_news %>
+		<% end %>
+		<% cache(get_global_recommendations(0)) do %>
+
+			<%= render "components/recommendations", articles: get_global_recommendations(0) %>
+		<% end %>
+
+		<% cache(most_visited, expires_in: 2.hours) do %>
+			<%= render "components/most-visited", articles: most_visited %>
+		<% end %>
+		
+	<% end %>
+	
+	
+
+	
+</div>
+
 </div>
