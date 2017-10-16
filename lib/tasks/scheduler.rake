@@ -5,10 +5,10 @@ task :publish_articles => :environment do
   articles.update_all(published: true, published_at: DateTime.now)
   articles.each do |article|
 	  if LatestArticle.count < 8
-			LatestArticle.create(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
+			LatestArticle.create(article_id: article.id, article_slug: article.slug, name: article.name, section_name: article.articable.name, section_slug: article.articable.slug, published_at: article.published_at)
 		else
 			last_article = LatestArticle.order(published_at: :asc).last(8).reverse.last.destroy
-			LatestArticle.create(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
+			LatestArticle.create(article_id: article.id, article_slug: article.slug, name: article.name, section_name: article.articable.name, section_slug: article.articable.slug, published_at: article.published_at)
 		end	
 	end
   
