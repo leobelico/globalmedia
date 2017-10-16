@@ -4,7 +4,7 @@ class Panel::ArticlesController < ApplicationController
 	before_action :check_create_permission, only: [:new, :create, :edit, :update]
 	before_action :check_delete_permission, only: [:destroy]
 	before_action :set_article, only: [:show, :edit, :gallery_images, :update, :destroy]
-	autocomplete :article, :name
+	autocomplete :article, :slug
 	before_action :set_s3_direct_post, only: [:new, :create, :edit, :gallery_images, :update]
 	
 	def publish_now
@@ -18,7 +18,7 @@ class Panel::ArticlesController < ApplicationController
 	end
 	def index
 		if params[:name]
-			@articles = Article.where('lower(name) LIKE ?', "%#{params[:name]}%").paginate(page: params[:page], per_page: 20)
+			@articles = Article.where('slug LIKE ?', "%#{params[:name]}%").paginate(page: params[:page], per_page: 20)
 			# p(params[:name])
 		else 
 			@articles = Article.limit(1000).order(created_at: "DESC").paginate(page: params[:page], per_page: 20)

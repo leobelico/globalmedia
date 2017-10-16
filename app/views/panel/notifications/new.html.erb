@@ -30,7 +30,8 @@
 
 	<div class="field field--string field--autocomplete">
 		<label>Contenido:</label>		
-		<%= f.autocomplete_field(:key_id, autocomplete_article_name_panel_notifications_path, :id_element => '#key_id', class: "", placeholder: "Buscar artículo", type: "search", value: "" ) %>
+		<% f.autocomplete_field(:key_id, autocomplete_article_name_panel_notifications_path, :id_element => '#key_id', class: "", placeholder: "Buscar artículo", type: "search", value: "" ) %>
+		<%= f.text_field :key_id, placeholder: "Coloca el id del artículo aquí" %>
 		<%= f.autocomplete_field(:key_id, autocomplete_station_name_panel_notifications_path, :id_element => '#key_id', class: "", placeholder: "Buscar estación", type: "search", value: "" ) %>
 		<%= f.autocomplete_field(:key_id, autocomplete_camera_name_panel_notifications_path, :id_element => '#key_id', class: "", placeholder: "Buscar cámara", type: "search", value: "" ) %>
 		<%= f.hidden_field :key_id, :id => "key_id" %>

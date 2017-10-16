@@ -18,10 +18,10 @@
 		<%= f.text_field :article_id %>		
 		<% if false %>
 			<% if @highlight.new_record? %>
-				<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
+				<%= f.autocomplete_field(:article_id, autocomplete_article_slug_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
 				<%= hidden_field_tag :article_id, :id => "article_id", class:"search-results", style:"background-color:#fff;" %> 
 			<% else %>
-				<%= f.autocomplete_field(:article_id, autocomplete_article_name_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @highlight.article.name) %>
+				<%= f.autocomplete_field(:article_id, autocomplete_article_slug_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @highlight.article.name) %>
 				<%= f.hidden_field :article_id, :id => "article_id", value: @highlight.article.id %>
 
 			<% end %>
