@@ -13,13 +13,13 @@ task :publish_articles => :environment do
 
 		if Section.where(visible: true).include?(article.articable)
 			if CoverArticle.count < 10
-				CoverArticle.create(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, section_id: article.articable_id, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
+				CoverArticle.create(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
 			else
 				last_article = CoverArticle.where(section_id: article.articable_id).order(published_at: :asc).last(10).reverse.last
 				if last_article
 					if last_article.destroy
 				end
-				CoverArticle.create(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, section_id: article.articable_id, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
+				CoverArticle.create(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
 			end
 		end	
 	end
