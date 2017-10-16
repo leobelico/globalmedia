@@ -1,0 +1,2 @@
+class CoverArticle < ApplicationRecord
+end
