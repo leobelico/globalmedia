@@ -24,83 +24,28 @@
 </div>
 
 
+
 <div class="table card">
+	<div class="table__row">
+		<div class="table__cell">Recomendaciones de la sección:</div>
+	</div>
 	<div class="table__row">
 		<p class="table__cell f-3">Título:</p>
 		<p class="table__cell">Vistas Totales:</p>
 		<p class="table__cell">Editar:</p>
-		<p class="table__cell">Destacado:</p>
-		<p class="table__cell">Global Recomienda:</p>
 	</div>
-	<% @articles.each do |article| %>
+	<% get_global_recommendations(@section.id).each do |article| %>
 		<div class="table__row">
-			<%= link_to article.name, article, class: "table__cell f-3" %>
+			<%= link_to article.name, article_path(article.article_slug), class: "table__cell f-3" %>
  				<p class="table__cell">
-				<% if article.hits.last %>
-					<%= article.total_hits_in_current_month %>
+				<% if Article.find(article.article_id).hits.last %>
+					<%= Article.find(article.article_id).total_hits_in_current_month %>
 				<% else %>
 					0
 				<% end %>
 			</p>
-			<%= link_to "Editar", edit_panel_article_path(article), class: "table__cell edit" %>
+			<%= link_to "Editar", edit_panel_article_path(article.article_slug), class: "table__cell edit" %>
+		</div>
 			
-			<% if article.highlight == true %>
-				<div class="table__cell">
-					
-					<div class="toggle toggle--active set-highlight"  data-id="<%= article.id %>" data-highlight="<%= article.highlight %>" data-slug="<%= article.slug %>">
-						<div class="toggle__button"></div>
-						<div class="toggle__indicator"></div>
-						<div class="toggle__background"></div>
-					</div>
-				</div>
-			<% else %>
-				<div class="table__cell">
-					<div class="toggle toggle--inactive set-highlight" data-id="<%= article.id %>" data-slug="<%= article.slug %>">
-						<div class="toggle__button"></div>
-						<div class="toggle__indicator"></div>
-						<div class="toggle__background"></div>
-					</div>
-				</div>
-			<% end %>			
-			<% if article.global_recommendation == true %>
-				<div class="table__cell">
-					
-					<div class="toggle toggle--active set-recommendation"  data-id="<%= article.id %>" data-highlight="<%= article.highlight %>" data-slug="<%= article.slug %>">
-						<div class="toggle__button"></div>
-						<div class="toggle__indicator"></div>
-						<div class="toggle__background"></div>
-					</div>
-				</div>
-			<% else %>
-				<div class="table__cell">
-					<div class="toggle toggle--inactive set-recommendation" data-id="<%= article.id %>" data-slug="<%= article.slug %>">
-						<div class="toggle__button"></div>
-						<div class="toggle__indicator"></div>
-						<div class="toggle__background"></div>
-					</div>
-				</div>
-			<% end %>
-			<script>
-				TweenMax.to(".toggle.toggle--active .toggle__button", .3, { x: 25, ease: Power2.easeOut });
-				TweenMax.to(".toggle.toggle--active .toggle__background", .425, { scale: "0", ease: Power2.easeOut });
-			</script>
-<!-- 		
-		</div>
-	<% end %>
-</div>
-<%= will_paginate @articles, class: "card admin-pagination" %>
-
-<div class="table card">
-	<div class="table__row">
-		<p class="table__cell">Recomendaciones actuales:</p>
-		<p class="table__cell">Extracto:</p>
-		<p class="table__cell">Sección:</p>
-	</div>
-	<% @recommendations.each do |recommendation| %>
-		<div class="table__row">
-			<%= link_to truncate(recommendation.article.name, length:  40), recommendation.article, class: "table__cell" %>
-			<p class="table__cell"><%= truncate(recommendation.article.short_description, length:  60) %></p>
-			<p class="table__cell"><%= recommendation.article.articable.name %></p>
-		</div>
 	<% end %>
 </div>

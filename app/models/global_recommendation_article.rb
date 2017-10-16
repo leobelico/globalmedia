@@ -1,0 +1,2 @@
+class GlobalRecommendationArticle < ApplicationRecord
+end

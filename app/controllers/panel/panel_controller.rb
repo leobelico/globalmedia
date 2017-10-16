@@ -8,24 +8,22 @@ class Panel::PanelController < ApplicationController
 
 
 	def set_global_recommendations
-		# Rails.cache.clear
-		# expires_action :get_global_recommendations
-		# cache.delete("views/global-recommendations/54f7eee5cf33ab592d78a02aade03259")
 		
-
-		articles_in_highlights = Article.where(global_recommendation: true)
-		articles_in_highlights.update_all(global_recommendation: false)
+    	GlobalRecommendationArticle.where(global_recommendation: true).delete_all
+		
 		if params[:panel][:first_article_id] != ""
 			first_article = Article.find(params[:panel][:first_article_id])
-			first_article.update_attributes(global_recommendation: true)
+			GlobalRecommendationArticle.create(name: first_article.name, article_slug: first_article.slug, article_image: first_article.image, global_recommendation: true, article_id: first_article.id)
 		end
 		if params[:panel][:second_article_id]  != ""
 			second_article = Article.find(params[:panel][:second_article_id])
-			second_article.update_attributes(global_recommendation: true)
+			GlobalRecommendationArticle.create(name: second_article.name, article_slug: second_article.slug, article_image: second_article.image, global_recommendation: true, article_id: second_article.id)
+
 		end
 		if params[:panel][:third_article_id]  != ""
 			third_article = Article.find(params[:panel][:third_article_id])
-			third_article.update_attributes(global_recommendation: true)
+			GlobalRecommendationArticle.create(name: third_article.name, article_slug: third_article.slug, article_image: third_article.image, global_recommendation: true, article_id: third_article.id)
+
 			
 		end
 

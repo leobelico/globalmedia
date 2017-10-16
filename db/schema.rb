@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016162845) do
+ActiveRecord::Schema.define(version: 20171016173403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,17 @@ ActiveRecord::Schema.define(version: 20171016162845) do
     t.string   "operating_system"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "global_recommendation_articles", force: :cascade do |t|
+    t.string   "name",                  default: ""
+    t.string   "article_slug",          default: ""
+    t.string   "article_image",         default: ""
+    t.integer  "section_id"
+    t.boolean  "global_recommendation", default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "article_id"
   end
 
   create_table "hashtags", force: :cascade do |t|

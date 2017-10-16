@@ -134,29 +134,29 @@ class Panel::SectionsController < ApplicationController
 	def select_global_recommendations
 
 		@section = Section.find_by_slug(params[:section_slug])
-		@recommendations = SectionHighlight.where(section: @section)
+		@recommendations = GlobalRecommendationArticle.where(section_id: @section.id)
 
 		session[:section_id] = @section.id
 
 	end
 	def set_global_recommendations
 		@section = Section.find_by_slug(params[:section_slug])
-		@recommendations = SectionHighlight.where(section: @section)
-		@recommendations.destroy_all
+		@recommendations = GlobalRecommendationArticle.where(section_id: @section.id).delete_all
+		GlobalRecommendationArticle.where(section_id: 1).delete_all
+		
 		if params[:panel][:first_article_id] != ""
 			first_article = Article.find(params[:panel][:first_article_id])
-			
-			SectionHighlight.create(article_id: first_article.id, section_id: @section.id )
+			GlobalRecommendationArticle.create(name: first_article.name, article_slug: first_article.slug, article_image: first_article.image, section_id: @section.id, article_id: first_article.id)
 		end
 		if params[:panel][:second_article_id] != ""
 			second_article = Article.find(params[:panel][:second_article_id])
+			GlobalRecommendationArticle.create(name: second_article.name, article_slug: second_article.slug, article_image: second_article.image, section_id: @section.id, article_id: second_article.id)
 			
-			SectionHighlight.create(article_id: second_article.id, section_id: @section.id )
 		end
 		if params[:panel][:third_article_id] != ""
 			third_article = Article.find(params[:panel][:third_article_id])
+			GlobalRecommendationArticle.create(name: third_article.name, article_slug: third_article.slug, article_image: third_article.image, section_id: @section.id, article_id: third_article.id)
 			
-			SectionHighlight.create(article_id: third_article.id, section_id: @section.id )
 		end
 
 		redirect_to panel_section_path(@section)

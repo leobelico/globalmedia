@@ -249,9 +249,19 @@ class ApplicationController < ActionController::Base
     @articles = Article.joins("INNER JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.section_id = ? AND articles.id != ?", id, session[:article_id]).last(3)
   end
 
-  def get_global_recommendations
-    @articles = Article.where("global_recommendation = ? AND published = ? AND id != ? ", true, true, session[:article_id]).order(updated_at: "ASC").last(3)  
+  def get_global_recommendations(id)
+    print "IDDDD " + id.to_s
+    
+    if id != 0
+      @articles = GlobalRecommendationArticle.where(section_id: id).last(3) 
+      if @articles.count == 0
+        @articles = GlobalRecommendationArticle.where(global_recommendation: true).last(3) 
+      end
+    else
+      @articles = GlobalRecommendationArticle.where(global_recommendation: true).last(3) 
+    end 
 
+    return @articles
   end
 
   def get_todays_keywords
