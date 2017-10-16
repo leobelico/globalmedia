@@ -55,6 +55,7 @@ class ApplicationController < ActionController::Base
 
   def get_complaints
     @complaints = Article.limit(4000).where(articable_id: 11, published: true).order(updated_at: "ASC").last(6).reverse
+
   end
 
   def get_collaborators
