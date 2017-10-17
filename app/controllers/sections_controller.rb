@@ -11,13 +11,13 @@ class SectionsController < ApplicationController
 	
 	def sports
 		session[:article_id] = nil
-		if Section.find(name: 1024)
-			@intl = Section.find(name: 1024) 
+		if Section.find(1024)
+			@intl = Section.find(1024) 
 			@intl_articles = @intl.articles.last(6)
 			@related_sections = RelatedSection.where(section: @intl)
 		end 
 		# if Section.find_by(name: "Táctica Internacional")
-		# 	@intl = Section.find(name: "Táctica Internacional") 
+		# 	@intl = Section.find("Táctica Internacional") 
 		# 	@intl_articles = @intl.articles.last(6)
 		# 	@related_sections = RelatedSection.where(section: @intl)
 		# end 

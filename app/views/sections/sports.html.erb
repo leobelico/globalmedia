@@ -47,7 +47,7 @@
 
 
 	</div>
-	<% if false %>
+	<% if true %>
 		<% if @intl.articles.count > 0 %>
 			<% if get_banner(@intl, "Section", "Mediano" ).count > 0 %>
 				<%= render "components/sidebar", article: @intl.articles.first, banner: get_banner(@intl, "Section", "Mediano" ) %>
