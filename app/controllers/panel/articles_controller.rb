@@ -150,6 +150,7 @@ class Panel::ArticlesController < ApplicationController
 
 		if @article.update(article_params)
 			if @article.published? 	
+				UpdateArticleJob.perform_later @article
 
 				if Section.where(visible: true).include?(@article.articable)
 					does_cover_article_exists = CoverArticle.where(article_id: @article.id)
