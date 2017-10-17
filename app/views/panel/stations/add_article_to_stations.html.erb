@@ -8,8 +8,9 @@
 	<div class="field">
 		
 		<label>Artículo</label>
-		<%= f.autocomplete_field(:first_article_id, autocomplete_article_slug_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
+		<% f.autocomplete_field(:first_article_id, autocomplete_article_name_panel_articles_path, :id_element => '#first_article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search" ) %>
 		<%= f.hidden_field :station_id, value: @station.id %>
+		<%= f.text_field :first_article_id, placeholder: "Coloca el id del artículo aquí." %>
 	</div>
 <% end %>
 <script>

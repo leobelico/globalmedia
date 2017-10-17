@@ -52,7 +52,7 @@ class Panel::StationsController < ApplicationController
 	def set_station_articles
 		station = Station.find(params[:panel][:station_id])
 		
-		first_article = Article.find_by_name(params[:panel][:first_article_id])
+		first_article = Article.find(params[:panel][:first_article_id])
 		if station.id
 			r = ArticleRelationship.create(article: first_article, articable_id: station.id, articable_type: "Station" )
 		else

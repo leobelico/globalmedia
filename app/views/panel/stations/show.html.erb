@@ -109,14 +109,16 @@
 
 	</div>
 	<% @station.article_relationships.last(20).each do |relationship| %>
-		<div class="table__row">
-			<%= link_to truncate(relationship.article.name, length:  60), relationship.article, class: "table__cell" %>
-			<p class="table__cell"><%= truncate(relationship.article.short_description, length:  120) %></p>
-			<p class="table__cell"><%= relationship.article.articable.name %></p>
-			<p class="table__cell"><%= relationship.article.created_at %></p>
+		<% if relationship.article %>
+			<div class="table__row">
+				<%= link_to truncate(relationship.article.name, length:  60), relationship.article, class: "table__cell" %>
+				<p class="table__cell"><%= truncate(relationship.article.short_description, length:  120) %></p>
+				<p class="table__cell"><%= relationship.article.articable.name %></p>
+				<p class="table__cell"><%= relationship.article.created_at %></p>
 
-			<%= link_to	"Eliminar", panel_article_relationship_path(relationship), method: :delete, class: "table__cell delete" %>
-		</div>
+				<%= link_to	"Eliminar", panel_article_relationship_path(relationship), method: :delete, class: "table__cell delete" %>
+			</div>
+		<% end %>
 	<% end %>
 </div>
 

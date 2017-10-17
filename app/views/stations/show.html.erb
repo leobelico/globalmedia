@@ -3,13 +3,17 @@
 <script src="https://vjs.zencdn.net/6.2.7/video.js" ></script>			
 <script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js" ></script>
 
+	<h1 data-chrome class="station__name">Si tu video no se ve correctamente, da click <a href="#">aquí</a></h1>
+
 <% if @station.news == false %>
 	<div class="interface--row">
 		<div class="main-content station">
 			<div class="station__header">
 				<%= image_tag @station.image, class: "station__image" %>
+
 				<div class="header__info">
 					<h4 class="station__name"><%= @station.name %></h4>
+
 					<p class="station__description"><%= @station.description %></p>
 					<div class="social-media" data-article="<%= station_url(@station) %>">
 						<%= link_to ("whatsapp://send?text=" + station_url(@station)), class: "social-media__link whatsapp", target: "_blank" do %>
@@ -26,15 +30,15 @@
 							<%= image_tag "copy.svg" %>
 						</a> 
 					</div>
-
+		
 				</div>
 			</div>
+
 			<% if !@station.video? and !@station.news? %>
 				<audio controls autoplay id="audio" controlsList="nodownload">
 					<source src="<%= @station.stream_url %>" type="audio/mpeg">	
 				</audio>
 			<% else %>	
-
 
 				  <video id="video" class="video-js" controls  preload="auto" width="640" height="264">
 				  		<!-- <source src="https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced.sdp" type="video/sdp"> -->
@@ -85,6 +89,7 @@
 				</div>
 
 			</div>
+
 		<% if @station.playlist_1 != "" %>
 			<div class="radio-banner__tune-in">Playlists recomendadas para ti</div>
 			<div class="playlists">
@@ -151,6 +156,8 @@
 <% end %>
 
 <script type="text/javascript">
+	$('[data-chrome]').hide();
+
 	function requestFlashPermission() {
 	    var iframe = document.createElement('iframe');
 	    iframe.src = 'https://get.adobe.com/flashplayer';
@@ -167,9 +174,12 @@
 	var canRequestPermission =  isNewChrome;
 
 	if (!swfobject.hasFlashPlayerVersion('10') && canRequestPermission) {
+		$('[data-chrome]').show();
 	    requestFlashPermission();
 	    // Chrome requires user's click in order to allow iframe embeding
-	    $(window).one('click', requestFlashPermission);
+	    $(window).one('click', requestFlashPermission);	
 	}
+
+
 </script>
 

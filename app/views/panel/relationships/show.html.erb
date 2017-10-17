@@ -27,7 +27,7 @@
 	</div>
 	 
 	<% @relationship.article_relationships.each do |relationship| %>
-		<% if relationship.article %>
+		<% if relationship.article and relationship %>
 			<div class="table__row">
 				<%= link_to truncate(relationship.article.name, length:  60), relationship.article, class: "table__cell" %>
 				<p class="table__cell"><%= truncate(relationship.article.short_description, length:  120) %></p>
