@@ -109,11 +109,11 @@ class Panel::SectionsController < ApplicationController
 		# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
 		# Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")
 
-		# @section = Section.find_by_slug(params[:section_slug])
-		# Article.where(articable_id: @section.id).update_all(highlight: false)
+		@section = Section.find_by_slug(params[:section_slug])
+		Article.where(articable_id: @section.id).update_all(highlight: false)
 		
 		article = Article.find(params[:panel][:article_id])
-		# article.update_attributes(highlight: true)
+		article.update_attributes(highlight: true)
 
 
 		if Section.where(visible: true).include?(article.articable)
