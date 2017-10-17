@@ -117,7 +117,7 @@ class Panel::SectionsController < ApplicationController
 
 
 		if Section.where(visible: true).include?(article.articable)
-			if CoverArticle.count < 10
+			if CoverArticle.where(section_id: article.articable_id).count < 10
 				last_article = CoverArticle.where(section_id: article.articable_id, article_highlight: true)
 				if last_article
 					last_article.delete_all
