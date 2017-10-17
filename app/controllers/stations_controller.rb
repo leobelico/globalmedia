@@ -7,6 +7,7 @@ class StationsController < ApplicationController
 		@news_channels = Station.where(news: true).order(frequency: "ASC")
 	end
 	def show
+		session[:article_id] = nil
 		if params[:tag]
 			redirect_to search_results_path(params[:tag])
 		else

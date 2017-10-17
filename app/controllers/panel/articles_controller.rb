@@ -161,7 +161,7 @@ class Panel::ArticlesController < ApplicationController
 							CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, section_id: @article.articable_id, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
 						end
 					else
-						does_cover_article_exists.first.update_attributes(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, section_id: @article.articable_id, article_highlight:  @article.highlight, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
+						does_cover_article_exists.first.update_attributes(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, section_id: @article.articable_id, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
 						
 						
 

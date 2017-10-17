@@ -80,7 +80,7 @@
 		<% end %>
 
 	</div>
-		<% if false %>
+		<% if true %>
 			<% if get_banner(@section, "Section", "Mediano" ).count > 0 %>
 				<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Section", "Mediano" ) %>
 			<% else %>

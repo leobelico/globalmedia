@@ -60,54 +60,13 @@
 </div>
 <% end %>
 <div class="section-previews-container">
-	
-	<!-- SAN LUIS -->
-	<% cache(get_section_articles(1)) do %>
-		<%= render "/layouts/section_preview", articles: get_section_articles(1), section: Section.find(1) %>
-	<% end %>
+	<% @sections.each do |section| %>
+		<!-- SAN LUIS -->
+		<% cache(get_cover_articles(section.id)) do %>
+			<%= render "/layouts/cover_section_preview", articles: get_cover_articles(section.id) %>
+		<% end %>
 
-	
-
-	<!-- MÉXICO -->
-	<% cache(get_section_articles(3)) do %>
-		<%= render "/layouts/section_preview", articles: get_section_articles(3), section: Section.find(3) %>
 	<% end %>
-
-	<!-- MUNDO -->
-	<% cache(get_section_articles(4)) do %>
-		<%= render "/layouts/section_preview", articles: get_section_articles(4), section: Section.find(4) %>
-	<% end %>
-
-	<!-- Negocios -->
-	<% cache(get_section_articles(7)) do %>
-		<%= render "/layouts/section_preview", articles: get_section_articles(7), section: Section.find(7) %>
-	<% end %>
-
-	<!-- Tactica local -->
-	<% cache(get_section_articles(1025)) do %>
-		<%= render "/layouts/section_preview", articles: get_section_articles(1025), section: Section.find(1025) %>
-	<% end %>
-
-	<!-- Tecnologia -->
-	<% cache(get_section_articles(1013)) do %>
-		<%= render "/layouts/section_preview", articles: get_section_articles(1013), section: Section.find(1013) %>
-	<% end %>
-
-	<!-- Espectaculos -->
-	<% cache(get_section_articles(5)) do %>
-		<%= render "/layouts/section_preview", articles: get_section_articles(5), section: Section.find(5) %>
-	<% end %>
-
-	<!-- Tacnac e in -->
-	<% cache(get_section_articles(1024)) do %>
-		<%= render "/layouts/section_preview", articles: get_section_articles(1024), section: Section.find(1024) %>
-	<% end %>
-
-	<!-- Entretenimiento -->
-	<% cache(get_section_articles(21)) do %>
-		<%= render "/layouts/section_preview", articles: get_section_articles(21), section: Section.find(21) %>
-	<% end %>
-			
 	
 
 

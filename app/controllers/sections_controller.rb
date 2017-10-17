@@ -10,6 +10,7 @@ class SectionsController < ApplicationController
 	end
 	
 	def sports
+		session[:article_id] = nil
 		if Section.find(name: 1024)
 			@intl = Section.find(name: 1024) 
 			@intl_articles = @intl.articles.last(6)
@@ -26,6 +27,7 @@ class SectionsController < ApplicationController
 		end
 	end
 	def corporation 
+		session[:article_id] = nil
 		@section = Section.find_by(slug: params[:format])
    		@highlight = Article.where(articable_id: @section.id, highlight: true, published: true).order(updated_at: "DESC").first
 		@articles = @section.articles.paginate(page: params[:page], per_page: 3)
@@ -35,9 +37,10 @@ class SectionsController < ApplicationController
 
 	end 
 	def show
+		session[:article_id] = nil
 		#articles = @section.articles	
 		@related_sections = RelatedSection.where(section: @section)	
-  		@articles = Article.where("published = true AND articable_id = ?", @section.id).order(highlight: :desc, created_at: :desc).paginate(page: params[:page], per_page: 13)
+  		@articles = Article.where("published = true AND articable_id = ? AND published_at IS NOT NULL", @section.id).order(highlight: :desc, published_at: :desc).paginate(page: params[:page], per_page: 13)
 
 	end
 

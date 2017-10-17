@@ -42,7 +42,7 @@ class TitlepageController < ApplicationController
 		@highlights = Highlight.where(published: true).order(order: "ASC")
 		
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')
-		# @sections = Section.where("visible = 'true' AND name != 'Último Momento'").order(order: "ASC")
+		@sections = Section.where("visible = 'true' AND name != 'Último Momento'").order(order: "ASC")
 
 		
  		

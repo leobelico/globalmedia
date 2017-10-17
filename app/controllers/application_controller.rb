@@ -55,8 +55,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_cover_articles
 
   def get_cover_articles(id)
-    CoverArticle.joins("LEFT OUTER JOIN highlights ON highlights.article_id = cover_articles.article_id").where("cover_articles.section_id = #{id} AND highlights.article_id IS NULL").order(article_highlight: :asc, published_at: :asc).last(4).reverse    
-
+    CoverArticle.joins("LEFT OUTER JOIN highlights ON highlights.article_id = cover_articles.article_id").where("cover_articles.section_id = #{id} AND highlights.article_id IS NULL").order(article_highlight: :asc, published_at: :asc).last(4).reverse
     
   end
   def get_complaints
@@ -258,12 +257,24 @@ class ApplicationController < ActionController::Base
   def get_global_recommendations(id)
     
     if id != 0
-      @articles = GlobalRecommendationArticle.where(section_id: id).last(3) 
-      if @articles.count == 0
-        @articles = GlobalRecommendationArticle.where(global_recommendation: true).last(3) 
+      if session[:article_id]
+        @articles = GlobalRecommendationArticle.where("section_id = ? AND article_id != ?", id, session[:article_id]).last(3) 
+        if @articles.count == 0
+           @articles = GlobalRecommendationArticle.where("global_recommendation = ? AND article_id != ?", true, session[:article_id]).last(3) 
+        end
+      else
+        @articles = GlobalRecommendationArticle.where(section_id: id).last(3) 
+        if @articles.count == 0
+          @articles = GlobalRecommendationArticle.where(global_recommendation: true).last(3) 
+        end
       end
     else
-      @articles = GlobalRecommendationArticle.where(global_recommendation: true).last(3) 
+      if session[:article_id]
+        @articles = GlobalRecommendationArticle.where("global_recommendation = ? AND article_id != ?", true, session[:article_id]).last(3)
+      else
+        @articles = GlobalRecommendationArticle.where(global_recommendation: true).last(3)
+
+      end 
     end 
 
     return @articles
@@ -299,8 +310,9 @@ class ApplicationController < ActionController::Base
 
   def most_visited
     #@hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
+   
+      @articles = MostVisitedArticle.all
 
-    @articles = MostVisitedArticle.all
     
     # Táctica Nacional, Internacional, Farándula, Entretenimiento 
 
