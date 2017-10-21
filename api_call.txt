@@ -1,0 +1,24 @@
+glatest_collaborator_articles
+laal
+curl -H http://localhost:3000/api/v1/latest_collaborator_articles?page=1
+
+curl http://localhost:3000/api/v1/latest_special_investigation_articles?page=1
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"name":"ilse"}' http://localhost:3000/api/v1/search
+
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -H "Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0OTI4Mjg0ODR9.X20DM8uFO5O4gbrz83RB_5EEE2aNtlq5dgLHR7K_p0I" -X POST -d '{"affle_id":"1"}'r http://localhost:3000/api/v1/favorites
+
+
+curl -H "Accept: application/json" -H "Content-type: application/json" http://localhost:3000/api/v1/search_hashtag/1
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"id":"1"}' http://localhost:3000/api/v1/search_hashtag?page=1
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"article_id":"1"}' http://localhost:3000/api/v1/related_by_hashtags?page=1
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"operating_system":"ios", "token": "123412341234"}' http://localhost:3000/api/v1/devices
+
+http://localhost:3000/api/v1/devices?operating_system=ios?token=132412341234
+
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X GET https://global-media.herokuapp.com/api/v1/sections/1

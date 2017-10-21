@@ -1,0 +1,2 @@
+class LatestArticle < ApplicationRecord
+end

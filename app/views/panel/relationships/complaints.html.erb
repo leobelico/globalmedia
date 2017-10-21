@@ -1,0 +1,33 @@
+<% if false %>
+	<div class="panel__header">
+		<h2 class="title panel__title"><span class="current">Denuncia Global</span></h2>
+		<div class="panel__actions">
+			<%= link_to "Nueva Denuncia", panel_new_complaint_path, class: "button" %>
+		</div>
+	</div>
+	<div class="table card">
+		<div class="table__row">
+			<p class="table__cell name">Título:</p>
+			<p class="table__cell f-3">Descripción:</p>
+			<p class="table__cell">Editar:</p>
+			<p class="table__cell">Eliminar:</p>
+			
+		</div>
+		<% @complaints.each do |complaint| %>
+			<div class="table__row">
+				<%= link_to complaint.name, panel_relationship_path(complaint), class: "table__cell name" %>
+				<p class="table__cell f-3"><%= truncate(complaint.description, length: 40) %></p>	
+
+				
+				<%= link_to	"Editar", edit_panel_relationship_path(complaint), class: "table__cell edit" %>
+				<%= link_to	"Eliminar", panel_relationship_path(complaint), class: "table__cell delete", method: :delete, data: { confirm: "¿Estas seguro de querer eliminar esta nota?" } %>
+			</div>
+		<% end %>
+		<% if @complaints.count == 0 %>
+			<div class="table__row">
+				<p class="table__cell table__empty">No hay denuncias para mostrar</p>
+			</div>
+		<% end %>
+	</div>
+	<%= will_paginate @complaints, class: "card admin-pagination" %>
+<% end %>

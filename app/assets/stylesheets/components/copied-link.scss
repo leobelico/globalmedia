@@ -1,0 +1,17 @@
+.copied-link {
+	opacity:  0; 
+	pointer-events:  none; 
+	position:  fixed; 
+	top:  25%; 
+	left:  50%; 
+	transform:  translate(-50%, -50%);
+	color:  $tertiary; 
+	font-size:  21px; 
+	text-transform:  uppercase; 
+	letter-spacing:  2px; 
+	background-color:  #ffffff; 
+	padding:  12px; 
+	border-radius:  5px; 
+	z-index:  400; 
+	box-shadow:  rgba(0, 0, 0, 0.0980392) 0px 2px 4px 0px;
+}

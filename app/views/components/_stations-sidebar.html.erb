@@ -1,0 +1,14 @@
+<div class="sidebar">
+	<% cache get_global_recommendations(0) do %>
+		<%= render "components/recommendations", articles: get_global_recommendations(0) %>
+	<% end %>
+	<% cache facebook do %>
+
+		<% if facebook == "" or facebook == nil %>
+			<div style="margin-top: 8px; display:  block;"></div>
+			<div class="fb-page" data-href="https://www.facebook.com/GlobalMediaSLP" data-tabs="timeline" data-width="342" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/GlobalMediaSLP" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/GlobalMediaSLP"></a></blockquote></div>
+		<% else %>	
+			<div class="fb-page" data-href="<%= facebook %>" data-tabs="timeline" data-width="342" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="<%= facebook %>" class="fb-xfbml-parse-ignore"><a href="<%= facebook %>"></a></blockquote></div>
+		<% end %>	
+	<% end %>	
+</div>

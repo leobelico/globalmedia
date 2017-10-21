@@ -1,0 +1,17 @@
+<div class="footer">
+	<div class="footer-column">
+		<%= image_tag "logo-white.svg" %>
+		
+	</div>
+	<div class="footer__column">
+		<%= link_to "Inicio", root_path, class: "footer__section-link" %>
+			<%= link_to "Contáctanos", root_url + "/corporativo.Contáctanos", class: "footer__section-link" %>
+			<%= link_to "Anunciate con nosotros", root_url + "/corporativo.Anunciate-con-nosotros", class: "footer__section-link" %>
+			<%= link_to "Quiénes Somos", root_url + "/corporativo.Quiénes-Somos", class: "footer__section-link" %>
+	</div>
+	<p class="disclaimer">2016 Global Media Comunicaciones. Todos los derechos reservados. <br><br>Prohibida la reproducción total o parcial, incluyendo cualquier medio electrónico o mágnetico. <br><br> <%= link_to "Aviso de Privacidad", privacy_policy_path %>  - <%= link_to "Responsable de Estaciones", stations_supervisor_path %>
+	<br><br>
+	<a href="http://nuva.rocks" target="_blank" style="opacity: .6">Página desarrollada por NUVA</a>
+	</p>
+	
+</div>

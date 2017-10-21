@@ -1,0 +1,65 @@
+<div class="interface--row">
+	
+	<div class="section main-content"> 
+
+		<h1 class="section__title" style="background-color:  <%= @intl.color %>; "><%= @intl.name %></h1>
+		<div class="section-articles-container">
+			<% @intl_articles.reverse.each do |article|%>
+				<%= render "components/section-article", article: article %>
+			<% end %>
+		</div>
+		<%= link_to "Ver más notas", section_path(@intl), class: "view-more" %>
+
+		<h1 class="section__title" style="background-color:  <%= @local.color %>;"><%= @local.name %></h1>
+		<div class="section-articles-container">
+			<% @local_articles.reverse.each do |article|%>
+				<%= render "components/section-article", article: article %>
+			<% end %>
+		</div>
+		<%= link_to "Ver más notas", section_path(@local), class: "view-more" %>
+		<!-- NOTAS DEL PROGRAMADOR-->
+			<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
+
+			<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
+		<!-- -->
+		<!--  -->
+
+
+
+
+		<% if get_banner(@intl, "Section", "Grande" ).count > 0 %>
+
+			<%=render "components/big-banner", banner: get_banner(@intl, "Section", "Grande" )  %>
+		<% else %>
+			<% if get_banner(@intl, "Global", "Grande" ).count > 0 %>
+				<%= render "components/big-banner", banner: get_banner(@intl, "Global", "Grande" ) %>
+			<% end %>
+			<br/>
+		<% end %>
+
+		<% if @related_sections.count > 0 %>
+			<div class="radio-banner__tune-in" style="margin-top:  8px; ">También te puede interesar:</div>
+			<% @related_sections.each do |related_section| %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(related_section.section_reference_id, 3), section_name: related_section.section_reference.name, highlight: "" %>
+
+			<% end %>
+		<% end %>
+
+
+	</div>
+	<% if true %>
+		<% if @intl.articles.count > 0 %>
+			<% if get_banner(@intl, "Section", "Mediano" ).count > 0 %>
+				<%= render "components/sidebar", article: @intl.articles.first, banner: get_banner(@intl, "Section", "Mediano" ) %>
+			<% else %>
+				<% if get_banner(@intl, "Global", "Mediano" ).count > 0 %>
+					<%= render "components/sidebar", article: @intl.articles.first, banner: get_banner(@intl, "Global", "Mediano" ) %>
+					
+				<% else %>
+					<%= render "components/sidebar", article: @intl.articles.first, banner: "" %>
+				<% end %>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>
+

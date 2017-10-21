@@ -1,0 +1,15 @@
+<div class="recommendations">
+	<div class="recommendation__header">
+		<%= image_tag "global-recomienda.png" %>
+		
+	</div>
+	<div class="articles-container">
+		
+		<% articles.each do |article| %>
+			<%= link_to article_path(article.article_slug), class: "recommendation" do %>
+				<%= image_tag article.article_image, class: "recommendation__image" %>
+				<h4 class="recommendation__title"><%= article.name %></h4>
+			<% end %>
+		<% end %>
+	</div>
+</div>

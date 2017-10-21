@@ -1,0 +1,44 @@
+<%= form_for [:panel, @highlight], html: { class: "card admin-form" } do |f| %>
+	<% if @highlight.errors.any? %>	
+		<h5><%= pluralize(@highlight.errors.count, "error") %></h5>
+			<ul>
+				<% @highlight.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+				<% end %>
+			</ul>
+	<% end %>
+
+	<div class="field">	
+		<label>Posición del Highlight:</label>
+		<%= f.select :order, options_for_select((1..6).step(1), @highlight.order)%>
+	</div>
+	<div class="field field--string">
+		
+		<label>Artículo:</label>
+		<%= f.text_field :article_id %>		
+		<% if false %>
+			<% if @highlight.new_record? %>
+				<%= f.autocomplete_field(:article_id, autocomplete_article_slug_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
+				<%= hidden_field_tag :article_id, :id => "article_id", class:"search-results", style:"background-color:#fff;" %> 
+			<% else %>
+				<%= f.autocomplete_field(:article_id, autocomplete_article_slug_highlights_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @highlight.article.name) %>
+				<%= f.hidden_field :article_id, :id => "article_id", value: @highlight.article.id %>
+
+			<% end %>
+
+		<% end %>
+
+	</div>
+	<div class="field field--datetime">
+		<label>Fecha programada:</label>
+		<div class="field">
+			<%= f.datetime_select :scheduled_time, datetime_separator: "<span>-</span>", time_separator: "<span>:</span>" %>
+		</div>
+	</div>
+
+<% end %>
+<script>
+	button = $("button.button");
+	form = $(".card.admin-form");
+	saveFormOnButtonClick(button, form); 
+</script>

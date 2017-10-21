@@ -1,0 +1,148 @@
+.table {
+	width:  calc(100% - 48px);  
+	height:  calc(100% - 48px); 
+	padding:  24px; 
+	margin:  24px; 
+	box-sizing:  border-box; 
+	max-width:  initial; 
+}
+.table__row .table__empty {
+	align-items:  center; 
+	justify-content:  center; 
+	text-align:  center; 
+	color: #424242; 
+}
+.rotated {
+	font-size:  10px; 
+	transform-origin:  0% 100% 0%; 
+	transform: rotateZ(-45deg) translate(-8px, -50%);
+}
+.permission {
+	width:  24px !important; 
+	font-size:  10.5px; 
+	flex: 1 !important;
+	margin-right:  8px !important; 
+	img {
+		max-height:  24px; 
+	} 
+}
+.table__row {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	position:  relative; 
+	&:first-of-type {
+		color:  #595959; 
+		font-size:  14px; 
+		font-weight:  600; 
+		.table__cell {
+			padding-top:  0; 
+		}
+		.table__image {
+			width:  120px; 
+			margin-right:  18px; 
+		}
+	}
+	&:not(:first-of-type) {
+		border-top:  solid 1px #ebebeb; 
+		.table__cell:first-child {
+			color:  $tertiary; 
+		}
+		.edit { 
+			color:  $tertiary;
+		}
+		.delete {
+			color: $red; 
+		}
+		.table__image {
+			width:  120px; 
+			height:  120px; 
+			object-fit:  cover; 
+			object-position:  center center; 
+			border-radius:  24px; 
+			margin-top:  12px; 
+			margin-right:  18px; 
+		}		
+	}
+	&:last-of-type {
+		.table__cell {
+			padding-bottom:  0; 
+		}
+	}
+
+}
+.table__empty {
+	color:  #424242 !important; 
+}
+.table__column {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.table__cell{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start; 
+	justify-content: center;
+	padding: 18px 0px;
+	box-sizing: border-box;
+	flex: 1;
+	&:not(:last-child) {
+		margin-right:  18px; 
+	}
+	&.edit:not {
+		color:  $tertiary; 
+	} 
+} 
+
+.f-1 { flex:  1; }
+.f-2 { flex:  2; }
+.f-3 { flex:  3; }
+.f-4 { flex:  4; }
+.f-5 { flex:  5; }
+.f-6 { flex:  6; }
+.f-7 { flex:  7; }
+.f-8 { flex:  8; }
+
+.table__cell.name { flex: 2; }
+.table__cell.short-description { flex:  3; }
+.table__cell.user-name { flex:  1; }
+.table__cell.date { flex:  1; }
+.table__cell.edit { flex:  1; }
+.table__cell.delete { flex:  1; }
+
+.table__cell.weekdays {
+	display:  flex; 
+	flex-direction:  row; 
+	font-weight:  600; 
+	span {
+		margin-right:  8px; 
+	}
+}
+.table__cell.boolean {
+	text-align:  center; 
+	align-items:  center; 
+	justify-content:  center; 
+	img {
+
+		max-height:  24px; 
+		max-width:  24px; 
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,57 @@
+#camera-map {
+	width:  100%; 
+	height:  400px; 
+}
+.cameras .sp__header {
+	margin-top:  8px; 
+	margin-bottom: 16px; 
+	.sp__name {
+		color: $tertiary;
+		padding-bottom:  4px; 
+		width: 100%;
+		border-bottom:  solid 3px $tertiary; 
+	}
+}
+.camera.camera--list {
+	display:  flex; 
+	flex-direction:  column; 
+	margin-bottom:  16px; 
+}
+.camera__name {
+	font-weight:  900; 
+	color:  #212121; 
+	font-size:  18px; 
+	margin-bottom:  8px; 
+}
+.camera__address {
+	font-weight:  400; 
+	font-size:  13.5px; 
+	color:  #616161; 
+}
+
+.camera-grid {
+	width:  100%; 
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  flex-start; 
+	justify-content:  space-between; 
+	flex-wrap:  wrap;
+	.camera__name {
+		margin-top:  8px; 
+	} 
+}
+
+.camera.camera--grid {
+	width:  211.33px;
+	height:  auto; 
+	margin-bottom:  8px; 
+	.camera__image {
+		background:  #dbdbdb; 
+	}
+}
+.camera__image {
+	width:  100%;
+	height: 140px; 
+	object-fit:  cover; 
+	object-position:  center center; 
+}

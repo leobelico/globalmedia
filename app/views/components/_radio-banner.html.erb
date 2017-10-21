@@ -1,0 +1,23 @@
+<div class="radio-banner__tune-in no-border"><div class="led"></div>Sintoniza ahora</div>
+<div class="radio-banner">
+	<% get_current_programs.each do |program| %>
+		<% if action_name == "show" and controller_name == "stations" %>
+			<%= link_to ("/" + program.station.slug), class: "radio-program", target: "_top" do %>
+				<%= image_tag program.image %>
+			<% end %>
+		<% else %>
+			<%= link_to ("/" + program.station.slug), class: "radio-program", target: "_blank" do %>
+				<%= image_tag program.image %>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>
+<script>
+	function led_timeline(){
+		var led = $(".led");
+		var led_tl = new TimelineMax({ repeat: -1 });
+		led_tl.add(TweenMax.set(led, { opacity: 0, delay: .8 }));
+		led_tl.add(TweenMax.set(led, { opacity: 1, delay: .8 }));
+	}
+	led_timeline(); 
+</script>

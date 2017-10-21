@@ -1,0 +1,26 @@
+.admin-pagination {
+	em {
+		color:  $red; 
+	}
+	a {
+		color:  $tertiary; 
+	}
+}
+.site-pagination {
+	margin-left:  auto; 
+	margin-right:  auto; 
+	padding:  32px; 
+	em {
+		color:  $red; 
+	}
+	a {
+		color:  $tertiary; 
+	}
+}
+.view-more {
+	padding:  8px; 
+	border:  solid 1px $tertiary; 
+	color:  $tertiary; 
+	background:  #ffffff;  
+	box-sizing:  border-box; 
+}

@@ -1,0 +1,24 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Palabras Clave</span> <small>(#EsNoticia)</small></h2>
+	<div class="panel__actions">
+		<% if get_todays_keywords.count > 0 %>	
+			<%= link_to "Editar palabras clave",  panel_edit_multiple_keywords_path, class: "button" %>
+		<% else %>	
+			<%= link_to "Nuevas palabras clave", new_panel_keyword_path, class: "button" %>
+		<% end %>	
+	</div>
+</div>
+<div class="card">
+	<div class="table__row">
+		<p class="table__cell">Palabras Clave:</p>
+	</div>
+	<% get_todays_keywords.each do |keyword| %>
+		<% if !keyword.slug.empty? %>
+			<div class="table__row">
+				<div class="table__cell">
+					<%= link_to keyword.keyword, panel_keyword_path(keyword)%>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+</div>

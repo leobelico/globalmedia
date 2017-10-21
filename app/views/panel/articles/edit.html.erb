@@ -1,0 +1,12 @@
+<div class="panel__header">
+	<h2 class="title panel__title">Notas / <span class="current">Editar nota</span></h2>
+	<div class="panel__actions">
+		<!-- <button class="button add-gallery">Galería</button> -->
+		<%= link_to	"Galería", panel_article_gallery_images_path(@article), class: "button add-gallery", style: "margin-right:  8px; " %>
+		<button class="button button--save save-article" data-slug="<%= @article.slug %>"><div class="button--text">Actualizar Nota</div><div class="button--spinner"></div></button>
+	</div>
+</div>
+<%= render 'form' %>
+<script>
+	editor.setContents(<%= raw(@article.note) %>); 
+</script>

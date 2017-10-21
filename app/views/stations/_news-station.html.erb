@@ -1,0 +1,98 @@
+<div class="interface--row">
+	<div class="main-content">
+	
+		<div class="station station--news">
+			<div class="station__header">
+				<%= image_tag "glyph-blue.svg" %>
+				<div class="header__info">
+					<h4 class="station__name"><%= station.name %></h4>
+					<div class="station__line"></div>			
+					<div class="broadcast__info">
+						<% if timetables.count > 1 %>
+							<p class="broadcaster__name"><%= timetables.first.broadcasters %></p>
+							<p class="broadcaster__schedule">De las <%= timetables.first.streaming_hour.strftime("%H:%M") %> a las <%= timetables.first.end_streaming_hour.strftime("%H:%M") %></p>
+						<% end %>
+					</div>
+				</div>
+			
+			</div>
+
+			<% if !@station.video? and !@station.news? %>
+				<audio controls autoplay id="audio" controlsList="nodownload">
+					<source src="<%= @station.stream_url %>" type="audio/mpeg">	
+				</audio>
+			<% else %>	
+
+			 <video id="video" class="video-js" controls  preload="auto" width="640" height="264">
+				  		<!-- <source src="https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced.sdp" type="video/sdp"> -->
+				  		<!-- <source src="https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8" type="application/x-mpegURL"> -->
+
+				   		<!-- <source src="rtmp://38.96.148.213:1935/vivecanaltest/myStream.sdp" type="video/sdp"> -->
+				  		<!-- <source src="http://38.96.148.213:1935/vivecanaltest/myStream.sdp/playlist.m3u8" type="application/x-mpegURL"> -->
+						<source src="https://59dcdb8f833ed.streamlock.net:443/vivecanaltest/myStream.sdp/playlist.m3u8" type="application/x-mpegURL">
+
+						<source src="rtmp://38.96.148.213:1935/vivecanaltest/myStream.sdp" type="video/sdp">
+				  </video>
+					<script>
+
+						var player = videojs('video', {techOrder: ['flash', 'html5']});
+						player.load(); 
+						player.play();
+					</script>
+					
+				
+				
+
+			<% end %>
+			<div class="stream">
+				<div class="stream__info">
+					<% if timetables.count > 1 %>
+						<%= image_tag timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
+						<p><strong><%= timetables.first.name %></strong>
+						   <br> <br><%= timetables.first.description %></p>
+					<% end %>
+
+				</div>
+				
+			</div>	
+			<div class="podcasts">
+				<% if station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).count > 0 %>
+					<h4 class="small-label">Podcasts del día</h4>
+					<% station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).each do |podcast| %>
+						<div class="podcast">
+							<h4 class="podcast__title"><%= podcast.name %></h4>
+							<audio controls>
+								<source src="<%= podcast.stream_url %>" controlsList="nodownload"> 
+							</audio>
+						</div>
+					<% end %>
+				<% end %>
+				<% if station.podcasts.count > 0 %>				
+					<h4 class="small-label">Podcasts más recientes</h4>
+					<% station.podcasts.last(4)[1..4].each do |podcast| %>
+						<div class="podcast">
+							<h4 class="podcast__title"><%= podcast.name %></h4>
+							<audio controls>
+								<source src="<%= podcast.stream_url %>" controlsList="nodownload"> 
+							</audio>
+						</div>
+					<% end %>
+				<% end %>
+			</div>
+			<% if station.article_relationships.count > 0 %>
+				
+				<div class="radio-banner__tune-in">Lo más reciente</div>
+
+				<div class="station__articles">
+					<% station.article_relationships.order(created_at: :desc).first(3).each do |relationship| %>
+						<%= render "components/horizontal-note", article: relationship.article %>
+					<% end %>
+
+					<!-- VÏNCULO PARA VER MAS -->
+					<% link_to "Ver más notas", station_articles_path(station.slug) %>		
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<%= render "components/stations-sidebar", facebook: station.facebook, twitter: station.twitter %>
+</div>

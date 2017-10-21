@@ -1,0 +1,29 @@
+<title><%= article.name %> - GlobalMedia</title>	
+<meta name="description" content="<%= truncate(article.short_description, length: 50) %>" />
+
+<meta property="og:type" 			content="article"/>
+<meta property="og:site_name" 		content="GlobalMedia"/>
+<meta property="fb:app_id"      	content="502512736803830" /> 
+<meta property="og:title" content="<%= article.name %>" />
+<meta property="og:description" 	content="<%= article.short_description %> <%= truncate(article.plain_text, length: 300) %>"/>
+<meta property="og:locale" 			content="es_MX"/>
+<meta property="article:author" 	content="https://www.facebook.com/GlobalMediaSLP/?fref=ts"/>
+<meta property="article:section"	content="<%= article.articable.name %>"/>
+
+<meta property="og:url" content="<%= article_url(article) %>"/>
+<meta property="og:image" itemprop="image" content="http:<%= URI.parse(URI.encode(image_url article.image)) %>"/>
+<meta property="og:image:secure_url" content="https:<%= URI.parse(URI.encode(image_url article.image)) %>" />
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image:width" itemprop="image" content="400" />
+<meta property="og:image:height" itemprop="image" content="400" />
+
+<link rel="image_src" href="<%= URI.parse(URI.encode(image_url article.image)) %>"/>
+
+<meta name="twitter:card" 			content="summary_large_image"/>
+<meta name="twitter:site" 			content="@globalmediamx"/>
+<meta name="twitter:title" 			content="<%= article.name %>"/>
+<meta name="twitter:description" 	content="<%= article.short_description %> <%= truncate(article.plain_text, length: 300) %>"/>
+<meta name="twitter:creator" 		content="@globalmediamx"/>
+<meta name="twitter:image:src" 		content="<%= URI.parse(URI.encode(image_url article.image)) %>"/>
+<meta name="twitter:image:alt" 		content="<%= truncate(article.short_description, length: 50)  %>"/>
+<meta name="twitter:domain" 		content="www.globalmedia.mx"/>

@@ -1,0 +1,48 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Controles Remotos</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Por Realizar", panel_controls_path, class: "button" %>
+		<%= link_to "Realizados", done_panel_controls_path, class: "button" %>
+		<%= link_to "Nuevo Control", new_panel_control_path, class: "button" %>
+		<%= link_to "Descargar", download_controls_panel_controls_path(format: "xls"), class: "button" %>
+	</div>
+</div>
+<div class="table card controls">
+	<div class="table__row">
+		<p class="table__cell">Cliente:</p>
+		<p class="table__cell">Inicio:</p>
+		<p class="table__cell">Fin:</p>
+		<p class="table__cell">Evento:</p>
+		<p class="table__cell">Dirección:</p>
+		<p class="table__cell">Estación:</p>
+		<p class="table__cell">Unidad:</p>
+		<p class="table__cell">Técnicos:</p>
+		<p class="table__cell">No. de Contrato:</p>
+		<p class="table__cell">Estado de Contrato:</p>
+		<p class="table__cell">Nombre del Agente:</p>
+		<p class="table__cell">Hoja de Datos:</p>
+		<p class="table__cell">Editar:</p>
+		<!-- <p class="table__cell">Delete:</p> -->
+	</div>
+	<% @controls.find_each do |control| %>
+		<div class="table__row">
+			<p class="table__cell"><%= control.client_name %></p>
+			<p class="table__cell"><%= control.init_date.strftime("%d %b %Y %l:%M %p") %></p>
+			<p class="table__cell"><%= control.end_date.strftime("%d %b %Y %l:%M %p") %></p>
+			<p class="table__cell"><%= control.event_name%></p>
+			<p class="table__cell"><%= control.event_address %></p>
+			<p class="table__cell"><%= control.station_name %></p>
+			<p class="table__cell"><%= control.unit_name %></p>
+			<p class="table__cell"><%= control.techs %></p>
+			<p class="table__cell"><%= control.contract_number %></p>
+			<p class="table__cell"><%= control.contract_state %></p>
+			<p class="table__cell"><%= control.agent_name %></p>
+			<p class="table__cell"><%= control.observations[0..40] %></p>
+			<p class="table__cell"><% if control.datasheet %>Activo<% else %>Inactivo<% end %></p>
+
+			<%= link_to "Editar", edit_panel_control_path(control), class: "table__cell edit" %>
+			<%# link_to "Eliminar", panel_control_path(control), method: :delete, data: { confirm: "¿Estas seguro de querer eliminar el banenr? Esta acción no se puede deshacer." }, class: "table__cell delete" %>
+		</div>
+	<% end %>	
+</div>
+<%= will_paginate @controls, class: "card admin-pagination" %>

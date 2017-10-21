@@ -1,0 +1,47 @@
+.panel__header {
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  center; 
+	justify-content:  space-between; 
+	width:  calc(100% - #{$admin-sidebar-width}); 
+	height:  78px; 
+	// border-bottom:  solid 1px #dbdbdb; 
+	padding:  18px 28px; 
+	background:  #ffffff; 
+	box-sizing:  border-box; 
+	position:  fixed; 
+	top:  0; 
+	right:  0; 
+	z-index:  100; 
+}
+.panel__title {
+	font-weight:  600; 
+	color: #424242; 
+	margin-bottom:  0px; 
+	font-size:  28px; 
+}
+.panel__header .title .current {
+	color:  $tertiary; 
+}
+.panel__actions {
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  center; 
+	.button, 
+	.delete {
+		&:not(:last-of-type) {
+			margin-right:  12px; 
+		}
+	} 
+}
+.banner-sections-card {
+	display:  flex; 
+	flex-direction:  row; 
+	flex-wrap:  wrap; 
+	p {
+		width:  50%; 
+		line-height:  200%; 
+	}
+
+}
+

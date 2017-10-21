@@ -1,0 +1,2 @@
+class MostVisitedArticle < ApplicationRecord
+end

@@ -1,0 +1,73 @@
+<%= form_for [:panel, @user], html: { class: "admin-form card" } do |f| %>
+	<% if @user.errors.any? %>
+		<div >
+			<label><%= pluralize(@user.errors.count, "error") %></label>
+			<ul>
+				<% @user.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<div class="field">
+		<label for="">Nombre(s):</label>
+		<%= f.text_field :first_name, placeholder: "Nombre(s)" %>
+	</div>
+	<div class="field">
+		<label for="">Apellido(s):</label>
+		<%= f.text_field :last_name, placeholder: "Apellidos(s)" %>
+	</div>
+	<div class="field">
+		<label for="">Correo:</label>
+		<%= f.text_field :email, placeholder: "Email" %>
+	</div>
+	<div class="field">
+		<label>Rol:</label> 
+		<%= f.select(:role, ['Superadmin', 'Admin']) %>
+	</div>
+	<div class="field field--checkbox">
+		
+		<label>Crear Notas </label>
+		<%= f.check_box :create_articles_permission %> 
+	</div>
+	<div class="field field--checkbox">
+
+		<label>Eliminar Notas </label>
+		<%= f.check_box :destroy_articles_permission %> 
+	</div>
+	<div class="field field--checkbox">
+
+		<label>Denuncia Global </label>
+		<%= f.check_box :video_complaints_permission %> 
+	</div>
+	<div class="field field--checkbox">
+
+		<label>Estaciones de Radio </label>
+		<%= f.check_box :radio_stations_permission %> 
+	</div>
+	<div class="field field--checkbox">
+
+		<label>Controles Remotos </label>
+		<%= f.check_box :remote_controls_permission %> 
+	</div>
+	<div class="field field--checkbox">
+
+		<label>Banners </label>
+		<%= f.check_box :banners_permission %> 
+	</div>
+	<div class="field field--checkbox">
+
+		<label>Vistas por Página</label>
+		<%= f.check_box :hits_permission %> 
+	</div>
+	<div class="field field--checkbox">
+
+		<label>Editores</label>
+		<%= f.check_box :user_permission%> 
+	</div>
+	<div class="field field--checkbox">
+    <label>¿Es Jefe de Noticias?</label>
+		<%= f.check_box :is_news_chief %>
+	</div>
+
+<% end %>

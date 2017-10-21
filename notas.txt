@@ -1,0 +1,58 @@
+Que el filefield te diga el nombre de la imagen 
+Revisar funcionalidad de es noticia 
+Claridad en highlights cambiar/lala
+Poner callback para eliminación de imagen en articulo 
+Eliminar nota que está en destacados da error
+Regla de notas relacionadas (Por TAG/Sección)
+Validación carga de TEMAS DEL DÍA (se reinicia a las 00:00 hrs, sino lo 
+carga el jefe de noticias no debe aparecer en página)
+Share de la nota (vista previa y texto complementario en whats app ejemplo: “Estoy leyendo – Trump continúa con la discusión del Muro Fronterizo en GlobalMedia Mx – www.globalmedia.mx/100234/trump)
+On site / Off site LINKS de Alexa (validar programación y mejores prácticas)
+Correcta indexación en motores de búsqueda
+Desaparecer palabra balazo o descripción de la nota y poner EXTRACTO, validando que sea de 120 caracteres.
+Complementos de Reproductor completos (Incluidos Playlists, eventos, top ten de la semana)
+El reproductor no debe abrirse en otra pestaña, sino cambiar en esa misma que se está navegando.
+Poder cargar una canción en el reproductor para reproducción de las personas (éxito de la semana).
+Validación de tamaño y fuente de acuerdo a maquetación
+- Vínculos Stream de las cámaras de tráfico
+- Habilitar Búsqueda en editor de notas
+- Agregar columna de Visitas a Página en las notas subidas del editor de notas.
+- Cambiar término de notas destacadas a NOTAS DE PORTADA
+- Cambiar término palabras clave y agregarle (Es noticia)
+- Corregir funcionamiento del tag #EsNoticia y agregar en el editor un histórico de temas.
+- Jalar la última investigación que se establece.
+- Probar lo más destacado
+- Ajuste en denuncia global, no referenciar de una nota hacia las demás sino dejarlo general y sólo seleccionar una nota más relevante.
+- Reproducción en automático en reproductores
+- Agregar NOTICIEROS después de las estaciones de radio en Radio/TV.
+- Agregar podcasts.
+- Cambiar el término de la descripción de la nota a EXTRACTO y sólo mostrar los primeros 120 caracteres.
+- Notas relacionadas al centro falta agregar (relacionadas por tag)
+- Correcta indexación en motores de búsqueda.
+- Notas relacionadas al final de la nota por tag y sección.
+- Programación de portadas (hora de entrada/salida de portada y rotación automática).
+- Habilitación banner programático 7 estaciones
+- Tipos de nota (aprobada/no aprobada y borrador)
+- #EsNoticia debe ocultarse automática a las 00:00 hrs y se activa hsata que lo capture manualmente el jefe de noticias.
+- Global Recomienda no funciona correctamente.
+- Icono de share en las notas y ocultar en Escritorio el icono de whatsapp.
+Quedamos al pendiente de sus comentarios
+Saludos
+- Click en IR A SECCIÓN  de Inv. Especial y Denuncia Global no funciona.
+- Mostrar opción en el editor del AUTOR de la nota.
+- Habilitación de portadas de secciones.
+- Completar desarrollo de sistema de hits.
+- Segmenta Táctica LOCAL y Táctica NACIONAL/INTERNACIONAL
+- Compartir el Link de la nota al crearla desde el editor.
+- Validar funcionamiento de controles remotos.
+- Validar como se presentan hashtags, debe ser de manera individual el autocompletar.
+- Subir Video Denuncias
+- Banner TOP con seguimiento por la página.
+- Habilitar resto del contenido en reproductor.
+- Validar API
+Banners:
+- Top, medio e inferior: HOME
+- Lateral e inferior: NOTA
+- Lateral inferior: SECCIONES
+- Banner estaciones: POR MARCA
+- Banner APP HOME, PORTADA, TRÁFICO EN GENERAL Y TRÁFICO POR CÁMARA.

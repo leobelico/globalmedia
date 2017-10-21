@@ -1,0 +1,257 @@
+//
+// MAIN SCSS 
+// 
+//
+// THIS FILE SERVES FOR THE DECLARATION 
+// OF GLOBAL STYLES AND ORGANIZING IMPORTS
+//
+// 
+
+
+// Base foundation reset
+
+@import "base/foundation";
+@import "libraries/quill.snow";
+@import "libraries/videojs.min";
+
+
+// Color import
+
+@import "base/colors"; 
+
+$interface-width:  1024px; 
+$admin-sidebar-width:  260px; 
+$main-content-width: 650px;
+$side-content-width: 342px;
+
+* {
+	position:  relative; 
+}
+.flashes {
+	background:  #FFAB00; 
+	color:  #000000; 
+	width:  100%; 
+	font-size:  21px; 
+	font-weight:  700; 
+	padding:  21px; 
+	box-sizing:  border-box; 
+
+}
+.line {
+	width:  50px; 
+	height:  1px; 
+	background-color:  $tertiary; 
+	border:  none; 
+	margin-top:  0; 
+	margin-left:  0; 
+	margin-right:  0; 
+	margin-bottom:  8px;
+	transition:  all .3s ease; 
+}
+html, 
+body {
+	height:  100%; 
+	width:  100%; 
+	font-family: Arial, Helvetica, sans-serif; 
+	background-color: #c6c6c6;
+	background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.24' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+}
+@media screen and (max-width:  1023px) {
+	iframe {
+		width:  100%; 
+		min-height:  150px;
+	}
+}
+.hidden {
+	display:  none;
+}
+
+.interface {
+	width:  100%; 
+	max-width:  $interface-width; 
+	display:  flex; 
+	flex-direction:  column; 
+	align-items:  flex-start; 
+	justify-content:  flex-start; 
+	flex-wrap:  wrap;
+	margin-left:  auto; 
+	margin-right:  auto; 
+	border-left:  solid 1px #dbdbdb; 
+	border-right:  solid 1px #dbdbdb; 
+	min-height:  100%; 
+	padding:  8px;
+	box-sizing:  border-box; 
+	background-color:  #fafafa; 
+}
+.interface--white {
+	background-color: #ffffff; 
+}
+.interface--row {
+	width:  100%;
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  flex-start; 
+	justify-content:  space-between; 
+}
+.interface--admin {
+	border:  none; 
+	max-width:  calc(100% - #{$admin-sidebar-width}); 
+	margin-right:  0; 
+	margin-left:  auto; 
+	padding:  0px; 
+	padding-top:  78px; 
+	background-color:  $gray-100; 
+}
+.wrapper-link {
+	display:  flex; 
+	flex-direction:  column; 
+	width:  100%; 
+}
+.primary {
+	color:  $tertiary; 
+	font-weight:  700; 
+}
+.inactive {
+	color:  #424242; 
+	opacity:  .1;
+}
+.section-title.card {
+	margin-top:  24px !important; 
+	margin-left:  24px !important; 
+	margin-bottom:  0px !important; 
+	margin-right:  0px !important; 
+}
+.main-content,
+.sidebar {
+	display:  flex; 
+	flex-direction:  column; 
+}
+.main-content {
+	width:  $main-content-width; 
+}
+.field_with_errors {
+	width:  100%; 
+	input {
+		border:  solid 1px $red !important; 
+	}
+}
+.errors {
+	margin-bottom:  18px; 
+	li {
+		margin-bottom:  8px; 
+	}
+}
+.ui-card {
+	padding:  8px; 
+	border:  solid 1px #dbdbdb;  
+	box-sizing:  border-box;
+	background-color:  #ffffff; 
+	box-shadow: $box-shadow;
+	transition:  all .3s ease; 
+	&:hover {
+		transform:  translateY(-6px);
+	}
+}
+@media screen and (max-width:  1023px) {
+	* {
+		max-width:  100% !important; 
+		box-sizing:  border-box !important;
+	}
+	// .topbar, 
+	// .header, 
+	// .navbar,
+	// .its-news {
+	// 	display:  none !important; 
+	// }
+	.interface {
+		width:  100% !important; 
+		box-sizing:  border-box !important; 
+		border:  none; 
+	}
+	.main-content {
+		width:  100%; 
+	}
+	.interface--row {
+		flex-direction:  column; 
+		align-items:  center; 
+		justify-content:  flex-start; 
+	}
+}
+
+
+//
+// COMPONENTS IMPORTS
+//
+
+@import "components/text"; 
+@import "components/forms"; 
+@import "components/buttons"; 
+@import "components/admin/cards"; 
+
+@import "components/navigation"; 
+@import "components/topbar"; 
+@import "components/header";
+@import "components/navbar"; 
+@import "components/social-media"; 
+@import "components/its-news"; 
+@import "components/breaking-news"; 
+@import "components/notes"; 
+@import "components/latest-news"; 
+@import "components/principal-highlight"; 
+@import "components/preview-article-info"; 
+@import "components/secondary-highlight"; 
+@import "components/banners"; 
+@import "components/section-preview"; 
+@import "components/special-articles"; 
+@import "components/collaborators"; 
+@import "components/sidebar"; 
+@import "components/recommendations"; 
+@import "components/sections"; 
+@import "components/section-article"; 
+@import "components/horizontal-article"; 
+@import "components/section-recommendations"; 
+@import "components/relationships"; 
+@import "components/stations"; 
+@import "components/stations-sidebar"; 
+@import "components/about-us"; 
+@import "components/radio-banner"; 
+@import "components/footer"; 
+@import "components/char-count"; 
+@import "components/hit-objectives"; 
+@import "components/exclusives"; 
+@import "components/cameras"; 
+@import "components/copied-link"; 
+@import "components/switch"; 
+@import "components/mobile-menu"; 
+@import "components/news-station"; 
+@import "components/graphs"; 
+@import "components/global-complaint-videos"; 
+@import "components/gallery"; 
+@import "components/stations-floating-bar"; 
+@import "components/skewed-title"; 
+
+@import "components/admin/buttons"; 
+@import "components/admin/admin-sidebar"; 
+@import "components/admin/admin-pagination"; 
+@import "components/admin/admin-panel"; 
+@import "components/admin/tables"; 
+@import "components/admin/articles-panel"; 
+@import "components/admin/admin-floating-bar"; 
+
+
+// 
+// PAGES IMPORTS
+// 
+
+@import "pages/titlepage"; 
+
+
+
+
+
+
+
+
+
+
+

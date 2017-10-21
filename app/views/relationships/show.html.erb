@@ -1,0 +1,40 @@
+<div class="interface--row">
+	<div class="section main-content">
+		<% if @relationship.relationship_type == "Investigation"%>
+			<p class="section__small-title">Investigación Especial</p>
+		<% end %>
+		<h1 class="section__title"><%= @relationship.name %></h1>
+		<div class="section-articles-container">
+			<%= link_to @relationship.article_relationships.first.article, class: "relationship ui-card" do	%>
+				<p class="relationship__description"><%= @relationship.description %></p>
+				<%= image_tag @relationship.image, class: "relationship__image" %>
+			<% end %>
+
+			<% @relationship.article_relationships.reverse.each do |relationship|%>
+					<%= render "components/horizontal-note", article: relationship.article %>
+				
+			<% end %>
+		</div>
+
+	</div>
+	<div class="sidebar">
+	<% if true %>
+		<% cache(latest_news) do %>
+			<%= render "components/latest-news",articles: latest_news %>
+		<% end %>
+		<% cache(get_global_recommendations(0)) do %>
+
+			<%= render "components/recommendations", articles: get_global_recommendations(0) %>
+		<% end %>
+
+		<% cache(most_visited, expires_in: 2.hours) do %>
+			<%= render "components/most-visited", articles: most_visited %>
+		<% end %>
+		
+	<% end %>
+	
+	
+	
+</div>
+
+</div>

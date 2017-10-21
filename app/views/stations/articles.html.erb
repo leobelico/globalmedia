@@ -1,0 +1,19 @@
+<div class="interface--row">
+	
+	<div class="section main-content"> 
+
+		<h1 class="section__title"><%= @station.name %></h1>
+		
+		<div class="section-articles-container">
+			
+			<% @relationships.each do |relationship|%>
+				<%= render "components/section-article", article: relationship.article %>
+			<% end %>
+		</div>
+
+		<%= will_paginate @relationships, class: "site-pagination" %>
+
+	</div>
+
+</div>
+

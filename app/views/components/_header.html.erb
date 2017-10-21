@@ -1,0 +1,109 @@
+
+<div class="header--wrapper">
+	<div class="header">
+		<div class="header__container container--1">
+				<% cache("header", expires_in: 1.year)do %>
+				
+					<%= link_to root_path, class: "header__logo" do %>
+						<%= image_tag "GLOBAL_DEGRADADOBLANCO.png", class: "" %>
+					<% end %>
+					<%= link_to stations_path, class: "stations-link" do %>	
+						<%= image_tag "radio-y-tv.svg" %>	
+					<% end %>
+					<div class="menu-button">
+						<p>MENU</p>
+						<div class="menu-trigger">
+							<div class="mt-1"></div>
+							<div class="mt-2"></div>
+							<div class="mt-3"></div>
+						</div>
+					</div>
+				<% end %>
+		</div>
+		<div class="header__container container--2">
+			<div id="time" class="time" data-turbolinks-permanent>
+				
+			</div>
+			<script>
+				function startTime() {
+				    var today = new Date();
+				    var h = today.getHours();
+				    var m = today.getMinutes();
+				    var s = today.getSeconds();
+				    var dn = today.getDay();
+				    var mn = today.getMonth();
+				    var yn = today.getFullYear();
+				    m = checkTime(m);
+				    dn = checkTime(dn);
+				    dmn = today.getDate();
+				    mn = checkTime(mn);
+				    yn = checkTime(yn);
+				    if (dn == 1) { day = "Lunes"; }
+				    if (dn == 2) { day = "Martes"; }
+				    if (dn == 3) { day = "Miércoles"; }
+				    if (dn == 4) { day = "Jueves"; }
+				    if (dn == 5) { day = "Viernes"; }
+				    if (dn == 6) { day = "Sábado"; }
+				    if (dn == 0) { day = "Domingo"; }
+				    if (mn == 0) { month = "Enero" };
+				    if (mn == 1) { month = "Febrero" };
+				    if (mn == 2) { month = "Marzo" };
+				    if (mn == 3) { month = "Abril" };
+				    if (mn == 4) { month = "Mayo" };
+				    if (mn == 5) { month = "Junio" };
+				    if (mn == 6) { month = "Julio" };
+				    if (mn == 7) { month = "Agosto" };
+				    if (mn == 8) { month = "Septiembre" };
+				    if (mn == 9) { month = "Octubre" };
+				    if (mn == 10) { month = "Noviembre" };
+				    if (mn == 11) { month = "Diciembre" };
+				    time_string = day + " " + dmn + " de " + month + ", " + yn + "<br>" + h + ":" + m + " horas "; 
+
+				    document.getElementById('time').innerHTML = time_string;
+				    var t = setTimeout(startTime, 500);
+				}
+				function checkTime(i) {
+				    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+				    return i;
+				}
+				startTime(); 
+			</script>
+			<div class="weather">
+				<%= image_tag "temperature.svg" %>
+				<div class="weather__data">
+					<p id="wl" class="weather__location" data-turbolinks-permanent> 
+						
+					</p>
+					<p>
+						<span id="wd" class="weather__degrees" data-turbolinks-permanent>--.--</span>
+						<span id="wu" class="weather__units">°C</span>
+					</p>
+				</div>
+			</div>
+			<div class="exchange-rate dollar">
+				<%= image_tag "dollar.svg" %>
+				<p class="">
+					<span class="exchange-rate__name">USD</span>
+					<br>
+					<span id="usd" class="exchange-rate__rate" data-turbolinks-permanent>$--.--</span>
+				</p>
+			</div>
+			<div class="exchange-rate euro">
+				<%= image_tag "euro.svg" %>
+				<p class="">
+					<span class="exchange-rate__name">EUR</span>
+					<br>
+					<span id="eur" class="exchange-rate__rate" data-turbolinks-permanent>$--.--</span>
+				</p> 			
+			</div>
+			<div class="apps">
+				<%= link_to "https://play.google.com/store/apps/details?id=mx.globalmedia.njambre&hl=en" do %>
+					<%= image_tag "android.svg" %>
+				<% end %>
+				<%= link_to "https://itunes.apple.com/mx/app/globalmedia/id1165166093?mt=8" do %>
+					<%= image_tag "apple.svg" %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

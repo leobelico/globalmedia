@@ -1,0 +1,68 @@
+<div class="interface--row cameras">
+	<div class="main-content">
+		<div class="sp__header">
+			
+			<h4 class="sp__name"><%= @camera.name %></h4>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+		<video id="video"></video>
+		<script>
+		  if(Hls.isSupported()) {
+		    var video = document.getElementById('video');
+		    var hls = new Hls();
+		    hls.loadSource('<%= @camera.stream %>');
+		    hls.attachMedia(video);
+		    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+		      video.play();
+		  });
+		 }
+		</script>
+		<div class="camera camera--list" style="margin-top:  16px">
+			<p class="camera__name"><%= @camera.name %></p>
+			<p class="camera__address"><%= @camera.location %></p>
+		</div>
+
+
+		<% if get_banner(@camera, "Camera", "Grande").count > 0 %>
+			<%= render "components/big-banner", banner: get_banner(@camera, "Camera", "Grande" ) %>
+		<% end %>
+
+		<div class="playlists">
+			<% Camera.order("RANDOM()").limit(4).each do |camera| %>
+				<% if camera.cover %>
+					<%= link_to camera_path(camera), class: "playlist" do %>
+						<%= image_tag camera.cover %>
+					<% end %>
+				
+				<% end %>
+			<% end %>
+		</div>
+
+		<%= render "components/section-recommendations", articles: get_articles_per_section(Section.find_by_name("San Luis").id, 3), section_name: "San Luis", section_name: "San Luis", highlight: "" %>
+
+	</div>	
+	<%= render "components/stations-sidebar", facebook: "", twitter: "" %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

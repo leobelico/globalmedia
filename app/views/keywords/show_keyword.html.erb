@@ -1,0 +1,19 @@
+<div class="interface--row">
+	<div class="section main-content"> 
+		<p class="section__small-title">#EsNoticia:</p>
+		<h2 class="section__title"><%= @keyword.keyword %></h2>
+
+		<% @keyword.articles.each do |article| %>
+			<%= render "components/horizontal-note", article: article %>
+		<% end %>
+		<% if @keyword.articles.count == 0 %>
+			<p>Todavía no hay artículos con esta palabra clave.</p>
+		<% end %>
+
+	</div>
+	<% if @keyword.articles.count > 0 %>
+		<%= render "components/sidebar", article: @keyword.articles.first %>
+	<% else %>
+		<%= render "components/sidebar", article: "global" %>
+	<% end %>
+</div>

@@ -1,0 +1,69 @@
+
+<div class="interface--row cameras">
+	
+
+	<div class="main-content ">
+		
+		<div id="camera-map">
+			
+		</div>
+		<div class="sp__header">
+			
+			<h4 class="sp__name">Cámaras disponibles</h4>
+		</div>
+		<% @cameras.each do |camera| %>
+			<%= link_to camera_path(camera), class: "camera camera--list" do %>
+			
+				<p class="camera__name"><%= camera.name %></p>
+				<p class="camera__address"><%= camera.location %></p>
+			
+			<% end %>
+		<% end %>
+		<div class="sp__header">
+			
+			<h4 class="sp__name">Vista Mosaico</h4>
+		</div>
+		<div class="camera-grid">
+
+			<% @cameras.find_each do |camera| %>
+				<%= link_to camera_path(camera), class: "camera camera--grid" do %>
+					<% if camera.cover %>
+						
+						<%= image_tag camera.cover, class: "camera__image" %>
+					<% else %>
+						<div class="camera__image"></div>
+					<% end %>
+					<p class="camera__name"><%= camera.name %></p>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	<%= render "components/stations-sidebar", facebook: "", twitter: "" %>
+</div>
+
+
+<script>
+	function initMap() {
+		var san_luis = {lat: 22.1519064, lng: -100.9919337}; 
+		var map = new google.maps.Map(document.getElementById("camera-map"), {
+			zoom:  13, 
+			center: san_luis
+		});
+		<% @cameras.each_with_index do |camera, index| %> 
+
+		    var marker_<%= index %> = new google.maps.Marker({
+		      position: { lat: <%= camera.lat %>, lng: <%= camera.lng %> },
+		      map: map,
+		      title: "<%= camera.name %>",
+		      url: "<%= camera_path(camera) %>",
+		      visible: true,
+		      zIndex: 10,
+		      optimized: false
+		    });
+			google.maps.event.addListener(marker_<%= index %>, 'click', function() {
+			    window.location.href = this.url;
+			});
+	    <% end %>
+	}
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJPtjjmEUjMh7l4SgjLcQC8hlp1KXW2F4&callback=initMap"></script>

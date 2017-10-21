@@ -1,0 +1,26 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Palabras Clave</span> <small>(#EsNoticia)</small> / <span>Editar</span></h2>
+	<div class="panel__actions">
+		<button class="button">Guardar palabras clave</button>
+	</div>
+</div>
+<%= form_for :keywords, url: {action: 'update_multiple', controller: "panel/keywords"}, html: { class: "admin-form card" } do -%>
+  
+  
+    <% @keywords.last(4).each_with_index do |keyword, index| %>
+      <%= fields_for "keyword[]", keyword, index: keyword.id do |f| %>
+
+        <div class="field">
+          <label>Palabra Clave <%= index + 1 %></label><br>
+          
+          <%= f.text_field :keyword %><br>
+         
+        </div>
+      <% end %>
+  <% end %>
+ <% end %>
+ <script> 
+ 	button = $("button.button"); 
+ 	form = $("form.admin-form.card"); 
+ 	saveFormOnButtonClick(button, form);
+ </script>

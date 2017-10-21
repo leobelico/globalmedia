@@ -1,0 +1,10 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span>Banners Publicitarios/ </span><span class="current">Editar Banner</span></h2>
+	<div class="panel__actions">	
+		<button class="button">Guardar cambios</button>
+	</div>
+</div>
+<%= render 'form' %>
+<script>
+	saveFormOnButtonClick($("button.button"), $("form")); 
+</script>

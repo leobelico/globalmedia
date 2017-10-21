@@ -1,0 +1,14 @@
+.highlights-container {
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  stretch; 
+	justify-content:  space-between; 
+	flex-wrap:  wrap; 
+	width:  100%; 
+	margin-top:  4px; 
+}
+@media screen and (max-width:  1023px) {
+	.highlights-container {
+		flex-direction:  column; 
+	}
+}

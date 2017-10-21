@@ -1,0 +1,61 @@
+<div class="mobile-menu">
+	<div class="mobile-menu__row">
+		<div class="mobile-menu__column">
+			<div class="mobile-menu__section">
+				<h4 class="mobile-menu__section-title">Radio:</h4>
+				<% if action_name == "show" and controller_name == "stations" %>
+					<% cache get_radio_stations do %>
+					
+						<% get_radio_stations.each do |station| %>
+							<%= link_to station.name, station, class: "mobile-menu__link" %>
+						<% end %>
+					<% end %>
+				<% else %>
+					<% cache get_radio_stations do %>
+
+						<% get_radio_stations.each do |station| %>
+							<%= link_to station.name, station, class: "mobile-menu__link", target: "_blank" %>
+						<% end %>
+					<% end %>
+				<% end %>
+			</div>
+			<div class="mobile-menu__section">
+				<h4 class="mobile-menu__section-title">T.V:</h4>
+				<% if action_name == "show" and controller_name == "stations" %>
+
+					<% cache get_video_stations do %>
+					
+						<% get_video_stations.each do |station| %>
+							<%= link_to station.name, station, class: "mobile-menu__link" %>
+						<% end %>
+					<% end %>
+				<% else %>
+					<% cache get_video_stations do %>
+
+						<% get_video_stations.each do |station| %>
+							<%= link_to station.name, station, class: "mobile-menu__link", target: "_blank" %>
+						<% end %>
+					<% end %>
+				<% end %>
+			</div>
+			<div class="mobile-menu__section">
+				<h4 class="mobile-menu__section-title">Noticieros:</h4>
+				<% if action_name == "show" and controller_name == "stations" %>
+					<% cache get_video_stations do %>
+						<% get_news_stations.each do |station| %>
+							<%= link_to station.name, station, class: "mobile-menu__link" %>
+						<% end %>
+					<% end %>
+
+				<% else %>
+					<% cache get_video_stations do %>
+						<% get_news_stations.each do |station| %>
+							<%= link_to station.name, station, class: "mobile-menu__link", target: "_blank" %>
+						<% end %>
+					<% end %>
+
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

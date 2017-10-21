@@ -1,0 +1,50 @@
+<% if article %>
+
+	<div class="horizontal-article ui-card">
+				<%= link_to article, class: "article__image" do %>
+						<%= image_tag article.image, class: "article__image" %>
+				<% end %>
+		<div class="article__information">
+			<%= link_to article, class: "wrapper-link" do %>
+				<h4 class="small-title semibold"><%= article.name %></h4>
+				<% if article.articable %>
+					<p class="section-and-author"><span class="section"><%= article.articable.name %></span> - 
+				<% end %>
+				<% if article.author != nil %>
+					<% if article.author.name != "Ninguno" %>
+						<span class="author">Por <%= article.author.name %></p>
+					<% end %>
+				<% else %>
+					<% if article.user %>
+						<span class="author">Por <%= article.user.full_name %></p>
+					<% end %>
+				<% end %>
+
+
+				<% if article.published_at? %>
+					<p class="datetime"><%= distance_of_time_in_words(Time.now, (article.published_at)) %></p>
+				<% else %>
+					<p class="datetime"><%= distance_of_time_in_words(Time.now, (article.created_at)) %></p>
+					
+				<% end %>
+				<p class="short-description"><%= truncate(article.short_description, length: 90) %></p> 	
+			<% end %>
+			<div class="social-media" data-article="<%= article_url(article) %>">
+				<%= link_to ("whatsapp://send?text= Estoy leyendo en GlobalMedia: " + article_url(article)), data: { action: "share/whatsapp/share" }, class: "social-media__link whatsapp", target: "_blank" do %>
+					<%= image_tag "whatsapp.svg" %>
+				<% end %>
+				<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
+					<%= image_tag "facebook.svg" %>				
+				</a>	
+
+				<a href="https://twitter.com/share?url=<%= url_encode(article_url(article)) %>&via=GlobalMediaMx&text=Estoy%20leyendo%20en%20GlobalMedia%3A%20-" class="social-media__link twitter" target="_blank">
+					<%= image_tag "twitter.svg" %>
+				</a>
+				<a class="social-media__link copy" target="_self" data-clipboard-text="<%= article_url(article) %>">	
+					<input class="hidden" value="<%= article_url(article) %>">
+					<%= image_tag "copy.svg" %>
+				</a> 
+			</div>
+		</div>
+	</div>
+<% end %>

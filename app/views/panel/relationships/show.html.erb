@@ -1,0 +1,41 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span><%= "Colaborador" if @relationship.relationship_type == "Collaborator" %></span> / <span class="current"><%= @relationship.name%></span></h2>
+	<div class="panel__actions">	
+		<%= link_to "Añadir artículo", panel_add_article_to_investigations_path(@relationship), class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__image">Imagen:</div>
+		<p class="table__cell">Nombre:</p>
+		<p class="table__cell">Descripción:</p>
+	</div>
+	<div class="table__row">
+		<img src="<%= @relationship.image %>" alt="" class="table__image">
+		<div class="table__cell"><%= @relationship.name %></div>
+		<div class="table__cell"><%= truncate(@relationship.description, length: 60) %></div>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__cell">Artículo:</div>
+		<div class="table__cell">Extracto:</div>
+		<div class="table__cell">Sección:</div>
+		<div class="table__cell">Fecha:</div>
+		<div class="table__cell">Editar:</div>
+		<div class="table__cell">Eliminar:</div>
+	</div>
+	 
+	<% @relationship.article_relationships.each do |relationship| %>
+		<% if relationship.article and relationship %>
+			<div class="table__row">
+				<%= link_to truncate(relationship.article.name, length:  60), relationship.article, class: "table__cell" %>
+				<p class="table__cell"><%= truncate(relationship.article.short_description, length:  120) %></p>
+				<p class="table__cell"><%= relationship.article.articable.name %></p>
+				<p class="table__cell"><%= relationship.article.created_at %></p>
+				<%= link_to "Editar", edit_panel_article_path(relationship.article), class: "table__cell edit" %>
+				<%= link_to	"Eliminar", panel_article_relationship_path(relationship), class: "table__cell delete", method: :delete, data: { confirm: "¿Estás seguro de querer eliminar esta nota?" } %>
+			</div>
+		<% end %>
+	<% end %>
+</div>

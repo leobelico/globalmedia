@@ -1,0 +1,25 @@
+<div class="latest-news">
+	<div class="special-articles__type">
+		<p class="type">Minuto a minuto</p>
+		<p class="link">&nbsp; </p>
+
+	</div>
+	<div id="latest_news" >
+		
+	</div>
+	<% articles.each do |article| %>
+					
+			<%= link_to article_path(article.article_slug), class: "latest-news__article" do %>
+				<div class="clock">
+					<div class="hours"></div>
+					<div class="minutes"></div>
+				</div>
+				<% if article.published_at %>
+					<p class="article__time"><%= article.published_at.strftime("%H:%M") %></p>		
+				<% end %>
+				<p class="article__title"><%= truncate(article.name, length: 55) %><br><span><%= article.section_name %></span></p>
+			<% end %>
+		
+	<% end %>
+</div>
+

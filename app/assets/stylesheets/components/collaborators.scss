@@ -1,0 +1,110 @@
+.collaborator-note {
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  center; 
+	justify-content:  flex-start; 
+	width:  100%; 
+	margin-top:  8px; 
+	padding-top:  8px; 
+	border-top:  dotted 1px #000000; 
+}
+.collaborator__image {
+	height:  96px; 
+	width:  96px; 
+	margin-left:  auto; 
+	object-fit:  cover; 
+	object-position:  center center; 
+}
+.collaborator__info {
+	display:  flex; 
+	flex-direction:  column; 
+	margin-right:  8px; 
+	.note__title { 
+		color:  #000000; 
+		font-size:  14px; 
+		order: 1; 
+	}
+	.note__author {
+		font-weight:  700;
+		font-size:  21px; 
+		color:  #424242; 
+		margin-top:  4px;
+		order: -1;
+		margin-bottom:  8px;  
+	}
+}
+.special-articles--collaborators {
+	.special-articles__type {
+		.type {
+			color:  #000000; 
+		}	
+		.link {
+			background:  #000000; 
+		}
+	}
+}
+.collaborator-preview {
+	display:  flex; 
+	flex-direction:  column; 
+	align-items:  flex-start; 
+	justify-content:  flex-start; 
+	width:  316px; 
+	margin-bottom:  18px; 
+	.collaborator__head {
+		display:  flex; 
+		flex-direction:  row; 
+		align-items:  stretch; 
+		justify-content:  flex-start; 
+		width:  100%; 
+		.collaborator__image {
+			width:  120px; 
+			height:  120px; 
+			margin-left:  0px; 
+			margin-right:  0px; 
+			object-fit:  cover; 
+			object-position:  center center; 
+		}
+	}
+	.collaborator__info {
+		display:  flex; 
+		flex-direction:  column; 
+		width:  100%;
+		margin-right:  0px; 
+		.collaborator__title {
+			font-size:  18px; 
+			font-weight:  bold; 
+			margin-left:  8px; 
+			margin-bottom:  8px; 
+		}
+		.collaborator__name {
+			margin-top:  auto; 
+			padding:  8px; 
+			background:  #021e44; 
+			color:  #ffffff; 
+			font-size:  14.5px; 
+			font-weight:  bold; 
+			width: 100%; 
+			box-sizing:  border-box; 
+			position:  relative; 
+			.collaborator__dent {
+				position:  absolute; 
+				top:  50%; 
+				left:  2px; 
+				height:  22px; 
+				width:  auto; 
+				transform:  translateX(-100%) translateY(-50%);
+				pointer-events:  none; 
+			}
+		}	
+	}
+	.collaborator__excerpt {
+		margin-top:  8px; 
+		font-size:  13.5px; 
+		line-height:  125%; 
+	}
+}
+@media screen and (max-width:  1024px) {
+	.collaborator__title {
+		font-size:  16px !important; 
+	}
+}

@@ -1,0 +1,67 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span>Notificaciones / </span><span class="current">Nueva notificación</span></h2>
+	<div class="panel__actions">	
+		<button class="button">Mandar notificación</button>
+	</div>
+</div>
+
+<%= form_for [:panel, @notification], html: { class: "admin-form card" } do |f| %>
+	
+	
+	<div class="field field--string">
+		<label>Título:</label>
+		<%= f.text_field :title %>
+	</div>
+	<div class="field field--string">
+		<label>Mensaje:</label>
+		<%= f.text_area :body %>
+	</div>
+	
+	<div class="field field--checkbox">
+		<label>¿Quieres abrir contenido?</label>
+
+		<%= f.check_box :wants_keys %>
+	</div>
+
+	<div class="field field--string">
+		<label>Tipo de contenido:</label>
+		<%= f.select(:key, [['Ninguno',''],['Artículo','article'], ['Estación o Canal','station'], ['Cámara', 'camera']]) %>
+	</div>
+
+	<div class="field field--string field--autocomplete">
+		<label>Contenido:</label>		
+		<% f.autocomplete_field(:key_id, autocomplete_article_name_panel_notifications_path, :id_element => '#key_id', class: "", placeholder: "Buscar artículo", type: "search", value: "" ) %>
+		<%= f.text_field :key_id, placeholder: "Coloca el id del artículo aquí" %>
+		<%= f.autocomplete_field(:key_id, autocomplete_station_name_panel_notifications_path, :id_element => '#key_id', class: "", placeholder: "Buscar estación", type: "search", value: "" ) %>
+		<%= f.autocomplete_field(:key_id, autocomplete_camera_name_panel_notifications_path, :id_element => '#key_id', class: "", placeholder: "Buscar cámara", type: "search", value: "" ) %>
+		<%= f.hidden_field :key_id, :id => "key_id" %>
+	</div>
+<% end %>
+<style>
+	.field--autocomplete {
+		display:  none;
+	}
+</style>
+<script>
+	$("#notification_key").on("change", function(){
+		console.log($(this).val());
+		TweenMax.set(".field--autocomplete", { display: "flex" });
+		$("#key_id").val("");
+		if ($(this).val() == 'article') {
+			TweenMax.set($("[data-autocomplete*='camera']"), { display: "none" });
+			TweenMax.set($("[data-autocomplete*='station']"), { display: "none" });
+			TweenMax.set($("[data-autocomplete*='article']"), { display: "block" });
+		}
+		if ($(this).val() == 'camera') {
+			TweenMax.set($("[data-autocomplete*='camera']"), { display: "block" });
+			TweenMax.set($("[data-autocomplete*='station']"), { display: "none" });
+			TweenMax.set($("[data-autocomplete*='article']"), { display: "none" });
+		}
+		if ($(this).val() == 'station') {
+			TweenMax.set($("[data-autocomplete*='station']"), { display: "block" });
+			TweenMax.set($("[data-autocomplete*='article']"), { display: "none" });
+			TweenMax.set($("[data-autocomplete*='camera']"), { display: "none" });
+		}
+	})
+	saveFormOnButtonClick($("button.button"), $("form")); 
+</script>

@@ -1,0 +1,32 @@
+<div class="panel__header">
+	<h4 class="panel__title">Vistas a Página</h4>
+	<div class="panel__actions">
+		<%= link_to "Ir a Objetivos", panel_hit_objectives_path, class: "button" %>
+		<%= link_to "Gráficas por Sección", graph_panel_hits_path, class: "button" %>
+		<%= link_to "Gráficas por Autor", author_graph_panel_hits_path, class: "button" %>
+		<%= link_to "Gráficas por Usuario", user_graph_panel_hits_path, class: "button" %>
+	</div>	
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell f-4">Artículo:</p>
+		<p class="table__cell f-2">Autor:</p>
+		<p class="table__cell f-1">Vistas a Página:</p>
+		<p class="table__cell f-3">Hora inicial:</p>
+		<p class="table__cell f-3">Hora final:</p>
+		<p class="table__cell f-1">Totales del Mes:</p>
+	</div>
+<% @hits.each do |hit| %>
+	<div class="table__row">
+		<%= link_to hit.article.name, hit.article, class: "table__cell f-4" %>
+		<p class="table__cell f-2"><% if hit.article.user %><%= hit.article.user.full_name %><% end %></p>
+		<p class="table__cell f-1"><%= hit.number %></p>
+		<p class="table__cell f-3"><%= hit.created_at.strftime("%l:%M %p, %b %e, %Y") %></p>
+		<p class="table__cell f-3"><%= (hit.created_at + 1.hours).strftime("%l:%M %p, %b %e, %Y") %></p>
+		<p class="table__cell f-1"><%= hit.article.total_hits_in_current_month %></p>
+
+	</div>
+
+<% end %>
+</div>
+<%= will_paginate @hits, class: "card admin-pagination" %>

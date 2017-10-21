@@ -1,0 +1,51 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span>Secciones / </span><span class="current"><%= @section.name %></span></h2>
+	<div class="panel__actions">
+		<%= link_to "Escoger destacado", panel_section_select_highlights_path(@section), class: "button" %>
+		<%= link_to "Escoger Recomendaciones de Sección", panel_section_select_global_recommendations_path(@section), class: "button" %>
+		<%= link_to "Editar sección", edit_panel_section_path(@section), class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__cell">Visitas totales a sección:</div>
+	</div>
+	<div class="table__row">
+		<div class="table__cell"><%= @section.total_hits_in_current_month %></div>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__cell">Artículo destacado:</div>
+	</div>
+	<div class="table__row">
+		<div class="table__cell"><% if @highlight_article %><%= @highlight_article.name %><% else %>Ninguno<% end %></div>
+	</div>
+</div>
+
+
+
+<div class="table card">
+	<div class="table__row">
+		<div class="table__cell">Recomendaciones de la sección:</div>
+	</div>
+	<div class="table__row">
+		<p class="table__cell f-3">Título:</p>
+		<p class="table__cell">Vistas Totales:</p>
+		<p class="table__cell">Editar:</p>
+	</div>
+	<% get_global_recommendations(@section.id).each do |article| %>
+		<div class="table__row">
+			<%= link_to article.name, article_path(article.article_slug), class: "table__cell f-3" %>
+ 				<p class="table__cell">
+				<% if Article.find(article.article_id).hits.last %>
+					<%= Article.find(article.article_id).total_hits_in_current_month %>
+				<% else %>
+					0
+				<% end %>
+			</p>
+			<%= link_to "Editar", edit_panel_article_path(article.article_slug), class: "table__cell edit" %>
+		</div>
+			
+	<% end %>
+</div>

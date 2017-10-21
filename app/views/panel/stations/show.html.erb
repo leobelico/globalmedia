@@ -1,0 +1,125 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span>Estaciones de Radio / </span><span class="current"><%= @station.name %></span></h2>
+	<div class="panel__actions">
+		<%= link_to "Eliminar estación", panel_station_path(@station), method: :delete, data: {confirm: "¿Seguro? Esta acción no se puede deshacer"}, class: "delete" %>
+		<%= link_to "Editar estación", edit_panel_station_path(@station), class: "button" %>
+		<%= link_to "Añadir entrada", panel_add_article_to_stations_path(@station), class: "button" %>
+		<%= link_to "Añadir podcast", new_panel_station_podcast_path(@station), class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__image">Imagen:</div>
+		<p class="table__cell">Nombre de la estación:</p>
+		<p class="table__cell">URL de stream:</p>
+	</div>
+	<div class="table__row">
+		<img src="<%= @station.image %>" alt="" class="table__image">
+		<div class="table__cell"><%= @station.name %></div>
+		<div class="table__cell"><%= @station.stream_url %></div>
+	</div>
+</div>
+
+<h3 class="card">Programas</h3>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Nombre del programa:</p>
+		<p class="table__cell">Comienza:</p>
+		<p class="table__cell">Termina:</p>
+		<p class="table__cell weekdays">Días de la semana:</p>
+		<p class="table__cell">Locutores:</p>
+	</div>
+	<% @station.timetables.order(streaming_hour: "ASC").each do |timetable| %>
+		<div class="table__row">
+			<p class="table__cell"><%= timetable.name %></p>
+			<p class="table__cell"><%= timetable.streaming_hour.strftime("%I:%M%p") %></p>
+			<p class="table__cell"><%= timetable.end_streaming_hour.strftime("%I:%M%p") %></p>
+			<p class="table__cell weekdays">
+				<% if timetable.monday? %>
+					<span class="primary">L</span>
+				<% else %>
+					<span class="inactive">L</span>
+				<% end %>	
+				<% if timetable.tuesday? %>
+					<span class="primary">M</span>
+				<% else %>
+					<span class="inactive">M</span>
+				<% end %>	
+				<% if timetable.wednesday? %>
+					<span class="primary">M</span>
+				<% else %>
+					<span class="inactive">M</span>
+				<% end %>	
+				<% if timetable.thursday? %>
+					<span class="primary">J</span>
+				<% else %>
+					<span class="inactive">J</span>
+				<% end %>	
+				<% if timetable.friday? %>
+					<span class="primary">V</span>
+				<% else %>
+					<span class="inactive">V</span>
+				<% end %>	
+				<% if timetable.saturday? %>
+					<span class="primary">S</span>
+				<% else %>
+					<span class="inactive">S</span>
+				<% end %>	
+				<% if timetable.sunday? %>
+					<span class="primary">D</span>
+				<% else %>
+					<span class="inactive">D</span>
+				<% end %>	
+
+			</p>
+			<p class="table__cell"><%= timetable.broadcasters %></p>
+			<% timetable.image %>
+		</div>
+
+	<% end %>
+</div>
+<h3 class="card">Podcasts</h3>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__cell">Nombre:</div>
+		<div class="table__cell">URL:</div>
+		<p class="table__cell edit">Editar:</p>
+		<div class="table__cell delete">Eliminar:</div>
+
+	</div>
+	<% @station.podcasts.last(20).each do |podcast| %>
+		<div class="table__row">
+			<p class="table__cell"><%= truncate(podcast.name, length:  60) %></p>
+			<p class="table__cell"><%= truncate(podcast.stream_url, length:  120) %></p>
+			<%= link_to	"Editar", edit_panel_station_podcast_path(@station,podcast), class: "table__cell edit" %>
+
+			<%= link_to	"Eliminar", panel_station_podcast_path(@station,podcast), method: :delete, class: "table__cell delete" %>
+		</div>
+	<% end %>
+</div>
+
+<h3 class="card">Artículos</h3>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__cell">Artículo:</div>
+		<div class="table__cell">Extracto:</div>
+		<div class="table__cell">Sección:</div>
+		<div class="table__cell">Fecha:</div>
+		<div class="table__cell delete">Eliminar:</div>
+
+	</div>
+	<% @station.article_relationships.order(created_at: :desc).last(20).each do |relationship| %>
+		<% if relationship.article %>
+			<div class="table__row">
+				<%= link_to truncate(relationship.article.name, length:  60), relationship.article, class: "table__cell" %>
+				<p class="table__cell"><%= truncate(relationship.article.short_description, length:  120) %></p>
+				<p class="table__cell"><%= relationship.article.articable.name %></p>
+				<p class="table__cell"><%= relationship.article.created_at %></p>
+
+				<%= link_to	"Eliminar", panel_article_relationship_path(relationship), method: :delete, class: "table__cell delete" %>
+			</div>
+		<% end %>
+	<% end %>
+</div>
+
+

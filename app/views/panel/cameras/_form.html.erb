@@ -1,0 +1,48 @@
+<%= form_for [:panel, @camera], html: { class: "admin-form card directUpload" }, data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }  do |camera| %>
+	<div class="field">
+		<label>Nombre de la cámara:</label>
+		<%= camera.text_field :name %>
+	</div>
+	<div class="field">
+		<label>Locación:</label>
+		<%= camera.text_field :location %>
+	</div>
+	<div class="multifield">
+		<div class="field">
+			<label>Latitud:</label>
+			<%= camera.text_field :lat %>
+		</div>
+		<div class="field">
+			<label>Longitud:</label>
+			<%= camera.text_field :lng %>
+		</div>
+	</div>
+	<div class="field">
+		<label>Vínculo a stream (m3u8):</label>
+		<%= camera.text_field :stream %>
+	</div>
+	<div class="field">
+		<label>Imagen:</label>
+		<%= camera.file_field :cover %>
+	</div>
+<% end %>
+<%= render "components/s3_form_js" %>
+<script>
+	$("input[type=file]").each(function(){
+		var $input = $(this);
+		if ($input.parents(".field").find("img").length == 0) {
+
+			$input.before('<img class="form__image-preview">');
+		}
+
+		$input.change(function(){
+		    var reader = new FileReader();
+		    $(reader).on("load", function(event){
+
+			    	$input.parents(".field").find("img").attr('src',  event.target.result); 
+			    	$input.parents(".field").find("img").css("display", "block"); 
+		    });
+			reader.readAsDataURL(this.files[0]);
+		});
+	});  
+</script>

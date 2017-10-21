@@ -1,0 +1,72 @@
+<div class="interface--row">
+	<div class="main-content">
+		<h4 class="section__title">Acerca de</h4>
+		<% if @articles %>
+			<div class="about-us">
+	<div class="note note--display">
+		<h1 class="title"><%= @articles.first.name %></h1>	
+		<p class="short-description"><%= @articles.first.short_description %></p>
+		<div class="article__info">
+			<p class="date"><%= @articles.first.created_at.strftime("%m:%M %p %A %e %B, %Y") %></p>
+			<%= render "components/social-media-links", article: @articles.first %>
+			
+		</div>
+		<div class="hashtags-container">
+			<%= render @articles.first.hashtags %>
+		</div>
+
+		<% if @articles.first.video_url != "" %> 
+			<div class="iframe">
+				<iframe width="650" height="415" src="<%= @articles.first.	video_url %>" frameborder="0" allowfullscreen></iframe>
+			</div>
+		<% else %>		
+			<% if @articles.first.image %>
+				<%= image_tag @articles.first.image, class: "main-image" %>
+			<% end %>
+		<% end %>
+
+		<div id="quill-container" class="quill--article">	
+		</div>
+
+
+	</div>
+			</div>
+			<div class="interface--row">
+				
+				<div class="section main-content"> 
+
+		 			<div class="section-articles-container">
+						
+						<% @articles.each do |article|%>
+							<div class="social-media" data-article="<%= article_url(article) %>">
+								<%= link_to ("whatsapp://send?text= Estoy leyendo en GlobalMedia: " + article_url(article)), data: { action: "share/whatsapp/share" }, class: "social-media__link whatsapp", target: "_blank" do %>
+									<%= image_tag "whatsapp.svg" %>
+								<% end %>
+								<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
+									<%= image_tag "facebook.svg" %>				
+								</a>	
+
+								<a href="https://twitter.com/share?url=<%= url_encode(article_url(article)) %>&via=GlobalMediaMx&text=Estoy%20leyendo%20en%20GlobalMedia%3A%20-" class="social-media__link twitter" target="_blank">
+									<%= image_tag "twitter.svg" %>
+								</a>
+								<a class="social-media__link copy" target="_self" data-clipboard-text="<%= article_url(article) %>">	
+									<input class="hidden" value="<%= article_url(article) %>">
+									<%= image_tag "copy.svg" %>
+								</a> 
+							</div>
+						<% end %>
+					</div>
+
+					<%= will_paginate @articles, class: "site-pagination" %>
+				</div>
+			</div>
+		<% end %>
+
+	</div>	
+	<%= render "components/sidebar", article: "global", banner: "" %>
+</div>
+<script>
+	var content = <%= raw(@articles.first.note) %>;
+	var container = document.getElementById("quill-container")
+	display_quill_note(content, container);
+</script>

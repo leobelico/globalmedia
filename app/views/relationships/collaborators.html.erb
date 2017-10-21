@@ -1,0 +1,52 @@
+<div class="interface--row">
+	<div class="main-content">
+		<h4 class="section__title">Colaboradores</h4>
+		<div class="section-articles-container">
+			<% @collaborators.each do |collaborator| %>
+				<% if collaborator.article_relationships.count > 0 %>
+					<%= link_to collaborator, class: "collaborator-preview ui-card" do %>
+						<div class="collaborator__head">
+							
+							<%= image_tag collaborator.image, class: "collaborator__image" %>
+							<div class="collaborator__info">
+								
+								<h4 class="collaborator__title"><%= truncate(collaborator.article_relationships.order(created_at: :asc).last.article.name, length:  55) %></h4>
+								<p class="collaborator__name"><%= collaborator.name %></p>
+						
+							</div>
+						</div>
+						<p class="collaborator__excerpt"><%= truncate(collaborator.article_relationships.order(created_at: :asc).last.article.short_description, length:  120) %></p> 
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+		<% if @related_sections.count > 0 %>
+			<div class="radio-banner__tune-in" style="margin-top:  8px; ">También te puede interesar:</div>
+			<% @related_sections.each do |related_section| %>
+				<%= render "components/section-recommendations", articles: get_articles_per_section(related_section.section_reference_id, 3), section_name: related_section.section_reference.name, highlight: "" %>
+
+			<% end %>
+		<% end %>		
+	</div>
+	<div class="sidebar">
+	<% if true %>
+		<% cache(latest_news) do %>
+			<%= render "components/latest-news",articles: latest_news %>
+		<% end %>
+		<% cache(get_global_recommendations(0)) do %>
+
+			<%= render "components/recommendations", articles: get_global_recommendations(0) %>
+		<% end %>
+
+		<% cache(most_visited, expires_in: 2.hours) do %>
+			<%= render "components/most-visited", articles: most_visited %>
+		<% end %>
+		
+	<% end %>
+	
+	
+
+	
+</div>
+
+</div>

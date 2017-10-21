@@ -1,0 +1,173 @@
+.topbar {
+	width:  100%; 
+	max-width:  $interface-width; 
+	margin-left:  auto; 
+	margin-right:  auto; 
+	display:  flex; 
+	flex-direction:  row; 
+	align-items:  center; 
+	justify-content:  flex-start; 
+	padding:  6px 12px; 
+	// background:  #12478c; 
+	background:  #e0e0e0; 
+	box-sizing:  border-box;
+	.social-media__tag {
+		color:  #212121; 
+	}
+	br {
+		display: none; 
+	}
+	.home-container {
+		display:  none; 
+		img {
+		}
+	}
+	.logo-container {
+		// max-width:  0px; 
+		// overflow:  hidden;
+		height:  auto; 
+		width:  auto; 
+		img {
+			height:  24px; 
+			width:  0px; 
+			object-fit:  cover; 
+			object-position:  left center; 
+			display:  block; 
+
+		}
+	}
+}
+@media screen and (max-width:  1023px) {
+	.topbar {
+		align-items:  center; 
+		.home-container {
+			display:  flex; 
+			height:  28px; 
+			width:  28px; 
+			img {
+				filter: invert(100%);
+				
+			}
+		}	
+		
+		br {
+			display:  initial; 
+		}
+	} 
+	.logo-container {
+		display:  none; 
+	}
+}
+
+.topbar__link {
+	font-family: 'Pragati Narrow', sans-serif;
+	font-size:  16px; 
+	color:  #424242; 
+	text-align:  center; 
+	text-transform:  uppercase; 
+	// margin-right:  18px; 
+	padding-right:  9px; 
+	padding-left:  9px; 
+	border-right:  solid 1px #424242; 
+	&:last-of-type {
+		margin-right:  8px; 
+	}
+}
+.topbar__link:after {
+	position:  absolute; 
+	bottom:  -4px; 
+	left:  10px; 
+	height:  2px; 
+	width:  0px; 
+	background:  #ffffff;
+	content: ' ';
+	display: block; 
+	transition:  all .3s ease; 
+}
+.topbar__link:hover:after {
+	width:  50px; 
+}
+.topbar .social-media {
+	margin-left: auto;
+}
+.search {
+	position:  relative;
+}
+.search__image {
+	position:  absolute;
+	left:  18px; 
+	top:  50%; 
+	transform:  translateY(-50%); 
+	height:  14px; 
+	width:  auto;
+	opacity:  .3; 
+	pointer-events:  none; 
+	transition:  opacity .3s ease; 
+}
+.search__box:focus + .search__image {
+	opacity:  0; 
+}
+.search__box {
+	background: #ffffff; 
+	color:  #212121; 
+	padding:  6px 8px; 
+	font-size:  14px;
+	text-align:  right; 
+	margin-left:  8px; 
+	border:  solid 1px #dbdbdb;
+	width:  130px; 
+}
+@media screen and (max-width:  1023px) {
+	.search__box, 
+	.topbar .social-media {
+		display:  none; 
+	}
+	.topbar__link {
+		font-size:  11px; 
+	}
+}
+
+/* Popup container - can be anything you want */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #FFD600;
+    color: #424242;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: -200%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}

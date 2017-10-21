@@ -1,0 +1,26 @@
+<%= form_for(@user, html: { class: "admin-form card" }) do |f| %>
+	<% if @user.errors.any? %>
+		<div >
+			<label><%= pluralize(@admin.errors.count, "error") %></label>
+			<ul>
+				<% @admin.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<div class="field">
+		<label for="">Nombre(s):</label>
+		<%= f.text_field :first_name, placeholder: "Nombre(s)" %>
+	</div>
+	<div class="field">
+		<label for="">Apellido(s):</label>
+		<%= f.text_field :last_name, placeholder: "Apellidos(s)" %><br/>
+	</div>
+	<div class="field">
+		<label for="">Correo:</label>
+		<%= f.text_field :email, placeholder: "Email" %><br/>
+	</div>
+	Rol: <%= f.select(:role, ['Superadmin', 'Admin']) %>
+	<%= f.submit "Guardar" %>
+<% end %>

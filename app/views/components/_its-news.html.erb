@@ -1,0 +1,22 @@
+<% cache get_todays_keywords do %>
+	<div class="its-news">
+		<p class="its-news__hashtag">#ESNOTICIA</p>
+		<div class="its-news__news">
+
+			<% get_todays_keywords.each do |keyword| %>
+					<%= link_to keyword.name, search_hashtag_articles_path(Article.first, search: "#{keyword.id}") %>
+			<% end %>
+			
+		</div>
+	</div>
+	<div class="floating-news">
+		<p class="its-news__hashtag">#ESNOTICIA</p>
+		<div class="its-news__news">
+
+			<% get_todays_keywords.each do |keyword| %>
+					<%= link_to keyword.name, search_hashtag_articles_path(Article.first, search: "#{keyword.id}") %>
+			<% end %>
+			
+		</div>
+	</div>
+<% end %>

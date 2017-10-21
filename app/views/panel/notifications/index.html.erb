@@ -1,0 +1,22 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Notificaciones</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Nueva notificación", new_panel_notification_path, class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Título:</p>
+		<p class="table__cell">Texto:</p>
+		<p class="table__cell">Fecha:</p>
+		
+	</div>
+		<% @notifications.each do |notification| %>
+			<div class="table__row">
+				<div class="table__cell"><%= notification.title %></div>
+				<div class="table__cell"><%= notification.body %></div>
+				<div class="table__cell"><%= notification.created_at %></div>
+			</div>	
+		<% end %>
+		
+</div>
