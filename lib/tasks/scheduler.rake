@@ -12,10 +12,10 @@ task :publish_articles => :environment do
 		end
 
 		if Section.where(visible: true).include?(article.articable)
-			if CoverArticle.where(section_id: article.articable_id).count < 10
+			if CoverArticle.where(section_id: article.articable_id).count < 20
 				CoverArticle.create(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, article_highlight: false, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
 			else
-				last_article = CoverArticle.where(section_id: article.articable_id).order(published_at: :asc).last(10).reverse.last
+				last_article = CoverArticle.where(section_id: article.articable_id).order(published_at: :asc).last(20).reverse.last
 				if last_article
 					last_article.destroy
 				end
