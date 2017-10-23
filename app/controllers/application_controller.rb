@@ -310,19 +310,17 @@ class ApplicationController < ActionController::Base
   end
 
   def most_visited
-    #@hits = Hit.where(created_at: 2.hours.ago..Time.now).order(number: "ASC").last(3)
-   
-      @articles = MostVisitedArticle.all
+  
+      if session[:article_id]
+        @articles = MostVisitedArticle.where("article_id != ?", session[:article_id]).last(3)
+        
+      else
+        @articles = MostVisitedArticle.last(3)
 
-    
-    # Táctica Nacional, Internacional, Farándula, Entretenimiento 
+      end
 
-#1427 
-    # print "le-id" 
-    # print session[:article_id]
     return @articles 
     
-    # return articles.last(3)
 
   end
 

@@ -127,10 +127,8 @@
 				<div class="radio-banner__tune-in">Lo más reciente</div>
 
 				<div class="station__articles">
-					<% @station.article_relationships.last(3).each do |relationship| %>
-						<% if relationship.article %>
+					<% @station.article_relationships.order(created_at: :desc).first(3).each do |relationship| %>
 							<%= render "components/horizontal-note", article: relationship.article %>
-						<% end %>
 					<% end %>
 				
 					<!-- VÏNCULO PARA VER MAS -->
@@ -149,10 +147,8 @@
 	</div>
 <% else %>
 
-		<% cache [@station, @timetables] do %>
 
-			<%= render "news-station", station: @station, timetables: @timetables %>
-		<% end %>
+	<%= render "news-station", station: @station, timetables: @timetables %>
 <% end %>
 
 <script type="text/javascript">
@@ -182,4 +178,3 @@
 
 
 </script>
-

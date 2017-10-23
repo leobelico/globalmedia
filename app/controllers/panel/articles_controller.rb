@@ -19,11 +19,11 @@ class Panel::ArticlesController < ApplicationController
 		end	
 
 		if Section.where(visible: true).include?(@article.articable)
-			if CoverArticle.where(section_id: @article.articable_id).count < 10
-				CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, section_id: @article.articable_id, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
+			if CoverArticle.where(section_id: @article.articable_id).count < 20
+				CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
 			else
-				last_article = CoverArticle.where(section_id: @article.articable_id, article_highlight: false).order(published_at: :asc).last(10).reverse.last.destroy
-				CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, section_id: @article.articable_id, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
+				last_article = CoverArticle.where(section_id: @article.articable_id, article_highlight: false).order(published_at: :asc).last(20).reverse.last.destroy
+				CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
 			end
 		end
 
@@ -85,11 +85,11 @@ class Panel::ArticlesController < ApplicationController
 
 				#ESTO CREA LOS ARTICULOS QUE VAN A IR EN EL COVER
 				if Section.where(visible: true).include?(@article.articable)
-					if CoverArticle.where(section_id: @article.articable_id).count < 10
-						CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, section_id: @article.articable_id, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
+					if CoverArticle.where(section_id: @article.articable_id).count < 20
+						CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
 					else
-						last_article = CoverArticle.where(section_id: @article.articable_id, article_highlight: false).order(published_at: :asc).last(10).reverse.last.destroy
-						CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, section_id: @article.articable_id, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
+						last_article = CoverArticle.where(section_id: @article.articable_id, article_highlight: false).order(published_at: :asc).last(20).reverse.last.destroy
+						CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
 					end
 				end
 				if LatestArticle.count < 8
@@ -155,14 +155,14 @@ class Panel::ArticlesController < ApplicationController
 				if Section.where(visible: true).include?(@article.articable)
 					does_cover_article_exists = CoverArticle.where(article_id: @article.id)
 					if does_cover_article_exists.count <= 0
-						if CoverArticle.where(section_id: @article.articable_id).count < 10
-							CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, section_id: @article.articable_id, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
+						if CoverArticle.where(section_id: @article.articable_id).count < 20
+							CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
 						else
-							last_article = CoverArticle.where(section_id: @article.articable_id, article_highlight: false).order(published_at: :asc).last(10).reverse.last.destroy
-							CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, section_id: @article.articable_id, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
+							last_article = CoverArticle.where(section_id: @article.articable_id, article_highlight: false).order(published_at: :asc).last(20).reverse.last.destroy
+							CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
 						end
 					else
-						does_cover_article_exists.first.update_attributes(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, section_id: @article.articable_id, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
+						does_cover_article_exists.first.update_attributes(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
 						
 						
 
@@ -190,6 +190,8 @@ class Panel::ArticlesController < ApplicationController
 
 	def destroy
 		@article.destroy
+		DeleteArticleJob.perform_later @article
+		
 		# expires_action :latest_news
 		# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
 		# Rails.cache.delete("views/recent_articles/54f7eee5cf33ab592d78a02aade03259")

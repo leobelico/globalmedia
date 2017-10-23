@@ -84,7 +84,7 @@
 				<div class="radio-banner__tune-in">Lo más reciente</div>
 
 				<div class="station__articles">
-					<% station.article_relationships.last(3).each do |relationship| %>
+					<% station.article_relationships.order(created_at: :desc).first(3).each do |relationship| %>
 						<%= render "components/horizontal-note", article: relationship.article %>
 					<% end %>
 

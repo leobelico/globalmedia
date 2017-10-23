@@ -50,11 +50,12 @@ class TitlepageController < ApplicationController
 
 	def publish_highlights
 		#este método saca todos los highlights que se publican ahora y pone en 
-	
+		p "publicando highlights"
 		
-		Highlight.where("scheduled_time >= ? AND scheduled_time <= ? AND published = ?", Time.now.beginning_of_minute, Time.now.end_of_minute, false).all.each do |highlight|
+		Highlight.where("scheduled_time >= ? AND scheduled_time <= ? AND published = ?", (DateTime.now.beginning_of_minute-10.minutes), (DateTime.now.end_of_minute), false).all.each do |highlight|
+		
 			highlights_to_remove = Highlight.where(published: true, order: highlight.order)
-			#highlights_to_remove.update_all(published: false)
+			highlights_to_remove.update_all(published: false)
 			highlights = Highlight.where("published = ? AND highlights.order >= ?", true, highlight.order)
 
 			counter = highlight.order
@@ -66,10 +67,13 @@ class TitlepageController < ApplicationController
 			end
 
 			seventh = Highlight.where(order: 7)
-			if seventh 
+			if seventh.first 
 				seventh.first.update_attributes(published: false)
 			end
 			highlight.update_attributes(published: true)
+			if Article.exists?(highlight.article_id)
+				Article.find(highlight.article_id).update_attribute(:published, true)
+			end
 
 		end
 	end

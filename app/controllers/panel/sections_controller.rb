@@ -126,10 +126,10 @@ class Panel::SectionsController < ApplicationController
 			if current_article
 				current_article.update_attributes(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, section_id: article.articable_id, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
 			else
-				if CoverArticle.where(section_id: article.articable_id).count < 10
+				if CoverArticle.where(section_id: article.articable_id).count < 20
 					CoverArticle.create(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, section_id: article.articable_id, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
 				else
-					last_article = CoverArticle.where(section_id: article.articable_id).order(published_at: :asc).last(10).reverse.last.destroy
+					last_article = CoverArticle.where(section_id: article.articable_id).order(published_at: :asc).last(20).reverse.last.destroy
 					CoverArticle.create(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, section_id: article.articable_id, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
 				end
 			end

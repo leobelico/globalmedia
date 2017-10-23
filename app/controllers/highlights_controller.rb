@@ -26,15 +26,23 @@ class HighlightsController < ApplicationController
 	end
 
 	def update
-
+		p "cambiando"
 		
 		article = Article.find_by_name(params[:highlight][:article_id])
+		p "article id " + article.id.to_s
+		p "cuenta " + Highlight.where(article_id: article.id, published: true).count.to_s
 		
-		@highlight.article = article
-		if @highlight.update(highlight_params)
-			redirect_to panel_highlights_path
+		if Highlight.where(article_id: article.id, published: true).count >= 1
+			@highlight.article = article
+			if @highlight.update(highlight_params)
+				redirect_to panel_highlights_path
+			else
+				render action: "edit"
+			end
 		else
-			render action: "edit"
+			flash[:notice] = "Ese artículo ya está en portadas"
+			redirect_to panel_highlights_path
+
 		end
 	end
 

@@ -3,9 +3,11 @@
 		<% cache(latest_news) do %>
 			<%= render "components/latest-news",articles: latest_news %>
 		<% end %>
-		<% cache(get_global_recommendations(article.articable_id)) do %>
+		<% if article %>
+			<% cache(get_global_recommendations(article.articable_id)) do %>
 
-			<%= render "components/recommendations", articles: get_global_recommendations(article.articable_id) %>
+				<%= render "components/recommendations", articles: get_global_recommendations(article.articable_id) %>
+			<% end %>
 		<% end %>
 
 		<% cache(most_visited, expires_in: 2.hours) do %>
@@ -19,7 +21,7 @@
 		<% end %>
 	<% end %>
 	
-	<% if  article != "" and article != "global" and article.articable and article.articable.facebook? %>
+	<% if article and  article != "" and article != "global" and article.articable and article.articable.facebook? %>
 		<div class="fb-page" data-href="<%= article.articable.facebook %>" data-tabs="timeline" data-width="342" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/GlobalMediaSLP" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/GlobalMediaSLP"></a></blockquote></div>
 	<% else %>
 		<div class="fb-page" data-href="https://www.facebook.com/GlobalMediaSLP" data-tabs="timeline" data-width="342" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/GlobalMediaSLP" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/GlobalMediaSLP"></a></blockquote></div>

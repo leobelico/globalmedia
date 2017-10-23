@@ -22,5 +22,8 @@
 
 latest.dump
 latest.dump.1
+
+latest.dump.2
 gm.dump
 db/schema.rb
+.DS_Store
