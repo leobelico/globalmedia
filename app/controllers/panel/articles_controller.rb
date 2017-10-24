@@ -189,8 +189,9 @@ class Panel::ArticlesController < ApplicationController
 	end
 
 	def destroy
-		@article.destroy
 		DeleteArticleJob.perform_later @article
+		
+		@article.destroy
 		
 		# expires_action :latest_news
 		# Rails.cache.delete("views/section_articles/c9e9bc761f258191703f09bb6e30110c")
