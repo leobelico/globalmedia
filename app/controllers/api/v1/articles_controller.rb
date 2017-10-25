@@ -45,7 +45,7 @@ class Api::V1::ArticlesController < Api::BaseController
 		#@articles = @articles.where()
 		#<% @relationship.article_relationships.each do |relationship| %>
 		
-		render json: { articles: @articles, article_images: @article_images }, adapter: :json, per_page: 20 
+		render json: { articles: @articles, article_images: @article_images }, adapter: :json, per_page: 6 
 
 	end
 	def latest_special_investigation 
