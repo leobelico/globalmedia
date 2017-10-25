@@ -31,7 +31,7 @@ class Api::V1::ArticlesController < Api::BaseController
 	def latest_collaborator_articles
 		
 		#relationship = @relationship.article_relationships
-		@articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator'").order(created_at: "DESC") 
+		@articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator'").order(created_at: "DESC").first(6) 
 		@article_images = {}
 		@articles.each_with_index do |article, index|
 			collaborator_name = article.article_relationships.where(articable_type: "Relationship").first.articable.name 
