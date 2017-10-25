@@ -21,7 +21,10 @@ class Api::V1::ArticlesController < Api::BaseController
 		end
 	end
 	def most_visited 
-	    @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ?", false,2.hours.ago, Time.now).order("hits.number").last(6)
+		articles_ids = MostVisitedArticle.all.pluck(:article_id).last(3) 
+		@articles = Article.where(id: articles_ids)
+
+	    # @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ?", false,2.hours.ago, Time.now).order("hits.number").last(6)
 	    json_response(@articles, :ok)
 	end
 
@@ -101,7 +104,9 @@ class Api::V1::ArticlesController < Api::BaseController
 	end
 
 	def get_global_recommendations
-	    @articles = Article.where(global_recommendation: true, published: true).order(updated_at: "ASC").last(4)
+		articles_ids = GlobalRecommendationArticle.where("global_recommendation = ?", true).pluck(:article_id).last(3) 
+		@articles = Article.where(id: articles_ids)
+	   
 	    render json: @articles, adapter: :json
   	end
 
