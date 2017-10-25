@@ -49,7 +49,7 @@
 <div class="special-articles-container">
 		<% cache(get_investigation_articles) do %>
 			<% if get_investigation_articles.count > 0 %>
-				<%= render "components/special-articles", type: "Investigación Especial", title: get_investigation_articles.last.article_relationships.last.articable.name, articles: get_investigation_articles %>
+				<%= render "components/special-articles", type: "Investigación Especial", title: Relationship.where(relationship_type: "Investigation").order(created_at: :asc).last.name, articles: get_investigation_articles %>
 			<% end %>
 		<% end %>
 	<% cache(get_complaints) do %>
