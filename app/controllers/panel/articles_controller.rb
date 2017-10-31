@@ -170,15 +170,10 @@ class Panel::ArticlesController < ApplicationController
 				end
 
 				does_article_exists = LatestArticle.where(article_id: @article.id)
-				if does_article_exists.count <= 0
-					#el artículo no existe entonces hay que crearlo
-					if LatestArticle.count < 8
-						LatestArticle.create(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
-					else
-						last_article = LatestArticle.order(published_at: :asc).last(8).reverse.last.destroy
-						LatestArticle.create(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
-					end	
-				else
+				if does_article_exists.count >=1 
+					# LatestArticle.create(article_id: 5900, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
+					
+					
 					does_article_exists.first.update_attributes(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
 				end
 			end
