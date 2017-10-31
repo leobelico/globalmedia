@@ -7,8 +7,10 @@ class StationsController < ApplicationController
 		@news_channels = Station.where(news: true).order(frequency: "ASC")
 	end
 	def show
-		@https_src = "https://59dcdb8f833ed.streamlock.net:443/Shoutcast/" + "38.96.148.212:8004/;stream.mp3" 
-		@rtmps_src = "rtmps://59dcdb8f833ed.streamlock.net:443/Shoutcast/" + "38.96.148.212:8004/;stream.mp3" 
+		@https_src = "https://59dcdb8f833ed.streamlock.net:443/Shoutcast/" + @station.stream_url + ".stream/playlist.m3u8" 
+		p "HTTPS "
+		p @https_src
+		@rtmps_src = "rtmps://59dcdb8f833ed.streamlock.net:443/Shoutcast/" + @station.stream_url  + ".stream"
 		session[:article_id] = nil
 		if params[:tag]
 			redirect_to search_results_path(params[:tag])
