@@ -24,7 +24,7 @@
 		<p class="table__cell">Editar:</p>
 		<!-- <p class="table__cell">Delete:</p> -->
 	</div>
-	<% @controls.find_each do |control| %>
+	<% @controls.each do |control| %>
 		<div class="table__row">
 			<p class="table__cell"><%= control.client_name %></p>
 			<p class="table__cell"><%= control.init_date.strftime("%d %b %Y %l:%M %p") %></p>

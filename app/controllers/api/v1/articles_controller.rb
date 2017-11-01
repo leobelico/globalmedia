@@ -21,14 +21,17 @@ class Api::V1::ArticlesController < Api::BaseController
 		end
 	end
 	def most_visited 
-	    @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ?", false,2.hours.ago, Time.now).order("hits.number").last(6)
+		articles_ids = MostVisitedArticle.all.pluck(:article_id).last(3) 
+		@articles = Article.where(id: articles_ids)
+
+	    # @articles = Article.joins("LEFT OUTER JOIN hits ON hits.article_id = articles.id").where("articles.published = true AND articles.highlight = false AND articles.global_recommendation = ? AND hits.created_at > ? AND hits.created_at < ?", false,2.hours.ago, Time.now).order("hits.number").last(6)
 	    json_response(@articles, :ok)
 	end
 
 	def latest_collaborator_articles
 		
 		#relationship = @relationship.article_relationships
-		@articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator'").order(created_at: "DESC") 
+		@articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator'").order(created_at: "DESC").first(6) 
 		@article_images = {}
 		@articles.each_with_index do |article, index|
 			collaborator_name = article.article_relationships.where(articable_type: "Relationship").first.articable.name 
@@ -42,8 +45,7 @@ class Api::V1::ArticlesController < Api::BaseController
 		#@articles = @articles.where()
 		#<% @relationship.article_relationships.each do |relationship| %>
 		
-		render json: { articles: @articles, article_images: @article_images }, adapter: :json, per_page: 20 
-
+		render json: { articles: @articles, article_images: @article_images }, adapter: :json
 	end
 	def latest_special_investigation 
 		@investigation = Relationship.where(relationship_type: "Investigation").last
@@ -101,7 +103,9 @@ class Api::V1::ArticlesController < Api::BaseController
 	end
 
 	def get_global_recommendations
-	    @articles = Article.where(global_recommendation: true, published: true).order(updated_at: "ASC").last(4)
+		articles_ids = GlobalRecommendationArticle.where("global_recommendation = ?", true).pluck(:article_id).last(3) 
+		@articles = Article.where(id: articles_ids)
+	   
 	    render json: @articles, adapter: :json
   	end
 

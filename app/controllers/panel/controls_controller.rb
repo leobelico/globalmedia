@@ -4,7 +4,7 @@ class Panel::ControlsController < ApplicationController
 	before_action :check_remote_controls_permission
 	before_action :set_control, only: [:show, :edit, :update, :destroy]
 	def index
-		@controls = Control.where(contract_state: "Por Realizar").paginate(page: params[:page], per_page: 20)
+		@controls = Control.where(contract_state: "Por Realizar").order(init_date: :asc).paginate(page: params[:page], per_page: 20)
 	end
 	def done
 		@controls = Control.where(contract_state: "Realizado").paginate(page: params[:page], per_page: 20)

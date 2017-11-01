@@ -21,6 +21,15 @@
 				<audio controls autoplay id="audio" controlsList="nodownload">
 					<source src="<%= @station.stream_url %>" type="audio/mpeg">	
 				</audio>
+
+
+
+			<!-- <div class="flowplayer" data-rtmp="<%= @rtmps_src %>">
+				<video controls autoplay>
+				    <source type="application/x-mpegurl" src="<%= @https_src %>">
+				    <source type="video/flash" src="<%= @rtmps_src %>">
+				</video>
+				</div> -->
 			<% else %>	
 
 			 <video id="video" class="video-js" controls  preload="auto" width="640" height="264">
