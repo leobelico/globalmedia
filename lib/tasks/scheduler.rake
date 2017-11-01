@@ -33,7 +33,7 @@ end
 
 task :publish_highlights => :environment do
 
-	Highlight.where("scheduled_time >= ? AND scheduled_time <= ? AND published = ?", (DateTime.now.beginning_of_minute-10.minutes), (DateTime.now.end_of_minute), false).all.each do |highlight|
+	Highlight.where("scheduled_time >= ? AND scheduled_time <= ? AND published = ?", (DateTime.now.beginning_of_minute-10.minutes), (DateTime.now.end_of_minute), false).order(order: :asc).all.each do |highlight|
 		
 			highlights_to_remove = Highlight.where(published: true, order: highlight.order)
 			highlights_to_remove.update_all(published: false)
