@@ -3,9 +3,9 @@
 <script src="https://vjs.zencdn.net/6.2.7/video.js" ></script>			
 <script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js" ></script>
 <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
-<link rel="stylesheet" href="//releases.flowplayer.org/7.1.2/skin/skin.css">
+<!-- <link rel="stylesheet" href="//releases.flowplayer.org/7.1.2/skin/skin.css">
 <script src="//releases.flowplayer.org/7.1.2/flowplayer.min.js"></script>
-<script src="//releases.flowplayer.org/hlsjs/flowplayer.hlsjs.light.min.js"></script>
+<script src="//releases.flowplayer.org/hlsjs/flowplayer.hlsjs.light.min.js"></script> -->
 	<h1 data-chrome class="station__name">Si tu video no se ve correctamente, da click <a href="#">aquí</a></h1>
 
 <% if @station.news == false %>
@@ -38,19 +38,25 @@
 			</div>
 
 			<% if !@station.video? and !@station.news? %>
-				<!-- <audio controls autoplay id="audio" controlsList="nodownload">
+				<audio controls autoplay id="audio" controlsList="nodownload">
 					<source src="<%= @station.stream_url %>" type="audio/mpeg">	
-				</audio> -->
+				</audio>
 
 				
 
-				<div class="flowplayer" data-rtmp="<%= @rtmps_src %>">
-				<video controls autoplay>
+				<!-- <div class="flowplayer" data-rtmp="<%= @rtmps_src %>" style="height: 70px;">
+				<video controls autoplay >
 				    <source type="application/x-mpegurl" src="<%= @https_src %>">
 				    <source type="video/flash" src="<%= @rtmps_src %>">
 				</video>
-				</div>
+				</div> -->
+	
+ 			<!-- <video id="video" class="video-js" controls  preload="auto" width="640" height="264">
+				  		
+						<source src="<%= @https_src %>" type="application/x-mpegURL">
 
+						<source src="<%= @rtmps_src %>" type="video/flash">
+				  </video> -->
 			<% else %>	
 
 				  <video id="video" class="video-js" controls  preload="auto" width="640" height="264">
