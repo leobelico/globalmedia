@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
 	<% if !(controller_name == "articles" and action_name == "show") %>
-	    <title>Global Media - Noticias</title>
+	    <title><%= yield(:title) %></title>
 		<meta name="description" content="GlobalMedia te informa">
 	<% end %>
 	<meta name="keywords" content="GlobalMedia,noticias,México,San Luis Potosí,Vanguardia,Negocios">

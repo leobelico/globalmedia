@@ -1,3 +1,5 @@
+<% content_for :title, "Resultados de Búsqueda"  %>
+
 <% @articles.each do |article| %>
 	<%= render "components/horizontal-note", article: article %>
 <% end %>

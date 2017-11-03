@@ -38,8 +38,11 @@ function submit_form(action, slug, event, go_to_gallery){
   }
   button = $(event.target);
   show_button_spinner(button);
-
-
+  if ($("#hashtags").val().length == 0) {
+    var noticias = "noticias";
+  } else {
+    var noticias = "";
+  }
 
   $.ajax({
     url: url,
@@ -50,7 +53,7 @@ function submit_form(action, slug, event, go_to_gallery){
         short_description: $("#article_short_description").val(),
         articable_id: $("#article_articable_id").val(),
         articable_type: $("#article_articable_type").val(),
-        hashtags_names: $("#hashtags").val(), 
+        hashtags_names: $("#hashtags").val() + noticias, 
         plain_text: text_note,
         note: JSON.stringify(quill_note),
         keyword_id: $("#article_keyword_id").val(),
@@ -75,9 +78,13 @@ function submit_form(action, slug, event, go_to_gallery){
   })
   .fail(function() {
     console.log("error");
-    hide_button_spinner(button);
-    $(".admin-form.form--article.card").prepend('<h4 class="small-title delete" style="margin-bottom:  18px; ">Asegurate de llenar todos los campos de la forma.</h4>')
-    $(".admin-form.form--article.card").append('<h4 class="small-title delete" style="margin-top:  18px; ">Asegurate de llenar todos los campos de la forma.</h4>')
+    hide_button_spinner(button); 
+    TweenMax.set(button, { pointerEvents: "all" })
+    
+    $(".admin-form.form--article.card h4").remove()
+    $(".admin-form.form--article.card").prepend('<h4 class="small-title delete" style="margin-bottom:  18px; ">Asegurate de llenar todos los campos de la forma o que tengas una conexión estable.</h4>')
+    $(".admin-form.form--article.card").append('<h4 class="small-title delete" style="margin-top:  18px; ">Asegurate de llenar todos los campos de la forma o que tengas una conexión estable.</h4>')
+    TweenMax.from(".admin-form.form--article.card h4", .3,  {opacity: 0})
   })
   .always(function() {
     console.log("complete");
