@@ -3,7 +3,7 @@
 		<h4 class="section__title">Radio</h4>
 		<div class="section-articles-container">
 			<% @radio_programs.each do |program| %>
-				<%= link_to program, class: "station-preview ui-card" do %>
+				<%= link_to program, class: "station-preview ui-card", target: "_blank" do %>
 					<%= image_tag program.image, class: "station-preview__image" %>
 				<% end %>
 			<% end %>
@@ -11,7 +11,7 @@
 		<h4 class="section__title">T.V.</h4>
 		<div class="section-articles-container">
 			<% @video_programs.each do |program| %>
-				<%= link_to program, class: "station-preview ui-card" do %>
+				<%= link_to program, class: "station-preview ui-card", target: "_blank" do %>
 					<%= image_tag program.image, class: "station-preview__image" %>
 				<% end %>
 			<% end %>
@@ -19,7 +19,7 @@
 		<h4 class="section__title">Noticieros</h4>
 		<div class="section-articles-container">
 			<% @news_channels.each do |program| %>
-				<%= link_to program, class: "station-preview ui-card" do %>
+				<%= link_to program, class: "station-preview ui-card", target: "_blank" do %>
 					<%= image_tag program.image, class: "station-preview__image" %>
 				<% end %>
 			<% end %>

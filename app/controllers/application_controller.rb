@@ -77,7 +77,7 @@ class ApplicationController < ActionController::Base
   end
   
   def get_sections 
-    @articles = Article.joins("LEFT JOIN section_highlights ON section_highlights.article_id = articles.id").where("section_highlights.article_id IS NULL AND articles.articable_id = ? AND articles.global_recommendation = ? AND articles.published = ?", 1, false, true).order(created_at: "DESC").first(3)
+    @sections = Section.where(visible: true)
     
   end
 

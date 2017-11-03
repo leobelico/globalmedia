@@ -1,5 +1,6 @@
 menu_open = false;
 $(document).on("touchend", function(event){
+	console.log(event.target);
 	if ( $(event.target).is(".menu-button") && menu_open == false ) {
 		menu_open = true; 
 		TweenMax.to(".mt-1", .2, { y: "+=9", rotation: 45 });

@@ -118,7 +118,14 @@
 	width:  130px; 
 }
 @media screen and (max-width:  1023px) {
-	.search__box, 
+	.search,
+	.search__box {
+		flex: 1; 
+	} 
+	.search__box {
+		width:  100%; 
+		font-size:  12px; 
+	}
 	.topbar .social-media {
 		display:  none; 
 	}

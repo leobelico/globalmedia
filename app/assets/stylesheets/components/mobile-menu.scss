@@ -12,7 +12,7 @@
 		z-index:  75; 
 		padding:  8px; 
 		padding-top:  142px;
-		background:  #f5f5f5;
+		background:  #fafafa;
 		position:  fixed; 
 		top:  -100%; 
 		left:  0px; 
@@ -45,8 +45,9 @@
 			}
 			.mobile-menu__link {
 				font-size:  18px; 
-				color:  #000000; 
-				margin-bottom:  8px;
+				color:  #424242; 
+				font-weight:  700; 
+				margin-bottom:  18px;
 				flex: 1;  
 			}
 		}
