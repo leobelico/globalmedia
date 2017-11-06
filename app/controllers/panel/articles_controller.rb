@@ -31,7 +31,7 @@ class Panel::ArticlesController < ApplicationController
 	end
 	def index
 		if params[:name]
-			@articles = Article.where('slug LIKE ?', "%#{params[:name]}%").paginate(page: params[:page], per_page: 10)
+			@articles = Article.where('name ILIKE ?', "%#{params[:name]}%").paginate(page: params[:page], per_page: 10)
 			# p(params[:name])
 		else 
 			@articles = Article.limit(1000).order(created_at: "DESC").paginate(page: params[:page], per_page: 10)
