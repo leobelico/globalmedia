@@ -39,7 +39,7 @@ class TitlepageController < ApplicationController
 	def index
 		@breaking_news = Article.joins("INNER JOIN sections ON articles.articable_id = sections.id").where("articles.breaking_news = ? AND articles.articable_id = ? AND sections.visible = ?", true, 10, true).order("articles.updated_at ASC").first(4)
 		
-		@highlights = Highlight.where(published: true).order(order: "ASC")
+		@highlights = Highlight.where("published = ? AND highlights.order < 7", true).order(order: "ASC")
 		
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')
 		@sections = Section.where("visible = 'true' AND name != 'Último Momento'").order(order: "ASC")
@@ -52,11 +52,13 @@ class TitlepageController < ApplicationController
 		#este método saca todos los highlights que se publican ahora y pone en 
 		p "publicando highlights"
 		
-		Highlight.where("scheduled_time >= ? AND scheduled_time <= ? AND published = ?", (DateTime.now.beginning_of_minute), (DateTime.now.end_of_minute + 1.hours), false).order(order: :asc).all.each do |highlight|
-		
-			highlights_to_remove = Highlight.where(published: true, order: highlight.order)
-			highlights_to_remove.update_all(published: false)
-			highlights = Highlight.where("published = ? AND highlights.order >= ?", true, highlight.order)
+		Highlight.where("scheduled_time >= ? AND scheduled_time <= ? AND published = ?", (DateTime.now.beginning_of_minute-10.minutes), (DateTime.now.end_of_minute), false).order(order: :asc).all.each do |highlight|
+			
+			highlights = Highlight.where("published = ? AND highlights.order >= ?", true, highlight.order).order(order: :asc)
+
+			# highlights_to_remove = Highlight.where(published: true, order: highlight.order)
+			# highlights_to_remove.update_all(published: false)
+			
 
 			counter = highlight.order
 
@@ -75,7 +77,7 @@ class TitlepageController < ApplicationController
 				Article.find(highlight.article_id).update_attribute(:published, true)
 			end
 
-	end
+		end
 
 		
 	end
