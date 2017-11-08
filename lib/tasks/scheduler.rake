@@ -53,6 +53,7 @@ task :publish_highlights => :environment do
 			if seventh.first 
 				seventh.first.update_attributes(published: false)
 			end
+			Highlight.where("highlights.order >= 7").delete_all
 			highlight.update_attributes(published: true)
 			if Article.exists?(highlight.article_id)
 				Article.find(highlight.article_id).update_attribute(:published, true)
