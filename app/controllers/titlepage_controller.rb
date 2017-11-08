@@ -52,11 +52,13 @@ class TitlepageController < ApplicationController
 		#este método saca todos los highlights que se publican ahora y pone en 
 		p "publicando highlights"
 		
-		Highlight.where("scheduled_time >= ? AND scheduled_time <= ? AND published = ?", (DateTime.now.beginning_of_minute), (DateTime.now.end_of_minute + 1.hours), false).order(order: :asc).all.each do |highlight|
-		
-			highlights_to_remove = Highlight.where(published: true, order: highlight.order)
-			highlights_to_remove.update_all(published: false)
-			highlights = Highlight.where("published = ? AND highlights.order >= ?", true, highlight.order)
+		Highlight.where("scheduled_time >= ? AND scheduled_time <= ? AND published = ?", (DateTime.now.beginning_of_minute  + 2.hours), (DateTime.now.end_of_minute + 8.hours), false).order(order: :asc).all.each do |highlight|
+			
+			highlights = Highlight.where("published = ? AND highlights.order >= ?", true, highlight.order).order(order: :asc)
+
+			# highlights_to_remove = Highlight.where(published: true, order: highlight.order)
+			# highlights_to_remove.update_all(published: false)
+			
 
 			counter = highlight.order
 
@@ -75,7 +77,7 @@ class TitlepageController < ApplicationController
 				Article.find(highlight.article_id).update_attribute(:published, true)
 			end
 
-	end
+		end
 
 		
 	end

@@ -12,7 +12,7 @@
 		<p class="table__cell">Programado:</p>
 		<p class="table__cell">Cambiar nota:</p>
 	</div>
-	<% @highlights.where(published: true).each do |highlight| %>
+	<% @published.each do |highlight| %>
 		<div class="table__row">
 			<div class="table__cell"><%= highlight.order %> </div>
 			<div class="table__cell"><%= link_to highlight.article.name, highlight.article %></div>

@@ -184,6 +184,7 @@ class Panel::ArticlesController < ApplicationController
 	end
 
 	def destroy
+		Highlight.where(article_id: @article.id, published: false).destroy_all
 		DeleteArticleJob.perform_later @article
 		
 		@article.destroy
