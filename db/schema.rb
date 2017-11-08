@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016192645) do
+ActiveRecord::Schema.define(version: 20171108164826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -225,6 +225,7 @@ ActiveRecord::Schema.define(version: 20171016192645) do
     t.string   "article_image", default: ""
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "article_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -320,6 +321,7 @@ ActiveRecord::Schema.define(version: 20171016192645) do
     t.float    "frequency",        default: 0.0
     t.text     "description",      default: ""
     t.string   "image_preview",    default: ""
+    t.string   "app_url",          default: ""
   end
 
   create_table "timetables", force: :cascade do |t|
