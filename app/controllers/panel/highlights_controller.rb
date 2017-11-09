@@ -106,7 +106,12 @@ class Panel::HighlightsController < ApplicationController
 	end
 
 	def destroy
-		@highlight.destroy
+		if @highlight.published == false
+			@highlight.destroy
+		else
+			flash[:notice] = "No se puede eliminar porque está en portada actualmente."
+
+		end
 		redirect_to panel_highlights_path
 	end
 

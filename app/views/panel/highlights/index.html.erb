@@ -34,6 +34,7 @@
 		<p class="table__cell">Estado:</p>
 		<p class="table__cell">Programado:</p>
 		<p class="table__cell">Cambiar nota:</p>
+		<p class="table__cell delete">Eliminar:</p>
 	</div>
 	<% @highlights.where(published: false).each do |highlight| %>
 		<div class="table__row">
@@ -42,6 +43,7 @@
 			<div class="table__cell"><% if highlight.published %>Activo<% else %>Inactivo<% end %></div>
 			<div class="table__cell"><%= highlight.scheduled_time %></div>
 			<%= link_to "Cambiar nota", edit_panel_highlight_path(highlight), class: "table__cell edit" %>
+			<%= link_to "Eliminar", panel_highlight_path(highlight), method: :delete, data: {confirm: "¿Estás seguro de que quieres realizar esta acción? Esto no se puede deshacer" }, class: "table__cell delete" %>
 		</div>
 	<% end %>
 	<% if @highlights.count == 0 %>
