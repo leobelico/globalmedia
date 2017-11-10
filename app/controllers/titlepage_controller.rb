@@ -1,4 +1,5 @@
 class TitlepageController < ApplicationController
+	before_action :authenticate_admin!, only: :publish_highlights
 	def search_article
 		if params[:article_id].include? "article_id"
        
@@ -52,7 +53,7 @@ class TitlepageController < ApplicationController
 		#este método saca todos los highlights que se publican ahora y pone en 
 		p "publicando highlights"
 		
-		Highlight.where("scheduled_time >= ? AND scheduled_time <= ? AND published = ?", (DateTime.now.beginning_of_minute-10.minutes), (DateTime.now.end_of_minute), false).order(order: :asc).all.each do |highlight|
+		Highlight.where("scheduled_time >= ? AND scheduled_time <= ? AND published = ?", (DateTime.now.beginning_of_minute-150.minutes), (DateTime.now.end_of_minute), false).order(order: :asc).all.each do |highlight|
 			
 			highlights = Highlight.where("published = ? AND highlights.order >= ?", true, highlight.order).order(order: :asc)
 
