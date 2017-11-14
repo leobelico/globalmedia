@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  constraints(:host => /globalmedia.mx/) do
+    root :to => redirect("https://www.globalmedia.mx")
+    match '/*path', :to => redirect {|params| "https://www.globalmedia.mx/#{params[:path]}"}
+  end
+
   # mount ActionCable.server => '/cable'
   devise_for :users
   # Todas las rutas del panel tiene que tener panel
