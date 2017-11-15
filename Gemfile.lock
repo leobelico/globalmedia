@@ -147,7 +147,6 @@ GEM
     rack-cors (1.0.1)
     rack-mini-profiler (0.10.5)
       rack (>= 1.2.0)
-    rack-rewrite (1.5.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-timeout (0.4.2)
@@ -279,7 +278,6 @@ DEPENDENCIES
   rack-attack
   rack-cors
   rack-mini-profiler
-  rack-rewrite
   rack-timeout
   rails (~> 5.0.2)
   rails-jquery-autocomplete
