@@ -11,10 +11,13 @@ class ApplicationController < ActionController::Base
     # if request.host == 'www.globalmedia.mx'
     #   redirect_to 'http://globalmedia.mx' + request.fullpath, :status => 301
     # end
-    unless /^www/.match(request.host)
-      redirect_to("#{request.protocol}x.com#{request.request_uri}",
-                  :status => 301)
+    if request.host == 'globalmedia.mx'
+      redirect_to 'http://www.globalmedia.mx' + request.fullpath, :status => 301
     end
+    # unless /^www/.match(request.host)
+    #   redirect_to("#{request.protocol}x.com#{request.request_uri}",
+    #               :status => 301)
+    # end
   end
   # before_action do
   #   if user_signed_in?
