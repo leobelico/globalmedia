@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     constraints(:host => /^(?!globalmedia\.mx)/i) do
       match "/(*path)" => redirect {
         |params, req| "https://globalmedia.mx/#{params[:path]}"
-        },  via: [:get, :post]
+        },  via: [:get, :post, :patch]
     end
   end
 
