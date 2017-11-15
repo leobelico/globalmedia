@@ -205,7 +205,7 @@
 		</script>
 	<% end %>
 	<%= render "components/admin/admin-sidebar" if panel_url && user_signed_in? %>
-
+	
 	<% if user_signed_in? && panel_url %>
 		<div class="interface interface--admin">
 			<% if flash.count > 0 %>
