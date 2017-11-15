@@ -8,12 +8,12 @@ class ApplicationController < ActionController::Base
   before_action :redirect_subdomain
 
   def redirect_subdomain
-    # if request.host == 'www.globalmedia.mx'
-    #   redirect_to 'http://globalmedia.mx' + request.fullpath, :status => 301
-    # end
-    if request.host == 'globalmedia.mx'
-      redirect_to 'http://www.globalmedia.mx' + request.fullpath, :status => 301
+    if request.host == 'www.globalmedia.mx'
+      redirect_to 'http://globalmedia.mx' + request.fullpath, :status => 301
     end
+    # if request.host == 'globalmedia.mx'
+    #   redirect_to 'http://www.globalmedia.mx' + request.fullpath, :status => 301
+    # end
     # unless /^www/.match(request.host)
     #   redirect_to("#{request.protocol}x.com#{request.request_uri}",
     #               :status => 301)
