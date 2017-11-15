@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     #   redirect_to 'http://www.globalmedia.mx' + request.fullpath, :status => 301
     # end
     unless /^www/.match(request.host)
-      redirect_to("#{request.protocol}x.com#{request.request_uri}",
+      redirect_to("#{request.protocol}x.com#{request.request_url}",
                   :status => 301)
     end
   end
