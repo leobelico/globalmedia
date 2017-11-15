@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  # if Rails.env.production?
-  #   constraints(:host => /^(?!globalmedia\.mx)/i) do
-  #     match "/(*path)" => redirect {
-  #       |params, req| "https://globalmedia.mx/#{params[:path]}"
-  #       },  via: [:get, :post, :patch]
-  #   end
-  # end
+  if Rails.env.production?
+     constraints(host: /^www\./i) do
+      match '(*any)' => redirect { |params, request|
+        URI.parse(request.url).tap { |uri| uri.host.sub!(/^www\./i, '') }.to_s
+      }
+    end
+  end
 
   # mount ActionCable.server => '/cable'
   devise_for :users
