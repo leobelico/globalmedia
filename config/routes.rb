@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  if Rails.env.production?
-    constraints(subdomain: '') do
-      match "(*x)" => redirect do |params, request|
-        URI.parse(request.url).tap { |x| x.host = "www.#{x.host}" }.to_s
-      end
-    end
-  end
+  # if Rails.env.production?
+  #   constraints(subdomain: '') do
+  #     match "(*x)" => redirect do |params, request|
+  #       URI.parse(request.url).tap { |x| x.host = "www.#{x.host}" }.to_s
+  #     end
+  #   end
+  # end
 
   # mount ActionCable.server => '/cable'
   devise_for :users
