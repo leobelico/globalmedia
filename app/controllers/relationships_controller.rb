@@ -6,7 +6,7 @@ class RelationshipsController < ApplicationController
 	end
 	def collaborators
 
-		@collaborators = Relationship.where(relationship_type: "Collaborator").order(updated_at: "DESC").paginate(page: params[:page], per_page: 20)
+		@collaborators = Relationship.where(relationship_type: "Collaborator").order(updated_at: "DESC").paginate(page: params[:page], per_page: 18)
 		@related_sections = RelatedSection.where(section: Section.find_by(name: "Colaboradores"))
 	end
 	private 

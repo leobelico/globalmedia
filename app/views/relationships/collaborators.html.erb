@@ -6,6 +6,7 @@
 		<div class="section-articles-container">
 			<% @collaborators.each do |collaborator| %>
 				<% if collaborator.article_relationships.count > 0 %>
+
 					<%= link_to collaborator, class: "collaborator-preview ui-card" do %>
 						<div class="collaborator__head">
 							
@@ -20,8 +21,12 @@
 						<p class="collaborator__excerpt"><%= truncate(collaborator.article_relationships.order(created_at: :asc).last.article.short_description, length:  120) %></p> 
 					<% end %>
 				<% end %>
+
+				
 			<% end %>
 		</div>
+			<%= will_paginate @collaborators, class: "site-pagination" %>
+		
 		<% if @related_sections.count > 0 %>
 			<div class="radio-banner__tune-in" style="margin-top:  8px; ">También te puede interesar:</div>
 			<% @related_sections.each do |related_section| %>
