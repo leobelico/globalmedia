@@ -16,7 +16,7 @@
 <meta property="og:image:type" content="image/jpg" />
 <meta property="og:image:width" itemprop="image" content="400" />
 <meta property="og:image:height" itemprop="image" content="400" />
-
+<meta name="twitter:image" content="https:<%= URI.parse(URI.encode(image_url article.image)) %>">
 <link rel="image_src" href="<%= URI.parse(URI.encode(image_url article.image)) %>"/>
 
 <meta name="twitter:card" 			content="summary_large_image"/>
