@@ -1,4 +1,4 @@
-Rack::Attack.blacklist('block <ip>') do |req|
-  # if variable `block <ip>` exists in cache store, then we'll block the request
-  Rails.cache.fetch("block #{req.ip}").blank?
+Rack::Attack.blocklist('block 52.233.27.230') do |req|
+  # Requests are blocked if the return value is truthy
+  '52.233.27.230' == req.ip
 end
