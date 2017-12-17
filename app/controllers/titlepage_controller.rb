@@ -12,8 +12,8 @@ class TitlepageController < ApplicationController
 	def privacy_policy 
 	end
 	def search_results
-		@articles = Article.last(3)
-		# @articles = Article.where('name ILIKE ? AND published = ? ', "%#{params[:format]}%", true).order(created_at: :desc).paginate(page: params[:page], per_page: 20)
+		# @articles = Article.last(3)
+		@articles = Article.where('name ILIKE ? AND published = ? ', "%#{params[:format]}%", true).order(created_at: :desc).paginate(page: params[:page], per_page: 20)
 	end
 
 	def about_us 
