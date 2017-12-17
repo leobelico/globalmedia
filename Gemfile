@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'rails-jquery-autocomplete'
 gem 'devise'
 gem 'foreman'
+gem 'rack-attack'
 gem 'aws-sdk', "2.2.8"
 gem 'will_paginate', "~>3.0.5"
 gem 'autoprefixer-rails'
