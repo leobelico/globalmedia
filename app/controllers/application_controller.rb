@@ -5,8 +5,18 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to panel_path, :alert => exception.message
   end
+  before_action :block_ip_addresses
+  
   before_action :redirect_subdomain
 
+
+  def block_ip_addresses
+    head :unauthorized if current_ip_address == "52.233.27.230"
+  end
+
+  def current_ip_address
+    request.env['HTTP_X_REAL_IP'] || request.env['REMOTE_ADDR']
+  end
   def redirect_subdomain
     unless /^www/.match(request.host)
       url_redirect = request.protocol + "www." + request.host_with_port + request.fullpath
