@@ -158,7 +158,7 @@
 
 			</div>
 
-			<% if true %>
+			<% if false %>
 				<% if get_banner(@article.articable, @article.articable_type, "Mediano" ).count > 0 %>
 					<%= render "components/sidebar", article: @article, banner: get_banner(@article.articable, @article.articable_type, "Mediano" ) %>
 				<% else %>
@@ -175,7 +175,7 @@
 
 		<template id="related-articles">
 
-			<% if @article.created_at > ("2017-09-10").to_date %>
+			<% if false and @article.created_at > ("2017-09-10").to_date %>
 					<% if related_by_hashtags(@article).count > 0 %>
 						<p class="related-articles"><strong class="related-articles__title">Artículos relacionados:</strong><br><% related_by_hashtags(@article).each do |name, slug, id| %><% if @article.id != id %><br><%= link_to truncate(name, length:  80), article_path(slug), class: "related-article" %><% end %><% end %></p>
 					<% end %>
@@ -192,7 +192,7 @@
 		var container = document.getElementById("quill-container")
 		display_quill_note(content, container);
 
-		<% if @article.created_at > ("2017-09-10").to_date  %>
+		<% if false and @article.created_at > ("2017-09-10").to_date  %>
 			var numberOfParagraphs = $("#quill-container p").length; 
 
 			var middle = parseInt(Math.ceil(numberOfParagraphs/2)); 
