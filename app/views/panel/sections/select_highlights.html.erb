@@ -6,21 +6,20 @@
 </div>
 <%= form_for :panel, url: {controller: "panel/sections", action: 'set_highlight'}, html: { class: "card admin-form" }  do |f|%>
 
-	<% if @highlight %>
-		<div class="field">
-			<% f.autocomplete_field(:article_id, autocomplete_article_name_panel_sections_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search", value: @highlight.name) %>
-			<% f.hidden_field :article_id, :id => "article_id", value: @highlight.id %>
-			<%= f.text_field :article_id, placeholder: "Coloca el id del artículo aquí" %>
-		</div>
-	<% else %>
+
+
 		<div class="field">
 			
+
+
+
 			<% f.autocomplete_field(:article_id, autocomplete_article_name_panel_sections_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
 			<% f.hidden_field :article_id, :id => "article_id" %>
 			<%= f.text_field :article_id, placeholder: "Coloca el id del artículo aquí" %>
 
 		</div>
-	<% end %>
+
+
 
 	<% f.submit %>
 <% end %>

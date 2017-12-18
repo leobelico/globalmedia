@@ -99,7 +99,6 @@ class Panel::SectionsController < ApplicationController
 	def select_highlights
 
 		@section = Section.find_by_slug(params[:section_slug])
-		@highlight_article = Article.where(articable_id: @section.id, highlight: true).first
 		
 		session[:section_id] = @section.id
 
