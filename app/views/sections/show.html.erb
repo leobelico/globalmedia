@@ -83,13 +83,13 @@
 	</div>
 		<% if true %>
 			<% if get_banner(@section, "Section", "Mediano" ).count > 0 %>
-				<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Section", "Mediano" ) %>
+				<%= render "components/sidebar", article: @first_article, banner: get_banner(@section, "Section", "Mediano" ) %>
 			<% else %>
 				<% if get_banner(@section, "Global", "Mediano" ).count > 0 %>
-					<%= render "components/sidebar", article: @articles.first, banner: get_banner(@section, "Global", "Mediano" ) %>
+					<%= render "components/sidebar", article: @first_article, banner: get_banner(@section, "Global", "Mediano" ) %>
 					
 				<% else %>
-					<%= render "components/sidebar", article: @articles.first, banner: "" %>
+					<%= render "components/sidebar", article: @first_article, banner: "" %>
 				<% end %>
 			<% end %>
 		<% end %>
