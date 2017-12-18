@@ -1,5 +1,5 @@
 <% content_for :title, "Global Media - Noticias" %>
-<% @breaking_news do %>
+<% cache @breaking_news do %>
 	<% if @breaking_news.count > 0 %>
 		<%= render "components/breaking-news" %>	
 	<% end %>
