@@ -40,7 +40,9 @@ class SectionsController < ApplicationController
 		session[:article_id] = nil
 		#articles = @section.articles	
 		@related_sections = RelatedSection.where(section: @section)	
-  		@articles = Article.where("published = true AND articable_id = ? AND published_at IS NOT NULL", @section.id).order(highlight: :desc, published_at: :desc).paginate(page: params[:page], per_page: 13)
+       
+    	@first_article = Article.joins("INNER JOIN cover_articles ON cover_articles.article_id = articles.id").where("cover_articles.section_id = #{@section.id}").order("cover_articles.article_highlight desc, cover_articles.published_at desc").first
+  		@articles = Article.where("published = true AND articable_id = ? AND published_at IS NOT NULL AND id != ?", @section.id, @first_article.id).order(published_at: :desc).paginate(page: params[:page], per_page: 13)
 
 	end
 
