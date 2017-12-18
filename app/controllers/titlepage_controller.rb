@@ -39,7 +39,7 @@ class TitlepageController < ApplicationController
 	end
 
 	def index
-		@breaking_news = Article.joins("INNER JOIN sections ON articles.articable_id = sections.id").where("articles.breaking_news = ? AND sections.visible = ?", true, true).order("articles.updated_at ASC").first(4)
+		@breaking_news = Article.joins("INNER JOIN sections ON articles.articable_id = sections.id").where("articles.breaking_news = ? AND sections.visible = ?", true, true).order("articles.updated_at ASC").last(4).reverse
 		
 		@highlights = Highlight.where("published = ? AND highlights.order < 7", true).order(order: "ASC")
 		
