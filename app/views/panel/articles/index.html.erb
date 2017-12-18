@@ -92,10 +92,6 @@
 
 		</div>
 	<% end %>
-	<% if @articles.count == 0 %>
-		<div class="table__row">
-			<p class="table__cell table__empty">No hay artículos para mostrar</p>
-		</div>
-	<% end %>
+	
 </div>
 <%= will_paginate @articles, class: "card admin-pagination" %>
