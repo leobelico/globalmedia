@@ -176,7 +176,8 @@ class ApplicationController < ActionController::Base
   def get_articles_per_section(id, last_number)
     
 
-     @articles = Article.where(articable_id: id).order(created_at: "ASC").last(last_number).reverse
+     # @articles = Article.where(articable_id: id).order(created_at: "ASC").last(last_number).reverse
+    @articles = Article.joins("INNER JOIN cover_articles ON cover_articles.article_id = articles.id").where("cover_articles.section_id = #{id}").order(created_at: "ASC").last(3).reverse
 
 
 
