@@ -184,7 +184,7 @@ class Panel::SectionsController < ApplicationController
 				p "creating"
 				RelatedSection.create(section_id: @section.id, section_reference_id: section.id)
 			end
-			redirect_to @section
+			redirect_to panel_section_path(@section)
 		else
 			render action: "edit"
 		end
