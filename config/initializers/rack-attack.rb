@@ -4,15 +4,15 @@ class Rack::Attack
 	  '52.233.27.230' == req.ip
 	end
 
-	Rack::Attack.throttle('req/ip', :limit => 100, :period => 5.minutes) do |req|
-	  # If the return value is truthy, the cache key for the return value
-	  # is incremented and compared with the limit. In this case:
-	  #   "rack::attack:#{Time.now.to_i/1.second}:req/ip:#{req.ip}"
-	  #
-	  # If falsy, the cache key is neither incremented nor checked.
+	# Rack::Attack.throttle('req/ip', :limit => 100, :period => 5.minutes) do |req|
+	#   # If the return value is truthy, the cache key for the return value
+	#   # is incremented and compared with the limit. In this case:
+	#   #   "rack::attack:#{Time.now.to_i/1.second}:req/ip:#{req.ip}"
+	#   #
+	#   # If falsy, the cache key is neither incremented nor checked.
 
-	  req.ip
-	end
+	#   req.ip
+	# end
 
 
 	Rack::Attack.blocklisted_response = lambda do |env|
@@ -21,15 +21,15 @@ class Rack::Attack
 	  [ 503, {}, ['Blocked']]
 	end
 
-	Rack::Attack.throttled_response = lambda do |env|
-	  # NB: you have access to the name and other data about the matched throttle
-	  #  env['rack.attack.matched'],
-	  #  env['rack.attack.match_type'],
-	  #  env['rack.attack.match_data']
+	# Rack::Attack.throttled_response = lambda do |env|
+	#   # NB: you have access to the name and other data about the matched throttle
+	#   #  env['rack.attack.matched'],
+	#   #  env['rack.attack.match_type'],
+	#   #  env['rack.attack.match_data']
 
-	  # Using 503 because it may make attacker think that they have successfully
-	  # DOSed the site. Rack::Attack returns 429 for throttling by default
-	  [ 503, {}, ["Server Error\n"]]
-	end
+	#   # Using 503 because it may make attacker think that they have successfully
+	#   # DOSed the site. Rack::Attack returns 429 for throttling by default
+	#   [ 503, {}, ["Server Error\n"]]
+	# end
 
 end
