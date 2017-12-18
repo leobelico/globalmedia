@@ -34,6 +34,17 @@ class Panel::ArticlesController < ApplicationController
 			@articles = Article.where('name ILIKE ?', "%#{params[:name]}%").paginate(page: params[:page], per_page: 10)
 			# p(params[:name])
 		else 
+			@articles = Article.last(50)
+			# @articles = Article.limit(500).order(created_at: "DESC").paginate(page: params[:page], per_page: 10)
+			
+		end
+	end
+
+	def all_articles
+		if params[:name]
+			@articles = Article.where('name ILIKE ?', "%#{params[:name]}%").paginate(page: params[:page], per_page: 10)
+			# p(params[:name])
+		else 
 			@articles = Article.limit(500).order(created_at: "DESC").paginate(page: params[:page], per_page: 10)
 			
 		end

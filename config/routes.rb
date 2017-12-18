@@ -151,6 +151,7 @@ Rails.application.routes.draw do
 
 
 
+    get "all_articles", to: "articles#all_articles"
     get "new_collaborator", to: "relationships#new_collaborator"
     get "collaborators", to: "relationships#collaborators"
 

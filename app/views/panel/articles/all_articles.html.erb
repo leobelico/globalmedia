@@ -3,7 +3,6 @@
 	<% if current_user.create_articles_permission %>
 		<div class="panel__actions">
 			<%= link_to "Nueva nota", new_panel_article_path, class: "button" %>
-			<%= link_to "Ver todos", panel_all_articles_path, class: "button" %>
 		</div>
 	<% end %>
 </div>
@@ -95,3 +94,4 @@
 	<% end %>
 	
 </div>
+<%= will_paginate @articles, class: "card admin-pagination" %>
