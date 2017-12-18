@@ -65,6 +65,8 @@ class ApplicationController < ActionController::Base
   def get_cover_articles(id)
     CoverArticle.joins("LEFT OUTER JOIN highlights ON highlights.article_id = cover_articles.article_id").where("cover_articles.section_id = #{id} AND highlights.article_id IS NULL AND cover_articles.published_at IS NOT NULL").order(article_highlight: :asc, published_at: :asc).last(4).reverse
 
+
+
     
   end
   def get_complaints
