@@ -5,9 +5,11 @@ class Api::V1::SectionsController < Api::BaseController
 	    json_response(@sections, :ok)
 	end
 	def show 
-		@articles = Article.where(articable_id: @section.id, published: true).order(created_at: "DESC")
-		# p "articles"
-		# p @articles
+		# @articles = Article.where(articable_id: @section.id, published: true).order(created_at: "DESC")
+		# # p "articles"
+		# # p @articles
+   		@articles = Article.joins("INNER JOIN cover_articles ON cover_articles.article_id = articles.id").where("cover_articles.section_id = ?", @section.id).order(created_at: :desc)
+
     	paginate json: @articles, adapter: :json, per_page: 20		
 	end
 
