@@ -126,6 +126,9 @@
 	.breaking-news {
 		flex-direction:  column;
 		.title {
+			height:  auto !important; 
+		}
+		.title {
 			margin-bottom:  8px !important; 
 		}
 		.breaking-news-1 {
@@ -143,7 +146,7 @@
 				width:  100%; 
 				margin-bottom:  8px; 
 				.title {
-					height:  auto; 
+					height:  auto !important; 
 				}
 				.breaking-news__image {
 					width:  100%; 
