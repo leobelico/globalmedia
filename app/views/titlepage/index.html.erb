@@ -1,31 +1,41 @@
 <% content_for :title, "Global Media - Noticias" %>
-<a href="http://www.globalmedia.mx/articles/Encuesta-Alcald%C3%ADa-SLP">
-	<%= image_tag "CANDIDATOS-2.jpg", class: "img-mobile" %>
-	<%= image_tag "CANDIDATOS-3.jpg", class: "img-desktop" %>
-</a>
+<div class="enc-links">
+	<a href="http://www.globalmedia.mx/articles/Encuesta-Alcald%C3%ADa-SLP">
+		<%= image_tag "c-1.jpeg", class: "img-desktop" %>
+	</a>
+	<a href="http://www.globalmedia.mx/articles/Resultados-Encuesta-Electoral-SLP" class="result-link-1">
+		<%= image_tag "c-2.jpeg", class: "img-desktop" %>
+	</a>
+</div>
 <style>
-	.result-link-1 {
+	.enc-links {
+		display:  flex;
+		flex-direction:  row; 
+		align-items:  stretch; 
 		width:  100%; 
-		padding:  15px 15px; 
-		box-sizing:  border-box; 
-		color:  #ffffff;
-		text-align:  center; 
-		font-size:  20px; 
-		font-weight:  bold; 
-		background-color:  #1b2d41;
+	}
+	.enc-links a {
+		width:  50%;
+	}
+	.enc-links img {
+		height:  auto; 
+		width:  100%; 
+		flex-shrink: 0; 
+	}
+	@media screen and (max-width:  1024px) {
+		.enc-links {
+			flex-direction:  column;
+		}
+		.enc-links a {
+			width:  100%; 
+			max-width:  400px;
+			margin:  0 auto;
+		}
 	}
 </style>
-<a href="http://www.globalmedia.mx/articles/Resultados-Encuesta-Electoral-SLP" class="result-link-1">
-	Ver resultados
-</a>
 <br>
 <style>
-	.img-mobile { display: none; }
-	.img-desktop { display: block; }
-	@media screen and (max-width:  1024px) {
-		.img-mobile { display: block; }
-		.img-desktop { display: none; }
-	} 
+	
 </style>
 <% cache @breaking_news do %>
 	<% if @breaking_news.count > 0 %>
