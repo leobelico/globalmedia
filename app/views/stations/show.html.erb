@@ -1,5 +1,8 @@
 <% content_for :title, @station.name  %>
+<link href="http://vjs.zencdn.net/6.0.0/video-js.css" rel="stylesheet">
 
+<script src="//vjs.zencdn.net/6.0.0/video.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.8.2/videojs-contrib-hls.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 <!-- <script src="https://vjs.zencdn.net/6.2.7/video.js" ></script>			 -->
 <!-- <script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js" ></script> -->
@@ -61,13 +64,11 @@
 			<% else %>	
 
 <div style="height:264px; width:640px; background:#000000">
-<link href="http://vjs.zencdn.net/6.0.0/video-js.css" rel="stylesheet">
 <style>.video-js .vjs-time-control{display: none;}.video-js .vjs-progress-control{display: none;}</style>
 <video id="player_webtv" class="video-js vjs-big-play-centered vjs-fluid" autoplay  controls preload="auto" width="100%" height="100%" data-setup="{ 'fluid':true,'aspectRatio':'16:9' }" >
    <source src="http://mediacp.live:1935/8258/8258/playlist.m3u8" type="application/x-mpegURL">
 </video>
-<script src="//vjs.zencdn.net/6.0.0/video.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.8.2/videojs-contrib-hls.min.js"></script>
+
 <script>var myPlayer=videojs('player_webtv',{},function(){var player=this;player.on("pause",function(){player.one("play",function(){player.load();player.play();});});})</script>
 </div>
 					
