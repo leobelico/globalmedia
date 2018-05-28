@@ -60,22 +60,16 @@
 				  </video> -->
 			<% else %>	
 
-			<video id="video" class="video-js" controls  preload="auto" width="640" height="264">
-					<!-- <source src="https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced.sdp" type="video/sdp"> -->
-					<!-- <source src="https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8" type="application/x-mpegURL"> -->
-
-			 		<!-- <source src="rtmp://38.96.148.213:1935/vivecanaltest/myStream.sdp" type="video/sdp"> -->
-					<!-- <source src="http://38.96.148.213:1935/vivecanaltest/myStream.sdp/playlist.m3u8" type="application/x-mpegURL"> -->
-				<source src="https://mediacp.live:1935/8258/8258/playlist.m3u8" type="application/x-mpegURL">
-
-				<source src="rtmp://mediacp.live:1935/8258/8258" type="video/sdp">
-			</video>
-			<script>
-
-				var player = videojs('video', {techOrder: ['flash', 'html5']});
-				player.load(); 
-				player.play();
-			</script>
+<div style="height:264px; width:640px; background:#000000">
+<link href="http://vjs.zencdn.net/6.0.0/video-js.css" rel="stylesheet">
+<style>.video-js .vjs-time-control{display: none;}.video-js .vjs-progress-control{display: none;}</style>
+<video id="player_webtv" class="video-js vjs-big-play-centered vjs-fluid" autoplay  controls preload="auto" width="100%" height="100%" data-setup="{ 'fluid':true,'aspectRatio':'16:9' }" >
+   <source src="http://mediacp.live:1935/8258/8258/playlist.m3u8" type="application/x-mpegURL">
+</video>
+<script src="//vjs.zencdn.net/6.0.0/video.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.8.2/videojs-contrib-hls.min.js"></script>
+<script>var myPlayer=videojs('player_webtv',{},function(){var player=this;player.on("pause",function(){player.one("play",function(){player.load();player.play();});});})</script>
+</div>
 					
 					
 			<% end %>	
