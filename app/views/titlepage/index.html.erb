@@ -19,11 +19,7 @@
 			<% end %>
 		</div>
 
-<div class="banner-wide">
-	<a href="https://www.globalmedia.mx/stations/ImagenRadio">
-		<%= image_tag "banner-2-debate.jpg", class: "" %>
-	</a>
-</div>
+
 <% cache(get_banner("global", "TitlePage", "Grande")) do %>
 	<% if get_banner("global", "TitlePage", "Grande") %>
 		<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
