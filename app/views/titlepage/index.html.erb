@@ -1,12 +1,5 @@
 <% content_for :title, "Global Media - Noticias" %>
-<div class="enc-links">
-	<a href="http://www.globalmedia.mx/articles/Encuesta-Alcald%C3%ADa-SLP">
-		<%= image_tag "c-1.jpg", class: "img-desktop" %>
-	</a>
-	<a href="http://www.globalmedia.mx/articles/Resultados-Encuesta-Electoral-SLP" class="result-link-1">
-		<%= image_tag "c-2.jpg", class: "img-desktop" %>
-	</a>
-</div>
+
 
 <% cache @breaking_news do %>
 	<% if @breaking_news.count > 0 %>
