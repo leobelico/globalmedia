@@ -7,60 +7,15 @@
 		<%= image_tag "c-2.jpg", class: "img-desktop" %>
 	</a>
 </div>
-<style>
-	.enc-links {
-		display:  flex;
-		flex-direction:  row; 
-		align-items:  stretch; 
-		width:  100%; 
-	}
-	.enc-links a {
-		width:  50%;
-	}
-	.enc-links img {
-		height:  auto; 
-		width:  100%; 
-		flex-shrink: 0; 
-	}
-	@media screen and (max-width:  1024px) {
-		.enc-links {
-			flex-direction:  column;
-		}
-		.enc-links a {
-			width:  100%; 
-			max-width:  400px;
-			margin:  0 auto;
-		}
-	}
-</style>
-<br>
-<style>
-	
-</style>
+
 <% cache @breaking_news do %>
 	<% if @breaking_news.count > 0 %>
 		<%= render "components/breaking-news" %>	
 	<% end %>
 <% end %>
 
-<div class="banner-wide">
-	<a href="https://www.globalmedia.mx/stations/ImagenRadio">
-		<%= image_tag "banner-1-debate.jpg", class: "" %>
-	</a>
-</div>
 
-<style>
-	.banner-wide {
-		display: flex; 
-		width:  100%; 
-		height:  auto; 
-	}
-	.banner-wide img {
-		width:  100%; 
-		height:  auto; 
-		margin-bottom: 15px;
-	}
-</style>
+
 		<div class="highlights-container">	
 			<% @highlights.each do |highlight| %>
 				<% if highlight.order == 1 %>
