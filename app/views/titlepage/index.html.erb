@@ -33,15 +33,6 @@
 		}
 	}
 </style>
-<br>
-<style>
-	
-</style>
-<% cache @breaking_news do %>
-	<% if @breaking_news.count > 0 %>
-		<%= render "components/breaking-news" %>	
-	<% end %>
-<% end %>
 
 <style>
 	.banner-wide {
@@ -54,7 +45,27 @@
 		height:  auto; 
 		margin-bottom: 15px;
 	}
+	.banner-ww {
+		width: 100%; 
+		height:  auto; 
+		/*display:  flex; */
+	}
+	.banner-ww img {
+		width:  100%; 
+		height:  auto; 
+	}
 </style>
+<br>
+<a href="/WFM" class="banner-ww">
+	<%= image_tag "banner-lideres.jpeg" %>
+</a>
+<br>
+<% cache @breaking_news do %>
+	<% if @breaking_news.count > 0 %>
+		<%= render "components/breaking-news" %>	
+	<% end %>
+<% end %>
+
 		<div class="highlights-container">	
 			<% @highlights.each do |highlight| %>
 				<% if highlight.order == 1 %>
