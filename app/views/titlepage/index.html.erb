@@ -1,6 +1,42 @@
 <% content_for :title, "Global Media - Noticias" %>
-
-
+<div class="enc-links">
+	<a href="http://www.globalmedia.mx/articles/Encuesta-Alcald%C3%ADa-SLP">
+		<%= image_tag "c-1.jpg", class: "img-desktop" %>
+	</a>
+	<a href="http://www.globalmedia.mx/articles/Resultados-Encuesta-Electoral-SLP" class="result-link-1">
+		<%= image_tag "c-2.jpg", class: "img-desktop" %>
+	</a>
+</div>
+<style>
+	.enc-links {
+		display:  flex;
+		flex-direction:  row; 
+		align-items:  stretch; 
+		width:  100%; 
+	}
+	.enc-links a {
+		width:  50%;
+	}
+	.enc-links img {
+		height:  auto; 
+		width:  100%; 
+		flex-shrink: 0; 
+	}
+	@media screen and (max-width:  1024px) {
+		.enc-links {
+			flex-direction:  column;
+		}
+		.enc-links a {
+			width:  100%; 
+			max-width:  400px;
+			margin:  0 auto;
+		}
+	}
+</style>
+<br>
+<style>
+	
+</style>
 <% cache @breaking_news do %>
 	<% if @breaking_news.count > 0 %>
 		<%= render "components/breaking-news" %>	
@@ -28,6 +64,7 @@
 				<% end %>
 			<% end %>
 		</div>
+
 
 <% cache(get_banner("global", "TitlePage", "Grande")) do %>
 	<% if get_banner("global", "TitlePage", "Grande") %>
