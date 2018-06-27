@@ -60,6 +60,10 @@
 	<%= image_tag "banner-lideres.jpg" %>
 </a>
 <br>
+<a href="/WFM" class="banner-ww">
+	<%= image_tag "BANNER MARTES.jpg" %>
+</a>
+<br>
 <% cache @breaking_news do %>
 	<% if @breaking_news.count > 0 %>
 		<%= render "components/breaking-news" %>	
