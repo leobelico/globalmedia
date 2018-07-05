@@ -1,0 +1,57 @@
+<%= form_for [:panel, @sport], html: { class: "admin-form card directUpload" }, data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }  do |sport| %>
+	<div class="field">
+		<label>Nombre del equipo uno:</label>
+		<%= sport.text_field :team_one %>
+	</div>
+	<div class="field">
+		<label>Nombre del equipo dos:</label>
+		<%= sport.text_field :team_two %>
+	</div>
+	<div class="field">
+		<label>Imagen del equipo uno:</label>
+		<%= sport.file_field :team_one_image %>
+	</div>
+	<div class="field">
+		<label>Imagen del equipo dos:</label>
+		<%= sport.file_field :team_two_image %>
+	</div>
+
+	<div class="field">
+		<label>Puntaje del equipo uno: </label>
+		<%= sport.text_field :team_one_score %>
+	</div>
+	<div class="field">
+		<label>Puntaje del equipo dos:</label>
+		<%= sport.text_field :team_two_score %>
+	</div>
+	<div class="field">
+		<label>Goleadores del equipo uno: </label>
+		<%= sport.text_field :team_one_goal_scorers %>
+	</div>
+	<div class="field">
+		<label>Goleadores del equipo dos puntaje:</label>
+		<%= sport.text_field :team_two_goal_scorers %>
+	</div>
+
+	
+<% end %>
+<%= render "components/s3_form_js" %>
+<script>
+	$("input[type=file]").each(function(){
+		var $input = $(this);
+		if ($input.parents(".field").find("img").length == 0) {
+
+			$input.before('<img class="form__image-preview">');
+		}
+
+		$input.change(function(){
+		    var reader = new FileReader();
+		    $(reader).on("load", function(event){
+
+			    	$input.parents(".field").find("img").attr('src',  event.target.result); 
+			    	$input.parents(".field").find("img").css("display", "block"); 
+		    });
+			reader.readAsDataURL(this.files[0]);
+		});
+	});  
+</script>

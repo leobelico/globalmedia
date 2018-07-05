@@ -187,6 +187,7 @@ Rails.application.routes.draw do
     resources :article_relationships, only: [:show, :destroy]
     resources :authors
     
+    resources :sports
   end
   # get "panel/keywords/edit_multiple", to: "panel/keywords#edit_multiple"
   # get "panel/keywords/update_multiple", to: "panel/keywords#update_multiple"
@@ -221,6 +222,7 @@ Rails.application.routes.draw do
       resources :podcasts, only: [:index]
       resources :stations, only: [:index, :show]
       resources :cameras, only: [:index, :show]
+      resources :sports, only: [:index]
       # , to: "api/v1/articles#most_visited"
 
       resources :sections, only: [:index, :show] do 
