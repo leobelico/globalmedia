@@ -1,0 +1,28 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span>Deportes / </span><%= @sport.team_one + " vs " + @sport.team_two %></h2>
+	<%= link_to "Editar deporte", edit_panel_sport_path(@sport), class: "button" %>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<p class="table__cell">Nombre:</p>
+		<p class="table__cell">Imagen del equipo uno:</p>
+		<p class="table__cell">Imagen del equipo dos:</p>
+		<p class="table__cell">Puntaje del equipo uno:</p>
+		<p class="table__cell">Puntaje del equipo dos:</p>
+		<p class="table__cell">Goleadores del equipo uno:</p>
+		<p class="table__cell">Goleadores del equipo dos:</p>
+	</div>
+	<div class="table__row">
+		<p class="table__cell"><%= @sport.team_one + " vs " + @sport.team_two %></p>
+		<% if @sport.team_one_image %>
+			<p class="table__cell"><%= image_tag @sport.team_one_image %></p>
+		<% end %>
+		<% if @sport.team_two_image %>
+			<p class="table__cell"><%= image_tag @sport.team_two_image %></p>
+		<% end %>
+		<p class="table__cell"><%= @sport.team_one_score %></p>
+		<p class="table__cell"><%= @sport.team_two_score %></p>
+		<p class="table__cell"><%= @sport.team_one_goal_scorers %></p>
+		<p class="table__cell"><%= @sport.team_two_goal_scorers %></p>
+	</div>
+</div>

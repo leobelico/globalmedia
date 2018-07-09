@@ -5,9 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'sys-proctable'
+# gem 'sys-proctable'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.2'
+# gem 'rails', '~> 5.0.2'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 # Use Puma as the app server
@@ -78,7 +78,7 @@ end
 
 
 group :development do
-  gem 'rack-mini-profiler'
+  # gem 'rack-mini-profiler'
 
   gem 'derailed'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
