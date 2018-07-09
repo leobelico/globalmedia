@@ -1,0 +1,23 @@
+<div class="panel__header">
+	<h2 class="title panel__title"><span class="current">Deportes</span></h2>
+	<div class="panel__actions">
+		<%= link_to "Nuevo resultado", new_panel_sport_path, class: "button" %>
+	</div>
+</div>
+<div class="table card">
+	<div class="table__row">
+		<div class="table__cell">Nombre:</div>
+		<div class="table__cell">Editar:</div>
+		<div class="table__cell">Eliminar:</div>
+	</div>
+	<% @sports.each do |sport| %>
+	<div class="table__row">
+		
+		<%= link_to sport.team_one + " vs " + sport.team_two, panel_sport_path(sport), class: "table__cell" %>
+		<%= link_to "Editar", edit_panel_sport_path(sport), class: "table__cell edit" %>
+		<%= link_to "Eliminar", panel_sport_path(sport), method: :delete, class: "table__cell delete" %>
+
+	</div>
+	<% end %>
+</div>
+	

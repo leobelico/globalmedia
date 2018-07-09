@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108164826) do
+ActiveRecord::Schema.define(version: 20180705110510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,19 @@ ActiveRecord::Schema.define(version: 20171108164826) do
     t.string   "operating_system"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.string   "team_one",              default: ""
+    t.string   "team_two",              default: ""
+    t.string   "team_one_image",        default: ""
+    t.string   "team_two_image",        default: ""
+    t.string   "team_one_score",        default: ""
+    t.string   "team_two_score",        default: ""
+    t.text     "team_one_goal_scorers", default: ""
+    t.text     "team_two_goal_scorers", default: ""
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "global_recommendation_articles", force: :cascade do |t|
@@ -295,6 +308,19 @@ ActiveRecord::Schema.define(version: 20171108164826) do
     t.text     "description"
     t.string   "facebook"
     t.string   "twitter"
+  end
+
+  create_table "sports", force: :cascade do |t|
+    t.string   "team_one"
+    t.string   "team_two"
+    t.string   "team_one_image"
+    t.string   "team_two_image"
+    t.string   "team_one_score"
+    t.string   "team_two_score"
+    t.string   "team_one_goal_scorers"
+    t.string   "team_two_goal_scorers"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "stations", force: :cascade do |t|
