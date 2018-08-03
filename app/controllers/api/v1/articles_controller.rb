@@ -1,5 +1,6 @@
 class Api::V1::ArticlesController < Api::BaseController
 	before_action :set_article, only: [:show]
+	
 	def index
 		@articles = Article.where(published: true).order(created_at: "DESC") 
     	paginate json: @articles, adapter: :json, per_page: 20
@@ -72,6 +73,10 @@ class Api::V1::ArticlesController < Api::BaseController
 	end
 
 	def search
+		p "SEARCH"
+		p params[:name]
+		p "SEARCH"
+		
       @articles = Article.where('LOWER(name) LIKE ? AND published = ?', "%#{params[:name]}%", true).order(created_at: "DESC").last(30)
       json_response(@articles)
     end
