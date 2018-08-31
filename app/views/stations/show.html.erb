@@ -55,13 +55,19 @@
 						<source src="<%= @rtmps_src %>" type="video/flash">
 				  </video> -->
 			<% else %>	
-
-				<video id='hls-video'>
-				  <source src='http://mediacp.live:1935/8258/8258/playlist.m3u8' title='480p' type='application/x-mpegURL'/>
-				  <source src='http://mediacp.live:1935/8258/8258_360p/playlist.m3u8' title='360p' type='application/x-mpegURL'/>
-				  <source src='http://mediacp.live:1935/8258/8258_160p/playlist.m3u8' title='160p' type='application/x-mpegURL'/>
-				</video>
+				<div class="vid-wrapper">
+					
+					<video id='hls-video'>
+					  <source src='http://mediacp.live:1935/8258/8258/playlist.m3u8' title='480p' type='application/x-mpegURL'/>
+					  <source src='http://mediacp.live:1935/8258/8258_360p/playlist.m3u8' title='360p' type='application/x-mpegURL'/>
+					  <source src='http://mediacp.live:1935/8258/8258_160p/playlist.m3u8' title='160p' type='application/x-mpegURL'/>
+					</video>
+				</div>
 				<style>
+				.vid-wrapper {
+					width:  100%; 
+					height:  400px; 
+				}
 					#fluid_video_wrapper_hls-video {
 						height:  auto;
 					}
