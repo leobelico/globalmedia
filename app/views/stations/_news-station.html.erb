@@ -33,15 +33,54 @@
 			<% else %>	
 
 
-			<div style="height:364px; width:640px; background:#000000">
-				<style>.video-js .vjs-time-control{display: none;}.video-js .vjs-progress-control{display: none;}</style>
-				<video id="player_webtv" class="video-js vjs-big-play-centered vjs-fluid" autoplay  controls preload="auto" width="100%" height="100%" data-setup="{ 'fluid':true,'aspectRatio':'16:9' }" >
-				   <source src="http://mediacp.live:1935/8258/8258/playlist.m3u8" type="application/x-mpegURL">
-				</video>
 
+				<video id='hls-video'>
+				  <source src='http://mediacp.live:1935/8258/8258/playlist.m3u8' title='480p' type='application/x-mpegURL'/>
+				  <source src='http://mediacp.live:1935/8258/8258_360p/playlist.m3u8' title='360p' type='application/x-mpegURL'/>
+				  <source src='http://mediacp.live:1935/8258/8258_160p/playlist.m3u8' title='160p' type='application/x-mpegURL'/>
+				</video>
 				<script>
-					var myPlayer=videojs('player_webtv',{},function(){var player=this;player.on("pause",function(){player.one("play",function(){player.load();player.play();});});})</script>
-			</div>
+			    var myFP = fluidPlayer(
+			        'hls-video',
+			        {
+			            layoutControls: {
+					fillToContainer: true,
+					primaryColor: false,
+					posterImage: '<%= @station.image %>',
+					autoPlay: true,
+					playButtonShowing: false,
+					playPauseAnimation: true,
+					mute: false,
+					logo: {
+						imageUrl: null,
+						position: 'top left',
+						clickUrl: null,
+						opacity: 1,
+						mouseOverImageUrl: null,
+						imageMargin: '2px',
+						hideWithControls: false,
+						showOverAds: false
+					},
+					htmlOnPauseBlock: {
+						html: null,
+						height: null,
+						width: null
+					},
+					allowDownload: false,
+					allowTheatre: true,
+					playbackRateEnabled: false,
+					controlBar: {
+						autoHide: false,
+						autoHideTimeout: 3,
+						animated: true
+					},
+			            },
+			            vastOptions: {
+			                // To implement ads see http://docs.fluidplayer.com/ad_configuration/
+			            }
+			        }
+			    );
+				</script>
 					
 					
 				
