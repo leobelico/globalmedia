@@ -55,68 +55,37 @@
 						<source src="<%= @rtmps_src %>" type="video/flash">
 				  </video> -->
 			<% else %>	
-				<div class="vid-wrapper">
-					
-					<video id='hls-video'>
-					  <source src='http://mediacp.live:1935/8258/8258/playlist.m3u8' title='480p' type='application/x-mpegURL'/>
-					  <source src='http://mediacp.live:1935/8258/8258_360p/playlist.m3u8' title='360p' type='application/x-mpegURL'/>
-					  <source src='http://mediacp.live:1935/8258/8258_160p/playlist.m3u8' title='160p' type='application/x-mpegURL'/>
-					</video>
-				</div>
-				<style>
-					.vid-wrapper {
-						width:  100%; 
-						height:  400px; 
-					}
-					#vast_video_loading_hls-video {
-						position:  static;
-					}
-					#fluid_video_wrapper_hls-video {
-						height:  auto;
-					}				</style>
-				<script>
-			    var myFP = fluidPlayer(
-			        'hls-video',
-			        {
-			            layoutControls: {
-					fillToContainer: true,
-					primaryColor: false,
-					posterImage: '<%= @station.image %>',
-					autoPlay: true,
-					playButtonShowing: false,
-					playPauseAnimation: true,
-					mute: false,
-					logo: {
-						imageUrl: null,
-						position: 'top left',
-						clickUrl: null,
-						opacity: 1,
-						mouseOverImageUrl: null,
-						imageMargin: '2px',
-						hideWithControls: false,
-						showOverAds: false
-					},
-					htmlOnPauseBlock: {
-						html: null,
-						height: null,
-						width: null
-					},
-					allowDownload: false,
-					allowTheatre: true,
-					playbackRateEnabled: false,
-					controlBar: {
-						autoHide: false,
-						autoHideTimeout: 3,
-						animated: true
-					},
-			            },
-			            vastOptions: {
-			                // To implement ads see http://docs.fluidplayer.com/ad_configuration/
-			            }
-			        }
-			    );
+
+				<!-- Insertar en Head -->
+
+				<script type="text/javascript" src="https://player.wowza.com/player/ull/latest/wowzaplayer.min.js"></script>
+
+				<!-- Insertar en body -->
+
+				<div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
+
+				<!-- codigo del reproductor -->
+
+				<script type="text/javascript">
+				WowzaPlayer.create("playerElement",
+				    {
+				    "license":"PLAY1-4BVTz-Rmtp4-Dx49D-Y4Qjv-6PVnb",
+				    "sources":[{
+				    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
+				    },
+				    {
+				    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
+				    }],
+				    "title":"Vive Canal en vivo",
+				    "description":"",
+				    "autoPlay":true,
+				    "mute":false,
+				    "volume":75,
+				    "posterFrameURL":"https://globalmediarocks.s3-us-west-1.amazonaws.com/uploads/bea801c9-427b-4405-9d61-bf2957bf6b10/fb_atleti_perf.png"
+				    }
+				);
 				</script>
-					
+
 					
 			<% end %>	
 			<div class="program__info">

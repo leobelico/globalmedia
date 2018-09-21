@@ -5,6 +5,9 @@
 	justify-content:  space-between;
 	margin-bottom:  18px; 
 	width:  100%; 
+	* {
+		position:  relative; 
+	}
 }
 .special-articles {
 	display:  flex; 

@@ -1,4 +1,7 @@
 .section-previews-container {
+	* {
+		position:  relative; 
+	}
 	width:  100%; 	
 }
 .section-preview {
