@@ -1,0 +1,40 @@
+// Estos comandos en Linux/Subsistema de Linux 
+
+// Para hacer pull (jalar cambios)
+
+git pull origin master 
+
+// cuando cambia algun asset del proyecto (como imagenes, CSS, SASS, JS, CoffeeScript, etc)
+
+rails assets:precompile RAILS_ENV=production 
+
+// Para hacer push (enviar cambios)
+
+git add .
+git commit -m "mensaje del commit"
+git push origin branch-name 
+
+// Después de hacer estos comandos, hay que hacer merge (github te da los pasos)
+
+// Una vez que se hace el merge, hay que ir a la rama principal (master)
+
+git checkout nombre-de-la-rama
+//  (git checkout master)
+
+git pull origin master // (para jalar cambios del merge)
+
+// Este comando en Windows
+
+git push heroku master 
+
+
+
+
+
+
+
+
+
+Si quieres hacer una nueva rama 
+
+git checkout -b nombre-de-la-rama 
