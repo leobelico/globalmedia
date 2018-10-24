@@ -18,7 +18,7 @@ module Globalmedia
     config.middleware.use Rack::Attack
     config.active_record.time_zone_aware_types = [:datetime, :time]
     config.active_record.time_zone_aware_attributes = false
-    config.middleware.insert_before 0, "Rack::Cors" do
+    config.middleware.insert_before 0, Rack::Cors do
         allow do
             origins '*'
             resource '*', :headers => :any, :methods => [:get, :post, :options]
