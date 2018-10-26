@@ -33,8 +33,16 @@ git push heroku master
 
 
 
+// La pagina principal esta en titlepage#index
 
-
-Si quieres hacer una nueva rama 
+// Si quieres hacer una nueva rama 
 
 git checkout -b nombre-de-la-rama 
+
+Para iniciar el server local :  rails s
+
+/mnt/c/gm/globalmedia
+
+eugenio@nuva.rocks
+
+4442090622
