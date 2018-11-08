@@ -62,8 +62,8 @@ Rails.application.configure do
     domain: "gmail.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "globalmediamx@gmail.com",
-    password: "2017Global_3030",
+    user_name: "noticias@globalmedia.mx",
+    password: "noticias2018*",
     openssl_verify_mode:'none'
   }
 
