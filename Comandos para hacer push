@@ -6,7 +6,7 @@ git pull origin master
 
 // cuando cambia algun asset del proyecto (como imagenes, CSS, SASS, JS, CoffeeScript, etc)
 
-rails assets:precompile RAILS_ENV=production 
+rails assets:precompile RAILS_ENV=production
 
 // Para hacer push (enviar cambios)
 
