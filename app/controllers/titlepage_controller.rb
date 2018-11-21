@@ -32,7 +32,7 @@ class TitlepageController < ApplicationController
 
 	def set_image
 		Image.where('article_id > 390').each do |image|
-			field = 'http://globalmedia.mx/images/multimedia/' + image.src
+			field = 'https://globalmedia.mx/images/multimedia/' + image.src
 	       
 	       image.update_attributes(src: field)
 		end
