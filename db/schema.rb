@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 20180705110510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "article_relationships", force: :cascade do |t|
     t.datetime "created_at",     null: false
@@ -28,7 +27,7 @@ ActiveRecord::Schema.define(version: 20180705110510) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "name",                      default: ""
-    t.text     "note",                      default: ""
+    t.jsonb    "note",                      default: ""
     t.text     "short_description",         default: ""
     t.integer  "articable_id"
     t.string   "articable_type"
@@ -51,7 +50,6 @@ ActiveRecord::Schema.define(version: 20180705110510) do
     t.boolean  "exclusive",                 default: false
     t.text     "_extra_props"
     t.boolean  "breaking_news"
-    t.text     "note_old",                  default: ""
     t.datetime "published_at"
     t.index ["articable_id"], name: "index_articles_on_articable_id", using: :btree
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id", using: :btree
