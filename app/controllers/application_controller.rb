@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
       items = items.where(published: true)
   end
 
-
+ 
   helper_method :get_articles_per_section
   
   helper_method :al_momento
@@ -60,6 +60,13 @@ class ApplicationController < ActionController::Base
   helper_method :get_complaints
   helper_method :get_section_articles
   helper_method :get_cover_articles
+
+  helper_method :current_coord
+
+  def current_coord
+    @current_coord = Geocoder.search("201.127.113.90").first.coordinates 
+  end
+
 
   def get_cover_articles(id)
     CoverArticle.joins("LEFT OUTER JOIN highlights ON highlights.article_id = cover_articles.article_id").where("cover_articles.section_id = #{id} AND highlights.article_id IS NULL AND cover_articles.published_at IS NOT NULL").order(article_highlight: :asc, published_at: :asc).last(4).reverse

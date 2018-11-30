@@ -48,7 +48,7 @@ gem 'api-pagination', "4.4.0"
 gem 'dalli'
 gem "rack-timeout"
 gem 'newrelic_rpm'
-
+gem 'geocoder'
 # gem "skylight"
 #gem 'unicorn'
 # gem 'actionpack-action_caching'
