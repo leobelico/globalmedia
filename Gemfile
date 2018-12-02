@@ -40,7 +40,6 @@ gem 'connection_pool'
 gem 'jwt'
 gem 'active_model_serializers'
 gem 'rack-cors'
-gem 'rack-attack'
 gem 'simple_command'
 gem 'api-pagination', "4.4.0"
 # Use Redis adapter to run Action Cable in production
