@@ -4,7 +4,7 @@ class Rack::Attack
 	  ['52.233.27.230', '85.241.15.110', '90.94.138.253']== req.ip
 	end
 
-	Rack::Attack.throttle('req/ip', :limit => 200, :period => 5.minutes) do |req|
+	Rack::Attack.throttle('req/ip', :limit => 500, :period => 5.minutes) do |req|
 	  # If the return value is truthy, the cache key for the return value
 	  # is incremented and compared with the limit. In this case:
 	  #   "rack::attack:#{Time.now.to_i/1.second}:req/ip:#{req.ip}"
