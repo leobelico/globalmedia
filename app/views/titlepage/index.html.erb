@@ -102,13 +102,11 @@
 		
 	</div>
 
-	<% if true %>
 		<% cache(get_collaborators) do %>
 			<div class="special-articles--collaborators">
 				<%= render "components/collaborators", articles: get_collaborators %>
 			</div>
 		<% end %>
-	<% end %>
 </div>
 <div class="special-articles-container">
 		<% cache(get_investigation_articles) do %>
