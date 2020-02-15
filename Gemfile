@@ -34,7 +34,7 @@ gem 'devise'
 gem 'foreman'
 gem 'rack-attack'
 gem 'aws-sdk', "2.2.8"
-gem 'will_paginate', "~>3.0.5"
+gem 'will_paginate', "~>3.1.0"
 gem 'autoprefixer-rails'
 gem "cancan"
 gem 'connection_pool'
