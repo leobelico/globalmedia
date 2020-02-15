@@ -12,7 +12,7 @@ rails assets:precompile RAILS_ENV=production
 
 git add .
 git commit -m "mensaje del commit"
-git push origin master 
+//git push origin master //es de github
 
 // Después de hacer estos comandos, hay que hacer merge (github te da los pasos)
 
