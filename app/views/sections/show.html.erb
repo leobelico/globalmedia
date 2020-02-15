@@ -47,7 +47,7 @@
 			<% @articles.each do |article|%>
 					<%= render "components/section-article", article: article %>
 			<% end %>
-			<%= will_paginate @articles, class: "site-pagination" %>
+			<%# will_paginate @articles, class: "site-pagination" %>
 
 		</div>
 
