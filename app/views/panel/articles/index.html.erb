@@ -61,7 +61,7 @@
 			<p class="table__cell"><%= article.id %></p>
 		 	
 			<% if article.articable and article.articable.name %>
-				<%= link_to article.articable.name, panel_section_path(article.articable.name), class: "table__cell" %>
+				<%= link_to article.articable.name, panel_section_path(article.articable.slug), class: "table__cell" %>
 			<% else %>
 				<p class="table__cell">Ninguna</p>
 			<% end %>
