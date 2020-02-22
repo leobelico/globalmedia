@@ -35,8 +35,11 @@
 			</div>
 
 			<% if !@station.video? and !@station.news? %>
-				<audio controls autoplay id="audio" controlsList="nodownload">
+				<!--<audio controls autoplay id="audio" controlsList="nodownload">
 					<source src="<%= @station.stream_url %>" type="audio/mpeg">	
+				</audio>-->
+
+				<audio src="<%= @station.stream_url %>" controls autoplay>
 				</audio>
 
 				

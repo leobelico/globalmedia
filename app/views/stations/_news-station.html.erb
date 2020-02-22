@@ -18,12 +18,11 @@
 			</div>
 
 			<% if !@station.video? and !@station.news? %>
-				<audio controls autoplay id="audio" controlsList="nodownload">
-					<source src="<%= @station.stream_url %>" type="audio/mpeg">	
+				<audio src="<%= @station.stream_url %>" controls autoplay>
 				</audio>
-
-
-
+				<!--<audio controls autoplay id="audio" controlsList="nodownload">
+					<source src="<%= @station.stream_url %>" type="audio/mpeg">	
+				</audio>-->
 			<!-- <div class="flowplayer" data-rtmp="<%= @rtmps_src %>">
 				<video controls autoplay>
 				    <source type="application/x-mpegurl" src="<%= @https_src %>">
@@ -31,19 +30,11 @@
 				</video>
 				</div> -->
 			<% else %>	
-
-
-
 			<!-- Insertar en Head -->
-
 			<script type="text/javascript" src="//player.wowza.com/player/ull/latest/wowzaplayer.min.js"></script>
-
 			<!-- Insertar en body -->
-
 			<div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
-
 			<!-- codigo del reproductor -->
-
 			<script type="text/javascript">
 			WowzaPlayer.create("playerElement",
 			    {
@@ -63,11 +54,8 @@
 			    }
 			);
 			</script>
-
-				
-				
-
 			<% end %>
+
 			<div class="stream">
 				<div class="stream__info">
 					<% if timetables.count > 1 %>
