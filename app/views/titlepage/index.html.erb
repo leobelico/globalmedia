@@ -1,32 +1,32 @@
 <% content_for :title, "Global Media - Noticias" %>
-<div class="enc-links">	
+<div class="enc-links">
 	<a href="https://sondeosglobalmedia.com.mx/globalmedia/" target="_blank">
-		<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/aaec0117-038a-4e3b-9885-4dc16450b110.jpeg", class: "img-desktop" %>
+		<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/e43c3593-df36-4a76-9e2b-0adcecb8807c.jpeg", class: "img-desktop" %>
 	</a>
 </div>
 
 <style>
 	.enc-links {
 		display:  flex;
-		flex-direction:  row; 
-		align-items:  stretch; 
+		flex-direction:  row;
+		align-items:  stretch;
 		justify-content:  center;
-		width:  100%; 
+		width:  100%;
 	}
 	.enc-links a {
 		width:  100%;
 	}
 	.enc-links img {
-		height:  auto; 
-		width:  100%; 
-		flex-shrink: 0; 
+		height:  auto;
+		width:  100%;
+		flex-shrink: 0;
 	}
 	@media screen and (max-width:  1024px) {
 		.enc-links {
 			flex-direction:  column;
 		}
 		.enc-links a {
-			width:  100%; 
+			width:  100%;
 			max-width:  400px;
 			margin:  0 auto;
 		}
@@ -35,26 +35,26 @@
 
 <style>
 	.banner-wide {
-		display: flex; 
-		width:  100%; 
-		height:  auto; 
+		display: flex;
+		width:  100%;
+		height:  auto;
 	}
 	.banner-wide img {
-		width:  100%; 
-		height:  auto; 
+		width:  100%;
+		height:  auto;
 		margin-bottom: 15px;
 	}
 	.banner-ww {
-		width: 100%; 
-		height:  auto; 
+		width: 100%;
+		height:  auto;
 		/*display:  flex; */
 	}
 	.banner-ww img {
-		width:  100%; 
-		height:  auto; 
+		width:  100%;
+		height:  auto;
 	}
 </style>
-<!-- <br> 
+<!-- <br>
 
 <a href="/WFM" class="banner-ww">
 	<img src="https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/ban.jpg">
@@ -63,11 +63,11 @@
 -->
 <% cache @breaking_news do %>
 	<% if @breaking_news.count > 0 %>
-		<%= render "components/breaking-news" %>	
+		<%= render "components/breaking-news" %>
 	<% end %>
 <% end %>
 
-		<div class="highlights-container">	
+		<div class="highlights-container">
 			<% @highlights.each do |highlight| %>
 				<% if highlight.order == 1 %>
 					<%= render "components/principal-highlight", article: highlight.article %>
@@ -85,7 +85,7 @@
 <% end %>
 <% if true %>
 <div class="special-articles-container">
-	
+
 	<div class="special-articles">
 		<% if true %>
 			<% cache(latest_news) do %>
@@ -100,7 +100,7 @@
 				<% end %>
 		<% end %>
 
-		
+
 	</div>
 
 		<% cache(get_collaborators) do %>
@@ -130,7 +130,7 @@
 		<% end %>
 
 	<% end %>
-	
+
 
 
 </div>
