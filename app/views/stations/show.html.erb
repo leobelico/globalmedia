@@ -1,7 +1,7 @@
 <% content_for :title, @station.name  %>
 
 <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css"/>
-<script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script> 
+<script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script>
 
 <h1 data-chrome class="station__name">Si tu video no se ve correctamente, da click <a href="#">aquí</a></h1>
 
@@ -20,29 +20,50 @@
 							<%= image_tag "whatsapp.svg" %>
 						<% end %>
 						<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
-							<%= image_tag "facebook.svg" %>				
-						</a>	
+							<%= image_tag "facebook.svg" %>
+						</a>
 						<a target="_blank" href="https://twitter.com/home?status=<%= truncate(@station.name, length: 80) %>%20%2D%20<%= url_encode(station_url(@station)) %>" class="social-media__link twitter">
 							<%= image_tag "twitter.svg" %>
 						</a>
-						<a class="social-media__link copy" target="_self" data-clipboard-text="<%= station_url(@station) %>">	
+						<a class="social-media__link copy" target="_self" data-clipboard-text="<%= station_url(@station) %>">
 							<input class="hidden" value="<%= station_url(@station) %>">
 							<%= image_tag "copy.svg" %>
-						</a> 
+						</a>
 					</div>
-		
+
 				</div>
 			</div>
 
 			<% if !@station.video? and !@station.news? %>
 				<!--<audio controls autoplay id="audio" controlsList="nodownload">
-					<source src="<%= @station.stream_url %>" type="audio/mpeg">	
+					<source src="<%= @station.stream_url %>" type="audio/mpeg">
 				</audio>-->
 
-				<audio src="<%= @station.stream_url %>" controls autoplay>
-				</audio>
+				<!-- <audio src="<%= @station.stream_url %>" controls autoplay>
+				</audio> -->
 
-				
+				<!-- BEGINS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
+				<script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
+				<script type="text/javascript">
+					MRP.insert({
+					'url':'<%= @station.stream_url %>',
+					'lang':'es',
+					'codec':'mp3',
+					'volume':100,
+					'autoplay':true,
+					'forceHTML5':true,
+					'jsevents':true,
+					'buffering':0,
+					'title':'<%= @station.name %>',
+					'wecome':'<%= @station.description %>',
+					'wmode':'transparent',
+					'skin':'darkconsole',
+					'width':190,
+					'height':62
+					});
+				</script>
+				<!-- ENDS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
+
 
 				<!-- <div class="flowplayer" data-rtmp="<%= @rtmps_src %>" style="height: 70px;">
 				<video controls autoplay >
@@ -50,14 +71,14 @@
 				    <source type="video/flash" src="<%= @rtmps_src %>">
 				</video>
 				</div> -->
-	
+
  			<!-- <video id="video" class="video-js" controls  preload="auto" width="640" height="264">
-				  		
+
 						<source src="<%= @httpss_src %>" type="application/x-mpegURL">
 
 						<source src="<%= @rtmps_src %>" type="video/flash">
 				  </video> -->
-			<% else %>	
+			<% else %>
 
 				<!-- Insertar en Head -->
 
@@ -89,21 +110,21 @@
 				);
 				</script>
 
-					
-			<% end %>	
+
+			<% end %>
 			<div class="program__info">
-				
+
 				<% if @timetables.first %>
 					<%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
 					<div class="program__info__text">
-						<p><%= @timetables.first.name %></p>						
+						<p><%= @timetables.first.name %></p>
 						<p><%= @timetables.first.description %></p>
 						<p class="radio-banner__tune-in">Con:</p>
 						<p><%= @timetables.first.broadcasters %></p>
 					</div>
 				<% end %>
 			</div>
-			<div class="station__info">		
+			<div class="station__info">
 
 				<div class="station__programs">
 					<% @timetables.each_with_index do |timetable, index| %>
@@ -113,11 +134,11 @@
 							<p class="program__current-indicator">Programa actual:</p>
 						<% end %>
 						<div class="program">
-							
-							<p class="program__hour"><%= timetable.streaming_hour.strftime('%H:%M') %></p>	 
-							<p class="program__name"><%= timetable.name %></p>		 
+
+							<p class="program__hour"><%= timetable.streaming_hour.strftime('%H:%M') %></p>
+							<p class="program__name"><%= timetable.name %></p>
 						</div>
-					<% end %>	
+					<% end %>
 				</div>
 
 			</div>
@@ -162,10 +183,10 @@
 					<% @station.article_relationships.order(created_at: :desc).first(3).each do |relationship| %>
 							<%= render "components/horizontal-note", article: relationship.article %>
 					<% end %>
-				
+
 					<!-- VÏNCULO PARA VER MAS -->
 					<% if @station.article_relationships.count > 3 %>
-						<%= link_to "Ver más notas", station_articles_path(@station.slug), class: "view-more" %>		
+						<%= link_to "Ver más notas", station_articles_path(@station.slug), class: "view-more" %>
 					<% end %>
 				</div>
 			<% end %>
@@ -198,14 +219,14 @@
 	var isNewChrome = (navigator.userAgent.match(/Chrom(e|ium)\/(\d+)/) || [])[2] > 56
 	    && !/Mobile/i.test(navigator.userAgent);
 	    var isNewFirefox = (navigator.userAgent.match(/Fireforx\/(\d+)/));
-	    
+
 	var canRequestPermission =  isNewChrome;
 
 	if (!swfobject.hasFlashPlayerVersion('10') && canRequestPermission) {
 		$('[data-chrome]').show();
 	    requestFlashPermission();
 	    // Chrome requires user's click in order to allow iframe embeding
-	    $(window).one('click', requestFlashPermission);	
+	    $(window).one('click', requestFlashPermission);
 	}
 
 
