@@ -43,42 +43,8 @@
 					<source src="<%= @station.stream_url %>" type="audio/mpeg">
 				</audio>-->
 
-				<audio id="audioTag" src="<%= @station.stream_url %>" controls autoplay loop>
+				<audio id="audioTag" src="<%= @station.stream_url %>" controls autoplay loop onended=this.play();>
 				</audio>
-
-				<!-- BEGINS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
-				<!-- <script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
-				<script type="text/javascript">
-					MRP.insert({
-					'url':'<%= @station.stream_url %>',
-					'lang':'es',
-					'codec':'mp3',
-					'volume':100,
-					'autoplay':true,
-					'forceHTML5':true,
-					'jsevents':true,
-					'buffering':0,
-					'title':'<%= @station.name %>',
-					'wecome':'<%= @station.description %>',
-					'wmode':'transparent',
-					'skin':'darkconsole',
-					'width':190,
-					'height':62
-					});
-				</script> -->
-				<!-- ENDS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
-
-				<script type="text/javascript">
-					jQuery(function() {
-						function replay()
-						{
-							audioTag.play();
-							//console.log("Replay");
-						}
-						//setInterval(replay, 5000); // 5 seg
-						setInterval(replay, 60000); // 1 min
-					});
-				</script>
 
 
 				<!-- <div class="flowplayer" data-rtmp="<%= @rtmps_src %>" style="height: 70px;">
