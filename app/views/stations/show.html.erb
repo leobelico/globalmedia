@@ -39,7 +39,7 @@
 					<source src="<%= @station.stream_url %>" type="audio/mpeg">
 				</audio>-->
 
-				<audio id="audioTag" src="<%= @station.stream_url %>" autoplay  onended=this.play(); controls=controls autobuffer>
+				<audio preload="metadata" src="<%= @station.stream_url %>" autoplay onended=this.play(); controls=controls autobuffer>
 				</audio>
 
 
