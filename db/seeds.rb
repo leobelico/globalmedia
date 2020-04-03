@@ -21,7 +21,7 @@ sections = Section.first_or_create([
 	{name: "Quiénes Somos"},
 	{name: "Contáctanos"},
 	{name: "Anunciate con nosotros"}
-])	
+])
 
 
 article_content = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in qusae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium sit, quibusdam provident in quae nisi, alias exercitationem odio laudantium perferendis atque, autem quidem nobis? Aut asperiores labore iste doloribus laudantium? "
@@ -30,7 +30,7 @@ short_description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. T
 
 article_name = "Lorem Ipsum Dolor Sit Amet"
 
-plain_text = "Lorem ipsum dolor sit amet - consectetur adipiscing elit. Proin cursus sit amet augue ut viverra. Pellentesque pulvinar, lectus ac lacinia convallis, tortor massa tempor ante, nec consectetur arcu purus sed ipsum. Vivamus nec sapien auctor velit faucibus vehicula sed vitae justo. Fusce dolor enim, auctor at turpis id, placerat pretium sapien. Nunc vitae efficitur tellus. Sed quis vestibulum ante, sed malesuada erat. Etiam ullamcorper pharetra scelerisque. 
+plain_text = "Lorem ipsum dolor sit amet - consectetur adipiscing elit. Proin cursus sit amet augue ut viverra. Pellentesque pulvinar, lectus ac lacinia convallis, tortor massa tempor ante, nec consectetur arcu purus sed ipsum. Vivamus nec sapien auctor velit faucibus vehicula sed vitae justo. Fusce dolor enim, auctor at turpis id, placerat pretium sapien. Nunc vitae efficitur tellus. Sed quis vestibulum ante, sed malesuada erat. Etiam ullamcorper pharetra scelerisque.
 
 Nunc fringilla, sapien non porttitor tempus, tortor felis porttitor nulla, ac ullamcorper purus eros et lacus. Praesent condimentum dapibus eros id ullamcorper. Mauris blandit justo eu varius placerat. Aliquam lacus velit, mattis at arcu ac, viverra laoreet nisl. Integer eu sapien interdum, ornare risus sit amet, iaculis nulla. Sed tempus quam sed nulla maximus placerat. Donec vitae velit ut est semper tempus. Nam lacinia tempor convallis. Fusce lobortis velit eget ligula tempus, vitae vehicula risus tincidunt."
 
@@ -43,14 +43,14 @@ superadmins = User.create([
 
 User.all.each do |user|
 	user.update_attributes(
-		banners_permission: true, 
-		create_articles_permission: true, 
-		video_complaints_permission: true, 
-		hits_permission: true, 
-		destroy_articles_permission: true, 
-		radio_stations_permission: true, 
-		remote_controls_permission: true, 
-		user_permission: true, 
+		banners_permission: true,
+		create_articles_permission: true,
+		video_complaints_permission: true,
+		hits_permission: true,
+		destroy_articles_permission: true,
+		radio_stations_permission: true,
+		remote_controls_permission: true,
+		user_permission: true,
 		is_news_chief: true
 	)
 end
@@ -62,11 +62,11 @@ short_lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin cu
 hashtags = "#duarte #poltica"
 
 images = [
-"http://www.metmuseum.org/toah/images/hb/hb_62.24.jpg", 
-"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg", 
-"http://www.metmuseum.org/toah/images/hb/hb_1993.132.jpg", 
-"https://upload.wikimedia.org/wikipedia/commons/b/b4/Vincent_Willem_van_Gogh_128.jpg", 
-"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gustav_Klimt_046.jpg/1023px-Gustav_Klimt_046.jpg", 
+"http://www.metmuseum.org/toah/images/hb/hb_62.24.jpg",
+"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
+"http://www.metmuseum.org/toah/images/hb/hb_1993.132.jpg",
+"https://upload.wikimedia.org/wikipedia/commons/b/b4/Vincent_Willem_van_Gogh_128.jpg",
+"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gustav_Klimt_046.jpg/1023px-Gustav_Klimt_046.jpg",
 "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg",
 "https://s-media-cache-ak0.pinimg.com/originals/8d/02/13/8d0213fd171c553b0da0f98b856d050d.jpg",
 "http://www.sothebys.com/content/dam/stb/lots/L14/L14006/812L14006_7H7HW.jpg",
@@ -74,7 +74,7 @@ images = [
 "https://s-media-cache-ak0.pinimg.com/originals/8d/b1/e9/8db1e9ceb968f84843ddcbc8a750d0e4.jpg",
 "https://upload.wikimedia.org/wikipedia/commons/1/1f/Michelangelo%27s_Pieta_5450_cropncleaned_edit.jpg",
 "http://www.wallpaperawesome.com/wallpapers-awesome/wallpapers-famous-painting-artist-painter-brush-oil-on-canvas-awesome/wallpaper-painting-of-famous-painters-4.jpg",
-"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gustav_Klimt_046.jpg/1023px-Gustav_Klimt_046.jpg", 
+"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gustav_Klimt_046.jpg/1023px-Gustav_Klimt_046.jpg",
 "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg",
 "https://s-media-cache-ak0.pinimg.com/originals/8d/02/13/8d0213fd171c553b0da0f98b856d050d.jpg",
 "http://www.sothebys.com/content/dam/stb/lots/L14/L14006/812L14006_7H7HW.jpg",
@@ -82,7 +82,7 @@ images = [
 "https://s-media-cache-ak0.pinimg.com/originals/8d/b1/e9/8db1e9ceb968f84843ddcbc8a750d0e4.jpg",
 "https://upload.wikimedia.org/wikipedia/commons/1/1f/Michelangelo%27s_Pieta_5450_cropncleaned_edit.jpg",
 "http://www.wallpaperawesome.com/wallpapers-awesome/wallpapers-famous-painting-artist-painter-brush-oil-on-canvas-awesome/wallpaper-painting-of-famous-painters-4.jpg",
-"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gustav_Klimt_046.jpg/1023px-Gustav_Klimt_046.jpg", 
+"https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Gustav_Klimt_046.jpg/1023px-Gustav_Klimt_046.jpg",
 "https://upload.wikimedia.org/wikipedia/commons/8/84/Gustav_Klimt_046.jpg",
 "https://s-media-cache-ak0.pinimg.com/originals/8d/02/13/8d0213fd171c553b0da0f98b856d050d.jpg",
 "http://www.sothebys.com/content/dam/stb/lots/L14/L14006/812L14006_7H7HW.jpg",
@@ -100,21 +100,21 @@ authors = Author.create([
 	{name: "Fred Weasley", logo: images[3]},
 	{name: "George Weasley", logo: images[3]},
 	{name: "Ginny Weasley", logo: images[3]},
-])	
+])
 Section.all.each do |section|
 	for i in 0..20
 		article = Article.create([
-			{		
+			{
 				name: ("Lorem ipsum dolor sit amet, consectetur adipiscing elit cont") + (0...4).map { ('a'..'z').to_a[rand(26)] }.join,
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
-				hashtags_names: hashtags, 
-				global_recommendation:  false, 
-				highlight:  false, 
-				articable_type:  "Section", 
-				articable_id: section.id, 
-				image: images[i], 
+				hashtags_names: hashtags,
+				global_recommendation:  false,
+				highlight:  false,
+				articable_type:  "Section",
+				articable_id: section.id,
+				image: images[i],
 				image_thumbnail: images[i],
 				draft: 1,
 				published: true,
@@ -126,116 +126,116 @@ Section.all.each do |section|
 end
 
 articles_new = Article.create([
-			{		
+			{
 				name: "Corea del Norte lanza misil",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
-				hashtags_names: hashtags, 
-				global_recommendation:  false, 
-				highlight:  false, 
-				articable_type:  "Section", 
-				articable_id: Section.first.id, 
-				image: images[1], 
+				hashtags_names: hashtags,
+				global_recommendation:  false,
+				highlight:  false,
+				articable_type:  "Section",
+				articable_id: Section.first.id,
+				image: images[1],
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true, 
+				published: true,
 				author_id: 1
 			},
-			{		
+			{
 				name: "Trump le dice no al muro",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
-				hashtags_names: hashtags, 
-				global_recommendation:  false, 
-				highlight:  false, 
-				articable_type:  "Section", 
-				articable_id: Section.first.id, 
-				image: images[1], 
+				hashtags_names: hashtags,
+				global_recommendation:  false,
+				highlight:  false,
+				articable_type:  "Section",
+				articable_id: Section.first.id,
+				image: images[1],
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true, 
+				published: true,
 				author_id: 1
 			},
-			{		
+			{
 				name: "Muere David Bowie",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
-				hashtags_names: hashtags, 
-				global_recommendation:  false, 
-				highlight:  false, 
-				articable_type:  "Section", 
-				articable_id: Section.first.id, 
-				image: images[1], 
+				hashtags_names: hashtags,
+				global_recommendation:  false,
+				highlight:  false,
+				articable_type:  "Section",
+				articable_id: Section.first.id,
+				image: images[1],
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true, 
+				published: true,
 				author_id: 1
 			},
-			{		
+			{
 				name: "Conflicto en medio oriente",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
-				hashtags_names: hashtags, 
-				global_recommendation:  false, 
-				highlight:  false, 
-				articable_type:  "Section", 
-				articable_id: Section.first.id, 
-				image: images[1], 
+				hashtags_names: hashtags,
+				global_recommendation:  false,
+				highlight:  false,
+				articable_type:  "Section",
+				articable_id: Section.first.id,
+				image: images[1],
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true, 
+				published: true,
 				author_id: 1
 			},
-			{		
+			{
 				name: "Cierran 254 empresas Pyme en SLP",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
-				hashtags_names: hashtags, 
-				global_recommendation:  false, 
-				highlight:  false, 
-				articable_type:  "Section", 
-				articable_id: Section.first.id, 
-				image: images[1], 
+				hashtags_names: hashtags,
+				global_recommendation:  false,
+				highlight:  false,
+				articable_type:  "Section",
+				articable_id: Section.first.id,
+				image: images[1],
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true, 
+				published: true,
 				author_id: 1
 			},
-			{		
+			{
 				name: "Encuentran eslabón en la cadena evolutiva",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
-				hashtags_names: hashtags, 
-				global_recommendation:  false, 
-				highlight:  false, 
-				articable_type:  "Section", 
-				articable_id: Section.first.id, 
-				image: images[1], 
+				hashtags_names: hashtags,
+				global_recommendation:  false,
+				highlight:  false,
+				articable_type:  "Section",
+				articable_id: Section.first.id,
+				image: images[1],
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true, 
+				published: true,
 				author_id: 1
 			},
-			{		
+			{
 				name: "Dan a conocer nuevos impuestos",
 				note: placeholder_note,
 				short_description: short_lorem,
 				plain_text: plain_text,
-				hashtags_names: hashtags, 
-				global_recommendation:  false, 
-				highlight:  false, 
-				articable_type:  "Section", 
-				articable_id: Section.first.id, 
-				image: images[1], 
+				hashtags_names: hashtags,
+				global_recommendation:  false,
+				highlight:  false,
+				articable_type:  "Section",
+				articable_id: Section.first.id,
+				image: images[1],
 				image_thumbnail: images[1],
 				draft: 1,
-				published: true, 
+				published: true,
 				author_id: 1
 			}
 
@@ -249,7 +249,7 @@ articles.each do |article|
 	p "updated article user"
 end
 p "----------------------"
-p articles.count 
+p articles.count
 p articles[1].id
 p articles[2].id
 p articles[3].id
@@ -341,7 +341,7 @@ investigation_articles = ArticleRelationship.create([
 		articable_id: investigation.id,
 		articable_type: "Relationship"
 	}
-]) 
+])
 
 globalcomplaint = Relationship.create({
 	name: "Denuncia Global",
@@ -385,7 +385,7 @@ globalcomplaint_articles = ArticleRelationship.create([
 		articable_id: globalcomplaint.id,
 		articable_type: "Relationship"
 	}
-]) 
+])
 
 collaborators = Relationship.create([
 	{
@@ -456,7 +456,7 @@ collaborator_articles = ArticleRelationship.create([
 		articable_id: collaborators[1].id,
 		articable_type: "Relationship"
 	}
-]) 
+])
 stations_image = "https://cdn.dribbble.com/users/482851/screenshots/2717061/radio.gif"
 stations_image_2 = "https://cdn.dribbble.com/users/229993/screenshots/2924148/spaceradio4dr.jpg"
 # stations_name = "Estación "
@@ -476,14 +476,14 @@ stations_names = [
 	"Trión",
 	"VIVECANAL",
 	"WFM"
-]  
+]
 # name: stations_name  + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
 for i in 0..stations_names.size
 	station = Station.create(
 		{
 			image: stations_image,
 			name: stations_names[i],
-			stream_url: stream_url, 
+			stream_url: stream_url,
 			playlist_1: playlist,
 			playlist_1_image: playlist_image,
 			playlist_2: playlist,
@@ -524,13 +524,13 @@ Station.all.each do |station|
 					image: timetable_image,
 					streaming_hour: Time.now.beginning_of_day,
 					end_streaming_hour: Time.now.end_of_day,
-					monday: true, 
-					tuesday: true, 
-					wednesday: true, 
-					thursday: true, 
-					friday: true, 
-					saturday: true, 
-					sunday: true, 
+					monday: true,
+					tuesday: true,
+					wednesday: true,
+					thursday: true,
+					friday: true,
+					saturday: true,
+					sunday: true,
 					broadcasters: "Lalalala",
 					broadcaster_image: timetable_image,
 					description: "Lalalala",
@@ -554,17 +554,17 @@ Article.all.each do |article|
 		hit.created_at = DateTime.now - (rand * 200)
 		hit.save
 	end
-end 
+end
 User.all.each do |user|
 	user.update_attributes(
-		banners_permission: true, 
-		create_articles_permission: true, 
-		video_complaints_permission: true, 
-		hits_permission: true, 
-		destroy_articles_permission: true, 
-		radio_stations_permission: true, 
-		remote_controls_permission: true, 
-		user_permission: true, 
+		banners_permission: true,
+		create_articles_permission: true,
+		video_complaints_permission: true,
+		hits_permission: true,
+		destroy_articles_permission: true,
+		radio_stations_permission: true,
+		remote_controls_permission: true,
+		user_permission: true,
 		is_news_chief: true
 	)
 end
@@ -577,7 +577,7 @@ end
 			lng: "-101.004523",
 			stream: video_stream
 		}
-	) 
+	)
 	camera = Camera.create(
 		{
 			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
@@ -586,7 +586,7 @@ end
 			lng: "-100.004523",
 			stream: video_stream
 		}
-	) 
+	)
 	camera = Camera.create(
 		{
 			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
@@ -595,7 +595,7 @@ end
 			lng: "-100.104523",
 			stream: video_stream
 		}
-	) 
+	)
 	camera = Camera.create(
 		{
 			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
@@ -604,7 +604,7 @@ end
 			lng: "-101.104523",
 			stream: video_stream
 		}
-	) 
+	)
 	camera = Camera.create(
 		{
 			name: "Cámara " + (0...6).map { ('a'..'z').to_a[rand(26)] }.join,
@@ -613,7 +613,7 @@ end
 			lng: "-101.104523",
 			stream: video_stream
 		}
-	) 
+	)
 
 
 
