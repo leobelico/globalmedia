@@ -1,186 +1,170 @@
 <% content_for :title, @station.name  %>
 
-<!-- <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css"/>
-<script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script> -->
+	<!-- <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css"/>
+	<script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script> -->
 
-<h1 data-chrome class="station__name">Si tu video no se ve correctamente, da click <a href="#">aquí</a></h1>
+	<h1 data-chrome class="station__name">Si tu video no se ve correctamente, da click <a href="#">aquí</a></h1>
 
-<% if @station.news == false %>
-	<div class="interface--row">
-		<div class="main-content station">
-			<div class="station__header">
-				<%= image_tag @station.image, class: "station__image" %>
+	<% if @station.news == false %>
+		<div class="interface--row">
+			<div class="main-content station">
+				<div class="station__header">
+					<%= image_tag @station.image, class: "station__image" %>
+					<div class="header__info">
+						<h4 class="station__name"><%= @station.name %></h4>
 
-				<div class="header__info">
-					<h4 class="station__name"><%= @station.name %></h4>
-
-					<p class="station__description"><%= @station.description %></p>
-					<div class="social-media" data-article="<%= station_url(@station) %>">
-						<%= link_to ("whatsapp://send?text=" + station_url(@station)), class: "social-media__link whatsapp", target: "_blank" do %>
-							<%= image_tag "whatsapp.svg" %>
-						<% end %>
-						<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
-							<%= image_tag "facebook.svg" %>
-						</a>
-						<a target="_blank" href="https://twitter.com/home?status=<%= truncate(@station.name, length: 80) %>%20%2D%20<%= url_encode(station_url(@station)) %>" class="social-media__link twitter">
-							<%= image_tag "twitter.svg" %>
-						</a>
-						<a class="social-media__link copy" target="_self" data-clipboard-text="<%= station_url(@station) %>">
-							<input class="hidden" value="<%= station_url(@station) %>">
-							<%= image_tag "copy.svg" %>
-						</a>
+						<p class="station__description"><%= @station.description %></p>
+						<div class="social-media" data-article="<%= station_url(@station) %>">
+							<%= link_to ("whatsapp://send?text=" + station_url(@station)), class: "social-media__link whatsapp", target: "_blank" do %>
+								<%= image_tag "whatsapp.svg" %>
+							<% end %>
+							<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
+								<%= image_tag "facebook.svg" %>
+							</a>
+							<a target="_blank" href="https://twitter.com/home?status=<%= truncate(@station.name, length: 80) %>%20%2D%20<%= url_encode(station_url(@station)) %>" class="social-media__link twitter">
+								<%= image_tag "twitter.svg" %>
+							</a>
+							<a class="social-media__link copy" target="_self" data-clipboard-text="<%= station_url(@station) %>">
+								<input class="hidden" value="<%= station_url(@station) %>">
+								<%= image_tag "copy.svg" %>
+							</a>
+						</div>
 					</div>
-
 				</div>
-			</div>
 
-			<% if !@station.video? and !@station.news? %>
-				<!--<audio controls autoplay id="audio" controlsList="nodownload">
-					<source src="<%= @station.stream_url %>" type="audio/mpeg">
-				</audio>-->
+				<% if !@station.video? and !@station.news? %>
+					<!--<audio controls autoplay id="audio" controlsList="nodownload">
+						<source src="<%= @station.stream_url %>" type="audio/mpeg">
+					</audio>-->
 
-				<audio preload="metadata" src="<%= @station.stream_url %>" autoplay onended=this.play(); controls=controls autobuffer>
-				</audio>
+					<audio preload="metadata" src="<%= @station.stream_url %>" autoplay onended=this.play(); controls=controls autobuffer>
+					</audio>
 
+					<!-- <div class="flowplayer" data-rtmp="<%= @rtmps_src %>" style="height: 70px;">
+					<video controls autoplay >
+					    <source type="application/x-mpegurl" src="<%= @httpss_src %>">
+					    <source type="video/flash" src="<%= @rtmps_src %>">
+					</video>
+					</div> -->
 
-				<!-- <div class="flowplayer" data-rtmp="<%= @rtmps_src %>" style="height: 70px;">
-				<video controls autoplay >
-				    <source type="application/x-mpegurl" src="<%= @httpss_src %>">
-				    <source type="video/flash" src="<%= @rtmps_src %>">
-				</video>
-				</div> -->
+	 				<!-- <video id="video" class="video-js" controls  preload="auto" width="640" height="264">
 
- 				<!-- <video id="video" class="video-js" controls  preload="auto" width="640" height="264">
+							<source src="<%= @httpss_src %>" type="application/x-mpegURL">
 
-						<source src="<%= @httpss_src %>" type="application/x-mpegURL">
+							<source src="<%= @rtmps_src %>" type="video/flash">
+					  </video> -->
+				<% else %>
+					<!-- Insertar en Head -->
+					<script type="text/javascript" src="https://player.wowza.com/player/ull/latest/wowzaplayer.min.js"></script>
 
-						<source src="<%= @rtmps_src %>" type="video/flash">
-				  </video> -->
-			<% else %>
+					<!-- Insertar en body -->
+					<div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
 
-				<!-- Insertar en Head -->
-
-				<script type="text/javascript" src="https://player.wowza.com/player/ull/latest/wowzaplayer.min.js"></script>
-
-				<!-- Insertar en body -->
-
-				<div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
-
-				<!-- codigo del reproductor -->
-
-				<script type="text/javascript">
-				WowzaPlayer.create("playerElement",
-				    {
-				    "license":"PLAY1-4BVTz-Rmtp4-Dx49D-Y4Qjv-6PVnb",
-				    "sources":[{
-				    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
-				    },
-				    {
-				    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
-				    }],
-				    "title":"Vive Canal en vivo",
-				    "description":"",
-				    "autoPlay":true,
-				    "mute":false,
-				    "volume":75,
-				    "posterFrameURL":"https://globalmediarocks.s3-us-west-1.amazonaws.com/uploads/bea801c9-427b-4405-9d61-bf2957bf6b10/fb_atleti_perf.png"
-				    }
-				);
-				</script>
-
-
-			<% end %>
-			<div class="program__info">
-
-				<% if @timetables.first %>
-					<%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
-					<div class="program__info__text">
-						<p><%= @timetables.first.name %></p>
-						<p><%= @timetables.first.description %></p>
-						<p class="radio-banner__tune-in">Con:</p>
-						<p><%= @timetables.first.broadcasters %></p>
-					</div>
+					<!-- codigo del reproductor -->
+					<script type="text/javascript">
+					WowzaPlayer.create("playerElement",
+					    {
+					    "license":"PLAY1-4BVTz-Rmtp4-Dx49D-Y4Qjv-6PVnb",
+					    "sources":[{
+					    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
+					    },
+					    {
+					    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
+					    }],
+					    "title":"Vive Canal en vivo",
+					    "description":"",
+					    "autoPlay":true,
+					    "mute":false,
+					    "volume":75,
+					    "posterFrameURL":"https://globalmediarocks.s3-us-west-1.amazonaws.com/uploads/bea801c9-427b-4405-9d61-bf2957bf6b10/fb_atleti_perf.png"
+					    }
+					);
+					</script>
 				<% end %>
-			</div>
-			<div class="station__info">
-
-				<div class="station__programs">
-					<% @timetables.each_with_index do |timetable, index| %>
-						<% if index == 0 and @station.video == false %>
-							<p class="program__current-indicator">Suena Ahora:</p>
-						<% elsif index == 0 and @station.video == true %>
-							<p class="program__current-indicator">Programa actual:</p>
-						<% end %>
-						<div class="program">
-
-							<p class="program__hour"><%= timetable.streaming_hour.strftime('%H:%M') %></p>
-							<p class="program__name"><%= timetable.name %></p>
+				<div class="program__info">
+					<% if @timetables.first %>
+						<%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
+						<div class="program__info__text">
+							<p><%= @timetables.first.name %></p>
+							<p><%= @timetables.first.description %></p>
+							<p class="radio-banner__tune-in">Con:</p>
+							<p><%= @timetables.first.broadcasters %></p>
 						</div>
 					<% end %>
 				</div>
+				<div class="station__info">
+					<div class="station__programs">
+						<% @timetables.each_with_index do |timetable, index| %>
+							<% if index == 0 and @station.video == false %>
+								<p class="program__current-indicator">Suena Ahora:</p>
+							<% elsif index == 0 and @station.video == true %>
+								<p class="program__current-indicator">Programa actual:</p>
+							<% end %>
+							<div class="program">
+								<p class="program__hour"><%= timetable.streaming_hour.strftime('%H:%M') %></p>
+								<p class="program__name"><%= timetable.name %></p>
+							</div>
+						<% end %>
+					</div>
+				</div>
 
-			</div>
-
-		<% if @station.playlist_1 != "" %>
-			<div class="radio-banner__tune-in">Playlists recomendadas para ti</div>
-			<div class="playlists">
 				<% if @station.playlist_1 != "" %>
-					<a target="_blank" href="<%= @station.playlist_1 %>" class="playlist">
-						<%= image_tag @station.playlist_1_image %>
-					</a>
-				<% end %>
-				<% if @station.playlist_2 != "" %>
-					<a target="_blank" href="<%= @station.playlist_2 %>" class="playlist">
-						<%= image_tag @station.playlist_2_image %>
-					</a>
-				<% end %>
-				<% if @station.playlist_3 != "" %>
-					<a target="_blank" href="<%= @station.playlist_3 %>" class="playlist">
-						<%= image_tag @station.playlist_3_image %>
-					</a>
-				<% end %>
-				<% if @station.playlist_4 != "" %>
-					<a target="_blank" href="<%= @station.playlist_4 %>" class="playlist">
-						<%= image_tag @station.playlist_4_image %>
-					</a>
-				<% end %>
-			</div>
-		<% end	%>
-			<div class="radio-banner__tune-in">También puedes disfrutar</div>
-			<div class="station__recommendations">
-				<% @recommendations.each do |recommendation| %>
-					<%= link_to recommendation, class: "recommendation__image" do %>
-						<%= image_tag recommendation.image %>
-					<% end %>
-				<% end %>
-			</div>
-			<% if @station.article_relationships.count > 0 %>
-				<div class="radio-banner__tune-in">Lo más reciente</div>
-
-				<div class="station__articles">
-					<% @station.article_relationships.order(created_at: :desc).first(3).each do |relationship| %>
-							<%= render "components/horizontal-note", article: relationship.article %>
-					<% end %>
-
-					<!-- VÏNCULO PARA VER MAS -->
-					<% if @station.article_relationships.count > 3 %>
-						<%= link_to "Ver más notas", station_articles_path(@station.slug), class: "view-more" %>
+					<div class="radio-banner__tune-in">Playlists recomendadas para ti</div>
+					<div class="playlists">
+						<% if @station.playlist_1 != "" %>
+							<a target="_blank" href="<%= @station.playlist_1 %>" class="playlist">
+								<%= image_tag @station.playlist_1_image %>
+							</a>
+						<% end %>
+						<% if @station.playlist_2 != "" %>
+							<a target="_blank" href="<%= @station.playlist_2 %>" class="playlist">
+								<%= image_tag @station.playlist_2_image %>
+							</a>
+						<% end %>
+						<% if @station.playlist_3 != "" %>
+							<a target="_blank" href="<%= @station.playlist_3 %>" class="playlist">
+								<%= image_tag @station.playlist_3_image %>
+							</a>
+						<% end %>
+						<% if @station.playlist_4 != "" %>
+							<a target="_blank" href="<%= @station.playlist_4 %>" class="playlist">
+								<%= image_tag @station.playlist_4_image %>
+							</a>
+						<% end %>
+					</div>
+				<% end	%>
+				<div class="radio-banner__tune-in">También puedes disfrutar</div>
+				<div class="station__recommendations">
+					<% @recommendations.each do |recommendation| %>
+						<%= link_to recommendation, class: "recommendation__image" do %>
+							<%= image_tag recommendation.image %>
+						<% end %>
 					<% end %>
 				</div>
-			<% end %>
-			<% if get_banner(@station, "Station", "Grande").count > 0 %>
-				<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
-			<% end %>
+				<% if @station.article_relationships.count > 0 %>
+					<div class="radio-banner__tune-in">Lo más reciente</div>
+					<div class="station__articles">
+						<% @station.article_relationships.order(created_at: :desc).first(3).each do |relationship| %>
+								<%= render "components/horizontal-note", article: relationship.article %>
+						<% end %>
+
+						<!-- VÏNCULO PARA VER MAS -->
+						<% if @station.article_relationships.count > 3 %>
+							<%= link_to "Ver más notas", station_articles_path(@station.slug), class: "view-more" %>
+						<% end %>
+					</div>
+				<% end %>
+				<% if get_banner(@station, "Station", "Grande").count > 0 %>
+					<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
+				<% end %>
+			</div>
+
+			<%= render "components/stations-sidebar", facebook: @station.facebook, twitter: @station.twitter %>
+
 		</div>
-
-		<%= render "components/stations-sidebar", facebook: @station.facebook, twitter: @station.twitter %>
-
-	</div>
-<% else %>
-
-
-	<%= render "news-station", station: @station, timetables: @timetables %>
-<% end %>
+	<% else %>
+		<%= render "news-station", station: @station, timetables: @timetables %>
+	<% end %>
 
 <script type="text/javascript">
 	$('[data-chrome]').hide();
@@ -206,6 +190,4 @@
 	    // Chrome requires user's click in order to allow iframe embeding
 	    $(window).one('click', requestFlashPermission);
 	}
-
-
 </script>
