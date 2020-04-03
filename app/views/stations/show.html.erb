@@ -37,8 +37,21 @@
 						<source src="<%= @station.stream_url %>" type="audio/mpeg">
 					</audio>-->
 
-					<audio preload="metadata" src="<%= @station.stream_url %>" autoplay onended=this.play(); controls=controls autobuffer>
+					<audio id="myAudio" preload="metadata" src="<%= @station.stream_url %>" autoplay onended=this.play(); controls=controls autobuffer>
 					</audio>
+
+					<script>
+						var aud = document.getElementById("myAudio");
+						aud.addEventListener("ended", function() {
+							myAudio.play();
+						});
+
+						/*document.getElementById("myAudio").onended = function() {myFunction()};
+
+						function myFunction() {
+							myAudio.play();
+						}*/
+					</script>
 
 					<!-- <div class="flowplayer" data-rtmp="<%= @rtmps_src %>" style="height: 70px;">
 					<video controls autoplay >
