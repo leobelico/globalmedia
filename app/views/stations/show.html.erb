@@ -121,7 +121,13 @@
 				</div>
 
 				<% if @station.playlist_1 != "" %>
-					<div class="radio-banner__tune-in">Playlists recomendadas para ti</div>
+
+					<% if @station.name == "Trión" or @station.name == "VOX" %>
+						<div class="radio-banner__tune-in">Frecuencia con tu salud</div>
+					<% else %>
+						<div class="radio-banner__tune-in">Playlists recomendadas para ti</div>
+					<% end %>
+
 					<div class="playlists">
 						<% if @station.playlist_1 != "" %>
 							<a target="_blank" href="<%= @station.playlist_1 %>" class="playlist">
