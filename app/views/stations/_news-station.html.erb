@@ -80,7 +80,7 @@
 						<div class="podcast">
 							<h4 class="podcast__title"><%= podcast.name %></h4>
 							<audio controls>
-								<source src="<%= podcast.stream_url %>" controlsList="nodownload">
+								<source src="<%= podcast.stream_url %>">
 							</audio>
 						</div>
 					<% end %>
@@ -92,7 +92,7 @@
 					<% station.podcasts.each do |podcast| %>
 						<div class="podcast">
 							<h4 class="podcast__title"><%= podcast.name %></h4>
-							<audio controls controlsList="nodownload">
+							<audio controls>
 								<source src="<%= podcast.stream_url %>">
 							</audio>
 						</div>
