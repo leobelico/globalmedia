@@ -70,7 +70,16 @@
 					<script type="text/javascript" src="https://player.wowza.com/player/ull/latest/wowzaplayer.min.js"></script>
 
 					<!-- Insertar en body -->
-					<div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
+
+					<% if @station.name == "Frecuencia Con Tu Salud" %>
+						<div class="enc-links">
+							<a href="https://sondeosglobalmedia.com.mx/globalmedia/" target="_blank">
+								<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/frecuencia.jpg", class: "img-desktop" %>
+							</a>
+						</div>
+					<% else %>
+						<div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
+					<% end %>
 
 					<!-- codigo del reproductor -->
 					<script type="text/javascript">
