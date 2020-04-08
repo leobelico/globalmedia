@@ -1,12 +1,12 @@
 <div class="interface--row">
 	<div class="main-content">
-	
+
 		<div class="station station--news">
 			<div class="station__header">
 				<%= image_tag "glyph-blue.svg" %>
 				<div class="header__info">
 					<h4 class="station__name"><%= station.name %></h4>
-					<div class="station__line"></div>			
+					<div class="station__line"></div>
 					<div class="broadcast__info">
 						<% if timetables.count > 1 %>
 							<p class="broadcaster__name"><%= timetables.first.broadcasters %></p>
@@ -14,14 +14,14 @@
 						<% end %>
 					</div>
 				</div>
-			
+
 			</div>
 
 			<% if !@station.video? and !@station.news? %>
 				<audio src="<%= @station.stream_url %>" controls autoplay>
 				</audio>
 				<!--<audio controls autoplay id="audio" controlsList="nodownload">
-					<source src="<%= @station.stream_url %>" type="audio/mpeg">	
+					<source src="<%= @station.stream_url %>" type="audio/mpeg">
 				</audio>-->
 			<!-- <div class="flowplayer" data-rtmp="<%= @rtmps_src %>">
 				<video controls autoplay>
@@ -29,31 +29,38 @@
 				    <source type="video/flash" src="<%= @rtmps_src %>">
 				</video>
 				</div> -->
-			<% else %>	
-			<!-- Insertar en Head -->
-			<script type="text/javascript" src="//player.wowza.com/player/ull/latest/wowzaplayer.min.js"></script>
-			<!-- Insertar en body -->
-			<div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
-			<!-- codigo del reproductor -->
-			<script type="text/javascript">
-			WowzaPlayer.create("playerElement",
-			    {
-			    "license":"PLAY1-4BVTz-Rmtp4-Dx49D-Y4Qjv-6PVnb",
-			    "sources":[{
-			    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
-			    },
-			    {
-			    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
-			    }],
-			    "title":"Vive Canal en vivo",
-			    "description":"",
-			    "autoPlay":true,
-			    "mute":false,
-			    "volume":75,
-			    "posterFrameURL":"https://globalmediarocks.s3-us-west-1.amazonaws.com/uploads/bea801c9-427b-4405-9d61-bf2957bf6b10/fb_atleti_perf.png"
-			    }
-			);
-			</script>
+			<% else %>
+				<!-- Insertar en body -->
+				<div class="radio-banner__tune-in"><%= @station.name %></div>
+				<% if @station.name == "Frecuencia Con Tu Salud" %>
+					<div class="enc-links">
+						<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/frecuencia.jpg", class: "img-desktop" %>
+					</div>
+				<% else %>
+					<!-- Insertar en Head -->
+					<script type="text/javascript" src="https://player.wowza.com/player/ull/latest/wowzaplayer.min.js"></script>
+					<div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
+					<!-- codigo del reproductor -->
+					<script type="text/javascript">
+						WowzaPlayer.create("playerElement",
+						    {
+							    "license":"PLAY1-4BVTz-Rmtp4-Dx49D-Y4Qjv-6PVnb",
+							    "sources":[{
+								    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
+							    },
+							    {
+								    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
+							    }],
+							    "title":"Vive Canal en vivo",
+							    "description":"",
+							    "autoPlay":true,
+							    "mute":false,
+							    "volume":75,
+							    "posterFrameURL":"https://globalmediarocks.s3-us-west-1.amazonaws.com/uploads/bea801c9-427b-4405-9d61-bf2957bf6b10/fb_atleti_perf.png"
+						    }
+						);
+					</script>
+				<% end %>
 			<% end %>
 
 			<div class="stream">
@@ -65,8 +72,8 @@
 					<% end %>
 
 				</div>
-				
-			</div>	
+
+			</div>
 			<div class="podcasts">
 				<% if station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).count > 0 %>
 					<h4 class="small-label">Podcasts del día</h4>
@@ -74,25 +81,25 @@
 						<div class="podcast">
 							<h4 class="podcast__title"><%= podcast.name %></h4>
 							<audio controls>
-								<source src="<%= podcast.stream_url %>" controlsList="nodownload"> 
+								<source src="<%= podcast.stream_url %>" controlsList="nodownload">
 							</audio>
 						</div>
 					<% end %>
 				<% end %>
-				<% if station.podcasts.count > 0 %>				
+				<% if station.podcasts.count > 0 %>
 					<h4 class="small-label">Podcasts más recientes</h4>
 					<% station.podcasts.last(4)[1..4].each do |podcast| %>
 						<div class="podcast">
 							<h4 class="podcast__title"><%= podcast.name %></h4>
 							<audio controls>
-								<source src="<%= podcast.stream_url %>" controlsList="nodownload"> 
+								<source src="<%= podcast.stream_url %>" controlsList="nodownload">
 							</audio>
 						</div>
 					<% end %>
 				<% end %>
 			</div>
 			<% if station.article_relationships.count > 0 %>
-				
+
 				<div class="radio-banner__tune-in">Lo más reciente</div>
 
 				<div class="station__articles">
@@ -101,7 +108,7 @@
 					<% end %>
 
 					<!-- VÏNCULO PARA VER MAS -->
-					<% link_to "Ver más notas", station_articles_path(station.slug) %>		
+					<% link_to "Ver más notas", station_articles_path(station.slug) %>
 				</div>
 			<% end %>
 		</div>
