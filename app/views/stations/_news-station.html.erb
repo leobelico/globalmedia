@@ -69,11 +69,11 @@
 						<p><strong><%= timetables.first.name %></strong>
 						   <br> <br><%= timetables.first.description %></p>
 					<% end %>
-
 				</div>
-
 			</div>
+
 			<div class="podcasts">
+
 				<% if station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).count > 0 %>
 					<h4 class="small-label">Podcasts del día</h4>
 					<% station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).each do |podcast| %>
@@ -85,17 +85,20 @@
 						</div>
 					<% end %>
 				<% end %>
+
 				<% if station.podcasts.count > 0 %>
 					<h4 class="small-label">Podcasts más recientes</h4>
-					<% station.podcasts.last(4)[1..4].each do |podcast| %>
+					<!--< % station.podcasts.last(4)[1..4].each do |podcast| %>-->
+					<% station.podcasts.each do |podcast| %>
 						<div class="podcast">
 							<h4 class="podcast__title"><%= podcast.name %></h4>
-							<audio controls>
-								<source src="<%= podcast.stream_url %>" controlsList="nodownload">
+							<audio controls controlsList="nodownload">
+								<source src="<%= podcast.stream_url %>">
 							</audio>
 						</div>
 					<% end %>
 				<% end %>
+
 			</div>
 			<% if station.article_relationships.count > 0 %>
 
