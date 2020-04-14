@@ -89,14 +89,16 @@
 				<% if station.podcasts.count > 0 %>
 					<h4 class="small-label">Podcasts más recientes</h4>
 					<!--< % station.podcasts.last(4)[1..4].each do |podcast| %>-->
-					<% station.podcasts.each do |podcast| %>
-						<div class="podcast">
-							<h4 class="podcast__title"><%= podcast.name %></h4>
-							<audio controls>
-								<source src="<%= podcast.stream_url %>">
-							</audio>
-						</div>
-					<% end %>
+					<div style="overflow: auto; height: 200px;">
+						<% station.podcasts.each do |podcast| %>
+							<div class="podcast">
+								<h4 class="podcast__title"><%= podcast.name %></h4>
+								<audio controls>
+									<source src="<%= podcast.stream_url %>">
+								</audio>
+							</div>
+						<% end %>
+					</div>
 				<% end %>
 
 			</div>
