@@ -90,7 +90,9 @@
 					<h4 class="small-label">Podcasts más recientes</h4>
 					<!--< % station.podcasts.last(4)[1..4].each do |podcast| %>-->
 					<div style="overflow: auto; height: 200px;">
-						<% station.podcasts.each do |podcast| %>
+
+						<!-- < % station.podcasts.each do |podcast| %> -->
+						<% for podcast in (station.podcasts.last).downto(station.podcasts.first) do %>
 							<div class="podcast">
 								<h4 class="podcast__title"><%= podcast.name %></h4>
 								<audio controls>
@@ -98,6 +100,7 @@
 								</audio>
 							</div>
 						<% end %>
+
 					</div>
 				<% end %>
 
