@@ -88,17 +88,38 @@
 
 				<% if station.podcasts.count > 0 %>
 					<h4 class="small-label">Podcasts más recientes</h4>
-					<!--< % station.podcasts.last(4)[1..4].each do |podcast| %>-->
-					<div style="overflow: auto; height: 200px;">
-						<% station.podcasts.each do |podcast| %>
-							<div class="podcast">
-								<h4 class="podcast__title"><%= podcast.name %></h4>
-								<audio controls>
-									<source src="<%= podcast.stream_url %>">
-								</audio>
-							</div>
-						<% end %>
+					<div id="podcastContainer" style="overflow: auto; height: 200px;">
 					</div>
+					<script>
+						var arrPodcast = [];
+					</script>
+
+					<!--< % station.podcasts.last(station.podcasts.count)[1..4].each do |podcast| %>-->
+					<% station.podcasts.each do |podcast| %>
+						<script>
+							var podcast = {name:"<%= podcast.name %>", url:"<%= podcast.stream_url %>"};
+							arrPodcast.push(podcast);
+						</script>
+						<!-- <div class="podcast">
+							<h4 class="podcast__title">< %= podcast.name %></h4>
+							<audio controls>
+								<source src="< %= podcast.stream_url %>">
+							</audio>
+						</div> -->
+					<% end %>
+
+					<script>
+						var pLen = arrPodcast.length;
+						var cad = "";
+						for (var i = pLen-1; i >= 0; i--)
+						{
+							//text += "<li>" + fruits[i] + "</li>";
+							//alert(arrPodcast[i].name);
+							cad+= "<div class='podcast'><h4 class='podcast__title'>"+arrPodcast[i].name+
+									  "</h4><audio controls><source src='"+arrPodcast[i].url+"'></audio></div>";
+						}
+						document.getElementById("podcastContainer").innerHTML = cad;
+					</script>
 				<% end %>
 
 			</div>
