@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-12 card" *ngIf="formGroupUpsert" (submit)="onSubmit()">
+    <form [formGroup]="formGroupUpsert">
+      <div class="row">
+        <div class="col-12">
+          <h3>Banner publicitario</h3>
+        </div>
+        <div class="mt-4 col-12 col-md-6">
+          <div class="row">
+            <div class="form-group col-12">
+              <label for="inputName">Nombre</label>
+              <input formControlName="name" type="text" class="form-control form-control-sm" id="inputName" placeholder="Nombre">
+            </div>
+            <div class="form-group col-12">
+              <div class="custom-control custom-checkbox">
+                <input formControlName="isActive" type="checkbox" class="custom-control-input" id="checkboxIsActive">
+                <label class="custom-control-label" for="checkboxIsActive">Activo</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 form-group col-12 col-md-6">
+          <label for="inputDescription">Descripción</label>
+          <textarea formControlName="description"  class="form-control" id="inputDescription" rows="3"></textarea>
+        </div>
+        <div class="mt-4 col-12 col-md-6 form-group">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="radioTypeInterstitial" formControlName="type" value="interstitial" class="custom-control-input">
+            <label class="custom-control-label" for="radioTypeInterstitial">Interstitial</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="radioTypePusDown" formControlName="type" value="push_down" class="custom-control-input">
+            <label class="custom-control-label" for="radioTypePusDown">Push Down</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="radioTypeTopBoard" formControlName="type" value="top_board" class="custom-control-input">
+            <label class="custom-control-label" for="radioTypeTopBoard">Topboard</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="radioTypeLayer" formControlName="type" value="layer" class="custom-control-input">
+            <label class="custom-control-label" for="radioTypeLayer">Layer</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="radioPushDownMobile" formControlName="type" value="push_down_mobile" class="custom-control-input">
+            <label class="custom-control-label" for="radioPushDownMobile">Push Down Mobile</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="radioBannerMobile" formControlName="type" value="banner_mobile" class="custom-control-input">
+            <label class="custom-control-label" for="radioBannerMobile">Banner Mobile</label>
+          </div>
+        </div>
+        <div class="mt-4 col-12 col-md-6 d-flex justify-content-center">
+          <img class="max-height-image-type" *ngIf="formGroupUpsert.get('type').value === 'interstitial'" src="https://verticeads.com/content/webdeveloper/images/ico_interstitial.png?v=1589295029" alt="Example">
+          <img class="max-height-image-type" *ngIf="formGroupUpsert.get('type').value === 'push_down'" src="https://verticeads.com/content/webdeveloper/images/ico_pushdown.png?v=1589295029" alt="Example">
+          <img class="max-height-image-type" *ngIf="formGroupUpsert.get('type').value === 'top_board'" src="https://verticeads.com/content/webdeveloper/images/ico_topboard.png?v=1589295029" alt="Example">
+          <img class="max-height-image-type" *ngIf="formGroupUpsert.get('type').value === 'layer'" src="https://verticeads.com/content/webdeveloper/images/ico_layer.png?v=1589295029" alt="Example">
+          <img class="max-height-image-type" *ngIf="formGroupUpsert.get('type').value === 'push_down_mobile'" src="https://verticeads.com/content/webdeveloper/images/mobile2.png?v=1589295029" alt="Example">
+          <img class="max-height-image-type" *ngIf="formGroupUpsert.get('type').value === 'banner_mobile'" src="https://verticeads.com/content/webdeveloper/images/mobile1.png?v=1589295029" alt="Example">
+        </div>
+        <div class="mt-4 col-12">
+          <div class="row">
+            <div class="col-12 col-md-6 d-flex flex-column">
+              <label>Mostrar desde</label>
+              <div>
+                <ngb-datepicker formControlName="showAt"></ngb-datepicker>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 d-flex flex-column">
+              <label>Mostrar hasta</label>
+              <div>
+                <ngb-datepicker formControlName="expiryAt" ></ngb-datepicker>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 col-12">
+          <label>Contenido</label>
+          <quill-editor format="json" formControlName="content" [style]="{height: '500px'}" ></quill-editor>
+        </div>
+        <div class="col-12 d-flex justify-content-end" style="margin-top: 150px;">
+          <button type="submit" class="btn btn-sm btn-primary my-2">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
