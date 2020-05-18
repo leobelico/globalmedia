@@ -136,7 +136,7 @@ Rails.application.routes.draw do
       post :user_graph, on: :collection
     end
     resources :banners
-    resources :relationships, param: :slug 
+    resources :relationships, param: :slug
     resources :hit_objectives
     resources :controls do 
       get :done, on: :collection
@@ -188,6 +188,12 @@ Rails.application.routes.draw do
     resources :authors
     
     resources :sports
+
+    #ROUTES FROM ANGULAR
+    get "new-banner", to: "new_banners#index"
+    get "new-banner/create", to: "new_banners#index"
+    get "new-banner/edit/:id", to: "new_banners#index"
+
   end
   # get "panel/keywords/edit_multiple", to: "panel/keywords#edit_multiple"
   # get "panel/keywords/update_multiple", to: "panel/keywords#update_multiple"
@@ -245,6 +251,16 @@ Rails.application.routes.draw do
       post "related_by_hashtags", to: "articles#related_by_hashtags"
       get "search_hashtag", to: "articles#search_hashtag"
       post "search_hashtag", to: "articles#search_hashtag"
+
+      #START NEW BANNERS
+      get "new_banner", to: "new_banners#index"
+      get "new_banner/now", to: "new_banners#get_new_banners_now"
+      get "new_banner/show_now/:type", to: "new_banners#get_new_banner_show_now"
+      get "new_banner/:id", to: "new_banners#find_by_id"
+      post "new_banner", to: "new_banners#create"
+      patch "new_banner/:id", to: "new_banners#update"
+      delete "new_banner/:id", to: "new_banners#delete"
+      #END NEW BANNERS
       
     end
   end

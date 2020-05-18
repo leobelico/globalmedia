@@ -28,6 +28,7 @@
 	<% end %>
 	<% if current_user.banners_permission? %>
 		<%= link_to "Banners publicitarios", panel_banners_path, class: "admin-sidebar__link" %>
+    <a target="_blank" href="/panel/new-banner" class="admin-sidebar__link">Nuevos Banners publicitarios</a>
 	<% end %>
 	<% if current_user.hits_permission? %>
 		<%= link_to "Vistas a página", panel_hits_path, class: "admin-sidebar__link" %>

@@ -1,0 +1,2 @@
+class NewBanner < ApplicationRecord
+end
