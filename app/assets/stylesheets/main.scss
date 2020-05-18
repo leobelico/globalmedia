@@ -13,6 +13,7 @@
 @import "base/foundation";
 @import "libraries/quill.snow";
 @import "libraries/videojs.min";
+@import "bootstrap/bootstrap-grid.min";
 
 
 // Color import
@@ -238,14 +239,16 @@ body {
 @import "components/admin/admin-panel"; 
 @import "components/admin/tables"; 
 @import "components/admin/articles-panel"; 
-@import "components/admin/admin-floating-bar"; 
+@import "components/admin/admin-floating-bar";
+
+@import "components/banner-modal";
 
 
 // 
 // PAGES IMPORTS
 // 
 
-@import "pages/titlepage"; 
+@import "pages/titlepage";
 
 
 

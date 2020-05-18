@@ -106,4 +106,49 @@
 			</div>
 		</div>
 	</div>
+  <div class="modal-banner d-none">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-close">
+        <span class="close">&times;</span>
+      </div>
+      <div id="quillSHowSome">
+
+      </div>
+<!--      <a href="#">-->
+<!--        <img class="banner-image" src="assets/test_banner.jpg" alt="Banner">-->
+<!--      </a>-->
+    </div>
+
+  </div>
 </div>
+
+<script !src="">
+    $(window).ready(()=> {
+        $('.modal-close .close').click((e) => {
+            $('.modal-banner').removeClass('d-md-block');
+        });
+        showSome();
+    });
+    async function showSome() {
+        const resultt = await fetch('/api/v1/new_banner/show_now/interstitial');
+        const somexd = await resultt.json();
+        if (somexd) {
+            $('.modal-banner').addClass('d-md-block');
+        }
+        var container = document.getElementById("quillSHowSome")
+        display_quill_note(JSON.parse(somexd.content), container);
+    }
+    function display_quill_note(quill_note, container) {
+        var options = {
+            readOnly: true
+        }
+        Parchment = Quill.import('parchment');
+        Delta = Quill.import('delta');
+        editor = new Quill(container, options);
+
+        editor.setContents(quill_note);
+    }
+
+</script>
