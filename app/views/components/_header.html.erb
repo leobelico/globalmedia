@@ -140,9 +140,9 @@
         const somexd = await resultt.json();
         if (somexd) {
             $('.modal-banner').addClass('d-md-block');
+            var container = document.getElementById("quillSHowSome")
+            display_quill_note(JSON.parse(somexd.content), container);
         }
-        var container = document.getElementById("quillSHowSome")
-        display_quill_note(JSON.parse(somexd.content), container);
     }
     function display_quill_note(quill_note, container) {
         var options = {
