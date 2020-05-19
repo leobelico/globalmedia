@@ -238,7 +238,12 @@
 	
 	<script>
 		$(document).on('turbolinks:click', function(event) {
-			clear_media();
+			try {
+          clear_media();
+      }
+      catch (e) {
+          console.error(e);
+      }
 		});
 	</script>
 	<script async>
