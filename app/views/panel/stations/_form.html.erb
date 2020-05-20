@@ -4,9 +4,9 @@
 	<% end %>
 </form>
 <%= form_for [:panel, @station], multipart: true, html: { class: "station-form directUpload", data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }} do |f| %>
-	<% if @station.errors.any? %>	
+	<% if @station.errors.any? %>
 		<div class="card">
-			
+
 			<h5><%= pluralize(@station.errors.count, "error") %></h5>
 			<ul>
 				<% @station.errors.full_messages.each do |msg| %>
@@ -31,7 +31,7 @@
 			<%= f.text_field :description %>
 		</div>
 		<div class="multifield">
-			
+
 			<div class="field">
 				<label>URL a playlist 1:</label>
 				<%= f.text_field :playlist_1 %>
@@ -90,11 +90,11 @@
 				<%= f.text_field :twitter %>
 			</div>
 		</div>
-		<div class="field field--checkbox">	
+		<div class="field field--checkbox">
 			<label>Canal de video:</label>
 			<%= f.check_box	 :video %>
 		</div>
-		<div class="field field--checkbox">	
+		<div class="field field--checkbox">
 			<label>Noticiero:</label>
 			<%= f.check_box	 :news %>
 		</div>
@@ -109,27 +109,27 @@
 			<div class="field">
 				<% if @station.image %>
 					<%= image_tag @station.image_preview, class: "form-image-preview" %>
-				<% end %>	
+				<% end %>
 				<label>Imagen para Facebook:</label>
 				<%= f.file_field :image_preview %>
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div class="admin-form">
-		
+
 	<h3 class="section-title">Programas</h3>
-	
+
 	<div class= "field-builder">
 		<%= link_to_add_fields "Añadir Programa", f, :timetables, "", "Add a Program"%>
 	</div>
-	
+
 		<%= f.fields_for :timetables, class: "field-builder" do |builder| %>
 			<div class= "field-builder card">
-					
+
 				<div class="field">
-					
+
 					<label>Nombre del Programa</label>
 					<%= builder.text_field :name %>
 				</div>
@@ -140,62 +140,62 @@
 				<div class="field">
 					<label for="">Descripción:</label>
 					<%= builder.text_field :description %>
-				</div>				
+				</div>
 				<div class="multifield">
-					
+
 					<div class="timefield">
-						<label>Hora de Inicio:</label> 
+						<label>Hora de Inicio:</label>
 						<div class="field">
-							<%= builder.time_select :streaming_hour, default: {hour:"00", minute: "00"}, time_separator: "<span>:</span>" %> 
+							<%= builder.time_select :streaming_hour, default: {hour:"00", minute: "00"}, time_separator: "<span>:</span>" %>
 						</div>
 					</div>
 					<div class="timefield">
-						<label>Hora de Fin:</label> 
+						<label>Hora de Fin:</label>
 						<div class="field">
-							<%= builder.time_select :end_streaming_hour, default: {hour: "01", minute: "00"}, time_separator: "<span>:</span>" %> 
-							
+							<%= builder.time_select :end_streaming_hour, default: {hour: "01", minute: "00"}, time_separator: "<span>:</span>" %>
+
 						</div>
 					</div>
 				</div>
-				<div class="field">	
+				<div class="field">
 					<label>Días de la semana: </label>
 				</div>
 				<div class="field field--checkbox">
-					<%= builder.check_box :monday %> 
-					<label>Lunes</label> 
+					<%= builder.check_box :monday %>
+					<label>Lunes</label>
 				</div>
 				<div class="field field--checkbox">
-					<%= builder.check_box :tuesday %> 
-					<label>Martes</label> 
-					
+					<%= builder.check_box :tuesday %>
+					<label>Martes</label>
+
 				</div>
 				<div class="field field--checkbox">
-					<%= builder.check_box :wednesday %> 
-					<label>Miércoles</label> 
-					
+					<%= builder.check_box :wednesday %>
+					<label>Miércoles</label>
+
 				</div>
 				<div class="field field--checkbox">
-					
-					<%= builder.check_box :thursday %> 
-					<label>Jueves</label> 
+
+					<%= builder.check_box :thursday %>
+					<label>Jueves</label>
 				</div>
 				<div class="field field--checkbox">
-					<%= builder.check_box :friday %> 
-					<label>Viernes</label> 
-					
+					<%= builder.check_box :friday %>
+					<label>Viernes</label>
+
 				</div>
 				<div class="field field--checkbox">
-					<%= builder.check_box :saturday %> 
-					<label>Sábado</label> 
-					
+					<%= builder.check_box :saturday %>
+					<label>Sábado</label>
+
 				</div>
 				<div class="field field--checkbox">
-					<%= builder.check_box :sunday %> 
+					<%= builder.check_box :sunday %>
 					<label>Domingo</label>
-					
+
 				</div>
 				<div class="field">
-				
+
 					<label>Imagen para banner programático:</label>
 					<%= builder.file_field :image %>
 				</div>
@@ -203,16 +203,16 @@
 					<label>Imagen del locutor o anfitrión:</label>
 					<%= builder.file_field :broadcaster_image %>
 				</div>
-				
+
 				<%= builder.hidden_field :_destroy %>
 				<%= link_to_remove_fields 'Eliminar programa', builder, "fields__remove delete" %>
 
-				
+
 			</div>
 		<% end %>
-		
+
 	</div>
-	
+
 	<% f.submit "Guardar" %>
 <% end %>
 <script>
@@ -227,11 +227,11 @@
 		    var reader = new FileReader();
 		    $(reader).on("load", function(event){
 
-			    	$input.parents(".field").find("img").attr('src',  event.target.result); 
-			    	$input.parents(".field").find("img").css("display", "block"); 
+			    	$input.parents(".field").find("img").attr('src',  event.target.result);
+			    	$input.parents(".field").find("img").css("display", "block");
 		    });
 			reader.readAsDataURL(this.files[0]);
 		});
-	});  
+	});
 </script>
 <%= render "components/s3_form_js" %>

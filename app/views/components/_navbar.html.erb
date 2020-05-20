@@ -3,32 +3,31 @@
 		<%= image_tag "home.svg" %>
 	<% end %>
 	<div class="dropdown">
-		<%= link_to "Radio y TV", stations_path, class: "navbar__link" %>
+		<%= link_to "Radio en vivo", stations_path, class: "navbar__link" %>
 		<div class="dropdown__options dropdown__radio">
 			<div class="dropdown__row radio-row">
 				<div class="dropdown__col">
 					<p class="dropdown__section radio-title">Radio</p>
 					<div class="line"></div>
-						<%= link_to "https://www.globalmedia.mx/stations/Los40", target:"_blank" do %>
-							<%= image_tag "programs/los 40.jpg" %>
-						<% end %>
-						<%= link_to "https://www.globalmedia.mx/stations/VOX969", target:"_blank" do %>
-							<%= image_tag "programs/vox.png" %>
-						<% end %>
-						<%= link_to "https://www.globalmedia.mx/stations/WFM", target:"_blank" do %>
-							<%= image_tag "programs/wfm.png" %>
-						<% end %>
-						<%= link_to "https://www.globalmedia.mx/stations/KeBuena", target:"_blank" do %>
-							<%= image_tag "programs/ke buena.jpg" %>
-						<% end %>
-						<%= link_to "https://www.globalmedia.mx/stations/ImagenRadio", target:"_blank" do %>
-							<%= image_tag "programs/imagen.png" %>
-						<% end %>
-						<%= link_to "https://www.globalmedia.mx/stations/Trión", target:"_blank" do %>
-							<%= image_tag "programs/trion.png" %>
-						<% end %>
+					<%= link_to "https://www.globalmedia.mx/stations/Los40", target:"_blank" do %>
+						<%= image_tag "programs/los 40.jpg" %>
+					<% end %>
+					<%= link_to "https://www.globalmedia.mx/stations/VOX969", target:"_blank" do %>
+						<%= image_tag "programs/vox.png" %>
+					<% end %>
+					<%= link_to "https://www.globalmedia.mx/stations/WFM", target:"_blank" do %>
+						<%= image_tag "programs/wfm.png" %>
+					<% end %>
+					<%= link_to "https://www.globalmedia.mx/stations/KeBuena", target:"_blank" do %>
+						<%= image_tag "programs/ke buena.jpg" %>
+					<% end %>
+					<%= link_to "https://www.globalmedia.mx/stations/ImagenRadio", target:"_blank" do %>
+						<%= image_tag "programs/imagen.png" %>
+					<% end %>
+					<%= link_to "https://www.globalmedia.mx/stations/Trión", target:"_blank" do %>
+						<%= image_tag "programs/trion.png" %>
+					<% end %>
 				</div>
-
 			</div>
 			<!--<div class="dropdown__row radio-row">
 				<div class="dropdown__col">
@@ -39,44 +38,72 @@
 						<% end %>
 				</div>
 			</div>-->
-			<div class="dropdown__row radio-row">
+			<!--<div class="dropdown__row radio-row">
 				<div class="dropdown__col">
 					<p class="dropdown__section radio-title">Entretenimiento</p>
 					<div class="line"></div>
-						<%= link_to "https://www.globalmedia.mx/stations/CUENTOCONTIGO" do %>
-							<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/LOGO+CUENTA+CONMIGO_Mesa+de+trabajo+1.png" %>
-						<% end %>
+					<%= link_to "https://www.globalmedia.mx/stations/CUENTOCONTIGO" do %>
+						<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/LOGO+CUENTA+CONMIGO_Mesa+de+trabajo+1.png" %>
+					<% end %>
 				</div>
 			</div>
 			<div class="dropdown__row radio-row">
 				<div class="dropdown__col">
 					<p class="dropdown__section radio-title">Noticieros</p>
 					<div class="line"></div>
-						<!--<%= link_to "https://www.globalmedia.mx/stations/NOTICIASDELANOCHECONHECTORTREJO" do %>
-							<%= image_tag "programs/BANNER-TRION-4.jpg" %>
-						<% end %>-->
-						<%= link_to "https://www.globalmedia.mx/stations/VOXINFORMATIVA" do %>
-							<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/voxinformativa.jpg" %>
-						<% end %>
-						<%= link_to "https://www.globalmedia.mx/stations/IMAGENINFORMATIVACONEVAMARÍACAMACHO" do %>
-							<%= image_tag "programs/BANNER-IMAGEN-2.png" %>
-						<% end %>
-						<%= link_to "https://www.globalmedia.mx/stations/FrecuenciaConTuSalud" do %>
-							<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/frecuencia.png" %>
-						<% end %>
+					<%= link_to "https://www.globalmedia.mx/stations/NOTICIASDELANOCHECONHECTORTREJO" do %>
+						<%= image_tag "programs/BANNER-TRION-4.jpg" %>
+					<% end %>
+					<%= link_to "https://www.globalmedia.mx/stations/VOXINFORMATIVA" do %>
+						<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/voxinformativa.jpg" %>
+					<% end %>
+					<%= link_to "https://www.globalmedia.mx/stations/IMAGENINFORMATIVACONEVAMARÍACAMACHO" do %>
+						<%= image_tag "programs/BANNER-IMAGEN-2.png" %>
+					<% end %>
+					<%= link_to "https://www.globalmedia.mx/stations/FrecuenciaConTuSalud" do %>
+						<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/frecuencia.png" %>
+					<% end %>
 				</div>
+			</div>-->
+		</div>
+	</div>
 
+	<div class="dropdown">
+		<%= link_to "Podcast", stations_path, class: "navbar__link" %>
+		<div class="dropdown__options dropdown__radio">
+			<div class="dropdown__row radio-row">
+				<div class="dropdown__col">
+					<p class="dropdown__section radio-title">Entretenimiento</p>
+					<div class="line"></div>
+					<%= link_to "https://www.globalmedia.mx/stations/CUENTOCONTIGO" do %>
+						<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/LOGO+CUENTA+CONMIGO_Mesa+de+trabajo+1.png" %>
+					<% end %>
+				</div>
+			</div>
+			<div class="dropdown__row radio-row">
+				<div class="dropdown__col">
+					<p class="dropdown__section radio-title">Noticieros</p>
+					<div class="line"></div>
+					<!--<%= link_to "https://www.globalmedia.mx/stations/NOTICIASDELANOCHECONHECTORTREJO" do %>
+						<%= image_tag "programs/BANNER-TRION-4.jpg" %>
+					<% end %>-->
+					<%= link_to "https://www.globalmedia.mx/stations/VOXINFORMATIVA" do %>
+						<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/voxinformativa.jpg" %>
+					<% end %>
+					<%= link_to "https://www.globalmedia.mx/stations/FrecuenciaConTuSalud" do %>
+						<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/frecuencia.png" %>
+					<% end %>
+				</div>
 			</div>
 		</div>
 	</div>
-		<%= link_to "San Luis",  "https://www.globalmedia.mx/sections/San-Luis", class: "navbar__link" %>
-		<%= link_to "México", "https://www.globalmedia.mx/sections/MÉXICO", class: "navbar__link" %>
-		<%= link_to "Mundo", "https://www.globalmedia.mx/sections/MUNDO", class: "navbar__link" %>
-		<%= link_to "Negocios", "https://www.globalmedia.mx/sections/Negocios", class: "navbar__link" %>
-		<%= link_to "Táctica", tactica_path, class: "navbar__link" %>
-		<%= link_to "Tecnología", "https://www.globalmedia.mx/sections/TECNOLOGIA", class: "navbar__link" %>
 
-		<%= link_to "Colaboradores", collaborators_path, class: "navbar__link" %>
-
-		<%= link_to "Entretenimiento", "https://www.globalmedia.mx/sections/ENTRETENIMIENTO", class: "navbar__link" %>
-	</div>
+	<%= link_to "San Luis",  "https://www.globalmedia.mx/sections/San-Luis", class: "navbar__link" %>
+	<%= link_to "México", "https://www.globalmedia.mx/sections/MÉXICO", class: "navbar__link" %>
+	<%= link_to "Mundo", "https://www.globalmedia.mx/sections/MUNDO", class: "navbar__link" %>
+	<%= link_to "Negocios", "https://www.globalmedia.mx/sections/Negocios", class: "navbar__link" %>
+	<%= link_to "Táctica", tactica_path, class: "navbar__link" %>
+	<%= link_to "Tecnología", "https://www.globalmedia.mx/sections/TECNOLOGIA", class: "navbar__link" %>
+	<%= link_to "Colaboradores", collaborators_path, class: "navbar__link" %>
+	<%= link_to "Entretenimiento", "https://www.globalmedia.mx/sections/ENTRETENIMIENTO", class: "navbar__link" %>
+</div>
