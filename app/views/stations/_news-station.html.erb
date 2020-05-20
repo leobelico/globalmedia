@@ -90,18 +90,16 @@
 
 				<% if station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).count > 0 %>
 					<h4 class="small-label">Podcasts del día</h4>
+					<% if @station.name == "Vox Informativa" %>
+						<div>
+							Platicamos con el Director Felipe Salazar de Alten Energías Renovables de México; “la cancelación en inversiones renovables en el sector eléctrico está generando una imagen negativa del país en la inversión extranjera.”
+							<br><br>
+							Platicamos con José Mario de la Garza Marroquín, Director de Congreso Calificado; “a diferencia de otras legislaturas del país, los diputados potosinos han relajado su trabajo aún más por la contingencia sanitaria.
+						</div>
+					<% end %>
 					<% station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).each do |podcast| %>
 						<div class="podcast">
 							<h4 class="podcast__title"><%= podcast.name %></h4>
-
-							<% if @station.name == "Vox Informativa" %>
-								<div>
-									Platicamos con el Director Felipe Salazar de Alten Energías Renovables de México; “la cancelación en inversiones renovables en el sector eléctrico está generando una imagen negativa del país en la inversión extranjera.”
-									<br><br>
-									Platicamos con José Mario de la Garza Marroquín, Director de Congreso Calificado; “a diferencia de otras legislaturas del país, los diputados potosinos han relajado su trabajo aún más por la contingencia sanitaria.
-								</div>
-							<% end %>
-
 							<audio controls>
 								<source src="<%= podcast.stream_url %>">
 							</audio>
