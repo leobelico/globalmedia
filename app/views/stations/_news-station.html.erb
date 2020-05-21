@@ -90,11 +90,12 @@
 
 				<% if station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).count > 0 %>
 					<h4 class="small-label">Podcasts del día</h4>
-					<% if @station.name == "Vox Informativa" %>
-					<% end %>
 					<% station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).each do |podcast| %>
 						<div class="podcast">
 							<h4 class="podcast__title"><%= podcast.name %></h4>
+							<div>
+								<%= podcast.description %>
+							</div>
 							<audio controls>
 								<source src="<%= podcast.stream_url %>">
 							</audio>
@@ -109,6 +110,9 @@
 						<% station.podcasts.order(created_at: :desc).each do |podcast| %>
 							<div class="podcast">
 								<h4 class="podcast__title"><%= podcast.name %></h4>
+								<div>
+									<%= podcast.description %>
+								</div>
 								<audio controls>
 									<source src="<%= podcast.stream_url %>">
 								</audio>

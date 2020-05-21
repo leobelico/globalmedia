@@ -5,7 +5,7 @@ class Panel::PodcastsController < ApplicationController
 	before_action :set_podcast, only: [:show, :edit, :update, :destroy]
 
 	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
-	
+
 
 	def new
 		@podcast = @station.podcasts.build
@@ -38,10 +38,10 @@ class Panel::PodcastsController < ApplicationController
 		redirect_to panel_station_path(@station)
 	end
 
-	
+
 	private
 		def podcast_params
-			params.require(:podcast).permit(:name, :stream_url)
+			params.require(:podcast).permit(:name, :stream_url, :description)
 		end
 		def set_s3_direct_post
 			one_year_in_seconds = 365 * 24 * 60 * 60
@@ -50,7 +50,7 @@ class Panel::PodcastsController < ApplicationController
   		end
 		def set_station
 			@station = Station.find_by_slug(params[:station_slug])
-			
+
 			rescue ActiveRecord::RecordNotFound
 				flash[:alert] = "La página que estabas buscando no existe."
 				redirect_to root_ur
@@ -61,5 +61,5 @@ class Panel::PodcastsController < ApplicationController
 			@podcast = @station.podcasts.find(params[:id])
 
 		end
-	
+
 end

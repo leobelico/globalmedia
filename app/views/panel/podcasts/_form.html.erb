@@ -14,11 +14,15 @@
 	<% end %>
 
 	<div class="field field--string">
-		<label>Nombre del Podcast</label>
+		<label>Nombre del Podcast: </label>
 		<%= f.text_field :name %>
 	</div>
 	<div class="field field--string">
-		<label>Archivo del stream</label>
+		<label>Descripcion: </label>
+		<%= f.text_area :name %>
+	</div>
+	<div class="field field--string">
+		<label>Archivo del stream: </label>
 		<!--< %= f.file_field :stream_url %>-->
 		<%= f.text_field :stream_url %>
 	</div>
