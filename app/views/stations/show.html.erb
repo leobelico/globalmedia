@@ -68,7 +68,7 @@
 				<% else %>
 					<!-- Insertar en body -->
 					<div class="radio-banner__tune-in"><%= @station.name %></div>
-					<% if @station.name == "Frecuencia Con Tu Salud" or @station.name == "CUENTO CONTIGO" %>
+					<% if @station.name == "Frecuencia Con Tu Salud" or @station.name == "CUENTO CONTIGO" or @station.name == "Vox Informativa" %>
 
 						<% if @station.name == "Frecuencia Con Tu Salud" %>
 							<div class="enc-links">
@@ -79,6 +79,12 @@
 						<% if @station.name == "CUENTO CONTIGO" %>
 							<div class="enc-links">
 								<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/Cuento+Contigo_Mesa+de+trabajo+1.jpg", class: "img-desktop" %>
+							</div>
+						<% end %>
+
+						<% if @station.name == "Vox Informativa" %>
+							<div class="enc-links">
+								<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/PODCAST-H%C3%89CTOR-02.jpg", class: "img-desktop" %>
 							</div>
 						<% end %>
 

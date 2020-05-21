@@ -13,8 +13,9 @@
 		</div>
 
 		<div class="mobile-menu__column">
+
 			<div class="mobile-menu__section">
-				<h4 class="mobile-menu__section-title">Radio:</h4>
+				<h4 class="mobile-menu__section-title">Radio en vivo:</h4>
 				<% if action_name == "show" and controller_name == "stations" %>
 					<% cache get_radio_stations do %>
 						<% get_radio_stations.each do |station| %>
@@ -29,6 +30,7 @@
 					<% end %>
 				<% end %>
 			</div>
+
 			<div class="mobile-menu__section">
 				<h4 class="mobile-menu__section-title">Entretenimiento:</h4>
 				<% if action_name == "show" and controller_name == "stations" %>
@@ -45,6 +47,7 @@
 					<% end %>
 				<% end %>
 			</div>
+
 			<div class="mobile-menu__section">
 				<h4 class="mobile-menu__section-title">Noticieros:</h4>
 				<% if action_name == "show" and controller_name == "stations" %>
@@ -61,6 +64,7 @@
 					<% end %>
 				<% end %>
 			</div>
+
 		</div>
 	</div>
 </div>
