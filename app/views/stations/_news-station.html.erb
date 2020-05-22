@@ -90,7 +90,7 @@
 
 				<% if station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).count > 0 %>
 					<h4 class="small-label">Podcasts del día</h4>
-					<% station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).each do |podcast| %>
+					<% station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).order(created_at: :asc).each do |podcast| %>
 						<div class="podcast">
 							<h4 class="podcast__title"><%= podcast.name %></h4>
 							<div>
