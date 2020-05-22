@@ -33,7 +33,7 @@
 
 			<div class="mobile-menu__section">
 				<h4 class="mobile-menu__section-title">Entretenimiento:</h4>
-				<% if action_name == "show" and controller_name == "stations" %>
+				<!--<% if action_name == "show" and controller_name == "stations" %>
 					<% cache get_video_stations do %>
 						<% get_video_stations.each do |station| %>
 							<%= link_to station.name, station, class: "mobile-menu__link", target: "_blank"  %>
@@ -45,12 +45,14 @@
 							<%= link_to station.name, station, class: "mobile-menu__link", target: "_blank" %>
 						<% end %>
 					<% end %>
-				<% end %>
+				<% end %>-->
+
+				<%= link_to "Cuento Contigo", "https://www.globalmedia.mx/stations/CUENTOCONTIGO", class: "mobile-menu__link", target: "_blank" %>
 			</div>
 
 			<div class="mobile-menu__section">
 				<h4 class="mobile-menu__section-title">Noticieros:</h4>
-				<% if action_name == "show" and controller_name == "stations" %>
+				<!--<% if action_name == "show" and controller_name == "stations" %>
 					<% cache get_video_stations do %>
 						<% get_news_stations.each do |station| %>
 							<%= link_to station.name, station, class: "mobile-menu__link", target: "_blank"  %>
@@ -62,7 +64,9 @@
 							<%= link_to station.name, station, class: "mobile-menu__link", target: "_blank" %>
 						<% end %>
 					<% end %>
-				<% end %>
+				<% end %>-->
+				<%= link_to "Vox Informativa", "https://www.globalmedia.mx/stations/VOXINFORMATIVA", class: "mobile-menu__link", target: "_blank" %>
+				<%= link_to "Frecuencia Con Tu Salud", "https://www.globalmedia.mx/stations/FrecuenciaConTuSalud", class: "mobile-menu__link", target: "_blank" %>
 			</div>
 
 		</div>
