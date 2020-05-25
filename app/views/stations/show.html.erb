@@ -35,38 +35,8 @@
 				</div>
 
 				<% if !@station.video? and !@station.news? %>
-					<!--<audio controls autoplay id="audio" controlsList="nodownload">
-						<source src="<%= @station.stream_url %>" type="audio/mpeg">
-					</audio>-->
-
 					<audio id="myAudio" preload="metadata" src="<%= @station.stream_url %>" autoplay onended=this.play(); controls=controls autobuffer>
 					</audio>
-
-					<script>
-						/*var aud = document.getElementById("myAudio");
-						aud.addEventListener("ended", function() {
-							myAudio.play();
-						});
-
-						var myAudio = document.getElementById("myAudio");
-						myAudio.addEventListener('pause', function(){
-							myAudio.play();
-						});*/
-					</script>
-
-					<!-- <div class="flowplayer" data-rtmp="<%= @rtmps_src %>" style="height: 70px;">
-					<video controls autoplay >
-					    <source type="application/x-mpegurl" src="<%= @httpss_src %>">
-					    <source type="video/flash" src="<%= @rtmps_src %>">
-					</video>
-					</div> -->
-
-	 				<!-- <video id="video" class="video-js" controls  preload="auto" width="640" height="264">
-
-							<source src="<%= @httpss_src %>" type="application/x-mpegURL">
-
-							<source src="<%= @rtmps_src %>" type="video/flash">
-					  </video> -->
 				<% else %>
 					<!-- Insertar en body -->
 					<div class="radio-banner__tune-in"><%= @station.name %></div>
