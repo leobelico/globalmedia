@@ -3,12 +3,12 @@
 	<div class="header">
 		<div class="header__container container--1">
 				<% cache("header", expires_in: 1.year)do %>
-				
+
 					<%= link_to root_path, class: "header__logo" do %>
 						<%= image_tag "GLOBAL_DEGRADADOBLANCO.png", class: "" %>
 					<% end %>
-					<%= link_to stations_path, class: "stations-link", target: "_blank" do %>	
-						<%= image_tag "radio-y-tv.svg" %>	
+					<%= link_to stations_path, class: "stations-link", target: "_blank" do %>
+						<%= image_tag "radio-y-tv.svg" %>
 					<% end %>
 					<div class="menu-button">
 						<p>MENU</p>
@@ -22,7 +22,7 @@
 		</div>
 		<div class="header__container container--2">
 			<div id="time" class="time" data-turbolinks-permanent>
-				
+
 			</div>
 			<script>
 				function startTime() {
@@ -57,7 +57,7 @@
 				    if (mn == 9) { month = "Octubre" };
 				    if (mn == 10) { month = "Noviembre" };
 				    if (mn == 11) { month = "Diciembre" };
-				    time_string = day + " " + dmn + " de " + month + ", " + yn + "<br>" + h + ":" + m + " horas "; 
+				    time_string = day + " " + dmn + " de " + month + ", " + yn + "<br>" + h + ":" + m + " horas ";
 
 				    document.getElementById('time').innerHTML = time_string;
 				    var t = setTimeout(startTime, 500);
@@ -66,13 +66,13 @@
 				    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
 				    return i;
 				}
-				startTime(); 
+				startTime();
 			</script>
-			<div class="weather">
+			<!--<div class="weather">
 				<%= image_tag "temperature.svg" %>
 				<div class="weather__data">
-					<p id="wl" class="weather__location" data-turbolinks-permanent> 
-						
+					<p id="wl" class="weather__location" data-turbolinks-permanent>
+
 					</p>
 					<p>
 						<span id="wd" class="weather__degrees" data-turbolinks-permanent>--.--</span>
@@ -94,8 +94,8 @@
 					<span class="exchange-rate__name">EUR</span>
 					<br>
 					<span id="eur" class="exchange-rate__rate" data-turbolinks-permanent>$--.--</span>
-				</p> 			
-			</div>
+				</p>
+			</div>-->
 			<div class="apps">
 				<%= link_to "https://play.google.com/store/apps/details?id=mx.globalmedia.njambre&hl=en" do %>
 					<%= image_tag "android.svg" %>
