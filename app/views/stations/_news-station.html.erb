@@ -81,7 +81,7 @@
 							<div>
 								<%= podcast.description %>
 							</div>
-							<audio controls onplaying="setPlayerStatus(this)" onpause="setPlayerStatus(this)" onwaiting="setPlayerStatus(this)" onended="setPlayerStatus(this)">
+							<audio controls onplaying="setPlayerStatus" onpause="setPlayerStatus" onwaiting="setPlayerStatus" onended="setPlayerStatus">
 								<source src="<%= podcast.stream_url %>">
 							</audio>
 						</div>
@@ -98,7 +98,7 @@
 								<div>
 									<%= podcast.description %>
 								</div>
-								<audio controls onplaying="setPlayerStatus(this)" onpause="setPlayerStatus(this)" onwaiting="setPlayerStatus(this)" onended="setPlayerStatus(this)">
+								<audio controls onplaying="setPlayerStatus" onpause="setPlayerStatus" onwaiting="setPlayerStatus" onended="setPlayerStatus">
 									<source src="<%= podcast.stream_url %>">
 								</audio>
 							</div>
@@ -128,7 +128,7 @@
 <script type="text/javascript" charset="utf-8">
   let currentaAudioIsPlaying = false;
     function setPlayerStatus(evt){
-        console.log(evt);
+        console.log(evt)
         switch (evt.type) {
             case 'playing':
                 currentaAudioIsPlaying = true;
