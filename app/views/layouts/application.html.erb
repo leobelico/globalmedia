@@ -38,7 +38,12 @@
 	  function gtag(){dataLayer.push(arguments)};
 	  gtag('js', new Date());
 
-	  gtag('config', 'UA-106606454-1');
+	  gtag('config', 'UA-106606454-1', {
+        'custom_map': {
+            'metric1': 'reproduction_time',
+            'metric2': 'reproduction_started',
+        }
+    });
 	</script>
 	<!-- Start Alexa Certify Javascript -->
 	<script type="text/javascript">
