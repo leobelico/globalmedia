@@ -129,9 +129,11 @@
   let currentaAudioIsPlaying = false;
   let currentId = null;
   function isPlaying(id) {
-      gtag('event', 'load_reproduction_started', {'reproduction_started': 1});
-      currentaAudioIsPlaying = true;
-      currentId = id;
+      if (id !== currentId) {
+          gtag('event', 'load_reproduction_started', {'reproduction_started': 1});
+          currentaAudioIsPlaying = true;
+          currentId = id;
+      }
   }
   function isStopped(id) {
       if (currentId === id) {
