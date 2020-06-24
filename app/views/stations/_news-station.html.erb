@@ -148,6 +148,8 @@
         }
     }
     setInterval(()=> {
-        gtag('event', 'load_reproduction_time', {'reproduction_time': 5});
+        if (currentaAudioIsPlaying === true) {
+            gtag('event', 'load_reproduction_time', {'reproduction_time': 5});
+        }
     }, 5000);
 </script>
