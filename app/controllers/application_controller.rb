@@ -40,6 +40,7 @@ class ApplicationController < ActionController::Base
   helper_method :latest_news
   helper_method :most_visited
   helper_method :get_current_programs
+  helper_method :get_children_programs
   helper_method :check_hits_permission
   helper_method :check_create_permission
   helper_method :check_delete_permission
@@ -212,38 +213,71 @@ class ApplicationController < ActionController::Base
     # p "TIME"
     # p time.strftime( "%H:%M")
     if time.sunday? 
-      @timetables = Timetable.includes(:station).where("sunday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
+      @timetables = Timetable.includes(:station).where("sunday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
     end
    
     if time.monday? 
-      @timetables = Timetable.includes(:station).where("monday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
+      @timetables = Timetable.includes(:station).where("monday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
     end
    
     if time.tuesday? 
-      @timetables = Timetable.includes(:station).where("tuesday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
+      @timetables = Timetable.includes(:station).where("tuesday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
     end
    
     if time.wednesday? 
-      @timetables = Timetable.includes(:station).where("wednesday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
+      @timetables = Timetable.includes(:station).where("wednesday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
     end
    
     if time.thursday? 
-      @timetables = Timetable.includes(:station).where("thursday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
+      @timetables = Timetable.includes(:station).where("thursday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
     end
    
     if time.friday? 
       # p "FRIDAY"
-      @timetables = Timetable.includes(:station).where("friday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time }'").order("stations.orderer asc").first(7)
+      @timetables = Timetable.includes(:station).where("friday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time }'").order("stations.orderer asc").first(7)
       # p "TIMETABLESSSSSSSSSS"
       # p @timetables
       # p @timetables.count
     end
    
     if time.saturday? 
-      @timetables = Timetable.includes(:station).where("saturday = 'true' AND streaming_hour < '#{time}' AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
+      @timetables = Timetable.includes(:station).where("saturday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
     end
    # p "THE TIMETABLESSSSSSSSSS"
     @timetables
+  end
+
+  def get_children_programs(parent_id)
+    time = Time.now
+    result = []
+    if time.sunday?
+      result = Timetable.includes(:station).where("sunday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
+    end
+
+    if time.monday?
+      result = Timetable.includes(:station).where("monday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
+    end
+
+    if time.tuesday?
+      result = Timetable.includes(:station).where("tuesday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
+    end
+
+    if time.wednesday?
+      result = Timetable.includes(:station).where("wednesday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
+    end
+
+    if time.thursday?
+      result = Timetable.includes(:station).where("thursday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
+    end
+
+    if time.friday?
+      result = Timetable.includes(:station).where("friday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time }'").order("stations.orderer asc").first(7)
+    end
+
+    if time.saturday?
+      result = Timetable.includes(:station).where("saturday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
+    end
+    result
   end
 
   def al_momento(not_repeat_highlight, not_repeat_recommendation, not_repeat_outstading, last_number)

@@ -1,17 +1,48 @@
 <div class="radio-banner__tune-in no-border"><div class="led"></div>Sintoniza ahora</div>
 <div class="radio-banner">
 	<% get_current_programs.each do |program| %>
-		<% if action_name == "show" and controller_name == "stations" %>
-			<%= link_to ("/" + program.station.slug), class: "radio-program", target: "_top" do %>
-				<%= image_tag program.image %>
-			<% end %>
-		<% else %>
-			<%= link_to ("/" + program.station.slug), class: "radio-program", target: "_blank" do %>
-				<%= image_tag program.image %>
-			<% end %>
-		<% end %>
+		<div class="radio-program">
+      <div class="radio-program-parent">
+        <% if action_name == "show" and controller_name == "stations" %>
+          <%= link_to ("/" + program.station.slug), target: "_top" do %>
+            <%= image_tag program.image %>
+          <% end %>
+        <% else %>
+          <%= link_to ("/" + program.station.slug), target: "_blank" do %>
+            <%= image_tag program.image %>
+          <% end %>
+        <% end %>
+      </div>
+      <% get_children_programs(program.station.id).each do |program_child| %>
+        <div class="radio-program-children">
+          <%= link_to ("/" + program_child.station.slug), target: "_top" do %>
+            <%= image_tag program_child.image %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 	<% end %>
 </div>
+<style>
+  .radio-banner {
+    margin-bottom: 0.8rem;
+  }
+  .radio-program {
+    display: block;
+    flex-direction: column;
+  }
+  .radio-program .radio-program-parent a img {
+    width: 100%;
+  }
+  .radio-program .radio-program-children {
+    display: none;
+  }
+  .radio-program:hover .radio-program-children {
+    display: block;
+  }
+
+
+</style>
 <script>
 	function led_timeline(){
 		var led = $(".led");
