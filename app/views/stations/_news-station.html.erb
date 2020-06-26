@@ -136,7 +136,7 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(() => {
+    function started() {
         const allAudioElements = [];
         for (const id of todayPodcastIds) {
             const audioElement = document.getElementById(`today-podcast-${id}`);
@@ -149,7 +149,10 @@
         for (const audioElement of allAudioElements) {
             audioElement.start();
         }
-    });
+    }
+    setTimeout(()=> {
+        started();
+    }, 5000);
 
     class AudioElement {
         audioElement = null
