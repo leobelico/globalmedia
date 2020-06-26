@@ -226,6 +226,7 @@ Rails.application.routes.draw do
       resources :banners, only: [:index]
       get "get_banners", to: "banners#get_banners"
       resources :podcasts, only: [:index]
+      get "podcast/:id/increment_one_second", to: "podcasts#add_one_second_played"
       resources :stations, only: [:index, :show]
       resources :cameras, only: [:index, :show]
       resources :sports, only: [:index]

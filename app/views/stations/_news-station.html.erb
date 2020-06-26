@@ -1,149 +1,194 @@
 <div class="interface--row">
-	<div class="main-content">
+  <div class="main-content">
 
-		<div class="station station--news">
-			<div class="station__header">
-				<%= image_tag "glyph-blue.svg" %>
-				<div class="header__info">
-					<h4 class="station__name"><%= station.name %></h4>
-					<div class="station__line"></div>
-					<div class="broadcast__info">
-						<% if timetables.count > 1 %>
-							<p class="broadcaster__name"><%= timetables.first.broadcasters %></p>
-							<p class="broadcaster__schedule">De las <%= timetables.first.streaming_hour.strftime("%H:%M") %> a las <%= timetables.first.end_streaming_hour.strftime("%H:%M") %></p>
-						<% end %>
-					</div>
-				</div>
+    <div class="station station--news">
+      <div class="station__header">
+        <%= image_tag "glyph-blue.svg" %>
+        <div class="header__info">
+          <h4 class="station__name"><%= station.name %></h4>
+          <div class="station__line"></div>
+          <div class="broadcast__info">
+            <% if timetables.count > 1 %>
+              <p class="broadcaster__name"><%= timetables.first.broadcasters %></p>
+              <p class="broadcaster__schedule">De las <%= timetables.first.streaming_hour.strftime("%H:%M") %> a las <%= timetables.first.end_streaming_hour.strftime("%H:%M") %></p>
+            <% end %>
+          </div>
+        </div>
 
-			</div>
+      </div>
 
-			<% if !@station.video? and !@station.news? %>
-				<audio src="<%= @station.stream_url %>" controls autoplay>
-				</audio>
-				<!--<audio controls autoplay id="audio" controlsList="nodownload">
+      <% if !@station.video? and !@station.news? %>
+        <audio src="<%= @station.stream_url %>" controls autoplay>
+        </audio>
+        <!--<audio controls autoplay id="audio" controlsList="nodownload">
 					<source src="<%= @station.stream_url %>" type="audio/mpeg">
 				</audio>-->
-			<!-- <div class="flowplayer" data-rtmp="<%= @rtmps_src %>">
+        <!-- <div class="flowplayer" data-rtmp="<%= @rtmps_src %>">
 				<video controls autoplay>
 				    <source type="application/x-mpegurl" src="<%= @https_src %>">
 				    <source type="video/flash" src="<%= @rtmps_src %>">
 				</video>
 				</div> -->
-			<% else %>
-				<% if @station.news %>
-					<!-- Insertar en body -->
-						<div class="enc-links">
-							<%= image_tag @station.image, class: "img-desktop" %>
-						</div>
-				<% else %>
-					<!-- Insertar en Head -->
-					<!--<script type="text/javascript" src="https://player.wowza.com/player/ull/latest/wowzaplayer.min.js"></script>
-					<div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
-					<script type="text/javascript">
-						WowzaPlayer.create("playerElement",
-						    {
-							    "license":"PLAY1-4BVTz-Rmtp4-Dx49D-Y4Qjv-6PVnb",
-							    "sources":[{
-								    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
-							    },
-							    {
-								    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
-							    }],
-							    "title":"Vive Canal en vivo",
-							    "description":"",
-							    "autoPlay":true,
-							    "mute":false,
-							    "volume":75,
-							    "posterFrameURL":"https://globalmediarocks.s3-us-west-1.amazonaws.com/uploads/bea801c9-427b-4405-9d61-bf2957bf6b10/fb_atleti_perf.png"
-						    }
-						);
-					</script>-->
-				<% end %>
-			<% end %>
+      <% else %>
+        <% if @station.news %>
+          <!-- Insertar en body -->
+          <div class="enc-links">
+            <%= image_tag @station.image, class: "img-desktop" %>
+          </div>
+        <% else %>
+          <!-- Insertar en Head -->
+          <!--<script type="text/javascript" src="https://player.wowza.com/player/ull/latest/wowzaplayer.min.js"></script>
+          <div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
+          <script type="text/javascript">
+            WowzaPlayer.create("playerElement",
+                {
+                  "license":"PLAY1-4BVTz-Rmtp4-Dx49D-Y4Qjv-6PVnb",
+                  "sources":[{
+                    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
+                  },
+                  {
+                    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
+                  }],
+                  "title":"Vive Canal en vivo",
+                  "description":"",
+                  "autoPlay":true,
+                  "mute":false,
+                  "volume":75,
+                  "posterFrameURL":"https://globalmediarocks.s3-us-west-1.amazonaws.com/uploads/bea801c9-427b-4405-9d61-bf2957bf6b10/fb_atleti_perf.png"
+                }
+            );
+          </script>-->
+        <% end %>
+      <% end %>
 
-			<div class="stream">
-				<div class="stream__info">
-					<% if timetables.count > 1 %>
-						<%= image_tag timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
-						<p><strong><%= timetables.first.name %></strong>
-						   <br> <br><%= timetables.first.description %></p>
-					<% end %>
-				</div>
-			</div>
+      <div class="stream">
+        <div class="stream__info">
+          <% if timetables.count > 1 %>
+            <%= image_tag timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
+            <p><strong><%= timetables.first.name %></strong>
+              <br> <br><%= timetables.first.description %></p>
+          <% end %>
+        </div>
+      </div>
 
-			<div class="podcasts">
+      <script type="text/javascript" charset="utf-8">
+          const todayPodcastIds = [];
+          const allPodcastIds = [];
+      </script>
+      <div class="podcasts">
 
-				<% if station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).count > 0 %>
-					<h4 class="small-label">Podcasts del día</h4>
-					<% station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).order(created_at: :asc).each do |podcast| %>
-						<div class="podcast">
-							<h4 class="podcast__title"><%= podcast.name %></h4>
-							<div>
-								<%= podcast.description %>
-							</div>
-							<audio controls onplaying="isPlaying(<%= podcast.id %>)" onpause="isStopped(<%= podcast.id %>)" onwaiting="isStopped(<%= podcast.id %>)" onended="isStopped(<%= podcast.id %>)">
-								<source src="<%= podcast.stream_url %>">
-							</audio>
-						</div>
-					<% end %>
-				<% end %>
+        <% if station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).count > 0 %>
+          <h4 class="small-label">Podcasts del día</h4>
+          <% station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).order(created_at: :asc).each do |podcast| %>
+            <div class="podcast">
+              <h4 class="podcast__title"><%= podcast.name %></h4>
+              <div>
+                <%= podcast.description %>
+              </div>
+              <audio id="today-podcast-<%= podcast.id %>" controls>
+                <source src="<%= podcast.stream_url %>">
+              </audio>
+              <script type="text/javascript" charset="utf-8">
+                  todayPodcastIds.push(<%= podcast.id %>)
+              </script>
+            </div>
+          <% end %>
+        <% end %>
 
-				<% if station.podcasts.count > 0 %>
-					<h4 class="small-label">Podcasts más recientes</h4>
-					<!--< % station.podcasts.last(station.podcasts.count)[1..4].each do |podcast| %>-->
-					<div id="podcastContainer" style="overflow: auto; height: 200px;">
-						<% station.podcasts.order(created_at: :desc).each do |podcast| %>
-							<div class="podcast">
-								<h4 class="podcast__title"><%= podcast.name %></h4>
-								<div>
-									<%= podcast.description %>
-								</div>
-								<audio controls onplaying="isPlaying(<%= podcast.id %>)" onpause="isStopped(<%= podcast.id %>)" onwaiting="isStopped(<%= podcast.id %>)" onended="isStopped(<%= podcast.id %>)">
-									<source src="<%= podcast.stream_url %>">
-								</audio>
-							</div>
-						<% end %>
-					</div>
-				<% end %>
+        <% if station.podcasts.count > 0 %>
+          <h4 class="small-label">Podcasts más recientes</h4>
+          <!--< % station.podcasts.last(station.podcasts.count)[1..4].each do |podcast| %>-->
+          <div id="podcastContainer" style="overflow: auto; height: 200px;">
+            <% station.podcasts.order(created_at: :desc).each do |podcast| %>
+              <div class="podcast">
+                <h4 class="podcast__title"><%= podcast.name %></h4>
+                <div>
+                  <%= podcast.description %>
+                </div>
+                <audio id="all-podcast-<%= podcast.id %>" controls>
+                  <source src="<%= podcast.stream_url %>">
+                </audio>
+                <script type="text/javascript" charset="utf-8">
+                    allPodcastIds.push(<%= podcast.id %>)
+                </script>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
 
-			</div>
-			<% if station.article_relationships.count > 0 %>
+      </div>
+      <% if station.article_relationships.count > 0 %>
 
-				<div class="radio-banner__tune-in">Lo más reciente</div>
+        <div class="radio-banner__tune-in">Lo más reciente</div>
 
-				<div class="station__articles">
-					<% station.article_relationships.order(created_at: :desc).first(3).each do |relationship| %>
-						<%= render "components/horizontal-note", article: relationship.article %>
-					<% end %>
+        <div class="station__articles">
+          <% station.article_relationships.order(created_at: :desc).first(3).each do |relationship| %>
+            <%= render "components/horizontal-note", article: relationship.article %>
+          <% end %>
 
-					<!-- VÏNCULO PARA VER MAS -->
-					<% link_to "Ver más notas", station_articles_path(station.slug) %>
-				</div>
-			<% end %>
-		</div>
-	</div>
-	<%= render "components/stations-sidebar", facebook: station.facebook, twitter: station.twitter %>
+          <!-- VÏNCULO PARA VER MAS -->
+          <% link_to "Ver más notas", station_articles_path(station.slug) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= render "components/stations-sidebar", facebook: station.facebook, twitter: station.twitter %>
 </div>
 
 <script type="text/javascript" charset="utf-8">
-  let currentaAudioIsPlaying = false;
-  let currentId = null;
-  function isPlaying(id) {
-      if (id !== currentId) {
-          gtag('event', 'load_reproduction_started', {'reproduction_started': 1});
-          currentaAudioIsPlaying = true;
-          currentId = id;
-      }
-  }
-  function isStopped(id) {
-      if (currentId === id) {
-          currentaAudioIsPlaying = false;
-          currentId = id;
-      }
-  }
-    setInterval(()=> {
-        if (currentaAudioIsPlaying === true && currentId) {
-            gtag('event', 'load_reproduction_time', {'reproduction_time': 5});
+    $(document).ready(() => {
+        const allAudioElements = [];
+        for (const id of todayPodcastIds) {
+            const audioElement = document.getElementById(`today-podcast-${id}`);
+            allAudioElements.push(new AudioElement(audioElement, id));
         }
-    }, 5000);
+        for (const id of allPodcastIds) {
+            const audioElement = document.getElementById(`all-podcast-${id}`);
+            allAudioElements.push(new AudioElement(audioElement, id));
+        }
+        for (const audioElement of allAudioElements) {
+            audioElement.start();
+        }
+    });
+
+    class AudioElement {
+        audioElement = null
+        podcastId = 0;
+        timeElapsed = 0;
+
+        constructor(audioElement, podcastId) {
+            this.audioElement = audioElement;
+            this.podcastId = podcastId;
+        }
+        start() {
+            if (this.audioElement) {
+                this.setListenerEvent();
+            }
+        }
+        setListenerEvent() {
+            this.audioElement.addEventListener('timeupdate', this.calculateTime, false);
+        }
+        calculateTime = (evt) => {
+            const ct = this.audioElement.currentTime
+            this.setTimeElapsed(Math.floor(ct));
+
+        }
+        setTimeElapsed(seconds) {
+            if (seconds > this.timeElapsed) {
+                const difference = seconds - this.timeElapsed;
+                if (difference === 1) {
+                    this.sentToServer();
+                }
+            }
+            this.timeElapsed = seconds;
+        }
+
+        sentToServer() {
+            fetch(`/api/v1/podcast/${this.podcastId}/increment_one_second`).then(value => {
+
+            }).catch(reason => {
+
+            });
+        }
+    }
 </script>
