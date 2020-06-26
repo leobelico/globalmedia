@@ -78,19 +78,41 @@
 
 	<% end %>
 </div>
+<style>
+  .truncate {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>
 <h3 class="card">Podcasts</h3>
 <div class="table card">
 	<div class="table__row">
 		<div class="table__cell">Nombre:</div>
-		<div class="table__cell">URL:</div>
+    <div class="table__cell">Tiempo reproducido:</div>
+    <div class="table__cell">URL:</div>
 		<p class="table__cell edit">Editar:</p>
 		<div class="table__cell delete">Eliminar:</div>
 
 	</div>
 	<% @station.podcasts.last(20).each do |podcast| %>
+    <%
+      time_played_sec = 0
+      if podcast.seconds_played
+        time_played_sec = podcast.seconds_played
+      end
+
+      seconds = (time_played_sec % 3600 % 60).floor
+      minutes = (time_played_sec % 3600 / 60).floor
+      hours = (time_played_sec / 3600).floor
+
+      display_time_played = (hours < 10 ? '0' + hours.to_s : hours.to_s) + ':' + (minutes < 10 ? '0' + minutes.to_s : minutes.to_s) +':' + (seconds < 10 ? '0' + seconds.to_s : seconds.to_s)
+    %>
 		<div class="table__row">
-			<p class="table__cell"><%= truncate(podcast.name, length:  60) %></p>
-			<p class="table__cell"><%= truncate(podcast.stream_url, length:  120) %></p>
+			<span class="table__cell"><%= truncate(podcast.name, length:  60) %></span>
+			<span class="table__cell"><%= display_time_played %></span>
+			<span class="table__cell truncate"><%= truncate(podcast.stream_url, length:  120) %></span>
 			<%= link_to	"Editar", edit_panel_station_podcast_path(@station,podcast), class: "table__cell edit" %>
 
 			<%= link_to	"Eliminar", panel_station_podcast_path(@station,podcast), method: :delete, class: "table__cell delete" %>
