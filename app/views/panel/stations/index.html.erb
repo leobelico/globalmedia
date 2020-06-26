@@ -8,12 +8,26 @@
 	<div class="table__row">
 		<div class="table__cell">Nombre:</div>
 		<div class="table__cell">Cantidad de Programas:</div>
+		<div class="table__cell">Cantidad Podcasts:</div>
+		<div class="table__cell">Tiempo Podcasts reproducido:</div>
 	</div>
 	<% @stations.each do |station| %>
 	<div class="table__row">
-		
+
+      <%
+        time_played_sec = station.podcasts.sum(:seconds_played)
+
+        seconds = (time_played_sec % 3600 % 60).floor
+        minutes = (time_played_sec % 3600 / 60).floor
+        hours = (time_played_sec / 3600).floor
+
+        display_time_played = (hours < 10 ? '0' + hours.to_s : hours.to_s) + ':' + (minutes < 10 ? '0' + minutes.to_s : minutes.to_s) +':' + (seconds < 10 ? '0' + seconds.to_s : seconds.to_s)
+      %>
+
 		<%= link_to station.name, panel_station_path(station), class: "table__cell" %>
 		<p class="table__cell"><%= station.timetables.count %></p>
+		<p class="table__cell"><%= station.podcasts.count %></p>
+		<p class="table__cell"><%= display_time_played %></p>
 	</div>
 	<% end %>
 </div>
