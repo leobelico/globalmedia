@@ -1,28 +1,62 @@
 <% content_for :title, "Global Media - Noticias" %>
-<!--	<div class="enc-links">-->
-<!--		<a href="https://sondeosglobalmedia.com.mx/globalmedia/" target="_blank">-->
-		<%#= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/WhatsApp+Image+2020-02-28+at+6.58.43+PM.jpeg", class: "img-desktop" %>
-<!--		</a>-->
-<!--	</div>-->
+<div id="polls-banner-container">
+  	<div class="enc-links polls-banner-closed" style="display: none;">
+  		<a href="https://sondeosglobalmedia.com.mx/globalmedia/" target="_blank">
+  <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/WhatsApp+Image+2020-02-28+at+6.58.43+PM.jpeg", class: "img-desktop" %>
+  		</a>
+  	</div>
 
-	<table width="100%">
-		<tr>
-			<td width="70%">
-				<div class="enc-links">
-					<a href="https://sondeosglobalmedia.com.mx/globalmedia/">
-						<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/BANNER_ENCUESTAS_COVID_26062020.png", class: "img-desktop" %>
-					</a>
-				</div>
-			</td>
-			<td width="30%">
-				<div class="enc-links">
-					<a href="https://sondeosglobalmedia.com.mx/globalmedia/resultados" target="_blank">
-						<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/resultados_generales.jpg", class: "img-desktop" %>
-					</a>
-				</div>
-			</td>
-		</tr>
-	</table>
+  <table class="polls-banner-opened"  width="100%" style="display: none;">
+    <tr>
+      <td width="70%">
+        <div class="enc-links">
+          <a href="https://sondeosglobalmedia.com.mx/globalmedia/">
+            <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/BANNER_ENCUESTAS_COVID_26062020.png", class: "img-desktop banner-new-polls" %>
+          </a>
+        </div>
+      </td>
+      <td width="30%">
+        <div class="enc-links">
+          <a href="https://sondeosglobalmedia.com.mx/globalmedia/resultados" target="_blank">
+            <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/resultados_generales.jpg", class: "img-desktop" %>
+          </a>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(`#polls-banner-container`).ready(() => {
+      fetch('/api/v1/preference/key/banner_polls_is_open').then(async (value) => {
+         try {
+             const jsonObject = await value.json();
+             if (jsonObject) {
+                 if (jsonObject.value === 'true') {
+                     $(`.polls-banner-opened`).css('display', 'block');
+                     fetch('/api/v1/preference/key/banner_polls_open_image').then(async (responseObj) => {
+                        try {
+                            const imageObject = await responseObj.json();
+                            if (imageObject) {
+                                const imageUrl = imageObject.value;
+                                if (imageUrl) {
+                                    $('.banner-new-polls').attr('src', imageUrl);
+                                }
+                            }
+                        } catch (e) {
+
+                        }
+                     });
+                 } else {
+                     $(`.polls-banner-closed`).css('display', 'block');
+                 }
+             }
+         } catch (e) {
+
+         }
+      });
+  });
+</script>
 
 <style>
 	.enc-links {
