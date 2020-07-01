@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-12 card" *ngIf="formGroupUpsert" (submit)="onSubmit()">
+    <form [formGroup]="formGroupUpsert">
+      <div class="row">
+        <div class="col-12">
+          <h3>Preferencia</h3>
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <label for="inputKey">Key</label>
+          <input formControlName="key" type="text" class="form-control form-control-sm" id="inputKey" placeholder="Key">
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <label for="inputValue">Value</label>
+          <input type="text" formControlName="value"  class="form-control form-control-sm" id="inputValue" placeholder="Value" />
+        </div>
+        <div class="col-12 d-flex justify-content-end" style="margin-top: 150px;">
+          <button type="submit" class="btn btn-sm btn-primary my-2">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -19,7 +19,11 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: 'new-banner',
-        loadChildren: () => __webpack_require__.e(/*! import() | new-banner-new-banner-module */ "new-banner-new-banner-module").then(__webpack_require__.bind(null, /*! ./new-banner/new-banner.module */ "./src/app/pages/panel/new-banner/new-banner.module.ts")).then(m => m.NewBannerModule)
+        loadChildren: () => Promise.all(/*! import() | new-banner-new-banner-module */[__webpack_require__.e("default~new-banner-new-banner-module~preference-preference-module"), __webpack_require__.e("new-banner-new-banner-module")]).then(__webpack_require__.bind(null, /*! ./new-banner/new-banner.module */ "./src/app/pages/panel/new-banner/new-banner.module.ts")).then(m => m.NewBannerModule)
+    },
+    {
+        path: 'preference',
+        loadChildren: () => Promise.all(/*! import() | preference-preference-module */[__webpack_require__.e("default~new-banner-new-banner-module~preference-preference-module"), __webpack_require__.e("preference-preference-module")]).then(__webpack_require__.bind(null, /*! ./preference/preference.module */ "./src/app/pages/panel/preference/preference.module.ts")).then(m => m.PreferenceModule)
     }
 ];
 class PanelRoutingModule {

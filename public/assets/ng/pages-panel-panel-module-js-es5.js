@@ -36,12 +36,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var routes = [{
       path: 'new-banner',
       loadChildren: function loadChildren() {
-        return __webpack_require__.e(
+        return Promise.all(
         /*! import() | new-banner-new-banner-module */
-        "new-banner-new-banner-module").then(__webpack_require__.bind(null,
+        [__webpack_require__.e("default~new-banner-new-banner-module~preference-preference-module"), __webpack_require__.e("new-banner-new-banner-module")]).then(__webpack_require__.bind(null,
         /*! ./new-banner/new-banner.module */
         "./src/app/pages/panel/new-banner/new-banner.module.ts")).then(function (m) {
           return m.NewBannerModule;
+        });
+      }
+    }, {
+      path: 'preference',
+      loadChildren: function loadChildren() {
+        return Promise.all(
+        /*! import() | preference-preference-module */
+        [__webpack_require__.e("default~new-banner-new-banner-module~preference-preference-module"), __webpack_require__.e("preference-preference-module")]).then(__webpack_require__.bind(null,
+        /*! ./preference/preference.module */
+        "./src/app/pages/panel/preference/preference.module.ts")).then(function (m) {
+          return m.PreferenceModule;
         });
       }
     }];

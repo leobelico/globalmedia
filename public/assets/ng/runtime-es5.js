@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"pages-panel-panel-module-js":"pages-panel-panel-module-js","new-banner-new-banner-module":"new-banner-new-banner-module","quill":"quill"}[chunkId]||chunkId) +    "-es5.js"
+/******/ 		return __webpack_require__.p + "" + ({"pages-panel-panel-module-js":"pages-panel-panel-module-js","default~new-banner-new-banner-module~preference-preference-module":"default~new-banner-new-banner-module~preference-preference-module","new-banner-new-banner-module":"new-banner-new-banner-module","preference-preference-module":"preference-preference-module","quill":"quill"}[chunkId]||chunkId) +    "-es5.js"
 /******/ 	}
 /******/
 /******/ 	// The require function

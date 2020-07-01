@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: 'new-banner',
     loadChildren: () => import('./new-banner/new-banner.module').then(m => m.NewBannerModule)
+  },
+  {
+    path: 'preference',
+    loadChildren: () => import('./preference/preference.module').then(m => m.PreferenceModule)
   }
 ];
 

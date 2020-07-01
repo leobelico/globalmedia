@@ -36,8 +36,8 @@
 	<% if current_user.user_permission? %>
 		<%= link_to "Editores", panel_users_path, class: "admin-sidebar__link" %>
 	<% end %>
-	
-	
+
+  <a target="_blank" href="/panel/preference" class="admin-sidebar__link">Preferencias</a>
 
 
 	<%= link_to "Salir", destroy_user_session_path, class: "button--logout admin-sidebar__link" %>

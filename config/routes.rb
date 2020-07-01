@@ -194,6 +194,10 @@ Rails.application.routes.draw do
     get "new-banner/create", to: "new_banners#index"
     get "new-banner/edit/:id", to: "new_banners#index"
 
+    get "preference", to: "new_banners#index"
+    get "preference/create", to: "new_banners#index"
+    get "preference/edit/:id", to: "new_banners#index"
+
   end
   # get "panel/keywords/edit_multiple", to: "panel/keywords#edit_multiple"
   # get "panel/keywords/update_multiple", to: "panel/keywords#update_multiple"
@@ -216,6 +220,14 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+
+      get "preferences", to: "preferences#index"
+      get "preference/:id", to: "preferences#find"
+      post "preference", to: "preferences#create"
+      post "preference/:id", to: "preferences#update"
+      delete "preference/:id", to: "preferences#delete"
+      get "preference/key/:key", to: "preferences#find_by_key"
+
       resources :articles, only: [:index, :show] do
         collection do 
           get "most_visited"
