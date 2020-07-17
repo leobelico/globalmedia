@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/assets/libraries/fontawesome/css/all.min.css">
 <form id="fields-for-s3">
 	<% @s3_direct_post.fields.map do |name, value| %>
 	    <input type="hidden" name="<%= name %>" value="<%= value %>" />
@@ -22,10 +23,30 @@
 		<%= f.text_area :description %>
 	</div>
 	<div class="field field--string">
-		<label>Archivo del stream: </label>
+		<label>Archivo del stream: <i class="icon-uploading fas fa-spinner fa-spin"></i></label>
 		<!--< %= f.file_field :stream_url %>-->
+    <input type="file" id="awsS3File" accept="audio/*">
 		<%= f.text_field :stream_url %>
 	</div>
 
 <% end %>
-<%= render "components/s3_form_js" %>
+<%#= render "components/s3_form_js" %>
+<script src="/assets/libraries/js/podcastUpload.js"></script>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(() => {
+        const iconUploading = $(`.icon-uploading`);
+        iconUploading.hide();
+        $(`#awsS3File`).on('change', (event) => {
+            const files = event.target.files;
+            if (files.length > 0 ) {
+                iconUploading.show();
+                uploadAWSS3(files[0]).subscribe(urlPath => {
+                    iconUploading.hide();
+                    $('#podcast_stream_url').val(urlPath);
+                }, error => {
+                    iconUploading.hide();
+                });
+            }
+        });
+    });
+</script>
