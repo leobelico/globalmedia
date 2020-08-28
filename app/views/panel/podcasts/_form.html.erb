@@ -26,12 +26,21 @@
 		<label>Archivo del stream: <i class="icon-uploading fas fa-spinner fa-spin"></i></label>
 		<!--< %= f.file_field :stream_url %>-->
     <input type="file" id="awsS3File" accept="audio/*">
+    <div style="border: 1px solid #000; margin: 1rem;">
+      <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
+      <div id="container">
+        <a id="pickfiles" href="javascript:;">[Selecciona un archivo]</a>
+        <a id="uploadfiles" href="javascript:;">[Subir Archivo]</a>
+      </div>
+      <span id="console"></span>
+    </div>
 		<%= f.text_field :stream_url %>
 	</div>
 
 <% end %>
 <%#= render "components/s3_form_js" %>
 <script src="/assets/libraries/js/podcastUpload.js"></script>
+<script src="/assets/libraries/js/plupload.full.min.js"></script>
 <script type="text/javascript" charset="utf-8">
     $(document).ready(() => {
         const iconUploading = $(`.icon-uploading`);
@@ -49,4 +58,42 @@
             }
         });
     });
+</script>
+<script type="text/javascript" charset="utf-8">
+    var uploader = new plupload.Uploader({
+        runtimes : 'html5,flash,silverlight,html4',
+        browse_button : 'pickfiles', // you can pass an id...
+        container: document.getElementById('container'), // ... or DOM Element itself
+        url : 'upload.php',
+        filters : {
+            max_file_size : '1024mb'
+        },
+
+        init: {
+            PostInit: function() {
+                document.getElementById('filelist').innerHTML = '';
+
+                document.getElementById('uploadfiles').onclick = function() {
+                    uploader.start();
+                    return false;
+                };
+            },
+
+            FilesAdded: function(up, files) {
+                plupload.each(files, function(file) {
+                    document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                });
+            },
+
+            UploadProgress: function(up, file) {
+                document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+            },
+
+            Error: function(up, err) {
+                document.getElementById('console').innerHTML = "Error #" + err.code + ": " + err.message;
+            }
+        }
+    });
+
+    uploader.init();
 </script>
