@@ -1,11 +1,12 @@
 <% content_for :title, "Global Media - Noticias" %>
+<!--
 <div id="polls-banner-container">
   	<div class="enc-links polls-banner-closed" style="display: none;">
   		<a href="https://sondeosglobalmedia.com.mx/globalmedia/" target="_blank">
   <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/WhatsApp+Image+2020-02-28+at+6.58.43+PM.jpeg", class: "img-desktop" %>
   		</a>
   	</div>
-  <!--
+
   <table class="polls-banner-opened"  width="100%" style="display: none;">
     <tr>
       <td width="70%">
@@ -24,8 +25,8 @@
       </td>
     </tr>
   </table>
-  -->
 </div>
+  -->
 <script type="text/javascript" charset="utf-8">
   $(`#polls-banner-container`).ready(() => {
       fetch('/api/v1/preference/key/banner_polls_is_open').then(async (value) => {
