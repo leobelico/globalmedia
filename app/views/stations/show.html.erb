@@ -143,9 +143,13 @@
 						<% end %>
 					</div>
 				<% end	%>-->
-        <% if @station.name == "KeBuena" or @station.name == "VOX 96.9" %>
-          <div class="enc-links">
-            <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png", class: "img-desktop" %>
+        <% if @station.name == "Ke Buena" or @station.name == "VOX 96.9" %>
+          <div class="playlists">
+            <div class="enc-links">
+              <a target="_blank" href="https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png">
+                <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png", class: "img-desktop" %>
+              </a>
+            </div>
           </div>
         <% end %>
         <!-- prueba -->
