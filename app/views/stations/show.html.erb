@@ -144,15 +144,13 @@
 					</div>
 				<% end	%>-->
         <% if @station.name == "Ke Buena" or @station.name == "VOX 96.9" %>
-          <div class="playlists">
+          <div class="radio-banner__tune-in"></div>
             <div class="enc-links">
               <a target="_blank" href="https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png">
                 <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png", class: "img-desktop" %>
               </a>
             </div>
-          </div>
         <% end %>
-        <!-- prueba -->
 				<div class="radio-banner__tune-in">También puedes disfrutar</div>
 				<div class="station__recommendations">
 					<% @recommendations.each do |recommendation| %>
