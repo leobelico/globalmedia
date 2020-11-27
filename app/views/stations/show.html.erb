@@ -143,14 +143,7 @@
 						<% end %>
 					</div>
 				<% end	%>-->
-        <% if @station.name == "Ke Buena" or @station.name == "VOX 96.9" %>
-          <div class="radio-banner__tune-in"></div>
-            <div class="enc-links">
-              <a target="_blank" href="https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png">
-                <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png", class: "img-desktop" %>
-              </a>
-            </div>
-        <% end %>
+
 				<div class="radio-banner__tune-in">También puedes disfrutar</div>
 				<div class="station__recommendations">
 					<% @recommendations.each do |recommendation| %>
@@ -172,6 +165,14 @@
 						<% end %>
 					</div>
 				<% end %>
+        <% if @station.name == "Ke Buena" or @station.name == "VOX 96.9" %>
+          <div class="radio-banner__tune-in"></div>
+          <div class="enc-links">
+            <a target="_blank" href="https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png">
+              <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png", class: "img-desktop" %>
+            </a>
+          </div>
+        <% end %>
 				<% if get_banner(@station, "Station", "Grande").count > 0 %>
 					<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
 				<% end %>
