@@ -28,10 +28,10 @@ default: &default
 development:
   adapter: postgresql
   encoding: utf8
-  database: postgres
-  username: eduardo
-  password: 123456
-  host: localhost
+  database: d7goh0u5ir0oao
+  username: udfplt23avh2uv
+  password: pac1562bc2c810402d819c56f774f1810fa30182484c641c70c4d083e8115ac7e
+  host: ec2-52-71-149-22.compute-1.amazonaws.com
   port: 5432
   pool: 10
 
