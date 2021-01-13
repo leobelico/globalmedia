@@ -138,11 +138,11 @@
 		<div class="top-padder"></div>
 	<% end %>
 	<p class="copied-link">Vínculo copiado</p>
-	<div class="navigation">
-		<%= render "components/topbar" if !panel_url %>	
-		<%= render "components/header" if !user_signed_in? || !panel_url %>
-		<%= render "components/navbar" if !panel_url %>
-	</div>
+<!--	<div class="navigation">-->
+		<%#= render "components/topbar" if !panel_url %>
+		<%#= render "components/header" if !user_signed_in? || !panel_url %>
+		<%#= render "components/navbar" if !panel_url %>
+<!--	</div>-->
 		<% if true %>
 			<%= render "components/mobile-menu" if !panel_url %>
 		<% end %>
