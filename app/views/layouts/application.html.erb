@@ -143,12 +143,12 @@
 		<%#= render "components/header" if !user_signed_in? || !panel_url %>
 		<%#= render "components/navbar" if !panel_url %>
 <!--	</div>-->
-		<% if true %>
-			<%= render "components/mobile-menu" if !panel_url %>
-		<% end %>
-	<%= render "components/stations-floating-bar" if !panel_url %>
+		<%# if true %>
+			<%#= render "components/mobile-menu" if !panel_url %>
+		<%# end %>
+	<%#= render "components/stations-floating-bar" if !panel_url %>
 
-	<%= render "components/admin/admin-floating-bar" if !panel_url and user_signed_in? %>
+	<%#= render "components/admin/admin-floating-bar" if !panel_url and user_signed_in? %>
 	
 	<% if !panel_url %>
 		<script>
@@ -231,9 +231,9 @@
 		 	<div class="interface">
 		<% end %>
 			<% if !panel_url %>
-				<%= render "components/radio-banner" if !user_signed_in? || !panel_url %>
-				<%= render "components/its-news" %>
-				<%= render "components/breaking-news" if false %>
+				<%#= render "components/radio-banner" if !user_signed_in? || !panel_url %>
+				<%#= render "components/its-news" %>
+				<%#= render "components/breaking-news" if false %>
 			<% end %>
 		    <%= yield %>
 	 	</div>
