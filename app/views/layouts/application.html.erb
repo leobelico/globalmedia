@@ -1,7 +1,110 @@
 
 <!DOCTYPE html>
 <html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+	<meta charset="UTF-8">
+	<meta name="google-site-verification" content="qmtKgqSClufrHzJbzMMtDlRjonS47U9-OVugljr636k" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+	<% if !(controller_name == "articles" and action_name == "show") %>
+	    <title><%= yield(:title) %></title>
+		<meta name="description" content="GlobalMedia te informa">
+	<% end %>
+	<meta name="keywords" content="GlobalMedia,noticias,México,San Luis Potosí,Vanguardia,Negocios,Radio,Televisión,Bajío,Estaciones de radio">
+	<meta name="author" content="GlobalMedia">
+	<%= action_cable_meta_tag %>
 
+	<% if controller_name == "articles" and action_name == "show" %>
+		<%= render "components/article_meta_tags", article: @article %>
+	<% end %>
+	<% if controller_name == "stations" and action_name == "show" %>
+		<%= render "components/station_meta_tags", station: @station %>
+	<% end %>
+
+	<%= render 'application/favicon' %>
+
+	<link href="https://fonts.googleapis.com/css?family=Pragati+Narrow|Martel:900" rel="stylesheet">
+	<!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" async></script> -->
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload', cache: "cached/all" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', cache: "cached/all" %>
+	<script src="https://platform.twitter.com/widgets.js" async></script>
+
+	<!-- Global Site Tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106606454-1"></script>
+	<!-- <script type="text/javascript" src="//player.wowza.com/player/latest/wowzaplayer.min.js"></script> -->
+	<script async>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments)};
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-106606454-1', {
+        'custom_map': {
+            'metric1': 'reproduction_time',
+            'metric2': 'reproduction_started',
+        }
+    });
+	</script>
+	<!-- Start Alexa Certify Javascript -->
+	<script type="text/javascript">
+	_atrk_opts = { atrk_acct:"TmlPj1a8wt00q2", domain:"globalmedia.mx",dynamic: true};
+	(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+	</script>
+	<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=TmlPj1a8wt00q2" style="display:none" height="1" width="1" alt="" /></noscript>
+	<!-- End Alexa Certify Javascript -->
+	<script async>
+
+
+		var bindFacebookEvents, initializeFacebookSDK, loadFacebookSDK, restoreFacebookRoot, saveFacebookRoot;
+
+		$(function() {
+		  loadFacebookSDK();
+		  if (!window.fbEventsBound) {
+		    return bindFacebookEvents();
+		  }
+		});
+
+		bindFacebookEvents = function() {
+		  $(document).on('turbolinks:request-start', saveFacebookRoot).on('turbolinks:load', restoreFacebookRoot).on('turbolinks:load', function() {
+		    return typeof FB !== "undefined" && FB !== null ? FB.XFBML.parse() : void 0;
+		  });
+		  return this.fbEventsBound = true;
+		};
+
+		saveFacebookRoot = function() {
+		  if ($('#fb-root').length) {
+		    return this.fbRoot = $('#fb-root').detach();
+		  }
+		};
+
+		restoreFacebookRoot = function() {
+		  if (this.fbRoot != null) {
+		    if ($('#fb-root').length) {
+		      return $('#fb-root').replaceWith(this.fbRoot);
+		    } else {
+		      return $('body').append(this.fbRoot);
+		    }
+		  }
+		};
+
+		loadFacebookSDK = function() {
+		  window.fbAsyncInit = initializeFacebookSDK;
+		  return $.getScript("//connect.facebook.net/en_US/sdk.js");
+		};
+
+		initializeFacebookSDK = function() {
+		  return FB.init({
+		    appId: '502512736803830',
+		    status: true,
+		    cookie: true,
+		    xfbml: true,
+		    version: 'v2.9'
+		  });
+		};
+
+
+	</script>
+  </head>
 
   <body>
 <!-- 	<script data-turbolinks-permanent>
