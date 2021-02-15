@@ -1,24 +1,25 @@
-Que el filefield te diga el nombre de la imagen 
-Revisar funcionalidad de es noticia 
-Claridad en highlights cambiar/lala
-Poner callback para eliminación de imagen en articulo 
-Eliminar nota que está en destacados da error
-Regla de notas relacionadas (Por TAG/Sección)
-Validación carga de TEMAS DEL DÍA (se reinicia a las 00:00 hrs, sino lo 
-carga el jefe de noticias no debe aparecer en página)
-Share de la nota (vista previa y texto complementario en whats app ejemplo: “Estoy leyendo – Trump continúa con la discusión del Muro Fronterizo en GlobalMedia Mx – www.globalmedia.mx/100234/trump)
-On site / Off site LINKS de Alexa (validar programación y mejores prácticas)
-Correcta indexación en motores de búsqueda
-Desaparecer palabra balazo o descripción de la nota y poner EXTRACTO, validando que sea de 120 caracteres.
-Complementos de Reproductor completos (Incluidos Playlists, eventos, top ten de la semana)
-El reproductor no debe abrirse en otra pestaña, sino cambiar en esa misma que se está navegando.
-Poder cargar una canción en el reproductor para reproducción de las personas (éxito de la semana).
-Validación de tamaño y fuente de acuerdo a maquetación
+1. Que el filefield te diga el nombre de la imagen
+2. Revisar funcionalidad de es noticia
+3. Claridad en highlights cambiar/lala
+4. Poner callback para eliminación de imagen en articulo
+5. Eliminar nota que está en destacados da error
+6. Regla de notas relacionadas (Por TAG/Sección)
+7. Validación carga de TEMAS DEL DÍA (se reinicia a las 00:00 hrs,
+sino lo carga el jefe de noticias no debe aparecer en página)
+8. Share de la nota (vista previa y texto complementario en whats app ejemplo: }
+“Estoy leyendo – Trump continúa con la discusión del Muro Fronterizo en GlobalMedia Mx – www.globalmedia.mx/100234/trump)
+9.On site / Off site LINKS de Alexa (validar programación y mejores prácticas)
+10. Correcta indexación en motores de búsqueda
+11. Desaparecer palabra balazo o descripción de la nota y poner EXTRACTO, validando que sea de 120 caracteres.
+13. Complementos de Reproductor completos (Incluidos Playlists, eventos, top ten de la semana)
+14. El reproductor no debe abrirse en otra pestaña, sino cambiar en esa misma que se está navegando.
+15. Poder cargar una canción en el reproductor para reproducción de las personas (éxito de la semana).
+16. Validación de tamaño y fuente de acuerdo a maquetación
 - Vínculos Stream de las cámaras de tráfico
-- Habilitar Búsqueda en editor de notas
-- Agregar columna de Visitas a Página en las notas subidas del editor de notas.
-- Cambiar término de notas destacadas a NOTAS DE PORTADA
-- Cambiar término palabras clave y agregarle (Es noticia)
+17. Habilitar Búsqueda en editor de notas - ok
+18. Agregar columna de Visitas a Página en las notas subidas del editor de notas.- ok
+19. Cambiar término de notas destacadas a NOTAS DE PORTADA - ok
+20. Cambiar término palabras clave y agregarle (Es noticia) - ok
 - Corregir funcionamiento del tag #EsNoticia y agregar en el editor un histórico de temas.
 - Jalar la última investigación que se establece.
 - Probar lo más destacado
