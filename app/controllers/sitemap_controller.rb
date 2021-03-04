@@ -3,7 +3,6 @@ class SitemapController < ApplicationController
   def index
     host = 'https://www.globalmedia.mx'
     sitemap = params[:sitemap]
-    puts sitemap
     @items = []
     if sitemap == 'articles' || sitemap == nil
       elements = SitemapIndex.order(lastmod: 'DESC')
