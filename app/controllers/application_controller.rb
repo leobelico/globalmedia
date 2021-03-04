@@ -8,9 +8,11 @@ class ApplicationController < ActionController::Base
   before_action :redirect_subdomain
 
   def redirect_subdomain
-    unless /^www/.match(request.host)
-      url_redirect = request.protocol + "www." + request.host_with_port + request.fullpath
-      redirect_to("#{url_redirect}", status: 301)
+    unless /(^leon)|(^queretaro)|(^jalisco)|(^zacatecas)/.match(request.host)
+      unless /^www/.match(request.host)
+        url_redirect = request.protocol + "www." + request.host_with_port + request.fullpath
+        redirect_to("#{url_redirect}", status: 301)
+      end
     end
   end
   # before_action do
