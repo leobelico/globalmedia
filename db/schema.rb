@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_21_150957) do
+ActiveRecord::Schema.define(version: 2021_03_04_025722) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "article_relationships", id: :serial, force: :cascade do |t|
@@ -27,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_05_21_150957) do
 
   create_table "articles", id: :serial, force: :cascade do |t|
     t.string "name", default: ""
-    t.jsonb "note", default: ""
+    t.text "note", default: ""
     t.text "short_description", default: ""
     t.integer "articable_id"
     t.string "articable_type"
@@ -50,7 +51,10 @@ ActiveRecord::Schema.define(version: 2020_05_21_150957) do
     t.boolean "exclusive", default: false
     t.text "_extra_props"
     t.boolean "breaking_news"
+    t.text "note_old", default: ""
     t.datetime "published_at"
+    t.string "meta_tags", default: ""
+    t.integer "location_id", default: 0
     t.index ["articable_id"], name: "index_articles_on_articable_id"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id"
     t.index ["author_id"], name: "index_articles_on_author_id"
@@ -217,6 +221,16 @@ ActiveRecord::Schema.define(version: 2020_05_21_150957) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "name", null: false
+    t.string "description"
+    t.float "latitude", default: 0.0, null: false
+    t.float "longitude", default: 0.0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "most_visited_articles", id: :serial, force: :cascade do |t|
     t.string "name", default: ""
     t.string "article_slug", default: ""
@@ -255,7 +269,15 @@ ActiveRecord::Schema.define(version: 2020_05_21_150957) do
     t.datetime "updated_at", null: false
     t.integer "station_id"
     t.string "description", default: ""
+    t.integer "seconds_played"
     t.index ["station_id"], name: "index_podcasts_on_station_id"
+  end
+
+  create_table "preferences", force: :cascade do |t|
+    t.string "key", default: ""
+    t.string "value", default: ""
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "related_sections", id: :serial, force: :cascade do |t|
@@ -310,6 +332,24 @@ ActiveRecord::Schema.define(version: 2020_05_21_150957) do
     t.string "twitter"
   end
 
+  create_table "sitemap_indexed_articles", force: :cascade do |t|
+    t.integer "article_id", null: false
+    t.integer "sitemap_index_id", null: false
+    t.string "loc", null: false
+    t.datetime "lastmod", null: false
+    t.string "changefreq", default: "never", null: false
+    t.float "priority", default: 0.9, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sitemap_indices", force: :cascade do |t|
+    t.datetime "lastmod", null: false
+    t.integer "total_records", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "sports", id: :serial, force: :cascade do |t|
     t.string "team_one"
     t.string "team_two"
@@ -346,6 +386,8 @@ ActiveRecord::Schema.define(version: 2020_05_21_150957) do
     t.text "description", default: ""
     t.string "image_preview", default: ""
     t.string "app_url", default: ""
+    t.integer "orderer"
+    t.integer "parent_station_id"
   end
 
   create_table "timetables", id: :serial, force: :cascade do |t|
