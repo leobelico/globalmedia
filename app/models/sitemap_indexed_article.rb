@@ -1,0 +1,2 @@
+class SitemapIndexedArticle < ApplicationRecord
+end

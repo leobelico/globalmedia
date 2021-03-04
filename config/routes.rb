@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   end
   #resources :stations, param: :slug
 
+  get "/sitemap/:sitemap/index.xml" => "sitemap#index", :format => "xml"
+  get "/sitemap/:id/:sitemap" => "sitemap#sitemap", :format => "xml"
+
 
   resources :sections, only: [:show], param: :slug
   get "tactica", to: "sections#sports"
