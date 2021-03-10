@@ -2,14 +2,11 @@
 #
 # To ban all spiders from the entire site uncomment the next two lines:
 # User-agent: *
-Disallow: /
 
 User-agent: *
-
 Disallow: /angular/
 Disallow: /assets/
-
-# Sitemap:
+Sitemap: https://www.globalmedia.mx/sitemap/articles/index.xml
 
 User-agent: Genio
 Disallow: /
