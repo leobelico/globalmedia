@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
+  post "/graphql", to: "graphql#execute"
   # if Rails.env.production?
   #   constraints(subdomain: '') do
   #     match "(*x)" => redirect do |params, request|
@@ -26,6 +30,7 @@ Rails.application.routes.draw do
   end
   #resources :stations, param: :slug
 
+  get "/sitemap.xml" => "sitemap#index", :format => "xml"
   get "/sitemap/:sitemap/index.xml" => "sitemap#index", :format => "xml"
   get "/sitemap/:id/:sitemap" => "sitemap#sitemap", :format => "xml"
 

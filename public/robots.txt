@@ -6,7 +6,7 @@
 User-agent: *
 Disallow: /angular/
 Disallow: /assets/
-Sitemap: https://www.globalmedia.mx/sitemap/articles/index.xml
+Sitemap: https://www.globalmedia.mx/sitemap.xml
 
 User-agent: Genio
 Disallow: /
