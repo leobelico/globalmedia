@@ -4,7 +4,7 @@ xml.tag! 'urlset', 'xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9' do
   @items.each do |item|
     xml.url do
       xml.loc item.loc
-      xml.lastmod item.lastmod.to_date
+      xml.lastmod item.lastmod.to_datetime.strftime("%F %T")
       xml.changefreq item.changefreq
       xml.priority item.priority
     end

@@ -10,7 +10,7 @@ class SitemapController < ApplicationController
         @items.push(
           {
             'loc' => "#{host}/sitemap/#{element.id}/articles.xml",
-            'lastmod' => element.lastmod.to_date
+            'lastmod' => element.lastmod.to_datetime.strftime("%F %T")
           }
         )
       end
