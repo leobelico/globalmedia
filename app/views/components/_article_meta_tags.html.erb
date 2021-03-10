@@ -1,6 +1,6 @@
 <title><%= article.name %></title>
 <% if article.meta_tags != nil && article.meta_tags.length > 0 %>
-  <meta name="keywords" content="<%= truncate(article.meta_tags, length: 50) %>" />
+  <meta name="keywords" content="<%= article.meta_tags %>" />
 <% else %>
   <meta name="keywords" content="GlobalMedia,noticias,México,San Luis Potosí,Vanguardia,Negocios,Radio,Televisión,Bajío,Estaciones de radio">
 <% end %>
