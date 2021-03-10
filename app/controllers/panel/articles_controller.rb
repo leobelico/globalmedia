@@ -220,7 +220,7 @@ class Panel::ArticlesController < ApplicationController
 
 	private
 		def article_params
-			params.require(:article).permit(:name, :exclusive, :note, :plain_text, :image, :image_thumbnail, :video_url, :short_description, :hashtags_names, :articable_id, :articable_type, :draft, :keyword_id, :global_recommendation, :the_note, :author_id, :breaking_news, the_note: [:quill], images_attributes: 
+			params.require(:article).permit(:name, :exclusive, :note, :plain_text, :image, :image_thumbnail, :video_url, :short_description, :hashtags_names, :articable_id, :articable_type, :draft, :keyword_id, :global_recommendation, :the_note, :author_id, :meta_tags, :breaking_news, the_note: [:quill], images_attributes:
 						[	
 							:id, 
 							:src, 

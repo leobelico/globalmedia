@@ -62,6 +62,7 @@ function submit_form(action, slug, event, go_to_gallery){
         video_url: $("#article_video_url").val(),
         author_id: $("#article_author_id").val(),
         exclusive: $("#article_exclusive").val(), 
+        meta_tags: $("#article_meta_tags").val(),
         breaking_news: function(){
           if ($("#breaking_news").is(":checked")){
             return 1;

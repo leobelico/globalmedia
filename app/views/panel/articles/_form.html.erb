@@ -93,7 +93,11 @@
 		<div class="field field--string">
 			<label>Vídeo principal:</label>
 			<%= f.text_field :video_url %>
-		</div>		
+		</div>
+		<div class="field field--string">
+			<label>Metatags:</label>
+			<%= f.text_field :meta_tags %>
+		</div>
 		<div class="field field--checkbox">
 			<label>Último momento:</label>
 			<%= f.check_box :breaking_news, id: "breaking_news" %>
