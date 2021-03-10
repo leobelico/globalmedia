@@ -118,6 +118,14 @@ task :update_sitemap_articles => :environment do
 			last_index.save
     end
   end
+  sitemap_indexes = SitemapIndex.all
+  sitemap_indexes.each do |index|
+    last_mod = SitemapIndexedArticle.where('sitemap_index_id = ? ', index.id).order('lastmod DESC').first
+    if last_mod != nil
+      tmp_idx = SitemapIndex.find_by(id: index.id)
+			tmp_idx.update(lastmod: last_mod.lastmod)
+    end
+  end
 end
 
 

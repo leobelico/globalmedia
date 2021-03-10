@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
   <head>
+  <base href="/">
 	<meta charset="UTF-8">
 	<meta name="google-site-verification" content="qmtKgqSClufrHzJbzMMtDlRjonS47U9-OVugljr636k" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,12 +11,13 @@
 	    <title><%= yield(:title) %></title>
 		<meta name="description" content="GlobalMedia te informa">
 	<% end %>
-	<meta name="keywords" content="GlobalMedia,noticias,México,San Luis Potosí,Vanguardia,Negocios,Radio,Televisión,Bajío,Estaciones de radio">
 	<meta name="author" content="GlobalMedia">
 	<%= action_cable_meta_tag %>
 
 	<% if controller_name == "articles" and action_name == "show" %>
 		<%= render "components/article_meta_tags", article: @article %>
+  <% else %>
+      <meta name="keywords" content="GlobalMedia,noticias,México,San Luis Potosí,Vanguardia,Negocios,Radio,Televisión,Bajío,Estaciones de radio">
 	<% end %>
 	<% if controller_name == "stations" and action_name == "show" %>
 		<%= render "components/station_meta_tags", station: @station %>
@@ -24,6 +26,8 @@
 	<%= render 'application/favicon' %>
 
 	<link href="https://fonts.googleapis.com/css?family=Pragati+Narrow|Martel:900" rel="stylesheet">
+  <%#= render "components/angular/include_global_media_styles" %>
+
 	<!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" async></script> -->
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload', cache: "cached/all" %>
@@ -274,6 +278,7 @@
 			}
 		});
 	</script>
+  <%#= render "components/angular/include_global_media_javascripts" %>
   </body>
 
 </html>
