@@ -76,6 +76,50 @@ task :most_visited => :environment do
 
 end
 
+task :update_sitemap_articles => :environment do
+  host = 'https://www.globalmedia.mx'
+  max_records_by_sitemap = 10000
+  buffer_records = (max_records_by_sitemap / 5).to_i
+  articles = Article.joins("LEFT JOIN sitemap_indexed_articles ON sitemap_indexed_articles.article_id = articles.id").where('articles.published = TRUE AND sitemap_indexed_articles.article_id IS NULL').order("articles.created_at ASC")
+	articles_count = articles.count
+  total_pages = articles_count % buffer_records == 0 ? (articles_count / buffer_records).to_i : (articles_count / buffer_records).to_i + 1
+
+  last_index = SitemapIndex.order(id: 'DESC').first
+  if last_index == nil
+		last_index = SitemapIndex.create(lastmod: DateTime.now)
+  end
+	records_count = last_index.total_records
+  for i in 0..total_pages
+    articles_chunk = articles.offset(i * buffer_records).limit(buffer_records)
+    sitemap_index_articles = []
+    articles_chunk.each do |article|
+			if records_count + 1 > max_records_by_sitemap
+        last_index.total_records = records_count
+        last_index.save
+				last_index = SitemapIndex.create(lastmod: DateTime.now)
+				records_count = last_index.total_records
+      end
+			records_count += 1
+			sitemap_index_articles.push(
+        {
+          article_id: article.id,
+          sitemap_index_id: last_index.id,
+          loc: "#{host}/articles/#{article.slug}",
+          lastmod: article.updated_at.to_datetime,
+          created_at: DateTime.now,
+          updated_at: DateTime.now,
+        }
+      )
+    end
+    news_len = sitemap_index_articles.count
+    if news_len > 0
+			SitemapIndexedArticle.insert_all(sitemap_index_articles)
+			last_index.total_records = records_count
+			last_index.save
+    end
+  end
+end
+
 
 task :remove_old_highlights => :environment do 
 	Highlight.where("scheduled_time <= ?", Time.now - 48.hours).delete_all
