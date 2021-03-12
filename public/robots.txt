@@ -7,6 +7,7 @@ User-agent: *
 Disallow: /angular/
 Disallow: /assets/
 Sitemap: https://www.globalmedia.mx/sitemap.xml
+Sitemap: https://www.globalmedia.mx/google_news.xml
 
 User-agent: Genio
 Disallow: /
