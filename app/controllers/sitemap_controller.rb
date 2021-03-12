@@ -31,4 +31,13 @@ class SitemapController < ApplicationController
       format.xml { render :template => 'sitemap/sitemap'}
     end
   end
+
+  def google_news
+    now = DateTime.now
+    two_days = (now.to_time - 48.hours).to_datetime
+    @items = Article.where('published_at >= ?', two_days).order('published_at DESC')
+    respond_to do |format|
+      format.xml { render :template => 'sitemap/sitemap_google_news'}
+    end
+  end
 end

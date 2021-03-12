@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   end
   #resources :stations, param: :slug
 
+  get "/google_news.xml" => "sitemap#google_news", :format => "xml"
   get "/sitemap.xml" => "sitemap#index", :format => "xml"
   get "/sitemap/:sitemap/index.xml" => "sitemap#index", :format => "xml"
   get "/sitemap/:id/:sitemap" => "sitemap#sitemap", :format => "xml"
