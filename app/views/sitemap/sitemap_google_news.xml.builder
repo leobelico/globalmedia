@@ -11,6 +11,7 @@ xml.tag! 'urlset', 'xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
         end
         xml.tag!("news:publication_date", item.published_at.to_date)
         xml.tag!("news:title", item.name)
+        xml.tag!("news:keywords", item.meta_tags)
       end
     end
   end
