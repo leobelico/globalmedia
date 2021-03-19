@@ -105,7 +105,9 @@ Rails.application.routes.draw do
     end
 
     resources :highlights, param: :slug
-
+    resources :preferences, only: [:index]
+    resources :analytics, only: [:index]
+    get "analytics/export/:from/:to", to: "analytics#export_articles"
     resources :articles, param: :slug do 
       post :publish_now
       get :publish_now

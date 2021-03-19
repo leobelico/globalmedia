@@ -13,7 +13,6 @@
 	<% end %>
 	<meta name="author" content="GlobalMedia">
 	<%= action_cable_meta_tag %>
-
 	<% if controller_name == "articles" and action_name == "show" %>
 		<%= render "components/article_meta_tags", article: @article %>
   <% else %>
@@ -25,8 +24,8 @@
 
 	<%= render 'application/favicon' %>
 
+    <%= render "components/angular/include_global_media_styles" %>
 	<link href="https://fonts.googleapis.com/css?family=Pragati+Narrow|Martel:900" rel="stylesheet">
-  <%#= render "components/angular/include_global_media_styles" %>
 
 	<!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" async></script> -->
 
@@ -278,7 +277,7 @@
 			}
 		});
 	</script>
-  <%#= render "components/angular/include_global_media_javascripts" %>
+  <%= render "components/angular/include_global_media_javascripts" %>
   </body>
 
 </html>

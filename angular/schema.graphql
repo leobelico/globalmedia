@@ -1,0 +1,137 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Article {
+  _extraProps: String
+  articableId: Int
+  articableType: String
+  author: Author
+  authorId: Int
+  breakingNews: Boolean
+  createdAt: ISO8601DateTime!
+  draft: Int
+  exclusive: Boolean
+  globalRecommendation: Boolean
+  highlight: Boolean
+  id: Int!
+  image: String
+  imageThumbnail: String
+  keywordId: Int
+  locationId: Int
+  metaTags: String
+  name: String
+  note: String
+  noteOld: String
+  plainText: String
+  published: Boolean
+  publishedAt: ISO8601DateTime
+  scheduledTime: ISO8601DateTime
+  section: Section!
+  shortDescription: String
+  slug: String
+  totalViews: Int!
+  updatedAt: ISO8601DateTime!
+  updatedRecommendationOn: ISO8601DateTime
+  userId: Int
+  videoUrl: String
+}
+
+type Author {
+  createdAt: ISO8601DateTime!
+  id: Int!
+  logo: String
+  name: String
+  updatedAt: ISO8601DateTime!
+}
+
+type Mutation {
+  "Create preference"
+  createPreference(input: UpsertPreferenceInput!): Preference
+  "Delete preference"
+  deletePreference(id: Int!): Preference
+  "Update preference"
+  updatePreference(id: Int!, input: UpsertPreferenceInput!): Preference
+}
+
+type Preference {
+  createdAt: ISO8601DateTime!
+  id: Int!
+  key: String
+  updatedAt: ISO8601DateTime!
+  value: String
+}
+
+type Query {
+  "Current stations on air"
+  currentStationsOnAir: [Station!]!
+  "Highlighted articles"
+  highlightedArticles(limit: Int): [Article!]!
+  "Latest published articles"
+  latestArticles(limit: Int): [Article!]!
+  "Latest published articles"
+  mostViewedArticles(from: String!, limit: Int, to: String!): [Article!]!
+  "All preferences"
+  preferences: [Preference!]!
+  "Find section"
+  section(id: ID): Section
+  "All sections"
+  sections: [Section!]!
+}
+
+type Section {
+  _extraProps: String
+  articles(limit: Int, skip: Int): [Article!]!
+  color: String
+  createdAt: ISO8601DateTime!
+  description: String
+  facebook: String
+  id: Int!
+  name: String
+  order: Int
+  slug: String
+  twitter: String
+  updatedAt: ISO8601DateTime!
+  visible: Boolean
+}
+
+type Station {
+  appUrl: String
+  children: [Station!]!
+  createdAt: ISO8601DateTime!
+  description: String
+  facebook: String
+  frequency: Float
+  id: Int!
+  image: String
+  imagePreview: String
+  name: String
+  news: Boolean
+  orderer: Int
+  parentStationId: Int
+  playlist1: String
+  playlist1Image: String
+  playlist2: String
+  playlist2Image: String
+  playlist3: String
+  playlist3Image: String
+  playlist4: String
+  playlist4Image: String
+  slug: String
+  streamUrl: String
+  twitter: String
+  updatedAt: ISO8601DateTime!
+  video: Boolean
+}
+
+input UpsertPreferenceInput {
+  key: String!
+  value: String
+}
+
+
+"An ISO 8601-encoded datetime"
+scalar ISO8601DateTime

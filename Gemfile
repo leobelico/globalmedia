@@ -49,6 +49,8 @@ gem 'dalli'
 gem "rack-timeout"
 gem 'newrelic_rpm'
 gem 'geocoder'
+gem 'graphql', '~> 1.12', '>= 1.12.6'
+gem 'axlsx', '~> 2.0', '>= 2.0.1'
 # gem "skylight"
 #gem 'unicorn'
 # gem 'actionpack-action_caching'
@@ -93,3 +95,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'graphiql-rails', group: :development

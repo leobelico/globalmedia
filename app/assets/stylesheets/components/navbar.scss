@@ -4,7 +4,8 @@
 	background: #424242; 
 	height:  40px; 
 	margin-left:  auto; 
-	margin-right:  auto; 
+	margin-right:  auto;
+    padding-top: 0;
 	box-sizing:  border-box; 
 	display:  flex; 
 	flex-direction:  row; 
@@ -30,13 +31,13 @@
 	top:  30px; 
 	left:  12px; 
 	height:  2px; 
-	width:  0px; 
+	width:  0px;
 	background:  #ffffff;
 	content: ' ';
 	transition:  all .3s ease; 
 }
 .navbar__link:hover:after {
-	width:  50px; 
+	width:  50px;
 }
 .navbar__link:not(:first-of-type):before {
 	border-right:  solid 1px rgba(255,255,255,.55); 	

@@ -5,6 +5,9 @@
 	<% if current_user.create_articles_permission? or current_user.destroy_articles_permission? %>
 		<%= link_to "Notas", panel_articles_path, class: "admin-sidebar__link" %>
 	<% end %>
+  <% if current_user.hits_permission? %>
+    <%= link_to "Analytics", '/panel/analytics', class: "admin-sidebar__link" %>
+  <% end %>
 	<% if current_user.is_news_chief? %>
 			<%= link_to "Notas en portada", panel_highlights_path, class: "admin-sidebar__link" %>
 			<%= link_to "Es Noticia", panel_hashtags_path, class: "admin-sidebar__link" %>
@@ -35,7 +38,7 @@
 		<%= link_to "Editores", panel_users_path, class: "admin-sidebar__link" %>
 	<% end %>
 
-  <a target="_blank" href="/panel/preference" class="admin-sidebar__link">Preferencias</a>
+  <a href="/panel/preferences" class="admin-sidebar__link">Preferencias</a>
 
   <% if current_user.create_articles_permission? or current_user.destroy_articles_permission? %>
     <a target="_blank" href="https://gmnet.vip/login" class="admin-sidebar__link" style="color: #ff0000;">Acortador URL</a>

@@ -1,0 +1,88 @@
+<div class="row m-2">
+  <div class="col-12 d-flex justify-content-between bg-light rounded p-2">
+    <span class="h3">Analytics</span>
+    <div>
+      <button class="btn btn-success" (click)="openModalExportExcel()"><i class="fas fa-file-excel mx-1"></i>Exportar
+      </button>
+    </div>
+  </div>
+  <div class="col-12 bg-light rounded my-2 p-3">
+    <div class="row">
+      <div class="col-12 p-2">
+        <div class="w-100 d-flex justify-content-center">
+          <span class="h4">Top articulos(Hoy)</span>
+        </div>
+        <div *ngIf="!mostViewedArticlesTodayLoading">
+          <canvas *ngIf="mostViewedArticlesToday.length > 0" baseChart
+                  [chartType]="'bar'"
+                  [legend]="false"
+                  [labels]="barChartLabelsToday"
+                  [datasets]="barChartDataToday">
+          </canvas>
+          <div *ngIf="mostViewedArticlesToday.length <= 0" class="w-100 d-flex justify-content-center">
+            <span class="text-muted"><i class="fas fa-database mx-1"></i>Sin datos</span>
+          </div>
+        </div>
+        <div *ngIf="mostViewedArticlesTodayLoading" class="w-100 d-flex justify-content-center">
+          <i class="fas fa-2x fa-spinner fa-spin"></i>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 p-2">
+        <div class="w-100 d-flex justify-content-center">
+          <span class="h4">Top articulos(Semana)</span>
+        </div>
+        <div *ngIf="!mostViewedArticlesWeekLoading">
+          <canvas *ngIf="mostViewedArticlesWeek.length > 0" baseChart
+                  [chartType]="'bar'"
+                  [legend]="false"
+                  [labels]="barChartLabelsWeek"
+                  [datasets]="barChartDataWeek">
+          </canvas>
+          <div *ngIf="mostViewedArticlesWeek.length <= 0" class="w-100 d-flex justify-content-center">
+            <span class="text-muted"><i class="fas fa-database mx-1"></i>Sin datos</span>
+          </div>
+        </div>
+        <div *ngIf="mostViewedArticlesWeekLoading" class="w-100 d-flex justify-content-center">
+          <i class="fas fa-2x fa-spinner fa-spin"></i>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 p-2">
+        <div class="w-100 d-flex justify-content-center">
+          <span class="h4">Top articulos(Mes)</span>
+        </div>
+        <div *ngIf="!mostViewedArticlesMonthLoading">
+          <canvas *ngIf="mostViewedArticlesMonth.length > 0" baseChart
+                  [chartType]="'bar'"
+                  [legend]="false"
+                  [labels]="barChartLabelsMonth"
+                  [datasets]="barChartDataMonth">
+          </canvas>
+          <div *ngIf="mostViewedArticlesMonth.length <= 0" class="w-100 d-flex justify-content-center">
+            <span class="text-muted"><i class="fas fa-database mx-1"></i>Sin datos</span>
+          </div>
+        </div>
+        <div *ngIf="mostViewedArticlesMonthLoading" class="w-100 d-flex justify-content-center">
+          <i class="fas fa-2x fa-spinner fa-spin"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #modalExport let-modal>
+  <div class="modal-header">
+    <span class="h4">Exportar metricas</span>
+    <button class="btn" (click)="modal.dismiss()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="modal-body">
+    <strong class="text-muted">Selecciona el rango de fechas</strong>
+    <div class="w-100 d-flex justify-content-center mt-2">
+      <app-range-datepicker (onRangeChanged)="setExportRangeDates($event)"></app-range-datepicker>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss()">Cancelar</button>
+    <button type="button" class="btn btn-success" (click)="modal.close()" [disabled]="!exportRangeDates || !exportRangeDates.from || !exportRangeDates.to">
+      <i class="fas fa-file-excel mx-1"></i>Exportar
+    </button>
+  </div>
+</ng-template>

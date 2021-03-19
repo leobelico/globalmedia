@@ -1,0 +1,59 @@
+<div class="row m-2">
+  <div class="col-12 d-flex justify-content-between bg-light rounded p-2">
+    <span class="h3">Preferences</span>
+  </div>
+  <div class="col-12 bg-light rounded my-2 p-3">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-end">
+        <button  class="btn btn-primary" (click)="openModalUpsert()">Agregar</button>
+      </div>
+      <div *ngIf="isLoadingData" class="col-12 d-flex justify-content-center">
+        <i class="fas fa-2x fa-spinner fa-spin"></i>
+      </div>
+      <div *ngIf="!isLoadingData" class="col-12">
+        <table class="table table-sm">
+          <thead class="thead-dark">
+          <tr>
+            <th class="text-center" scope="col">Key</th>
+            <th class="text-center" scope="col">Value</th>
+            <th class="text-center" scope="col">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of preferences">
+            <td class="text-center">{{item.key}}</td>
+            <td class="text-center">{{item.value}}</td>
+            <td class="d-flex justify-content-center">
+              <a style="cursor: pointer;" (click)="openModalUpsert(item)"><i class="mx-1 fas fa-edit text-secondary"></i></a>
+              <a style="cursor: pointer;" (click)="delete(item.id)"><i class="mx-1 fas fa-trash text-danger"></i></a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #modalUpsert let-modal>
+  <div class="modal-header">
+    <span class="h4">Preferencia</span>
+    <button class="btn" (click)="modal.dismiss()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="modal-body">
+    <form *ngIf="formGroupUpsert" [formGroup]="formGroupUpsert" (submit)="modal.close()">
+      <div class="row">
+        <div class="form-group col-12 my-2">
+          <label for="inputKey">Key</label>
+          <input formControlName="key" type="text" class="form-control form-control-sm" id="inputKey" placeholder="Key">
+        </div>
+        <div class="form-group col-12 my-2">
+          <label for="inputValue">Value</label>
+          <input type="text" formControlName="value"  class="form-control form-control-sm" id="inputValue" placeholder="Value" />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss()">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="modal.close()">Guardar</button>
+  </div>
+</ng-template>

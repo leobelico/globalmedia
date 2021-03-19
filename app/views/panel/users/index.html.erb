@@ -29,32 +29,32 @@
 			<% end %>
 
 			<p class="table__cell permission">
-				<%= image_tag (user.create_articles_permission.to_s + ".svg") %>
+				<%= image_tag (user.create_articles_permission.to_s + ".svg"), class: 'p-0' %>
 			</p>	
 			<p class="table__cell permission">
-				<%= image_tag (user.destroy_articles_permission.to_s + ".svg") %>
+				<%= image_tag (user.destroy_articles_permission.to_s + ".svg"), class: 'p-0' %>
 			</p>
 			<p class="table__cell permission">
-				<%= image_tag (user.banners_permission.to_s + ".svg") %>
+				<%= image_tag (user.banners_permission.to_s + ".svg"), class: 'p-0' %>
 			</p>
 			<p class="table__cell permission">
-				<%= image_tag (user.hits_permission.to_s + ".svg") %>
+				<%= image_tag (user.hits_permission.to_s + ".svg"), class: 'p-0' %>
 			</p>
 			<p class="table__cell permission">
-				<%= image_tag (user.video_complaints_permission.to_s + ".svg") %>
+				<%= image_tag (user.video_complaints_permission.to_s + ".svg"), class: 'p-0' %>
 			</p>
 			<p class="table__cell permission">
-				<%= image_tag (user.radio_stations_permission.to_s + ".svg") %>
+				<%= image_tag (user.radio_stations_permission.to_s + ".svg"), class: 'p-0' %>
 			</p>
 			<p class="table__cell permission">
-				<%= image_tag (user.remote_controls_permission.to_s + ".svg") %>
+				<%= image_tag (user.remote_controls_permission.to_s + ".svg"), class: 'p-0' %>
 			</p>
 			<p class="table__cell permission">
-				<%= image_tag (user.user_permission.to_s + ".svg") %>
+				<%= image_tag (user.user_permission.to_s + ".svg"), class: 'p-0' %>
 
 			</p>
 			<p class="table__cell permission">
-				<%= image_tag (user.is_news_chief.to_s + ".svg") %>
+				<%= image_tag (user.is_news_chief.to_s + ".svg"), class: 'p-0' %>
 			</p>
 			
 			<%= link_to "Editar", edit_panel_user_path(user), class: "table__cell boolean edit" %>

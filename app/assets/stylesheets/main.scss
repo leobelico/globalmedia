@@ -67,6 +67,10 @@ body {
 	display:  none;
 }
 
+.navbar__link:hover {
+  color: #FFFFFF;
+}
+
 .interface {
 	width:  100%; 
 	max-width:  $interface-width; 
