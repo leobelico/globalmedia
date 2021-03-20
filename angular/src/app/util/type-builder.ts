@@ -2,6 +2,7 @@ import {ArticleType} from "../types/graphql/article-type";
 import {isIterable} from "rxjs/internal-compatibility";
 import {PreferenceType} from "../types/graphql/preference-type";
 import * as moment from "moment";
+import {AuthorType} from "../types/graphql/author-type";
 
 export class TypeBuilder {
   public static async article(data: any): Promise<ArticleType | null> {
@@ -73,6 +74,32 @@ export class TypeBuilder {
     }
     for (const item of data) {
       const objectType = await TypeBuilder.preference(item);
+      if (objectType != null) {
+        result.push(objectType);
+      }
+    }
+    return result;
+  }
+  public static async author(data: any): Promise<AuthorType | null> {
+    if (data) {
+      return {
+        id: data.id ?? -1,
+        logo: data.logo ?? null,
+        name: data.name ?? null,
+        totalViews: data.totalViews ?? 0,
+        createdAt: moment(data.createdAt),
+        updatedAt: moment(data.updatedAt)
+      };
+    }
+    return null;
+  }
+  public static async authors(data: any[]): Promise<AuthorType[]> {
+    const result: AuthorType[] = [];
+    if (!data || !isIterable(data)) {
+      return [];
+    }
+    for (const item of data) {
+      const objectType = await TypeBuilder.author(item);
       if (objectType != null) {
         result.push(objectType);
       }

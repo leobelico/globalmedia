@@ -45,6 +45,7 @@ type Author {
   id: Int!
   logo: String
   name: String
+  totalViews(from: String!, to: String!): Int!
   updatedAt: ISO8601DateTime!
 }
 
@@ -72,8 +73,10 @@ type Query {
   highlightedArticles(limit: Int): [Article!]!
   "Latest published articles"
   latestArticles(limit: Int): [Article!]!
-  "Latest published articles"
+  "Most viewed articles"
   mostViewedArticles(from: String!, limit: Int, to: String!): [Article!]!
+  "MOst viewed authors"
+  mostViewedAuthors(from: String!, limit: Int, to: String!): [Author!]!
   "All preferences"
   preferences: [Preference!]!
   "Find section"

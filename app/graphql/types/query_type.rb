@@ -6,7 +6,7 @@ module Types
 
     field :highlightedArticles, resolver: Resolvers::ResolversArticle::ResolverHighlightedArticles, description: "Highlighted articles"
     field :latestArticles, resolver: Resolvers::ResolversArticle::ResolverLatestArticles, description: "Latest published articles"
-    field :mostViewedArticles, resolver: Resolvers::ResolversArticle::ResolverMostViewedArticles, description: "Latest published articles"
+    field :mostViewedArticles, resolver: Resolvers::ResolversArticle::ResolverMostViewedArticles, description: "Most viewed articles"
 
     field :sections, resolver: Resolvers::ResolversSection::ResolverAllSections, description: "All sections"
     field :section, resolver: Resolvers::ResolversSection::ResolverFindSection, description: "Find section"
@@ -14,6 +14,8 @@ module Types
     field :currentStationsOnAir, resolver: Resolvers::ResolversStation::ResolverCurrentStationsOnAirStations, description: "Current stations on air"
 
     field :preferences, resolver: Resolvers::ResolversPreference::ResolverAllPreferences, description: "All preferences"
+
+    field :mostViewedAuthors, resolver: Resolvers::ResolversAuthor::ResolverMostViewedAuthors, description: "MOst viewed authors"
 
   end
 end

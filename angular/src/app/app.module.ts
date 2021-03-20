@@ -14,6 +14,7 @@ import {NavigationService} from "./services/navigation.service";
 import {ArticleGraphqlService} from "./services/graphql/article-graphql.service";
 import {PreferenceGraphqlService} from "./services/graphql/preference-graphql.service";
 import {PreferenceComponent} from "./pages/panel/preference/preference.component";
+import {AuthorGraphqlService} from "./services/graphql/author-graphql.service";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {PreferenceComponent} from "./pages/panel/preference/preference.component
     NavigationService,
     //Graphql Services
     ArticleGraphqlService,
+    AuthorGraphqlService,
     PreferenceGraphqlService
   ],
   // bootstrap: [AppComponent] // Commented for angular elements

@@ -1,12 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgbDate, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Label} from "ng2-charts";
-import {ChartDataSets, ChartOptions, ChartType} from "chart.js";
+import {ChartDataSets, ChartOptions} from "chart.js";
 import {ArticleGraphqlService} from "../../../services/graphql/article-graphql.service";
 import * as moment from "moment-timezone";
 import {ArticleType} from "../../../types/graphql/article-type";
 import {RangeDates} from "../../../types/range-dates";
 import {NavigationService} from "../../../services/navigation.service";
+import {AuthorGraphqlService} from "../../../services/graphql/author-graphql.service";
+import {AuthorType} from "../../../types/graphql/author-type";
 
 @Component({
   selector: 'app-analytics',
@@ -27,10 +29,28 @@ export class AnalyticsComponent implements OnInit {
       yAxes: [{}]
     }
   };
-  barChartLabelsToday: Label[] = [];
-  barChartLabelsWeek: Label[] = [];
-  barChartLabelsMonth: Label[] = [];
-  barChartDataToday: ChartDataSets[] = [
+  optionsAuthorsChart: ChartOptions = {
+    scales: {
+      xAxes: [{
+        ticks: {
+          callback: function(value: string) {
+            return value.substr(0, 10);//truncate
+          },
+        }
+      }],
+      yAxes: [{}]
+    }
+  };
+
+  barChartArticlesLabelsToday: Label[] = [];
+  barChartArticlesLabelsWeek: Label[] = [];
+  barChartArticlesLabelsMonth: Label[] = [];
+
+  barChartAuthorsLabelsToday: Label[] = [];
+  barChartAuthorsLabelsWeek: Label[] = [];
+  barChartAuthorsLabelsMonth: Label[] = [];
+
+  barChartArticlesDataToday: ChartDataSets[] = [
     {
       data: [],
       label: 'Vistas',
@@ -40,7 +60,7 @@ export class AnalyticsComponent implements OnInit {
       hoverBorderColor: 'rgb(1,55,131)',
     }
   ];
-  barChartDataWeek: ChartDataSets[] = [
+  barChartArticlesDataWeek: ChartDataSets[] = [
     {
       data: [],
       label: 'Vistas',
@@ -50,7 +70,38 @@ export class AnalyticsComponent implements OnInit {
       hoverBorderColor: 'rgb(1,55,131)',
     }
   ];
-  barChartDataMonth: ChartDataSets[] = [
+  barChartArticlesDataMonth: ChartDataSets[] = [
+    {
+      data: [],
+      label: 'Vistas',
+      backgroundColor: 'rgb(24,108,172,0.7)',
+      borderColor: 'rgb(24,108,172)',
+      hoverBackgroundColor: 'rgb(1,55,131, 0.7)',
+      hoverBorderColor: 'rgb(1,55,131)',
+    }
+  ];
+
+  barChartAuthorsDataToday: ChartDataSets[] = [
+    {
+      data: [],
+      label: 'Vistas',
+      backgroundColor: 'rgb(24,108,172,0.7)',
+      borderColor: 'rgb(24,108,172)',
+      hoverBackgroundColor: 'rgb(1,55,131, 0.7)',
+      hoverBorderColor: 'rgb(1,55,131)',
+    }
+  ];
+  barChartAuthorsDataWeek: ChartDataSets[] = [
+    {
+      data: [],
+      label: 'Vistas',
+      backgroundColor: 'rgb(24,108,172,0.7)',
+      borderColor: 'rgb(24,108,172)',
+      hoverBackgroundColor: 'rgb(1,55,131, 0.7)',
+      hoverBorderColor: 'rgb(1,55,131)',
+    }
+  ];
+  barChartAuthorsDataMonth: ChartDataSets[] = [
     {
       data: [],
       label: 'Vistas',
@@ -65,43 +116,76 @@ export class AnalyticsComponent implements OnInit {
   mostViewedArticlesWeek: ArticleType[] = [];
   mostViewedArticlesMonth: ArticleType[] = [];
 
+  mostViewedAuthorsToday: AuthorType[] = [];
+  mostViewedAuthorsWeek: AuthorType[] = [];
+  mostViewedAuthorsMonth: AuthorType[] = [];
+
   mostViewedArticlesTodayLoading = true;
   mostViewedArticlesWeekLoading = true;
   mostViewedArticlesMonthLoading = true;
 
+  mostViewedAuthorsTodayLoading = true;
+  mostViewedAuthorsWeekLoading = true;
+  mostViewedAuthorsMonthLoading = true;
+
   exportRangeDates: RangeDates | null = null;
   @ViewChild('modalExport') modalExport: ViewChild | null = null;
   constructor(private articleGraphqlService: ArticleGraphqlService,
+              private authorGraphqlService: AuthorGraphqlService,
               private ngbModal: NgbModal,
               private navigationService: NavigationService) {
   }
 
   ngOnInit(): void {
-    const momentToday: moment.Moment = moment();
-    this.articleGraphqlService.mostViewedArticles(momentToday.startOf('day').toISOString(), momentToday.endOf('day').toISOString(), 30).subscribe(articles => {
+    this.articleGraphqlService.mostViewedArticles(moment().startOf('day').toISOString(), moment().endOf('day').toISOString(), 30).subscribe(articles => {
       this.mostViewedArticlesTodayLoading = false;
       this.mostViewedArticlesToday = articles;
-      this.barChartLabelsToday = this.getLabels(articles);
-      this.barChartDataToday[0].data = this.getViews(articles);
+      this.barChartArticlesLabelsToday = this.getLabelsArticles(articles);
+      this.barChartArticlesDataToday[0].data = this.getViewsArticles(articles);
     });
-    this.articleGraphqlService.mostViewedArticles(momentToday.startOf('week').toISOString(), momentToday.endOf('week').toISOString()).subscribe(articles => {
+    this.articleGraphqlService.mostViewedArticles(moment().startOf('week').toISOString(), moment().endOf('week').toISOString()).subscribe(articles => {
       this.mostViewedArticlesWeekLoading = false;
       this.mostViewedArticlesWeek = articles;
-      this.barChartLabelsWeek = this.getLabels(articles);
-      this.barChartDataWeek[0].data = this.getViews(articles);
+      this.barChartArticlesLabelsWeek = this.getLabelsArticles(articles);
+      this.barChartArticlesDataWeek[0].data = this.getViewsArticles(articles);
     });
-    this.articleGraphqlService.mostViewedArticles(momentToday.startOf('month').toISOString(), momentToday.endOf('month').toISOString()).subscribe(articles => {
+    this.articleGraphqlService.mostViewedArticles(moment().startOf('month').toISOString(), moment().endOf('month').toISOString()).subscribe(articles => {
       this.mostViewedArticlesMonthLoading = false;
       this.mostViewedArticlesMonth = articles;
-      this.barChartLabelsMonth = this.getLabels(articles);
-      this.barChartDataMonth[0].data = this.getViews(articles);
+      this.barChartArticlesLabelsMonth = this.getLabelsArticles(articles);
+      this.barChartArticlesDataMonth[0].data = this.getViewsArticles(articles);
+    });
+
+    this.authorGraphqlService.mostViewedAuthors(moment().startOf('day').toISOString(), moment().endOf('day').toISOString(), 30).subscribe(authors => {
+      this.mostViewedAuthorsTodayLoading = false;
+      this.mostViewedAuthorsToday = authors;
+      this.barChartAuthorsLabelsToday = this.getLabelsAuthors(authors);
+      this.barChartAuthorsDataToday[0].data = this.getViewsAuthors(authors);
+    });
+    this.authorGraphqlService.mostViewedAuthors(moment().startOf('week').toISOString(), moment().endOf('week').toISOString()).subscribe(authors => {
+      this.mostViewedAuthorsWeekLoading = false;
+      this.mostViewedAuthorsWeek = authors;
+      this.barChartAuthorsLabelsWeek = this.getLabelsAuthors(authors);
+      this.barChartAuthorsDataWeek[0].data = this.getViewsAuthors(authors);
+    });
+    this.authorGraphqlService.mostViewedAuthors(moment().startOf('month').toISOString(), moment().endOf('month').toISOString()).subscribe(authors => {
+      this.mostViewedAuthorsMonthLoading = false;
+      this.mostViewedAuthorsMonth = authors;
+      this.barChartAuthorsLabelsMonth = this.getLabelsAuthors(authors);
+      this.barChartAuthorsDataMonth[0].data = this.getViewsAuthors(authors);
     });
   }
 
-  getLabels(articles: ArticleType[]): string[] {
+  getLabelsArticles(articles: ArticleType[]): string[] {
     return articles.map(value => value.name??'');
   }
-  getViews(articles: ArticleType[]): number[] {
+  getLabelsAuthors(articles: AuthorType[]): string[] {
+    return articles.map(value => value.name??'');
+  }
+  getViewsArticles(articles: ArticleType[]): number[] {
+    return articles.map(value => value.totalViews);
+  }
+  getViewsAuthors(articles: AuthorType[]): number[] {
     return articles.map(value => value.totalViews);
   }
   openModalExportExcel(): void {

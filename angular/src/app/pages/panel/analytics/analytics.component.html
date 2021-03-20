@@ -8,7 +8,7 @@
   </div>
   <div class="col-12 bg-light rounded my-2 p-3">
     <div class="row">
-      <div class="col-12 p-2">
+      <div class="col-12 col-md-6 p-2">
         <div class="w-100 d-flex justify-content-center">
           <span class="h4">Top articulos(Hoy)</span>
         </div>
@@ -17,14 +17,34 @@
                   [options]="optionsArticlesChart"
                   [chartType]="'bar'"
                   [legend]="false"
-                  [labels]="barChartLabelsToday"
-                  [datasets]="barChartDataToday">
+                  [labels]="barChartArticlesLabelsToday"
+                  [datasets]="barChartArticlesDataToday">
           </canvas>
           <div *ngIf="mostViewedArticlesToday.length <= 0" class="w-100 d-flex justify-content-center">
             <span class="text-muted"><i class="fas fa-database mx-1"></i>Sin datos</span>
           </div>
         </div>
         <div *ngIf="mostViewedArticlesTodayLoading" class="w-100 d-flex justify-content-center">
+          <i class="fas fa-2x fa-spinner fa-spin"></i>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 p-2">
+        <div class="w-100 d-flex justify-content-center">
+          <span class="h4">Top autores(Hoy)</span>
+        </div>
+        <div *ngIf="!mostViewedAuthorsTodayLoading">
+          <canvas *ngIf="mostViewedAuthorsToday.length > 0" baseChart
+                  [options]="optionsAuthorsChart"
+                  [chartType]="'bar'"
+                  [legend]="false"
+                  [labels]="barChartAuthorsLabelsToday"
+                  [datasets]="barChartAuthorsDataToday">
+          </canvas>
+          <div *ngIf="mostViewedAuthorsToday.length <= 0" class="w-100 d-flex justify-content-center">
+            <span class="text-muted"><i class="fas fa-database mx-1"></i>Sin datos</span>
+          </div>
+        </div>
+        <div *ngIf="mostViewedAuthorsTodayLoading" class="w-100 d-flex justify-content-center">
           <i class="fas fa-2x fa-spinner fa-spin"></i>
         </div>
       </div>
@@ -37,14 +57,34 @@
                   [options]="optionsArticlesChart"
                   [chartType]="'bar'"
                   [legend]="false"
-                  [labels]="barChartLabelsWeek"
-                  [datasets]="barChartDataWeek">
+                  [labels]="barChartArticlesLabelsWeek"
+                  [datasets]="barChartArticlesDataWeek">
           </canvas>
           <div *ngIf="mostViewedArticlesWeek.length <= 0" class="w-100 d-flex justify-content-center">
             <span class="text-muted"><i class="fas fa-database mx-1"></i>Sin datos</span>
           </div>
         </div>
         <div *ngIf="mostViewedArticlesWeekLoading" class="w-100 d-flex justify-content-center">
+          <i class="fas fa-2x fa-spinner fa-spin"></i>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 p-2">
+        <div class="w-100 d-flex justify-content-center">
+          <span class="h4">Top autores(Semana)</span>
+        </div>
+        <div *ngIf="!mostViewedAuthorsWeekLoading">
+          <canvas *ngIf="mostViewedAuthorsWeek.length > 0" baseChart
+                  [options]="optionsAuthorsChart"
+                  [chartType]="'bar'"
+                  [legend]="false"
+                  [labels]="barChartAuthorsLabelsWeek"
+                  [datasets]="barChartAuthorsDataWeek">
+          </canvas>
+          <div *ngIf="mostViewedAuthorsWeek.length <= 0" class="w-100 d-flex justify-content-center">
+            <span class="text-muted"><i class="fas fa-database mx-1"></i>Sin datos</span>
+          </div>
+        </div>
+        <div *ngIf="mostViewedAuthorsWeekLoading" class="w-100 d-flex justify-content-center">
           <i class="fas fa-2x fa-spinner fa-spin"></i>
         </div>
       </div>
@@ -57,14 +97,34 @@
                   [options]="optionsArticlesChart"
                   [chartType]="'bar'"
                   [legend]="false"
-                  [labels]="barChartLabelsMonth"
-                  [datasets]="barChartDataMonth">
+                  [labels]="barChartArticlesLabelsMonth"
+                  [datasets]="barChartArticlesDataMonth">
           </canvas>
           <div *ngIf="mostViewedArticlesMonth.length <= 0" class="w-100 d-flex justify-content-center">
             <span class="text-muted"><i class="fas fa-database mx-1"></i>Sin datos</span>
           </div>
         </div>
         <div *ngIf="mostViewedArticlesMonthLoading" class="w-100 d-flex justify-content-center">
+          <i class="fas fa-2x fa-spinner fa-spin"></i>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 p-2">
+        <div class="w-100 d-flex justify-content-center">
+          <span class="h4">Top autores(Mes)</span>
+        </div>
+        <div *ngIf="!mostViewedAuthorsMonthLoading">
+          <canvas *ngIf="mostViewedAuthorsMonth.length > 0" baseChart
+                  [options]="optionsAuthorsChart"
+                  [chartType]="'bar'"
+                  [legend]="false"
+                  [labels]="barChartAuthorsLabelsMonth"
+                  [datasets]="barChartAuthorsDataMonth">
+          </canvas>
+          <div *ngIf="mostViewedAuthorsMonth.length <= 0" class="w-100 d-flex justify-content-center">
+            <span class="text-muted"><i class="fas fa-database mx-1"></i>Sin datos</span>
+          </div>
+        </div>
+        <div *ngIf="mostViewedAuthorsMonthLoading" class="w-100 d-flex justify-content-center">
           <i class="fas fa-2x fa-spinner fa-spin"></i>
         </div>
       </div>
