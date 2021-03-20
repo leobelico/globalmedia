@@ -33,7 +33,7 @@ export class AnalyticsComponent implements OnInit {
   barChartDataToday: ChartDataSets[] = [
     {
       data: [],
-      label: 'Articulos',
+      label: 'Vistas',
       backgroundColor: 'rgb(24,108,172,0.7)',
       borderColor: 'rgb(24,108,172)',
       hoverBackgroundColor: 'rgb(1,55,131, 0.7)',
@@ -43,7 +43,7 @@ export class AnalyticsComponent implements OnInit {
   barChartDataWeek: ChartDataSets[] = [
     {
       data: [],
-      label: 'Articulos',
+      label: 'Vistas',
       backgroundColor: 'rgb(24,108,172,0.7)',
       borderColor: 'rgb(24,108,172)',
       hoverBackgroundColor: 'rgb(1,55,131, 0.7)',
@@ -53,7 +53,7 @@ export class AnalyticsComponent implements OnInit {
   barChartDataMonth: ChartDataSets[] = [
     {
       data: [],
-      label: 'Articulos',
+      label: 'Vistas',
       backgroundColor: 'rgb(24,108,172,0.7)',
       borderColor: 'rgb(24,108,172)',
       hoverBackgroundColor: 'rgb(1,55,131, 0.7)',
