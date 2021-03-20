@@ -14,6 +14,7 @@
         </div>
         <div *ngIf="!mostViewedArticlesTodayLoading">
           <canvas *ngIf="mostViewedArticlesToday.length > 0" baseChart
+                  [options]="optionsArticlesChart"
                   [chartType]="'bar'"
                   [legend]="false"
                   [labels]="barChartLabelsToday"
@@ -33,6 +34,7 @@
         </div>
         <div *ngIf="!mostViewedArticlesWeekLoading">
           <canvas *ngIf="mostViewedArticlesWeek.length > 0" baseChart
+                  [options]="optionsArticlesChart"
                   [chartType]="'bar'"
                   [legend]="false"
                   [labels]="barChartLabelsWeek"
@@ -52,6 +54,7 @@
         </div>
         <div *ngIf="!mostViewedArticlesMonthLoading">
           <canvas *ngIf="mostViewedArticlesMonth.length > 0" baseChart
+                  [options]="optionsArticlesChart"
                   [chartType]="'bar'"
                   [legend]="false"
                   [labels]="barChartLabelsMonth"

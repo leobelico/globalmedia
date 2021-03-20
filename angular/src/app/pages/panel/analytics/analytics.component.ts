@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgbDate, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Label} from "ng2-charts";
-import {ChartDataSets, ChartType} from "chart.js";
+import {ChartDataSets, ChartOptions, ChartType} from "chart.js";
 import {ArticleGraphqlService} from "../../../services/graphql/article-graphql.service";
 import * as moment from "moment-timezone";
 import {ArticleType} from "../../../types/graphql/article-type";
@@ -15,6 +15,18 @@ import {NavigationService} from "../../../services/navigation.service";
 })
 export class AnalyticsComponent implements OnInit {
 
+  optionsArticlesChart: ChartOptions = {
+    scales: {
+      xAxes: [{
+        ticks: {
+          callback: function(value: string) {
+            return value.substr(0, 10);//truncate
+          },
+        }
+      }],
+      yAxes: [{}]
+    }
+  };
   barChartLabelsToday: Label[] = [];
   barChartLabelsWeek: Label[] = [];
   barChartLabelsMonth: Label[] = [];
@@ -87,7 +99,7 @@ export class AnalyticsComponent implements OnInit {
   }
 
   getLabels(articles: ArticleType[]): string[] {
-    return articles.map(value => (value.name ? value.name.substr(0, 10) : '') + '...');
+    return articles.map(value => value.name??'');
   }
   getViews(articles: ArticleType[]): number[] {
     return articles.map(value => value.totalViews);
