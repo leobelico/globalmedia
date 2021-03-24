@@ -24,7 +24,6 @@ export class ArticleGraphqlService extends BaseGraphqlService{
         image
         imageThumbnail
         keywordId
-        locationId
         metaTags
         name
         note
