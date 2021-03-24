@@ -8,7 +8,17 @@ class ApplicationController < ActionController::Base
   before_action :redirect_subdomain
 
   def redirect_subdomain
-    unless /(^leon)|(^queretaro)|(^jalisco)|(^zacatecas)/.match(request.host)
+    @subdomain_location = 'default'
+    @location_id = 1
+    if /(^leon)|(^queretaro)|(^jalisco)|(^zacatecas)/.match(request.host)
+      matchers = request.host.match(/^[a-zA-Z]+/)
+      matchers.captures
+      @subdomain_location = matchers[0]
+      location = Location.where('key = ?', @subdomain_location).first
+      if location != nil
+        @location_id = location.id
+        end
+    else
       unless /^www/.match(request.host)
         url_redirect = request.protocol + "www." + request.host_with_port + request.fullpath
         redirect_to("#{url_redirect}", status: 301)
@@ -63,6 +73,8 @@ class ApplicationController < ActionController::Base
   helper_method :get_complaints
   helper_method :get_section_articles
   helper_method :get_cover_articles
+  helper_method :get_current_location
+  helper_method :get_local_section
 
   helper_method :current_coord
 
@@ -73,9 +85,6 @@ class ApplicationController < ActionController::Base
 
   def get_cover_articles(id)
     CoverArticle.joins("LEFT OUTER JOIN highlights ON highlights.article_id = cover_articles.article_id").where("cover_articles.section_id = #{id} AND highlights.article_id IS NULL AND cover_articles.published_at IS NOT NULL").order(article_highlight: :asc, published_at: :asc).last(4).reverse
-
-
-
     
   end
   def get_complaints
@@ -390,5 +399,17 @@ class ApplicationController < ActionController::Base
       end
       
      
+  end
+
+  def get_current_location
+    Location.where('id = ?', @location_id).first
+  end
+
+  def get_local_section
+    section = Section.find_by(location_id: @location_id)
+    if section == nil
+      section = Section.find_by(id: 1)
     end
+    section
+  end
 end
