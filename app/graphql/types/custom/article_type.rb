@@ -29,7 +29,6 @@ module Types
       field :note_old, String, null: true
       field :published_at, GraphQL::Types::ISO8601DateTime, null: true
       field :meta_tags, String, null: true
-      field :location_id, Integer, null: true
 
       # Custom Fields
       field :totalViews, resolver: Resolvers::ResolversArticle::Fields::FieldTotalViews, null: false
