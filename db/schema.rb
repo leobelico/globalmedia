@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_23_083611) do
+ActiveRecord::Schema.define(version: 2021_03_24_053851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 2021_03_23_083611) do
     t.text "note_old", default: ""
     t.datetime "published_at"
     t.string "meta_tags", default: ""
-    t.integer "location_id", default: 1
     t.index ["articable_id"], name: "index_articles_on_articable_id"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id"
     t.index ["author_id"], name: "index_articles_on_author_id"
@@ -171,6 +170,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_083611) do
     t.integer "article_id"
     t.datetime "scheduled_time"
     t.boolean "published", default: false
+    t.integer "location_id", default: 1, null: false
     t.index ["article_id"], name: "index_highlights_on_article_id"
   end
 
@@ -330,7 +330,6 @@ ActiveRecord::Schema.define(version: 2021_03_23_083611) do
     t.text "description"
     t.string "facebook"
     t.string "twitter"
-    t.boolean "is_local", default: false
     t.integer "location_id"
   end
 

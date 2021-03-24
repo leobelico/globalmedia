@@ -41,7 +41,7 @@ class TitlepageController < ApplicationController
 	def index
 		@breaking_news = Article.where(breaking_news: true).order("articles.updated_at ASC").last(4).reverse
 		
-		@highlights = Highlight.where("published = ? AND highlights.order < 7", true).order(order: "ASC")
+		@highlights = Highlight.where("published = ? AND highlights.order < 7 AND location_id = ?", true, @location_id).order(order: "ASC")
 		
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')
 		@sections = Section.where("visible = 'true' AND name != 'Último Momento' AND (location_id IS NULL OR location_id = ?)", @location_id).order(order: "ASC")
