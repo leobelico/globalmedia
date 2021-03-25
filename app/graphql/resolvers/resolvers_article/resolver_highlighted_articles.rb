@@ -7,7 +7,7 @@ module Resolvers
 
       def resolve(limit: 10)
         Article.joins('INNER JOIN highlights ON articles.id = highlights.article_id')
-               .where("highlights.published = ? AND highlights.order < 7 AND articles.location_id = ?", true, context['locationId'])
+               .where("highlights.published = ? AND highlights.order < 7", true)
                .order(order: "ASC")
                .limit(limit)
       end

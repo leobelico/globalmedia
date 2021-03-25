@@ -8,8 +8,8 @@ import * as moment from 'moment-timezone';
 export class TzPipe implements PipeTransform {
   constructor(private configurationService: ConfigurationService) {
   }
-  transform(value: string | moment.Moment | null, format: 'date' | 'datetime' | string = 'YYYY-MM-DD HH:mm:ss'): string {
-    return this.configurationService.tzToTimeZoneFormat(value, format === 'date' ? 'LL' : format === 'datetime' ? 'LLL' : format);
+  transform(value: string | moment.Moment | null, format: 'date' | 'datetime' | 'fullDatetime' | string = 'YYYY-MM-DD HH:mm:ss'): string {
+    return this.configurationService.tzToTimeZoneFormat(value, format === 'date' ? 'LL' : format === 'datetime' ? 'LLL' : format === 'fullDatetime' ? 'LLLL' : format);
   }
 
 }

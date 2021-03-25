@@ -15,6 +15,10 @@ import {ArticleGraphqlService} from "./services/graphql/article-graphql.service"
 import {PreferenceGraphqlService} from "./services/graphql/preference-graphql.service";
 import {PreferenceComponent} from "./pages/panel/preference/preference.component";
 import {AuthorGraphqlService} from "./services/graphql/author-graphql.service";
+import {HighlightComponent} from "./pages/panel/highlight/highlight.component";
+import {LocationGraphqlService} from "./services/graphql/location-graphql.service";
+import {HighlightGraphqlService} from "./services/graphql/highlight-graphql.service";
+import {SectionGraphqlService} from "./services/graphql/section-graphql.service";
 
 @NgModule({
   declarations: [
@@ -34,7 +38,10 @@ import {AuthorGraphqlService} from "./services/graphql/author-graphql.service";
     //Graphql Services
     ArticleGraphqlService,
     AuthorGraphqlService,
-    PreferenceGraphqlService
+    PreferenceGraphqlService,
+    LocationGraphqlService,
+    HighlightGraphqlService,
+    SectionGraphqlService,
   ],
   // bootstrap: [AppComponent] // Commented for angular elements
 })
@@ -48,10 +55,12 @@ export class AppModule {
 
     const panelAnalytics = createCustomElement(AnalyticsComponent, {injector: this.injector});
     const panelPreference = createCustomElement(PreferenceComponent, {injector: this.injector});
+    const panelHighlight = createCustomElement(HighlightComponent, {injector: this.injector});
 
 
     customElements.get('panel-analytics') || customElements.define("panel-analytics", panelAnalytics);
     customElements.get('panel-preference') || customElements.define("panel-preference", panelPreference);
+    customElements.get('panel-highlight') || customElements.define("panel-highlight", panelHighlight);
 
   }
 }

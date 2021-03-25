@@ -16,9 +16,11 @@ export class AuthorGraphqlService extends BaseGraphqlService {
         id
         name
         logo
-        totalViews(from: $from, to: $to)
         createdAt
         updatedAt
+        analytics(from: $from, to: $to) {
+          totalViews
+        }
       }
     }
   `;
@@ -28,7 +30,6 @@ export class AuthorGraphqlService extends BaseGraphqlService {
   }
 
   public mostViewedAuthors(from: string, to: string, limit: number = 10): Observable<AuthorType[]> {
-    console.log(from, to);
     return this.apollo.query<{mostViewedAuthors: any[]}, {from: string, to: string, limit?: number}>({
       query: this.queryMostViewedAuthors,
       variables: {

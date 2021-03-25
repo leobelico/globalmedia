@@ -30,6 +30,7 @@ export class ConfigurationService {
       return '';
     }
     const momentDate = (typeof timezone === 'string') ? moment(timezone) : timezone;
+    momentDate.locale(this.locale);
     return momentDate.tz(this.timeZone).format(format);
   }
 }

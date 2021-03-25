@@ -15,7 +15,7 @@ export class PreferenceComponent implements OnInit {
   preferences: PreferenceType[] = []
   formGroupUpsert: FormGroup | null = null;
   isLoadingData = true;
-  @ViewChild('modalUpsert') modalUpsert: ViewChild | null = null;
+  @ViewChild('upsertModal') upsertModal: ViewChild | null = null;
 
   constructor(private preferenceGraphqlService: PreferenceGraphqlService,
               private ngbModal: NgbModal) {
@@ -46,19 +46,19 @@ export class PreferenceComponent implements OnInit {
     }
   }
 
-  openModalUpsert(param?: PreferenceType): void {
+  openUpsertModal(param?: PreferenceType): void {
     if (this.formGroupUpsert) {
       if (param) {
-        this.formGroupUpsert.controls['id'].setValue(param.id);
-        this.formGroupUpsert.controls['key'].setValue(param.key);
-        this.formGroupUpsert.controls['value'].setValue(param.value);
+        this.formGroupUpsert.controls.id.setValue(param.id);
+        this.formGroupUpsert.controls.key.setValue(param.key);
+        this.formGroupUpsert.controls.value.setValue(param.value);
       } else {
-        this.formGroupUpsert.controls['id'].setValue(null);
-        this.formGroupUpsert.controls['key'].setValue('');
-        this.formGroupUpsert.controls['value'].setValue('');
+        this.formGroupUpsert.controls.id.setValue(null);
+        this.formGroupUpsert.controls.key.setValue('');
+        this.formGroupUpsert.controls.value.setValue('');
       }
     }
-    this.ngbModal.open(this.modalUpsert).closed.subscribe(value => {
+    this.ngbModal.open(this.upsertModal).closed.subscribe(value => {
       this.saveUpsert();
     });
   }
@@ -70,17 +70,17 @@ export class PreferenceComponent implements OnInit {
     if (this.formGroupUpsert.invalid) {
       return;
     }
-    const id: number | null = this.formGroupUpsert.controls['id'].value;
-    const value: UpsertPreferenceInput = {
-      key: this.formGroupUpsert.controls['key'].value,
-      value: this.formGroupUpsert.controls['value'].value,
+    const id: number | null = this.formGroupUpsert.controls.id.value;
+    const data: UpsertPreferenceInput = {
+      key: this.formGroupUpsert.controls.key.value,
+      value: this.formGroupUpsert.controls.value.value,
     };
     if (id) {
-      this.preferenceGraphqlService.update(id, value).subscribe(preference => {
+      this.preferenceGraphqlService.update(id, data).subscribe(preference => {
         this.loadData();
       });
     } else {
-      this.preferenceGraphqlService.create(value).subscribe(preference => {
+      this.preferenceGraphqlService.create(data).subscribe(preference => {
         this.loadData();
       });
     }

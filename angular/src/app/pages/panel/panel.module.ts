@@ -4,6 +4,7 @@ import {ArticleModule} from "./article/article.module";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {AnalyticsModule} from "./analytics/analytics.module";
 import {PreferenceModule} from "./preference/preference.module";
+import {HighlightModule} from "./highlight/highlight.module";
 
 
 
@@ -14,6 +15,7 @@ import {PreferenceModule} from "./preference/preference.module";
     NgbModule,
     AnalyticsModule,
     ArticleModule,
+    HighlightModule,
     PreferenceModule
   ]
 })

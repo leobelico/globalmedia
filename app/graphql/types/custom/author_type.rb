@@ -8,7 +8,7 @@ module Types
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
       # Custom Fields
-      field :totalViews, resolver: Resolvers::ResolversAuthor::Fields::FieldTotalViews, null: false
+      field :analytics, resolver: Resolvers::ResolversAuthor::Fields::FieldAnalytics, null: false
     end
   end
 end

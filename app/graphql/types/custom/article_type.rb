@@ -31,7 +31,7 @@ module Types
       field :meta_tags, String, null: true
 
       # Custom Fields
-      field :totalViews, resolver: Resolvers::ResolversArticle::Fields::FieldTotalViews, null: false
+      field :analytics, resolver: Resolvers::ResolversArticle::Fields::FieldAnalytics, null: false
       field :author, resolver: Resolvers::ResolversArticle::Fields::FieldAuthor, null: true
       field :section, resolver: Resolvers::ResolversArticle::Fields::FieldSection, null: false
     end

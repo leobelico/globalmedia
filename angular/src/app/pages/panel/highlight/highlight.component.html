@@ -1,0 +1,115 @@
+<div class="row m-2">
+  <div class="col-12 bg-light rounded p-2">
+    <span class="h3">Notas destacadas</span>
+  </div>
+  <div class="col-12 bg-light rounded my-2 p-3">
+    <div class="w-100 d-flex justify-content-between">
+      <div class="d-flex align-items-center">
+        <span class="mx-1 text-center">Ubicación: </span>
+        <select *ngIf="formControlLocation" [formControl]="formControlLocation" class="form-select">
+          <option [value]="0">Seleccionar</option>
+          <option *ngFor="let item of locations" [value]="item.id">{{item.name}}</option>
+        </select>
+      </div>
+      <div>
+        <button *ngIf="formControlLocation" class="btn btn-primary" (click)="openUpsertModal()"
+                [disabled]="formControlLocation.value <= 0">Agregar
+        </button>
+      </div>
+    </div>
+    <div *ngIf="isLoadingHighlights" class="w-100 d-flex justify-content-center">
+      <i class="fas fa-2x fa-spinner fa-spin"></i>
+    </div>
+    <div *ngIf="!isLoadingHighlights">
+      <table *ngIf="formControlLocation && formControlLocation.value > 0" class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col" class="text-center">Posición</th>
+          <th scope="col">Artículo</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Programado</th>
+          <th scope="col" class="text-center">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of highlights">
+          <th scope="row" class="text-center">{{item.order}}</th>
+          <td>{{item.article ? item.article.name : ''}}</td>
+          <td>
+            <span *ngIf="item.published" class="badge bg-success">Activo</span>
+            <span *ngIf="!item.published" class="badge bg-secondary">Inactivo</span>
+          </td>
+          <td>{{item.scheduledTime | tz: 'datetime'}}</td>
+          <td>
+            <div class="d-flex justify-content-center">
+              <a *ngIf="item.article" class="cursor-pointer mx-2" (click)="openArticle(item.article)">
+                <i *ngIf="item.article" class="fas fa-external-link-alt text-primary" placement="top"
+                   ngbTooltip="Ver artículo"></i>
+              </a>
+              <a class="cursor-pointer mx-2" (click)="openUpsertModal(item)">
+                <i class="far fa-edit" placement="top" ngbTooltip="Editar"></i>
+              </a>
+              <a class="cursor-pointer mx-2" (click)="delete(item.id)">
+                <i class="fas fa-trash text-danger" placement="top" ngbTooltip="Eliminar"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div *ngIf="formControlLocation && formControlLocation.value <= 0" class="d-flex justify-content-center">
+        <span class="text-secondary h5">Selecciona una ubicación!</span>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #upsertModal let-modal>
+  <div class="modal-header">
+    <span *ngIf="formGroupUpsert" class="h4">{{formGroupUpsert.controls.id.value ? 'Editar' : 'Crear'}} articulo destacado</span>
+    <button class="btn" (click)="modal.dismiss()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="modal-body">
+    <div class="row" *ngIf="formGroupUpsert" [formGroup]="formGroupUpsert">
+      <div class="col-12 my-1 d-flex align-items-center">
+        <label class="form-label w-100">
+          Orden
+          <select class="form-select" formControlName="order">
+            <option [value]="0">Selecciona el orden</option>
+            <option [value]="1">1</option>
+            <option [value]="2">2</option>
+            <option [value]="3">3</option>
+            <option [value]="4">4</option>
+            <option [value]="5">5</option>
+            <option [value]="6">6</option>
+          </select>
+        </label>
+      </div>
+      <div class="col-12 my-1">
+        <label class="form-label w-100">
+          Artículo
+          <input formControlName="articleId" type="number" class="form-control" placeholder="Id del articulo">
+        </label>
+      </div>
+      <div class="col-12 my-1">
+        <div class="form-check form-switch">
+          <label class="form-check-label">
+            Publicado
+            <input formControlName="published" class="form-check-input" type="checkbox">
+          </label>
+        </div>
+      </div>
+      <div *ngIf="formGroupUpsert && !formGroupUpsert.controls.published.value" class="col-12 my-1">
+        <span>Publicación programada para: <strong>{{getMomentFromDateAndTime(this.formGroupUpsert.controls.scheduledDate.value, this.formGroupUpsert.controls.scheduledTime.value) | tz: 'datetime'}}</strong></span>
+        <div class="w-100 my-1 d-flex justify-content-start align-items-center">
+          <ngb-datepicker formControlName="scheduledDate"></ngb-datepicker>
+          <ngb-timepicker class="mx-1" formControlName="scheduledTime"></ngb-timepicker>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="formGroupUpsert" class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss()">Cancelar</button>
+    <button type="button" class="btn btn-success" (click)="modal.close()" [disabled]="formGroupUpsert.invalid">Guardar
+    </button>
+  </div>
+</ng-template>

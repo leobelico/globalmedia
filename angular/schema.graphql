@@ -7,6 +7,7 @@ schema {
 
 type Article {
   _extraProps: String
+  analytics: ArticleAnalytics!
   articableId: Int
   articableType: String
   author: Author
@@ -21,7 +22,6 @@ type Article {
   image: String
   imageThumbnail: String
   keywordId: Int
-  locationId: Int
   metaTags: String
   name: String
   note: String
@@ -33,27 +33,63 @@ type Article {
   section: Section!
   shortDescription: String
   slug: String
-  totalViews: Int!
   updatedAt: ISO8601DateTime!
   updatedRecommendationOn: ISO8601DateTime
   userId: Int
   videoUrl: String
 }
 
+type ArticleAnalytics {
+  totalViews: Int!
+}
+
 type Author {
+  analytics(from: String!, to: String!): AuthorAnalytics!
   createdAt: ISO8601DateTime!
   id: Int!
   logo: String
   name: String
-  totalViews(from: String!, to: String!): Int!
+  updatedAt: ISO8601DateTime!
+}
+
+type AuthorAnalytics {
+  totalViews: Int!
+}
+
+type Highlight {
+  article: Article!
+  articleId: Int
+  createdAt: ISO8601DateTime!
+  id: Int!
+  locationId: Int!
+  order: Int
+  published: Boolean
+  scheduledTime: ISO8601DateTime!
+  updatedAt: ISO8601DateTime!
+}
+
+type Location {
+  createdAt: ISO8601DateTime!
+  description: String
+  id: Int!
+  key: String!
+  latitude: Float!
+  longitude: Float!
+  name: String!
   updatedAt: ISO8601DateTime!
 }
 
 type Mutation {
+  "Create highlight"
+  createHighlight(input: UpsertHighlightInput!): Highlight
   "Create preference"
   createPreference(input: UpsertPreferenceInput!): Preference
+  "Delete highlight"
+  deleteHighlight(id: Int!): Highlight
   "Delete preference"
   deletePreference(id: Int!): Preference
+  "Update highlight"
+  updateHighlight(id: Int!, input: UpsertHighlightInput!): Highlight
   "Update preference"
   updatePreference(id: Int!, input: UpsertPreferenceInput!): Preference
 }
@@ -67,15 +103,21 @@ type Preference {
 }
 
 type Query {
+  "Current highlights by location"
+  currentHighlightsByLocation(locationId: Int!): [Highlight!]!
   "Current stations on air"
   currentStationsOnAir: [Station!]!
   "Highlighted articles"
   highlightedArticles(limit: Int): [Article!]!
   "Latest published articles"
   latestArticles(limit: Int): [Article!]!
+  "All locations"
+  locations: [Location!]!
   "Most viewed articles"
   mostViewedArticles(from: String!, limit: Int, to: String!): [Article!]!
-  "MOst viewed authors"
+  "Most viewed articles by section"
+  mostViewedArticlesBySection(from: String!, limit: Int, sectionId: Int!, to: String!): [Article!]!
+  "Most viewed authors"
   mostViewedAuthors(from: String!, limit: Int, to: String!): [Author!]!
   "All preferences"
   preferences: [Preference!]!
@@ -128,6 +170,14 @@ type Station {
   twitter: String
   updatedAt: ISO8601DateTime!
   video: Boolean
+}
+
+input UpsertHighlightInput {
+  articleId: Int!
+  locationId: Int!
+  order: Int!
+  published: Boolean = false
+  scheduledTime: String!
 }
 
 input UpsertPreferenceInput {
