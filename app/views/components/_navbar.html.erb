@@ -119,4 +119,10 @@
 	<%= link_to "Tecnología", "https://www.globalmedia.mx/sections/TECNOLOGIA", class: "navbar__link" %>
 	<%= link_to "Colaboradores", collaborators_path, class: "navbar__link" %>
 	<%#= link_to "Entretenimiento", "https://www.globalmedia.mx/sections/ENTRETENIMIENTO", class: "navbar__link" %>
+  <div class="dropdown">
+    <a href="#" class="navbar__link"><i class="fas fa-chevron-down"></i></a>
+    <div class="dropdown__options" style="width: 150px; left: -111px">
+      <%= link_to "Entretenimiento", "https://www.globalmedia.mx/sections/ENTRETENIMIENTO", class: "navbar__link" %>
+    </div>
+  </div>
 </div>
