@@ -104,6 +104,7 @@ Rails.application.routes.draw do
 
     end
 
+    get 'highlights/experimental', to: 'highlights#experimental'
     resources :highlights, param: :slug
     resources :preferences, only: [:index]
     resources :analytics, only: [:index]

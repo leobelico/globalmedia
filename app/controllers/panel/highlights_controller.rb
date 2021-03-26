@@ -10,7 +10,9 @@ class Panel::HighlightsController < ApplicationController
 		@published = Highlight.where("published = ? AND highlights.order < 7", true).order(order: "ASC")
 		@highlights = Highlight.where("highlights.order < 7 AND published = ?", false).order(published: "DESC", scheduled_time: "DESC", order: "ASC").paginate(page: params[:page], per_page: 20)
 	end
+  def experimental
 
+	end
 	def new
 		@highlight = Highlight.new
 	end

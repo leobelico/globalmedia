@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar" style="overflow: hidden;">
 	<%= link_to root_path, class: "navbar__link" do %>
 		<%= image_tag "home.svg" %>
 	<% end %>
@@ -111,6 +111,7 @@
 	</div>
 
 	<%= link_to get_local_section.name,  "https://www.globalmedia.mx/sections/" + get_local_section.slug, class: "navbar__link" %>
+	<%= link_to "Bajío", "https://www.globalmedia.mx/sections/bajio", class: "navbar__link" %>
 	<%= link_to "México", "https://www.globalmedia.mx/sections/MÉXICO", class: "navbar__link" %>
 	<%= link_to "Mundo", "https://www.globalmedia.mx/sections/MUNDO", class: "navbar__link" %>
 	<%= link_to "Negocios", "https://www.globalmedia.mx/sections/Negocios", class: "navbar__link" %>
