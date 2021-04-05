@@ -25,7 +25,7 @@
     <tr>
       <td width="70%">
         <div class="enc-links">
-          <a href="https://sondeosglobalmedia.com.mx/globalmedia/">
+          <a id="link_poll" href="https://sondeosglobalmedia.com.mx/globalmedia/">
             <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/BANNER_NOVIEMBRE.jpg", class: "img-desktop banner-new-polls" %>
           </a>
         </div>
@@ -42,14 +42,20 @@
 
 <!-- aqui termina el banner -->
 <script type="text/javascript" charset="utf-8">
+  var bannerPollIsOpen = 'banner_polls_is_open';
+  var bannerPollIsOpenImage = 'banner_polls_open_image';
+  var bannerPollId = 'banner_polls_id';
+  bannerPollIsOpen = '<%= get_current_location.key %>_' +  bannerPollIsOpen;
+  bannerPollIsOpenImage = '<%= get_current_location.key %>_' +  bannerPollIsOpenImage;
+  bannerPollId = '<%= get_current_location.key %>_' +  bannerPollId;
   $(`#polls-banner-container`).ready(() => {
-      fetch('/api/v1/preference/key/banner_polls_is_open').then(async (value) => {
+      fetch(`/api/v1/preference/key/${bannerPollIsOpen}`).then(async (value) => {
          try {
              const jsonObject = await value.json();
              if (jsonObject) {
                  if (jsonObject.value === 'true') {
                      $(`.polls-banner-opened`).css('display', 'block');
-                     fetch('/api/v1/preference/key/banner_polls_open_image').then(async (responseObj) => {
+                     fetch(`/api/v1/preference/key/${bannerPollIsOpenImage}`).then(async (responseObj) => {
                         try {
                             const imageObject = await responseObj.json();
                             if (imageObject) {
@@ -57,6 +63,17 @@
                                 if (imageUrl) {
                                     $('.banner-new-polls').attr('src', imageUrl);
                                 }
+                            }
+                        } catch (e) {
+
+                        }
+                     });
+                     fetch(`/api/v1/preference/key/${bannerPollId}`).then(async (responseObj) => {
+                        try {
+                            const pollId = await responseObj.json();
+                            if (pollId) {
+                                let href = $('#link_poll').attr('href');
+                                $('#link_poll').attr('href', href + `?p=${pollId.value}`);
                             }
                         } catch (e) {
 
