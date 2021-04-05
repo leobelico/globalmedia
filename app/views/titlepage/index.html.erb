@@ -25,9 +25,15 @@
     <tr>
       <td width="70%">
         <div class="enc-links">
-          <a id="link_poll" href="https://sondeosglobalmedia.com.mx/globalmedia/">
-            <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/BANNER_NOVIEMBRE.jpg", class: "img-desktop banner-new-polls" %>
-          </a>
+          <% if get_current_location.key == 'jalisco' %>
+            <a id="link_poll" href="https://sondeosglobalmedia.com.mx/globalmedia_jalisco/">
+              <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/BANNER_NOVIEMBRE.jpg", class: "img-desktop banner-new-polls" %>
+            </a>
+          <% else %>
+            <a id="link_poll" href="https://sondeosglobalmedia.com.mx/globalmedia/">
+              <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/BANNER_NOVIEMBRE.jpg", class: "img-desktop banner-new-polls" %>
+            </a>
+          <% end %>
         </div>
       </td>
       <td width="30%">
