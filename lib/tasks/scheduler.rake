@@ -32,33 +32,30 @@ task :remove_hashtags => :environment do
 end
 
 task :publish_highlights => :environment do
+  locations = Location.all
+	locations.each do |location|
+		Highlight.where("published = ? AND scheduled_time >= ? AND scheduled_time <= ? AND location_id = ?", false, (DateTime.now.beginning_of_minute-10.minutes), (DateTime.now.end_of_minute), location.id).order(order: :asc).each do |highlight|
 
-	Highlight.where("published = ? AND scheduled_time >= ? AND scheduled_time <= ?", false, (DateTime.now.beginning_of_minute-10.minutes), (DateTime.now.end_of_minute)).order(order: :asc).each do |highlight|
-			
-			highlights = Highlight.where("published = ? AND highlights.order >= ?", true, highlight.order).order(order: :asc)
-
-			# highlights_to_remove = Highlight.where(published: true, order: highlight.order)
-			# highlights_to_remove.update_all(published: false)
-			
+			highlights = Highlight.where("published = ? AND highlights.order >= ? AND location_id = ?", true, highlight.order, location.id).order(order: :asc)
 
 			counter = highlight.order
 
-			highlights.each do |h|	
+			highlights.each do |h|
 				counter = counter + 1
 				h.update_attributes(order: counter)
 
 			end
 
-			seventh = Highlight.where(order: 7)
-			if seventh.first 
+			seventh = Highlight.where('order = 7 AND location_id = ?', location.id)
+			if seventh.first
 				seventh.first.update_attributes(published: false)
 			end
-			Highlight.where("highlights.order >= 7").delete_all
+			Highlight.where("highlights.order >= 7 AND location_id = ?", location.id).delete_all
 			highlight.update_attributes(published: true)
 			if Article.exists?(highlight.article_id)
 				Article.find(highlight.article_id).update_attribute(:published, true)
 			end
-
+		end
 	end
 end
 
