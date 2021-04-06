@@ -402,19 +402,14 @@ class ApplicationController < ActionController::Base
   end
 
   def get_current_location
-    if @current_location == nil
-      @current_location = Location.where('id = ?', @location_id).first
-    end
-    @current_location
+    Location.where('id = ?', @location_id).first
   end
 
   def get_local_section
-    if @local_section == nil
-      @local_section = Section.find_by(location_id: @location_id)
-      if @local_section == nil
-        @local_section = Section.find_by(id: 1)
-      end
+    section = Section.find_by(location_id: @location_id)
+    if section == nil
+      section = Section.find_by(id: 1)
     end
-    @local_section
+    section
   end
 end
