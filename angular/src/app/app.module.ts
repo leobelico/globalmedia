@@ -19,6 +19,8 @@ import {HighlightComponent} from "./pages/panel/highlight/highlight.component";
 import {LocationGraphqlService} from "./services/graphql/location-graphql.service";
 import {HighlightGraphqlService} from "./services/graphql/highlight-graphql.service";
 import {SectionGraphqlService} from "./services/graphql/section-graphql.service";
+import {ChangeLocationModule} from "./components/change-location/change-location.module";
+import {ChangeLocationComponent} from "./components/change-location/change-location.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import {SectionGraphqlService} from "./services/graphql/section-graphql.service"
   imports: [
     BrowserModule,
     PanelModule,
+    // Standalone components
+    ChangeLocationModule,
     GraphQLModule,
     HttpClientModule
   ],
@@ -57,10 +61,15 @@ export class AppModule {
     const panelPreference = createCustomElement(PreferenceComponent, {injector: this.injector});
     const panelHighlight = createCustomElement(HighlightComponent, {injector: this.injector});
 
+    // Standalone components
+    const changeLocation = createCustomElement(ChangeLocationComponent, {injector: this.injector});
+
 
     customElements.get('panel-analytics') || customElements.define("panel-analytics", panelAnalytics);
     customElements.get('panel-preference') || customElements.define("panel-preference", panelPreference);
     customElements.get('panel-highlight') || customElements.define("panel-highlight", panelHighlight);
 
+    // Standalone components
+    customElements.get('change-location') || customElements.define("change-location", changeLocation);
   }
 }

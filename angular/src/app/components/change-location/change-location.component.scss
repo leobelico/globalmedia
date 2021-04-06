@@ -1,0 +1,16 @@
+.location {
+  margin-left: 7px;
+  padding-right: 7px;
+  white-space: nowrap;
+  border: {
+    style: solid;
+    width: 0 1px 0 0;
+    color: #2B333F;
+  };
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    color: #0F83E8;
+  }
+}

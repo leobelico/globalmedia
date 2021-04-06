@@ -5,7 +5,7 @@
 				<% cache("header", expires_in: 1.year)do %>
 
 					<%= link_to root_path, class: "header__logo" do %>
-						<%= image_tag "GLOBAL_DEGRADADOBLANCO.png", class: "" %>
+          <img src="/assets/logos/<%= get_current_location.key %>.png" alt="GlobalMedia">
 					<% end %>
 					<%= link_to stations_path, class: "stations-link", target: "_blank" do %>
 						<%= image_tag "radio-y-tv.svg" %>

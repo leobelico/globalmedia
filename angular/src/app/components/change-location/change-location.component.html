@@ -1,0 +1,5 @@
+<div class="d-flex overflow-hidden">
+  <ng-container *ngFor="let item of locations">
+    <span class="location " *ngIf="item.key != currentKeyLocation" (click)="changeLocation(item.key)">{{item.name}}</span>
+  </ng-container>
+</div>
