@@ -6,9 +6,6 @@
 		<%= link_to root_path, class: "home-container" do %>
 			<%= image_tag "home.svg" %>
 		<% end %>
-		<% if Relationship.find_by(relationship_type: "Investigation") %>
-			<%= link_to "investigación especial", relationship_path(Relationship.where(relationship_type: "Investigation").last), class: "topbar__link" %>
-		<% end %>
 		<%= link_to "Columnas de hoy", collaborators_path, class: "topbar__link" %>
 		<% if false %>
 			
