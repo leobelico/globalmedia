@@ -22,26 +22,20 @@
 <!--</div>-->
 <!-- cambio de solo el banner -->
 <% if @banner_poll['is_open'] %>
-  <table class="polls-banner-opened"  width="100%">
-    <tr>
-      <td width="70%">
-        <div class="enc-links">
-          <a id="link_poll" href="<%= @banner_poll['poll_url'] %>">
-            <%= image_tag @banner_poll['image_url'], class: "img-desktop banner-new-polls" %>
-          </a>
-        </div>
-      </td>
-      <% if @banner_poll['show_results'] %>
-        <td width="30%">
-          <div class="enc-links">
-            <a href="https://sondeosglobalmedia.com.mx/globalmedia/resultados" target="_blank">
-              <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/resultados_generales.jpg", class: "img-desktop" %>
-            </a>
-          </div>
-        </td>
-      <% end %>
-    </tr>
-  </table>
+  <div class="row">
+    <div class="<%= @banner_poll['show_results']  ? 'col-9' : 'col-12' %>">
+      <a id="link_poll" href="<%= @banner_poll['poll_url'] %>">
+        <%= image_tag @banner_poll['image_url'], class: "img-desktop banner-new-polls" %>
+      </a>
+    </div>
+    <% if @banner_poll['show_results'] %>
+      <div class="col-3">
+        <a href="https://sondeosglobalmedia.com.mx/globalmedia/resultados" target="_blank">
+          <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/resultados_generales.jpg", class: "img-desktop" %>
+        </a>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 
