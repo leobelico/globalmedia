@@ -45,6 +45,33 @@ class TitlepageController < ApplicationController
 		
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')
 		@sections = Section.where("visible = 'true' AND name != 'Último Momento' AND (location_id IS NULL OR location_id = ?)", @location_id).order(order: "ASC")
+
+
+		@banner_poll = {
+			'is_open' => false,
+			'image_url' => '',
+			'poll_url' => '',
+			'show_results' => false
+		}
+		location = get_current_location
+		is_open = Preference.where('key = ?', "#{location.key}_banner_polls_is_open").first
+		if is_open != nil && is_open.value == "true"
+			@banner_poll['is_open'] = true
+			image = Preference.where('key = ?', "#{location.key}_banner_polls_open_image").first
+			poll_id = Preference.where('key = ?', "#{location.key}_banner_polls_id").first
+			if image != nil
+				@banner_poll['image_url'] = image.value
+			end
+			if poll_id != nil
+				if location.key == 'san-luis'
+					@banner_poll['show_results'] = true
+					@banner_poll['poll_url'] = "https://sondeosglobalmedia.com.mx/globalmedia/?p=#{poll_id.value}"
+				else
+					@banner_poll['poll_url'] = "https://sondeosglobalmedia.com.mx/globalmedia_#{location.key}/?p=#{poll_id.value}"
+				end
+			end
+		end
+		puts @banner_poll.to_s
 	end
 
 	def publish_highlights

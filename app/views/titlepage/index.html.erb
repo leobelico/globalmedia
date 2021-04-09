@@ -21,31 +21,17 @@
 <!--  </table>-->
 <!--</div>-->
 <!-- cambio de solo el banner -->
-  <table class="polls-banner-opened"  width="100%" style="display: none;">
+<% if @banner_poll['is_open'] %>
+  <table class="polls-banner-opened"  width="100%">
     <tr>
-      <% if get_current_location.key == 'jalisco' %>
-        <td width="100%">
-          <div class="enc-links">
-            <a id="link_poll" href="https://sondeosglobalmedia.com.mx/globalmedia_jalisco/">
-              <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/BANNER_NOVIEMBRE.jpg", class: "img-desktop banner-new-polls" %>
-            </a>
-          </div>
-        </td>
-        <td width="30%">
-<!--          <div class="enc-links">-->
-<!--            <a href="https://sondeosglobalmedia.com.mx/globalmedia_jalisco/resultados" target="_blank">-->
-              <%#= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/resultados_generales.jpg", class: "img-desktop" %>
-<!--            </a>-->
-<!--          </div>-->
-        </td>
-      <% else %>
-        <td width="70%">
-          <div class="enc-links">
-            <a id="link_poll" href="https://sondeosglobalmedia.com.mx/globalmedia/">
-              <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/BANNER_NOVIEMBRE.jpg", class: "img-desktop banner-new-polls" %>
-            </a>
-          </div>
-        </td>
+      <td width="70%">
+        <div class="enc-links">
+          <a id="link_poll" href="<%= @banner_poll['poll_url'] %>">
+            <%= image_tag @banner_poll['image_url'], class: "img-desktop banner-new-polls" %>
+          </a>
+        </div>
+      </td>
+      <% if @banner_poll['show_results'] %>
         <td width="30%">
           <div class="enc-links">
             <a href="https://sondeosglobalmedia.com.mx/globalmedia/resultados" target="_blank">
@@ -56,55 +42,8 @@
       <% end %>
     </tr>
   </table>
-<!-- aqui termina el banner -->
-<script type="text/javascript" charset="utf-8">
-  var bannerPollIsOpen = 'banner_polls_is_open';
-  var bannerPollIsOpenImage = 'banner_polls_open_image';
-  var bannerPollId = 'banner_polls_id';
-  bannerPollIsOpen = '<%= get_current_location.key %>_' +  bannerPollIsOpen;
-  bannerPollIsOpenImage = '<%= get_current_location.key %>_' +  bannerPollIsOpenImage;
-  bannerPollId = '<%= get_current_location.key %>_' +  bannerPollId;
-  $(`#polls-banner-container`).ready(() => {
-      fetch(`/api/v1/preference/key/${bannerPollIsOpen}`).then(async (value) => {
-         try {
-             const jsonObject = await value.json();
-             if (jsonObject) {
-                 if (jsonObject.value === 'true') {
-                     $(`.polls-banner-opened`).css('display', 'block');
-                     fetch(`/api/v1/preference/key/${bannerPollIsOpenImage}`).then(async (responseObj) => {
-                        try {
-                            const imageObject = await responseObj.json();
-                            if (imageObject) {
-                                const imageUrl = imageObject.value;
-                                if (imageUrl) {
-                                    $('.banner-new-polls').attr('src', imageUrl);
-                                }
-                            }
-                        } catch (e) {
+<% end %>
 
-                        }
-                     });
-                     fetch(`/api/v1/preference/key/${bannerPollId}`).then(async (responseObj) => {
-                        try {
-                            const pollId = await responseObj.json();
-                            if (pollId) {
-                                let href = $('#link_poll').attr('href');
-                                $('#link_poll').attr('href', href + `?p=${pollId.value}`);
-                            }
-                        } catch (e) {
-
-                        }
-                     });
-                 } else {
-                     $(`.polls-banner-closed`).css('display', 'block');
-                 }
-             }
-         } catch (e) {
-
-         }
-      });
-  });
-</script>
 
 <style>
 	.enc-links {
