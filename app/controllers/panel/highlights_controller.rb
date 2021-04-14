@@ -7,8 +7,8 @@ class Panel::HighlightsController < ApplicationController
 	autocomplete :article, :name, full: true
 	before_action :get_all_highlights, only: [:new, :create, :edit, :update]
 	def index
-		@published = Highlight.where("published = ? AND highlights.order < 7", true).order(order: "ASC")
-		@highlights = Highlight.where("highlights.order < 7 AND published = ?", false).order(published: "DESC", scheduled_time: "DESC", order: "ASC").paginate(page: params[:page], per_page: 20)
+		@published = Highlight.where("published = ? AND highlights.order < 7 AND location_id = ?", true, @location_id).order(order: "ASC")
+		@highlights = Highlight.where("highlights.order < 7 AND published = ? AND location_id = ?", false, @location_id).order(published: "DESC", scheduled_time: "DESC", order: "ASC").paginate(page: params[:page], per_page: 20)
 	end
   def experimental
 
@@ -20,15 +20,15 @@ class Panel::HighlightsController < ApplicationController
 	def create
 
 		@highlight = Highlight.new(highlight_params)
-
+		@highlight.location_id = @location_id
 		##Lo primero que tenemos que hacer es revisar que no haya ese artículo ahorita
 
-		existent_article_now = Highlight.where(article_id: params[:highlight][:article_id], published: true)
+		existent_article_now = Highlight.where(article_id: params[:highlight][:article_id], published: true, location_id: @location_id)
 		if existent_article_now.count == 0
 			##Luego checamos si ya hay un articulo con ese id en el futuro
-			existent_article_in_future = Highlight.where("article_id = ? AND published = ? AND scheduled_time > ?", params[:highlight][:article_id], false, Time.now)
+			existent_article_in_future = Highlight.where("article_id = ? AND published = ? AND scheduled_time > ? AND location_id = ?", params[:highlight][:article_id], false, Time.now, @location_id)
 			if existent_article_in_future.count == 0
-				is_order_created = Highlight.where(order: params[:highlight][:order], published: true)
+				is_order_created = Highlight.where(order: params[:highlight][:order], published: true, location_id: @location_id)
 				if is_order_created.count == 0
 					@highlight.published = true
 					if @highlight.save
@@ -41,14 +41,14 @@ class Panel::HighlightsController < ApplicationController
 					##vamos a mover los artículos
 					scheduled_time = Time.new params[:highlight]["scheduled_time(1i)"].to_i, params[:highlight]["scheduled_time(2i)"].to_i, params[:highlight]["scheduled_time(3i)"].to_i, params[:highlight]["scheduled_time(4i)"].to_i, params[:highlight]["scheduled_time(5i)"].to_i 
 					if scheduled_time >= Time.now.beginning_of_minute and scheduled_time <= Time.now.end_of_minute
-						the_h = Highlight.where(order: params[:highlight][:order], published: true)
-						highlights = Highlight.where(published: true)
+						the_h = Highlight.where(order: params[:highlight][:order], published: true, location_id: @location_id)
+						highlights = Highlight.where(published: true, location_id: @location_id)
 						counter = the_h.first.order
 							
 						highlights.order(order: :asc).each do |h|
 									
 							if h.order >= counter and h.order < 6		
-								h_to_mod = Highlight.where(order: h.order + 1, published: true).first
+								h_to_mod = Highlight.where(order: h.order + 1, published: true, location_id: @location_id).first
 										
 								h_to_mod.update_attributes(article_id: h.article_id)
 										
@@ -86,9 +86,9 @@ class Panel::HighlightsController < ApplicationController
 
 	def update
 
-		existent_article_now = Highlight.where(article_id: params[:highlight][:article_id], published: true)
+		existent_article_now = Highlight.where(article_id: params[:highlight][:article_id], published: true, location_id: @location_id)
 		if existent_article_now.count == 0
-			existent_article_in_future = Highlight.where("article_id = ? AND published = ? AND scheduled_time > ?", params[:highlight][:article_id], false, Time.now)
+			existent_article_in_future = Highlight.where("article_id = ? AND published = ? AND scheduled_time > ? AND location_id = ?", params[:highlight][:article_id], false, Time.now, @location_id)
 			if existent_article_in_future.count == 0
 				if @highlight.update(highlight_params)
 					redirect_to panel_highlights_path
