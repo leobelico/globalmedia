@@ -5,7 +5,7 @@ class Panel::BannersController < ApplicationController
 	before_action :set_banner, only: [:show, :edit, :update, :destroy]
 	before_action :set_s3_direct_post, only: [:new, :create, :edit, :update]
 	def index
-		@banners = Banner.all
+		@banners = Banner.where('location_id = ?', @location_id).all
 	end
 
 	def new
@@ -14,6 +14,7 @@ class Panel::BannersController < ApplicationController
 
 	def create
 		@banner = Banner.new(banner_params)
+		@banner.location_id = @location_id
 		if @banner.save
 			sections =  Section.where(id: params[:all_sections])
 			p "cuenta de secciones"

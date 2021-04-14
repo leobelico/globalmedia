@@ -355,16 +355,17 @@ class ApplicationController < ActionController::Base
     if section_type == "Global" or section_type == "TitlePage"
       if section_type == "Global"
         # @banners = Banner.where(global: true, size: size, active: true).reverse
-        @banners = Banner.where("global = true AND size = '#{size}' AND active = 'true' AND expiry_date > '#{time}'").reverse
+        @banners = Banner.where("global = true AND size = '#{size}' AND active = 'true' AND expiry_date > '#{time}' AND banners.location_id = ?", @location_id).reverse
       else
-        @banners = Banner.where("titlepage = 'true' AND size = '#{size}' AND active = 'true' AND expiry_date > '#{time}'").reverse
+        @banners = Banner.where("titlepage = 'true' AND size = '#{size}' AND active = 'true' AND expiry_date > '#{time}' AND banners.location_id = ?", @location_id).reverse
         # @banners = Banner.where(titlepage: true, size: size, active: true).reverse
 
       end 
     else
       # p "GRANDEEEEEEEE"
       # @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where("banners.active = 'true' AND section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}'").reverse
-      @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id").where("banners.active = 'true' AND section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}' AND banners.expiry_date > '#{time}'").reverse
+      @banner = Banner.joins("LEFT OUTER JOIN section_banners ON section_banners.banner_id = banners.id")
+                      .where("banners.active = 'true' AND section_banners.sectionable_id = #{section.id} AND section_banners.sectionable_type = '#{section_type}' AND banners.size = '#{size}' AND banners.expiry_date > '#{time}' AND banners.location_id = ?", @location_id).reverse
       # p "banner ilse"
       # p @banner
     end
