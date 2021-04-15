@@ -47,15 +47,18 @@ task :publish_highlights_locations => :environment do
           if latest_published_highlight.scheduled_time.to_datetime <= latest_unpublished_highlight.scheduled_time.to_datetime
 						latest_unpublished_highlight.update(published: true)
 						latest_published_highlight = latest_unpublished_highlight
-						# if Article.exists?(latest_published_highlight.article_id)
-						# 	Article.find(latest_published_highlight.article_id).update_attribute(:published, true)
-						# end
           end
-					Highlight.where("scheduled_time <= ? AND location_id = ? AND highlights.order = ? AND id != ?", now, location.id, counter, latest_published_highlight.id).destroy_all
+        else
+					latest_unpublished_highlight.update(published: true)
+					latest_published_highlight = latest_unpublished_highlight
         end
+				Highlight.where("scheduled_time <= ? AND location_id = ? AND highlights.order = ? AND id != ?", now, location.id, counter, latest_published_highlight.id).destroy_all
+				# if Article.exists?(latest_published_highlight.article_id)
+				# 	Article.find(latest_published_highlight.article_id).update_attribute(:published, true)
+				# end
       end
 			counter += 1
-    end
+		end
   end
 end
 
