@@ -31,8 +31,36 @@ task :remove_hashtags => :environment do
   hashtags.update_all(selected: false)
 end
 
+
+task :publish_highlights_locations => :environment do
+	locations = Location.where('id != 1')
+  order_from = 1
+  order_to = 6
+  now = DateTime.now
+	locations.each do |location|
+    counter = order_from
+    while counter <= order_to
+      latest_unpublished_highlight = Highlight.where("published = ? AND scheduled_time <= ? AND location_id = ? AND highlights.order = ?", false, now, location.id, counter).order('scheduled_time DESC').first
+      if latest_unpublished_highlight != nil
+				latest_published_highlight = Highlight.where("published = ? AND location_id = ? AND highlights.order = ?", true, location.id, counter).order('scheduled_time DESC').first
+        if latest_published_highlight != nil
+          if latest_published_highlight.scheduled_time.to_datetime <= latest_unpublished_highlight.scheduled_time.to_datetime
+						latest_unpublished_highlight.update(published: true)
+						latest_published_highlight = latest_unpublished_highlight
+						# if Article.exists?(latest_published_highlight.article_id)
+						# 	Article.find(latest_published_highlight.article_id).update_attribute(:published, true)
+						# end
+          end
+					Highlight.where("scheduled_time <= ? AND location_id = ? AND highlights.order = ? AND id != ?", now, location.id, counter, latest_published_highlight.id).destroy_all
+        end
+      end
+			counter += 1
+    end
+  end
+end
+
 task :publish_highlights => :environment do
-  locations = Location.all
+  locations = Location.where('id = 1')
 	locations.each do |location|
 		Highlight.where("published = ? AND scheduled_time >= ? AND scheduled_time <= ? AND location_id = ?", false, (DateTime.now.beginning_of_minute-10.minutes), (DateTime.now.end_of_minute), location.id).order(order: :asc).each do |highlight|
 
