@@ -33,7 +33,7 @@ end
 
 
 task :publish_highlights => :environment do
-	locations = Location.where('id != 1')
+	locations = Location.all
 	order_from = 1
 	order_to = 6
 	now = DateTime.now
@@ -53,38 +53,11 @@ task :publish_highlights => :environment do
 					latest_published_highlight = latest_unpublished_highlight
 				end
 				Highlight.where("scheduled_time <= ? AND location_id = ? AND highlights.order = ? AND id != ?", now, location.id, counter, latest_published_highlight.id).destroy_all
-				# if Article.exists?(latest_published_highlight.article_id)
-				# 	Article.find(latest_published_highlight.article_id).update_attribute(:published, true)
-				# end
+				if Article.exists?(latest_published_highlight.article_id)
+					Article.find(latest_published_highlight.article_id).update_attribute(:published, true)
+				end
 			end
 			counter += 1
-		end
-	end
-
-
-  locations = Location.where('id = 1')
-	locations.each do |location|
-		Highlight.where("published = ? AND scheduled_time >= ? AND scheduled_time <= ? AND location_id = ?", false, (DateTime.now.beginning_of_minute-10.minutes), (DateTime.now.end_of_minute), location.id).order(order: :asc).each do |highlight|
-
-			highlights = Highlight.where("published = ? AND highlights.order >= ? AND location_id = ?", true, highlight.order, location.id).order(order: :asc)
-
-			counter = highlight.order
-
-			highlights.each do |h|
-				counter = counter + 1
-				h.update_attributes(order: counter)
-
-			end
-
-			seventh = Highlight.where('order = 7 AND location_id = ?', location.id)
-			if seventh.first
-				seventh.first.update_attributes(published: false)
-			end
-			Highlight.where("highlights.order >= 7 AND location_id = ?", location.id).delete_all
-			highlight.update_attributes(published: true)
-			if Article.exists?(highlight.article_id)
-				Article.find(highlight.article_id).update_attribute(:published, true)
-			end
 		end
 	end
 end
