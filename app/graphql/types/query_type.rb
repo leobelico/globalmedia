@@ -20,7 +20,8 @@ module Types
 
     field :locations, resolver: Resolvers::ResolversLocation::ResolverAllLocations, description: "All locations"
 
-    field :currentHighlightsByLocation, resolver: Resolvers::ResolversHighlight::ResolverCurrentHighlightsByLocation, description: "Current highlights by location"
+    field :currentPublishedHighlightsByLocation, resolver: Resolvers::ResolversHighlight::ResolverCurrentPublishedHighlightsByLocation, description: "Current published highlights by location"
+    field :currentUnpublishedHighlightsByLocation, resolver: Resolvers::ResolversHighlight::ResolverCurrentUnpublishedHighlightsByLocation, description: "Current unpublished highlights by location"
 
   end
 end

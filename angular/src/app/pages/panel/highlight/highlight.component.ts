@@ -1,6 +1,5 @@
 import {ApplicationRef, Component, OnInit, ViewChild} from '@angular/core';
 import {LocationGraphqlService} from "../../../services/graphql/location-graphql.service";
-import {LocationType} from "../../../types/graphql/location-type";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {HighlightGraphqlService} from "../../../services/graphql/highlight-graphql.service";
 import {HighlightType} from "../../../types/graphql/highlight-type";
@@ -10,6 +9,8 @@ import {NgbDate, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment-timezone";
 import {NgbTime} from "@ng-bootstrap/ng-bootstrap/timepicker/ngb-time";
 import {UpsertHighlightInput} from "../../../types/graphql/inputs/upsert-highlight-input";
+import {ConfigurationService} from "../../../services/configuration.service";
+import {LocationType} from "../../../types/graphql/location-type";
 
 @Component({
   selector: 'app-highlight',
@@ -18,25 +19,27 @@ import {UpsertHighlightInput} from "../../../types/graphql/inputs/upsert-highlig
 })
 export class HighlightComponent implements OnInit {
 
-  locations: LocationType[] = [];
-  formControlLocation: FormControl | null = null;
-  highlights: HighlightType[] = [];
-  isLoadingHighlights = false;
+  activeHighlights: HighlightType[] = [];
+  inactiveHighlights: HighlightType[] = [];
+  isLoadingActiveHighlights = false;
+  isLoadingInactiveHighlights = false;
 
   formGroupUpsert: FormGroup | null = null;
   @ViewChild('upsertModal') upsertModal: ViewChild | null = null;
+  location: LocationType | null = null;
 
   constructor(private locationGraphqlService: LocationGraphqlService,
               private highlightGraphqlService: HighlightGraphqlService,
               private navigationService: NavigationService,
+              private configurationService: ConfigurationService,
               private ngbModal: NgbModal) {
   }
 
   ngOnInit(): void {
-    this.locationGraphqlService.all().subscribe(locations => {
-      this.locations = locations;
+    this.configurationService.location.subscribe(location => {
+      this.location = location;
+      this.loadHighlightsByLocationId(Number(this.location.id));
     });
-    this.formControlLocation = new FormControl(0);
     this.formGroupUpsert = new FormGroup({
       id: new FormControl(null),
       order: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(6)]),
@@ -45,16 +48,18 @@ export class HighlightComponent implements OnInit {
       scheduledDate: new FormControl(null, [Validators.required]),
       scheduledTime: new FormControl(null, [Validators.required]),
     });
-    this.formControlLocation.valueChanges.subscribe(locationId => {
-      this.loadHighlightsByCityId(Number(locationId));
-    });
   }
 
-  loadHighlightsByCityId(locationId: number): void {
-    this.isLoadingHighlights = true;
-    this.highlightGraphqlService.currentByLocation(locationId).subscribe(highlights => {
-      this.highlights = highlights;
-      this.isLoadingHighlights = false;
+  loadHighlightsByLocationId(locationId: number): void {
+    this.isLoadingActiveHighlights = true;
+    this.isLoadingInactiveHighlights = true;
+    this.highlightGraphqlService.currentPublishedByLocation(locationId).subscribe(highlights => {
+      this.activeHighlights = highlights;
+      this.isLoadingActiveHighlights = false;
+    });
+    this.highlightGraphqlService.currentUnpublishedByLocation(locationId).subscribe(highlights => {
+      this.inactiveHighlights = highlights;
+      this.isLoadingInactiveHighlights = false;
     });
   }
 
@@ -112,27 +117,27 @@ export class HighlightComponent implements OnInit {
   }
 
   saveUpsert(): void {
-    if (!this.formGroupUpsert || !this.formControlLocation) {
+    if (!this.formGroupUpsert || !this.location) {
       return;
     }
-    if (this.formGroupUpsert.invalid || this.formControlLocation.invalid) {
+    if (this.formGroupUpsert.invalid) {
       return;
     }
     const id: number | null = this.formGroupUpsert.controls.id.value;
     const data: UpsertHighlightInput = {
       order: Number(this.formGroupUpsert.controls.order.value),
       articleId: Number(this.formGroupUpsert.controls.articleId.value),
-      locationId: Number(this.formControlLocation.value),
+      locationId: Number(this.location.id),
       published: this.formGroupUpsert.controls.published.value ?? false,
       scheduledTime: this.getMomentFromDateAndTime(this.formGroupUpsert.controls.scheduledDate.value, this.formGroupUpsert.controls.scheduledTime.value).toISOString()
     };
     if (id) {
       this.highlightGraphqlService.update(id, data).subscribe(highlight => {
-        this.loadHighlightsByCityId(Number(this.formControlLocation?.value));
+        this.loadHighlightsByLocationId(Number(this.location?.id));
       });
     } else {
       this.highlightGraphqlService.create(data).subscribe(highlight => {
-        this.loadHighlightsByCityId(Number(this.formControlLocation?.value));
+        this.loadHighlightsByLocationId(Number(this.location?.id));
       });
     }
   }
@@ -140,7 +145,7 @@ export class HighlightComponent implements OnInit {
   delete(id: number) {
     if (confirm('Eliminar nota destacada?')) {
       this.highlightGraphqlService.delete(id).subscribe(highlight => {
-        this.loadHighlightsByCityId(Number(this.formControlLocation?.value));
+        this.loadHighlightsByLocationId(Number(this.location?.id));
       })
     }
   }

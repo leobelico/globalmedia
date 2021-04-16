@@ -103,10 +103,12 @@ type Preference {
 }
 
 type Query {
-  "Current highlights by location"
-  currentHighlightsByLocation(locationId: Int!): [Highlight!]!
+  "Current published highlights by location"
+  currentPublishedHighlightsByLocation(locationId: Int!): [Highlight!]!
   "Current stations on air"
   currentStationsOnAir: [Station!]!
+  "Current unpublished highlights by location"
+  currentUnpublishedHighlightsByLocation(locationId: Int!): [Highlight!]!
   "Highlighted articles"
   highlightedArticles(limit: Int): [Article!]!
   "Latest published articles"

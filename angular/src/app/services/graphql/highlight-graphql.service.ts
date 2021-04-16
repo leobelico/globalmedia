@@ -10,9 +10,54 @@ import {UpsertHighlightInput} from "../../types/graphql/inputs/upsert-highlight-
 
 @Injectable()
 export class HighlightGraphqlService extends BaseGraphqlService {
-  queryCurrentHighlightsByLocation = gql`
+  queryCurrentPublishedHighlightsByLocation = gql`
     query currentHighlights($locationId: Int!) {
-      currentHighlightsByLocation(locationId: $locationId) {
+      currentPublishedHighlightsByLocation(locationId: $locationId) {
+        id
+        articleId
+        order
+        published
+        scheduledTime
+        locationId
+        createdAt
+        updatedAt
+        article {
+          id
+          articableId
+          articableType
+          authorId
+          breakingNews
+          draft
+          exclusive
+          globalRecommendation
+          highlight
+          image
+          imageThumbnail
+          keywordId
+          metaTags
+          name
+          note
+          noteOld
+          plainText
+          published
+          publishedAt
+          scheduledTime
+          shortDescription
+          slug
+          updatedAt
+          createdAt
+          updatedRecommendationOn
+          userId
+          videoUrl
+          _extraProps
+        }
+      }
+    }
+  `;
+
+  queryCurrentUnpublishedHighlightsByLocation = gql`
+    query currentHighlights($locationId: Int!) {
+      currentUnpublishedHighlightsByLocation(locationId: $locationId) {
         id
         articleId
         order
@@ -104,14 +149,24 @@ export class HighlightGraphqlService extends BaseGraphqlService {
     super(authService, apollo);
   }
 
-  public currentByLocation(locationId: number): Observable<HighlightType[]> {
-    return this.apollo.query<{ currentHighlightsByLocation: any[] }, { locationId: number }>({
-      query: this.queryCurrentHighlightsByLocation,
+  public currentPublishedByLocation(locationId: number): Observable<HighlightType[]> {
+    return this.apollo.query<{ currentPublishedHighlightsByLocation: any[] }, { locationId: number }>({
+      query: this.queryCurrentPublishedHighlightsByLocation,
       variables: {
         locationId
       }
     }).pipe(catchError(err => this.handleError(err)),
-      mergeMap(value => TypeBuilder.highlights(value.data.currentHighlightsByLocation)));
+      mergeMap(value => TypeBuilder.highlights(value.data.currentPublishedHighlightsByLocation)));
+
+  }
+  public currentUnpublishedByLocation(locationId: number): Observable<HighlightType[]> {
+    return this.apollo.query<{ currentUnpublishedHighlightsByLocation: any[] }, { locationId: number }>({
+      query: this.queryCurrentUnpublishedHighlightsByLocation,
+      variables: {
+        locationId
+      }
+    }).pipe(catchError(err => this.handleError(err)),
+      mergeMap(value => TypeBuilder.highlights(value.data.currentUnpublishedHighlightsByLocation)));
 
   }
 

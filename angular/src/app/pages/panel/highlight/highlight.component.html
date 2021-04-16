@@ -3,25 +3,16 @@
     <span class="h3">Notas destacadas</span>
   </div>
   <div class="col-12 bg-light rounded my-2 p-3">
-    <div class="w-100 d-flex justify-content-between">
-      <div class="d-flex align-items-center">
-        <span class="mx-1 text-center">Ubicación: </span>
-        <select *ngIf="formControlLocation" [formControl]="formControlLocation" class="form-select">
-          <option [value]="0">Seleccionar</option>
-          <option *ngFor="let item of locations" [value]="item.id">{{item.name}}</option>
-        </select>
-      </div>
-      <div>
-        <button *ngIf="formControlLocation" class="btn btn-primary" (click)="openUpsertModal()"
-                [disabled]="formControlLocation.value <= 0">Agregar
+    <div class="w-100 d-flex justify-content-end">
+        <button class="btn btn-primary" (click)="openUpsertModal()">Agregar
         </button>
-      </div>
     </div>
-    <div *ngIf="isLoadingHighlights" class="w-100 d-flex justify-content-center">
+    <div *ngIf="isLoadingActiveHighlights" class="w-100 d-flex justify-content-center">
       <i class="fas fa-2x fa-spinner fa-spin"></i>
     </div>
-    <div *ngIf="!isLoadingHighlights">
-      <table *ngIf="formControlLocation && formControlLocation.value > 0" class="table table-striped">
+    <div *ngIf="!isLoadingActiveHighlights">
+      <span class="h5"><i class="mr-1 fas fa-dot-circle text-success"></i>Activas</span>
+      <table class="table table-striped">
         <thead>
         <tr>
           <th scope="col" class="text-center">Posición</th>
@@ -32,7 +23,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of highlights">
+        <tr *ngFor="let item of activeHighlights">
           <th scope="row" class="text-center">{{item.order}}</th>
           <td>{{item.article ? item.article.name : ''}}</td>
           <td>
@@ -57,9 +48,48 @@
         </tr>
         </tbody>
       </table>
-      <div *ngIf="formControlLocation && formControlLocation.value <= 0" class="d-flex justify-content-center">
-        <span class="text-secondary h5">Selecciona una ubicación!</span>
-      </div>
+    </div>
+    <div *ngIf="isLoadingInactiveHighlights" class="w-100 d-flex justify-content-center">
+      <i class="fas fa-2x fa-spinner fa-spin"></i>
+    </div>
+    <div *ngIf="!isLoadingInactiveHighlights">
+      <span class="h5"><i class="mr-1 fas fa-dot-circle text-secondary"></i>Programadas</span>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col" class="text-center">Posición</th>
+          <th scope="col">Artículo</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Programado</th>
+          <th scope="col" class="text-center">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of inactiveHighlights">
+          <th scope="row" class="text-center">{{item.order}}</th>
+          <td>{{item.article ? item.article.name : ''}}</td>
+          <td>
+            <span *ngIf="item.published" class="badge bg-success">Activo</span>
+            <span *ngIf="!item.published" class="badge bg-secondary">Inactivo</span>
+          </td>
+          <td>{{item.scheduledTime | tz: 'datetime'}}</td>
+          <td>
+            <div class="d-flex justify-content-center">
+              <a *ngIf="item.article" class="cursor-pointer mx-2" (click)="openArticle(item.article)">
+                <i *ngIf="item.article" class="fas fa-external-link-alt text-primary" placement="top"
+                   ngbTooltip="Ver artículo"></i>
+              </a>
+              <a class="cursor-pointer mx-2" (click)="openUpsertModal(item)">
+                <i class="far fa-edit" placement="top" ngbTooltip="Editar"></i>
+              </a>
+              <a class="cursor-pointer mx-2" (click)="delete(item.id)">
+                <i class="fas fa-trash text-danger" placement="top" ngbTooltip="Eliminar"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

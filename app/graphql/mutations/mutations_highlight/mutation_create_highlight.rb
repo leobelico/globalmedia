@@ -5,11 +5,27 @@ module Mutations
       argument :input, Types::Inputs::UpsertHighlightInput, required: true
 
       def resolve(input: {})
-        scheduled = input.scheduled_time.to_datetime
         now = DateTime.now
-        result = Highlight.create(input.to_hash)
+        scheduled = input.scheduled_time.to_datetime
+        input_hash = input.to_hash
+        if input_hash[:published] == true
+          input_hash[:scheduled_time] = now
+        end
         if scheduled <= now
-          result.update(published: true)
+          input_hash[:scheduled_time] = now
+          input_hash[:published] = true
+        end
+        result = nil
+        if input_hash[:published] == true
+          prev_published_highlight = Highlight.where('location_id = ? AND highlights.order = ? AND published = ?', input_hash[:location_id], input_hash[:order], true).first
+          if prev_published_highlight != nil
+            prev_published_highlight.update(input_hash)
+            result = prev_published_highlight
+          else
+            result = Highlight.create(input_hash)
+          end
+        else
+          result = Highlight.create(input_hash)
         end
         result
       end
