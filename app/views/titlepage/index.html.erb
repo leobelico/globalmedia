@@ -117,11 +117,10 @@
 		<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
 	<% end %>
 <% end %>
-<% if true %>
+<% if get_current_location.key == "san-luis" %>
 <div class="special-articles-container">
 
 	<div class="special-articles">
-		<% if true %>
 			<% cache(latest_news) do %>
 				<%= render "components/latest-news", articles: latest_news  %>
 			<% end %>
@@ -132,33 +131,30 @@
 						<%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
 					<% end %>
 				<% end %>
-		<% end %>
-
 
 	</div>
-
-		<% cache(get_collaborators) do %>
-			<div class="special-articles--collaborators">
-				<%= render "components/collaborators", articles: get_collaborators %>
-			</div>
-		<% end %>
+      <% cache(get_collaborators) do %>
+        <div class="special-articles--collaborators">
+          <%= render "components/collaborators", articles: get_collaborators %>
+        </div>
+      <% end %>
 </div>
-<!--<div class="special-articles-container">-->
-		<%# cache(get_investigation_articles) do %>
-			<%# if get_investigation_articles.count > 0 %>
-				<%#= render "components/special-articles", type: "Investigación Especial", title: Relationship.where(relationship_type: "Investigation").order(created_at: :asc).last.name, articles: get_investigation_articles %>
-			<%# end %>
-		<%# end %>
-	<%# cache(get_complaints) do %>
-		<%# if get_complaints %>
-			<%#= render "components/special-articles", type: "#DENUNCIAGLOBAL", title: "Denuncia Global", articles: get_complaints %>
-		<%# end %>
-	<%# end %>
-<!--</div>-->
+  <% else %>
+  <div class="special-articles" style="width: 100% !important;">
+      <% cache(latest_news) do %>
+        <%= render "components/latest-news", articles: latest_news  %>
+      <% end %>
+      <% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
+        <%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
+      <% else %>
+        <% if get_banner("", "Global", "Chico" ).count > 0 %>
+          <%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
+        <% end %>
+      <% end %>
+  </div>
 <% end %>
 <div class="section-previews-container">
 	<% @sections.each do |section| %>
-		<!-- SAN LUIS -->
 		<% cache(get_cover_articles(section.id)) do %>
 			<%= render "/layouts/cover_section_preview", articles: get_cover_articles(section.id) %>
 		<% end %>

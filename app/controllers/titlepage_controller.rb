@@ -44,7 +44,11 @@ class TitlepageController < ApplicationController
 		@highlights = Highlight.where("published = ? AND highlights.order < 7 AND location_id = ?", true, @location_id).order(order: "ASC")
 		
 		#@sections = Section.articles.joins("LEFT OUTER JOIN highlights ON highlights.article_id = articable_id").where('highlights.article_id IS NULL')
-		@sections = Section.where("visible = 'true' AND name != 'Último Momento' AND (location_id IS NULL OR location_id = ?)", @location_id).order(order: "ASC")
+		if get_current_location.key == "san-luis"
+			@sections = Section.where("visible = 'true' AND name != 'Último Momento' AND (location_id IS NULL OR location_id = ?)", @location_id).order(order: "ASC")
+		else
+			@sections = Section.where("visible = 'true' AND name != 'Último Momento' AND id != 1025 AND (location_id IS NULL OR location_id = ?)", @location_id).order(order: "ASC")
+		end
 
 
 		@banner_poll = {
