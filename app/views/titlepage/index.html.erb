@@ -133,11 +133,9 @@
 				<% end %>
 
 	</div>
-      <% cache(get_collaborators) do %>
-        <div class="special-articles--collaborators">
-          <%= render "components/collaborators", articles: get_collaborators %>
-        </div>
-      <% end %>
+  <div class="special-articles--collaborators">
+    <%= render "components/collaborators", articles: get_collaborators %>
+  </div>
 </div>
   <% else %>
   <div class="special-articles" style="width: 100% !important;">
