@@ -19,6 +19,9 @@ module Mutations
             input_hash[:published] = true
           end
           if input_hash[:published] == true
+            if Article.exists?(input_hash[:article_id])
+              Article.find(input_hash[:article_id]).update_attribute(:published, true)
+            end
             prev_published_highlight = Highlight.where('location_id = ? AND highlights.order = ? AND published = ? AND id != ?', input_hash[:location_id], input_hash[:order], true, result.id).first
             if prev_published_highlight != nil
               result.delete
