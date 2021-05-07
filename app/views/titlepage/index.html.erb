@@ -23,7 +23,7 @@
 <!-- cambio de solo el banner -->
 <% if @banner_poll['is_open'] %>
   <div class="row">
-    <div class="<%= @banner_poll['show_results']  ? 'col-9' : 'col-12' %>">
+    <div class="<%= @banner_poll['show_results']  ? 'col-12' : 'col-12' %>">
       <a id="link_poll" href="<%= @banner_poll['poll_url'] %>">
         <%= image_tag @banner_poll['image_url'], class: "img-desktop banner-new-polls" %>
       </a>
