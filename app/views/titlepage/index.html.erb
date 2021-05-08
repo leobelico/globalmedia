@@ -23,23 +23,21 @@
 <!-- cambio de solo el banner -->
 <% if @banner_poll['is_open'] %>
   <div class="row">
-    <div class="<%= @banner_poll['show_results']  ? 'col-12' : 'col-12' %>">
+    <div class="<%= @banner_poll['show_results']  ? 'col-9' : 'col-12' %>">
       <a id="link_poll" href="<%= @banner_poll['poll_url'] %>">
         <%= image_tag @banner_poll['image_url'], class: "img-desktop banner-new-polls" %>
       </a>
     </div>
-    </div>
-<% end %>
-    <!-- OJO AQUI ES EL CODIGO PARA DIVIDIR EL BANNER DE LAS ENCUESTAS EM DOS  -->
-    <%#>% if @banner_poll['show_results'] %>-->
-      <%# div class="col-3 pl-0" %>
-        <%# a href="https://sondeosglobalmedia.com.mx/globalmedia/resultados" target="_blank">
-      <%#= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/resultados_generales.jpg", class: "img-desktop" %>
-        <%# /a>
+    <!-- OJO AQUI ES EL CODIGO PARA DIVIDIR EL BANNER DE LAS ENCUESTAS EM DOS cambio de solo el banner -->
+    <% if @banner_poll['show_results'] %>
+      <div class="col-3 pl-0">
+        <a href="https://sondeosglobalmedia.com.mx/globalmedia/resultados" target="_blank">
+          <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/resultados_generales.jpg", class: "img-desktop" %>
+        </a>
       </div>
     <% end %>
-  <%#/div%>
-<%# end %>
+  </div>
+<% end %>
 
 
 <style>
