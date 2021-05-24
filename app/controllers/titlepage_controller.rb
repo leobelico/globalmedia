@@ -70,7 +70,7 @@ class TitlepageController < ApplicationController
 			if poll_id != nil
 				if location.key == 'san-luis'
 					@banner_poll['show_results'] = false
-					@banner_poll['poll_url'] = "https://www.globalmedia.mx/articles/Debate-de-candidatos-a-la-alcald%C3%ADa-de-SLP"
+					@banner_poll['poll_url'] = "https://www.facebook.com/GlobalMediaSLP/videos/295388648881308"
 				else
 					@banner_poll['poll_url'] = "https://sondeosglobalmedia.com.mx/globalmedia_#{location.key}/?p=#{poll_id.value}"
 				end
