@@ -4,11 +4,12 @@
 		
 	</div>
 	<div class="footer__column">
-		<%= link_to "Inicio", root_path, class: "footer__section-link" %>
+		  <%= link_to "Inicio", root_path, class: "footer__section-link" %>
 			<%= link_to "Contáctanos", root_url + "/corporativo.Contáctanos", class: "footer__section-link" %>
 			<%= link_to "Anunciate con nosotros", root_url + "/corporativo.Anunciate-con-nosotros", class: "footer__section-link" %>
 			<%= link_to "Quiénes Somos", root_url + "/corporativo.Quiénes-Somos", class: "footer__section-link" %>
-    <%= link_to "Políticas de Premiación ", root_url + "/articles/Pol%C3%ADticas-de-premiaci%C3%B3n-de-concursos-en-las-estaciones-de-Global-Media", class: "footer__section-link" %>
+      <%= link_to "Políticas de Premiación", root_url + "/articles/Pol%C3%ADticas-de-premiaci%C3%B3n-de-concursos-en-las-estaciones-de-Global-Media", class: "footer__section-link" %>
+      <%= link_to "Encuesta de satisfacción del cliente", root_url + "https://encuesta.com/survey/2llD8i0lZJ/encuesta-de-satisfaccion", class: "footer__section-link" %>
 	</div>
 	<p class="disclaimer"><%=  @current_coord %> 2016 Global Media Comunicaciones. Todos los derechos reservados. <br><br>Prohibida la reproducción total o parcial, incluyendo cualquier medio electrónico o mágnetico. <br><br> <%= link_to "Aviso de Privacidad", privacy_policy_path %>  - <%= link_to "Responsable de Estaciones", stations_supervisor_path %>
 	<br><br>
