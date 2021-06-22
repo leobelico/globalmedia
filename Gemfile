@@ -7,6 +7,7 @@ end
 ruby '2.6.7'
 # gem 'sys-proctable'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'slowpoke'
 gem 'rails', '~> 6.0.3'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
