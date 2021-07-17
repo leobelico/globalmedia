@@ -92,7 +92,6 @@ class TitlepageController < ApplicationController
 
 
 			counter = highlight.order
-
 			highlights.each do |h|
 				counter = counter + 1
 				h.update_attributes(order: counter)
