@@ -4,7 +4,7 @@
 <!--<div id="polls-banner-container">-->
 <!--  	<div class="enc-links polls-banner-closed" style="display: none;">-->
 <!--  		<a href="https://sondeosglobalmedia.com.mx/globalmedia/" target="_blank">-->
-        <%#= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/WhatsApp+Image+2020-02-28+at+6.58.43+PM.jpeg", class: "img-desktop" %>
+<%#= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/WhatsApp+Image+2020-02-28+at+6.58.43+PM.jpeg", class: "img-desktop" %>
 <!--  		</a>-->
 <!--  	</div>-->
 
@@ -13,7 +13,7 @@
 <!--      <td width="100%">-->
 <!--        <div class="enc-links">-->
 <!--          <a href="https://sondeosglobalmedia.com.mx/globalmedia/">-->
-            <%#= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/BANNER_NOVIEMBRE.jpg", class: "img-desktop banner-new-polls" %>
+<%#= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/BANNER_NOVIEMBRE.jpg", class: "img-desktop banner-new-polls" %>
 <!--          </a>-->
 <!--        </div>-->
 <!--      </td>-->
@@ -41,53 +41,53 @@
 
 
 <style>
-	.enc-links {
-		display:  flex;
-		flex-direction:  row;
-		align-items:  stretch;
-		justify-content:  center;
-		width:  100%;
-	}
-	.enc-links a {
-		width:  100%;
-	}
-	.enc-links img {
-		height:  auto;
-		width:  100%;
-		flex-shrink: 0;
-	}
-	@media screen and (max-width:  1024px) {
-		.enc-links {
-			flex-direction:  column;
-		}
-		.enc-links a {
-			width:  100%;
-			max-width:  400px;
-			margin:  0 auto;
-		}
-	}
+    .enc-links {
+        display:  flex;
+        flex-direction:  row;
+        align-items:  stretch;
+        justify-content:  center;
+        width:  100%;
+    }
+    .enc-links a {
+        width:  100%;
+    }
+    .enc-links img {
+        height:  auto;
+        width:  100%;
+        flex-shrink: 0;
+    }
+    @media screen and (max-width:  1024px) {
+        .enc-links {
+            flex-direction:  column;
+        }
+        .enc-links a {
+            width:  100%;
+            max-width:  400px;
+            margin:  0 auto;
+        }
+    }
 </style>
 
 <style>
-	.banner-wide {
-		display: flex;
-		width:  100%;
-		height:  auto;
-	}
-	.banner-wide img {
-		width:  100%;
-		height:  auto;
-		margin-bottom: 15px;
-	}
-	.banner-ww {
-		width: 100%;
-		height:  auto;
-		/*display:  flex; */
-	}
-	.banner-ww img {
-		width:  100%;
-		height:  auto;
-	}
+    .banner-wide {
+        display: flex;
+        width:  100%;
+        height:  auto;
+    }
+    .banner-wide img {
+        width:  100%;
+        height:  auto;
+        margin-bottom: 15px;
+    }
+    .banner-ww {
+        width: 100%;
+        height:  auto;
+        /*display:  flex; */
+    }
+    .banner-ww img {
+        width:  100%;
+        height:  auto;
+    }
 </style>
 <!-- <br>
 
@@ -97,34 +97,49 @@
 <br>
 -->
 <% cache @breaking_news do %>
-	<% if @breaking_news.count > 0 %>
-		<%= render "components/breaking-news" %>
-	<% end %>
+  <% if @breaking_news.count > 0 %>
+    <%= render "components/breaking-news" %>
+  <% end %>
 <% end %>
 
-		<div class="highlights-container">
-			<% @highlights.each do |highlight| %>
-				<% if highlight.order == 1 %>
-					<%= render "components/principal-highlight", article: highlight.article %>
-				<% else %>
-					<%= render "components/secondary-highlight", article: highlight.article %>
-				<% end %>
-			<% end %>
-		</div>
+<div class="highlights-container">
+  <% @highlights.each do |highlight| %>
+    <% if highlight.order == 1 %>
+      <%= render "components/principal-highlight", article: highlight.article %>
+    <% else %>
+      <%= render "components/secondary-highlight", article: highlight.article %>
+    <% end %>
+  <% end %>
+</div>
 
 
 <% cache(get_banner("global", "TitlePage", "Grande")) do %>
-	<% if get_banner("global", "TitlePage", "Grande") %>
-		<%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
-	<% end %>
+  <% if get_banner("global", "TitlePage", "Grande") %>
+    <%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
+  <% end %>
 <% end %>
 <% if get_current_location.key == "san-luis" %>
-<div class="special-articles-container">
-  <div class="special-articles d-flex" style="width: 50% !important;">
-    <div class="w-100 mb-4">
-      <p class="special-articles__title">AHORA EN VIVO</p>
-      <iframe width="470" height="400" src="https://www.youtube.com/embed/TWbj50K5k0w?autoplay=1&mute=1&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="special-articles-container">
+
+    <div class="special-articles">
+      <% cache(latest_news) do %>
+        <%= render "components/latest-news", articles: latest_news  %>
+      <% end %>
+      <% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
+        <%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
+      <% else %>
+        <% if get_banner("", "Global", "Chico" ).count > 0 %>
+          <%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
+        <% end %>
+      <% end %>
+
     </div>
+    <div class="special-articles--collaborators">
+      <%= render "components/collaborators", articles: get_collaborators %>
+    </div>
+  </div>
+<% else %>
+  <div class="special-articles" style="width: 100% !important;">
     <% cache(latest_news) do %>
       <%= render "components/latest-news", articles: latest_news  %>
     <% end %>
@@ -136,39 +151,22 @@
       <% end %>
     <% end %>
   </div>
-  <div class="special-articles--collaborators">
-    <%= render "components/collaborators", articles: get_collaborators %>
-  </div>
-</div>
-  <% else %>
-  <div class="special-articles" style="width: 100% !important;">
-      <% cache(latest_news) do %>
-        <%= render "components/latest-news", articles: latest_news  %>
-      <% end %>
-      <% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
-        <%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
-      <% else %>
-        <% if get_banner("", "Global", "Chico" ).count > 0 %>
-          <%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
-        <% end %>
-      <% end %>
-  </div>
 <% end %>
 <div class="section-previews-container">
-	<% @sections.each do |section| %>
-		<% cache(get_cover_articles(section.id)) do %>
-			<%= render "/layouts/cover_section_preview", articles: get_cover_articles(section.id) %>
-		<% end %>
+  <% @sections.each do |section| %>
+    <% cache(get_cover_articles(section.id)) do %>
+      <%= render "/layouts/cover_section_preview", articles: get_cover_articles(section.id) %>
+    <% end %>
 
-	<% end %>
+  <% end %>
 
 
 
 </div>
-	<% if get_banner("", "TitlePage", "Grande" ).count > 0 %>
-		<%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande" )  %>
-	<% else %>
-		<% if get_banner("", "Global", "Grande" ).count > 0 %>
-			<%= render "components/big-banner", banner: get_banner("", "Global", "Grande" )  %>
-		<% end %>
-	<% end %>
+<% if get_banner("", "TitlePage", "Grande" ).count > 0 %>
+  <%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande" )  %>
+<% else %>
+  <% if get_banner("", "Global", "Grande" ).count > 0 %>
+    <%= render "components/big-banner", banner: get_banner("", "Global", "Grande" )  %>
+  <% end %>
+<% end %>
