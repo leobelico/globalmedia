@@ -28,11 +28,11 @@
         <%= image_tag @banner_poll['image_url'], class: "img-desktop banner-new-polls" %>
       </a>
     </div>
-    <!-- OJO AQUI ES EL CODIGO PARA DIVIDIR EL BANNER DE LAS ENCUESTAS EM DOS cambio de solo el banner -->
+    <!-- OJO AQUI ES PARA DIVIDIR EL BANNER DE LAS ENCUESTAS EM DOS - SE AGREGA URL DE UBI DE BANNER Y LINK -->
     <% if @banner_poll['show_results'] %>
       <div class="col-3 pl-0">
-        <a href="https://www.globalmedia.mx/articles/IMAGEN-INFORMATIVA-EN-VIVO" target="_blank">
-          <%= image_tag "https://globalmedia-gm.s3.us-west-1.amazonaws.com/BANNER+PEQUE%C3%91O_janathan.jpg", class: "img-desktop" %>
+        <a href="https://www.globalmedia.mx/articles/AS%C3%8D-LAS-COSAS" target="_blank">
+          <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/banners/L-V_+ERIKA_en_vivo.gif", class: "img-desktop" %>
         </a>
       </div>
     <% end %>
