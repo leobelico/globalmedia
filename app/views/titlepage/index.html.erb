@@ -31,8 +31,8 @@
     <!-- OJO AQUI ES PARA DIVIDIR EL BANNER DE LAS ENCUESTAS EM DOS - SE AGREGA URL DE UBI DE BANNER Y LINK -->
     <% if @banner_poll['show_results'] %>
       <div class="col-3 pl-0">
-        <a href="https://www.globalmedia.mx/articles/AS%C3%8D-LAS-COSAS" target="_blank">
-          <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/banners/L-V_+ERIKA_en_vivo.gif", class: "img-desktop" %>
+        <a href="https://www.globalmedia.mx/articles/IMAGEN-INFORMATIVA-EN-VIVO" target="_blank">
+          <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/banners/BANNER+PEQUE%C3%91O+JONATHAN.gif", class: "img-desktop" %>
         </a>
       </div>
     <% end %>
@@ -120,8 +120,16 @@
 <% end %>
 <% if get_current_location.key == "san-luis" %>
   <div class="special-articles-container">
-
+    <!-- OJO AQUI ES PARA agregar el video arriba de min a min -->
+    <!--<div class="special-articles d-flex" style="width: 100% !important;">
+        <div class="w-100 mb-5">
+           <p class="sp__name mb-3" style="background-color: #730E15">ASí LAS COSAS EN VIVO</p>
+          <iframe width="470" height="400" src="https://www.youtube.com/embed/6mC9HUvjTpA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>-->
+      <!-- termina codiel video arriba de min a min -->
+    <!--cuando se quiere desactivar el reproductor se agrega esta linea -->
     <div class="special-articles">
+      <!--fin de linea -->
       <% cache(latest_news) do %>
         <%= render "components/latest-news", articles: latest_news  %>
       <% end %>
@@ -132,7 +140,6 @@
           <%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
         <% end %>
       <% end %>
-
     </div>
     <div class="special-articles--collaborators">
       <%= render "components/collaborators", articles: get_collaborators %>
