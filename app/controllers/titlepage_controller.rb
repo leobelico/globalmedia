@@ -70,8 +70,8 @@ class TitlepageController < ApplicationController
 			if poll_id != nil
 				if location.key == 'san-luis'
 					#APARTADO PARA ACTIVAR EL MINI-BANNER - AQUI SE AGREGA LINK DEL BANNER GRANDE
-					@banner_poll['show_results'] = true
-					@banner_poll['poll_url'] = "https://api.whatsapp.com/message/WIUIWFCDVWFMM1"
+					@banner_poll['show_results'] = false
+					@banner_poll['poll_url'] = "https://www.globalmedia.mx/articles/IMAGEN-INFORMATIVA-EN-VIVO"
 				else
 					@banner_poll['poll_url'] = "https://sondeosglobalmedia.com.mx/globalmedia_#{location.key}/?p=#{poll_id.value}"
 				end
