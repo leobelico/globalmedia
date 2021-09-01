@@ -37,9 +37,9 @@
 			</div>
 		</div>
 	</div>
-
+  <%= link_to "TV EN VIVO", "/stations/VIVECANAL", class: "navbar__link" %>
 	<div class="dropdown">
-		<%= link_to "Podcast", stations_path, class: "navbar__link" %>
+    		<%= link_to "Podcast", stations_path, class: "navbar__link" %>
 		<div class="dropdown__options dropdown__radio">
 			<div class="dropdown__row radio-row">
 				<div class="dropdown__col">
@@ -114,12 +114,12 @@
 	<%= link_to "Negocios", "/sections/Negocios", class: "navbar__link" %>
 	<%= link_to "Táctica", tactica_path, class: "navbar__link" %>
 	<%= link_to "Tecnología", "/sections/TECNOLOGIA", class: "navbar__link" %>
-  <%= link_to "Colaboradores", collaborators_path, class: "navbar__link" %>
-	<div class="dropdown">
+  	<div class="dropdown">
     <a href="#" class="navbar__link"><i class="fas fa-chevron-down"></i></a>
     <div class="dropdown__options" style="width: 150px; left: -111px">
       <%= link_to "ESPECTACULOS", "/sections/ESPECTÁCULOS", class: "navbar__link" %>
       <%= link_to "VIRALES", "/sections/ENTRETENIMIENTO", class: "navbar__link" %>
+      <%= link_to "Colaboradores", collaborators_path, class: "navbar__link" %>
     </div>
   </div>
 </div>
