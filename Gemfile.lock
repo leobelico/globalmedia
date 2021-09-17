@@ -304,6 +304,7 @@ DEPENDENCIES
   graphiql-rails
   graphql (~> 1.12, >= 1.12.6)
   heroku-deflater
+  i18n
   jbuilder (~> 2.5)
   jquery-rails
   jquery-ui-rails (~> 5.0.5)

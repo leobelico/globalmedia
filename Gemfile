@@ -9,6 +9,7 @@ ruby '2.6.7'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'slowpoke'
 gem 'rails', '~> 6.0.3'
+gem 'i18n'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 # Use Puma as the app server
