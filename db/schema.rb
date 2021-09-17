@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_231521) do
+ActiveRecord::Schema.define(version: 2021_09_16_150349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 2021_04_09_231521) do
     t.datetime "updated_at", null: false
     t.boolean "selected", default: false
     t.datetime "selected_on"
+    t.string "slug", default: "default", null: false
   end
 
   create_table "highlights", id: :serial, force: :cascade do |t|
