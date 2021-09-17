@@ -132,3 +132,17 @@ end
 task :remove_old_highlights => :environment do 
 	Highlight.where("scheduled_time <= ?", Time.now - 48.hours).delete_all
 end
+
+task :update_hashtags_slug => :environment do
+  result = Hashtag.where(slug: "default")
+  result.each do |hashtag|
+		slug = I18n.transliterate(hashtag.name)
+    slug.strip!
+		slug = slug.length < 1 ?  "#{hashtag.id}" : slug
+		slug = slug.scan(/([[:alnum:]]+)/).join('_')
+		slug = slug.length < 1 ?  "#{hashtag.id}" : slug
+		slug = slug.downcase
+    hashtag.slug = slug
+    hashtag.save
+	end
+end
