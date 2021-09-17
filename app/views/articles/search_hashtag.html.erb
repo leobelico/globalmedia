@@ -1,20 +1,22 @@
 
 
-<% content_for :title, @search.name  %>
+<% if @search != nil %>
+  <% content_for :title, @search.name  %>
 
-<div class="interface--row">
-	<div class="section main-content"> 
-		<p class="section__small-title">Hashtag:</p>
+  <div class="interface--row">
+    <div class="section main-content">
+      <p class="section__small-title">Hashtag:</p>
 
-		<h3 class="section__title"><%= @search.name %></h3>
+      <h3 class="section__title"><%= @search.name %></h3>
 
-		<% @articles.each do |article| %>
-			<%= render "components/horizontal-note", article: article %>
-		<% end %>
-		<%= will_paginate @articles, class: "site-pagination" %>
+      <% @articles.each do |article| %>
+        <%= render "components/horizontal-note", article: article %>
+      <% end %>
+      <%= will_paginate @articles, class: "site-pagination" %>
 
-	</div>
-	<% if false %>
-		<%= render "components/sidebar", article: "global", banner: "" %>
-	<% end %>
-</div>
+    </div>
+    <% if false %>
+      <%= render "components/sidebar", article: "global", banner: "" %>
+    <% end %>
+  </div>
+<% end %>
