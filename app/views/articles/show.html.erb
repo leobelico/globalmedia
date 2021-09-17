@@ -111,7 +111,7 @@
 					</div>
 				<% else %>		
 					<% if @article.image %>
-						<%= image_tag @article.image, class: "main-image" %>
+						<%= image_tag @article.image, class: "main-image", alt: @article.name %>
 					<% end %>
 				<% end %>
 						<div class="gallery__thumbnails">
