@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get "privacy_policy", to: "titlepage#privacy_policy"
   get "stations_supervisor", to: "titlepage#stations_supervisor"
 
+  get "/articles/hashtag/:slug", to: "articles#filter_by_hashtag"
+
   resources :articles, param: :slug, only: [:show] do
       get :search_hashtag, on: :collection
   end

@@ -4,7 +4,7 @@
 		<div class="its-news__news">
 
 			<% get_todays_keywords.each do |keyword| %>
-					<%= link_to keyword.name, search_hashtag_articles_path(Article.first, search: "#{keyword.id}") %>
+					<%= link_to keyword.name, "/articles/hashtag/#{keyword.slug}" %>
 			<% end %>
 			
 		</div>
@@ -14,7 +14,7 @@
 		<div class="its-news__news">
 
 			<% get_todays_keywords.each do |keyword| %>
-					<%= link_to keyword.name, search_hashtag_articles_path(Article.first, search: "#{keyword.id}") %>
+        <%= link_to keyword.name, "/articles/hashtag/#{keyword.slug}" %>
 			<% end %>
 			
 		</div>
