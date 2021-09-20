@@ -64,28 +64,13 @@ class Article < ApplicationRecord
 
     def to_slug
       #strip the string
-      ret = self.name.strip
-
-      #blow away apostrophes
-      ret.gsub! /['`]/,""
-
-      ret.gsub! /[.]/,""
-      # @ --> at, and & --> and
-      ret.gsub! /\s*@\s*/, " en "
-      ret.gsub! /\s*&\s*/, " y "
-
-      #replace all non alphanumeric, underscore or periods with underscore
-       ret.gsub! /\s*[^A-Za-z0-9ÁáÉéÍíÓóÚú\.\-]\s*/, '-'  
-
-       #convert double underscores to single
-       ret.gsub! /_+/,"-"
-
-       #strip off leading/trailing underscore
-       ret.gsub! /\A[_\.]+|[_\.]+\z/,""
-
-      # Revisar slugs repetidos 
-
-      self.slug =  ret
+      name = self.name.strip
+      slug = I18n.transliterate(name)
+      slug = slug.scan(/([[:alnum:]]+)/).join('_')
+      slug = slug.length < 1 ?  SecureRandom.hex : slug
+      slug = slug.downcase
+      self.slug =  slug
+      self.friendly_slug =  slug
     end
 
     

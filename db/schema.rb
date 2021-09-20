@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_16_150349) do
+ActiveRecord::Schema.define(version: 2021_09_17_235729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_150349) do
     t.text "note_old", default: ""
     t.datetime "published_at"
     t.string "meta_tags", default: ""
+    t.string "friendly_slug", default: "default", null: false
     t.index ["articable_id"], name: "index_articles_on_articable_id"
     t.index ["articable_type", "articable_id"], name: "index_articles_on_articable_type_and_articable_id"
     t.index ["author_id"], name: "index_articles_on_author_id"
