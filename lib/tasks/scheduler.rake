@@ -146,3 +146,22 @@ task :update_hashtags_slug => :environment do
     hashtag.save
 	end
 end
+
+task :update_articles_friendly_slug => :environment do
+  limit = 100
+  total = Article.where(friendly_slug: "default").count
+  counter = 0
+  while counter < total
+    counter += limit
+		result = Article.where(friendly_slug: "default").limit(limit)
+		result.each do |item|
+			slug = I18n.transliterate(item.name)
+			slug = slug.length < 1 ?  "#{item.id}" : slug
+			slug = slug.scan(/([[:alnum:]]+)/).join('_')
+			slug = slug.length < 1 ?  "#{item.id}" : slug
+			slug = slug.downcase
+			item.friendly_slug = slug
+			item.save
+		end
+  end
+end
