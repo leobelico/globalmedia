@@ -71,7 +71,7 @@ class TitlepageController < ApplicationController
 				if location.key == 'san-luis'
 					#APARTADO PARA ACTIVAR EL MINI-BANNER - AQUI SE AGREGA LINK DEL BANNER GRANDE
 					@banner_poll['show_results'] = false
-					@banner_poll['poll_url'] = "https://www.globalmedia.mx/stations"
+					@banner_poll['poll_url'] = "https://www.globalmedia.mx/stations/VIVECANAL"
 				else
 					@banner_poll['poll_url'] = "https://sondeosglobalmedia.com.mx/globalmedia_#{location.key}/?p=#{poll_id.value}"
 				end
