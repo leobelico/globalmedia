@@ -2,7 +2,7 @@
 <% if article.meta_tags != nil && article.meta_tags.length > 0 %>
   <meta name="keywords" content="<%= article.meta_tags %>" />
 <% else %>
-  <meta name="keywords" content="GlobalMedia,noticias,México,San Luis Potosí,Vanguardia,Negocios,Radio,Televisión,Bajío,Estaciones de radio">
+  <meta name="keywords" content="GlobalMedia, noticias, México, San Luis Potosí, Vanguardia, Negocios, Radio, Televisión, Bajío, Estaciones de radio">
 <% end %>
 <meta name="description" content="<%= truncate(article.short_description, length: 50) %>" />
 

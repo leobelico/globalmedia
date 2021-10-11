@@ -10,14 +10,14 @@
     <%= csrf_meta_tags %>
 	<% if !(controller_name == "articles" and action_name == "show") %>
 	    <title><%= yield(:title) %></title>
-		<meta name="description" content="GlobalMedia te informa">
+		<meta name="description" content="Noticias de hoy en San Luis Potosí, México y el mundo, sigue la información minuto a minuto desde San Luis Potosí GlobalMedia es noticia.">
 	<% end %>
 	<meta name="author" content="GlobalMedia">
 	<%= action_cable_meta_tag %>
 	<% if controller_name == "articles" and action_name == "show" %>
 		<%= render "components/article_meta_tags", article: @article %>
   <% else %>
-      <meta name="keywords" content="GlobalMedia,noticias,México,San Luis Potosí,Vanguardia,Negocios,Radio,Televisión,Bajío,Estaciones de radio">
+      <meta name="keywords" content="GlobalMedia,noticias, México, San Luis Potosí, Negocios, Espectaculos, virales, Radio, Televisión, Estaciones de radio">
 	<% end %>
 	<% if controller_name == "stations" and action_name == "show" %>
 		<%= render "components/station_meta_tags", station: @station %>
