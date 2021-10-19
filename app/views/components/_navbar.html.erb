@@ -52,25 +52,42 @@
 	<div class="dropdown">
     		<%= link_to "Podcast", stations_path, class: "navbar__link" %>
 		<div class="dropdown__options dropdown__radio">
+      <div class="dropdown__row radio-row">
+        <div class="dropdown__col">
+          <p class="dropdown__section radio-title">Noticieros</p>
+          <div class="line"></div>
+          <%= link_to "/stations/As%C3%ADlascosasSLP" do %>
+            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/ERIKA+PODCAST-02.jpg" %>
+          <% end %>
+          <%= link_to "/stations/As%C3%ADlascosasWFMVallarta" do %>
+            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/21-04-2021/BOTON+WEB.jpg" %>
+          <% end %>
+          <%= link_to "/stations/ImagenInformativaconJonathanFlores" do %>
+            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/PODCAST+BOTON.jpg" %>
+          <% end %>
+          <%= link_to "stations/AsílascosasenelBajío" do %>
+            <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/BOTON+PODCAST-09.jpg" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="dropdown__row radio-row">
+        <div class="dropdown__col">
+          <p class="dropdown__section radio-title">Entretenimiento y Espectáculo</p>
+          <div class="line"></div>
+          <%= link_to "/stations/ELTRENDELMAME" do %>
+            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/18-03-2021/PODCAST_EL_tren_mame.jpg" %>
+          <% end %>
+          <%= link_to "/stations/10ALAS10" do %>
+            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/18-03-2021/PODCAST_10A_LAS10.jpg" %>
+          <% end %>
+          <%= link_to "/stations/CUENTOCONTIGO" do %>
+            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/18-03-2021/boton_cuenta_conmigo.jpg" %>
+          <% end %>
+        </div>
+      </div>
 			<div class="dropdown__row radio-row">
 				<div class="dropdown__col">
-					<p class="dropdown__section radio-title">Ke Buena</p>
-					<div class="line"></div>
-					<%= link_to "/stations/loshijosdelamanana" do %>
-						<%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/PODCAST_NUEVOS_1.png" %>
-					<% end %>
-					<%= link_to "/stations/kebuenrollo" do %>
-						<%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/PODCAST_NUEVOS_2.png" %>
-					<% end %>
-					<%= link_to "/stations/lasllegadoras" do %>
-						<%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/PODCAST_NUEVOS_3.png" %>
-					<% end %>
-				</div>
-			</div>
-
-			<div class="dropdown__row radio-row">
-				<div class="dropdown__col">
-					<p class="dropdown__section radio-title">Los 40 </p>
+          <p class="dropdown__section radio-title">Los 40 </p>
 					<div class="line"></div>
 					<%= link_to "/stations/lacorneta" do %>
 						<%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/PODCAST_NUEVOS_4.png" %>
@@ -83,38 +100,21 @@
 					<% end %>
 				</div>
 			</div>
-
-			<div class="dropdown__row radio-row">
-				<div class="dropdown__col">
-					<p class="dropdown__section radio-title">Entretenimiento y Espectáculo</p>
-					<div class="line"></div>
-          <%= link_to "/stations/ELTRENDELMAME" do %>
-            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/18-03-2021/PODCAST_EL_tren_mame.jpg" %>
+      <div class="dropdown__row radio-row">
+        <div class="dropdown__col">
+          <p class="dropdown__section radio-title">Ke Buena</p>
+          <div class="line"></div>
+          <%= link_to "/stations/loshijosdelamanana" do %>
+            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/PODCAST_NUEVOS_1.png" %>
           <% end %>
-          <%= link_to "/stations/10ALAS10" do %>
-            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/18-03-2021/PODCAST_10A_LAS10.jpg" %>
+          <%= link_to "/stations/kebuenrollo" do %>
+            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/PODCAST_NUEVOS_2.png" %>
           <% end %>
-          <%= link_to "/stations/CUENTOCONTIGO" do %>
-            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/18-03-2021/boton_cuenta_conmigo.jpg" %>
+          <%= link_to "/stations/lasllegadoras" do %>
+            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/PODCAST_NUEVOS_3.png" %>
           <% end %>
-				</div>
-			</div>
-
-			<div class="dropdown__row radio-row">
-				<div class="dropdown__col">
-					<p class="dropdown__section radio-title">Noticieros</p>
-					<div class="line"></div>
-					<%= link_to "/stations/As%C3%ADlascosasSLP" do %>
-						<%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/ERIKA+PODCAST-02.jpg" %>
-					<% end %>
-          <%= link_to "/stations/As%C3%ADlascosasWFMVallarta" do %>
-            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/21-04-2021/BOTON+WEB.jpg" %>
-          <% end %>
-          <%= link_to "/stations/ImagenInformativaconJonathanFlores" do %>
-            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/PODCAST+BOTON.jpg" %>
-          <% end %>
-					</div>
-			</div>
+        </div>
+      </div>
 		</div>
 	</div>
 
