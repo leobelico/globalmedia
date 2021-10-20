@@ -5,15 +5,14 @@
 	</div>
 	<div class="footer__column">
 		  <%= link_to "Inicio", root_path, class: "footer__section-link" %>
+      <%= link_to "Quiénes somos", root_url + "/corporativo.Quiénes-Somos", class: "footer__section-link" %>
 			<%= link_to "Contáctanos", root_url + "/corporativo.Contáctanos", class: "footer__section-link" %>
 			<%= link_to "Anunciate con nosotros", root_url + "/corporativo.Anunciate-con-nosotros", class: "footer__section-link" %>
-			<%= link_to "Quiénes somos", root_url + "/corporativo.Quiénes-Somos", class: "footer__section-link" %>
-      <%= link_to "Políticas de Premiación", root_url + "/articles/Pol%C3%ADticas-de-premiaci%C3%B3n-de-concursos-en-las-estaciones-de-Global-Media", class: "footer__section-link" %>
+			<%= link_to "Políticas de Premiación", root_url + "/articles/Pol%C3%ADticas-de-premiaci%C3%B3n-de-concursos-en-las-estaciones-de-Global-Media", class: "footer__section-link" %>
       <%= link_to "Encuesta de satisfacción del cliente", "https://encuesta.com/survey/j33pLfX30X/encuesta-de-satisfaccion", class: "footer__section-link" %>
-      <%= link_to "Aviso de Privacidad", "https://www.globalmedia.mx/privacy_policy", class: "footer__section-link" %>
-      <%= link_to "Responsable de Estaciones", "https://www.globalmedia.mx/stations_supervisor", class: "footer__section-link" %>
-	</div>
-	<p class="disclaimer"><%=  @current_coord %> 2016 Global Media Comunicaciones. Todos los derechos reservados. <br><br>Prohibida la reproducción total o parcial, Noticias de hoy en San Luis Potosí, México y el mundo.<br><br> <%= link_to "sigue la información minuto a minuto", privacy_policy_path %>  - <%= link_to "desde San Luis Potosí GlobalMedia es noticia.", stations_supervisor_path %>
+      <%= link_to "Denuncia Urbana", root_url + "/articles/denuncia_urbana", class: "footer__section-link" %>
+  </div>
+	<p class="disclaimer"><%=  @current_coord %> 2016 Global Media Comunicaciones. Todos los derechos reservados. <br><br>Prohibida la reproducción total o parcial <br><br> <%= link_to "Aviso de Privacidad", privacy_policy_path %>  - <%= link_to "Responsable de Estaciones", stations_supervisor_path %>
 	<br><br>
 	<a href="https://www.globalmedia.mx/" target="_blank" style="opacity: .6">GLOBALMEDIA NOTICIAS DE SAN LUIS POTOSI</a>
 	</p>
