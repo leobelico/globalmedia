@@ -3,7 +3,7 @@
 
 		<div class="mobile-menu__column">
 			<div class="mobile-menu__section">
-				<h4 class="mobile-menu__section-title">Secciones:</h4>
+				<h4 class="mobile-menu__section-title">Secciones</h4>
 				<% cache get_sections do %>
 					<% get_sections.each do |section| %>
 						<%= link_to section.name, section, class: "mobile-menu__link" %>
@@ -15,7 +15,7 @@
 		<div class="mobile-menu__column">
 
 			<div class="mobile-menu__section">
-				<h4 class="mobile-menu__section-title">Radio en vivo:</h4>
+				<h4 class="mobile-menu__section-title">Radio en vivo</h4>
 				<% if action_name == "show" and controller_name == "stations" %>
 					<% cache get_radio_stations do %>
 						<% get_radio_stations.each do |station| %>
@@ -32,7 +32,11 @@
 			</div>
 
       <div class="mobile-menu__section">
-        <h4 class="mobile-menu__section-title">Podcast Noticieros:</h4>
+        <h4 class="mobile-menu__section-title">TV en vivo</h4>
+        <%= link_to "GlobalMedia TV", "/stations/VIVECANAL", class: "mobile-menu__link", target: "_blank" %>
+
+      <div class="mobile-menu__section">
+        <h4 class="mobile-menu__section-title">Podcast Noticieros</h4>
         <%= link_to "Así las cosas con Erika Salgado", "/stations/AsílascosasSLP", class: "mobile-menu__link", target: "_blank" %>
         <%= link_to "Imagen Informativa con Jonatha Flores", "/stations/ImagenInformativaconJonathanFlores", class: "mobile-menu__link", target: "_blank" %>
         <%= link_to "Así la cosas en el Bajío con Hector Trejo", "/stations/AsílascosasenelBajío", class: "mobile-menu__link", target: "_blank" %>
@@ -40,14 +44,14 @@
       </div>
 
       <div class="mobile-menu__section">
-        <h4 class="mobile-menu__section-title">Podcast Entretenimiento:</h4>
+        <h4 class="mobile-menu__section-title">Podcast Entretenimiento</h4>
         <%= link_to "10 a las 10 con Eva María Camacho", "/stations/10ALAS10", class: "mobile-menu__link", target: "_blank" %>
         <%= link_to "El tren del mame", "/stations/ELTRENDELMAME", class: "mobile-menu__link", target: "_blank" %>
         <%= link_to "Cuento Contigo", "/stations/CUENTOCONTIGO", class: "mobile-menu__link", target: "_blank" %>
 
       </div>
 			<div class="mobile-menu__section">
-				<h4 class="mobile-menu__section-title">Podcast Ke Buena:</h4>
+				<h4 class="mobile-menu__section-title">Podcast Ke Buena</h4>
 				<%= link_to "Los hijos de la mañana", "/stations/loshijosdelamanana", class: "mobile-menu__link", target: "_blank" %>
 				<%= link_to "Ke buen rollo", "/stations/kebuenrollo", class: "mobile-menu__link", target: "_blank" %>
 				<%= link_to "Las llegadoras", "/stations/lasllegadoras", class: "mobile-menu__link", target: "_blank" %>
