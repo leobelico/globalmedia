@@ -7,21 +7,31 @@ class ApplicationController < ActionController::Base
 
   before_action :redirect_subdomain
 
+  @meta_description = ''
   def redirect_subdomain
     @subdomain_location = 'default'
     @location_id = 1
-    if /(^leon)|(^queretaro)|(^jalisco)|(^zacatecas)/.match(request.host)
+    if /(^leon)|(^queretaro)|(^vallarta)|(^zacatecas)/.match(request.host)
       matchers = request.host.match(/^[a-zA-Z]+/)
       matchers.captures
       @subdomain_location = matchers[0]
       location = Location.where('key = ?', @subdomain_location).first
       if location != nil
+        @meta_description = location.meta_description
         @location_id = location.id
-        end
+      end
     else
       unless /^www/.match(request.host)
         url_redirect = request.protocol + "www." + request.host_with_port + request.fullpath
         redirect_to("#{url_redirect}", status: 301)
+      end
+      location = Location.where('key = ?', 'san-luis').first
+      if location != nil
+        @meta_description = location.meta_description
+        @location_id = location.id
+      else
+        # Solo como default
+        @meta_description = 'Noticias de hoy en San Luis Potosí, México y el mundo, sigue la información minuto a minuto desde San Luis Potosí GlobalMedia es noticia.'
       end
     end
   end

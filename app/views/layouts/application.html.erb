@@ -10,7 +10,7 @@
     <%= csrf_meta_tags %>
 	<% if !(controller_name == "articles" and action_name == "show") %>
 	    <title><%= yield(:title) %></title>
-		<meta name="description" content="Noticias de hoy en San Luis Potosí, México y el mundo, sigue la información minuto a minuto desde San Luis Potosí GlobalMedia es noticia.">
+		<meta name="description" content="<%= @meta_description %>">
 	<% end %>
 	<meta name="author" content="GlobalMedia">
 	<%= action_cable_meta_tag %>
@@ -57,7 +57,7 @@
 
 			ga('create', 'UA-106606454-1', 'auto', {'allowLinker': true});
 			ga('require', 'linker');
-			ga('linker:autoLink', ['jalisco.globalmedia.mx'] );
+			ga('linker:autoLink', ['vallarta.globalmedia.mx'] );
 			ga('send', 'pageview');
 	</script>
 		<!-- End Google Analytics -->
