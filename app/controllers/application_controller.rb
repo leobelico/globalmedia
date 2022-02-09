@@ -11,10 +11,16 @@ class ApplicationController < ActionController::Base
   def redirect_subdomain
     @subdomain_location = 'default'
     @location_id = 1
-    if /(^leon)|(^queretaro)|(^vallarta)|(^zacatecas)/.match(request.host)
+    if /^((?:leon)|(?:queretaro)|(?:vallarta)|(?:vallartabahia)|(?:jalisco)|(?:zacatecas))\./.match(request.host)
       matchers = request.host.match(/^[a-zA-Z]+/)
       matchers.captures
       @subdomain_location = matchers[0]
+
+      if ['vallarta', 'jalisco'].include? @subdomain_location
+        url_redirect = request.protocol + (request.host_with_port.gsub(/(vallarta)|(jalisco)/, 'vallartabahia')) + request.fullpath
+        redirect_to("#{url_redirect}", status: 301)
+      end
+
       location = Location.where('key = ?', @subdomain_location).first
       if location != nil
         @meta_description = location.meta_description
