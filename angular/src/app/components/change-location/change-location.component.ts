@@ -19,7 +19,7 @@ export class ChangeLocationComponent implements OnInit {
 
   ngOnInit(): void {
     this.locationGraphqlService.all().subscribe(locations => {
-      this.locations = locations.filter(value => value.key === 'san-luis' || value.key === 'vallartabahia'|| value.key === 'zacatecas');
+      this.locations = locations.filter(value => value.key === 'san-luis' || value.key === 'vallartabahia'|| value.key === 'zacatecas'|| value.key === 'leon');
     });
     this.configurationService.subdomainKey.subscribe(key => {
       this.currentKeyLocation = key;
