@@ -89,7 +89,7 @@
                 <audio id="today-podcast-<%= podcast.id %>" controls>
                   <source src="<%= podcast.stream_url %>">
                 </audio>
-                <% podcastSomeUrl = '' + CGI.unescape(podcast.stream_url)%>
+                <% podcastSomeUrl = '' + URI.encode(podcast.stream_url) %>
                 <div class="social-media" data-article="<%= podcastSomeUrl %>">
                   <%= link_to ("whatsapp://send?text= Estoy escuchando los podcast en GlobalMedia: " + podcastSomeUrl), data: { action: "share/whatsapp/share" }, class: "social-media__link whatsapp", target: "_blank" do %>
                     <%= image_tag "whatsapp.svg" %>
@@ -128,7 +128,7 @@
                   <audio id="today-podcast-<%= podcast.id %>" controls>
                     <source src="<%= podcast.stream_url %>">
                   </audio>
-                  <% podcastSomeUrl = '' + CGI.unescape(podcast.stream_url) %>
+                  <% podcastSomeUrl = '' + URI.encode(podcast.stream_url) %>
                   <div class="social-media" data-article="<%= podcastSomeUrl %>">
                     <%= link_to ("whatsapp://send?text= Estoy escuchando los podcast en GlobalMedia: " + podcastSomeUrl), data: { action: "share/whatsapp/share" }, class: "social-media__link whatsapp", target: "_blank" do %>
                       <%= image_tag "whatsapp.svg" %>
