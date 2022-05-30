@@ -59,13 +59,10 @@
 		<div class="dropdown__options dropdown__radio">
       <div class="dropdown__row radio-row">
         <div class="dropdown__col">
-          <p class="dropdown__section radio-title">Noticieros</p>
+          <p class="dropdown__section radio-title">NOTICIEROS LOCALES</p>
           <div class="line"></div>
           <%= link_to "/stations/As%C3%ADlascosasSLP" do %>
             <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/ERIKA+PODCAST-02.jpg" %>
-          <% end %>
-          <%= link_to "/stations/As%C3%ADlascosasWFMVallarta" do %>
-            <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/21-04-2021/BOTON+WEB.jpg" %>
           <% end %>
           <%= link_to "/stations/ImagenInformativaconJonathanFlores" do %>
             <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/2021-01-25/PODCAST+BOTON.jpg" %>
@@ -73,8 +70,16 @@
           <%= link_to "stations/AsílascosasenelBajío" do %>
             <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/BOTON+PODCAST-09.jpg" %>
           <% end %>
+					<p class="dropdown__section radio-title">NOTICIEROS REGIONALES</p>
+					<div class="line"></div>
 					<%= link_to "stations/AsílascosasenZacatecas" do %>
 						<%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/BOTON-ZACATECAS.jpg" %>
+					<% end %>
+					<%= link_to "/stations/As%C3%ADlascosasWFMVallarta" do %>
+						<%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/asi_las_cosas_vallarta.png" %>
+					<% end %>
+					<%= link_to "stations/As%C3%ADlascosasenLe%C3%B3n" do %>
+						<%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/PODCAST_leon.jpg" %>
 					<% end %>
         </div>
       </div>
@@ -85,6 +90,9 @@
             <%= link_to "/stations/CUENTOCONTIGO" do %>
             <%= image_tag "https://globalmedia-gm.s3-us-west-1.amazonaws.com/18-03-2021/boton_cuenta_conmigo.jpg" %>
           <% end %>
+					<%= link_to "/stations/WCONTIGO" do %>
+						<%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/w_contigo.jpg" %>
+					<% end %>
         </div>
       </div>
 			<div class="dropdown__row radio-row">
