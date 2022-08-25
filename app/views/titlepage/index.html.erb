@@ -126,7 +126,8 @@
     <%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
   <% end %>
 <% end %>
-<% if get_current_location.key == "san-luis" %>
+<% if @location_id = 1  %>
+
   <div class="special-articles-container">
     <!-- OJO AQUI ES PARA agregar el video arriba de min a min -->
     <!-- pega el siguiente texto donde quieras acomodar el player<body> -->
@@ -182,7 +183,12 @@
     </div>
   </div>
 <% else %>
+
   <div class="special-articles" style="width: 100% !important;">
+
+    <% @render= 'default'%>
+    <% @location_id = 1 %>
+
     <% cache(latest_news) do %>
       <%= render "components/latest-news", articles: latest_news  %>
     <% end %>
