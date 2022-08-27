@@ -109,7 +109,9 @@ class ApplicationController < ActionController::Base
   end
 
   def get_collaborators
-    @collaborator_articles = Article.joins("INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator' ORDER BY article_relationships.created_at DESC").limit(5)
+    @collaborator_articles = Article.joins("
+    INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' AND article_relationships.location_id = #{@location_id}
+    INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator' ORDER BY article_relationships.created_at DESC").limit(5)
 
   end
 

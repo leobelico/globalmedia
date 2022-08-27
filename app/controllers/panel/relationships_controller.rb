@@ -79,7 +79,7 @@ class Panel::RelationshipsController < ApplicationController
 		
 		first_article = Article.find(params[:panel][:first_article_id])
 		if investigation.id
-			r = ArticleRelationship.create(article: first_article, articable_id: investigation.id, articable_type: "Relationship" )
+			r = ArticleRelationship.create(article: first_article, articable_id: investigation.id, articable_type: "Relationship", location_id: @location_id)
 		else
 			flash[:error] = "No se pudo guardar, intenta de nuevo."
 		end
