@@ -187,19 +187,20 @@
 						<% end %>
 					<% end %>
 				</div>
-				<% if @station.article_relationships.count > 0 %>
-					<div class="radio-banner__tune-in">Lo más reciente</div>
-					<div class="station__articles">
-						<% @station.article_relationships.order(created_at: :desc).first(3).each do |relationship| %>
-								<%= render "components/horizontal-note", article: relationship.article %>
-						<% end %>
+				<div class="radio-banner__tune-in">Lo más reciente</div>
+				<div class="station__articles">
+					<% LatestArticle.all.sort_by{ |t| t.published_at }.last(2).each do |article| %>
+						<%= render "components/horizontal-note", article: Article.find(article.article_id) %>
+					<% end %>
+					<% MostVisitedArticle.last(1).each do |relationship| %>
+						<%= render "components/horizontal-note", article: Article.find(relationship.article_id) %>
+					<% end %>
 
-						<!-- VÏNCULO PARA VER MAS -->
-						<% if @station.article_relationships.count > 3 %>
-							<%= link_to "Ver más notas", station_articles_path(@station.slug), class: "view-more" %>
-						<% end %>
-					</div>
-				<% end %>
+					<!-- VÏNCULO PARA VER MAS -->
+					<% if @station.article_relationships.count > 3 %>
+						<%= link_to "Ver más notas", station_articles_path(@station.slug), class: "view-more" %>
+					<% end %>
+				</div>
         <% if @station.name == "Ke Buena" or @station.name == "VOX 96.9" %>
           <div class="radio-banner__tune-in"></div>
           <div class="enc-links">
