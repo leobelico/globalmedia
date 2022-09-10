@@ -189,7 +189,7 @@
 				</div>
 				<div class="radio-banner__tune-in">Lo más reciente</div>
 				<div class="station__articles">
-					<% LatestArticle.all.sort_by{ |t| t.published_at }.last(2).each do |article| %>
+					<% LatestArticle.all.sort_by{ |t| t.published_at }.last(2).reverse.each do |article| %>
 						<%= render "components/horizontal-note", article: Article.find(article.article_id) %>
 					<% end %>
 					<% MostVisitedArticle.last(1).each do |relationship| %>
