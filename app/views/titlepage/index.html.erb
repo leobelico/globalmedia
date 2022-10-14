@@ -130,37 +130,37 @@
   <!-- OJO AQUI ES PARA agregar el video arriba de min a min -->
   <!-- pega el siguiente texto donde quieras acomodar el player<body> -->
   <div class="special-articles d-flex" style="width: 100% !important;">
-    <div class="w-100 mb-5">
-      <p class="sp__name mb-3" style="background-color: #730E15">GlobalMedia TV</p>
-      <!-- Paste the following into the <body> -->
-      <div id="MediaPlayerMiniPlayer" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
-      <script type="text/javascript">
-          WowzaPlayer.create('MediaPlayerMiniPlayer',
-              {
-                  "license":"PLAY1-4BVTz-Rmtp4-Dx49D-Y4Qjv-6PVnb",
-                  "title":"Live Streaming",
-                  "description":"",
-                  "sourceURL":
-                      "https://videocast.mx:1936/8010/ngrp:8010_all/playlist.m3u8"
+    <!--  <div class="w-100 mb-5">
+        <p class="sp__name mb-3" style="background-color: #730E15">GlobalMedia TV</p>
+        <!-- Paste the following into the <body> -->
+    <!--<div id="MediaPlayerMiniPlayer" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
+    <script type="text/javascript">
+        WowzaPlayer.create('MediaPlayerMiniPlayer',
+            {
+                "license":"PLAY1-4BVTz-Rmtp4-Dx49D-Y4Qjv-6PVnb",
+                "title":"Live Streaming",
+                "description":"",
+                "sourceURL":
+                    "https://videocast.mx:1936/8010/ngrp:8010_all/playlist.m3u8"
 
-                  ,
-                  "autoPlay":true,
-                  "volume":"75",
-                  "mute":true,
-                  "loop":false,
-                  "audioOnly":false,
-                  "uiShowQuickRewind":false,
-                  "uiQuickRewindSeconds":"30"
-              }
-          );
-      </script>
-    </div>
-    <div class="w-100 mb-3"></div>
-    <!--<div class="special-articles d-flex" style="width: 100% !important;">
-        <div class="w-100 mb-5">
-           <p class="sp__name mb-3" style="background-color: #730E15">ASí LAS COSAS EN VIVO</p>
-          <iframe width="470" height="400" src="https://www.youtube.com/embed/u0kTFc5cRwU?autoplay=1&mute=1&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>-->
+                ,
+                "autoPlay":true,
+                "volume":"75",
+                "mute":true,
+                "loop":false,
+                "audioOnly":false,
+                "uiShowQuickRewind":false,
+                "uiQuickRewindSeconds":"30"
+            }
+        );
+    </script>
+  </div>
+  <div class="w-100 mb-3"></div>
+  <!--<div class="special-articles d-flex" style="width: 100% !important;">
+      <div class="w-100 mb-5">
+         <p class="sp__name mb-3" style="background-color: #730E15">ASí LAS COSAS EN VIVO</p>
+        <iframe width="470" height="400" src="https://www.youtube.com/embed/u0kTFc5cRwU?autoplay=1&mute=1&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>-->
     <!-- termina codiel video arriba de min a min -->
     <!--cuando se quiere desactivar el reproductor se agrega esta linea -->
     <!--<div class="special-articles">-->
@@ -187,8 +187,6 @@
     <% end %>
 
   <% end %>
-
-
 
 </div>
 <% if get_banner("", "TitlePage", "Grande" ).count > 0 %>
