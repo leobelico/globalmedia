@@ -7,7 +7,7 @@ class RelationshipsController < ApplicationController
 	def collaborators
 
 		@collaborators = Relationship
-											 .select('relationships.*, MAX(ar.created) as most_recent_article')
+											 .select('relationships.*, MAX(ar.updated_at) as most_recent_article')
 											 .joins('inner join article_relationships ar on relationships.id = ar.articable_id')
 											 .where(relationship_type: "Collaborator")
 											 .order('most_recent_article DESC')
