@@ -6,7 +6,13 @@ class RelationshipsController < ApplicationController
 	end
 	def collaborators
 
-		@collaborators = Relationship.where(relationship_type: "Collaborator").order(updated_at: "ASC").paginate(page: params[:page], per_page: 18)
+		@collaborators = Relationship
+											 .select('relationships.*, MAX(ar.updated_at) as most_recent_article')
+											 .joins('inner join article_relationships ar on relationships.id = ar.articable_id')
+											 .where(relationship_type: "Collaborator")
+											 .order('most_recent_article DESC')
+											 .group('relationships.id')
+											 .paginate(page: params[:page], per_page: 18)
 		@related_sections = RelatedSection.where(section: Section.find_by(name: "Colaboradores"))
 	end
 	private 
