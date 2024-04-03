@@ -28,8 +28,8 @@ default: &default
 development:
   adapter: postgresql
   encoding: utf8
-  database: postgres
-  username: eduardo
+  database: globalmedia
+  username: postgres
   password: 123456
   host: localhost
   port: 5432
