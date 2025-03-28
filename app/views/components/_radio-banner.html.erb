@@ -1,28 +1,64 @@
-<div class="radio-banner__tune-in no-border"><div class="led"></div>Sintoniza ahora</div>
+<div class="radio-banner__tune-in no-border">
+  <div class="led"></div>Sintoniza ahora
+</div>
+
 <div class="radio-banner">
-	<% get_current_programs.each do |program| %>
-		<div class="radio-program">
-      <div class="radio-program-parent">
-        <% if action_name == "show" and controller_name == "stations" %>
-          <%= link_to ("/" + program.station.slug), target: "_top" do %>
-            <%= image_tag program.image %>
+  <% get_current_programs.each do |program| %>
+    <%# Ocultamos LOS40QUERETARO bajo Los40 %>
+    <% unless program.station.slug == "los40-queretaro" %>
+      <div class="radio-program">
+        <div class="radio-program-parent">
+          <%= link_to ("/" + program.station.slug), target: (controller_name == "stations" && action_name == "show") ? "_top" : "_blank" do %>
+            <%= image_tag program.station.image, alt: program.station.name %>
           <% end %>
-        <% else %>
-          <%= link_to ("/" + program.station.slug), target: "_blank" do %>
-            <%= image_tag program.image %>
+        </div>
+
+        <%# Mostramos hijos EXCEPTO LOS40QUERETARO %>
+        <% get_children_programs(program.station.id).each do |child| %>
+          <% unless child.station.slug == "los40-queretaro" %>
+            <div class="radio-program-children">
+              <%= link_to ("/" + child.station.slug), target: "_top" do %>
+                <%= image_tag child.station.image, alt: child.station.name %>
+              <% end %>
+            </div>
           <% end %>
         <% end %>
       </div>
-      <% get_children_programs(program.station.id).each do |program_child| %>
-        <div class="radio-program-children">
-          <%= link_to ("/" + program_child.station.slug), target: "_top" do %>
-            <%= image_tag program_child.image %>
-          <% end %>
-        </div>
-      <% end %>
+    <% end %>
+  <% end %>
+
+  <%# Mostramos Wradio y agregamos MANUALMENTE a LOS40QUERETARO como si fuera su hijo %>
+  <% wradio = Station.find_by(name: "Wradio") %>
+  <% los40_queretaro = Station.find_by(slug: "los40-queretaro") %>
+
+  <% if wradio && los40_queretaro %>
+    <div class="radio-program">
+      <div class="radio-program-parent">
+        <%= link_to ("/" + wradio.slug), target: "_blank" do %>
+          <%= image_tag wradio.image, alt: wradio.name %>
+        <% end %>
+      </div>
+      <div class="radio-program-children">
+        <%= link_to ("/" + los40_queretaro.slug), target: "_top" do %>
+          <%= image_tag los40_queretaro.image, alt: los40_queretaro.name %>
+        <% end %>
+      </div>
     </div>
-    	<% end %>
+  <% end %>
+
+  <%# Mostramos Los40 SOLO si no es el de Querétaro %>
+  <% los40_parent = Station.find_by(name: "Los40") %>
+  <% if los40_parent && los40_parent.slug != "los40-queretaro" %>
+    <div class="radio-program">
+      <div class="radio-program-parent">
+        <%= link_to ("/" + los40_parent.slug), target: "_blank" do %>
+          <%= image_tag los40_parent.image, alt: los40_parent.name %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
+
 <style>
   .radio-banner {
     margin-bottom: 0.8rem;
