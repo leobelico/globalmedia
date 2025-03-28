@@ -3,33 +3,36 @@
 </div>
 
 <div class="radio-banner">
+  <!-- Mostramos todas las estaciones excepto W Radio y Los40 Querétaro -->
   <% get_current_programs.each do |program| %>
-    <div class="radio-program">
-      <div class="radio-program-parent">
-        <%= link_to (controller_name == "stations" && action_name == "show") ? "/#{program.station.slug}" : "/#{program.station.slug}", 
-                   target: (controller_name == "stations" && action_name == "show") ? "_top" : "_blank" do %>
-          <%= image_tag program.image %>
+    <% unless ["WRadio", "LOS40QUERETARO"].include?(program.station.name.upcase) %>
+      <div class="radio-program">
+        <div class="radio-program-parent">
+          <%= link_to "/#{program.station.slug}", 
+                     target: (controller_name == "stations" && action_name == "show") ? "_top" : "_blank" do %>
+            <%= image_tag program.image %>
+          <% end %>
+        </div>
+        
+        <!-- Mostramos hijos excepto Los40 Querétaro -->
+        <% get_children_programs(program.station.id).each do |child| %>
+          <% unless child.station.slug == "los40queretaro" %>
+            <div class="radio-program-children">
+              <%= link_to "/#{child.station.slug}", target: "_top" do %>
+                <%= image_tag child.image %>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
       </div>
-      
-      <%# MOSTRAMOS TODOS LOS HIJOS MENOS LOS40QUERETARO %>
-      <% get_children_programs(program.station.id).each do |program_child| %>
-        <% unless program_child.station.slug == "los40queretaro" %>
-          <div class="radio-program-children">
-            <%= link_to "/#{program_child.station.slug}", target: "_top" do %>
-              <%= image_tag program_child.image %>
-            <% end %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
+    <% end %>
   <% end %>
 
-  <%# AGREGAMOS MANUALMENTE Wradio CON LOS40QUERETARO COMO HIJO EXTRA %>
+  <!-- Mostramos W Radio San Luis manualmente con sus hijos + Los40 Querétaro -->
   <% wradio = Station.find_by(slug: "wradio") %>
   <% los40_queretaro = Station.find_by(slug: "los40queretaro") %>
   
-  <% if wradio && los40_queretaro %>
+  <% if wradio %>
     <div class="radio-program">
       <div class="radio-program-parent">
         <%= link_to "/#{wradio.slug}", target: "_blank" do %>
@@ -37,21 +40,23 @@
         <% end %>
       </div>
       
-      <%# Hijos originales de Wradio %>
-      <% get_children_programs(wradio.id).each do |wradio_child| %>
+      <!-- Hijos originales de W Radio -->
+      <% get_children_programs(wradio.id).each do |child| %>
         <div class="radio-program-children">
-          <%= link_to "/#{wradio_child.station.slug}", target: "_top" do %>
-            <%= image_tag wradio_child.image %>
+          <%= link_to "/#{child.station.slug}", target: "_top" do %>
+            <%= image_tag child.image %>
           <% end %>
         </div>
       <% end %>
       
-      <%# Añadimos a LOS40QUERETARO como hijo extra %>
-      <div class="radio-program-children">
-        <%= link_to "/#{los40_queretaro.slug}", target: "_top" do %>
-          <%= image_tag los40_queretaro.image %>
-        <% end %>
-      </div>
+      <!-- Añadimos Los40 Querétaro como hijo extra -->
+      <% if los40_queretaro %>
+        <div class="radio-program-children">
+          <%= link_to "/#{los40_queretaro.slug}", target: "_top" do %>
+            <%= image_tag los40_queretaro.image %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </div>
