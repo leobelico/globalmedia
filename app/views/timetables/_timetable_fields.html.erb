@@ -1,0 +1,16 @@
+<div class="field-builder card nested-fields">
+  <div class="field">
+    <%= f.label :name, "Nombre del Programa" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :broadcasters, "Locutores" %>
+    <%= f.text_field :broadcasters %>
+  </div>
+
+  <!-- Más campos del timetable... -->
+
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "Eliminar", "#", class: "remove_fields", data: { action: "remove-fields" } %>
+</div>

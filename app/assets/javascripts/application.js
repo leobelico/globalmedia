@@ -1,15 +1,3 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file. JavaScript code in this file should be added after the last require_* statement.
-//
-// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
-//
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/autocomplete
@@ -20,24 +8,7 @@
 //= require libraries/money
 //= require libraries/quill/quill.min 
 //= require libraries/clipboard.js/clipboard.min 
-// require components/media-cache-cleaner
 //= require components/buttons
-// require_tree ./channels
-// 
-// 
-// QUILL BLOTS
-// 
-//= require libraries/quill/blots/Tweet 
-//= require libraries/quill/blots/EmbedContent 
-//= require libraries/quill/blots/Instagram 
-// 
-// 
-//  QUILL FUNCTIONS
-// 
-//= require libraries/quill/functions/createInstagramEmbed 
-// 
-//  COMPONENTS 
-// 
 //= require components/currency-rates
 //= require components/weather
 //= require components/quill-initializer
@@ -49,31 +20,113 @@
 //= require components/copy-to-clipboard
 //= require components/mobile-menu
 
-$(document).on("click", function(event){
-	if ($(event.target).is("[data-link]")){
-		window.location.href = $(event.target).data("link");
-	}
-}); 
+// QUILL BLOTS
+//= require libraries/quill/blots/Tweet 
+//= require libraries/quill/blots/EmbedContent 
+//= require libraries/quill/blots/Instagram 
 
-function add_fields(link, association, content) { 
-//
-    var new_id = new Date().getTime();  
-    var regexp = new RegExp("new_" + association, "g");  
-    $(link).parent().append(content.replace(regexp, new_id));
-    TweenMax.to(".field-builder", 1.2, {maxHeight: 200, overflow:  "hidden"})
+// QUILL FUNCTIONS
+//= require libraries/quill/functions/createInstagramEmbed 
+
+// Inicialización después de cargar Turbolinks
+$(document).on('turbolinks:load', function() {
+  // Manejar clicks en elementos con data-link
+  $(document).on("click", "[data-link]", function(event) {
+    event.preventDefault();
+    window.location.href = $(this).data("link");
+  });
+  
+  // =============================================
+  // MANEJO DE CAMPOS DINÁMICOS (SOLUCIÓN COMPLETA)
+  // =============================================
+  
+  // Añadir nuevos campos
+  $(document).on('click', '[data-action="add-fields"]', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    var association = $(this).data('association');
+    var content = $(this).data('fields');
+    var new_id = new Date().getTime();
+    var regexp = new RegExp('new_' + association, 'g');
+    
+    // Insertar los nuevos campos
+    $(this).parent().find('.field-builder').last().after(content.replace(regexp, new_id));
+    
+    // Animación para el nuevo elemento
+    var $newField = $(this).parent().find('.field-builder').last();
+    TweenMax.from($newField, 0.5, {
+      opacity: 0,
+      height: 0,
+      onComplete: function() {
+        TweenMax.set($newField, { clearProps: 'all' });
+      }
+    });
+  });
+
+  // Eliminar campos
+  $(document).on('click', '[data-action="remove-fields"]', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    var $field = $(this).closest('.field-builder');
+    var $destroyField = $field.find('input[type=hidden][name*="_destroy"]');
+    
+    if ($destroyField.length) {
+      $destroyField.val('1'); // Marcar para eliminación
+      TweenMax.to($field, 0.5, {
+        opacity: 0,
+        height: 0,
+        marginBottom: 0,
+        padding: 0,
+        onComplete: function() {
+          $field.hide();
+        }
+      });
+    } else {
+      // Eliminar directamente si es un nuevo campo no guardado
+      TweenMax.to($field, 0.5, {
+        opacity: 0,
+        height: 0,
+        marginBottom: 0,
+        padding: 0,
+        onComplete: function() {
+          $field.remove();
+        }
+      });
+    }
+  });
+
+  // =============================================
+  // FUNCIONES ADICIONALES EXISTENTES
+  // =============================================
+  
+  function popup(x) {
+    $('.popuptext').toggleClass("show");
+  }
+
+  function popupout(x) {
+    $('.popuptext').toggleClass("show");
+  }
+  
+  // Inicialización de otros componentes
+  initializeQuillEditors();
+  setupClipboard();
+  initMobileMenu();
+});
+
+// =============================================
+// FUNCIONES DE COMPONENTES
+// =============================================
+
+function initializeQuillEditors() {
+  // Tu código de inicialización de Quill
 }
 
-function remove_fields(link) {
-  $(link).prev("input[type=hidden]").val("1");
-  $(link).closest(".field-builder").hide();
-  TweenMax.to($(link).parent(), .6, { height:  0, overflow:  "hidden", marginBottom:  0});
+function setupClipboard() {
+  // Tu código para clipboard.js
 }
 
-function popup(x){
-  $('.popuptext').toggleClass("show");
+function initMobileMenu() {
+  // Tu código para el menú móvil
 }
-
-function popupout(x){
-  $('.popuptext').toggleClass("show");
-}
-
