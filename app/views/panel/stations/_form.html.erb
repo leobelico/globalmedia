@@ -1,19 +1,139 @@
 <form id="fields-for-s3">
   <% @s3_direct_post.fields.map do |name, value| %>
-      <input type="hidden" name="<%= name %>" value="<%= value %>" />
+    <input type="hidden" name="<%= name %>" value="<%= value %>" />
   <% end %>
 </form>
-<%= form_for [:panel, @station], multipart: true, html: { class: "station-form directUpload", data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }} do |f| %>
-  <!-- [Tus otros campos de estación aquí...] -->
 
+<%= form_for [:panel, @station], multipart: true, html: { class: "station-form directUpload", data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }} do |f| %>
+  
+  <% if @station.errors.any? %>
+    <div class="card">
+      <h5><%= pluralize(@station.errors.count, "error") %></h5>
+      <ul>
+        <% @station.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- SECCIÓN DE LA ESTACIÓN -->
+  <div class="card admin-form">
+    <h3 class="section-title">Estación / Canal</h3>
+
+    <div class="field">
+      <label>Nombre de la estación:</label>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <label>Frecuencia:</label>
+      <%= f.text_field :frequency %>
+    </div>
+    <div class="field">
+      <label>Descripción:</label>
+      <%= f.text_field :description %>
+    </div>
+
+    <!-- Playlists 1-4 -->
+    <div class="multifield">
+      <div class="field">
+        <label>URL a playlist 1:</label>
+        <%= f.text_field :playlist_1 %>
+      </div>
+      <div class="field">
+        <label>URL a playlist 2:</label>
+        <%= f.text_field :playlist_2 %>
+      </div>
+    </div>
+    <div class="multifield">
+      <div class="field">
+        <label>Imagen para playlist 1:</label>
+        <%= f.file_field :playlist_1_image %>
+      </div>
+      <div class="field">
+        <label>Imagen para playlist 2:</label>
+        <%= f.file_field :playlist_2_image %>
+      </div>
+    </div>
+    <div class="multifield">
+      <div class="field">
+        <label>URL a playlist 3:</label>
+        <%= f.text_field :playlist_3 %>
+      </div>
+      <div class="field">
+        <label>URL a playlist 4:</label>
+        <%= f.text_field :playlist_4 %>
+      </div>
+    </div>
+    <div class="multifield">
+      <div class="field">
+        <label>Imagen para playlist 3:</label>
+        <%= f.file_field :playlist_3_image %>
+      </div>
+      <div class="field">
+        <label>Imagen para playlist 4:</label>
+        <%= f.file_field :playlist_4_image %>
+      </div>
+    </div>
+
+    <!-- URLs de Stream -->
+    <div class="field">
+      <label>URL de Stream:</label>
+      <%= f.text_field :stream_url %>
+    </div>
+    <div class="field">
+      <label>URL de Stream para app móvil:</label>
+      <%= f.text_field :app_url %>
+    </div>
+
+    <!-- Redes Sociales -->
+    <div class="multifield">
+      <div class="field">
+        <label>URL de Facebook:</label>
+        <%= f.text_field :facebook %>
+      </div>
+      <div class="field">
+        <label>URL de Twitter:</label>
+        <%= f.text_field :twitter %>
+      </div>
+    </div>
+
+    <!-- Checkboxes -->
+    <div class="field field--checkbox">
+      <label>Canal de video:</label>
+      <%= f.check_box :video %>
+    </div>
+    <div class="field field--checkbox">
+      <label>Noticiero:</label>
+      <%= f.check_box :news %>
+    </div>
+
+    <!-- Imágenes -->
+    <div class="multifield">
+      <div class="field">
+        <% if @station.image %>
+          <%= image_tag @station.image, class: "form-image-preview" %>
+        <% end %>
+        <label>Imagen (logo):</label>
+        <%= f.file_field :image %>
+      </div>
+      <div class="field">
+        <% if @station.image_preview %>
+          <%= image_tag @station.image_preview, class: "form-image-preview" %>
+        <% end %>
+        <label>Imagen para Facebook:</label>
+        <%= f.file_field :image_preview %>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN DE PROGRAMAS (12 PRE-CREADOS) -->
   <div class="admin-form">
     <h3 class="section-title">Programas</h3>
 
-    <% # Crear 12 programas por defecto %>
     <% 12.times do |i| %>
       <%= f.fields_for :timetables, @station.timetables[i] || @station.timetables.build do |builder| %>
         <div class="field-builder card">
-
           <div class="field">
             <label>Nombre del Programa</label>
             <%= builder.text_field :name, value: builder.object.name || "Programa #{i+1}" %>
@@ -25,60 +145,97 @@
           </div>
 
           <div class="field">
-            <label for="">Descripción:</label>
+            <label>Descripción:</label>
             <%= builder.text_field :description %>
           </div>
 
           <div class="multifield">
             <div class="timefield">
               <label>Hora de Inicio:</label>
-              <div class="field">
-                <%= builder.time_select :streaming_hour, default: {hour:"00", minute: "00"}, time_separator: "<span>:</span>" %>
-              </div>
+              <%= builder.time_select :streaming_hour, default: { hour: "00", minute: "00" }, time_separator: "<span>:</span>" %>
             </div>
             <div class="timefield">
               <label>Hora de Fin:</label>
-              <div class="field">
-                <%= builder.time_select :end_streaming_hour, default: {hour: "01", minute: "00"}, time_separator: "<span>:</span>" %>
-              </div>
+              <%= builder.time_select :end_streaming_hour, default: { hour: "01", minute: "00" }, time_separator: "<span>:</span>" %>
             </div>
           </div>
 
-          <!-- [Resto de campos del programa...] -->
+          <div class="field">
+            <label>Días de la semana:</label>
+          </div>
+          <div class="field field--checkbox">
+            <%= builder.check_box :monday %>
+            <label>Lunes</label>
+          </div>
+          <div class="field field--checkbox">
+            <%= builder.check_box :tuesday %>
+            <label>Martes</label>
+          </div>
+          <div class="field field--checkbox">
+            <%= builder.check_box :wednesday %>
+            <label>Miércoles</label>
+          </div>
+          <div class="field field--checkbox">
+            <%= builder.check_box :thursday %>
+            <label>Jueves</label>
+          </div>
+          <div class="field field--checkbox">
+            <%= builder.check_box :friday %>
+            <label>Viernes</label>
+          </div>
+          <div class="field field--checkbox">
+            <%= builder.check_box :saturday %>
+            <label>Sábado</label>
+          </div>
+          <div class="field field--checkbox">
+            <%= builder.check_box :sunday %>
+            <label>Domingo</label>
+          </div>
+
+          <div class="field">
+            <label>Imagen para banner programático:</label>
+            <%= builder.file_field :image %>
+          </div>
+          <div class="field">
+            <label>Imagen del locutor o anfitrión:</label>
+            <%= builder.file_field :broadcaster_image %>
+          </div>
 
           <%= builder.hidden_field :_destroy %>
-          <%= link_to 'Eliminar programa', '#', class: 'remove-program fields__remove delete', data: { index: i } %>
+          <%= link_to "Eliminar programa", "#", class: "remove-program fields__remove delete", data: { index: i } %>
         </div>
       <% end %>
     <% end %>
   </div>
 
-  <%= f.submit "Guardar" %>
+  <%= f.submit "Guardar", class: "btn-submit" %>
 <% end %>
 
 <script>
-  // Script para eliminar programas
-  $(document).on('click', '.remove-program', function(e) {
+  // Eliminar programas sin refrescar
+  $(document).on("click", ".remove-program", function(e) {
     e.preventDefault();
-    $(this).closest('.field-builder').find('input[name*="_destroy"]').val('1');
-    $(this).closest('.field-builder').hide();
+    $(this).closest(".field-builder").find("input[name*='_destroy']").val("1");
+    $(this).closest(".field-builder").hide();
   });
 
-  // Script para previsualización de imágenes
-  $("input[type=file]").each(function(){
+  // Previsualización de imágenes
+  $("input[type=file]").each(function() {
     var $input = $(this);
     if ($input.parents(".field").find("img").length == 0) {
       $input.before('<img class="form__image-preview">');
     }
 
-    $input.change(function(){
-      var reader = new FileReader();
-      $(reader).on("load", function(event){
-        $input.parents(".field").find("img").attr('src', event.target.result);
-        $input.parents(".field").find("img").css("display", "block");
-      });
-      reader.readAsDataURL(this.files[0]);
+    $input.change(function() {
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          $input.parents(".field").find("img").attr("src", e.target.result).show();
+        };
+        reader.readAsDataURL(this.files[0]);
+      }
     });
   });
 </script>
+
 <%= render "components/s3_form_js" %>
