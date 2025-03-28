@@ -3,97 +3,78 @@
 </div>
 
 <div class="radio-banner">
-  <!-- 1. Mostramos TODAS las estaciones EXCEPTO WRadio y LOS40QUERETARO -->
+  <!-- Mostramos todas las estaciones excepto W Radio y Los40 Querétaro -->
   <% get_current_programs.each do |program| %>
-    <% unless ["W Radio San Luis", "Los 40 Querétaro"].include?(program.station.name) %>
+    <% unless ["WRadio", "LOS40QUERETARO"].include?(program.station.name.upcase) %>
       <div class="radio-program">
         <div class="radio-program-parent">
-          <a href="/<%= program.station.slug %>" target="<%= controller_name == 'stations' && action_name == 'show' ? '_top' : '_blank' %>">
-            <img src="<%= program.image %>">
-          </a>
+          <%= link_to "/#{program.station.slug}", 
+                     target: (controller_name == "stations" && action_name == "show") ? "_top" : "_blank" do %>
+            <%= image_tag program.image %>
+          <% end %>
         </div>
+        
+        <!-- Mostramos hijos excepto Los40 Querétaro -->
         <% get_children_programs(program.station.id).each do |child| %>
-          <div class="radio-program-children">
-            <a href="/<%= child.station.slug %>" target="_top">
-              <img src="<%= child.image %>">
-            </a>
-          </div>
+          <% unless child.station.slug == "los40queretaro" %>
+            <div class="radio-program-children">
+              <%= link_to "/#{child.station.slug}", target: "_top" do %>
+                <%= image_tag child.image %>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
       </div>
     <% end %>
   <% end %>
 
-  <!-- 2. Mostramos WRadio MANUALMENTE con sus hijos + LOS40QUERETARO -->
-  <div class="radio-program">
-    <!-- Parent: W Radio San Luis -->
-    <div class="radio-program-parent">
-      <a href="/wradio" target="_blank">
-        <img src="<%= Station.find_by(slug: 'wradio').image %>">
-      </a>
+  <!-- Mostramos W Radio San Luis manualmente con sus hijos + Los40 Querétaro -->
+  <% wradio = Station.find_by(slug: "wradio") %>
+  <% los40_queretaro = Station.find_by(slug: "los40queretaro") %>
+  
+  <% if wradio %>
+    <div class="radio-program">
+      <div class="radio-program-parent">
+        <%= link_to "/#{wradio.slug}", target: "_blank" do %>
+          <%= image_tag wradio.image %>
+        <% end %>
+      </div>
+      
+      <!-- Hijos originales de W Radio -->
+      <% get_children_programs(wradio.id).each do |child| %>
+        <div class="radio-program-children">
+          <%= link_to "/#{child.station.slug}", target: "_top" do %>
+            <%= image_tag child.image %>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <!-- Añadimos Los40 Querétaro como hijo extra -->
+      <% if los40_queretaro %>
+        <div class="radio-program-children">
+          <%= link_to "/#{los40_queretaro.slug}", target: "_top" do %>
+            <%= image_tag los40_queretaro.image %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
-    
-    <!-- Hijo 1: W Radio Querétaro -->
-    <div class="radio-program-children">
-      <a href="/wradioqueretaro" target="_top">
-        <img src="<%= Station.find_by(slug: 'wradioqueretaro').image %>">
-      </a>
-    </div>
-    
-    <!-- Hijo 2: W Radio Zacatecas -->
-    <div class="radio-program-children">
-      <a href="/wradiozacatecas" target="_top">
-        <img src="<%= Station.find_by(slug: 'wradiozacatecas').image %>">
-      </a>
-    </div>
-    
-    <!-- Hijo 3: W Radio León -->
-    <div class="radio-program-children">
-      <a href="/wradioleon" target="_top">
-        <img src="<%= Station.find_by(slug: 'wradioleon').image %>">
-      </a>
-    </div>
-    
-    <!-- Hijo 4: W Radio Puerto Vallarta -->
-    <div class="radio-program-children">
-      <a href="/wradiopuertovallarta" target="_top">
-        <img src="<%= Station.find_by(slug: 'wradiopuertovallarta').image %>">
-      </a>
-    </div>
-    
-    <!-- HIJO EXTRA: Los 40 Querétaro -->
-    <div class="radio-program-children">
-      <a href="/los40queretaro" target="_top">
-        <img src="<%= Station.find_by(slug: 'los40queretaro').image %>">
-      </a>
-    </div>
-  </div>
+  <% end %>
 </div>
 
 <style>
   .radio-banner {
     margin-bottom: 0.8rem;
     z-index: 9;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
   }
   .radio-program {
-    position: relative;
+    display: block;
+    flex-direction: column;
   }
-  .radio-program-parent img {
-    width: 100px;
-    height: auto;
+  .radio-program .radio-program-parent a img {
+    width: 100%;
   }
-  .radio-program-children {
+  .radio-program .radio-program-children {
     display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: white;
-    padding: 5px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 10;
   }
   .radio-program:hover .radio-program-children {
     display: block;
@@ -101,11 +82,11 @@
 </style>
 
 <script>
-  $(document).ready(function() {
-    function ledAnimation() {
-      var led = $(".led");
-      led.animate({opacity: 0}, 800).animate({opacity: 1}, 800, ledAnimation);
-    }
-    ledAnimation();
-  });
+  function led_timeline(){
+    var led = $(".led");
+    var led_tl = new TimelineMax({ repeat: -1 });
+    led_tl.add(TweenMax.set(led, { opacity: 0, delay: .8 }));
+    led_tl.add(TweenMax.set(led, { opacity: 1, delay: .8 }));
+  }
+  led_timeline(); 
 </script>
