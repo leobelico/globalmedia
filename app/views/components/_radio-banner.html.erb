@@ -3,78 +3,81 @@
 </div>
 
 <div class="radio-banner">
-  <!-- Mostramos todas las estaciones excepto W Radio y Los40 Querétaro -->
-  <% get_current_programs.each do |program| %>
-    <% unless ["WRadio", "LOS40QUERETARO"].include?(program.station.name.upcase) %>
-      <div class="radio-program">
-        <div class="radio-program-parent">
-          <%= link_to "/#{program.station.slug}", 
-                     target: (controller_name == "stations" && action_name == "show") ? "_top" : "_blank" do %>
-            <%= image_tag program.image %>
-          <% end %>
-        </div>
-        
-        <!-- Mostramos hijos excepto Los40 Querétaro -->
-        <% get_children_programs(program.station.id).each do |child| %>
-          <% unless child.station.slug == "los40queretaro" %>
-            <div class="radio-program-children">
-              <%= link_to "/#{child.station.slug}", target: "_top" do %>
-                <%= image_tag child.image %>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    <% end %>
-  <% end %>
-
-  <!-- Mostramos W Radio San Luis manualmente con sus hijos + Los40 Querétaro -->
-  <% wradio = Station.find_by(slug: "wradio") %>
-  <% los40_queretaro = Station.find_by(slug: "los40queretaro") %>
-  
-  <% if wradio %>
-    <div class="radio-program">
-      <div class="radio-program-parent">
-        <%= link_to "/#{wradio.slug}", target: "_blank" do %>
-          <%= image_tag wradio.image %>
-        <% end %>
-      </div>
-      
-      <!-- Hijos originales de W Radio -->
-      <% get_children_programs(wradio.id).each do |child| %>
-        <div class="radio-program-children">
-          <%= link_to "/#{child.station.slug}", target: "_top" do %>
-            <%= image_tag child.image %>
-          <% end %>
-        </div>
-      <% end %>
-      
-      <!-- Añadimos Los40 Querétaro como hijo extra -->
-      <% if los40_queretaro %>
-        <div class="radio-program-children">
-          <%= link_to "/#{los40_queretaro.slug}", target: "_top" do %>
-            <%= image_tag los40_queretaro.image %>
-          <% end %>
-        </div>
-      <% end %>
+  <!-- 1. Grupo Los40 (sin Querétaro) -->
+  <div class="radio-program">
+    <div class="radio-program-parent">
+      <a href="/Los40" target="_blank">
+        <img src="//globalmediarocks.s3-us-west-1.amazonaws.com/uploads/d67bde50-5695-4965-914d-1c5ef5790d20/LA%20CORNETA.png">
+      </a>
     </div>
-  <% end %>
+    <div class="radio-program-children">
+      <a href="/Los40%20vallarta" target="_top">
+        <img src="//globalmediarocks.s3-us-west-1.amazonaws.com/uploads/e4835488-82fb-4521-99c7-921db23dcc63/BOTON%20CORNETA.png">
+      </a>
+    </div>
+  </div>
+
+  <!-- 2. Grupo WRadio (con Querétaro añadido) -->
+  <div class="radio-program">
+    <div class="radio-program-parent">
+      <a href="/WRadio" target="_blank">
+        <img src="//globalmediarocks.s3-us-west-1.amazonaws.com/uploads/8f0b10f2-2216-403d-be44-b7b4169e8d6f/LORET%20SLP.jpg">
+      </a>
+    </div>
+    <!-- Hijos originales -->
+    <div class="radio-program-children">
+      <a href="/WRADIOZACATECAS" target="_top">
+        <img src="//globalmediarocks.s3-us-west-1.amazonaws.com/uploads/0c4b2ca5-50f9-4749-87d5-27c3bc0c69cf/ZAC%20LORET.png">
+      </a>
+    </div>
+    <div class="radio-program-children">
+      <a href="/WRADIOLEON" target="_top">
+        <img src="//globalmediarocks.s3-us-west-1.amazonaws.com/uploads/9a04ff31-d517-4a1a-85f8-75522b30827c/LORET.png">
+      </a>
+    </div>
+    <div class="radio-program-children">
+      <a href="/WRADIOQUERETARO" target="_top">
+        <img src="//globalmediarocks.s3-us-west-1.amazonaws.com/uploads/3be5fc8c-28ca-42c7-95bb-f641804e911d/LORET.png">
+      </a>
+    </div>
+    <div class="radio-program-children">
+      <a href="/WRADIOPUERTOVALLARTA" target="_top">
+        <img src="//globalmediarocks.s3-us-west-1.amazonaws.com/uploads/dc8fb26a-cde1-4c81-8896-7a134232c63b/LORET.png">
+      </a>
+    </div>
+    <!-- Añadimos Querétaro como hijo extra -->
+    <div class="radio-program-children">
+      <a href="/LOS40QUERETARO" target="_top">
+        <img src="//globalmediarocks.s3-us-west-1.amazonaws.com/uploads/b36676fd-4422-4d6b-9bf4-97948f6dca1a/LORET.jpg">
+      </a>
+    </div>
+  </div>
 </div>
 
 <style>
   .radio-banner {
     margin-bottom: 0.8rem;
     z-index: 9;
+    display: flex;
+    gap: 15px;
   }
   .radio-program {
-    display: block;
-    flex-direction: column;
+    position: relative;
   }
-  .radio-program .radio-program-parent a img {
-    width: 100%;
+  .radio-program-parent img {
+    width: 100px;
+    height: auto;
   }
-  .radio-program .radio-program-children {
+  .radio-program-children {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 10;
   }
   .radio-program:hover .radio-program-children {
     display: block;
@@ -82,11 +85,9 @@
 </style>
 
 <script>
-  function led_timeline(){
-    var led = $(".led");
-    var led_tl = new TimelineMax({ repeat: -1 });
-    led_tl.add(TweenMax.set(led, { opacity: 0, delay: .8 }));
-    led_tl.add(TweenMax.set(led, { opacity: 1, delay: .8 }));
-  }
-  led_timeline(); 
+  $(function(){
+    setInterval(function(){
+      $(".led").fadeTo(800, 0).fadeTo(800, 1);
+    }, 1600);
+  });
 </script>
