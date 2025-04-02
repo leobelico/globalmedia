@@ -1,35 +1,31 @@
 <div class="section-preview">
-
-	<%= link_to section, class: "sp__header " do %>
-		<div class="skews">
-			<div class="sp__skew sp__skew-1"></div>
-			<div class="sp__skew sp__skew-2"></div>
-			<div class="sp__skew sp__skew-3"></div>
-		</div>
-		<div class="sp__name" style="background-color: <%= section.color %>"><%= section.name %></div>
-		<p class="sp__link" style="background-color: <%= section.color %>"><%= section.description %></p>
-	<% end %>
-	<div class="sp__articles">
-
-		<% articles.each do |article|%>	
-			<div class="sp__article ui-card">
-				<%= link_to article, class: "sp__image-link" do %>
-					<% if article.exclusive? %>
-						<p class="exclusive">EXCLUSIVA</p>
-					<% end %>
-
-					<% if article.image %>
-						<%= image_tag article.image, class: "sp__image" %>
-					<% end %>
-				<% end %>
-				<div class="sp__info">
-					
-					<%= link_to article do %>
-						<h4 class="small-title"><%= article.name %></h4>
-					<% end %>
-					<%= render "components/social-media-links", article: article %>
-				</div>
-			</div>
-		<% end %>
-	</div>
+  <%= link_to section, class: "sp__header " do %>
+    <div class="skews">
+      <div class="sp__skew sp__skew-1"></div>
+      <div class="sp__skew sp__skew-2"></div>
+      <div class="sp__skew sp__skew-3"></div>
+    </div>
+    <div class="sp__name" style="background-color: <%= section.color %>"><%= section.name == "Denuncia Urbana" ? "Ahí te encargo" : section.name %></div>
+    <p class="sp__link" style="background-color: <%= section.color %>"><%= section.description %></p>
+  <% end %>
+  <div class="sp__articles">
+    <% articles.each do |article|%>  
+      <div class="sp__article ui-card">
+        <%= link_to article, class: "sp__image-link" do %>
+          <% if article.exclusive? %>
+            <p class="exclusive">EXCLUSIVA</p>
+          <% end %>
+          <% if article.image %>
+            <%= image_tag article.image, class: "sp__image" %>
+          <% end %>
+        <% end %>
+        <div class="sp__info">
+          <%= link_to article do %>
+            <h4 class="small-title"><%= article.name %></h4>
+          <% end %>
+          <%= render "components/social-media-links", article: article %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
