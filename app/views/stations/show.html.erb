@@ -1,246 +1,176 @@
-
 <!-- Paste the following into the <head>  -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
 
 <% content_for :title, @station.name  %>
-	<h1 data-chrome class="station__name">Si tu video no se ve correctamente, da click <a href="#">aquí</a></h1>
+<h1 data-chrome class="station__name">Si tu video no se ve correctamente, da click <a href="#">aquí</a></h1>
 
-	<% if @station.news == false %>
-		<div class="interface--row">
-			<div class="main-content station">
-				<div class="station__header">
-					<%= image_tag @station.image, class: "station__image" %>
-					<div class="header__info">
-						<h4 class="station__name"><%= @station.name %></h4>
-						<p class="station__description"><%= @station.description %></p>
-						<div class="social-media" data-article="<%= station_url(@station) %>">
-							<%= link_to ("whatsapp://send?text=" + station_url(@station)), class: "social-media__link whatsapp", target: "_blank" do %>
-								<%= image_tag "whatsapp.svg" %>
-							<% end %>
-							<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
-								<%= image_tag "facebook.svg" %>
-							</a>
-							<a target="_blank" href="https://twitter.com/home?status=<%= truncate(@station.name, length: 80) %>%20%2D%20<%= url_encode(station_url(@station)) %>" class="social-media__link twitter">
-								<%= image_tag "twitter.svg" %>
-							</a>
-							<a class="social-media__link copy" target="_self" data-clipboard-text="<%= CGI.unescape(station_url(@station)) %>">
-								<input class="hidden" value="<%= station_url(@station) %>">
-								<%= image_tag "copy.svg" %>
-							</a>
-						</div>
-					</div>
-					<!--<div id="banner_station">
-						<%= image_tag @station.image, class: "station__image" %>
-					</div>-->
-				</div>
-
-				<% if !@station.video? and !@station.news? %>
-					<audio id="myAudio" preload="metadata" src="<%= @station.stream_url %>" autoplay onended=this.play(); controls=controls autobuffer>
-					</audio>
-				<% else %>
-					<!-- Insertar en body -->
-					<div class="radio-banner__tune-in"><%= @station.name %></div>
-					<% if @station.name == "Frecuencia Con Tu Salud" or @station.name == "CUENTO CONTIGO" or @station.name == "Vox Informativa" %>
-
-						<% if @station.name == "FRECUENCIA CON TU SALUD" %>
-							<div class="enc-links">
-								<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/frecuencia.jpg", class: "img-desktop" %>
-							</div>
-						<% end %>
-
-						<% if @station.name == "CUENTO CONTIGO" %>
-							<div class="enc-links">
-								<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/Cuento+Contigo_Mesa+de+trabajo+1.jpg", class: "img-desktop" %>
-							</div>
-						<% end %>
-
-						<% if @station.name == "Vox Informativa" %>
-							<div class="enc-links">
-								<%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/PODCAST-H%C3%89CTOR-02.jpg", class: "img-desktop" %>
-							</div>
-						<% end %>
-
-					<% else %>
-						<!-- Insertar en Head se agrega lo nuevo-->
-
-            <!-- Paste the following into the <head>  -->
-            <style>
-							#clappr{ width: 100%;height: 100%;position: relative; min-height: 320px; margin-bottom: 25px;}
-							#clappr > div{ width:100%;height:100%;position: absolute;}
-						</style>
-
-
-						<!-- pega el siguiente texto donde quieras acomodar el player<body> -->
-
-						<div id="clappr"></div>
-						<script>
-							var player = new Clappr.Player({
-								source:
-									"https://videocast.mx:19360/globalmedia/globalmedia.m3u8"
-								,
-								parentId: "#clappr",
-								width: '100%',
-								height: '100%',
-								autoPlay: false,
-								//"volume":"75",
-								"mute":false,
-								"loop":false,
-								"audioOnly":false,
-								"uiShowQuickRewind":true,
-								//"uiQuickRewindSeconds":"30"
-								//gaAccount: 'UA-44332211-1',
-								//gaTrackerName: 'MyPlayerInstance'
-							});
-            </script>
-            <!--<script type="text/javascript" src="https://player.wowza.com/player/ull/latest/wowzaplayer.min.js"></script>
-            <div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
-            <!-- codigo del reproductor -->
-            <!--<script type="text/javascript">
-							WowzaPlayer.create("playerElement",
-							    {
-								    "license":"PLAY1-4BVTz-Rmtp4-Dx49D-Y4Qjv-6PVnb",
-								    "sources":[{
-									    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
-								    },
-								    {
-									    "sourceURL":"https://mediacp.live:1936/8258/ngrp:8258_all/playlist.m3u8"
-								    }],
-								    "title":"Vive Canal en vivo",
-								    "description":"",
-								    "autoPlay":true,
-								    "mute":false,
-								    "volume":75,
-								    "posterFrameURL":"https://globalmediarocks.s3-us-west-1.amazonaws.com/uploads/bea801c9-427b-4405-9d61-bf2957bf6b10/fb_atleti_perf.png"
-							    }
-							);
-						</script>-->
-					<% end %>
-				<% end %>
-				<div class="program__info">
-					<% if @timetables.first %>
-						<%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
-						<div class="program__info__text">
-							<p><%= @timetables.first.name %></p>
-							<p><%= @timetables.first.description %></p>
-							<p class="radio-banner__tune-in">Con:</p>
-							<p><%= @timetables.first.broadcasters %></p>
-						</div>
-					<% end %>
-				</div>
-				<div class="station__info">
-					<div class="station__programs">
-						<% @timetables.each_with_index do |timetable, index| %>
-							<% if index == 0 and @station.video == false %>
-								<p class="program__current-indicator">Suena Ahora:</p>
-							<% elsif index == 0 and @station.video == true %>
-								<p class="program__current-indicator">Programa actual:</p>
-							<% end %>
-							<div class="program">
-								<p class="program__hour"><%= timetable.streaming_hour.strftime('%H:%M') %></p>
-								<p class="program__name"><%= timetable.name %></p>
-							</div>
-						<% end %>
-					</div>
-				</div>
-
-				<!--<% if @station.playlist_1 != "" %>
-					<% if @station.name == "Trión" or @station.name == "VOX 96.9" %>
-						<div class="radio-banner__tune-in">Podcast - Frecuencia con tu salud</div>
-					<% else %>
-						<% if @station.name == "Imagen" %>
-							<div class="radio-banner__tune-in">Podcast - Cuento Contigo</div>
-						<% else %>
-							<div class="radio-banner__tune-in">Playlists recomendadas para ti</div>
-						<% end %>
-					<% end %>
-
-					<div class="playlists">
-						<% if @station.playlist_1 != "" %>
-							<a target="_blank" href="<%= @station.playlist_1 %>" class="playlist">
-								<%= image_tag @station.playlist_1_image %>
-							</a>
-						<% end %>
-						<% if @station.playlist_2 != "" %>
-							<a target="_blank" href="<%= @station.playlist_2 %>" class="playlist">
-								<%= image_tag @station.playlist_2_image %>
-							</a>
-						<% end %>
-						<% if @station.playlist_3 != "" %>
-							<a target="_blank" href="<%= @station.playlist_3 %>" class="playlist">
-								<%= image_tag @station.playlist_3_image %>
-							</a>
-						<% end %>
-						<% if @station.playlist_4 != "" %>
-							<a target="_blank" href="<%= @station.playlist_4 %>" class="playlist">
-								<%= image_tag @station.playlist_4_image %>
-							</a>
-						<% end %>
-					</div>
-				<% end	%>-->
-
-				<div class="radio-banner__tune-in">También puedes disfrutar</div>
-				<div class="station__recommendations">
-					<% @recommendations.each do |recommendation| %>
-						<%= link_to recommendation, class: "recommendation__image" do %>
-							<%= image_tag recommendation.image %>
-						<% end %>
-					<% end %>
-				</div>
-				<div class="radio-banner__tune-in">Lo más reciente</div>
-				<div class="station__articles">
-					<% LatestArticle.all.sort_by{ |t| t.published_at }.last(2).reverse.each do |article| %>
-						<%= render "components/horizontal-note", article: Article.find(article.article_id) %>
-					<% end %>
-					<% MostVisitedArticle.last(1).each do |relationship| %>
-						<%= render "components/horizontal-note", article: Article.find(relationship.article_id) %>
-					<% end %>
-
-					<!-- VÏNCULO PARA VER MAS -->
-					<% if @station.article_relationships.count > 3 %>
-						<%= link_to "Ver más notas", station_articles_path(@station.slug), class: "view-more" %>
-					<% end %>
-				</div>
-        <% if @station.name == "Ke Buena" or @station.name == "VOX 96.9" %>
-          <div class="radio-banner__tune-in"></div>
-          <div class="enc-links">
-            <a target="_blank" href="https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png">
-              <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png", class: "station__image" %>
+<% if @station.news == false %>
+  <div class="interface--row">
+    <div class="main-content station">
+      <div class="station__header">
+        <%= image_tag @station.image, class: "station__image" %>
+        <div class="header__info">
+          <h4 class="station__name"><%= @station.name %></h4>
+          <p class="station__description"><%= @station.description %></p>
+          <div class="social-media" data-article="<%= station_url(@station) %>">
+            <%= link_to ("whatsapp://send?text=" + station_url(@station)), class: "social-media__link whatsapp", target: "_blank" do %>
+              <%= image_tag "whatsapp.svg" %>
+            <% end %>
+            <a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
+              <%= image_tag "facebook.svg" %>
+            </a>
+            <a target="_blank" href="https://twitter.com/home?status=<%= truncate(@station.name, length: 80) %>%20%2D%20<%= url_encode(station_url(@station)) %>" class="social-media__link twitter">
+              <%= image_tag "twitter.svg" %>
+            </a>
+            <a class="social-media__link copy" target="_self" data-clipboard-text="<%= CGI.unescape(station_url(@station)) %>">
+              <input class="hidden" value="<%= station_url(@station) %>">
+              <%= image_tag "copy.svg" %>
             </a>
           </div>
+        </div>
+      </div>
+
+      <% if !@station.video? && !@station.news? %>
+        <audio id="myAudio" preload="metadata" src="<%= @station.stream_url %>" autoplay onended=this.play(); controls=controls autobuffer></audio>
+      <% else %>
+        <div class="radio-banner__tune-in"><%= @station.name %></div>
+        
+        <% if @station.name == "Frecuencia Con Tu Salud" || @station.name == "CUENTO CONTIGO" || @station.name == "Vox Informativa" %>
+          <!-- Banners Especiales -->
+          <% if @station.name == "FRECUENCIA CON TU SALUD" %>
+            <div class="enc-links">
+              <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/frecuencia.jpg", class: "img-desktop" %>
+            </div>
+          <% elsif @station.name == "CUENTO CONTIGO" %>
+            <div class="enc-links">
+              <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/Cuento+Contigo_Mesa+de+trabajo+1.jpg", class: "img-desktop" %>
+            </div>
+          <% elsif @station.name == "Vox Informativa" %>
+            <div class="enc-links">
+              <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/PODCAST-H%C3%89CTOR-02.jpg", class: "img-desktop" %>
+            </div>
+          <% end %>
+        
+        <% else %>
+          <!-- ============= REPRODUCTOR HD ============= -->
+          <style>
+            #hd-container {
+              width: 100%;
+              max-width: 1920px;
+              margin: 0 auto;
+              position: relative;
+            }
+            #clappr {
+              width: 100%;
+              height: 0;
+              padding-bottom: 56.25%; /* Relación 16:9 */
+              background: #000;
+            }
+          </style>
+
+          <div id="hd-container">
+            <div id="clappr"></div>
+          </div>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var player = new Clappr.Player({
+                source: "https://videocast.mx:19360/globalmedia/globalmedia.m3u8",
+                parentId: "#clappr",
+                autoPlay: false,
+                height: '100%',
+                width: '100%',
+                mute: false,
+                playback: {
+                  hlsjsConfig: {
+                    maxMaxBufferLength: 60,
+                    startLevel: -1
+                  }
+                }
+              });
+
+              player.on(Clappr.Events.PLAYER_FULLSCREEN, function() {
+                document.getElementById('hd-container').style.height = 
+                  player.isFullscreen() ? '100vh' : 'auto';
+              });
+            });
+          </script>
+          <!-- ============= FIN REPRODUCTOR HD ============= -->
         <% end %>
-				<% if get_banner(@station, "Station", "Grande").count > 0 %>
-					<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
-				<% end %>
-			</div>
 
-			<%= render "components/stations-sidebar", facebook: @station.facebook, twitter: @station.twitter %>
+      <% end %> <!-- Cierra if/else de video/news -->
 
-		</div>
-	<% else %>
-		<%= render "news-station", station: @station, timetables: @timetables %>
-	<% end %>
+      <div class="program__info">
+        <% if @timetables.first %>
+          <%= image_tag @timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
+          <div class="program__info__text">
+            <p><%= @timetables.first.name %></p>
+            <p><%= @timetables.first.description %></p>
+            <p class="radio-banner__tune-in">Con:</p>
+            <p><%= @timetables.first.broadcasters %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="station__info">
+        <div class="station__programs">
+          <% @timetables.each_with_index do |timetable, index| %>
+            <% if index == 0 && @station.video == false %>
+              <p class="program__current-indicator">Suena Ahora:</p>
+            <% elsif index == 0 && @station.video == true %>
+              <p class="program__current-indicator">Programa actual:</p>
+            <% end %>
+            <div class="program">
+              <p class="program__hour"><%= timetable.streaming_hour.strftime('%H:%M') %></p>
+              <p class="program__name"><%= timetable.name %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="radio-banner__tune-in">También puedes disfrutar</div>
+      <div class="station__recommendations">
+        <% @recommendations.each do |recommendation| %>
+          <%= link_to recommendation, class: "recommendation__image" do %>
+            <%= image_tag recommendation.image %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="radio-banner__tune-in">Lo más reciente</div>
+      <div class="station__articles">
+        <% LatestArticle.all.sort_by{ |t| t.published_at }.last(2).reverse.each do |article| %>
+          <%= render "components/horizontal-note", article: Article.find(article.article_id) %>
+        <% end %>
+        <% MostVisitedArticle.last(1).each do |relationship| %>
+          <%= render "components/horizontal-note", article: Article.find(relationship.article_id) %>
+        <% end %>
+
+        <% if @station.article_relationships.count > 3 %>
+          <%= link_to "Ver más notas", station_articles_path(@station.slug), class: "view-more" %>
+        <% end %>
+      </div>
+
+      <% if @station.name == "Ke Buena" || @station.name == "VOX 96.9" %>
+        <div class="radio-banner__tune-in"></div>
+        <div class="enc-links">
+          <a target="_blank" href="https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png">
+            <%= image_tag "https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/anexo.png", class: "station__image" %>
+          </a>
+        </div>
+      <% end %>
+
+      <% if get_banner(@station, "Station", "Grande").count > 0 %>
+        <%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
+      <% end %>
+    </div>
+
+    <%= render "components/stations-sidebar", facebook: @station.facebook, twitter: @station.twitter %>
+  </div>
+<% else %>
+  <%= render "news-station", station: @station, timetables: @timetables %>
+<% end %>
 
 <script type="text/javascript">
-	$('[data-chrome]').hide();
-
-	/*function requestFlashPermission() {
-	    var iframe = document.createElement('iframe');
-	    iframe.src = 'https://get.adobe.com/flashplayer';
-	    iframe.sandbox = '';
-	    document.body.appendChild(iframe);
-	    document.body.removeChild(iframe);
-	}
-
-	var isNewChrome = (navigator.userAgent.match(/Chrom(e|ium)\/(\d+)/) || [])[2] > 56
-	    && !/Mobile/i.test(navigator.userAgent);
-	    var isNewFirefox = (navigator.userAgent.match(/Fireforx\/(\d+)/));
-
-	var canRequestPermission =  isNewChrome;
-
-	if (!swfobject.hasFlashPlayerVersion('10') && canRequestPermission) {
-		$('[data-chrome]').show();
-	    requestFlashPermission();
-	    // Chrome requires user's click in order to allow iframe embeding
-	    $(window).one('click', requestFlashPermission);
-	}*/
+  $('[data-chrome]').hide();
 </script>
