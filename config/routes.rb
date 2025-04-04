@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   # HEALTH CHECKS (Versión CORRECTA)
-  root to: proc { [200, {}, ['OK']] }  # ¡Cierre correcto con ] y )!
-  get '/up', to: proc { [200, {}, ['']] }  # Versión corregida
+  get '/health', to: proc { [200, {}, ['OK']] }  # Nota los dos ]] al final
+  get '/up', to: proc { [200, {}, ['']] } 
 
+  # Ruta PRINCIPAL (¡esto es lo que falta!)
+  root to: 'titlepage#index' 
   # GRAPHQL
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
