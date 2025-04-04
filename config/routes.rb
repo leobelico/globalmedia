@@ -1,170 +1,194 @@
 Rails.application.routes.draw do
-  # =======================
-  # 1. HEALTH CHECKS (Primero, para Heroku)
-  # =======================
-  root to: "titlepage#index"  # Solo un root definition!
-  get '/up', to: proc { [200, {}, [''] }  # Health check endpoint
-  get '/health', to: proc { [200, {}, ['OK'] }  # Alternativo
+  # HEALTH CHECKS (Versión CORRECTA)
+  root to: proc { [200, {}, ['OK']] }  # ¡Cierre correcto con ] y )!
+  get '/up', to: proc { [200, {}, ['']] }  # Versión corregida
 
-  # =======================
-  # 2. DEVISE (Autenticación)
-  # =======================
-  devise_for :users, skip: [:sessions]
-  as :user do
-    get 'panel/login' => 'devise/sessions#new', as: :new_user_session
-    post 'panel/login' => 'devise/sessions#create', as: :user_session
-    delete 'panel/logout' => 'devise/sessions#destroy', as: :destroy_user_session
+  # GRAPHQL
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
+  post "/graphql", to: "graphql#execute"
+
+  # DEVISE
+  devise_for :users
+  devise_scope :user do
+    get 'panel/login', to: 'devise/sessions#new'
   end
 
-  # =======================
-  # 3. PUBLIC ROUTES
-  # =======================
-  resources :articles, param: :slug, only: [:show] do
-    collection do
-      get :search_hashtag
-    end
-  end
-
-  get "/articles/hashtag/:slug", to: "articles#filter_by_hashtag"
-  
-  resources :sections, only: [:show], param: :slug do
-    member do
-      get :sports, to: "sections#sports"
-      get :corporation, to: "sections#corporation"
-    end
-  end
-
-  resources :stations do 
-    get "articles", on: :member
-  end
-
-  resources :cameras
-  resources :relationships
-  resources :highlights do
-    collection do
-      get :autocomplete_article_name
-    end
-  end
-
-  # Páginas estáticas
+  # PUBLIC ROUTES
   get "privacy_policy", to: "titlepage#privacy_policy"
-  get "about_us", to: "titlepage#about_us"
-  get "search_article", to: "titlepage#search_article"
-  get "search_results", to: "titlepage#search_results"
   get "stations_supervisor", to: "titlepage#stations_supervisor"
+  get "/articles/hashtag/:slug", to: "articles#filter_by_hashtag"
+
+  resources :articles, param: :slug, only: [:show] do
+    get :search_hashtag, on: :collection
+  end
+
+  # SITEMAPS
+  get "/google_news.xml" => "sitemap#google_news", :format => "xml"
+  get "/sitemap.xml" => "sitemap#index", :format => "xml"
+  get "/sitemap/:sitemap/index.xml" => "sitemap#index", :format => "xml"
+  get "/sitemap/:id/:sitemap" => "sitemap#sitemap", :format => "xml"
+
+  resources :sections, only: [:show], param: :slug
+  get "tactica", to: "sections#sports"
+  get "corporativo", to: "sections#corporation"
+  resources :relationships
+  resources :stations do 
+    get "articles", to: "stations#articles"
+  end
+  resources :cameras
   get "collaborators", to: "relationships#collaborators"
+  get "about_us", to: "titlepage#about_us"
+  get "panel", to: "panel/panel#panel"
 
-  # Sitemaps
-  get "/google_news.xml" => "sitemap#google_news", format: "xml"
-  get "/sitemap.xml" => "sitemap#index", format: "xml"
-  get "/sitemap/:sitemap/index.xml" => "sitemap#index", format: "xml"
-  get "/sitemap/:id/:sitemap" => "sitemap#sitemap", format: "xml"
+  authenticated :user do 
+    root to: "panel/panel#panel", as: "authenticated_root"
+  end
 
-  # =======================
-  # 4. PANEL (Admin)
-  # =======================
+  get :autocomplete_article_name, controller: "application"
+
+  resources :highlights do 
+    get :autocomplete_article_name, on: :collection
+  end
+
+  # PANEL (ADMIN)
   namespace :panel do
-    get "/", to: "panel#panel"  # Dashboard
+    root to: "panel#panel"
     
-    # Artículos
-    resources :articles, param: :slug do
-      member do
-        post :publish_now
-        get :gallery_images
-        post :set_highlight_from_id
-        post :set_recommendation_from_id
-      end
-      collection do
-        get :all_articles
-        get :autocomplete_article_name
-      end
+    resources :keywords, param: :slug 
+    resources :cameras
+
+    get "edit_multiple_keywords", to: "keywords#edit_multiple"
+    get "update_multiple_keywords", to: "keywords#update_multiple"
+    patch "update_multiple_keywords", to: "keywords#update_multiple"
+    post "update_multiple_keywords", to: "keywords#update_multiple"
+
+    resources :notifications do 
+      get :autocomplete_article_name, on: :collection
+      get :autocomplete_station_name, on: :collection
+      get :autocomplete_camera_name, on: :collection
     end
 
-    # Multimedia
-    resources :cameras
-    resources :banners
-    resources :highlights, param: :slug
     get 'highlights/experimental', to: 'highlights#experimental'
+    resources :highlights, param: :slug
+    resources :preferences, only: [:index]
+    resources :analytics, only: [:index]
+    get "analytics/export/:from/:to", to: "analytics#export_articles"
+    
+    resources :articles, param: :slug do 
+      post :publish_now
+      get :publish_now
+      get :autocomplete_article_name, on: :collection
+      get :gallery_images
+      post :gallery_images
+      post :set_highlight_from_id
+      post :set_recommendation_from_id
+    end
 
-    # Secciones
-    resources :sections, param: :slug do
-      member do
-        get :select_highlights
-        post :set_highlight
-        get :select_global_recommendations
-        post :set_global_recommendations
-      end
+    post "set_highlight_from_id", to: "articles#set_highlight_from_id"
+    
+    resources :stations, param: :slug do 
+      resources :timetables 
+      resources :podcasts 
+    end
+
+    resources :sections, param: :slug do 
+      get :select_highlights
+      post :select_highlights
+      post :set_highlight
+      get :select_global_recommendations
+      post :select_global_recommendations
+      post :set_global_recommendations
+      get :autocomplete_article_name, on: :collection
       resources :related_sections
     end
 
-    # Estadísticas
-    resources :analytics, only: [:index] do
-      collection do
-        get "export/:from/:to", to: "analytics#export_articles"
-      end
+    resources :hits do 
+      get :graph, on: :collection
+      post :graph, on: :collection
+      get :author_graph, on: :collection
+      post :author_graph, on: :collection
+      get :user_graph, on: :collection
+      post :user_graph, on: :collection
     end
 
-    # Usuarios y colaboradores
-    resources :users
-    resources :authors
-    resources :relationships, param: :slug do
-      collection do
-        get :new_collaborator
-        get :collaborators
-        get :new_complaint
-        get :complaints
-      end
+    resources :banners
+    resources :relationships, param: :slug
+    resources :hit_objectives
+    resources :controls do 
+      get :done, on: :collection
+      get :download_controls, on: :collection
     end
 
-    # Configuración
-    resources :preferences, only: [:index]
     resources :hashtags, only: :index do
-      collection do
-        get :autocomplete_hashtag_name
-        get :switch_hashtag
-        post :switch_hashtag
-      end
+      get :autocomplete_hashtag_name, on: :collection
+      get :switch_hashtag, on: :collection
+      post :switch_hashtag, on: :collection
     end
+
+    get "all_articles", to: "articles#all_articles"
+    get "new_collaborator", to: "relationships#new_collaborator"
+    get "collaborators", to: "relationships#collaborators"
+    get "new_complaint", to: "relationships#new_complaint"
+    get "complaints", to: "relationships#complaints"
+    get "add_article_to_investigations", to: "relationships#add_article_to_investigations"
+    get "set_investigation_articles", to: "relationships#set_investigation_articles"
+    post "set_investigation_articles", to: "relationships#set_investigation_articles"
+    get "add_article_to_stations", to: "stations#add_article_to_stations"
+    get "set_station_articles", to: "stations#set_station_articles"
+    post "set_station_articles", to: "stations#set_station_articles"
+    get "set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
+    post "set_highlight_and_recomendations", to: "sections#set_highlight_and_recomendations"
+    get "show_global_recommendations", to: "panel#show_global_recommendations"
+    get "set_global_recommendations", to: "panel#set_global_recommendations"
+    post "set_global_recommendations", to: "panel#set_global_recommendations"
+    get "selecting_hashtags", to: "hashtags#selecting_hashtags"
+    get "set_selected", to: "hashtags#set_selected"
+    post "set_selected", to: "hashtags#set_selected"
+    resources :users
+    resources :article_relationships, only: [:show, :destroy]
+    resources :authors
+    resources :sports
   end
 
-  # =======================
-  # 5. API
-  # =======================
+  # API
   namespace :api do
     namespace :v1 do
-      # Artículos
       resources :articles, only: [:index, :show] do
         collection do 
-          get :most_visited
-          get :search
-          get :highlights
-          get :latest_collaborator_articles
-          get :latest_special_investigation
-          get :latest_complaints_articles
-          get :get_global_recommendations
+          get "most_visited"
+          get "search"
         end
       end
-
-      # Multimedia
-      resources :banners, only: [:index]
-      resources :podcasts, only: [:index] do
-        member do
-          get :increment_one_second
-        end
-      end
-
-      # Secciones
-      resources :sections, only: [:index, :show] do 
-        get :articles, on: :member
-      end
-
-      # Dispositivos
       resources :devices, only: [:create]
+      resources :banners, only: [:index]
+      get "get_banners", to: "banners#get_banners"
+      resources :podcasts, only: [:index]
+      get "podcast/:id/increment_one_second", to: "podcasts#add_one_second_played"
+      resources :stations, only: [:index, :show]
+      resources :cameras, only: [:index, :show]
+      resources :sports, only: [:index]
+      resources :sections, only: [:index, :show] do 
+        get "articles", to: "sections#get_articles"
+      end
+      get "highlights", to: "articles#highlights"
+      get "latest_collaborator_articles", to: "articles#latest_collaborator_articles"
+      get "latest_special_investigation", to: "articles#latest_special_investigation"
+      get "latest_special_investigation_articles", to: "articles#latest_special_investigation_articles"
+      get "latest_complaints_articles", to: "articles#latest_complaints_articles"
+      get "get_global_recommendations", to: "articles#get_global_recommendations"
+      get "search", to: "articles#search"
+      post "search", to: "articles#search"
+      get "search_with_dates_and_category", to: "articles#search_with_dates_and_category"
+      post "search_with_dates_and_category", to: "articles#search_with_dates_and_category"
+      get "related_by_hashtags", to: "articles#related_by_hashtags"
+      post "related_by_hashtags", to: "articles#related_by_hashtags"
+      get "search_hashtag", to: "articles#search_hashtag"
+      post "search_hashtag", to: "articles#search_hashtag"
     end
   end
 
-  # =======================
-  # 6. CATCH-ALL (Último!)
-  # =======================
-  get '/:id', to: 'stations#show', constraints: { id: /[0-9]+/ }  # Solo números
+  # CATCH-ALL
+  get '/:id', to: 'stations#show'
 end
