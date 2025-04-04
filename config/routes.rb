@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: proc { [200, {}, ['OK'] }
+  get '/up', to: proc { [200, {}, [''] }
 
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
