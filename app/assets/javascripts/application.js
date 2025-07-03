@@ -1,9 +1,9 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/autocomplete
+//= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
 //= require turbolinks
-//= require_directory .
+//= require_tree .
 //= require libraries/gsap/TweenMax.min
 //= require libraries/money
 //= require libraries/quill/quill.min 

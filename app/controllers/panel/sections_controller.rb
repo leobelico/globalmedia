@@ -72,13 +72,27 @@ class Panel::SectionsController < ApplicationController
 	end
 
 	def show
-		
-		@highlight_article = CoverArticle.where(section_id: @section.id, article_highlight: true).first
+	@highlight_article = CoverArticle
+		.where(section_id: @section.id, article_highlight: true)
+		.first
 
-		@highlights = SectionHighlight.where(section: @section).order(updated_at: "DESC")
-		@recommendations = SectionHighlight.where(section: @section)
-		@articles = Article.where(articable_id: @section.id).order(created_at: "DESC").paginate(page: params[:page], per_page: 10)
+	# Cache opcional para reducir consultas repetidas
+	@highlights = Rails.cache.fetch("section_#{@section.id}_highlights", expires_in: 5.minutes) do
+		SectionHighlight.includes(:article)
+						.where(section: @section)
+						.order(updated_at: :desc)
+						.limit(10)
 	end
+
+	# Si recomendaciones son las mismas, reutilizamos
+	@recommendations = @highlights
+
+	@articles = Article.includes(:images, :author, :user, :articable)
+						.where(articable_id: @section.id)
+						.order(created_at: :desc)
+						.paginate(page: params[:page], per_page: 10)
+	end
+
 	
 	def new
 		@section = Section.new

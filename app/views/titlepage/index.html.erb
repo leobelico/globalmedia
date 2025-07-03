@@ -145,21 +145,26 @@
 </a>
 <br>
 -->
-<% cache @breaking_news do %>
-  <% if @breaking_news.count > 0 %>
-    <%= render "components/breaking-news" %>
-  <% end %>
-<% end %>
 
-<div class="highlights-container">
-  <% @highlights.each do |highlight| %>
-    <% if highlight.order == 1 %>
-      <%= render "components/principal-highlight", article: highlight.article %>
-    <% else %>
-      <%= render "components/secondary-highlight", article: highlight.article %>
+<%# cache @breaking_news do %>
+  <%# if @breaking_news.count > 0 %>
+    <%#= render "components/breaking-news" %>
+  <%# end %>
+<%# end %>
+
+<% if @highlights.present? %>
+  <div class="highlights-container">
+    <% @highlights.each do |highlight| %>
+      <% if highlight.order == 1 %>
+        <%= render "components/principal-highlight", article: highlight.article %>
+      <% else %>
+        <%= render "components/secondary-highlight", article: highlight.article %>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% else %>
+  <p>No hay highlights disponibles.</p>
+<% end %>
 
 
 <% cache(get_banner("global", "TitlePage", "Grande")) do %>
@@ -218,7 +223,7 @@
     <% end %>
   </div>
   <div class="special-articles--collaborators">
-    <%= render "components/collaborators", articles: get_collaborators %>
+   <%= render "components/collaborators", articles: get_collaborators || [] %>
   </div>
 </div>
 <div class="section-previews-container">

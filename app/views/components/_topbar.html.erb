@@ -1,57 +1,58 @@
-	<div class="topbar">
-		<%= link_to root_path, class: "logo-container" do %>
-			<%= image_tag "logo-black.svg" %>
-		<% end %>
-		<%= link_to root_path, class: "home-container" do %>
-			<%= image_tag "home.svg" %>
-		<% end %>
-		<% if false %>
-			
-			<%= link_to "denuncia global", section_path("Denuncia-Global"), class: "topbar__link" %>
-			<a href="" class="topbar__link popup" onmouseover="popup(this)" onmouseout="popupout(this)">
-				tráfico san luis
-				<span class="popuptext" id="myPopup">Próximamente</span>
-			</a>
-		<% end %>
-    <div class="d-block">
-       <change-location></change-location>
-    </div>
-<% cache("topbar", expires_in: 1.year)do %>
-		<div class="social-media">
-			<p class="social-media__tag">Síguenos</p>
-			<%= link_to "https://twitter.com/globalmediamx", class: "social-media__link", target: "_blank" do %>
-				<%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/TWITTER.svg" %>
-			<% end %>
-			<%= link_to "https://www.facebook.com/GlobalMediaSLP/?fref=ts", class: "social-media__link", target: "_blank" do %>
-				<%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/FACEBOOK.svg" %>
-      <% end %>
-    <%= link_to "https://www.instagram.com/globalmediamx/?hl=es", class: "social-media__link", target: "_blank" do %>
-      <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/INSTAGRAM.svg" %>
+<% cache("topbar", expires_in: 1.year) do %>
+  <div class="topbar">
+    <%= link_to root_path, class: "logo-container" do %>
+      <%= image_tag "logo-black.svg" %>
     <% end %>
+    <%= link_to root_path, class: "home-container" do %>
+      <%= image_tag "home.svg" %>
+    <% end %>
+    
+    <% if false %>
+      <%= link_to "denuncia global", section_path("Denuncia-Global"), class: "topbar__link" %>
+      <a href="" class="topbar__link popup" onmouseover="popup(this)" onmouseout="popupout(this)">
+        tráfico san luis
+        <span class="popuptext" id="myPopup">Próximamente</span>
+      </a>
+    <% end %>
+
+    <div class="d-block">
+      <change-location></change-location>
+    </div>
+
+    <div class="social-media">
+      <p class="social-media__tag">Síguenos</p>
+      <%= link_to "https://twitter.com/globalmediamx", class: "social-media__link", target: "_blank" do %>
+        <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/TWITTER.svg" %>
+      <% end %>
+      <%= link_to "https://www.facebook.com/GlobalMediaSLP/?fref=ts", class: "social-media__link", target: "_blank" do %>
+        <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/FACEBOOK.svg" %>
+      <% end %>
+      <%= link_to "https://www.instagram.com/globalmediamx/?hl=es", class: "social-media__link", target: "_blank" do %>
+        <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/INSTAGRAM.svg" %>
+      <% end %>
       <%= link_to "https://www.tiktok.com/@globalmediamx?", class: "social-media__link", target: "_blank" do %>
         <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/TIK+TOK.svg" %>
       <% end %>
       <%= link_to "https://www.youtube.com/channel/UCqF55I3fwX8fs0AEgaIvNQQ", class: "social-media__link", target: "_blank" do %>
         <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/YOUTUBE.svg" %>
       <% end %>
-			<%= link_to "https://linktr.ee/globalmediapodcast", class: "social-media__link", target: "_blank" do %>
-				<%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/SPOTIFY.svg" %>
-			<% end %>
-		<%= link_to "https://www.pinterest.com.mx/GlobalMediamx", class: "social-media__link", target: "_blank" do %>
-			<%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/PINTEREST.svg" %>
-		<% end %>
-		</div>
+      <%= link_to "https://linktr.ee/globalmediapodcast", class: "social-media__link", target: "_blank" do %>
+        <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/SPOTIFY.svg" %>
+      <% end %>
+      <%= link_to "https://www.pinterest.com.mx/GlobalMediamx", class: "social-media__link", target: "_blank" do %>
+        <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/PINTEREST.svg" %>
+      <% end %>
+    </div>
+
+    <div class="search">
+      <% unless request.original_url.include?("users/password") || request.original_url.include?("users/sign_in") %>
+        <%= form_for :article, url: {controller: "titlepage", action: 'search_article'} do |f| %>
+          <% f.autocomplete_field(:articable_id, autocomplete_article_name_path, id_element: '#article_id', class: "search__box", placeholder: "Búsqueda", type: "search", value: "") %>
+          <%= f.text_field :articable_id, class: "search__box", placeholder: "Búsqueda", type: "search", value: "" %>
+          <%= hidden_field_tag :article_id, id: "article_id" %>
+          <%= image_tag "search.svg", class: "search__image" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 <% end %>
-		<div class="search">
-			 <% if !request.original_url.include? "users/password" and !request.original_url.include? "users/sign_in"%>
-				<%= form_for :article, url: {controller: "titlepage", action: 'search_article'}  do |f|%>
-		          <% f.autocomplete_field(:articable_id, autocomplete_article_name_path, :id_element => '#article_id', class: "search__box", placeholder: "Búsqueda", type: "search", value: "" ) %>
-		          <%= f.text_field :articable_id, class: "search__box", placeholder: "Búsqueda", type: "search", value: ""  %>
-					<%= image_tag "search.svg", class: "search__image" %>
-			          <%= hidden_field_tag :article_id, :id => "article_id" %>
-		       		<%= image_tag "search.svg", class: "search__image" %>
-		        <% end %>
-	        <% end %>
-			
-		</div>
-	</div>

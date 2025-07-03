@@ -131,8 +131,8 @@
   <div class="admin-form">
     <h3 class="section-title">Programas</h3>
 
-    <% 21.times do |i| %>
-      <%= f.fields_for :timetables, @station.timetables[i] || @station.timetables.build do |builder| %>
+    <% 1.times do |i| %>
+      <%= f.fields_for :timetables, @station.timetables[i]&.dup.tap { |t| t&.id = nil } || @station.timetables.build do |builder| %>
         <div class="field-builder card">
           <div class="field">
             <label>Nombre del Programa</label>

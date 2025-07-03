@@ -3,7 +3,11 @@
 	<div class="header">
 		<div class="header__container container--1">
       <%= link_to root_path, class: "header__logo" do %>
-        <img src="/assets/logos/<%= get_current_location.key %>.png" alt="GlobalMedia">
+      <% if get_current_location.present? %>
+		<img src="/assets/logos/san-luis.png" alt="GlobalMedia">
+		<% else %>
+		<img src="/assets/logos/san-luis.png" alt="GlobalMedia">
+		<% end %>
       <% end %>
       <%= link_to stations_path, class: "stations-link", target: "_blank" do %>
         <%= image_tag "radio-y-tv.svg" %>

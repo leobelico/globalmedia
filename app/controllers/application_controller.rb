@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
 
   @meta_description = ''
   def redirect_subdomain
+      if Rails.env.development?
+        set_local_dev_location
+        return
+      end # Evitar redireccionar en desarrollo
+
     @subdomain_location = 'default'
     @location_id = 1
     if /^((?:leon)|(?:queretaro)|(?:vallarta)|(?:vallartabahia)|(?:jalisco)|(?:zacatecas))\./.match(request.host)
@@ -27,10 +32,11 @@ class ApplicationController < ActionController::Base
         @location_id = location.id
       end
     else
-      unless /^www/.match(request.host)
+      unless /^www/.match(request.host) || ['127.0.0.1', 'localhost'].include?(request.host)
         url_redirect = request.protocol + "www." + request.host_with_port + request.fullpath
         redirect_to("#{url_redirect}", status: 301)
       end
+
       location = Location.where('key = ?', 'san-luis').first
       if location != nil
         @meta_description = location.meta_description
@@ -41,6 +47,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
   # before_action do
   #   if user_signed_in?
   #     # Rack::MiniProfiler.authorize_request
@@ -49,6 +56,11 @@ class ApplicationController < ActionController::Base
 
   autocomplete :article, :name, full: true
 
+def set_local_dev_location
+  @location_id = 1
+  @meta_description = "Desarrollo local - San Luis Potosí"
+  @subdomain_location = "san-luis"
+end
 
   def get_autocomplete_items(parameters)
       items = active_record_get_autocomplete_items(parameters)
@@ -109,11 +121,24 @@ class ApplicationController < ActionController::Base
   end
 
   def get_collaborators
-    @collaborator_articles = Article.joins("
-    INNER JOIN article_relationships ON article_relationships.article_id = articles.id AND articles.published = true AND article_relationships.articable_type = 'Relationship' AND article_relationships.location_id = #{@location_id}
-    INNER JOIN relationships ON article_relationships.articable_id = relationships.id WHERE relationships.relationship_type= 'Collaborator' ORDER BY article_relationships.created_at DESC").limit(7)
+  return [] unless @location_id.present?
 
-  end
+  Article.joins(:article_relationships)
+         .joins("INNER JOIN relationships ON article_relationships.articable_id = relationships.id")
+         .where(
+           published: true,
+           article_relationships: {
+             articable_type: "Relationship",
+             location_id: @location_id.to_i
+           },
+           relationships: {
+             relationship_type: "Collaborator"
+           }
+         )
+         .order("article_relationships.created_at DESC")
+         .limit(7)
+end
+
 
   def get_section_articles(id)
 
