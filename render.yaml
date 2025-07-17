@@ -10,3 +10,5 @@ services:
         value: production
       - key: NODE_ENV
         value: production
+      - key: RAILS_SERVE_STATIC_FILES
+        value: true
