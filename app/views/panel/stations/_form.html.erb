@@ -49,10 +49,16 @@
       <div class="field">
         <label>Imagen para playlist 1:</label>
         <%= f.file_field :playlist_1_image %>
+        <% if @station.playlist_1_image.present? %>
+          <%= image_tag @station.playlist_1_image, class: "form-image-preview" %>
+        <% end %>
       </div>
       <div class="field">
         <label>Imagen para playlist 2:</label>
         <%= f.file_field :playlist_2_image %>
+        <% if @station.playlist_2_image.present? %>
+          <%= image_tag @station.playlist_2_image, class: "form-image-preview" %>
+        <% end %>
       </div>
     </div>
     <div class="multifield">
@@ -69,10 +75,16 @@
       <div class="field">
         <label>Imagen para playlist 3:</label>
         <%= f.file_field :playlist_3_image %>
+        <% if @station.playlist_3_image.present? %>
+          <%= image_tag @station.playlist_3_image, class: "form-image-preview" %>
+        <% end %>
       </div>
       <div class="field">
         <label>Imagen para playlist 4:</label>
         <%= f.file_field :playlist_4_image %>
+        <% if @station.playlist_4_image.present? %>
+          <%= image_tag @station.playlist_4_image, class: "form-image-preview" %>
+        <% end %>
       </div>
     </div>
 
@@ -111,14 +123,14 @@
     <!-- Imágenes -->
     <div class="multifield">
       <div class="field">
-        <% if @station.image %>
+        <% if @station.image.present? %>
           <%= image_tag @station.image, class: "form-image-preview" %>
         <% end %>
         <label>Imagen (logo):</label>
         <%= f.file_field :image %>
       </div>
       <div class="field">
-        <% if @station.image_preview %>
+        <% if @station.image_preview.present? %>
           <%= image_tag @station.image_preview, class: "form-image-preview" %>
         <% end %>
         <label>Imagen para Facebook:</label>
@@ -127,85 +139,17 @@
     </div>
   </div>
 
-  <!-- SECCIÓN DE PROGRAMAS (12 PRE-CREADOS) -->
+  <!-- SECCIÓN DE PROGRAMAS -->
   <div class="admin-form">
     <h3 class="section-title">Programas</h3>
-
-    <% 1.times do |i| %>
-      <%= f.fields_for :timetables, @station.timetables[i]&.dup.tap { |t| t&.id = nil } || @station.timetables.build do |builder| %>
-        <div class="field-builder card">
-          <div class="field">
-            <label>Nombre del Programa</label>
-            <%= builder.text_field :name, value: builder.object.name || "Programa #{i+1}" %>
-          </div>
-
-          <div class="field">
-            <label>Locutores o Anfitriones</label>
-            <%= builder.text_field :broadcasters %>
-          </div>
-
-          <div class="field">
-            <label>Descripción:</label>
-            <%= builder.text_field :description %>
-          </div>
-
-          <div class="multifield">
-            <div class="timefield">
-              <label>Hora de Inicio:</label>
-              <%= builder.time_select :streaming_hour, default: { hour: "00", minute: "00" }, time_separator: "<span>:</span>" %>
-            </div>
-            <div class="timefield">
-              <label>Hora de Fin:</label>
-              <%= builder.time_select :end_streaming_hour, default: { hour: "01", minute: "00" }, time_separator: "<span>:</span>" %>
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Días de la semana:</label>
-          </div>
-          <div class="field field--checkbox">
-            <%= builder.check_box :monday %>
-            <label>Lunes</label>
-          </div>
-          <div class="field field--checkbox">
-            <%= builder.check_box :tuesday %>
-            <label>Martes</label>
-          </div>
-          <div class="field field--checkbox">
-            <%= builder.check_box :wednesday %>
-            <label>Miércoles</label>
-          </div>
-          <div class="field field--checkbox">
-            <%= builder.check_box :thursday %>
-            <label>Jueves</label>
-          </div>
-          <div class="field field--checkbox">
-            <%= builder.check_box :friday %>
-            <label>Viernes</label>
-          </div>
-          <div class="field field--checkbox">
-            <%= builder.check_box :saturday %>
-            <label>Sábado</label>
-          </div>
-          <div class="field field--checkbox">
-            <%= builder.check_box :sunday %>
-            <label>Domingo</label>
-          </div>
-
-          <div class="field">
-            <label>Imagen para banner programático:</label>
-            <%= builder.file_field :image %>
-          </div>
-          <div class="field">
-            <label>Imagen del locutor o anfitrión:</label>
-            <%= builder.file_field :broadcaster_image %>
-          </div>
-
-          <%= builder.hidden_field :_destroy %>
-          <%= link_to "Eliminar programa", "#", class: "remove-program fields__remove delete", data: { index: i } %>
-        </div>
+    
+    <div id="programs-container">
+      <%= f.fields_for :timetables do |builder| %>
+        <%= render 'timetable_fields', f: builder %>
       <% end %>
-    <% end %>
+    </div>
+    
+    <button type="button" id="add-program" class="btn-submit">Añadir Programa</button>
   </div>
 
   <%= f.submit "Guardar", class: "btn-submit" %>
@@ -220,22 +164,144 @@
   });
 
   // Previsualización de imágenes
-  $("input[type=file]").each(function() {
-    var $input = $(this);
-    if ($input.parents(".field").find("img").length == 0) {
-      $input.before('<img class="form__image-preview">');
+  function setupImagePreview(input) {
+    var $input = $(input);
+    if ($input.parents(".field").find(".form__image-preview").length == 0) {
+      $input.after('<img class="form__image-preview" style="max-width: 200px; display: none;">');
     }
 
     $input.change(function() {
       if (this.files && this.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
-          $input.parents(".field").find("img").attr("src", e.target.result).show();
+          $input.parents(".field").find(".form__image-preview").attr("src", e.target.result).show();
         };
         reader.readAsDataURL(this.files[0]);
       }
     });
+  }
+
+  // Configurar previsualización para imágenes existentes
+  $("input[type=file]").each(function() {
+    setupImagePreview(this);
   });
+
+  // Contador para nuevos programas
+  let programCounter = <%= @station.timetables.size || 0 %>;
+  
+  // Función para añadir nuevo programa
+  $('#add-program').click(function() {
+    programCounter++;
+    const newId = new Date().getTime();
+    
+    // Crear el nuevo programa con estructura HTML
+    const newProgram = `
+      <div class="field-builder card">
+        <div class="create__field-container">
+          <div class="field">
+            <label>Nombre del Programa</label>
+            <input type="text" name="station[timetables_attributes][${newId}][name]" id="station_timetables_attributes_${newId}_name" value="Programa ${programCounter}">
+          </div>
+          <div class="field">
+            <label>Locutores o Anfitriones</label>
+            <input type="text" name="station[timetables_attributes][${newId}][broadcasters]" id="station_timetables_attributes_${newId}_broadcasters">
+          </div>
+          <div class="field">
+            <label>Descripción:</label>
+            <input type="text" name="station[timetables_attributes][${newId}][description]" id="station_timetables_attributes_${newId}_description">
+          </div>
+          <div class="multifield">
+            <div class="timefield">
+              <label>Hora de Inicio:</label>
+              <select name="station[timetables_attributes][${newId}][streaming_hour(4i)]" id="station_timetables_attributes_${newId}_streaming_hour_4i">
+                ${generateTimeOptions('00')}
+              </select>
+              <span>:</span>
+              <select name="station[timetables_attributes][${newId}][streaming_hour(5i)]" id="station_timetables_attributes_${newId}_streaming_hour_5i">
+                ${generateMinuteOptions()}
+              </select>
+            </div>
+            <div class="timefield">
+              <label>Hora de Fin:</label>
+              <select name="station[timetables_attributes][${newId}][end_streaming_hour(4i)]" id="station_timetables_attributes_${newId}_end_streaming_hour_4i">
+                ${generateTimeOptions('01')}
+              </select>
+              <span>:</span>
+              <select name="station[timetables_attributes][${newId}][end_streaming_hour(5i)]" id="station_timetables_attributes_${newId}_end_streaming_hour_5i">
+                ${generateMinuteOptions()}
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Días de la semana:</label>
+          </div>
+          ${generateDayCheckboxes(newId)}
+          <div class="field">
+            <label>Imagen para banner programático:</label>
+            <input type="file" name="station[timetables_attributes][${newId}][image]" id="station_timetables_attributes_${newId}_image">
+            <img class="form__image-preview" style="max-width: 200px; display: none;">
+          </div>
+          <div class="field">
+            <label>Imagen del locutor o anfitrión:</label>
+            <input type="file" name="station[timetables_attributes][${newId}][broadcaster_image]" id="station_timetables_attributes_${newId}_broadcaster_image">
+            <img class="form__image-preview" style="max-width: 200px; display: none;">
+          </div>
+          <input type="hidden" name="station[timetables_attributes][${newId}][_destroy]" id="station_timetables_attributes_${newId}__destroy" value="0">
+          <a href="#" class="remove-program fields__remove delete">Eliminar programa</a>
+        </div>
+      </div>
+    `;
+    
+    // Añadir al contenedor
+    $('#programs-container').append(newProgram);
+    
+    // Configurar previsualización para las nuevas imágenes
+    setupImagePreview($(`#station_timetables_attributes_${newId}_image`)[0]);
+    setupImagePreview($(`#station_timetables_attributes_${newId}_broadcaster_image`)[0]);
+  });
+
+  // Funciones auxiliares
+  function generateTimeOptions(selectedHour = '00') {
+    let options = '';
+    for (let i = 0; i < 24; i++) {
+      const hour = i < 10 ? `0${i}` : `${i}`;
+      options += `<option value="${hour}" ${hour === selectedHour ? 'selected' : ''}>${hour}</option>`;
+    }
+    return options;
+  }
+  
+  function generateMinuteOptions() {
+    let options = '';
+    for (let i = 0; i < 60; i += 15) {
+      const minute = i < 10 ? `0${i}` : `${i}`;
+      options += `<option value="${minute}">${minute}</option>`;
+    }
+    return options;
+  }
+  
+  function generateDayCheckboxes(newId) {
+    const days = [
+      { name: 'monday', label: 'Lunes' },
+      { name: 'tuesday', label: 'Martes' },
+      { name: 'wednesday', label: 'Miércoles' },
+      { name: 'thursday', label: 'Jueves' },
+      { name: 'friday', label: 'Viernes' },
+      { name: 'saturday', label: 'Sábado' },
+      { name: 'sunday', label: 'Domingo' }
+    ];
+    
+    let checkboxes = '';
+    days.forEach(day => {
+      checkboxes += `
+        <div class="field field--checkbox">
+          <input type="checkbox" value="1" name="station[timetables_attributes][${newId}][${day.name}]" id="station_timetables_attributes_${newId}_${day.name}">
+          <label>${day.label}</label>
+        </div>
+      `;
+    });
+    
+    return checkboxes;
+  }
 </script>
 
 <%= render "components/s3_form_js" %>

@@ -1,0 +1,12 @@
+diff --git a/node_modules/@rails/webpacker/package.json b/node_modules/@rails/webpacker/package.json
+index abc1234..def5678 100644
+--- a/node_modules/@rails/webpacker/package.json
++++ b/node_modules/@rails/webpacker/package.json
+@@ -45,7 +45,7 @@
+     "webpack": "4.46.0",
+     "webpack-assets-manifest": "5.1.0",
+     "webpack-cli": "3.3.12",
+-    "webpack-dev-server": "^3.11.0"
++    "webpack-dev-server": "3.11.3"
+   }
+ }

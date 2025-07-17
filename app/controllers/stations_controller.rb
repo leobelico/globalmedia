@@ -1,4 +1,4 @@
-class Panel::StationsController < ApplicationController
+class StationsController < ApplicationController
   before_action :set_station, only: [:show, :edit, :update, :destroy]
   before_action :set_station_on_id, only: [:articles]
 

@@ -5,7 +5,6 @@ gem 'rails', '~> 6.1.7'
 gem 'pg', '>= 1.4'
 gem 'puma', '~> 5.6'
 gem 'sass-rails', '>= 6'
-gem 'webpacker', '~> 5.4' # si estás usando Webpacker
 gem 'jbuilder', '~> 2.11'
 gem 'devise'
 gem 'foreman'
@@ -18,7 +17,7 @@ gem 'jwt'
 gem 'rack-cors'
 gem 'graphql', '~> 1.12'
 gem 'caxlsx', '~> 3.1'
-gem 'axlsx_rails'
+gem 'caxlsx_rails'
 gem 'rack', '~> 2.2'
 gem 'api-pagination', '~> 4.4'
 gem 'dalli'
@@ -36,6 +35,7 @@ gem 'coffee-rails', '~> 5.0'
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
+  gem 'bullet'
 end
 
 group :development do
@@ -50,3 +50,7 @@ end
 group :production do
   gem 'heroku-deflater'
 end
+
+gem "uglifier", "~> 4.2"
+
+gem "webpacker", "= 5.4.4"

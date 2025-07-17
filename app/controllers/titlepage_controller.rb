@@ -53,7 +53,7 @@ def index
 
 
     # Highlights limitados a 6 para mejorar rendimiento
-	@highlights = Highlight.includes(:article)
+@highlights = Highlight.includes(article: :articable)
 									.where(published: true, location_id: @location_id)
 									.order(order: :asc)
 									.limit(6)

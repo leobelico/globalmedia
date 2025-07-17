@@ -11,7 +11,9 @@ module Globalmedia
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    
+    # config/application.rb
+    config.load_defaults 6.1 # Asegúrate que sea 6.0 o superior
+    config.autoloader = :zeitwerk # ← Esta línea es crucial
     config.time_zone = 'Mexico City'
 	config.active_record.default_timezone = :local
 	config.i18n.default_locale = :es

@@ -1,6 +1,6 @@
 # Puma puede atender múltiples solicitudes por hilo desde un pool interno.
 # Estas líneas definen el número mínimo y máximo de hilos usados por cada worker.
-threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }.to_i
+threads_count = ENV.fetch("RAILS_MAX_THREADS") { 8 }.to_i
 threads threads_count, threads_count
 
 # Puerto en el que Puma escucha las peticiones (por defecto 3000)
