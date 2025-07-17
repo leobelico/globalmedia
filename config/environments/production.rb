@@ -52,6 +52,7 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
+  require 'logger' unless defined?(Logger)
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.

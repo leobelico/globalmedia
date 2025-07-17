@@ -21,3 +21,4 @@ else
 fi
 
 echo "✅ Build finalizado"
+cp -R public/assets/
