@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
         set_local_dev_location
         return
       end # Evitar redireccionar en desarrollo
+  if request.host.include?('onrender.com')
+    @subdomain_location = 'default'
+    @location_id = 1
+    return
+  end
 
     @subdomain_location = 'default'
     @location_id = 1
