@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 # bin/render-build.sh
 
-# Exit immediately if any command fails
-set -o errexit
+# Exit on error and show commands
+set -ex
 
-# Install Node.js 16.20.2 if not present
+# Install specific Node.js version
 if [ ! -d "$HOME/.nvm/versions/node/v16.20.2" ]; then
-  echo "Installing Node.js 16.20.2..."
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -14,22 +13,19 @@ if [ ! -d "$HOME/.nvm/versions/node/v16.20.2" ]; then
   nvm use 16.20.2
 fi
 
-# Install Ruby dependencies
-echo "Installing Ruby gems..."
-bundle install
-
-# Install JavaScript dependencies
-echo "Installing Yarn packages..."
-yarn install --ignore-engines
+# Install dependencies
+bundle config set without 'development test'
+bundle install --jobs 4 --retry 3
+yarn install --ignore-engines --frozen-lockfile
 
 # Precompile assets
-echo "Precompiling assets..."
-RAILS_ENV=production NODE_ENV=production bundle exec rails assets:precompile
+RAILS_ENV=production NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider bundle exec rails assets:precompile
 
-# Verify assets were compiled
-if [ ! -f "public/assets/.sprockets-manifest-*.json" ]; then
-  echo "Error: Assets failed to precompile!"
+# Clean old assets (keep last 2 versions)
+bundle exec rails assets:clean[2]
+
+# Verify compilation
+if [ ! -f public/assets/.sprockets-manifest-*.json ]; then
+  echo "ERROR: Asset compilation failed!"
   exit 1
 fi
-
-echo "Build completed successfully!"
