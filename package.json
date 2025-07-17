@@ -11,11 +11,9 @@
   },
   "devDependencies": {
     "compression-webpack-plugin": "6.1.1",
-    "terser-webpack-plugin": "^5.3.14",
-    "webpack-assets-manifest": "^5.1.0",
-    "webpack-dev-server": "3.11.3"
+    "webpack-assets-manifest": "^5.1.0"
   },
-    "resolutions": {
+  "resolutions": {
     "@babel/core": "^7.22.1",
     "webpack": "4.46.0"
   }

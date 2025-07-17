@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: global-media
+    env: ruby
+    buildCommand: "./build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    plan: starter
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: NODE_ENV
+        value: production
