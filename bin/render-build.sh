@@ -12,6 +12,9 @@ nvm use 16.20.2
 bundle install
 yarn install --ignore-engines
 
+# Prueba si Logger funciona en Ruby
+ruby test_logger.rb
+
 # Usa los assets precompilados si ya existen
 if [ -f public/assets/manifest.json ]; then
   echo "✅ Assets ya precompilados. No se compilan de nuevo."
@@ -21,4 +24,3 @@ else
 fi
 
 echo "✅ Build finalizado"
-cp -R public/assets/
