@@ -13,7 +13,8 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+config.public_file_server.enabled = true
+
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
 
@@ -24,7 +25,6 @@ Rails.application.configure do
  
   # Compress JavaScripts and CSS.
   config.assets.compress = true
-  config.assets.js_compressor = :uglifier
   config.assets.css_compressor = :sass
   config.assets.digest = true
   # Do not fallback to assets pipeline if a precompiled asset is missed.

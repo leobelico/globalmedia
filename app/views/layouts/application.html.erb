@@ -30,7 +30,7 @@
 	<!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" async></script> -->
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload', cache: "cached/all" %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', cache: "cached/all" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 	<script src="https://platform.twitter.com/widgets.js" async></script>
 
 	<!-- Global Site Tag (gtag.js) - Google Analytics -->
@@ -134,6 +134,8 @@
 
 
 	</script>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
   </head>
 
   <body>

@@ -51,6 +51,5 @@ group :production do
   gem 'heroku-deflater'
 end
 
-gem "uglifier", "~> 4.2"
 
 gem "webpacker", "= 5.4.4"

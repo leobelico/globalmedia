@@ -7,7 +7,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install 16.20.2
 nvm use 16.20.2
-
+gem uninstall logger -v 1.5.3 -x
+gem install logger -v 1.7.0
 # Instala dependencias
 bundle install
 yarn install --ignore-engines
