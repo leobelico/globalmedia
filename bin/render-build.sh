@@ -20,7 +20,8 @@ if [ -f public/assets/manifest.json ]; then
   echo "✅ Assets ya precompilados. No se compilan de nuevo."
 else
   echo "⚠️ No se encontraron assets. Ejecutando precompilación..."
-  RAILS_ENV=production bundle exec rails assets:precompile
+  RAILS_ENV=production ruby -r logger -S bundle exec rails assets:precompile
+
 fi
 
 echo "✅ Build finalizado"
