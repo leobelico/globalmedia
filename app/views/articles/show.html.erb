@@ -119,11 +119,15 @@
 								<%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
 							<% end %>	
 						</div>
-				<% if !@article.note.empty? %>
+				<% if @article.note.present? %>
 				<div id="quill-container" class="quill--article">
-					<%= sanitize JSON.parse(@article.note)["html"] %>
+					<% if @article.note.is_a?(String) && @article.note.start_with?('{') %>
+					<%= sanitize JSON.parse(@article.note)["html"] rescue @article.note %>
+					<% else %>
+					<%= sanitize @article.note %>
+					<% end %>
 				</div>
-				<% elsif @article.note_old != nil && @article.note.empty? %>
+				<% elsif @article.note_old.present? %>
 				<div class="quill--article article--old">
 					<%= simple_format @article.note_old %>
 				</div>
