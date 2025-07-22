@@ -112,93 +112,80 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-  // Inicialización del editor Quill (solo si no existe)
-  if (!window.quillEditor) {
-    window.quillEditor = new Quill('#note-editor', {
-      theme: 'snow',
-      modules: {
-        toolbar: [
-          [{ 'header': [1, 2, 3, false] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-          ['link', 'image'],
-          ['clean']
-        ],
-        clipboard: {
-          matchVisual: false // Previene loops
-        }
-      },
-      placeholder: 'Escribe el contenido de tu artículo aquí...'
-    });
-
-    // Cargar contenido existente
-    <% if @article.note.present? %>
-      try {
-        const noteContent = `<%= j @article.note.html_safe %>`;
-        if (noteContent.trim() !== '') {
-          window.quillEditor.root.innerHTML = noteContent;
-        }
-      } catch(e) {
-        console.error("Error cargando contenido:", e);
+  // Define el editor como variable global
+  window.editor = new Quill('#note-editor', {
+    theme: 'snow',
+    modules: {
+      toolbar: [
+        [{ 'header': [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ['link', 'image'],
+        ['clean']
+      ],
+      clipboard: {
+        matchVisual: false // Previene loops
       }
-    <% end %>
+    },
+    placeholder: 'Escribe el contenido de tu artículo aquí...'
+  });
 
-    // Manejador de submit mejorado
-    const form = document.querySelector('form.directUpload');
-    if (form) {
-      form.addEventListener('submit', function(e) {
-        const contentField = document.querySelector('#article_note');
-        if (contentField) {
-          contentField.value = window.quillEditor.root.innerHTML;
-        }
-        // No preventDefault() aquí para permitir el envío normal
-      });
-    }
+  // Contenido existente
+  <% if @article.note.present? %>
+    window.editor.root.innerHTML = `<%= j @article.note.html_safe %>`;
+  <% end %>
 
-    // Sobrescritura segura de submit_form
-    if (typeof submit_form === 'function') {
-      const originalSubmitForm = submit_form;
-      window.submit_form = function(t, e, n, r) {
-        try {
-          const content = window.quillEditor.getContents();
-          const text = window.quillEditor.getText();
-          return originalSubmitForm(t, e, n, r);
-        } catch(error) {
-          console.error("Error en submit_form:", error);
-          return false;
-        }
-      };
-    }
+  // Manejo del envío del formulario
+  document.querySelector('form.directUpload').onsubmit = function() {
+    var content = document.querySelector('#article_note');
+    content.value = window.editor.root.innerHTML;
+    return true;
+  };
+
+  // Sobrescribe la función submit_form para usar window.editor
+  if(typeof submit_form === 'function') {
+    var originalSubmitForm = submit_form;
+    submit_form = function(t, e, n, r) {
+      console.log($("#article_articable_id").val());
+      console.log(window.editor.getContents());
+      console.log(window.editor.getText());
+      
+      var i = window.editor.getContents(),
+          o = window.editor.getText();
+      
+      // Resto de tu lógica original...
+      return originalSubmitForm(t, e, n, r);
+    };
   }
 
-  // Límite de caracteres (con protección jQuery)
+  // Límite de caracteres
   (function() {
     var maxChars = {
       name: 80,
       short_description: 120
     };
 
-    $('#article_name').off('input').on('input', function() {
+    $('#article_name').on('input', function() {
       if ($(this).val().length > maxChars.name) {
         $(this).val($(this).val().substring(0, maxChars.name));
       }
     });
 
-    $('#article_short_description').off('input').on('input', function() {
+    $('#article_short_description').on('input', function() {
       if ($(this).val().length > maxChars.short_description) {
         $(this).val($(this).val().substring(0, maxChars.short_description));
       }
     });
   })();
 
-  // Vista previa de imágenes (optimizada)
+  // Vista previa de imágenes
   $("input[type=file]").each(function() {
     var $input = $(this);
     if ($input.parents(".field").find("img").length === 0) {
-      $input.before('<img class="form__image-preview" style="display:none;max-width:200px;">');
+      $input.before('<img class="form__image-preview">');
     }
 
-    $input.off('change').on('change', function() {
+    $input.change(function() {
       if (this.files && this.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
