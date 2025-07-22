@@ -5,6 +5,7 @@
 </form>
 
 <%= form_for [:panel, @article], multipart: true, html: { class: "directUpload", remote: true, data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } } do |f| %>
+
   <% if @article.errors.any? %>  
     <div class="card">
       <h5><%= pluralize(@article.errors.count, "error") %></h5>
@@ -72,6 +73,8 @@
       </div>  
     <% end %>
 
+    <div id="note-editor"></div>
+    <%= f.hidden_field :note, id: 'article_note' %>
 	<div id="note-editor"></div>
 	<%= f.hidden_field :note, id: 'article_note' %>
 
@@ -112,6 +115,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+  // Initialize Quill Editor
+  var quill = new Quill('#note-editor', {
   // Define el editor como variable global
   window.editor = new Quill('#note-editor', {
     theme: 'snow',
@@ -122,26 +127,28 @@
         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
         ['link', 'image'],
         ['clean']
-      ],
-      clipboard: {
-        matchVisual: false // Previene loops
-      }
+      ]
     },
     placeholder: 'Escribe el contenido de tu artículo aquí...'
   });
 
+  // Set existing content if editing
   // Contenido existente
   <% if @article.note.present? %>
+    quill.root.innerHTML = `<%= j @article.note.html_safe %>`;
     window.editor.root.innerHTML = `<%= j @article.note.html_safe %>`;
   <% end %>
 
+  // Update hidden input with Quill content before form submission
   // Manejo del envío del formulario
   document.querySelector('form.directUpload').onsubmit = function() {
     var content = document.querySelector('#article_note');
+    content.value = quill.root.innerHTML;
     content.value = window.editor.root.innerHTML;
     return true;
   };
 
+  // Character limit functions
   // Sobrescribe la función submit_form para usar window.editor
   if(typeof submit_form === 'function') {
     var originalSubmitForm = submit_form;
@@ -178,6 +185,7 @@
     });
   })();
 
+  // Image preview handling
   // Vista previa de imágenes
   $("input[type=file]").each(function() {
     var $input = $(this);
@@ -198,5 +206,3 @@
     });
   });
 </script>
-
-<%= render "components/s3_form_js" %>
