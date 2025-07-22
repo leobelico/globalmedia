@@ -15,10 +15,12 @@ class ApplicationController < ActionController::Base
       end # Evitar redireccionar en desarrollo
   if request.host.include?('onrender.com')
     @subdomain_location = 'default'
+    @location_id = 1
     return
   end
 
     @subdomain_location = 'default'
+    @location_id = 1
     if /^((?:leon)|(?:queretaro)|(?:vallarta)|(?:vallartabahia)|(?:jalisco)|(?:zacatecas))\./.match(request.host)
       matchers = request.host.match(/^[a-zA-Z]+/)
       matchers.captures
