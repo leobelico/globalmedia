@@ -61,7 +61,7 @@
 
 		<div class="field">
 			<label>Extracto</label>
-			<%= f.text_area :short_description, required: true, data: { max_chars: 120 } %>
+			<%= f.text_area :short_description, id: "article_short_description", maxlength: 120, required: true %>
 		</div>
 
 		<% if @article.image %>
@@ -74,7 +74,11 @@
 			</div>	
 		<% end %>
 
-		<div id="note-editor">
+		 <div class="field">
+			<label>Contenido</label>
+			<div id="quill-editor" data-maxlength="4000" style="min-height: 200px;"></div>
+			<%= f.hidden_field :body, id: "article_body" %>
+		</div>
 			
 		</div>
 		<div class="field">
@@ -104,51 +108,64 @@
 		</div>
 	</div>
 <% end %>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
 <script>
-	char_count();
-	initialize_quill(); 
-</script>
-<script>
-    let max_chars_name = 80;
-    let max_chars_short_description = 120;
-    $('#article_name').keydown( function(e){
-        if ($(this).val().length >= max_chars_name) {
-            $(this).val($(this).val().substr(0, max_chars_name));
-        }
-    });
+	document.addEventListener("DOMContentLoaded", function () {
+		char_count();
+		initialize_quill(); 
 
-    $('#article_name').keyup( function(e){
-        if ($(this).val().length >= max_chars_name) {
-            $(this).val($(this).val().substr(0, max_chars_name));
-        }
-    });
-    $('#article_short_description').keydown( function(e){
-        if ($(this).val().length >= max_chars_short_description) {
-            $(this).val($(this).val().substr(0, max_chars_short_description));
-        }
-    });
+		const max_chars_name = 80;
+		const max_chars_short_description = 120;
 
-    $('#article_short_description').keyup( function(e){
-        if ($(this).val().length >= max_chars_short_description) {
-            $(this).val($(this).val().substr(0, max_chars_short_description));
-        }
-    });
-	$("input[type=file]").each(function(){
-		var $input = $(this);
-		if ($input.parents(".field").find("img").length == 0) {
+		// Título
+		const nameInput = document.querySelector("#article_name");
+		nameInput.setAttribute("maxlength", max_chars_name);
 
-			$input.before('<img class="form__image-preview">');
-		}
-
-		$input.change(function(){
-		    var reader = new FileReader();
-		    $(reader).on("load", function(event){
-
-			    	$input.parents(".field").find("img").attr('src',  event.target.result); 
-			    	$input.parents(".field").find("img").css("display", "block"); 
-		    });
-			reader.readAsDataURL(this.files[0]);
+		nameInput.addEventListener("input", function () {
+			if (this.value.length > max_chars_name) {
+				this.value = this.value.slice(0, max_chars_name);
+			}
 		});
-	});  
+		nameInput.addEventListener("paste", function (e) {
+			e.preventDefault();
+			const pasted = (e.clipboardData || window.clipboardData).getData("text").slice(0, max_chars_name - this.value.length);
+			document.execCommand("insertText", false, pasted);
+		});
+
+		// Extracto
+		const descInput = document.querySelector("#article_short_description");
+		descInput.setAttribute("maxlength", max_chars_short_description);
+
+		descInput.addEventListener("input", function () {
+			if (this.value.length > max_chars_short_description) {
+				this.value = this.value.slice(0, max_chars_short_description);
+			}
+		});
+		descInput.addEventListener("paste", function (e) {
+			e.preventDefault();
+			const pasted = (e.clipboardData || window.clipboardData).getData("text").slice(0, max_chars_short_description - this.value.length);
+			document.execCommand("insertText", false, pasted);
+		});
+
+		// Previsualización de imágenes
+		document.querySelectorAll("input[type=file]").forEach(function ($input) {
+			if ($input.closest(".field").querySelector("img") === null) {
+				$input.insertAdjacentHTML('beforebegin', '<img class="form__image-preview">');
+			}
+
+			$input.addEventListener("change", function () {
+				const reader = new FileReader();
+				reader.onload = function (event) {
+					const img = $input.closest(".field").querySelector("img");
+					img.src = event.target.result;
+					img.style.display = "block";
+				};
+				reader.readAsDataURL(this.files[0]);
+			});
+		});
+	});
 </script>
+
 <%= render "components/s3_form_js" %>
