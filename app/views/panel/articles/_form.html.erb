@@ -74,7 +74,7 @@
     <% end %>
 
     <div id="note-editor"></div>
-    <%= f.hidden_field :content, id: 'article_content' %>
+    <%= f.hidden_field :note, id: 'article_note' %>
 
     <div class="field">
       <label>Exclusiva</label>
@@ -113,7 +113,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-
+  // Initialize Quill Editor
   var quill = new Quill('#note-editor', {
     theme: 'snow',
     modules: {
@@ -128,13 +128,14 @@
     placeholder: 'Escribe el contenido de tu artículo aquí...'
   });
 
-  <% if @article.content.present? %>
-    quill.root.innerHTML = `<%= j @article.content.html_safe %>`;
+  // Set existing content if editing
+  <% if @article.note.present? %>
+    quill.root.innerHTML = `<%= j @article.note.html_safe %>`;
   <% end %>
 
   // Update hidden input with Quill content before form submission
   document.querySelector('form.directUpload').onsubmit = function() {
-    var content = document.querySelector('#article_content');
+    var content = document.querySelector('#article_note');
     content.value = quill.root.innerHTML;
     return true;
   };
