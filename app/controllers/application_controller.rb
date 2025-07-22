@@ -8,50 +8,50 @@ class ApplicationController < ActionController::Base
   before_action :redirect_subdomain
 
   @meta_description = ''
-  def redirect_subdomain
-      if Rails.env.development?
-        set_local_dev_location
-        return
-      end # Evitar redireccionar en desarrollo
-  if request.host.include?('onrender.com')
-    @subdomain_location = 'default'
-    @location_id = 6
+def redirect_subdomain
+  if Rails.env.development?
+    set_local_dev_location
     return
   end
 
-    @subdomain_location = 'default'
-    @location_id = 1
-    if /^((?:leon)|(?:queretaro)|(?:vallarta)|(?:vallartabahia)|(?:jalisco)|(?:zacatecas))\./.match(request.host)
-      matchers = request.host.match(/^[a-zA-Z]+/)
-      matchers.captures
-      @subdomain_location = matchers[0]
+  @meta_description = ''
+  @subdomain_location = 'default'
+  host = request.host
 
-      if ['vallarta', 'jalisco'].include? @subdomain_location
-        url_redirect = request.protocol + (request.host_with_port.gsub(/(vallarta)|(jalisco)/, 'vallartabahia')) + request.fullpath
-        redirect_to("#{url_redirect}", status: 301)
-      end
-
-      location = Location.where('key = ?', @subdomain_location).first
-      if location != nil
-        @meta_description = location.meta_description
-        @location_id = location.id
-      end
-    else
-      unless /^www/.match(request.host) || ['127.0.0.1', 'localhost'].include?(request.host)
-        url_redirect = request.protocol + "www." + request.host_with_port + request.fullpath
-        redirect_to("#{url_redirect}", status: 301)
-      end
-
-      location = Location.where('key = ?', 'san-luis').first
-      if location != nil
-        @meta_description = location.meta_description
-        @location_id = location.id
-      else
-        # Solo como default
-        @meta_description = 'Noticias de hoy en San Luis Potosí, México y el mundo, sigue la información minuto a minuto desde San Luis Potosí GlobalMedia es noticia.'
-      end
-    end
+  # Dominio raíz sin subdominio (por ejemplo globalmedia.onrender.com o globalmedia.mx)
+  if host.match?(/^globalmedia\.(onrender\.com|mx)$/)
+    @location_id = 1 # San Luis Potosí
+    return
   end
+
+  # Detectar subdominio como leon.globalmedia.mx o leon.globalmedia.onrender.com
+  subdomain_match = host.match(/^([a-zA-Z0-9-]+)\.globalmedia\.(onrender\.com|mx)$/)
+  subdomain = subdomain_match[1] if subdomain_match
+
+  case subdomain
+  when 'leon'
+    @location_id = 2
+  when 'zacatecas'
+    @location_id = 6
+  when 'vallarta', 'jalisco'
+    # Redirección a subdominio oficial: vallartabahia
+    new_host = host.gsub(/(vallarta|jalisco)/, 'vallartabahia')
+    redirect_to "#{request.protocol}#{new_host}#{request.fullpath}", status: 301 and return
+  when 'vallartabahia'
+    @location_id = 4
+  else
+    @location_id = 1 # Default: San Luis
+  end
+
+  # Intentar cargar datos del Location
+  location = Location.find_by(id: @location_id)
+  if location
+    @meta_description = location.meta_description
+    @subdomain_location = location.key
+  else
+    @meta_description = 'Noticias de hoy en San Luis Potosí, México y el mundo, sigue la información minuto a minuto desde San Luis Potosí GlobalMedia es noticia.'
+  end
+end
 
   # before_action do
   #   if user_signed_in?
