@@ -120,15 +120,13 @@
 							<% end %>	
 						</div>
 				<% if !@article.note.empty? %>
-					<div id="quill-container" class="quill--article">
-					</div>
-				<% elsif @article.note_old != nil and @article.note.empty? %>
-					<div class="quill--article article--old">
-						<%= simple_format @article.note_old %>
-					</div>
-					<script>
-						// $(".quill--article").html("<%= simple_format @article.note_old %>"); 
-					</script>
+				<div id="quill-container" class="quill--article">
+					<%= sanitize JSON.parse(@article.note)["html"] %>
+				</div>
+				<% elsif @article.note_old != nil && @article.note.empty? %>
+				<div class="quill--article article--old">
+					<%= simple_format @article.note_old %>
+				</div>
 				<% end %>
 
 	
