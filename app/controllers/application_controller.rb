@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
       end # Evitar redireccionar en desarrollo
   if request.host.include?('onrender.com')
     @subdomain_location = 'default'
-    @location_id = 5
+    @location_id = 6
     return
   end
 
