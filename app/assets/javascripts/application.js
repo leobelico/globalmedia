@@ -19,7 +19,7 @@
 //= require components/char-count
 //= require components/copy-to-clipboard
 //= require components/mobile-menu
-
+//= require quill
 // QUILL BLOTS
 //= require libraries/quill/blots/Tweet 
 //= require libraries/quill/blots/EmbedContent 
