@@ -187,11 +187,8 @@ function display_quill_notex(quill_note, container) {
   Quill.register(EmbedContentBlot);
   Quill.register(InstagramBlot);
 
-        editor.setContents(quill_note);
-    }
   // Usar window.quillViewer para evitar conflictos con el editor principal
   window.quillViewer = new Quill(container, options);
   window.quillViewer.setContents(quill_note);
 }
-
 </script>
