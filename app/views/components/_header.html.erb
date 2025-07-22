@@ -146,43 +146,78 @@
 </div>
 
 <script>
-    $(window).ready(()=> {
-        $('.modal-close .close').click((e) => {
-            $('.modal-banner').removeClass('d-md-block');
-        });
-        try {
-            showSome();
-        } catch (e) {
-            console.error(e);
-        }
+  $(function() { // Reemplaza $(window).ready con esto
+    $('.modal-close .close').on('click', function(e) {
+      $('.modal-banner').removeClass('d-md-block');
     });
-    async function showSome() {
-        const resultt = await fetch('/api/v1/new_banner/show_now/interstitial');
-        const somexd = await resultt.json();
-        if (somexd) {
-            $('.modal-banner').addClass('d-md-block');
-            var container = document.getElementById("quillSHowSome")
-            display_quill_notex(JSON.parse(somexd.content), container);
+    
+    // Cargar el banner de manera controlada
+    let bannerLoaded = false;
+    
+    function loadBanner() {
+      if (!bannerLoaded) {
+        bannerLoaded = true;
+        try {
+          showSome();
+        } catch (e) {
+          console.error("Error loading banner:", e);
         }
+      }
     }
-function display_quill_notex(quill_note, container) {
-  var options = {
-    readOnly: true,
-    theme: 'snow'
+    
+    // Retrasar ligeramente la carga
+    setTimeout(loadBanner, 500);
+  });
+
+  async function showSome() {
+    try {
+      const response = await fetch('/api/v1/new_banner/show_now/interstitial');
+      if (!response.ok) throw new Error("Network response was not ok");
+      
+      const data = await response.json();
+      if (data && data.content) {
+        $('.modal-banner').addClass('d-md-block');
+        const container = document.getElementById("quillSHowSome");
+        if (container) {
+          display_quill_notex(JSON.parse(data.content), container);
+        }
+      }
+    } catch(error) {
+      console.error("Error fetching banner:", error);
+    }
   }
-  
-  // Importaciones necesarias
-  Parchment = Quill.import('parchment');
-  Delta = Quill.import('delta');
-  
-  // Registrar blots personalizados
-  Quill.register(TweetBlot);
-  Quill.register(EmbedContentBlot);
-  Quill.register(InstagramBlot);
 
-  // Usar window.quillViewer para evitar conflictos con el editor principal
-  window.quillViewer = new Quill(container, options);
-  window.quillViewer.setContents(quill_note);
-}
-
+  function display_quill_notex(quill_note, container) {
+    try {
+      // Limpiar contenedor primero
+      container.innerHTML = '';
+      
+      const options = {
+        readOnly: true,
+        theme: 'bubble', // Más ligero para visualización
+        modules: { toolbar: false } // Deshabilitar toolbar
+      };
+      
+      if (!window.quillViewer) {
+        // Registrar blots solo una vez
+        if (!window.quillBlotsRegistered) {
+          Parchment = Quill.import('parchment');
+          Delta = Quill.import('delta');
+          Quill.register(TweetBlot);
+          Quill.register(EmbedContentBlot);
+          Quill.register(InstagramBlot);
+          window.quillBlotsRegistered = true;
+        }
+        
+        window.quillViewer = new Quill(container, options);
+      }
+      
+      window.quillViewer.setContents(quill_note);
+      window.quillViewer.disable(); // Deshabilitar completamente
+      
+    } catch(error) {
+      console.error("Error displaying Quill content:", error);
+      container.innerHTML = '<p>Error al cargar el contenido</p>';
+    }
+  }
 </script>
