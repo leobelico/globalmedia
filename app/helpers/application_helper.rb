@@ -24,9 +24,6 @@ module ApplicationHelper
   end
 
   # Método mejorado para contenido Quill
-module ApplicationHelper
-  # ... (tus otros métodos existentes)
-
   def display_quill_content(content)
     return "" unless content.present?
 
