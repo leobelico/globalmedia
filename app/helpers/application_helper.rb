@@ -21,4 +21,21 @@ module ApplicationHelper
               fields: fields.gsub("\n", "")
             })
   end
+  def display_quill_content(content)
+    return "" unless content.present?
+
+    if content.is_a?(Hash) || (content.is_a?(String) && content.start_with?('{'))
+      begin
+        parsed = JSON.parse(content.to_s)
+        html_content = parsed["html"] || content.to_s
+      rescue JSON::ParserError
+        html_content = content.to_s
+      end
+    else
+      html_content = content.to_s
+    end
+
+    sanitize(html_content, tags: %w[p br ul ol li strong em u s a img h1 h2 h3 h4 h5 h6 blockquote pre iframe div span],
+                    attributes: %w[href src alt title class style width height frameborder allowfullscreen data-id data-url])
+  end
 end

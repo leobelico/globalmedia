@@ -6,13 +6,23 @@
 	<meta charset="UTF-8">
 	<meta name="google-site-verification" content="qmtKgqSClufrHzJbzMMtDlRjonS47U9-OVugljr636k" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 		
-		<!-- jQuery (si es necesario) -->
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+		<%= stylesheet_link_tag 'application', media: 'all' %>
+		<style>
+			.quill-content {
+			font-family: inherit;
+			line-height: 1.6;
+			}
+			.quill-content img {
+			max-width: 100%;
+			height: auto;
+			}
+			.quill-content iframe {
+			max-width: 100%;
+			}
+		</style>
 		
-		<!-- Quill JS -->
-		<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 		
 		<%= stylesheet_link_tag 'application', media: 'all' %>
 		<%= javascript_include_tag 'application' %>
@@ -320,6 +330,10 @@
 			}
 		});
 	</script>
+		<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+		
+		<!-- jQuery (si es necesario) -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <%= render "components/angular/include_global_media_javascripts" %>
   </body>
 

@@ -120,16 +120,12 @@
 							<% end %>	
 						</div>
 				<% if @article.note.present? %>
-				<div id="quill-container" class="quill--article">
-					<% if @article.note.is_a?(String) && @article.note.start_with?('{') %>
-					<%= sanitize JSON.parse(@article.note)["html"] rescue @article.note %>
-					<% else %>
-					<%= sanitize @article.note %>
-					<% end %>
+				<div class="quill-content">
+					<%= display_quill_content(@article.note) %>
 				</div>
 				<% elsif @article.note_old.present? %>
-				<div class="quill--article article--old">
-					<%= simple_format @article.note_old %>
+				<div class="quill-content">
+					<%= simple_format(@article.note_old) %>
 				</div>
 				<% end %>
 
