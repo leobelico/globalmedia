@@ -24,115 +24,156 @@ module ApplicationHelper
   end
 
   # Método mejorado para contenido Quill
+module ApplicationHelper
+  # ... (tus otros métodos existentes)
+
   def display_quill_content(content)
     return "" unless content.present?
 
     # Si el contenido ya es HTML (formato antiguo)
-    return sanitize(content) if content.include?('<') && !content.start_with?('{')
+    if content.include?('<') && !content.start_with?('{')
+      return sanitize(content, tags: allowed_quill_tags, attributes: allowed_quill_attributes)
+    end
 
     # Procesamiento para contenido en formato Delta (JSON)
     if content.is_a?(String) && content.start_with?('{')
       begin
         parsed = JSON.parse(content)
         
-        # Caso 1: Contiene HTML directamente
         if parsed["html"]
-          return sanitize(parsed["html"], 
-                         tags: allowed_quill_tags, 
-                         attributes: allowed_quill_attributes)
-        
-        # Caso 2: Formato Delta (ops)
+          wrapped_content(parsed["html"])
         elsif parsed["ops"]
           html = quill_delta_to_html(parsed["ops"])
-          return sanitize(html, 
-                         tags: allowed_quill_tags, 
-                         attributes: allowed_quill_attributes)
+          wrapped_content(html)
         else
-          return sanitize(content.to_s)
+          wrapped_content(content.to_s)
         end
-      rescue JSON::ParserError => e
-        Rails.logger.error "Error parsing Quill content: #{e.message}"
-        return sanitize(content.to_s)
+      rescue JSON::ParserError
+        wrapped_content(content.to_s)
       end
+    else
+      wrapped_content(content.to_s)
     end
-
-    # Para cualquier otro caso
-    sanitize(content.to_s)
   end
 
   private
 
-  # Tags HTML permitidos
+  def wrapped_content(html)
+    style = <<-CSS
+      <style>
+        .quill-content {
+          font-family: Arial, Helvetica, serif;
+          font-size: 16px;
+          line-height: 28px;
+          font-weight: 400;
+        }
+        .quill-content .ql-align-justify {
+          text-align: justify;
+        }
+        .quill-content p,
+        .quill-content ol,
+        .quill-content ul,
+        .quill-content pre,
+        .quill-content blockquote,
+        .quill-content h1,
+        .quill-content h2,
+        .quill-content h3,
+        .quill-content h4,
+        .quill-content h5,
+        .quill-content h6 {
+          margin: 0;
+          padding: 0;
+          counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+        }
+        .quill-content p {
+          margin-top: 0;
+          margin-bottom: 1rem;
+        }
+        .quill-content img {
+          max-width: 100%;
+          height: auto;
+          margin: 0.5rem 0;
+        }
+      </style>
+    CSS
+
+    content = <<-HTML
+      <div class="quill-content">
+        #{html}
+      </div>
+    HTML
+
+    (style + content).html_safe
+  end
+
   def allowed_quill_tags
     %w[p br ul ol li strong em u s a img h1 h2 h3 h4 h5 h6 blockquote pre iframe div span table tr td th]
   end
 
-  # Atributos HTML permitidos
   def allowed_quill_attributes
     %w[href src alt title class style width height frameborder allowfullscreen data-id data-url data-align]
   end
 
-  # Convertir Delta ops a HTML (ahora más robusto)
   def quill_delta_to_html(ops)
     return "" unless ops.is_a?(Array)
 
     html = []
-    current_paragraph = []
-    
+    current_block = []
+    current_attrs = {}
+
     ops.each do |op|
       next unless op.is_a?(Hash)
 
-      # Manejo de texto
       if op['insert'].is_a?(String)
         text = op['insert']
         
-        # Saltos de línea (nuevos párrafos)
         if text == "\n"
-          unless current_paragraph.empty?
-            html << "<p>#{current_paragraph.join}</p>"
-            current_paragraph = []
+          unless current_block.empty?
+            html << wrap_with_attrs(current_block.join, current_attrs)
+            current_block = []
+            current_attrs = {}
           end
           next
         end
-        
-        # Aplicar formatos
+
         formatted_text = text.dup
         if op['attributes'].is_a?(Hash)
           formatted_text = apply_text_attributes(formatted_text, op['attributes'])
+          current_attrs = op['attributes'].merge(current_attrs)
         end
         
-        current_paragraph << formatted_text
-      
-      # Manejo de imágenes embebidas
+        current_block << formatted_text
       elsif op['insert'].is_a?(Hash) && op['insert']['image']
         html << "<img src=\"#{op['insert']['image']}\" class=\"quill-image\">"
       end
     end
-    
-    # Añadir el último párrafo si existe
-    html << "<p>#{current_paragraph.join}</p>" unless current_paragraph.empty?
-    
-    html.join("\n").html_safe
+
+    html << wrap_with_attrs(current_block.join, current_attrs) unless current_block.empty?
+    html.join("\n")
   end
 
-  # Aplicar atributos de formato al texto (más seguro)
+  def wrap_with_attrs(content, attrs)
+    return content if content.blank?
+
+    if attrs['align'] == 'justify'
+      "<p class=\"ql-align-justify\">#{content}</p>"
+    elsif attrs['align']
+      "<p style=\"text-align:#{attrs['align']}\">#{content}</p>"
+    else
+      "<p>#{content}</p>"
+    end
+  end
+
   def apply_text_attributes(text, attributes)
     return text unless attributes.is_a?(Hash)
 
     attributes.each do |attr, value|
       case attr.to_s
-      when 'bold'
-        text = "<strong>#{text}</strong>"
-      when 'italic'
-        text = "<em>#{text}</em>"
-      when 'underline'
-        text = "<u>#{text}</u>"
-      when 'strike'
-        text = "<s>#{text}</s>"
-      when 'link'
-        text = "<a href=\"#{ERB::Util.html_escape(value)}\" target=\"_blank\" rel=\"noopener\">#{text}</a>"
-      when 'align'
-        text = "<div style=\"text-align:#{ERB::Util.html_escape(value)}\">#{text}</div>"
+      when 'bold' then text = "<strong>#{text}</strong>"
+      when 'italic' then text = "<em>#{text}</em>"
+      when 'underline' then text = "<u>#{text}</u>"
+      when 'strike' then text = "<s>#{text}</s>"
+      when 'link' then text = "<a href=\"#{ERB::Util.html_escape(value)}\" target=\"_blank\" rel=\"noopener\">#{text}</a>"
       end
     end
     text
