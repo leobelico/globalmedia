@@ -121,7 +121,7 @@
 						</div>
 				<% if @article.note.present? %>
 				<div class="quill-content">
-					<%= display_quill_content(@article.note) %>
+					<%= quill_delta_to_html(@article.note) %>
 				</div>
 				<% elsif @article.note_old.present? %>
 				<div class="quill-content">
