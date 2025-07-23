@@ -24,16 +24,16 @@ module ApplicationHelper
   end
 
   # Método mejorado para contenido Quill
-  def display_quill_content(content)
+    def display_quill_content(content)
     return "" unless content.present?
 
     # Si el contenido ya es HTML (formato antiguo)
     return sanitize(content) if content.include?('<') && !content.start_with?('{')
 
     # Procesamiento para contenido en formato Delta (JSON)
-    if content.is_a?(Hash) || (content.is_a?(String) && content.start_with?('{'))
+    if content.is_a?(String) && content.start_with?('{')
       begin
-        parsed = JSON.parse(content.to_s)
+        parsed = JSON.parse(content)
         
         # Caso 1: Contiene HTML directamente
         if parsed["html"]
@@ -94,7 +94,7 @@ module ApplicationHelper
         end
         
         current_paragraph << formatted_text
-      elsif op['insert']['image']
+      elsif op['insert'] && op['insert']['image']
         # Manejo de imágenes embebidas
         html << "<img src=\"#{op['insert']['image']}\" class=\"quill-image\">"
       end
@@ -119,7 +119,9 @@ module ApplicationHelper
       when 'strike'
         text = "<s>#{text}</s>"
       when 'link'
-        text = "<a href=\"#{value}\">#{text}</a>"
+        text = "<a href=\"#{value}\" target=\"_blank\">#{text}</a>"
+      when 'align'
+        text = "<div style=\"text-align:#{value}\">#{text}</div>"
       end
     end
     text
