@@ -118,10 +118,9 @@
 							<% @article.images.each_with_index do |image, index| %>
 								<%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
 							<% end %>	
-						</div>
 				<% if @article.note.present? %>
 				<div class="quill-content">
-					<%= quill_delta_to_html(@article.note) %>
+					<%= display_quill_content(@article.note) %>
 				</div>
 				<% elsif @article.note_old.present? %>
 				<div class="quill-content">

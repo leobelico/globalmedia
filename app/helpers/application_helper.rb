@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   # Método mejorado para contenido Quill
-    def display_quill_content(content)
+  def display_quill_content(content)
     return "" unless content.present?
 
     # Si el contenido ya es HTML (formato antiguo)
@@ -43,12 +43,15 @@ module ApplicationHelper
         
         # Caso 2: Formato Delta (ops)
         elsif parsed["ops"]
-          return sanitize(quill_delta_to_html(parsed["ops"]), 
+          html = quill_delta_to_html(parsed["ops"])
+          return sanitize(html, 
                          tags: allowed_quill_tags, 
                          attributes: allowed_quill_attributes)
+        else
+          return sanitize(content.to_s)
         end
-      rescue JSON::ParserError
-        # Si falla el parseo JSON, devolver el contenido original sanitizado
+      rescue JSON::ParserError => e
+        Rails.logger.error "Error parsing Quill content: #{e.message}"
         return sanitize(content.to_s)
       end
     end
@@ -69,16 +72,21 @@ module ApplicationHelper
     %w[href src alt title class style width height frameborder allowfullscreen data-id data-url data-align]
   end
 
-  # Convertir Delta ops a HTML
+  # Convertir Delta ops a HTML (ahora más robusto)
   def quill_delta_to_html(ops)
+    return "" unless ops.is_a?(Array)
+
     html = []
     current_paragraph = []
     
     ops.each do |op|
+      next unless op.is_a?(Hash)
+
+      # Manejo de texto
       if op['insert'].is_a?(String)
         text = op['insert']
         
-        # Manejo de saltos de línea (nuevos párrafos)
+        # Saltos de línea (nuevos párrafos)
         if text == "\n"
           unless current_paragraph.empty?
             html << "<p>#{current_paragraph.join}</p>"
@@ -88,14 +96,15 @@ module ApplicationHelper
         end
         
         # Aplicar formatos
-        formatted_text = text
-        if op['attributes']
+        formatted_text = text.dup
+        if op['attributes'].is_a?(Hash)
           formatted_text = apply_text_attributes(formatted_text, op['attributes'])
         end
         
         current_paragraph << formatted_text
-      elsif op['insert'] && op['insert']['image']
-        # Manejo de imágenes embebidas
+      
+      # Manejo de imágenes embebidas
+      elsif op['insert'].is_a?(Hash) && op['insert']['image']
         html << "<img src=\"#{op['insert']['image']}\" class=\"quill-image\">"
       end
     end
@@ -103,13 +112,15 @@ module ApplicationHelper
     # Añadir el último párrafo si existe
     html << "<p>#{current_paragraph.join}</p>" unless current_paragraph.empty?
     
-    html.join
+    html.join("\n").html_safe
   end
 
-  # Aplicar atributos de formato al texto
+  # Aplicar atributos de formato al texto (más seguro)
   def apply_text_attributes(text, attributes)
+    return text unless attributes.is_a?(Hash)
+
     attributes.each do |attr, value|
-      case attr
+      case attr.to_s
       when 'bold'
         text = "<strong>#{text}</strong>"
       when 'italic'
@@ -119,9 +130,9 @@ module ApplicationHelper
       when 'strike'
         text = "<s>#{text}</s>"
       when 'link'
-        text = "<a href=\"#{value}\" target=\"_blank\">#{text}</a>"
+        text = "<a href=\"#{ERB::Util.html_escape(value)}\" target=\"_blank\" rel=\"noopener\">#{text}</a>"
       when 'align'
-        text = "<div style=\"text-align:#{value}\">#{text}</div>"
+        text = "<div style=\"text-align:#{ERB::Util.html_escape(value)}\">#{text}</div>"
       end
     end
     text
