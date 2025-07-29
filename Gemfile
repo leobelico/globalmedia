@@ -32,6 +32,7 @@ gem 'jquery-ui-rails'
 gem 'turbolinks', '~> 5'
 gem 'coffee-script', '~> 2.4.1'
 gem 'coffee-rails', '~> 5.0'
+gem 'rack-mini-profiler'
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
