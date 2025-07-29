@@ -1,4 +1,5 @@
 class GraphqlController < ActionController::Base
+   skip_before_action :verify_authenticity_token
   # If accessing from outside this domain, nullify the session
   # This allows for outside API access while preventing CSRF attacks,
   # but you'll have to authenticate your user separately
