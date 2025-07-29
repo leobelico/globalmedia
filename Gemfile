@@ -45,7 +45,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen'
   gem 'graphiql-rails'
-  gem 'rack-mini-profiler'
 end
 
 group :production do
