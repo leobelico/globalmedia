@@ -9,6 +9,7 @@ Rails.application.configure do
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
+  config.middleware.insert_before Rack::Sendfile, Rack::Deflater
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
@@ -80,6 +81,10 @@ config.public_file_server.enabled = true
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
+if ENV['RACK_MINI_PROFILER'] == 'true'
+  require 'rack-mini-profiler'
+  Rack::MiniProfilerRails.initialize!(Rails.application)
+end
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
