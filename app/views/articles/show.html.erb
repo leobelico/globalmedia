@@ -119,7 +119,14 @@
 								<%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
 							<% end %>	
 				<% if @article.note.present? %>
-
+				<div class="quill-content">
+					<%= display_quill_content(@article.note) %>
+				</div>
+				<% elsif @article.note_old.present? %>
+				<div class="quill-content">
+					<%= simple_format(@article.note_old) %>
+				</div>
+				<% end %>
 
 	
 				<!-- NOTAS DEL PROGRAMADOR-->
