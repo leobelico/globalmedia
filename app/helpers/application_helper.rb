@@ -55,53 +55,54 @@ module ApplicationHelper
 
   private
 
-  def wrapped_content(html)
-    style = <<-CSS
-      <style>
-        .quill-content {
-          font-family: Arial, Helvetica, serif;
-          font-size: 16px;
-          line-height: 28px;
-          font-weight: 400;
-        }
-        .quill-content .ql-align-justify {
-          text-align: justify;
-        }
-        .quill-content p,
-        .quill-content ol,
-        .quill-content ul,
-        .quill-content pre,
-        .quill-content blockquote,
-        .quill-content h1,
-        .quill-content h2,
-        .quill-content h3,
-        .quill-content h4,
-        .quill-content h5,
-        .quill-content h6 {
-          margin: 0;
-          padding: 0;
-          counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
-        }
-        .quill-content p {
-          margin-top: 0;
-          margin-bottom: 1rem;
-        }
-        .quill-content img {
-          max-width: 100%;
-          height: auto;
-          margin: 0.5rem 0;
-        }
-      </style>
-    CSS
+def wrapped_content(html)
+  styles = <<-CSS
+    .quill-content {
+      font-family: Arial, Helvetica, serif;
+      font-size: 16px;
+      line-height: 28px;
+      font-weight: 400;
+    }
 
-    content = <<-HTML
-      <div class="quill-content">
-        #{html}
-      </div>
-    HTML
+    .quill-content p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      padding: 0;
+    }
 
-    (style + content).html_safe
+    .quill-content img {
+      max-width: 100%;
+      height: auto;
+      margin: 0.5rem 0;
+    }
+
+    .quill-content .ql-align-justify {
+      text-align: justify;
+    }
+
+    .quill-content ol,
+    .quill-content ul,
+    .quill-content pre,
+    .quill-content blockquote,
+    .quill-content h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding: 0;
+      counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+    }
+  CSS
+
+  # Agrega el style en el HEAD de la página (una sola vez preferentemente)
+  content_for :head_styles do
+    "<style>#{styles}</style>".html_safe
   end
+
+  <<-HTML.html_safe
+    <div class="quill-content">
+      #{html}
+    </div>
+  HTML
+end
+
 
   def allowed_quill_tags
     %w[p br ul ol li strong em u s a img h1 h2 h3 h4 h5 h6 blockquote pre iframe div span table tr td th]
