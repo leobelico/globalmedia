@@ -179,7 +179,38 @@
 
 			<% end %>
 		</template>
+						
+<style>
+.interface--row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+}
 
+.note--display {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: calc(100% - 360px); // deja espacio para el sidebar
+  overflow-wrap: break-word;
+}
+
+.sidebar {
+  width: 342px;
+  flex-shrink: 0;
+}
+
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.note--display .gallery__thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+</style>
 
 <script async defer src="https://platform.instagram.com/en_US/embeds.js"></script>
 
