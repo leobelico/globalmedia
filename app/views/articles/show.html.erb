@@ -48,126 +48,124 @@
 </script>
 
 		<div class="interface--row">
-			<div class="note note--display">
-				<% if @article.exclusive? %>
-					<p class="exclusive--note">Exclusiva</p>
-				<% end %>
-				<h1 class="title"><%= @article.name %></h1>	
-				<p class="short-description"><%= @article.short_description %></p>
+    <div class="note note--display">
+        <% if @article.exclusive? %>
+            <p class="exclusive--note">Exclusiva</p>
+        <% end %>
+        <h1 class="title"><%= @article.name %></h1>    
+        <p class="short-description"><%= @article.short_description %></p>
 
-				<% if @article.articable_id != 1019   %>
+        <% if @article.articable_id != 1019   %>
 
-					<div class="article__info">
-						<% if @article.author and @article.author.name != "Ninguno" %>
-							<p class="author">Por <%= @article.author.name %></p>
+            <div class="article__info">
+                <% if @article.author and @article.author.name != "Ninguno" %>
+                    <p class="author">Por <%= @article.author.name %></p>
 
-						<% else %>
-							<% if @article.user %>
-								<p class="author">Por <%= @article.user.full_name %></p>
-							<% else %>
-								<p class="author">--</p>
-							<% end %>
-						<% end %>
-						<% if @article.published_at %>
-							<p class="date"><%= l(@article.published_at, format: "%H:%M %A %e %B, %Y") %></p>
-						<% else %>
-							<p class="date"><%= l(@article.created_at, format: "%H:%M %A %e %B, %Y") %></p>
-						<% end %>
-						<% if @article.articable_type == "Section" and @article.articable %>
-							<%= link_to @article.articable.name, section_path(Section.find(@article.articable_id)), class: "section" %>
-						<% end %>
-						<div class="social-media" data-article="<%= article_url(@article) %>">
-							<%= link_to ("whatsapp://send?text= Estoy leyendo en GlobalMedia: " + article_url(@article)), data: { action: "share/whatsapp/share" }, class: "social-media__link whatsapp", target: "_blank" do %>
-								<%= image_tag "whatsapp.svg" %>
-							<% end %>
-							<a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
-								<%= image_tag "facebook.svg" %>				
-							</a>	
+                <% else %>
+                    <% if @article.user %>
+                        <p class="author">Por <%= @article.user.full_name %></p>
+                    <% else %>
+                        <p class="author">--</p>
+                    <% end %>
+                <% end %>
+                <% if @article.published_at %>
+                    <p class="date"><%= l(@article.published_at, format: "%H:%M %A %e %B, %Y") %></p>
+                <% else %>
+                    <p class="date"><%= l(@article.created_at, format: "%H:%M %A %e %B, %Y") %></p>
+                <% end %>
+                <% if @article.articable_type == "Section" and @article.articable %>
+                    <%= link_to @article.articable.name, section_path(Section.find(@article.articable_id)), class: "section" %>
+                <% end %>
+                <div class="social-media" data-article="<%= article_url(@article) %>">
+                    <%= link_to ("whatsapp://send?text= Estoy leyendo en GlobalMedia: " + article_url(@article)), data: { action: "share/whatsapp/share" }, class: "social-media__link whatsapp", target: "_blank" do %>
+                        <%= image_tag "whatsapp.svg" %>
+                    <% end %>
+                    <a class="social-media__link facebook" target="_blank" onclick="shareToFacebook(event);">
+                        <%= image_tag "facebook.svg" %>                
+                    </a>    
 
-							<a href="https://twitter.com/share?url=<%= CGI.unescape(article_url(@article)) %>&via=GlobalMediaMx&text=<%= @article.name %>" class="social-media__link twitter" target="_blank">
-								<%= image_tag "twitter.svg" %>
-							</a>
-							<a class="social-media__link copy" target="_self" data-clipboard-text="<%= CGI.unescape(article_url(@article)) %>">
-								<input class="hidden" value="<%= article_url(@article) %>">
-								<%= image_tag "copy.svg" %>
-							</a> 
-						</div>
-						
-					</div>
-					<% if @article.keyword %>
-						<div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
-					<% end %>
-						<div class="hashtags-container">
-							<p>Hablamos de:</p> <%= render @article.hashtags %>
-						</div>
-					
+                    <a href="https://twitter.com/share?url=<%= CGI.unescape(article_url(@article)) %>&via=GlobalMediaMx&text=<%= @article.name %>" class="social-media__link twitter" target="_blank">
+                        <%= image_tag "twitter.svg" %>
+                    </a>
+                    <a class="social-media__link copy" target="_self" data-clipboard-text="<%= CGI.unescape(article_url(@article)) %>">
+                        <input class="hidden" value="<%= article_url(@article) %>">
+                        <%= image_tag "copy.svg" %>
+                    </a> 
+                </div>
+                
+            </div>
+            <% if @article.keyword %>
+                <div class="keyword-container">#EsNoticia: <%= @article.keyword.keyword %></div>
+            <% end %>
+                <div class="hashtags-container">
+                    <p>Hablamos de:</p> <%= render @article.hashtags %>
+                </div>
+            
 
-				<% end %>
+        <% end %>
 
 
-				<% if @article.video_url != "" %> 
-					<div class="iframe">
-						<iframe width="650" height="415" src="<%= @article.	video_url %>" frameborder="0" allowfullscreen></iframe>
-					</div>
-				<% else %>		
-					<% if @article.image %>
-						<%= image_tag @article.image, class: "main-image", alt: @article.name %>
-					<% end %>
-				<% end %>
-						<div class="gallery__thumbnails">
-							<% @article.images.each_with_index do |image, index| %>
-								<%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
-							<% end %>	
-				<% if @article.note.present? %>
-				<div class="quill-content">
-					<%= display_quill_content(@article.note) %>
-				</div>
-				<% elsif @article.note_old.present? %>
-				<div class="quill-content">
-					<%= simple_format(@article.note_old) %>
-				</div>
-				<% end %>
+        <% if @article.video_url != "" %> 
+            <div class="iframe">
+                <iframe width="650" height="415" src="<%= @article.    video_url %>" frameborder="0" allowfullscreen></iframe>
+            </div>
+        <% else %>        
+            <% if @article.image %>
+                <%= image_tag @article.image, class: "main-image", alt: @article.name %>
+            <% end %>
+        <% end %>
+                <div class="gallery__thumbnails">
+                    <% @article.images.each_with_index do |image, index| %>
+                        <%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
+                    <% end %>    
+        <% if @article.note.present? %>
+        <div class="quill-content">
+            <%= display_quill_content(@article.note) %>
+        </div>
+        <% elsif @article.note_old.present? %>
+        <div class="quill-content">
+            <%= simple_format(@article.note_old) %>
+        </div>
+        <% end %>
 
-	
-				<!-- NOTAS DEL PROGRAMADOR-->
-					<!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
 
-					<!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
-				<!-- -->
-				<div class="fb-comments" data-href="<%= request.original_url.force_encoding 'UTF-8' %>" data-numposts="5"></div>
-				<% if get_banner(@article.articable, @article.articable_type, "Grande" ).count > 0 %>
+        <!-- NOTAS DEL PROGRAMADOR-->
+            <!-- NO QUITAR ESTOS IFS PORQUE SON LOS QUE VEN SI HAY BANNER O NO -->
 
-					<%= render "components/big-banner", article: @article, banner: get_banner(@article.articable, @article.articable_type, "Grande" )  %>
-				<% else %>
-					<% if get_banner(@article.articable, "Global", "Grande" ).count > 0 %>
-						<%= render "components/big-banner", article: @article, banner: get_banner(@article.articable, "Global", "Grande" ) %>
-					<% else %>
-						<%= render "components/big-banner", article: @article, banner: "" %>
+            <!-- CAMBIAR EL NAME POR EL PARAMETRO QUE QUIERAS MOSTRAR->
+        <!-- -->
+        <div class="fb-comments" data-href="<%= request.original_url.force_encoding 'UTF-8' %>" data-numposts="5"></div>
+        <% if get_banner(@article.articable, @article.articable_type, "Grande" ).count > 0 %>
 
-					<% end %>
-				<% end %>
-				<% if @related_sections.count > 0 %>
-					<% @related_sections.each do |related_section| %>
-						<%= render "components/section-recommendations", articles: get_articles_per_section(related_section.section_reference_id, 3), section_name: related_section.section_reference.name, highlight: "" %>
+            <%= render "components/big-banner", article: @article, banner: get_banner(@article.articable, @article.articable_type, "Grande" )  %>
+        <% else %>
+            <% if get_banner(@article.articable, "Global", "Grande" ).count > 0 %>
+                <%= render "components/big-banner", article: @article, banner: get_banner(@article.articable, "Global", "Grande" ) %>
+            <% else %>
+                <%= render "components/big-banner", article: @article, banner: "" %>
 
-					<% end %>
-				<% end %>
+            <% end %>
+        <% end %>
+        <% if @related_sections.count > 0 %>
+            <% @related_sections.each do |related_section| %>
+                <%= render "components/section-recommendations", articles: get_articles_per_section(related_section.section_reference_id, 3), section_name: related_section.section_reference.name, highlight: "" %>
 
-			</div>
+            <% end %>
+        <% end %>
 
-			
-				<% if get_banner(@article.articable, @article.articable_type, "Mediano" ).count > 0 %>
-					<%= render "components/sidebar", article: @article, banner: get_banner(@article.articable, @article.articable_type, "Mediano" ) %>
-				<% else %>
-					<% if get_banner(@article.articable, "Global", "Mediano" ).count > 0 %>
-						<%= render "components/sidebar", article: @article, banner: get_banner(@article.articable, "Global", "Mediano" ) %>
-					<% else %>
-						<%= render "components/sidebar", article: @article, banner: ""  %>
-					<% end %>
-				<% end %>
-		
-
-		</div>
+    </div>
+    
+    <!-- Sidebar movido fuera del div note--display -->
+    <% if get_banner(@article.articable, @article.articable_type, "Mediano" ).count > 0 %>
+        <%= render "components/sidebar", article: @article, banner: get_banner(@article.articable, @article.articable_type, "Mediano" ) %>
+    <% else %>
+        <% if get_banner(@article.articable, "Global", "Mediano" ).count > 0 %>
+            <%= render "components/sidebar", article: @article, banner: get_banner(@article.articable, "Global", "Mediano" ) %>
+        <% else %>
+            <%= render "components/sidebar", article: @article, banner: ""  %>
+        <% end %>
+    <% end %>
+</div>
 
 
 		<template id="related-articles">
