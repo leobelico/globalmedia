@@ -55,18 +55,22 @@ module ApplicationHelper
 
   private
 
-  def wrapped_content(html)
+    def wrapped_content(html)
     style = <<-CSS
       <style>
-        .quill-content {
+        .quill-content,
+        .ql-editor {
           font-family: Arial, Helvetica, serif;
           font-size: 16px;
           line-height: 28px;
           font-weight: 400;
         }
-        .quill-content .ql-align-justify {
+
+        .quill-content .ql-align-justify,
+        .ql-editor .ql-align-justify {
           text-align: justify;
         }
+
         .quill-content p,
         .quill-content ol,
         .quill-content ul,
@@ -77,16 +81,31 @@ module ApplicationHelper
         .quill-content h3,
         .quill-content h4,
         .quill-content h5,
-        .quill-content h6 {
+        .quill-content h6,
+        .ql-editor p,
+        .ql-editor ol,
+        .ql-editor ul,
+        .ql-editor pre,
+        .ql-editor blockquote,
+        .ql-editor h1,
+        .ql-editor h2,
+        .ql-editor h3,
+        .ql-editor h4,
+        .ql-editor h5,
+        .ql-editor h6 {
           margin: 0;
           padding: 0;
           counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
         }
-        .quill-content p {
+
+        .quill-content p,
+        .ql-editor p {
           margin-top: 0;
           margin-bottom: 1rem;
         }
-        .quill-content img {
+
+        .quill-content img,
+        .ql-editor img {
           max-width: 100%;
           height: auto;
           margin: 0.5rem 0;
@@ -102,6 +121,7 @@ module ApplicationHelper
 
     (style + content).html_safe
   end
+
 
   def allowed_quill_tags
     %w[p br ul ol li strong em u s a img h1 h2 h3 h4 h5 h6 blockquote pre iframe div span table tr td th]
