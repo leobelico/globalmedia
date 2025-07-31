@@ -155,7 +155,8 @@
 
     </div>
     
-    <!-- Sidebar movido fuera del div note--display -->
+</div>
+				   <!-- Sidebar movido fuera del div note--display -->
     <% if get_banner(@article.articable, @article.articable_type, "Mediano" ).count > 0 %>
         <%= render "components/sidebar", article: @article, banner: get_banner(@article.articable, @article.articable_type, "Mediano" ) %>
     <% else %>
@@ -165,8 +166,6 @@
             <%= render "components/sidebar", article: @article, banner: ""  %>
         <% end %>
     <% end %>
-</div>
-
 
 		<template id="related-articles">
 
