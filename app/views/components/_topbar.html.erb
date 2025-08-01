@@ -1,58 +1,35 @@
 <% cache("topbar", expires_in: 1.year) do %>
   <div class="topbar">
-    <%= link_to root_path, class: "logo-container" do %>
-      <%= image_tag "logo-black.svg" %>
-    <% end %>
-    <%= link_to root_path, class: "home-container" do %>
-      <%= image_tag "home.svg" %>
-    <% end %>
-    
-    <% if false %>
-      <%= link_to "denuncia global", section_path("Denuncia-Global"), class: "topbar__link" %>
-      <a href="" class="topbar__link popup" onmouseover="popup(this)" onmouseout="popupout(this)">
-        tráfico san luis
-        <span class="popuptext" id="myPopup">Próximamente</span>
-      </a>
+    <!-- Logo principal -->
+    <%= link_to root_path, class: "logo" do %>
+      <%= image_tag "https://gm-general.s3.amazonaws.com/GM/logo_gm.svg", alt: "Logo GM", loading: "lazy" %>
     <% end %>
 
-    <div class="d-block">
-      <change-location></change-location>
-    </div>
+    <!-- Formulario de búsqueda -->
+    <%= form_for :article, url: { controller: "titlepage", action: 'search_article' }, method: :get, html: { role: "search" } do |f| %>
+      <%= f.autocomplete_field :articable_id, search_autocomplete_path, id_element: '#article_articable_id', placeholder: "Busca tu nota", autocomplete: "off", class: "search-field" %>
+    <% end %>
 
-    <div class="social-media">
-      <p class="social-media__tag">Síguenos</p>
-      <%= link_to "https://twitter.com/globalmediamx", class: "social-media__link", target: "_blank" do %>
-        <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/TWITTER.svg" %>
-      <% end %>
-      <%= link_to "https://www.facebook.com/GlobalMediaSLP/?fref=ts", class: "social-media__link", target: "_blank" do %>
-        <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/FACEBOOK.svg" %>
-      <% end %>
-      <%= link_to "https://www.instagram.com/globalmediamx/?hl=es", class: "social-media__link", target: "_blank" do %>
-        <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/INSTAGRAM.svg" %>
-      <% end %>
-      <%= link_to "https://www.tiktok.com/@globalmediamx?", class: "social-media__link", target: "_blank" do %>
-        <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/TIK+TOK.svg" %>
-      <% end %>
-      <%= link_to "https://www.youtube.com/channel/UCqF55I3fwX8fs0AEgaIvNQQ", class: "social-media__link", target: "_blank" do %>
-        <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/YOUTUBE.svg" %>
-      <% end %>
-      <%= link_to "https://linktr.ee/globalmediapodcast", class: "social-media__link", target: "_blank" do %>
-        <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/SPOTIFY.svg" %>
-      <% end %>
-      <%= link_to "https://www.pinterest.com.mx/GlobalMediamx", class: "social-media__link", target: "_blank" do %>
-        <%= image_tag "https://globalmediarocks.s3.us-west-1.amazonaws.com/LOGOS/PINTEREST.svg" %>
-      <% end %>
-    </div>
+    <!-- Selector de ubicación (solo si está activo) -->
+    <%= render("components/change-location") if defined?(ChangeLocationComponent) %>
 
-    <div class="search">
-      <% unless request.original_url.include?("users/password") || request.original_url.include?("users/sign_in") %>
-        <%= form_for :article, url: {controller: "titlepage", action: 'search_article'} do |f| %>
-          <% f.autocomplete_field(:articable_id, autocomplete_article_name_path, id_element: '#article_id', class: "search__box", placeholder: "Búsqueda", type: "search", value: "") %>
-          <%= f.text_field :articable_id, class: "search__box", placeholder: "Búsqueda", type: "search", value: "" %>
-          <%= hidden_field_tag :article_id, id: "article_id" %>
-          <%= image_tag "search.svg", class: "search__image" %>
+    <!-- Redes sociales -->
+    <div class="social-icons">
+      <% {
+        facebook: "FACEBOOK.svg",
+        twitter: "TWITTER.svg",
+        instagram: "INSTAGRAM.svg",
+        tiktok: "TIKTOK.svg"
+      }.each do |name, icon| %>
+        <%= link_to "#", target: "_blank", rel: "noopener", class: "social-link #{name}" do %>
+          <%= image_tag "https://gm-general.s3.amazonaws.com/GM/#{icon}", alt: name.to_s.titleize, loading: "lazy" %>
         <% end %>
       <% end %>
     </div>
+
+    <!-- Banner fijo oculto si no hay uno definido -->
+    <% if defined?(FixedBannerComponent) && FixedBannerComponent.any? %>
+      <%= render("components/fixed-banner") %>
+    <% end %>
   </div>
 <% end %>
