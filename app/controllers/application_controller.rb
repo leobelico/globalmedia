@@ -115,7 +115,14 @@ end
     @current_coord = Geocoder.search("201.127.113.90").first.coordinates 
   end
 
+  def get_children_programs(parent_id)
+    time = Time.now
+    result = []
+    day_name = time.strftime('%A').downcase
 
+    result = Timetable.includes(:station).where("#{day_name} = ? AND streaming_hour < ? AND parent_station_id = ? AND end_streaming_hour > ?", true, time, parent_id, time).order("stations.orderer asc").limit(7)
+    result
+  end
   def get_cover_articles(id)
     CoverArticle.joins("LEFT OUTER JOIN highlights ON highlights.article_id = cover_articles.article_id").where("cover_articles.section_id = #{id} AND highlights.article_id IS NULL AND cover_articles.published_at IS NOT NULL").order(article_highlight: :asc, published_at: :asc).last(4).reverse
     
