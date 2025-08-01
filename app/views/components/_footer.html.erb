@@ -13,43 +13,10 @@
       <%= link_to "Denuncia Urbana", root_url + "/articles/denuncia_urbana", class: "footer__section-link" %>
 
   </div>
-<p class="disclaimer">
-  <%= @current_coord %> 2025 Global Media Comunicaciones. Todos los derechos reservados. 
-  <br><br>Prohibida la reproducción total o parcial 
-  <br><br> 
-  <%= link_to "Aviso de Privacidad", privacy_policy_path %> - 
-  <%= link_to "Responsable de Estaciones", stations_supervisor_path %>
-  <br><br>
-  <a href="https://www.globalmedia.mx/" target="_blank" style="opacity: .6">GLOBALMEDIA NOTICIAS DE SAN LUIS POTOSI</a> 
-  <br><br>
-  <span class="remastered">Remastered by Leonardo Mendoza</span>
-</p>
-
-<style>
-.disclaimer {
-  position: relative;
-  padding-bottom: 30px; /* Espacio para el texto al final */
-  font-size: 12px;
-  line-height: 1.5;
-  text-align: left;
-}
-
-.remastered {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  opacity: 0.6;
-  font-size: 8px;
-}
-
-/* Para móviles */
-@media (max-width: 768px) {
-  .remastered {
-    position: static; /* Vuelve al flujo normal */
-    display: block;
-    text-align: right;
-    margin-top: 10px;
-  }
-}
-</style>
+	<p class="disclaimer"><%=  @current_coord %> 2025 Global Media Comunicaciones. Todos los derechos reservados. <br><br>Prohibida la reproducción total o parcial <br><br> <%= link_to "Aviso de Privacidad", privacy_policy_path %>  - <%= link_to "Responsable de Estaciones", stations_supervisor_path %>
+	<br><br>
+	<a href="https://www.globalmedia.mx/" target="_blank" style="opacity: .6">GLOBALMEDIA NOTICIAS DE SAN LUIS POTOSI</a> <br><br>
+	<a style="text-align: right; opacity: .3; font-size: 10px;">Remastered by Leonardo Mendoza</a>
+	</p>
+	
 </div>
