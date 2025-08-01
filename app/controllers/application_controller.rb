@@ -268,76 +268,20 @@ end
 
 
   def get_current_programs
-    time = Time.now
-    # p "TIME"
-    # p time.strftime( "%H:%M")
-    if time.sunday? 
-      @timetables = Timetable.includes(:station).where("sunday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
-    end
-   
-    if time.monday? 
-      @timetables = Timetable.includes(:station).where("monday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
-    end
-   
-    if time.tuesday? 
-      @timetables = Timetable.includes(:station).where("tuesday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
-    end
-   
-    if time.wednesday? 
-      @timetables = Timetable.includes(:station).where("wednesday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
-    end
-   
-    if time.thursday? 
-      @timetables = Timetable.includes(:station).where("thursday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
-    end
-   
-    if time.friday? 
-      # p "FRIDAY"
-      @timetables = Timetable.includes(:station).where("friday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time }'").order("stations.orderer asc").first(7)
-      # p "TIMETABLESSSSSSSSSS"
-      # p @timetables
-      # p @timetables.count
-    end
-   
-    if time.saturday? 
-      @timetables = Timetable.includes(:station).where("saturday = 'true' AND streaming_hour < '#{time}' AND parent_station_id IS NULL AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
-    end
-   # p "THE TIMETABLESSSSSSSSSS"
-    @timetables
-  end
-
-  def get_children_programs(parent_id)
-    time = Time.now
-    result = []
-    if time.sunday?
-      result = Timetable.includes(:station).where("sunday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time}'").order("stations.frequency asc").first(7)
-    end
-
-    if time.monday?
-      result = Timetable.includes(:station).where("monday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
-    end
-
-    if time.tuesday?
-      result = Timetable.includes(:station).where("tuesday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
-    end
-
-    if time.wednesday?
-      result = Timetable.includes(:station).where("wednesday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
-    end
-
-    if time.thursday?
-      result = Timetable.includes(:station).where("thursday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
-    end
-
-    if time.friday?
-      result = Timetable.includes(:station).where("friday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time }'").order("stations.orderer asc").first(7)
-    end
-
-    if time.saturday?
-      result = Timetable.includes(:station).where("saturday = 'true' AND streaming_hour < '#{time}' AND parent_station_id = #{parent_id} AND end_streaming_hour > '#{time}'").order("stations.orderer asc").first(7)
-    end
-    result
-  end
+  day_name = Time.now.strftime('%A').downcase  # "sunday", "monday", etc.
+  Timetable.includes(:station)
+          .references(:station)
+          .where("#{day_name} = ? AND streaming_hour < ? AND parent_station_id IS NULL AND end_streaming_hour > ?", true, Time.now, Time.now)
+          .order("stations.orderer ASC")
+          .limit(7)
+end
+def get_current_programs
+  day_name = Time.now.strftime('%A').downcase  # "sunday", "monday", etc.
+  Timetable.includes(:station)
+           .where("#{day_name} = ? AND streaming_hour < ? AND parent_station_id IS NULL AND end_streaming_hour > ?", true, Time.now, Time.now)
+           .order("stations.orderer ASC")
+           .limit(7)
+end
 
   def al_momento(not_repeat_highlight, not_repeat_recommendation, not_repeat_outstading, last_number)
     p "finish al_momento"
