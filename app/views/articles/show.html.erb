@@ -184,6 +184,7 @@
     align-items: flex-start;
     justify-content: space-between;
     width: 100%;
+    gap: 30px;
 }
 
 .note--display {
@@ -192,12 +193,34 @@
     max-width: calc(100% - 342px); 
 }
 
-
 .sidebar {
     width: 342px;
     flex-shrink: 0;       
+    position: sticky;
+    top: 20px; 
+    align-self: flex-start; 
 }
 
+
+@media (max-width: 768px) {
+    .interface--row {
+        flex-direction: column;
+        gap: 0; 
+    }
+    
+    .note--display {
+        max-width: 100%; 
+        width: 100%;
+        order: 1; 
+    }
+    
+    .sidebar {
+        width: 100%;
+        position: static; 
+        order: 2; 
+        margin-top: 30px;
+    }
+}
 </style>
 
 <script async defer src="https://platform.instagram.com/en_US/embeds.js"></script>
