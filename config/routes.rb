@@ -301,6 +301,7 @@ Rails.application.routes.draw do
 
   get 'publish_highlights', to: "titlepage#publish_highlights"
   get '/:id', to: 'stations#show'    
+  get '/search_autocomplete', to: 'titlepage#search_autocomplete', as: :search_autocomplete
 
   
 
