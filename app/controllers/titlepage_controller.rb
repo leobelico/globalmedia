@@ -47,10 +47,6 @@ class TitlepageController < ApplicationController
                        .where.not(id: location&.key == "san-luis" ? nil : 1025)
                        .order(:order)
                        .limit(20)
-
-    @banner_poll = load_banner_poll(location)
-
-    puts @banner_poll.to_s
   end
 
   def publish_highlights
@@ -83,7 +79,7 @@ class TitlepageController < ApplicationController
     end
   end
 
-  # ⚠️ Estos dos métodos deberían ir a una tarea Rake, no ejecutarse desde web.
+  # Estos métodos son para mantenimiento, considera moverlos a tareas Rake
   def set_slug
     Article.where('id > 390').each do |article|
       if (image = Image.where(article_id: article.id).first)
@@ -97,43 +93,5 @@ class TitlepageController < ApplicationController
       field = "https://globalmedia.mx/images/multimedia/#{image.src}"
       image.update(src: field)
     end
-  end
-
-  private
-
-  def load_banner_poll(location)
-    return default_banner unless location
-
-    poll = {
-      'is_open' => false,
-      'image_url' => '',
-      'poll_url' => '',
-      'show_results' => false
-    }
-
-    if Preference.find_by(key: "#{location.key}_banner_polls_is_open")&.value == "true"
-      poll['is_open'] = true
-      poll['image_url'] = Preference.find_by(key: "#{location.key}_banner_polls_open_image")&.value
-      poll_id = Preference.find_by(key: "#{location.key}_banner_polls_id")&.value
-
-      poll['poll_url'] = if location.key == 'san-luis'
-                           "https://www.globalmedia.mx/sections/QATAR-2022"
-                         elsif poll_id.present?
-                           "https://sondeosglobalmedia.com.mx/globalmedia_#{location.key}/?p=#{poll_id}"
-                         else
-                           ''
-                         end
-    end
-
-    poll
-  end
-
-  def default_banner
-    {
-      'is_open' => false,
-      'image_url' => '',
-      'poll_url' => '',
-      'show_results' => false
-    }
   end
 end
