@@ -33,10 +33,6 @@ def redirect_subdomain
     @location_id = 2
   when 'zacatecas'
     @location_id = 5
-  when 'vallartabahia', 'jalisco'
-    # Redirección a subdominio oficial: vallartabahia
-    new_host = host.gsub(/(vallartabahia|jalisco)/, 'vallartabahia')
-    redirect_to "#{request.protocol}#{new_host}#{request.fullpath}", status: 301 and return
   when 'vallartabahia'
     @location_id = 4
   else
