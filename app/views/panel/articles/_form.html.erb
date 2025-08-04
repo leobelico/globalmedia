@@ -112,116 +112,240 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-  // Inicialización del editor Quill (versión optimizada)
-  if (typeof window.editor === 'undefined') {
-    window.editor = new Quill('#note-editor', {
-      theme: 'snow',
-      modules: {
-        toolbar: [
-          [{ 'header': [1, 2, 3, false] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-          ['link', 'image'],
-          ['clean']
-        ],
-        clipboard: {
-          matchVisual: false // Previene loops de eventos
+// =============================================
+// BLOTS PERSONALIZADOS
+// =============================================
+const BlockEmbed = Quill.import('blots/block/embed');
+
+// 1. Blot para Twitter
+class TweetBlot extends BlockEmbed {
+  static create(id) {
+    const tweetId = id.match(/\d+$/)?.[0] || id;
+    const node = super.create();
+    node.dataset.id = tweetId;
+    node.innerHTML = `
+      <div class="social-embed tweet-embed" data-id="${tweetId}">
+        <blockquote class="twitter-tweet">
+          <a href="https://twitter.com/x/status/${tweetId}">Cargando tweet...</a>
+        </blockquote>
+      </div>
+    `;
+    
+    if (!window.twttr) {
+      const script = document.createElement('script');
+      script.src = 'https://platform.twitter.com/widgets.js';
+      script.async = true;
+      document.body.appendChild(script);
+    } else {
+      window.twttr.widgets.load();
+    }
+    return node;
+  }
+
+  static value(node) {
+    return node.dataset.id;
+  }
+}
+TweetBlot.blotName = 'tweet';
+TweetBlot.tagName = 'div';
+TweetBlot.className = 'tweet-embed';
+
+// 2. Blot para Instagram
+class InstagramBlot extends BlockEmbed {
+  static create(url) {
+    const regExp = /(?:https?:\/\/)?(?:www\.)?instagram\.com(?:\/[^\/]+)?\/(?:p|reel)\/([^\/?#&]+)/;
+    const shortcode = url.match(regExp)?.[1] || url;
+    const node = super.create();
+    node.dataset.url = url;
+    node.innerHTML = `
+      <div class="social-embed instagram-embed">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/${shortcode}/">
+          <a href="https://www.instagram.com/p/${shortcode}/">Ver publicación en Instagram</a>
+        </blockquote>
+      </div>
+    `;
+    
+    if (!window.instgrm) {
+      const script = document.createElement('script');
+      script.src = 'https://www.instagram.com/embed.js';
+      script.async = true;
+      document.body.appendChild(script);
+    } else {
+      window.instgrm.Embeds.process();
+    }
+    return node;
+  }
+
+  static value(node) {
+    return node.dataset.url;
+  }
+}
+InstagramBlot.blotName = 'instagram';
+InstagramBlot.tagName = 'div';
+InstagramBlot.className = 'instagram-embed';
+
+// 3. Blot para TikTok
+class TikTokBlot extends BlockEmbed {
+  static create(url) {
+    const regExp = /(?:https?:\/\/)?(?:www\.)?tiktok\.com\/@[^\/]+\/video\/(\d+)/;
+    const videoId = url.match(regExp)?.[1] || url;
+    const node = super.create();
+    node.dataset.url = url;
+    node.innerHTML = `
+      <div class="social-embed tiktok-embed">
+        <blockquote class="tiktok-embed" cite="${url}" data-video-id="${videoId}">
+          <section>Cargando video de TikTok...</section>
+        </blockquote>
+      </div>
+    `;
+    
+    if (!window.tiktokEmbedLoader) {
+      const script = document.createElement('script');
+      script.src = 'https://www.tiktok.com/embed.js';
+      script.async = true;
+      script.onload = () => window.tiktokEmbedLoader?.load();
+      document.body.appendChild(script);
+    } else {
+      window.tiktokEmbedLoader.load();
+    }
+    return node;
+  }
+
+  static value(node) {
+    return node.dataset.url;
+  }
+}
+TikTokBlot.blotName = 'tiktok';
+TikTokBlot.tagName = 'div';
+TikTokBlot.className = 'tiktok-embed';
+
+// =============================================
+// INICIALIZACIÓN DE QUILL
+// =============================================
+document.addEventListener('DOMContentLoaded', function() {
+  // Registrar blots personalizados
+  Quill.register({
+    'formats/tweet': TweetBlot,
+    'formats/instagram': InstagramBlot,
+    'formats/tiktok': TikTokBlot
+  });
+
+  // Configuración del editor
+  const options = {
+    theme: 'snow',
+    modules: {
+      toolbar: {
+        container: '#toolbar-container',
+        handlers: {
+          'tweet': function() {
+            const url = prompt("Introduce la URL del Tweet:");
+            if (url) {
+              const range = this.quill.getSelection();
+              this.quill.insertEmbed(range.index, 'tweet', url);
+            }
+          },
+          'instagram': function() {
+            const url = prompt("Introduce la URL de Instagram:");
+            if (url) {
+              const range = this.quill.getSelection();
+              this.quill.insertEmbed(range.index, 'instagram', url);
+            }
+          },
+          'tiktok': function() {
+            const url = prompt("Introduce la URL de TikTok:");
+            if (url) {
+              const range = this.quill.getSelection();
+              this.quill.insertEmbed(range.index, 'tiktok', url);
+            }
+          }
         }
       },
-      placeholder: 'Escribe el contenido de tu artículo aquí...'
-    });
-
-    // Cargar contenido existente con protección
-    <% if @article.note.present? %>
-      try {
-        const noteContent = `<%= j @article.note.html_safe %>`;
-        if (noteContent.trim() !== '') {
-          window.editor.root.innerHTML = noteContent;
-        }
-      } catch(e) {
-        console.error("Error cargando contenido existente:", e);
+      imageResize: {
+        displaySize: true
       }
-    <% end %>
+    },
+    placeholder: 'Escribe el contenido de tu artículo aquí...'
+  };
 
-    // Manejo robusto del envío del formulario
-    const form = document.querySelector('form.directUpload');
-    if (form) {
-      form.addEventListener('submit', function(e) {
-        const contentField = document.querySelector('#article_note');
-        if (contentField) {
-          contentField.value = JSON.stringify({
-            html: window.editor.root.innerHTML,
-            delta: window.editor.getContents()
-          });
-        }
-        return true;
-      });
-    }
+  // Inicializar editor
+  window.editor = new Quill('#note-editor', options);
 
-    // Sobrescritura segura de submit_form
-    if (typeof submit_form === 'function') {
-      const originalSubmitForm = submit_form;
-      window.submit_form = function(t, e, n, r) {
-        try {
-          console.log("Contenido Quill:", window.editor.getContents());
-          console.log("Texto plano:", window.editor.getText());
-          
-          const content = window.editor.getContents();
-          const text = window.editor.getText();
-          
-          return originalSubmitForm(t, e, n, r);
-        } catch(error) {
-          console.error("Error en submit_form:", error);
-          return false;
-        }
-      };
-    }
-
-    // Control estricto de caracteres con contadores
-    $(function() {
-      // Para el título (máximo 80)
-      $('#article_name').on('input', function() {
-        const currentLength = $(this).val().length;
-        if (currentLength > 80) {
-          $(this).val($(this).val().substring(0, 80));
-        }
-        $('#title-counter').text($(this).val().length + '/80');
-      }).trigger('input');
-      
-      // Para el extracto (máximo 120)
-      $('#article_short_description').on('input', function() {
-        const currentLength = $(this).val().length;
-        if (currentLength > 120) {
-          $(this).val($(this).val().substring(0, 120));
-        }
-        $('#excerpt-counter').text($(this).val().length + '/120');
-      }).trigger('input');
-      
-      // Añadir contadores visuales
-      $('<span id="title-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/80</span>').insertAfter('#article_name');
-      $('<span id="excerpt-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/120</span>').insertAfter('#article_short_description');
-    });
-
-    // Vista previa de imágenes mejorada
-    $("input[type=file]").each(function() {
-      const $input = $(this);
-      if ($input.parents(".field").find("img").length === 0) {
-        $input.before('<img class="form__image-preview" style="display:none;max-width:100%;max-height:150px;margin-bottom:10px;border:1px solid #ddd;">');
+  // Cargar contenido existente
+  <% if @article.note.present? %>
+    try {
+      const noteContent = JSON.parse(`<%= raw @article.note.to_json %>`);
+      if (noteContent.ops) {
+        window.editor.setContents(noteContent);
+      } else if (noteContent.html) {
+        window.editor.root.innerHTML = noteContent.html;
       }
+    } catch(e) {
+      console.error("Error cargando contenido:", e);
+      window.editor.root.innerHTML = `<%= j @article.note.html_safe %>`;
+    }
+  <% end %>
 
-      $input.on('change', function() {
-        if (this.files && this.files[0]) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            $input.parents(".field").find("img")
-              .attr('src', e.target.result)
-              .css("display", "block");
-          };
-          reader.readAsDataURL(this.files[0]);
-        }
-      });
-    });
+  // Manejar envío del formulario
+  $('form.directUpload').on('submit', function() {
+    const content = {
+      html: window.editor.root.innerHTML,
+      delta: window.editor.getContents()
+    };
+    $('#article_note').val(JSON.stringify(content));
+  });
+
+  // Contadores de caracteres
+  $('#article_name').on('input', function() {
+    const current = $(this).val().length;
+    $('#title-counter').text(current + '/80');
+    if (current > 80) {
+      $(this).val($(this).val().substring(0, 80));
+    }
+  }).trigger('input');
+
+  $('#article_short_description').on('input', function() {
+    const current = $(this).val().length;
+    $('#excerpt-counter').text(current + '/120');
+    if (current > 120) {
+      $(this).val($(this).val().substring(0, 120));
+    }
+  }).trigger('input');
+
+  // Añadir contadores visuales
+  $('<span id="title-counter" class="char-counter">0/80</span>').insertAfter('#article_name');
+  $('<span id="excerpt-counter" class="char-counter">0/120</span>').insertAfter('#article_short_description');
+});
+
+// =============================================
+// ESTILOS INLINE (opcional, mejor en CSS aparte)
+// =============================================
+const style = document.createElement('style');
+style.textContent = `
+  #note-editor {
+    min-height: 300px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
   }
+  #toolbar-container {
+    margin-bottom: 10px;
+  }
+  .ql-tweet, .ql-instagram, .ql-tiktok {
+    font-size: 12px !important;
+    padding: 3px 5px !important;
+  }
+  .social-embed {
+    margin: 15px 0;
+    max-width: 100%;
+  }
+  .char-counter {
+    display: block;
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+  }
+`;
+document.head.appendChild(style);
 </script>
 
 <%= render "components/s3_form_js" %>
