@@ -112,13 +112,170 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+const BlockEmbed = Quill.import('blots/block/embed');
+
+// 1. Blot para Twitter
+class TweetBlot extends BlockEmbed {
+  static create(id) {
+    // Extraer ID de la URL si es necesario
+    const tweetId = id.match(/\d+$/)?.[0] || id;
+    const node = super.create();
+    node.dataset.id = tweetId;
+    node.innerHTML = `
+      <div class="tweet-embed" data-id="${tweetId}">
+        <blockquote class="twitter-tweet">
+          <a href="https://twitter.com/x/status/${tweetId}">Cargando tweet...</a>
+        </blockquote>
+      </div>
+    `;
+    
+    if (!window.twttr) {
+      const script = document.createElement('script');
+      script.src = 'https://platform.twitter.com/widgets.js';
+      script.async = true;
+      document.body.appendChild(script);
+    } else {
+      window.twttr.widgets.load();
+    }
+    return node;
+  }
+
+  static value(node) {
+    return node.dataset.id;
+  }
+}
+TweetBlot.blotName = 'tweet';
+TweetBlot.tagName = 'div';
+TweetBlot.className = 'tweet-embed';
+
+// 2. Blot para Instagram
+class InstagramBlot extends BlockEmbed {
+  static create(url) {
+    const regExp = /(?:https?:\/\/)?(?:www\.)?instagram\.com(?:\/[^\/]+)?\/(?:p|reel)\/([^\/?#&]+)/;
+    const shortcode = url.match(regExp)?.[1] || url;
+    const node = super.create();
+    node.dataset.url = url;
+    node.innerHTML = `
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/${shortcode}/">
+        <a href="https://www.instagram.com/p/${shortcode}/">Ver publicación en Instagram</a>
+      </blockquote>
+    `;
+    
+    if (!window.instgrm) {
+      const script = document.createElement('script');
+      script.src = 'https://www.instagram.com/embed.js';
+      script.async = true;
+      document.body.appendChild(script);
+    } else {
+      window.instgrm.Embeds.process();
+    }
+    return node;
+  }
+
+  static value(node) {
+    return node.dataset.url;
+  }
+}
+InstagramBlot.blotName = 'instagram';
+InstagramBlot.tagName = 'div';
+InstagramBlot.className = 'instagram-embed';
+
+// 3. Blot para TikTok
+class TikTokBlot extends BlockEmbed {
+  static create(url) {
+    const regExp = /(?:https?:\/\/)?(?:www\.)?tiktok\.com\/@[^\/]+\/video\/(\d+)/;
+    const videoId = url.match(regExp)?.[1] || url;
+    const node = super.create();
+    node.dataset.url = url;
+    node.innerHTML = `
+      <blockquote class="tiktok-embed" cite="${url}" data-video-id="${videoId}">
+        <section>Cargando video de TikTok...</section>
+      </blockquote>
+    `;
+    
+    if (!window.tiktokEmbedLoader) {
+      const script = document.createElement('script');
+      script.src = 'https://www.tiktok.com/embed.js';
+      script.async = true;
+      script.onload = () => window.tiktokEmbedLoader?.load();
+      document.body.appendChild(script);
+    } else {
+      window.tiktokEmbedLoader.load();
+    }
+    return node;
+  }
+
+  static value(node) {
+    return node.dataset.url;
+  }
+}
+TikTokBlot.blotName = 'tiktok';
+TikTokBlot.tagName = 'div';
+TikTokBlot.className = 'tiktok-embed';
+
+// 4. Blot para contenido embebido genérico
+class EmbedContentBlot extends BlockEmbed {
+  static create(url) {
+    const node = super.create();
+    node.dataset.url = url;
+    
+    // YouTube
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+      const videoId = url.includes('v=') 
+        ? url.split('v=')[1].split('&')[0] 
+        : url.split('youtu.be/')[1]?.split('?')[0];
+      
+      if (videoId) {
+        node.innerHTML = `
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/${videoId}" 
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        `;
+      }
+    } 
+    // Vimeo
+    else if (url.includes('vimeo.com')) {
+      const videoId = url.split('vimeo.com/')[1]?.split('?')[0];
+      if (videoId) {
+        node.innerHTML = `
+          <div class="video-container">
+            <iframe src="https://player.vimeo.com/video/${videoId}" 
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        `;
+      }
+    }
+    // Genérico
+    else {
+      node.innerHTML = `
+        <div class="generic-embed">
+          <a href="${url}" target="_blank">Contenido embebido: ${url}</a>
+        </div>
+      `;
+    }
+    
+    return node;
+  }
+
+  static value(node) {
+    return node.dataset.url;
+  }
+}
+EmbedContentBlot.blotName = 'embed-content';
+EmbedContentBlot.tagName = 'div';
+EmbedContentBlot.className = 'embed-content';
+
   // Inicialización del editor Quill (versión optimizada)
   if (typeof window.editor === 'undefined') {
     window.editor = new Quill('#note-editor', {
       theme: 'snow',
       modules: {
         toolbar: [
-          [{ 'header': [1, 2, 3, false] }],
           ['bold', 'italic', 'underline', 'strike'],
           ['blockquote', 'code-block', 'video', 'image', 'link'],
           ['tweet', 'instagram', 'tiktok', 'embed-content'], // Nuestros blots personalizados
