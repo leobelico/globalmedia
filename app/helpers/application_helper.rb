@@ -102,6 +102,8 @@ module ApplicationHelper
         .ql-editor p {
           margin-top: 0;
           margin-bottom: 1rem;
+          text-align: justify;
+          white-space: pre-line;
         }
 
         .quill-content img,
