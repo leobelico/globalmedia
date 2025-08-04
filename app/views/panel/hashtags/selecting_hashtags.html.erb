@@ -5,9 +5,6 @@
 	</div>
 </div>
 <%= form_for :panel, html: { class: "admin-form card" }, url: {controller: "panel/hashtags", action: 'set_selected'} do |f| %>
-	<div class="panel__actions">
-		<button class="button">Guardar Palabras Clave</button>
-	</div>
 	<div class="field">
 		<% if @hashtags.count > 0 %>
 			<% if @hashtags.first %>

@@ -14,14 +14,14 @@ class Panel::HashtagsController < ApplicationController
 		hashtag = Hashtag.find(params[:id])
 
 		if hashtag.selected
-			hashtag.update_attributes(selected: false)
+			hashtag.update(selected: false)
 		else
 			if Hashtag.where(selected: true).count > 3
 				oldest_hashtag = Hashtag.where(selected: true).order(selected_on: "DESC").last
-				oldest_hashtag.update_attributes(selected: false)
+				oldest_hashtag.update(selected: false)
 			end
 
-			hashtag.update_attributes(selected: true, selected_on: Time.now)
+			hashtag.update(selected: true, selected_on: Time.current)
 		end
 		render json: { hashtag: hashtag }, status: :ok
 	end
