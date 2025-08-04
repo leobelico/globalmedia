@@ -159,10 +159,8 @@ Rails.application.routes.draw do
     # get "panel/controls/done", to: "panel/controls#done"
     resources :hashtags, only: :index do
       get :autocomplete_hashtag_name, on: :collection
-      get :switch_hashtag, on: :collection
-      post :switch_hashtag, on: :collection
+      post :switch_hashtag, on: :member
     end
-
 
 
     get "all_articles", to: "articles#all_articles"
@@ -301,7 +299,6 @@ Rails.application.routes.draw do
 
   get 'publish_highlights', to: "titlepage#publish_highlights"
   get '/:id', to: 'stations#show'    
-  get '/search_autocomplete', to: 'titlepage#search_autocomplete', as: :search_autocomplete
 
   
 
