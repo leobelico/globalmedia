@@ -87,8 +87,9 @@
                     <a href="https://twitter.com/share?url=<%= CGI.unescape(article_url(@article)) %>&via=GlobalMediaMx&text=<%= @article.name %>" class="social-media__link twitter" target="_blank">
                         <%= image_tag "twitter.svg" %>
                     </a>
-                    <a class="social-media__link copy" target="_self" data-clipboard-text="<%= CGI.unescape(article_url(@article)) %>">
-                        <input class="hidden" value="<%= article_url(@article) %>">
+                    <a class="social-media__link copy" target="_self" data-clipboard-text="<%= CGI.unescape(article_url(@article, host: 'https://globalmedia.mx')) %>"
+
+                        <input class="hidden" value="<%= article_url(@article, host: 'https://globalmedia.mx') %>">
                         <%= image_tag "copy.svg" %>
                     </a> 
                 </div>
