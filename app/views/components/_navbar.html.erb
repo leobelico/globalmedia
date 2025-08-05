@@ -117,6 +117,11 @@
 	</div>
 
 	<%= link_to get_local_section.name,  "/sections/" + get_local_section.slug, class: "navbar__link" %>
+	<%= link_to get_local_section.name, "/sections/#{get_local_section.slug}", class: "navbar__link" %>
+
+		<% if get_local_section.slug == "jalisco" %>
+		<%= link_to "Nayarit", "/sections/nayarit", class: "navbar__link" %>
+		<% end %>
   <%= link_to "Regional", "/sections/bajio", class: "navbar__link" %>
 	<%= link_to "México", "/sections/MÉXICO", class: "navbar__link" %>
 	<%= link_to "Mundo", "/sections/MUNDO", class: "navbar__link" %>
@@ -131,7 +136,6 @@
       <%= link_to "Colaboradores", collaborators_path, class: "navbar__link" %>
       <%= link_to "Ahí te encargo", "/sections/DENUNCIA-URBANA", class: "navbar__link" %>
       <%= link_to "INFOGRAFÍAS", "/sections/INFOGRAFÍAS", class: "navbar__link" %>
-	  <%= link_to "NAYARIT", "/sections/Nayarit", class: "navbar__link" %>
     </div>
   </div>
 </div>
