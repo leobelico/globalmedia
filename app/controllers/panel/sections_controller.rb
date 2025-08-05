@@ -55,14 +55,14 @@ class Panel::SectionsController < ApplicationController
 		current_articles.each do |a|
 			if a != article
 				
-				a.update_attributes(highlight: false)
+				a.update(highlight: false)
 				
 			end
 		end
 
 		if params[:highlight]
-			
-			article.update_attributes(highlight: true)
+
+			article.update(highlight: true)
 
 		end
 		
