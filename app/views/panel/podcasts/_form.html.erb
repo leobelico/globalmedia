@@ -56,25 +56,19 @@
         const xhr = new XMLHttpRequest();
         xhr.open('POST', action, true);
 
-        xhr.onload = function () {
-          if (xhr.status === 201 || xhr.status === 200 || xhr.status === 204) {
-            // URL pública del archivo en S3
+       xhr.onload = function () {
+        if (xhr.status === 201 || xhr.status === 200 || xhr.status === 204) {
             const responseXML = xhr.responseXML;
             const locationElement = responseXML ? responseXML.getElementsByTagName("Location")[0] : null;
-            if (locationElement) {
+
+            if (locationElement && locationElement.textContent) {
             successCallback(locationElement.textContent);
             } else {
             successCallback(action + '/' + encodeURIComponent(file.name));
             }
-            if(location){
-              successCallback(location);
-            } else {
-              // fallback si no devuelve Location
-              successCallback(action + '/' + encodeURIComponent(file.name));
-            }
-          } else {
+        } else {
             errorCallback('Error al subir archivo a S3. Código: ' + xhr.status);
-          }
+        }
         };
 
         xhr.onerror = function () {
