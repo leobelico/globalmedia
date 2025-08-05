@@ -128,7 +128,7 @@ class Panel::SectionsController < ApplicationController
 		article = Article.find(params[:panel][:article_id])
 		SetHighlightsJob.perform_later(article.id, @section.id)
 
-		article.update_attributes(highlight: true)
+		article.update(highlight: true)
 
 
 		if Section.where(visible: true).include?(article.articable)
@@ -139,7 +139,7 @@ class Panel::SectionsController < ApplicationController
 			end
 			current_article = CoverArticle.find_by(article_id: article.id)
 			if current_article
-				current_article.update_attributes(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, section_id: article.articable_id, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
+				current_article.update(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, section_id: article.articable_id, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)
 			else
 				if CoverArticle.where(section_id: article.articable_id).count < 20
 					CoverArticle.create(article_image: article.image, article_id: article.id, article_slug: article.slug, name: article.name, section_id: article.articable_id, article_highlight: true, published_at: article.published_at, section_id: article.articable_id, section_name: article.articable.name, section_slug: article.articable.slug, section_description: article.articable.description, article_exclusive: article.exclusive, section_color: article.articable.color)

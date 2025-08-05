@@ -1,29 +1,12 @@
 <div class="panel__header">
-	<h2 class="title panel__title">Sección / <span class="current">Escoger destacado</span></h2>
-	<div class="panel__actions">
-		<button class="button">Escoger artículo</button>
-	</div>
+  <h2 class="title panel__title">Sección / <span class="current">Escoger destacado</span></h2>
 </div>
-<%= form_for :panel, url: {controller: "panel/sections", action: 'set_highlight'}, html: { class: "card admin-form" }  do |f|%>
 
+<%= form_with url: set_highlight_panel_section_path(@section.slug), method: :post, html: { class: "card admin-form" }, local: true do |f| %>
+  <div class="field">
+    <%= f.autocomplete_field :article_id, autocomplete_article_name_panel_sections_path, id_element: '#article_id_hidden', class: "search-bar", placeholder: "Buscar Artículo", type: "search" %>
+    <%= f.hidden_field :article_id, id: "article_id_hidden" %>
+  </div>
 
-
-		<div class="field">
-			
-
-
-
-			<% f.autocomplete_field(:article_id, autocomplete_article_name_panel_sections_path, :id_element => '#article_id', class: "search-bar", placeholder: "Buscar Artículo", type: "search") %>
-			<% f.hidden_field :article_id, :id => "article_id" %>
-			<%= f.text_field :article_id, placeholder: "Coloca el id del artículo aquí" %>
-
-		</div>
-
-
-
-	<% f.submit %>
+  <%= f.submit "Escoger artículo", class: "button" %>
 <% end %>
-
-<script>
-	saveFormOnButtonClick($("button.button"), $("form")); 
-</script>
