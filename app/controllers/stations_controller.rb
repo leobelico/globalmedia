@@ -95,14 +95,14 @@ class StationsController < ApplicationController
   end
 
   def set_station
-    @station = Station.where("slug ILIKE ?", params[:id])
-    if @station.empty?
-      flash[:alert] = "No encontramos lo que estabas buscando"
-      redirect_to root_url
-    else
-      @station = @station.first
+    @station = Station.find_by("slug ILIKE ?", params[:id])
+
+    unless @station
+      Rails.logger.warn "Estación no encontrada con slug: #{params[:id]}"
+      redirect_to root_url, alert: "No encontramos la estación solicitada"
     end
   end
+
 
   def station_params
     raw = params.require(:station).permit(
