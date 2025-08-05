@@ -9,7 +9,7 @@ class Panel::ArticlesController < ApplicationController
 	
 	def publish_now
 		@article = Article.find_by(slug: params[:article_slug])
-		@article.update_attributes(published: true, draft: 1, published_at: DateTime.now)
+		@article.update(published: true, draft: 1, published_at: Time.current)
 
 		if LatestArticle.count < 8
 			LatestArticle.create(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
@@ -90,7 +90,7 @@ class Panel::ArticlesController < ApplicationController
 			@article.published = true	
 		end
 
-		@article.published_at = Time.now
+		@article.published_at = Time.current
 		if @article.save
 			if @article.published? 	
 
