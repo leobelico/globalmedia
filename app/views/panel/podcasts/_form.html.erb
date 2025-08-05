@@ -59,7 +59,13 @@
         xhr.onload = function () {
           if (xhr.status === 201 || xhr.status === 200 || xhr.status === 204) {
             // URL pública del archivo en S3
-            const location = xhr.getResponseHeader('Location');
+            const responseXML = xhr.responseXML;
+            const locationElement = responseXML ? responseXML.getElementsByTagName("Location")[0] : null;
+            if (locationElement) {
+            successCallback(locationElement.textContent);
+            } else {
+            successCallback(action + '/' + encodeURIComponent(file.name));
+            }
             if(location){
               successCallback(location);
             } else {
