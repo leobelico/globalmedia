@@ -1,23 +1,48 @@
 class ScheduledPublishingJob < ApplicationJob
   queue_as :default
+  self.log_level = :error # Reduce el logging solo a errores
 
   def perform
-    articles_to_publish = Article.where(published: false, draft: 1)
-                                .where("scheduled_time <= ?", Time.current)
-                                .where("scheduled_time > ?", 5.minutes.ago) # Solo artículos recientemente programados
-    
-    return if articles_to_publish.empty? # Salir silenciosamente si no hay nada que publicar
+    publish_scheduled_articles
+    publish_scheduled_highlights
+  end
 
-    ActiveRecord::Base.transaction do
-      articles_to_publish.update_all(
-        published: true, 
-        published_at: Time.current, 
+  private
+
+  def publish_scheduled_articles
+    articles = Article.where(published: false, draft: 1)
+                     .where("scheduled_time <= ?", Time.current)
+                     .where("scheduled_time > ?", 5.minutes.ago)
+
+    return if articles.empty?
+
+    updated_count = Article.transaction do
+      articles.update_all(
+        published: true,
+        published_at: Time.current,
         draft: 2,
         updated_at: Time.current
       )
     end
 
-    # Log mínimo solo cuando hay cambios
-    Rails.logger.info("[ScheduledPublishing] Published #{articles_to_publish.count} articles") if articles_to_publish.any?
+    Rails.logger.info("[Article Publishing] Published #{updated_count} articles") if updated_count.positive?
+  end
+
+  def publish_scheduled_highlights
+    highlights = Highlight.where(published: false)
+                         .where("scheduled_time <= ?", Time.current)
+                         .where("scheduled_time > ?", 5.minutes.ago)
+
+    return if highlights.empty?
+
+    updated_count = Highlight.transaction do
+      highlights.update_all(
+        published: true,
+        published_at: Time.current,
+        updated_at: Time.current
+      )
+    end
+
+    Rails.logger.info("[Highlight Publishing] Published #{updated_count} highlights") if updated_count.positive?
   end
 end
