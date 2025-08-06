@@ -31,7 +31,7 @@ class Panel::RelationshipsController < ApplicationController
 		@relationship = Relationship.new(relationship_params)
 		if @relationship.save
 
-			@relationship.update_attributes(slug: @relationship.slug + "-" + @relationship.id.to_s) 
+			@relationship.update(slug: @relationship.slug + "-" + @relationship.id.to_s) 
 			
 				redirect_to panel_relationship_path(@relationship)
 			
@@ -52,7 +52,7 @@ class Panel::RelationshipsController < ApplicationController
 		
 		if @relationship.update(relationship_params)
 			if @relationship.article_relationships.last
-				@relationship.article_relationships.last.article.update_attribute(:name, @relationship.article_relationships.last.article.name + " ")
+				@relationship.article_relationships.last.article.update(name: @relationship.article_relationships.last.article.name + " ")
 			end
 				redirect_to panel_relationship_path(@relationship)
 			
@@ -83,9 +83,7 @@ class Panel::RelationshipsController < ApplicationController
 		else
 			flash[:error] = "No se pudo guardar, intenta de nuevo."
 		end
-		#Article.all.each do |article|
-		#		article.update_attributes(global_recommendation: false)
-		#	end
+
 		redirect_to panel_relationship_path(investigation)
 		
 	end

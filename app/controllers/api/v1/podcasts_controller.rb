@@ -8,9 +8,9 @@ class Api::V1::PodcastsController < Api::BaseController
 		if Podcast.exists?(id: p_id)
 			result = Podcast.find(p_id)
 			if result.seconds_played
-				result.update_attributes(seconds_played: result.seconds_played + 1)
+				result.update(seconds_played: result.seconds_played + 1)
 			else
-				result.update_attributes(seconds_played: 1)
+				result.update(seconds_played: 1)
 			end
 			json_response(true)
 		else

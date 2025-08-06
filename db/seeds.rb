@@ -42,7 +42,7 @@ superadmins = User.create([
 	])
 
 User.all.each do |user|
-	user.update_attributes(
+	user.update(
 		banners_permission: true,
 		create_articles_permission: true,
 		video_complaints_permission: true,
@@ -245,7 +245,7 @@ articles = Article.all
 
 
 articles.each do |article|
-	article.update_attributes(user: superadmins[0])
+	article.update(user: superadmins[0])
 	p "updated article user"
 end
 p "----------------------"
@@ -556,7 +556,7 @@ Article.all.each do |article|
 	end
 end
 User.all.each do |user|
-	user.update_attributes(
+	user.update(
 		banners_permission: true,
 		create_articles_permission: true,
 		video_complaints_permission: true,

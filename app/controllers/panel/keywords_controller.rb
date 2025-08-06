@@ -20,7 +20,7 @@ class Panel::KeywordsController < ApplicationController
 	    	
  	 	end
  	 	Keyword.last(4).each do |keyword|
-			keyword.update_attributes(slug: keyword.slug + "-" + keyword.id.to_s) 
+			keyword.update(slug: keyword.slug + "-" + keyword.id.to_s) 
 
  	 	end
  	 	redirect_to panel_keywords_path

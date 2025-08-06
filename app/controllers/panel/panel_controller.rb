@@ -27,9 +27,6 @@ class Panel::PanelController < ApplicationController
 			
 		end
 
-		#Article.all.each do |article|
-		#		article.update_attributes(global_recommendation: false)
-		#	end
 		redirect_back(fallback_location: root_url)
 		
 	end

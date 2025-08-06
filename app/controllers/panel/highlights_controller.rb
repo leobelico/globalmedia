@@ -50,12 +50,12 @@ class Panel::HighlightsController < ApplicationController
 							if h.order >= counter and h.order < 6		
 								h_to_mod = Highlight.where(order: h.order + 1, published: true, location_id: @location_id).first
 										
-								h_to_mod.update_attributes(article_id: h.article_id)
+								h_to_mod.update(article_id: h.article_id)
 										
 										
 							end
 						end
-						the_h.first.update_attributes(article_id: params[:highlight][:article_id])
+						the_h.first.update(article_id: params[:highlight][:article_id])
 						redirect_to panel_highlights_path
 					else
 						##Aquí el articulo se programa
