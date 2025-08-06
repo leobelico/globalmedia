@@ -1,6 +1,5 @@
 class ScheduledPublishingJob < ApplicationJob
   queue_as :default
-  self.log_level = :error # Reduce el logging solo a errores
 
   def perform
     publish_scheduled_articles
@@ -14,7 +13,7 @@ class ScheduledPublishingJob < ApplicationJob
                      .where("scheduled_time <= ?", Time.current)
                      .where("scheduled_time > ?", 5.minutes.ago)
 
-    return if articles.empty?
+    return Rails.logger.debug("No articles to publish") if articles.empty?
 
     updated_count = Article.transaction do
       articles.update_all(
@@ -33,7 +32,7 @@ class ScheduledPublishingJob < ApplicationJob
                          .where("scheduled_time <= ?", Time.current)
                          .where("scheduled_time > ?", 5.minutes.ago)
 
-    return if highlights.empty?
+    return Rails.logger.debug("No highlights to publish") if highlights.empty?
 
     updated_count = Highlight.transaction do
       highlights.update_all(
