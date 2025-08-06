@@ -37,7 +37,6 @@ class ScheduledPublishingJob < ApplicationJob
     updated_count = Highlight.transaction do
       highlights.update_all(
         published: true,
-        published_at: Time.current,
         updated_at: Time.current
       )
     end
