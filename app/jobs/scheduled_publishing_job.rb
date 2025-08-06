@@ -11,7 +11,7 @@ class ScheduledPublishingJob < ApplicationJob
   def publish_scheduled_articles
     articles = Article.where(published: false, draft: 1)
                      .where("scheduled_time <= ?", Time.current)
-                     .where("scheduled_time > ?", 5.minutes.ago)
+                     .where("scheduled_time > ?", 10.minutes.ago)
 
     return Rails.logger.debug("No articles to publish") if articles.empty?
 
@@ -30,7 +30,7 @@ class ScheduledPublishingJob < ApplicationJob
   def publish_scheduled_highlights
     highlights = Highlight.where(published: false)
                          .where("scheduled_time <= ?", Time.current)
-                         .where("scheduled_time > ?", 5.minutes.ago)
+                         .where("scheduled_time > ?", 10.minutes.ago)
 
     return Rails.logger.debug("No highlights to publish") if highlights.empty?
 
