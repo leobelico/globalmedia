@@ -52,20 +52,20 @@ class Panel::ArticlesController < ApplicationController
 	def set_highlight_from_id  
 		article = Article.find(params[:article_id])
 		if article.highlight == false
-			article.update_attributes(highlight: true)
+			article.update(highlight: true)
 			Article.where('id != ? and articable_id = ?', article.id, article.articable_id).update_all(highlight: false)
 		else
 
-			article.update_attributes(highlight: false)
+			article.update(highlight: false)
 		end	
 		render json: { article: article }, status: :ok
 	end
 	def set_recommendation_from_id  
 		article = Article.find(params[:article_id])
 		if article.global_recommendation == false
-			article.update_attributes(global_recommendation: true)
+			article.update(global_recommendation: true)
 		else
-			article.update_attributes(global_recommendation: false)
+			article.update(global_recommendation: false)
 		end	
 		render json: { article: article }, status: :ok
 	end
@@ -174,9 +174,7 @@ class Panel::ArticlesController < ApplicationController
 							CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
 						end
 					else
-						does_cover_article_exists.first.update_attributes(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
-						
-						
+						does_cover_article_exists.first.update(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
 
 					end
 				end
@@ -184,9 +182,9 @@ class Panel::ArticlesController < ApplicationController
 				does_article_exists = LatestArticle.where(article_id: @article.id)
 				if does_article_exists.count >=1 
 					# LatestArticle.create(article_id: 5900, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
-					
-					
-					does_article_exists.first.update_attributes(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
+
+
+					does_article_exists.first.update(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
 				end
 			end
 			redirect_to @article
