@@ -27,20 +27,31 @@ class ScheduledPublishingJob < ApplicationJob
     Rails.logger.info("[Article Publishing] Published #{updated_count} articles") if updated_count.positive?
   end
 
-  def publish_scheduled_highlights
-    highlights = Highlight.where(published: false)
-                         .where("scheduled_time <= ?", Time.current)
-                         .where("scheduled_time > ?", 10.minutes.ago)
+    def publish_scheduled_highlights
+    # Highlights programados para publicarse ahora
+    pending_highlights = Highlight.where(published: false)
+                                .where("scheduled_time <= ?", Time.current)
+                                .where("scheduled_time > ?", 10.minutes.ago)
 
-    return Rails.logger.debug("No highlights to publish") if highlights.empty?
+    return Rails.logger.debug("No highlights to publish") if pending_highlights.empty?
 
     updated_count = Highlight.transaction do
-      highlights.update_all(
-        published: true,
-        updated_at: Time.current
-      )
+        pending_highlights.each do |highlight|
+        # Eliminar cualquier highlight existente con el mismo order y location_id
+        Highlight.where(
+            order: highlight.order,
+            location_id: highlight.location_id,
+            published: true
+        ).delete_all
+
+        # Publicar el nuevo highlight
+        highlight.update!(
+            published: true,
+            updated_at: Time.current
+        )
+        end
     end
 
-    Rails.logger.info("[Highlight Publishing] Published #{updated_count} highlights") if updated_count.positive?
-  end
+    Rails.logger.info("[Highlight Publishing] Published and replaced #{updated_count} highlights")
+    end
 end
