@@ -108,17 +108,13 @@
 <% end %>
 
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-  // Función para inicializar el editor
-  function initializeEditor() {
-    if (typeof window.editor !== 'undefined') return;
 
+  // Inicialización del editor Quill (versión optimizada)
+  if (typeof window.editor === 'undefined') {
     window.editor = new Quill('#note-editor', {
       theme: 'snow',
       modules: {
@@ -126,169 +122,97 @@
           [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
           ['bold', 'italic', 'underline', 'strike'],
           ['blockquote', 'code-block', 'video', 'image', 'link'],
-          ['tweet', 'instagram', 'tiktok', 'embed-content'],
+          ['tweet', 'instagram', 'tiktok', 'embed-content'], // Nuestros blots personalizados
           [{ 'list': 'ordered'}, { 'list': 'bullet' }],
           [{ 'indent': '-1'}, { 'indent': '+1' }],
-          [{ 'align': [] }],
+          [{ 'align': [] }], // Justificación (left, center, right, justify)
           [{ 'color': [] }, { 'background': [] }],
           [{ 'font': [] }],
           [{ 'size': ['small', false, 'large', 'huge'] }],
           ['clean']
         ],
         clipboard: {
-          matchVisual: false
+          matchVisual: false // Previene loops de eventos
         }
       },
       placeholder: 'Escribe el contenido de tu artículo aquí...'
     });
 
-    loadExistingContent();
-    setupFormHandlers();
-    setupCharacterCounters();
-    setupImagePreviews();
-  }
-
-  // Cargar contenido existente
-  function loadExistingContent() {
+    // Cargar contenido existente con protección
     <% if @article.note.present? %>
       try {
-        const noteContent = <%= raw @article.note.to_json %>;
-        if (!noteContent) return;
-        
-        if (typeof noteContent === 'object') {
-          if (noteContent.delta) {
-            window.editor.setContents(noteContent.delta);
-          } else if (noteContent.html) {
-            window.editor.root.innerHTML = noteContent.html;
-          }
-        } else if (typeof noteContent === 'string') {
+        const noteContent = `<%= j @article.note.html_safe %>`;
+        if (noteContent.trim() !== '') {
           window.editor.root.innerHTML = noteContent;
         }
       } catch(e) {
-        console.error("Error loading content:", e);
-        Swal.fire('Error', 'No se pudo cargar el contenido existente', 'error');
+        console.error("Error cargando contenido existente:", e);
       }
     <% end %>
-  }
 
-  // Configurar manejadores del formulario
-  function setupFormHandlers() {
+    // Manejo robusto del envío del formulario
     const form = document.querySelector('form.directUpload');
-    if (!form) return;
-
-    form.addEventListener('ajax:send', handleFormSubmit);
-    form.addEventListener('ajax:success', handleFormSuccess);
-    form.addEventListener('ajax:error', handleFormError);
-  }
-
-  function handleFormSubmit() {
-    const saveButton = document.querySelector('.button--save');
-    if (saveButton) {
-      saveButton.disabled = true;
-      const spinner = saveButton.querySelector('.button--spinner');
-      if (spinner) spinner.style.display = 'block';
-      const buttonText = saveButton.querySelector('.button--text');
-      if (buttonText) buttonText.textContent = 'Guardando...';
-    }
-
-    const contentField = document.querySelector('#article_note');
-    if (contentField && window.editor) {
-      contentField.value = JSON.stringify({
-        html: window.editor.root.innerHTML,
-        delta: window.editor.getContents()
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        const contentField = document.querySelector('#article_note');
+        if (contentField) {
+          contentField.value = JSON.stringify({
+            html: window.editor.root.innerHTML,
+            delta: window.editor.getContents()
+          });
+        }
+        return true;
       });
     }
-  }
 
-  function handleFormSuccess(event) {
-    const [data] = event.detail;
-    const saveButton = document.querySelector('.button--save');
-    
-    if (saveButton) {
-      saveButton.disabled = false;
-      const spinner = saveButton.querySelector('.button--spinner');
-      if (spinner) spinner.style.display = 'none';
-      const buttonText = saveButton.querySelector('.button--text');
-      if (buttonText) buttonText.textContent = 'Actualizar Nota';
+    // Sobrescritura segura de submit_form
+    if (typeof submit_form === 'function') {
+      const originalSubmitForm = submit_form;
+      window.submit_form = function(t, e, n, r) {
+        try {
+          console.log("Contenido Quill:", window.editor.getContents());
+          console.log("Texto plano:", window.editor.getText());
+          
+          const content = window.editor.getContents();
+          const text = window.editor.getText();
+          
+          return originalSubmitForm(t, e, n, r);
+        } catch(error) {
+          console.error("Error en submit_form:", error);
+          return false;
+        }
+      };
     }
 
-    Swal.fire({
-      icon: 'success',
-      title: '¡Éxito!',
-      text: data.message || 'Artículo actualizado correctamente',
-      showConfirmButton: true,
-      timer: 3000
-    }).then(() => {
-      if (data.redirect_url) {
-        window.location.href = data.redirect_url;
-      }
+    // Control estricto de caracteres con contadores
+    $(function() {
+      // Para el título (máximo 80)
+      $('#article_name').on('input', function() {
+        const currentLength = $(this).val().length;
+        if (currentLength > 80) {
+          $(this).val($(this).val().substring(0, 80));
+        }
+        $('#title-counter').text($(this).val().length + '/80');
+      }).trigger('input');
+      
+      // Para el extracto (máximo 120)
+      $('#article_short_description').on('input', function() {
+        const currentLength = $(this).val().length;
+        if (currentLength > 120) {
+          $(this).val($(this).val().substring(0, 120));
+        }
+        $('#excerpt-counter').text($(this).val().length + '/120');
+      }).trigger('input');
+      
+      // Añadir contadores visuales
+      $('<span id="title-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/80</span>').insertAfter('#article_name');
+      $('<span id="excerpt-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/120</span>').insertAfter('#article_short_description');
     });
-  }
 
-  function handleFormError(event) {
-    const [xhr] = event.detail;
-    const saveButton = document.querySelector('.button--save');
-    
-    if (saveButton) {
-      saveButton.disabled = false;
-      const spinner = saveButton.querySelector('.button--spinner');
-      if (spinner) spinner.style.display = 'none';
-      const buttonText = saveButton.querySelector('.button--text');
-      if (buttonText) buttonText.textContent = 'Actualizar Nota';
-    }
-
-    let errorMessage = 'Error al guardar el artículo';
-    try {
-      const response = JSON.parse(xhr.response);
-      errorMessage = response.errors ? response.errors.join('\n') : errorMessage;
-    } catch(e) {
-      console.error('Error parsing response:', e);
-    }
-
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: errorMessage,
-      showConfirmButton: true
-    });
-  }
-
-  // Contadores de caracteres
-  function setupCharacterCounters() {
-    // Título (máximo 80 caracteres)
-    const titleField = $('#article_name');
-    titleField.on('input', function() {
-      const current = $(this).val().length;
-      if (current > 80) {
-        $(this).val($(this).val().substring(0, 80));
-      }
-      $('#title-counter').text($(this).val().length + '/80');
-    }).trigger('input');
-
-    // Extracto (máximo 120 caracteres)
-    const excerptField = $('#article_short_description');
-    excerptField.on('input', function() {
-      const current = $(this).val().length;
-      if (current > 120) {
-        $(this).val($(this).val().substring(0, 120));
-      }
-      $('#excerpt-counter').text($(this).val().length + '/120');
-    }).trigger('input');
-
-    // Insertar contadores si no existen
-    if ($('#title-counter').length === 0) {
-      titleField.after('<span id="title-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/80</span>');
-    }
-    if ($('#excerpt-counter').length === 0) {
-      excerptField.after('<span id="excerpt-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/120</span>');
-    }
-  }
-
-  // Vista previa de imágenes
-  function setupImagePreviews() {
+    // Vista previa de imágenes mejorada
     $("input[type=file]").each(function() {
       const $input = $(this);
-      if ($input.parents(".field").find(".form__image-preview").length === 0) {
+      if ($input.parents(".field").find("img").length === 0) {
         $input.before('<img class="form__image-preview" style="display:none;max-width:100%;max-height:150px;margin-bottom:10px;border:1px solid #ddd;">');
       }
 
@@ -296,7 +220,7 @@
         if (this.files && this.files[0]) {
           const reader = new FileReader();
           reader.onload = function(e) {
-            $input.parents(".field").find(".form__image-preview")
+            $input.parents(".field").find("img")
               .attr('src', e.target.result)
               .css("display", "block");
           };
@@ -305,9 +229,6 @@
       });
     });
   }
-
-  // Inicializar cuando el DOM esté listo
-  $(document).ready(initializeEditor);
 </script>
 
 <%= render "components/s3_form_js" %>
