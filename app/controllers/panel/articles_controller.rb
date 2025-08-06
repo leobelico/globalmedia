@@ -135,64 +135,100 @@ class Panel::ArticlesController < ApplicationController
 		end
 	end
 
-	def update
-		if params[:article][:note]
-			@article.note = params[:article][:note]
-		end
-		if params[:scheduled_time_1i]
-			somedate = Time.zone.local(params[:scheduled_time_1i].to_i, 
-	                        params[:scheduled_time_2i].to_i,
-	                        params[:scheduled_time_3i].to_i,
-	                        params[:scheduled_time_4i].to_i,
-	                        params[:scheduled_time_5i].to_i, 0)
-		end
+def update
+  respond_to do |format|
+    if params[:article][:note]
+      @article.note = params[:article][:note]
+    end
 
-		if somedate 
-			@article.scheduled_time = somedate
-		end
+    if params[:scheduled_time_1i]
+      somedate = Time.zone.local(params[:scheduled_time_1i].to_i, 
+                      params[:scheduled_time_2i].to_i,
+                      params[:scheduled_time_3i].to_i,
+                      params[:scheduled_time_4i].to_i,
+                      params[:scheduled_time_5i].to_i, 0)
+      @article.scheduled_time = somedate
+    end
 
-		if params[:article][:draft].to_i == 0 or params[:article][:draft].to_i == -1
-			@article.published = false
-		end
+    if params[:article][:draft].to_i == 0 || params[:article][:draft].to_i == -1
+      @article.published = false
+    elsif params[:article][:draft].to_i == 2
+      @article.published = true
+    end
 
-		if params[:article][:draft].to_i == 2
-			@article.published = true
-		end
+    if @article.update(article_params)
+      UpdateArticleJob.perform_later(@article)
+      handle_published_article if @article.published?
 
-		if @article.update(article_params)
-			UpdateArticleJob.perform_later @article
+      format.html { 
+        redirect_to panel_article_path(@article), 
+        notice: 'Artículo actualizado correctamente.' 
+      }
+      format.json { 
+        render json: { 
+          status: 'success', 
+          message: 'Artículo actualizado correctamente',
+          redirect_url: panel_article_path(@article),
+          article: @article.as_json(only: [:id, :slug, :name])
+        }, status: :ok 
+      }
+    else
+      format.html { render :edit }
+      format.json { 
+        render json: { 
+          status: 'error', 
+          errors: @article.errors.full_messages,
+          error_message: 'No se pudo actualizar el artículo'
+        }, status: :unprocessable_entity 
+      }
+    end
+  end
+end
 
-			if @article.published? 	
+private
 
-				if Section.where(visible: true).include?(@article.articable)
-					does_cover_article_exists = CoverArticle.where(article_id: @article.id)
-					if does_cover_article_exists.count <= 0
-						if CoverArticle.where(section_id: @article.articable_id).count < 20
-							CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
-						else
-							last_article = CoverArticle.where(section_id: @article.articable_id, article_highlight: false).order(published_at: :asc).last(20).reverse.last.destroy
-							CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
-						end
-					else
-						does_cover_article_exists.first.update(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
+def handle_published_article
+  if Section.where(visible: true).include?(@article.articable)
+    cover_article = CoverArticle.find_or_initialize_by(article_id: @article.id)
+    cover_article.assign_attributes(
+      article_image: @article.image,
+      article_slug: @article.slug,
+      name: @article.name,
+      article_highlight: false,
+      published_at: @article.published_at,
+      section_id: @article.articable_id,
+      section_name: @article.articable.name,
+      section_slug: @article.articable.slug,
+      section_description: @article.articable.description,
+      article_exclusive: @article.exclusive,
+      section_color: @article.articable.color
+    )
+    
+    if CoverArticle.where(section_id: @article.articable_id).count >= 20
+      CoverArticle.where(section_id: @article.articable_id, article_highlight: false)
+                 .order(published_at: :asc)
+                 .first
+                 .destroy
+    end
+    
+    cover_article.save
+  end
 
-					end
-				end
-
-				does_article_exists = LatestArticle.where(article_id: @article.id)
-				if does_article_exists.count >=1 
-					# LatestArticle.create(article_id: 5900, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
-
-
-					does_article_exists.first.update(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
-				end
-			end
-			redirect_to @article
-		else
-			render action: "edit"
-		end
-	end
-
+  latest_article = LatestArticle.find_or_initialize_by(article_id: @article.id)
+  latest_article.assign_attributes(
+    article_slug: @article.slug,
+    name: @article.name,
+    section_name: @article.articable.name,
+    section_slug: @article.articable.slug,
+    published_at: @article.published_at
+  )
+  
+  if LatestArticle.count >= 8
+    LatestArticle.order(published_at: :asc).first.destroy
+  end
+  
+  latest_article.save
+end
 	def destroy
 		Highlight.where(article_id: @article.id, published: false).destroy_all
 		DeleteArticleJob.perform_later @article

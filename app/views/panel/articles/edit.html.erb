@@ -1,12 +1,113 @@
 <div class="panel__header">
-	<h2 class="title panel__title">Notas / <span class="current">Editar nota</span></h2>
-	<div class="panel__actions">
-		<!-- <button class="button add-gallery">Galería</button> -->
-		<%= link_to	"Galería", panel_article_gallery_images_path(@article), class: "button add-gallery", style: "margin-right:  8px; " %>
-		<button class="button button--save save-article" data-slug="<%= @article.slug %>"><div class="button--text">Actualizar Nota</div><div class="button--spinner"></div></button>
-	</div>
+  <h2 class="title panel__title">Notas / <span class="current">Editar nota</span></h2>
+  <div class="panel__actions">
+    <%= link_to "Galería", panel_article_gallery_images_path(@article), class: "button add-gallery", style: "margin-right: 8px;" %>
+    <button class="button button--save save-article" data-slug="<%= @article.slug %>">
+      <div class="button--text">Actualizar Nota</div>
+      <div class="button--spinner" style="display: none;">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </button>
+  </div>
 </div>
+
 <%= render 'form' %>
+
+<!-- Incluye SweetAlert2 para notificaciones elegantes -->
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
-	editor.setContents(<%= raw(@article.note) %>); 
+  // Inicializar el editor con el contenido existente
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
+      const noteContent = <%= raw(@article.note.to_json) %>;
+      if (noteContent && typeof editor !== 'undefined') {
+        editor.setContents(noteContent);
+      }
+    } catch(e) {
+      console.error("Error al cargar contenido en el editor:", e);
+    }
+
+    // Configurar el manejador del botón de guardar
+    const saveButton = document.querySelector('.save-article');
+    if (saveButton) {
+      saveButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        submitArticleForm();
+      });
+    }
+  });
+
+  function submitArticleForm() {
+    const form = document.querySelector('form.directUpload');
+    const saveButton = document.querySelector('.save-article');
+    const buttonText = saveButton.querySelector('.button--text');
+    const spinner = saveButton.querySelector('.button--spinner');
+
+    // Mostrar estado de carga
+    saveButton.disabled = true;
+    buttonText.textContent = 'Guardando...';
+    spinner.style.display = 'block';
+
+    // Actualizar el campo hidden con el contenido del editor
+    const contentField = document.querySelector('#article_note');
+    if (contentField && typeof editor !== 'undefined') {
+      contentField.value = JSON.stringify({
+        html: editor.root.innerHTML,
+        delta: editor.getContents()
+      });
+    }
+
+    // Enviar el formulario via AJAX
+    Rails.ajax({
+      url: form.action,
+      type: form.method,
+      data: new FormData(form),
+      dataType: 'json',
+      contentType: false,
+      processData: false,
+      success: function(data) {
+        // Ocultar spinner
+        saveButton.disabled = false;
+        buttonText.textContent = 'Actualizar Nota';
+        spinner.style.display = 'none';
+
+        // Mostrar notificación de éxito
+        Swal.fire({
+          icon: 'success',
+          title: '¡Éxito!',
+          text: data.message || 'Artículo actualizado correctamente',
+          showConfirmButton: true,
+          timer: 3000
+        }).then(() => {
+          if (data.redirect_url) {
+            window.location.href = data.redirect_url;
+          }
+        });
+      },
+      error: function(xhr) {
+        // Ocultar spinner
+        saveButton.disabled = false;
+        buttonText.textContent = 'Actualizar Nota';
+        spinner.style.display = 'none';
+
+        // Mostrar errores
+        let errorMessage = 'Error al guardar el artículo';
+        try {
+          const response = JSON.parse(xhr.response);
+          errorMessage = response.errors ? response.errors.join('\n') : errorMessage;
+        } catch(e) {
+          console.error('Error parsing response:', e);
+        }
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: errorMessage,
+          showConfirmButton: true
+        });
+      }
+    });
+  }
 </script>
