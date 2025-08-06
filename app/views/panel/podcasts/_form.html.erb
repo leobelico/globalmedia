@@ -29,14 +29,7 @@
   <div class="field field--string">
     <label>Archivo del stream: <i class="icon-uploading fas fa-spinner fa-spin"></i></label>
     <input type="file" id="awsS3File" accept="audio/*">
-    <div style="border: 1px solid #000; margin: 1rem;">
-      <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
-      <div id="container">
-        <a id="pickfiles" href="javascript:;">[Selecciona un archivo]</a>
-        <a id="uploadfiles" href="javascript:;">[Subir Archivo]</a>
-      </div>
-      <span id="console"></span>
-    </div>
+
     <%= f.text_field :stream_url %>
   </div>
 <% end %>
