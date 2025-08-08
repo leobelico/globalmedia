@@ -5,11 +5,16 @@ class Panel::HashtagsController < ApplicationController
   autocomplete :hashtag, :name, full: true
 
   def index
-    @hashtags = Hashtag.order(selected: :desc, updated_at: :desc, created_at: :desc).paginate(page: params[:page], per_page: 200)
+    # Reducido a 50 por página para mejorar rendimiento
+    @hashtags = Hashtag.order(selected: :desc, updated_at: :desc, created_at: :desc)
+                       .paginate(page: params[:page], per_page: 50)
   end
 
   def selecting_hashtags
-    @hashtags = Hashtag.where(selected: true).order(updated_at: :desc).last(4)
+    # Usar limit y order para que la DB devuelva solo 4 registros (más rápido y menos memoria)
+    @hashtags = Hashtag.where(selected: true)
+                       .order(updated_at: :desc)
+                       .limit(4)
   end
 
   def switch_hashtag
@@ -18,8 +23,10 @@ class Panel::HashtagsController < ApplicationController
     if hashtag.selected
       hashtag.update(selected: false)
     else
-      if Hashtag.where(selected: true).count > 3
-        oldest_hashtag = Hashtag.where(selected: true).order(selected_on: :desc).last
+      # Mejor usar .exists? para checar si hay más de 3 seleccionados
+      if Hashtag.where(selected: true).limit(4).count > 3
+        # Traer el más viejo usando order asc y first (no last que carga todo)
+        oldest_hashtag = Hashtag.where(selected: true).order(selected_on: :asc).first
         oldest_hashtag&.update(selected: false)
       end
 
