@@ -79,7 +79,11 @@
 
         <% if station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).count > 0 %>
           <h4 class="small-label">Podcasts del día</h4>
-          <% station.podcasts.where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day)).order(created_at: :asc).each do |podcast| %>
+          <% station.podcasts
+          .where(created_at: (Time.now.beginning_of_day..Time.now.end_of_day))
+          .order(created_at: :asc)
+          .limit(10)
+          .each do |podcast| %>
             <div class="podcast">
               <h4 class="podcast__title"><%= podcast.name %></h4>
               <div>
@@ -118,7 +122,11 @@
           <h4 class="small-label">Podcasts más recientes</h4>
           <!--< % station.podcasts.last(station.podcasts.count)[1..4].each do |podcast| %>-->
           <div id="podcastContainer" style="overflow: auto; height: 200px;">
-            <% station.podcasts.order(created_at: :desc).each do |podcast| %>
+            <% station.podcasts
+              .order(created_at: :desc)
+              .limit(10)
+              .each do |podcast| %>
+
               <div class="podcast">
                 <h4 class="podcast__title"><%= podcast.name %></h4>
                 <div>
