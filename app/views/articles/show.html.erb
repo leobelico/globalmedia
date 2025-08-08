@@ -120,7 +120,7 @@
                         <%= image_tag image.src, class: "gallery__thumbnail", data: { image: index }  %>
                     <% end %>    
         <% if @article.note.present? %>
-        <div class="quill-content" id="quill-container">
+        <div class="quill-content">
             <%= display_quill_content(@article.note) %>
         </div>
         <% elsif @article.note_old.present? %>
@@ -225,30 +225,7 @@
 }
 </style>
 
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<script async src="//www.instagram.com/embed.js"></script>
-<script async src="https://www.tiktok.com/embed.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    if (typeof twttr !== "undefined" && twttr.widgets) {
-      twttr.widgets.load();
-    }
-    if (window.instgrm && window.instgrm.Embeds) {
-      window.instgrm.Embeds.process();
-    }
-
-    // TikTok embed
-    var tiktokScripts = document.querySelectorAll('script[src="https://www.tiktok.com/embed.js"]');
-    tiktokScripts.forEach(function(script) {
-      script.remove();
-    });
-    var newScript = document.createElement("script");
-    newScript.src = "https://www.tiktok.com/embed.js";
-    newScript.async = true;
-    document.body.appendChild(newScript);
-  });
-</script>
+<script async defer src="https://platform.instagram.com/en_US/embeds.js"></script>
 
 <script>
 	<% if @article.note %>
