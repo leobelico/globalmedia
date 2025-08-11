@@ -1,4 +1,3 @@
-require 'will_paginate/array'
 class SectionsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show, :sports, :corporation]
 	before_action :set_section, only: [:edit, :update, :destroy]
@@ -13,7 +12,7 @@ class SectionsController < ApplicationController
 		session[:article_id] = nil
 		if Section.find(1024)
 			@intl = Section.find(1024) 
-			@intl_articles = @intl.articles.last(6)
+			@intl_articles = @intl.articles.order(created_at: :desc).limit(6)
 			@related_sections = RelatedSection.where(section: @intl)
 		end 
 		# if Section.find_by(name: "Táctica Internacional")
@@ -23,7 +22,7 @@ class SectionsController < ApplicationController
 		# end 
 		if Section.find(1025)
 			@local = Section.find(1025) 
-			@local_articles = @local.articles.last(6)
+			@local_articles = @local.articles.order(created_at: :desc).limit(6)
 		end
 	end
 	def corporation 
@@ -42,40 +41,45 @@ class SectionsController < ApplicationController
 		@related_sections = []
 		@first_article = nil
 		@articles = []
+
 		if slug == 'bajio'
 			local_section = get_local_section
 			@section = Section.find_by_slug('bajio')
-			# @related_sections = RelatedSection
-			# 											.joins('INNER JOIN sections ON related_sections.section_id = sections.id')
-			# 											.joins('INNER JOIN locations ON sections.location_id = locations.id')
-			# 											.where('sections.id != ?', local_section)
-			# 											.uniq
 			@related_sections = RelatedSection.where(section: @section)
 			@first_article = Article.joins("INNER JOIN cover_articles ON cover_articles.article_id = articles.id")
-														.joins('INNER JOIN sections ON articles.articable_id = sections.id')
-														.joins('INNER JOIN locations ON sections.location_id = locations.id')
-												 		.where('sections.id != ?', local_section)
-														.order("cover_articles.article_highlight desc, cover_articles.published_at desc").first
-			if @first_article != nil
-				@articles = Article.joins('INNER JOIN sections ON articles.articable_id = sections.id')
-													 .joins('INNER JOIN locations ON sections.location_id = locations.id')
-													 .where('published = true AND published_at IS NOT NULL AND sections.id != ? AND articles.id != ?', local_section, @first_article.id)
-													 .order(published_at: :desc).paginate(page: params[:page], per_page: 12)
+									.joins('INNER JOIN sections ON articles.articable_id = sections.id')
+									.joins('INNER JOIN locations ON sections.location_id = locations.id')
+									.where('sections.id != ?', local_section)
+									.order("cover_articles.article_highlight DESC, cover_articles.published_at DESC")
+									.first
+
+			if @first_article
+			@articles = Article.joins('INNER JOIN sections ON articles.articable_id = sections.id')
+								.joins('INNER JOIN locations ON sections.location_id = locations.id')
+								.where('published = true AND published_at IS NOT NULL AND sections.id != ? AND articles.id != ?', 
+										local_section, @first_article.id)
+								.order(published_at: :desc)
+								.paginate(page: params[:page], per_page: 6)
 			end
 		else
-			@section = Section.find_by_slug(params[:slug])
+			@section = Section.find_by_slug(slug)
 			if @section
-				@related_sections = RelatedSection.where(section: @section)
-				@first_article = Article.joins("INNER JOIN cover_articles ON cover_articles.article_id = articles.id").where("cover_articles.section_id = #{@section.id}").order("cover_articles.article_highlight desc, cover_articles.published_at desc").first
-				if @first_article != nil
-					@articles = Article.where("published = true AND articable_id = ? AND published_at IS NOT NULL AND id != ?", @section.id, @first_article.id).order(published_at: :desc).paginate(page: params[:page], per_page: 12)
-				end
+			@related_sections = RelatedSection.where(section: @section)
+			@first_article = Article.joins("INNER JOIN cover_articles ON cover_articles.article_id = articles.id")
+									.where("cover_articles.section_id = ?", @section.id)
+									.order("cover_articles.article_highlight DESC, cover_articles.published_at DESC")
+									.first
+			if @first_article
+				@articles = Article.where("published = true AND articable_id = ? AND published_at IS NOT NULL AND id != ?", 
+										@section.id, @first_article.id)
+								.order(published_at: :desc)
+								.paginate(page: params[:page], per_page: 6)
+			end
 			else
-				redirect_to root_url
+			redirect_to root_url
 			end
 		end
-
-	end
+		end
 
 	private		
 
