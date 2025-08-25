@@ -54,12 +54,12 @@
 
     <div class="field field--string">
       <label>Título de la Nota</label>
-      <%= f.text_field :name, max_chars: 80, required: true, data: { max_chars: 80 } %>
+      <%= f.text_field :name, max_chars: 120, required: true, data: { max_chars: 120 } %>
     </div>
 
     <div class="field">
       <label>Extracto</label>
-      <%= f.text_area :short_description, required: true, data: { max_chars: 120 } %>
+      <%= f.text_area :short_description, required: true, data: { max_chars: 150 } %>
     </div>
 
     <% if @article.image %>
@@ -276,22 +276,22 @@
     $(function() {
       $('#article_name').on('input', function() {
         const currentLength = $(this).val().length;
-        if (currentLength > 80) {
-          $(this).val($(this).val().substring(0, 80));
+        if (currentLength > 120) {
+          $(this).val($(this).val().substring(0, 120));
         }
-        $('#title-counter').text($(this).val().length + '/80');
+        $('#title-counter').text($(this).val().length + '/120');
       }).trigger('input');
 
       $('#article_short_description').on('input', function() {
         const currentLength = $(this).val().length;
-        if (currentLength > 120) {
-          $(this).val($(this).val().substring(0, 120));
+        if (currentLength > 150) {
+          $(this).val($(this).val().substring(0, 150));
         }
-        $('#excerpt-counter').text($(this).val().length + '/120');
+        $('#excerpt-counter').text($(this).val().length + '/150');
       }).trigger('input');
 
-      $('<span id="title-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/80</span>').insertAfter('#article_name');
-      $('<span id="excerpt-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/120</span>').insertAfter('#article_short_description');
+      $('<span id="title-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/120</span>').insertAfter('#article_name');
+      $('<span id="excerpt-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/150</span>').insertAfter('#article_short_description');
     });
 
     // === Vista previa de imágenes ===

@@ -8,35 +8,22 @@ class StationsController < ApplicationController
     @news_channels = Station.where(news: true).order(frequency: :asc)
   end
 
-def show
-  unless @station.stream_url.present?
-    Rails.logger.warn "Estación #{@station.slug} sin stream_url definido"
-    redirect_to root_url, alert: "Esta estación no tiene stream disponible"
-    return
+  def show
+    @https_src = "https://59dcdb8f833ed.streamlock.net:443/Shoutcast/#{@station.stream_url}.stream/playlist.m3u8"
+    @rtmps_src = "rtmps://59dcdb8f833ed.streamlock.net:443/Shoutcast/#{@station.stream_url}.stream"
+    session[:article_id] = nil
+
+    if params[:tag]
+      redirect_to search_results_path(params[:tag])
+      return
+    end
+
+    @recommendations = Station.where.not(id: @station.id).where(news: false).last(7)
+    time = Time.now
+    weekday = time.strftime("%A").downcase
+
+    @timetables = Timetable.where("#{weekday} = ? AND station_id = ? AND (streaming_hour < ? AND end_streaming_hour > ? OR streaming_hour > ?)", true, @station.id, time, time, time).order(streaming_hour: :asc).first(5)
   end
-
-  @https_src = "https://59dcdb8f833ed.streamlock.net:443/Shoutcast/#{@station.stream_url}.stream/playlist.m3u8"
-  @rtmps_src = "rtmps://59dcdb8f833ed.streamlock.net:443/Shoutcast/#{@station.stream_url}.stream"
-  session[:article_id] = nil
-
-  if params[:tag]
-    redirect_to search_results_path(params[:tag])
-    return
-  end
-
-  @recommendations = Station.where.not(id: @station.id).where(news: false).last(7)
-  time = Time.now
-  weekday = time.strftime("%A").downcase
-
-  # Asegurarse que weekday sea columna válida
-  if Timetable.column_names.include?(weekday)
-    @timetables = Timetable.where("#{weekday} = ? AND station_id = ? AND ((streaming_hour < ? AND end_streaming_hour > ?) OR streaming_hour > ?)", true, @station.id, time, time, time).order(streaming_hour: :asc).limit(5)
-  else
-    Rails.logger.warn "Columna weekday inválida: #{weekday}"
-    @timetables = []
-  end
-end
-
 
   def new
     @station = Station.new
@@ -107,14 +94,15 @@ end
     redirect_to root_url
   end
 
-def set_station
-  @station = Station.find_by("slug ILIKE ?", params[:id])
-  unless @station
-    Rails.logger.warn "Estación no encontrada con slug: #{params[:id]}"
-    redirect_to root_url, alert: "No encontramos la estación solicitada"
+  def set_station
+    @station = Station.where("slug ILIKE ?", params[:id])
+    if @station.empty?
+      flash[:alert] = "No encontramos lo que estabas buscando"
+      redirect_to root_url
+    else
+      @station = @station.first
+    end
   end
-end
-
 
   def station_params
     raw = params.require(:station).permit(

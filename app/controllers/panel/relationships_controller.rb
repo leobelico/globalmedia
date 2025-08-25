@@ -41,7 +41,10 @@ class Panel::RelationshipsController < ApplicationController
 	end
 
 	def show
-
+		@article_relationships = @relationship.article_relationships
+                           .includes(:article)
+                           .order(created_at: "DESC")
+                           .paginate(page: params[:page], per_page: 20)
 	end
 
 	def edit
@@ -97,7 +100,7 @@ class Panel::RelationshipsController < ApplicationController
 		def set_new
 			@relationship = Relationship.new
 		end
-		def set_relationship
+		def set_relationships
 			@relationship = Relationship.find_by_slug(params[:slug])
 			rescue ActiveRecord::RecordNotFound
 				flash[:alert] = "La página que estabas buscando no existe."
