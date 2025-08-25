@@ -41,10 +41,7 @@ class Panel::RelationshipsController < ApplicationController
 	end
 
 	def show
-		@article_relationships = @relationship.article_relationships
-                           .includes(:article)
-                           .order(created_at: "DESC")
-                           .paginate(page: params[:page], per_page: 20)
+
 	end
 
 	def edit
