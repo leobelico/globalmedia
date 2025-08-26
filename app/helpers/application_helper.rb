@@ -5,19 +5,6 @@ module ApplicationHelper
     link_to(name, '#', class: css_class, data: { action: 'remove-fields' })
   end
 
-  def absolute_image_url(image_path)
-    # Si ya es una URL completa, devolverla tal cual
-    return image_path if image_path.start_with?('http')
-    
-    # Para ActiveStorage
-    if image_path.respond_to?(:blob)
-      rails_blob_url(image_path, host: 'https://globalmedia.mx')
-    else
-      # Para rutas de imagen normales
-      URI.join('https://globalmedia.mx', image_path).to_s
-    end
-  end
-  
   def link_to_add_fields(name, f, association, css_class, title)
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
