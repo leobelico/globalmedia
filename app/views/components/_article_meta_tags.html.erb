@@ -1,3 +1,4 @@
+<%# app/views/components/_article_meta_tags.html.erb %>
 <title><%= article.name %></title>
 
 <% if article.meta_tags.present? %>
@@ -6,32 +7,55 @@
   <meta name="keywords" content="GlobalMedia, noticias, México, San Luis Potosí, Vanguardia, Negocios, Radio, Televisión, Bajío, Estaciones de radio" />
 <% end %>
 
-<meta name="description" content="<%= truncate(article.short_description, length: 50) %>" />
+<meta name="description" content="<%= truncate(article.short_description, length: 160) %>" />
 
+<%# Open Graph Meta Tags %>
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="GlobalMedia" />
 <meta property="fb:app_id" content="502512736803830" /> 
 <meta property="og:title" content="<%= article.name %>" />
-<meta property="og:description" content="<%= article.short_description %> <%= truncate(article.plain_text, length: 300) %>" />
+<meta property="og:description" content="<%= article.short_description %>" />
 <meta property="og:locale" content="es_MX" />
 <meta property="article:author" content="https://www.facebook.com/GlobalMediaSLP/?fref=ts" />
-<meta property="article:section" content="<%= article.articable.name if article.articable %>" />
+<% if article.articable %>
+  <meta property="article:section" content="<%= article.articable.name %>" />
+<% end %>
 
-<meta property="og:url" content="<%= article_url(article) %>" />
-<meta property="og:image" itemprop="image" content="<%= image_url(article.image) %>" />
-<meta property="og:image:secure_url" content="<%= image_url(article.image).sub(/^http:/, 'https:') %>" />
-<meta property="og:image:type" content="image/jpg" />
-<meta property="og:image:width" itemprop="image" content="400" />
-<meta property="og:image:height" itemprop="image" content="400" />
+<%# URL absoluta con protocolo HTTPS %>
+<meta property="og:url" content="<%= article_url(article, host: 'https://globalmedia.mx') %>" />
 
-<meta name="twitter:image" content="<%= image_url(article.image).sub(/^http:/, 'https:') %>" />
-<link rel="image_src" href="<%= image_url(article.image) %>" />
+<%# Imagen - URL absoluta y dimensiones reales %>
+<% if article.image.attached? %>
+  <%# Para ActiveStorage %>
+  <meta property="og:image" content="<%= rails_blob_url(article.image, host: 'https://globalmedia.mx') %>" />
+  <meta property="og:image:secure_url" content="<%= rails_blob_url(article.image, host: 'https://globalmedia.mx') %>" />
+<% else %>
+  <%# Para imágenes estáticas o de otro tipo %>
+  <meta property="og:image" content="<%= absolute_image_url(article.image) %>" />
+  <meta property="og:image:secure_url" content="<%= absolute_image_url(article.image) %>" />
+<% end %>
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="<%= article.name %>" />
 
+<%# Twitter Card Meta Tags %>
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@globalmediamx" />
 <meta name="twitter:title" content="<%= article.name %>" />
-<meta name="twitter:description" content="<%= article.short_description %> <%= truncate(article.plain_text, length: 300) %>" />
+<meta name="twitter:description" content="<%= article.short_description %>" />
 <meta name="twitter:creator" content="@globalmediamx" />
-<meta name="twitter:image:src" content="<%= image_url(article.image).sub(/^http:/, 'https:') %>" />
-<meta name="twitter:image:alt" content="<%= truncate(article.short_description, length: 50) %>" />
-<meta name="twitter:domain" content="www.globalmedia.mx" />
+<% if article.image.attached? %>
+  <meta name="twitter:image" content="<%= rails_blob_url(article.image, host: 'https://globalmedia.mx') %>" />
+<% else %>
+  <meta name="twitter:image" content="<%= absolute_image_url(article.image) %>" />
+<% end %>
+<meta name="twitter:image:alt" content="<%= article.name %>" />
+<meta name="twitter:domain" content="globalmedia.mx" />
+
+<%# Meta tags adicionales para artículos %>
+<meta property="article:published_time" content="<%= article.published_at || article.created_at %>" />
+<meta property="article:modified_time" content="<%= article.updated_at %>" />
+<% article.hashtags.each do |hashtag| %>
+  <meta property="article:tag" content="<%= hashtag.name %>" />
+<% end %>
