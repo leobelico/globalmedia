@@ -30,3 +30,40 @@
 <div class="pagination">
   <%= will_paginate @authors %>
 </div>
+<style>
+.pagination {
+  text-align: center;
+  margin: 30px 0;
+  padding: 20px;
+}
+
+.pagination a, 
+.pagination span {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 0 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.pagination .current {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination a:hover {
+  background-color: #f8f9fa;
+  border-color: #007bff;
+}
+
+.pagination .disabled {
+  color: #6c757d;
+  pointer-events: none;
+  background-color: #f8f9fa;
+}
+</style>
