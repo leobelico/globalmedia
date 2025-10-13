@@ -135,62 +135,70 @@ class Panel::ArticlesController < ApplicationController
 		end
 	end
 
-	def update
-		if params[:article][:note]
-			@article.note = params[:article][:note]
-		end
-		if params[:scheduled_time_1i]
-			somedate = Time.zone.local(params[:scheduled_time_1i].to_i, 
-	                        params[:scheduled_time_2i].to_i,
-	                        params[:scheduled_time_3i].to_i,
-	                        params[:scheduled_time_4i].to_i,
-	                        params[:scheduled_time_5i].to_i, 0)
-		end
+		def update
+	if params[:article][:note]
+		@article.note = params[:article][:note]
+	end
+	
+	if params[:scheduled_time_1i]
+		somedate = Time.zone.local(params[:scheduled_time_1i].to_i, 
+							params[:scheduled_time_2i].to_i,
+							params[:scheduled_time_3i].to_i,
+							params[:scheduled_time_4i].to_i,
+							params[:scheduled_time_5i].to_i, 0)
+	end
 
-		if somedate 
-			@article.scheduled_time = somedate
-		end
+	if somedate 
+		@article.scheduled_time = somedate
+	end
 
-		if params[:article][:draft].to_i == 0 or params[:article][:draft].to_i == -1
-			@article.published = false
-		end
+	if params[:article][:draft].to_i == 0 or params[:article][:draft].to_i == -1
+		@article.published = false
+	end
 
-		if params[:article][:draft].to_i == 2
-			@article.published = true
-		end
+	if params[:article][:draft].to_i == 2
+		@article.published = true
+	end
 
-		if @article.update(article_params)
-			UpdateArticleJob.perform_later @article
+	# Regenerar el slug si el nombre cambió
+	if params[:article][:name] && params[:article][:name] != @article.name
+		@article.slug = generate_slug(params[:article][:name])
+	end
 
-			if @article.published? 	
+	if @article.update(article_params)
+		UpdateArticleJob.perform_later @article
 
-				if Section.where(visible: true).include?(@article.articable)
-					does_cover_article_exists = CoverArticle.where(article_id: @article.id)
-					if does_cover_article_exists.count <= 0
-						if CoverArticle.where(section_id: @article.articable_id).count < 20
-							CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
-						else
-							last_article = CoverArticle.where(section_id: @article.articable_id, article_highlight: false).order(published_at: :asc).last(20).reverse.last.destroy
-							CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
-						end
-					else
-						does_cover_article_exists.first.update(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
-
-					end
-				end
-
-				does_article_exists = LatestArticle.where(article_id: @article.id)
-				if does_article_exists.count >=1 
-					# LatestArticle.create(article_id: 5900, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
-
-
-					does_article_exists.first.update(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
-				end
+		if @article.published?     
+		if Section.where(visible: true).include?(@article.articable)
+			does_cover_article_exists = CoverArticle.where(article_id: @article.id)
+			if does_cover_article_exists.count <= 0
+			if CoverArticle.where(section_id: @article.articable_id).count < 20
+				CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
+			else
+				last_article = CoverArticle.where(section_id: @article.articable_id, article_highlight: false).order(published_at: :asc).last(20).reverse.last.destroy
+				CoverArticle.create(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, article_highlight: false, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
 			end
-			redirect_to @article
-		else
-			render action: "edit"
+			else
+			does_cover_article_exists.first.update(article_image: @article.image, article_id: @article.id, article_slug: @article.slug, name: @article.name, published_at: @article.published_at, section_id: @article.articable_id, section_name: @article.articable.name, section_slug: @article.articable.slug, section_description: @article.articable.description, article_exclusive: @article.exclusive, section_color: @article.articable.color)
+			end
 		end
+
+		does_article_exists = LatestArticle.where(article_id: @article.id)
+		if does_article_exists.count >=1 
+			does_article_exists.first.update(article_id: @article.id, article_slug: @article.slug, name: @article.name, section_name: @article.articable.name, section_slug: @article.articable.slug, published_at: @article.published_at)
+		end
+		end
+		redirect_to @article
+	else
+		render action: "edit"
+	end
+	end
+
+	private
+
+	def generate_slug(name)
+	# Convierte el nombre a slug (minúsculas, reemplaza espacios con _)
+	name.parameterize.underscore
 	end
 
 	def destroy
