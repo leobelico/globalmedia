@@ -4,11 +4,11 @@
 		<%= link_to "Nuevo Autor", new_panel_author_path, class: "button" %>
 	</div>
 </div>
+
 <div class="table card">
 	<div class="table__row">
 		<p class="table__cell">Nombre:</p>
 		<div class="table__image">Imagen:</div>
-
 		<p class="table__cell">Fecha de creación:</p>
 		<p class="table__cell">Artículos:</p>
 		<p class="table__cell">Editar:</p>
@@ -17,12 +17,16 @@
 	<% @authors.each do |author| %>
 		<div class="table__row">
 			<%= link_to author.name, panel_author_path(author), class: "table__cell" %>
-			<img src="<%= author.logo %>" alt=<%= author.name %> class="table__image">
-
+			<img src="<%= author.logo %>" alt="<%= author.name %>" class="table__image">
 			<p class="table__cell"><%= author.created_at.strftime("%A, %d %b %Y %l:%M %p") %></p>
 			<p class="table__cell"><%= author.articles.count %></p>
 			<%= link_to "Editar", edit_panel_author_path(author), class: "table__cell edit" %>
-			<%= link_to "Delete", panel_author_path(author), method: :delete, data: { confirm: "¿Estas seguro de querer eliminar el banenr? Esta acción no se puede deshacer." }, class: "table__cell delete" %>
+			<%= link_to "Delete", panel_author_path(author), method: :delete, data: { confirm: "¿Estas seguro de querer eliminar el autor? Esta acción no se puede deshacer." }, class: "table__cell delete" %>
 		</div>
 	<% end %>	
+</div>
+
+<!-- PAGINACIÓN - AQUÍ VA -->
+<div class="pagination">
+  <%= will_paginate @authors %>
 </div>
