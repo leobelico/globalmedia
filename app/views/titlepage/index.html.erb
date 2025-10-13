@@ -209,33 +209,31 @@
    <%= render "components/collaborators", articles: get_collaborators || [] %>
   </div>
 </div>
-  <div class="section-previews-container">
-    <%# Reordenar secciones: San-Luis primero, luego Denuncia Urbana, luego las demás %>
-    
-    <%# Primero: San-Luis %>
-    <% san_luis_section = @sections.find { |section| section.name == "San-Luis" } %>
-    <% if san_luis_section %>
-      <% cache(get_cover_articles(san_luis_section.id)) do %>
-        <%= render "/layouts/cover_section_preview", articles: get_cover_articles(san_luis_section.id) %>
-      <% end %>
+ <div class="section-previews-container">
+  <%# San-Luis primero %>
+  <% san_luis_section = @sections.find_by(name: "San-Luis") %>
+  <% if san_luis_section %>
+    <% cache(get_cover_articles(san_luis_section.id)) do %>
+      <%= render "/layouts/cover_section_preview", articles: get_cover_articles(san_luis_section.id) %>
     <% end %>
+  <% end %>
 
-    <%# Segundo: Denuncia Urbana %>
-    <% denuncia_urbana_section = @sections.find { |section| section.name == "Denuncia Urbana" } %>
-    <% if denuncia_urbana_section %>
-      <% cache(get_cover_articles(denuncia_urbana_section.id)) do %>
-        <%= render "/layouts/cover_section_preview", articles: get_cover_articles(denuncia_urbana_section.id) %>
-      <% end %>
+  <%# Denuncia Urbana segundo %>
+  <% denuncia_urbana_section = @sections.find_by(name: "Denuncia Urbana") %>
+  <% if denuncia_urbana_section %>
+    <% cache(get_cover_articles(denuncia_urbana_section.id)) do %>
+      <%= render "/layouts/cover_section_preview", articles: get_cover_articles(denuncia_urbana_section.id) %>
     <% end %>
+  <% end %>
 
-    <%# Finalmente: Todas las demás secciones (excluyendo las dos anteriores) %>
-    <% otras_secciones = @sections.reject { |section| ["San-Luis", "Denuncia Urbana"].include?(section.name) } %>
-    <% otras_secciones.each do |section| %>
-      <% cache(get_cover_articles(section.id)) do %>
-        <%= render "/layouts/cover_section_preview", articles: get_cover_articles(section.id) %>
-      <% end %>
+  <%# Las demás secciones %>
+  <% otras_secciones = @sections.where.not(name: ["San-Luis", "Denuncia Urbana"]) %>
+  <% otras_secciones.each do |section| %>
+    <% cache(get_cover_articles(section.id)) do %>
+      <%= render "/layouts/cover_section_preview", articles: get_cover_articles(section.id) %>
     <% end %>
-  </div>
+  <% end %>
+</div>
 <% if get_banner("", "TitlePage", "Grande" ).count > 0 %>
   <%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande" )  %>
 <% else %>
