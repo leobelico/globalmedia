@@ -113,15 +113,32 @@
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
 <script>
-// Variable global para controlar el estado del editor
-window.articleForm = {
-  initialized: false,
-  editor: null
-};
+// Variable global con control más estricto
+if (typeof window.articleForm === 'undefined') {
+  window.articleForm = {
+    initialized: false,
+    editor: null,
+    initializationInProgress: false
+  };
+}
 
 function initializeArticleForm() {
+  // Prevenir múltiples inicializaciones simultáneas
+  if (window.articleForm.initializationInProgress) {
+    console.log('Inicialización ya en progreso, omitiendo...');
+    return;
+  }
+  
+  // Si ya está inicializado y el editor existe, no hacer nada
+  if (window.articleForm.initialized && window.articleForm.editor) {
+    console.log('Formulario ya inicializado, omitiendo...');
+    return;
+  }
+  
   console.log('Inicializando formulario de artículo...');
+  window.articleForm.initializationInProgress = true;
   
   // Verificar que todos los elementos necesarios existen
   const noteEditor = document.getElementById('note-editor');
@@ -130,179 +147,210 @@ function initializeArticleForm() {
   
   if (!noteEditor || !articleName || !shortDescription) {
     console.warn('Elementos del formulario no encontrados, reintentando...');
-    setTimeout(initializeArticleForm, 100);
+    setTimeout(() => {
+      window.articleForm.initializationInProgress = false;
+      initializeArticleForm();
+    }, 100);
     return;
   }
 
-  // Inicializar Quill (siempre recrearlo para evitar problemas con cache)
-  initializeQuillEditor();
+  // Inicializar Quill solo si no existe
+  if (!window.articleForm.editor) {
+    initializeQuillEditor();
+  }
   
-  // Inicializar contadores
-  initializeCounters();
-  
-  // Inicializar preview de imágenes
-  initializeImagePreviews();
-  
-  // Inicializar contador de metatags
-  initializeMetaTagsCounter();
+  // Inicializar contadores (solo una vez)
+  if (!window.articleForm.initialized) {
+    initializeCounters();
+    initializeImagePreviews();
+    initializeMetaTagsCounter();
+  }
   
   // Marcar como inicializado
   window.articleForm.initialized = true;
+  window.articleForm.initializationInProgress = false;
+  console.log('Formulario inicializado correctamente');
 }
 
 function initializeQuillEditor() {
-  // Destruir editor existente si hay uno
-  if (window.articleForm.editor) {
-    try {
-      const element = document.getElementById('note-editor');
-      if (element) {
-        element.innerHTML = ''; // Limpiar contenido
-      }
-      window.articleForm.editor = null;
-    } catch (e) {
-      console.warn('Error al destruir editor anterior:', e);
+  console.log('Inicializando Quill editor...');
+  
+  // Limpiar el contenedor completamente
+  const noteEditor = document.getElementById('note-editor');
+  if (noteEditor) {
+    // Remover todos los hijos del contenedor
+    while (noteEditor.firstChild) {
+      noteEditor.removeChild(noteEditor.firstChild);
     }
+    
+    // Crear estructura limpia para Quill
+    const editorContainer = document.createElement('div');
+    editorContainer.id = 'quill-container';
+    noteEditor.appendChild(editorContainer);
   }
 
-  // Registrar blots personalizados (hacerlo cada vez por si hay cache)
+  // Registrar blots personalizados solo si no están registrados
   const BlockEmbed = Quill.import('blots/block/embed');
 
-  // === Tweet Blot ===
-  class TweetBlot extends BlockEmbed {
-    static create(url) {
-      const node = super.create();
-      node.innerHTML = `<blockquote class="twitter-tweet"><a href="${url}"></a></blockquote>`;
-      if (typeof twttr !== 'undefined') {
-        setTimeout(() => twttr.widgets.load(node), 100);
+  // Verificar si los blots ya están registrados
+  const existingBlots = Quill.imports['blots/block/embed'];
+  let needRegistration = true;
+  
+  if (existingBlots) {
+    // Verificar si alguno de nuestros blots ya existe
+    const blotNames = ['tweet', 'instagram', 'tiktok'];
+    needRegistration = !blotNames.some(name => Quill.imports[`blots/block/embed/${name}`]);
+  }
+
+  if (needRegistration) {
+    // === Tweet Blot ===
+    class TweetBlot extends BlockEmbed {
+      static create(url) {
+        const node = super.create();
+        node.innerHTML = `<blockquote class="twitter-tweet"><a href="${url}"></a></blockquote>`;
+        if (typeof twttr !== 'undefined') {
+          setTimeout(() => twttr.widgets.load(node), 100);
+        }
+        return node;
       }
-      return node;
-    }
 
-    static value(node) {
-      const anchor = node.querySelector('a');
-      return anchor ? anchor.getAttribute('href') : '';
-    }
-  }
-  TweetBlot.blotName = 'tweet';
-  TweetBlot.tagName = 'div';
-  TweetBlot.className = 'tweet-embed';
-  
-  // === Instagram Blot ===
-  class InstagramBlot extends BlockEmbed {
-    static create(url) {
-      const node = super.create();
-      node.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${url}" data-instgrm-version="12"></blockquote>`;
-      if (window.instgrm) {
-        setTimeout(() => window.instgrm.Embeds.process(node), 100);
+      static value(node) {
+        const anchor = node.querySelector('a');
+        return anchor ? anchor.getAttribute('href') : '';
       }
-      return node;
     }
+    TweetBlot.blotName = 'tweet';
+    TweetBlot.tagName = 'div';
+    TweetBlot.className = 'tweet-embed';
+    
+    // === Instagram Blot ===
+    class InstagramBlot extends BlockEmbed {
+      static create(url) {
+        const node = super.create();
+        node.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${url}" data-instgrm-version="12"></blockquote>`;
+        if (window.instgrm) {
+          setTimeout(() => window.instgrm.Embeds.process(node), 100);
+        }
+        return node;
+      }
 
-    static value(node) {
-      return node.querySelector('blockquote')?.getAttribute('data-instgrm-permalink');
+      static value(node) {
+        return node.querySelector('blockquote')?.getAttribute('data-instgrm-permalink');
+      }
     }
-  }
-  InstagramBlot.blotName = 'instagram';
-  InstagramBlot.tagName = 'div';
-  InstagramBlot.className = 'instagram-embed';
-  
-  // === TikTok Blot ===
-  class TikTokBlot extends BlockEmbed {
-    static create(url) {
-      const node = super.create();
-      const videoId = url.split('/').filter(Boolean).pop();
-      node.innerHTML = `
-        <blockquote class="tiktok-embed" cite="${url}" data-video-id="${videoId}" style="max-width: 325px;"><section></section></blockquote>
-      `;
-      setTimeout(() => {
-        const script = document.createElement('script');
-        script.src = 'https://www.tiktok.com/embed.js';
-        script.async = true;
-        document.head.appendChild(script);
-      }, 100);
-      return node;
-    }
+    InstagramBlot.blotName = 'instagram';
+    InstagramBlot.tagName = 'div';
+    InstagramBlot.className = 'instagram-embed';
+    
+    // === TikTok Blot ===
+    class TikTokBlot extends BlockEmbed {
+      static create(url) {
+        const node = super.create();
+        const videoId = url.split('/').filter(Boolean).pop();
+        node.innerHTML = `
+          <blockquote class="tiktok-embed" cite="${url}" data-video-id="${videoId}" style="max-width: 325px;"><section></section></blockquote>
+        `;
+        setTimeout(() => {
+          const script = document.createElement('script');
+          script.src = 'https://www.tiktok.com/embed.js';
+          script.async = true;
+          document.head.appendChild(script);
+        }, 100);
+        return node;
+      }
 
-    static value(node) {
-      return node.querySelector('blockquote')?.getAttribute('cite');
+      static value(node) {
+        return node.querySelector('blockquote')?.getAttribute('cite');
+      }
     }
-  }
-  TikTokBlot.blotName = 'tiktok';
-  TikTokBlot.tagName = 'div';
-  TikTokBlot.className = 'tiktok-embed';
-  
-  // Re-registrar los blots (importante para cache)
-  try {
-    Quill.register(TweetBlot);
-    Quill.register(InstagramBlot);
-    Quill.register(TikTokBlot);
-  } catch (e) {
-    console.warn('Los blots ya estaban registrados:', e);
+    TikTokBlot.blotName = 'tiktok';
+    TikTokBlot.tagName = 'div';
+    TikTokBlot.className = 'tiktok-embed';
+    
+    // Registrar los blots
+    try {
+      Quill.register(TweetBlot);
+      Quill.register(InstagramBlot);
+      Quill.register(TikTokBlot);
+      console.log('Blots personalizados registrados');
+    } catch (e) {
+      console.warn('Los blots ya estaban registrados:', e);
+    }
   }
 
   // === Inicialización de Quill ===
-  window.articleForm.editor = new Quill('#note-editor', {
-    theme: 'snow',
-    modules: {
-      toolbar: [
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        ['bold', 'italic', 'underline', 'strike'],
-        ['blockquote', 'code-block', 'video', 'image', 'link'],
-        ['tweet', 'instagram', 'tiktok'],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'indent': '-1'}, { 'indent': '+1' }],
-        [{ 'align': [] }],
-        [{ 'color': [] }, { 'background': [] }],
-        [{ 'font': [] }],
-        [{ 'size': ['small', false, 'large', 'huge'] }],
-        ['clean']
-      ],
-      clipboard: {
-        matchVisual: false
+  try {
+    window.articleForm.editor = new Quill('#note-editor', {
+      theme: 'snow',
+      modules: {
+        toolbar: [
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          ['blockquote', 'code-block', 'video', 'image', 'link'],
+          ['tweet', 'instagram', 'tiktok'],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'indent': '-1'}, { 'indent': '+1' }],
+          [{ 'align': [] }],
+          [{ 'color': [] }, { 'background': [] }],
+          [{ 'font': [] }],
+          [{ 'size': ['small', false, 'large', 'huge'] }],
+          ['clean']
+        ],
+        clipboard: {
+          matchVisual: false
+        }
+      },
+      placeholder: 'Escribe el contenido de tu artículo aquí...'
+    });
+
+    // === Handlers para insertar embeds ===
+    const toolbar = window.articleForm.editor.getModule('toolbar');
+    
+    // Remover handlers existentes antes de agregar nuevos
+    const originalHandlers = {
+      tweet: toolbar.handlers['tweet'],
+      instagram: toolbar.handlers['instagram'],
+      tiktok: toolbar.handlers['tiktok']
+    };
+    
+    toolbar.addHandler('tweet', function() {
+      const url = prompt('Pega el enlace del Tweet:');
+      if (url) {
+        window.articleForm.editor.insertEmbed(window.articleForm.editor.getSelection().index, 'tweet', url);
       }
-    },
-    placeholder: 'Escribe el contenido de tu artículo aquí...'
-  });
-
-  // === Handlers para insertar embeds ===
-  const toolbar = window.articleForm.editor.getModule('toolbar');
-  toolbar.addHandler('tweet', function() {
-    const url = prompt('Pega el enlace del Tweet:');
-    if (url) {
-      window.articleForm.editor.insertEmbed(window.articleForm.editor.getSelection().index, 'tweet', url);
-    }
-  });
-  toolbar.addHandler('instagram', function() {
-    const url = prompt('Pega el enlace del post de Instagram:');
-    if (url) {
-      window.articleForm.editor.insertEmbed(window.articleForm.editor.getSelection().index, 'instagram', url);
-    }
-  });
-  toolbar.addHandler('tiktok', function() {
-    const url = prompt('Pega el enlace del video de TikTok:');
-    if (url) {
-      window.articleForm.editor.insertEmbed(window.articleForm.editor.getSelection().index, 'tiktok', url);
-    }
-  });
-
-  // === Cargar contenido existente ===
-  <% if @article.note.present? %>
-    try {
-      const noteContent = `<%= j @article.note.html_safe %>`;
-      if (noteContent.trim() !== '') {
-        window.articleForm.editor.root.innerHTML = noteContent;
+    });
+    
+    toolbar.addHandler('instagram', function() {
+      const url = prompt('Pega el enlace del post de Instagram:');
+      if (url) {
+        window.articleForm.editor.insertEmbed(window.articleForm.editor.getSelection().index, 'instagram', url);
       }
-    } catch(e) {
-      console.error("Error cargando contenido existente:", e);
-    }
-  <% end %>
+    });
+    
+    toolbar.addHandler('tiktok', function() {
+      const url = prompt('Pega el enlace del video de TikTok:');
+      if (url) {
+        window.articleForm.editor.insertEmbed(window.articleForm.editor.getSelection().index, 'tiktok', url);
+      }
+    });
 
-  // === Manejo del submit del formulario ===
-  const form = document.querySelector('form.directUpload');
-  if (form) {
-    // Remover event listeners previos
-    form.removeEventListener('submit', handleFormSubmit);
-    form.addEventListener('submit', handleFormSubmit);
+    // === Cargar contenido existente ===
+    <% if @article.note.present? %>
+      try {
+        const noteContent = `<%= j @article.note.html_safe %>`;
+        if (noteContent.trim() !== '') {
+          window.articleForm.editor.root.innerHTML = noteContent;
+        }
+      } catch(e) {
+        console.error("Error cargando contenido existente:", e);
+      }
+    <% end %>
+
+    console.log('Quill inicializado correctamente');
+
+  } catch (error) {
+    console.error('Error inicializando Quill:', error);
+    window.articleForm.editor = null;
   }
 }
 
@@ -318,12 +366,14 @@ function handleFormSubmit(e) {
 }
 
 function initializeCounters() {
+  console.log('Inicializando contadores...');
+  
   // Contador para título
   const titleInput = document.getElementById('article_name');
   const excerptInput = document.getElementById('article_short_description');
   
   if (titleInput) {
-    // Crear/actualizar contador de título
+    // Crear contador de título si no existe
     let titleCounter = document.getElementById('title-counter');
     if (!titleCounter) {
       titleCounter = document.createElement('span');
@@ -344,12 +394,14 @@ function initializeCounters() {
       }
     };
     
+    // Remover event listener anterior y agregar nuevo
+    titleInput.removeEventListener('input', updateTitleCounter);
     titleInput.addEventListener('input', updateTitleCounter);
     updateTitleCounter.call(titleInput);
   }
   
   if (excerptInput) {
-    // Crear/actualizar contador de extracto
+    // Crear contador de extracto si no existe
     let excerptCounter = document.getElementById('excerpt-counter');
     if (!excerptCounter) {
       excerptCounter = document.createElement('span');
@@ -370,12 +422,15 @@ function initializeCounters() {
       }
     };
     
+    // Remover event listener anterior y agregar nuevo
+    excerptInput.removeEventListener('input', updateExcerptCounter);
     excerptInput.addEventListener('input', updateExcerptCounter);
     updateExcerptCounter.call(excerptInput);
   }
 }
 
 function initializeImagePreviews() {
+  console.log('Inicializando previews de imágenes...');
   document.querySelectorAll('input[type=file]').forEach(function(input) {
     const field = input.closest('.field');
     let img = field.querySelector('.form__image-preview');
@@ -387,33 +442,34 @@ function initializeImagePreviews() {
       input.parentNode.insertBefore(img, input);
     }
     
+    function handleImageChange() {
+      if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        const field = this.closest('.field');
+        const img = field.querySelector('.form__image-preview');
+        
+        reader.onload = function(e) {
+          if (img) {
+            img.src = e.target.result;
+            img.style.display = 'block';
+          }
+        };
+        reader.readAsDataURL(this.files[0]);
+      }
+    }
+    
     input.removeEventListener('change', handleImageChange);
     input.addEventListener('change', handleImageChange);
   });
 }
 
-function handleImageChange() {
-  if (this.files && this.files[0]) {
-    const reader = new FileReader();
-    const field = this.closest('.field');
-    const img = field.querySelector('.form__image-preview');
-    
-    reader.onload = function(e) {
-      if (img) {
-        img.src = e.target.result;
-        img.style.display = 'block';
-      }
-    };
-    reader.readAsDataURL(this.files[0]);
-  }
-}
-
 function initializeMetaTagsCounter() {
+  console.log('Inicializando contador de metatags...');
   const metaTagsInput = document.getElementById('meta_tags');
   const metaTagsCounter = document.getElementById('meta-tags-counter');
   
   if (metaTagsInput && metaTagsCounter) {
-    const updateMetaTagsCounter = function() {
+    function updateMetaTagsCounter() {
       const text = this.value;
       const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
       
@@ -426,7 +482,7 @@ function initializeMetaTagsCounter() {
         metaTagsCounter.textContent = words + '/3 palabras';
         metaTagsCounter.style.color = words === 3 ? '#e74c3c' : '#666';
       }
-    };
+    }
     
     metaTagsInput.removeEventListener('input', updateMetaTagsCounter);
     metaTagsInput.addEventListener('input', updateMetaTagsCounter);
@@ -434,26 +490,43 @@ function initializeMetaTagsCounter() {
   }
 }
 
-// EVENTOS PRINCIPALES - Estrategia agresiva para Turbolinks
-document.addEventListener('turbolinks:load', function() {
-  console.log('Turbolinks:load - Inicializando formulario');
-  initializeArticleForm();
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOMContentLoaded - Inicializando formulario');
-  initializeArticleForm();
-});
+// GESTIÓN DE EVENTOS - Solo un event listener activo
+function setupEventListeners() {
+  // Remover event listeners anteriores
+  document.removeEventListener('turbolinks:load', initializeArticleForm);
+  document.removeEventListener('DOMContentLoaded', initializeArticleForm);
+  
+  // Agregar nuevos event listeners
+  document.addEventListener('turbolinks:load', initializeArticleForm);
+  document.addEventListener('DOMContentLoaded', initializeArticleForm);
+  
+  // Configurar submit del formulario
+  const form = document.querySelector('form.directUpload');
+  if (form) {
+    form.removeEventListener('submit', handleFormSubmit);
+    form.addEventListener('submit', handleFormSubmit);
+  }
+}
 
 // Limpiar completamente antes del cache
 document.addEventListener('turbolinks:before-cache', function() {
-  console.log('Turbolinks:before-cache - Limpiando formulario');
+  console.log('Limpiando antes del cache...');
   window.articleForm.initialized = false;
-  window.articleForm.editor = null;
+  window.articleForm.initializationInProgress = false;
+  
+  // No destruimos el editor para evitar problemas con Turbolinks
+  // Solo marcamos como no inicializado para que se reinicialice
 });
 
-// Inicialización inmediata si la página ya está cargada
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
+// INICIALIZACIÓN PRINCIPAL
+setupEventListeners();
+
+// Inicializar inmediatamente si es necesario
+if (document.readyState === 'loading') {
+  // Esperar a que el DOM esté listo
+  document.addEventListener('DOMContentLoaded', initializeArticleForm);
+} else {
+  // El DOM ya está listo, inicializar después de un breve delay
   setTimeout(initializeArticleForm, 10);
 }
 </script>
