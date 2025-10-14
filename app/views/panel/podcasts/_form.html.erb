@@ -37,41 +37,76 @@
 
 <script type="text/javascript">
   // Función para subir archivo a AWS S3 usando el formulario oculto fields-for-s3
-  function uploadAWSS3(file) {
-    return {
-      subscribe: function(successCallback, errorCallback) {
-        const form = document.getElementById('fields-for-s3');
-        const formData = new FormData(form);
-        const action = form.action;
+// Función corregida para manejar la respuesta XML de S3
+function uploadAWSS3(file) {
+  return {
+    subscribe: function(successCallback, errorCallback) {
+      const form = document.getElementById('fields-for-s3');
+      const formData = new FormData(form);
+      const action = form.action;
 
-        formData.append('file', file);
+      // Actualizar la key con el nombre real del archivo
+      const keyInput = form.querySelector('input[name="key"]');
+      const originalKey = keyInput.value;
+      const actualKey = originalKey.replace('${filename}', file.name);
+      formData.set('key', actualKey);
+      
+      formData.append('file', file);
 
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', action, true);
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', action, true);
 
-       xhr.onload = function () {
-        if (xhr.status === 201 || xhr.status === 200 || xhr.status === 204) {
-            const responseXML = xhr.responseXML;
-            const locationElement = responseXML ? responseXML.getElementsByTagName("Location")[0] : null;
-
+      xhr.onload = function () {
+        console.log('Respuesta completa de S3:', xhr.responseText); // Para debug
+        
+        // S3 responde con XML siempre, necesitamos parsearlo
+        if (xhr.status === 201) { // 201 = Success en S3
+          try {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xhr.responseText, "text/xml");
+            
+            // Buscar la URL en la respuesta XML
+            const locationElement = xmlDoc.getElementsByTagName("Location")[0];
+            
             if (locationElement && locationElement.textContent) {
-            successCallback(locationElement.textContent);
+              successCallback(locationElement.textContent);
             } else {
-            successCallback(action + '/' + encodeURIComponent(file.name));
+              // Si no encuentra Location, construir la URL manualmente
+              const bucketUrl = action.split('/').slice(0, -1).join('/');
+              successCallback(bucketUrl + '/' + encodeURIComponent(actualKey));
             }
+          } catch (e) {
+            // Fallback si el XML parsing falla
+            const bucketUrl = action.split('/').slice(0, -1).join('/');
+            successCallback(bucketUrl + '/' + encodeURIComponent(actualKey));
+          }
         } else {
-            errorCallback('Error al subir archivo a S3. Código: ' + xhr.status);
+          // Manejar errores reales de S3
+          try {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xhr.responseText, "text/xml");
+            const errorCode = xmlDoc.getElementsByTagName("Code")[0];
+            const errorMessage = xmlDoc.getElementsByTagName("Message")[0];
+            
+            const errorMsg = errorCode && errorMessage 
+              ? `${errorCode.textContent}: ${errorMessage.textContent}`
+              : `Error S3: ${xhr.status}`;
+              
+            errorCallback(errorMsg);
+          } catch (e) {
+            errorCallback('Error desconocido: ' + xhr.status);
+          }
         }
-        };
+      };
 
-        xhr.onerror = function () {
-          errorCallback('Error de red al subir a S3.');
-        };
+      xhr.onerror = function () {
+        errorCallback('Error de red al conectar con S3.');
+      };
 
-        xhr.send(formData);
-      }
-    };
-  }
+      xhr.send(formData);
+    }
+  };
+}
 
   $(document).ready(() => {
     const iconUploading = $(`.icon-uploading`);
