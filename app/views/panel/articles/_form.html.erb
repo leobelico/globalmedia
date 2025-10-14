@@ -114,12 +114,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-// Variable global para controlar el estado
-window.articleFormInitialized = false;
+// Variable global para controlar el estado del editor
+window.articleForm = {
+  initialized: false,
+  editor: null
+};
 
 function initializeArticleForm() {
-  // Si ya está inicializado, salir
-  if (window.articleFormInitialized) return;
+  console.log('Inicializando formulario de artículo...');
   
   // Verificar que todos los elementos necesarios existen
   const noteEditor = document.getElementById('note-editor');
@@ -132,12 +134,8 @@ function initializeArticleForm() {
     return;
   }
 
-  console.log('Inicializando formulario de artículo...');
-  
-  // Inicializar Quill solo si no existe
-  if (typeof window.editor === 'undefined' || window.editor === null) {
-    initializeQuillEditor();
-  }
+  // Inicializar Quill (siempre recrearlo para evitar problemas con cache)
+  initializeQuillEditor();
   
   // Inicializar contadores
   initializeCounters();
@@ -149,10 +147,24 @@ function initializeArticleForm() {
   initializeMetaTagsCounter();
   
   // Marcar como inicializado
-  window.articleFormInitialized = true;
+  window.articleForm.initialized = true;
 }
 
 function initializeQuillEditor() {
+  // Destruir editor existente si hay uno
+  if (window.articleForm.editor) {
+    try {
+      const element = document.getElementById('note-editor');
+      if (element) {
+        element.innerHTML = ''; // Limpiar contenido
+      }
+      window.articleForm.editor = null;
+    } catch (e) {
+      console.warn('Error al destruir editor anterior:', e);
+    }
+  }
+
+  // Registrar blots personalizados (hacerlo cada vez por si hay cache)
   const BlockEmbed = Quill.import('blots/block/embed');
 
   // === Tweet Blot ===
@@ -161,7 +173,7 @@ function initializeQuillEditor() {
       const node = super.create();
       node.innerHTML = `<blockquote class="twitter-tweet"><a href="${url}"></a></blockquote>`;
       if (typeof twttr !== 'undefined') {
-        twttr.widgets.load(node);
+        setTimeout(() => twttr.widgets.load(node), 100);
       }
       return node;
     }
@@ -174,15 +186,14 @@ function initializeQuillEditor() {
   TweetBlot.blotName = 'tweet';
   TweetBlot.tagName = 'div';
   TweetBlot.className = 'tweet-embed';
-  Quill.register(TweetBlot);
-
+  
   // === Instagram Blot ===
   class InstagramBlot extends BlockEmbed {
     static create(url) {
       const node = super.create();
       node.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${url}" data-instgrm-version="12"></blockquote>`;
       if (window.instgrm) {
-        window.instgrm.Embeds.process(node);
+        setTimeout(() => window.instgrm.Embeds.process(node), 100);
       }
       return node;
     }
@@ -194,8 +205,7 @@ function initializeQuillEditor() {
   InstagramBlot.blotName = 'instagram';
   InstagramBlot.tagName = 'div';
   InstagramBlot.className = 'instagram-embed';
-  Quill.register(InstagramBlot);
-
+  
   // === TikTok Blot ===
   class TikTokBlot extends BlockEmbed {
     static create(url) {
@@ -204,10 +214,12 @@ function initializeQuillEditor() {
       node.innerHTML = `
         <blockquote class="tiktok-embed" cite="${url}" data-video-id="${videoId}" style="max-width: 325px;"><section></section></blockquote>
       `;
-      const script = document.createElement('script');
-      script.src = 'https://www.tiktok.com/embed.js';
-      script.async = true;
-      node.appendChild(script);
+      setTimeout(() => {
+        const script = document.createElement('script');
+        script.src = 'https://www.tiktok.com/embed.js';
+        script.async = true;
+        document.head.appendChild(script);
+      }, 100);
       return node;
     }
 
@@ -218,10 +230,18 @@ function initializeQuillEditor() {
   TikTokBlot.blotName = 'tiktok';
   TikTokBlot.tagName = 'div';
   TikTokBlot.className = 'tiktok-embed';
-  Quill.register(TikTokBlot);
+  
+  // Re-registrar los blots (importante para cache)
+  try {
+    Quill.register(TweetBlot);
+    Quill.register(InstagramBlot);
+    Quill.register(TikTokBlot);
+  } catch (e) {
+    console.warn('Los blots ya estaban registrados:', e);
+  }
 
   // === Inicialización de Quill ===
-  window.editor = new Quill('#note-editor', {
+  window.articleForm.editor = new Quill('#note-editor', {
     theme: 'snow',
     modules: {
       toolbar: [
@@ -245,23 +265,23 @@ function initializeQuillEditor() {
   });
 
   // === Handlers para insertar embeds ===
-  const toolbar = window.editor.getModule('toolbar');
+  const toolbar = window.articleForm.editor.getModule('toolbar');
   toolbar.addHandler('tweet', function() {
     const url = prompt('Pega el enlace del Tweet:');
     if (url) {
-      window.editor.insertEmbed(window.editor.getSelection().index, 'tweet', url);
+      window.articleForm.editor.insertEmbed(window.articleForm.editor.getSelection().index, 'tweet', url);
     }
   });
   toolbar.addHandler('instagram', function() {
     const url = prompt('Pega el enlace del post de Instagram:');
     if (url) {
-      window.editor.insertEmbed(window.editor.getSelection().index, 'instagram', url);
+      window.articleForm.editor.insertEmbed(window.articleForm.editor.getSelection().index, 'instagram', url);
     }
   });
   toolbar.addHandler('tiktok', function() {
     const url = prompt('Pega el enlace del video de TikTok:');
     if (url) {
-      window.editor.insertEmbed(window.editor.getSelection().index, 'tiktok', url);
+      window.articleForm.editor.insertEmbed(window.articleForm.editor.getSelection().index, 'tiktok', url);
     }
   });
 
@@ -270,7 +290,7 @@ function initializeQuillEditor() {
     try {
       const noteContent = `<%= j @article.note.html_safe %>`;
       if (noteContent.trim() !== '') {
-        window.editor.root.innerHTML = noteContent;
+        window.articleForm.editor.root.innerHTML = noteContent;
       }
     } catch(e) {
       console.error("Error cargando contenido existente:", e);
@@ -280,17 +300,21 @@ function initializeQuillEditor() {
   // === Manejo del submit del formulario ===
   const form = document.querySelector('form.directUpload');
   if (form) {
-    form.addEventListener('submit', function(e) {
-      const contentField = document.querySelector('#article_note');
-      if (contentField && window.editor) {
-        contentField.value = JSON.stringify({
-          html: window.editor.root.innerHTML,
-          delta: window.editor.getContents()
-        });
-      }
-      return true;
+    // Remover event listeners previos
+    form.removeEventListener('submit', handleFormSubmit);
+    form.addEventListener('submit', handleFormSubmit);
+  }
+}
+
+function handleFormSubmit(e) {
+  const contentField = document.querySelector('#article_note');
+  if (contentField && window.articleForm.editor) {
+    contentField.value = JSON.stringify({
+      html: window.articleForm.editor.root.innerHTML,
+      delta: window.articleForm.editor.getContents()
     });
   }
+  return true;
 }
 
 function initializeCounters() {
@@ -299,9 +323,10 @@ function initializeCounters() {
   const excerptInput = document.getElementById('article_short_description');
   
   if (titleInput) {
-    // Crear contador de título si no existe
-    if (!document.getElementById('title-counter')) {
-      const titleCounter = document.createElement('span');
+    // Crear/actualizar contador de título
+    let titleCounter = document.getElementById('title-counter');
+    if (!titleCounter) {
+      titleCounter = document.createElement('span');
       titleCounter.id = 'title-counter';
       titleCounter.className = 'char-counter';
       titleCounter.style.cssText = 'display:block;font-size:0.8em;color:#666;';
@@ -310,24 +335,24 @@ function initializeCounters() {
     
     const updateTitleCounter = function() {
       const length = this.value.length;
-      const counter = document.getElementById('title-counter');
-      if (counter) {
-        counter.textContent = length + '/120';
+      if (titleCounter) {
+        titleCounter.textContent = length + '/120';
         if (length > 120) {
           this.value = this.value.substring(0, 120);
-          counter.textContent = '120/120';
+          titleCounter.textContent = '120/120';
         }
       }
     };
     
     titleInput.addEventListener('input', updateTitleCounter);
-    updateTitleCounter.call(titleInput); // Inicializar
+    updateTitleCounter.call(titleInput);
   }
   
   if (excerptInput) {
-    // Crear contador de extracto si no existe
-    if (!document.getElementById('excerpt-counter')) {
-      const excerptCounter = document.createElement('span');
+    // Crear/actualizar contador de extracto
+    let excerptCounter = document.getElementById('excerpt-counter');
+    if (!excerptCounter) {
+      excerptCounter = document.createElement('span');
       excerptCounter.id = 'excerpt-counter';
       excerptCounter.className = 'char-counter';
       excerptCounter.style.cssText = 'display:block;font-size:0.8em;color:#666;';
@@ -336,46 +361,51 @@ function initializeCounters() {
     
     const updateExcerptCounter = function() {
       const length = this.value.length;
-      const counter = document.getElementById('excerpt-counter');
-      if (counter) {
-        counter.textContent = length + '/150';
+      if (excerptCounter) {
+        excerptCounter.textContent = length + '/150';
         if (length > 150) {
           this.value = this.value.substring(0, 150);
-          counter.textContent = '150/150';
+          excerptCounter.textContent = '150/150';
         }
       }
     };
     
     excerptInput.addEventListener('input', updateExcerptCounter);
-    updateExcerptCounter.call(excerptInput); // Inicializar
+    updateExcerptCounter.call(excerptInput);
   }
 }
 
 function initializeImagePreviews() {
-  // Vista previa de imágenes usando JavaScript puro
   document.querySelectorAll('input[type=file]').forEach(function(input) {
     const field = input.closest('.field');
-    if (field && !field.querySelector('.form__image-preview')) {
-      const img = document.createElement('img');
+    let img = field.querySelector('.form__image-preview');
+    
+    if (!img) {
+      img = document.createElement('img');
       img.className = 'form__image-preview';
       img.style.cssText = 'display:none;max-width:100%;max-height:150px;margin-bottom:10px;border:1px solid #ddd;';
       input.parentNode.insertBefore(img, input);
     }
     
-    input.addEventListener('change', function() {
-      if (this.files && this.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const img = field.querySelector('.form__image-preview');
-          if (img) {
-            img.src = e.target.result;
-            img.style.display = 'block';
-          }
-        };
-        reader.readAsDataURL(this.files[0]);
-      }
-    });
+    input.removeEventListener('change', handleImageChange);
+    input.addEventListener('change', handleImageChange);
   });
+}
+
+function handleImageChange() {
+  if (this.files && this.files[0]) {
+    const reader = new FileReader();
+    const field = this.closest('.field');
+    const img = field.querySelector('.form__image-preview');
+    
+    reader.onload = function(e) {
+      if (img) {
+        img.src = e.target.result;
+        img.style.display = 'block';
+      }
+    };
+    reader.readAsDataURL(this.files[0]);
+  }
 }
 
 function initializeMetaTagsCounter() {
@@ -398,30 +428,34 @@ function initializeMetaTagsCounter() {
       }
     };
     
+    metaTagsInput.removeEventListener('input', updateMetaTagsCounter);
     metaTagsInput.addEventListener('input', updateMetaTagsCounter);
-    updateMetaTagsCounter.call(metaTagsInput); // Inicializar
+    updateMetaTagsCounter.call(metaTagsInput);
   }
 }
 
-// Múltiples estrategias de inicialización
-document.addEventListener('DOMContentLoaded', initializeArticleForm);
-document.addEventListener('turbolinks:load', initializeArticleForm);
+// EVENTOS PRINCIPALES - Estrategia agresiva para Turbolinks
+document.addEventListener('turbolinks:load', function() {
+  console.log('Turbolinks:load - Inicializando formulario');
+  initializeArticleForm();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOMContentLoaded - Inicializando formulario');
+  initializeArticleForm();
+});
+
+// Limpiar completamente antes del cache
+document.addEventListener('turbolinks:before-cache', function() {
+  console.log('Turbolinks:before-cache - Limpiando formulario');
+  window.articleForm.initialized = false;
+  window.articleForm.editor = null;
+});
 
 // Inicialización inmediata si la página ya está cargada
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeArticleForm);
-} else {
-  setTimeout(initializeArticleForm, 0);
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  setTimeout(initializeArticleForm, 10);
 }
-
-// Limpiar al salir de la página
-document.addEventListener('turbolinks:before-cache', function() {
-  window.articleFormInitialized = false;
-  if (window.editor) {
-    // No destruimos el editor completamente, solo marcamos como no inicializado
-    window.articleFormInitialized = false;
-  }
-});
 </script>
 
 <%= render "components/s3_form_js" %>
