@@ -283,10 +283,8 @@ function initializeQuillEditor() {
     form.addEventListener('submit', function(e) {
       const contentField = document.querySelector('#article_note');
       if (contentField && window.editor) {
-        contentField.value = JSON.stringify({
-          html: window.editor.root.innerHTML,
-          delta: window.editor.getContents()
-        });
+        // Guardar SOLO el HTML, no JSON
+        contentField.value = window.editor.root.innerHTML;
       }
       return true;
     });
