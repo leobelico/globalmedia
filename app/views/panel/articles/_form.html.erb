@@ -114,15 +114,45 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-  // Reemplaza todo el script con esta versión
-document.addEventListener('turbolinks:load', function() {
-  // Tu código de inicialización de Quill aquí
-  if (typeof window.editor === 'undefined' || window.editor === null) {
-    initializeQuill();
-  }
-});
+// Variable global para controlar el estado
+window.articleFormInitialized = false;
 
-function initializeQuill() {
+function initializeArticleForm() {
+  // Si ya está inicializado, salir
+  if (window.articleFormInitialized) return;
+  
+  // Verificar que todos los elementos necesarios existen
+  const noteEditor = document.getElementById('note-editor');
+  const articleName = document.getElementById('article_name');
+  const shortDescription = document.getElementById('article_short_description');
+  
+  if (!noteEditor || !articleName || !shortDescription) {
+    console.warn('Elementos del formulario no encontrados, reintentando...');
+    setTimeout(initializeArticleForm, 100);
+    return;
+  }
+
+  console.log('Inicializando formulario de artículo...');
+  
+  // Inicializar Quill solo si no existe
+  if (typeof window.editor === 'undefined' || window.editor === null) {
+    initializeQuillEditor();
+  }
+  
+  // Inicializar contadores
+  initializeCounters();
+  
+  // Inicializar preview de imágenes
+  initializeImagePreviews();
+  
+  // Inicializar contador de metatags
+  initializeMetaTagsCounter();
+  
+  // Marcar como inicializado
+  window.articleFormInitialized = true;
+}
+
+function initializeQuillEditor() {
   const BlockEmbed = Quill.import('blots/block/embed');
 
   // === Tweet Blot ===
@@ -189,13 +219,6 @@ function initializeQuill() {
   TikTokBlot.tagName = 'div';
   TikTokBlot.className = 'tiktok-embed';
   Quill.register(TikTokBlot);
-
-  // Verificar que el contenedor existe
-  const noteEditor = document.getElementById('note-editor');
-  if (!noteEditor) {
-    console.warn('Editor container not found');
-    return;
-  }
 
   // === Inicialización de Quill ===
   window.editor = new Quill('#note-editor', {
@@ -268,80 +291,137 @@ function initializeQuill() {
       return true;
     });
   }
-
-  // Inicializar contadores y preview de imágenes
-  initializeFormHelpers();
 }
 
-function initializeFormHelpers() {
-  // Contadores de caracteres
-  $(function() {
-    $('#article_name').on('input', function() {
-      const currentLength = $(this).val().length;
-      if (currentLength > 120) {
-        $(this).val($(this).val().substring(0, 120));
+function initializeCounters() {
+  // Contador para título
+  const titleInput = document.getElementById('article_name');
+  const excerptInput = document.getElementById('article_short_description');
+  
+  if (titleInput) {
+    // Crear contador de título si no existe
+    if (!document.getElementById('title-counter')) {
+      const titleCounter = document.createElement('span');
+      titleCounter.id = 'title-counter';
+      titleCounter.className = 'char-counter';
+      titleCounter.style.cssText = 'display:block;font-size:0.8em;color:#666;';
+      titleInput.parentNode.appendChild(titleCounter);
+    }
+    
+    const updateTitleCounter = function() {
+      const length = this.value.length;
+      const counter = document.getElementById('title-counter');
+      if (counter) {
+        counter.textContent = length + '/120';
+        if (length > 120) {
+          this.value = this.value.substring(0, 120);
+          counter.textContent = '120/120';
+        }
       }
-      $('#title-counter').text($(this).val().length + '/120');
-    }).trigger('input');
-
-    $('#article_short_description').on('input', function() {
-      const currentLength = $(this).val().length;
-      if (currentLength > 150) {
-        $(this).val($(this).val().substring(0, 150));
+    };
+    
+    titleInput.addEventListener('input', updateTitleCounter);
+    updateTitleCounter.call(titleInput); // Inicializar
+  }
+  
+  if (excerptInput) {
+    // Crear contador de extracto si no existe
+    if (!document.getElementById('excerpt-counter')) {
+      const excerptCounter = document.createElement('span');
+      excerptCounter.id = 'excerpt-counter';
+      excerptCounter.className = 'char-counter';
+      excerptCounter.style.cssText = 'display:block;font-size:0.8em;color:#666;';
+      excerptInput.parentNode.appendChild(excerptCounter);
+    }
+    
+    const updateExcerptCounter = function() {
+      const length = this.value.length;
+      const counter = document.getElementById('excerpt-counter');
+      if (counter) {
+        counter.textContent = length + '/150';
+        if (length > 150) {
+          this.value = this.value.substring(0, 150);
+          counter.textContent = '150/150';
+        }
       }
-      $('#excerpt-counter').text($(this).val().length + '/150');
-    }).trigger('input');
+    };
+    
+    excerptInput.addEventListener('input', updateExcerptCounter);
+    updateExcerptCounter.call(excerptInput); // Inicializar
+  }
+}
 
-    // Crear contadores si no existen
-    if ($('#title-counter').length === 0) {
-      $('<span id="title-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/120</span>').insertAfter('#article_name');
+function initializeImagePreviews() {
+  // Vista previa de imágenes usando JavaScript puro
+  document.querySelectorAll('input[type=file]').forEach(function(input) {
+    const field = input.closest('.field');
+    if (field && !field.querySelector('.form__image-preview')) {
+      const img = document.createElement('img');
+      img.className = 'form__image-preview';
+      img.style.cssText = 'display:none;max-width:100%;max-height:150px;margin-bottom:10px;border:1px solid #ddd;';
+      input.parentNode.insertBefore(img, input);
     }
-    if ($('#excerpt-counter').length === 0) {
-      $('<span id="excerpt-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/150</span>').insertAfter('#article_short_description');
-    }
-  });
-
-  // Vista previa de imágenes
-  $("input[type=file]").each(function() {
-    const $input = $(this);
-    if ($input.parents(".field").find("img").length === 0) {
-      $input.before('<img class="form__image-preview" style="display:none;max-width:100%;max-height:150px;margin-bottom:10px;border:1px solid #ddd;">');
-    }
-
-    $input.off('change').on('change', function() {
+    
+    input.addEventListener('change', function() {
       if (this.files && this.files[0]) {
         const reader = new FileReader();
         reader.onload = function(e) {
-          $input.parents(".field").find("img")
-            .attr('src', e.target.result)
-            .css("display", "block");
+          const img = field.querySelector('.form__image-preview');
+          if (img) {
+            img.src = e.target.result;
+            img.style.display = 'block';
+          }
         };
         reader.readAsDataURL(this.files[0]);
       }
     });
   });
-
-  // Contador de metatags
-  const $metaTags = $('#meta_tags');
-  const $metaTagsCounter = $('#meta-tags-counter');
-  
-  function updateMetaTagsCounter() {
-    const text = $metaTags.val();
-    const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
-    
-    if (words > 3) {
-      const wordsArray = text.trim().split(/\s+/).slice(0, 3);
-      $metaTags.val(wordsArray.join(' '));
-      $metaTagsCounter.text('3/3 palabras (límite alcanzado)').css('color', '#e74c3c');
-    } else {
-      $metaTagsCounter.text(words + '/3 palabras');
-      $metaTagsCounter.css('color', words === 3 ? '#e74c3c' : '#666');
-    }
-  }
-  
-  $metaTags.off('input').on('input', updateMetaTagsCounter);
-  updateMetaTagsCounter();
 }
+
+function initializeMetaTagsCounter() {
+  const metaTagsInput = document.getElementById('meta_tags');
+  const metaTagsCounter = document.getElementById('meta-tags-counter');
+  
+  if (metaTagsInput && metaTagsCounter) {
+    const updateMetaTagsCounter = function() {
+      const text = this.value;
+      const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+      
+      if (words > 3) {
+        const wordsArray = text.trim().split(/\s+/).slice(0, 3);
+        this.value = wordsArray.join(' ');
+        metaTagsCounter.textContent = '3/3 palabras (límite alcanzado)';
+        metaTagsCounter.style.color = '#e74c3c';
+      } else {
+        metaTagsCounter.textContent = words + '/3 palabras';
+        metaTagsCounter.style.color = words === 3 ? '#e74c3c' : '#666';
+      }
+    };
+    
+    metaTagsInput.addEventListener('input', updateMetaTagsCounter);
+    updateMetaTagsCounter.call(metaTagsInput); // Inicializar
+  }
+}
+
+// Múltiples estrategias de inicialización
+document.addEventListener('DOMContentLoaded', initializeArticleForm);
+document.addEventListener('turbolinks:load', initializeArticleForm);
+
+// Inicialización inmediata si la página ya está cargada
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeArticleForm);
+} else {
+  setTimeout(initializeArticleForm, 0);
+}
+
+// Limpiar al salir de la página
+document.addEventListener('turbolinks:before-cache', function() {
+  window.articleFormInitialized = false;
+  if (window.editor) {
+    // No destruimos el editor completamente, solo marcamos como no inicializado
+    window.articleFormInitialized = false;
+  }
+});
 </script>
 
 <%= render "components/s3_form_js" %>
