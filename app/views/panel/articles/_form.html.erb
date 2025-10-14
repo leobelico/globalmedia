@@ -114,7 +114,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-// Variable global para controlar el estado
 window.articleFormInitialized = false;
 
 function initializeArticleForm() {
@@ -152,17 +151,76 @@ function initializeArticleForm() {
   window.articleFormInitialized = true;
 }
 
+// === FUNCIÓN PARA CARGAR SCRIPTS DE REDES SOCIALES ===
+function loadSocialMediaScripts() {
+  // Cargar Twitter widgets si no están cargados
+  if (typeof twttr === 'undefined') {
+    const twitterScript = document.createElement('script');
+    twitterScript.src = 'https://platform.twitter.com/widgets.js';
+    twitterScript.async = true;
+    twitterScript.charset = 'utf-8';
+    document.head.appendChild(twitterScript);
+  } else {
+    twttr.widgets.load();
+  }
+
+  // Cargar Instagram embeds si no están cargados
+  if (typeof instgrm === 'undefined') {
+    const instagramScript = document.createElement('script');
+    instagramScript.src = '//www.instagram.com/embed.js';
+    instagramScript.async = true;
+    document.head.appendChild(instagramScript);
+  } else {
+    instgrm.Embeds.process();
+  }
+
+  // Cargar TikTok si no está cargado
+  if (!document.querySelector('script[src="https://www.tiktok.com/embed.js"]')) {
+    const tiktokScript = document.createElement('script');
+    tiktokScript.src = 'https://www.tiktok.com/embed.js';
+    tiktokScript.async = true;
+    document.head.appendChild(tiktokScript);
+  }
+}
+
+// === INICIALIZAR EMBEBIDOS SOCIALES ===
+function initializeSocialEmbeds() {
+  setTimeout(loadSocialMediaScripts, 100);
+  
+  // También procesar Instagram específicamente
+  if (window.instgrm) {
+    window.instgrm.Embeds.process();
+  }
+}
+
 function initializeQuillEditor() {
   const BlockEmbed = Quill.import('blots/block/embed');
 
-  // === Tweet Blot ===
+  // === Tweet Blot MEJORADO ===
   class TweetBlot extends BlockEmbed {
     static create(url) {
       const node = super.create();
-      node.innerHTML = `<blockquote class="twitter-tweet"><a href="${url}"></a></blockquote>`;
-      if (typeof twttr !== 'undefined') {
-        twttr.widgets.load(node);
+      // Normalizar URL de Twitter
+      let tweetUrl = url;
+      if (!url.includes('://')) {
+        tweetUrl = `https://twitter.com${url.startsWith('/') ? '' : '/'}${url}`;
       }
+      
+      node.innerHTML = `
+        <div class="tweet-embed-container">
+          <blockquote class="twitter-tweet">
+            <a href="${tweetUrl}"></a>
+          </blockquote>
+        </div>
+      `;
+      
+      // Programar la carga de widgets
+      setTimeout(() => {
+        if (typeof twttr !== 'undefined' && twttr.widgets) {
+          twttr.widgets.load(node);
+        }
+      }, 100);
+      
       return node;
     }
 
@@ -176,19 +234,34 @@ function initializeQuillEditor() {
   TweetBlot.className = 'tweet-embed';
   Quill.register(TweetBlot);
 
-  // === Instagram Blot ===
+  // === Instagram Blot MEJORADO ===
   class InstagramBlot extends BlockEmbed {
     static create(url) {
       const node = super.create();
-      node.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${url}" data-instgrm-version="12"></blockquote>`;
-      if (window.instgrm) {
-        window.instgrm.Embeds.process(node);
-      }
+      
+      node.innerHTML = `
+        <div class="instagram-embed-container">
+          <blockquote class="instagram-media" 
+                     data-instgrm-permalink="${url}"
+                     data-instgrm-version="14"
+                     style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+          </blockquote>
+        </div>
+      `;
+      
+      // Programar procesamiento de Instagram
+      setTimeout(() => {
+        if (window.instgrm && window.instgrm.Embeds) {
+          window.instgrm.Embeds.process();
+        }
+      }, 100);
+      
       return node;
     }
 
     static value(node) {
-      return node.querySelector('blockquote')?.getAttribute('data-instgrm-permalink');
+      const blockquote = node.querySelector('blockquote');
+      return blockquote ? blockquote.getAttribute('data-instgrm-permalink') : '';
     }
   }
   InstagramBlot.blotName = 'instagram';
@@ -196,23 +269,42 @@ function initializeQuillEditor() {
   InstagramBlot.className = 'instagram-embed';
   Quill.register(InstagramBlot);
 
-  // === TikTok Blot ===
+  // === TikTok Blot MEJORADO ===
   class TikTokBlot extends BlockEmbed {
     static create(url) {
       const node = super.create();
-      const videoId = url.split('/').filter(Boolean).pop();
+      const videoId = this.extractVideoId(url);
+      
       node.innerHTML = `
-        <blockquote class="tiktok-embed" cite="${url}" data-video-id="${videoId}" style="max-width: 325px;"><section></section></blockquote>
+        <div class="tiktok-embed-container">
+          <blockquote class="tiktok-embed" 
+                     cite="${url}" 
+                     data-video-id="${videoId}"
+                     style="max-width: 605px;min-width: 325px;">
+            <section></section>
+          </blockquote>
+        </div>
       `;
-      const script = document.createElement('script');
-      script.src = 'https://www.tiktok.com/embed.js';
-      script.async = true;
-      node.appendChild(script);
+      
+      // Cargar script de TikTok si es necesario
+      if (!document.querySelector('script[src="https://www.tiktok.com/embed.js"]')) {
+        const script = document.createElement('script');
+        script.src = 'https://www.tiktok.com/embed.js';
+        script.async = true;
+        document.head.appendChild(script);
+      }
+      
       return node;
     }
 
+    static extractVideoId(url) {
+      const match = url.match(/\/(\d+)(?:\?|$)/);
+      return match ? match[1] : url.split('/').filter(Boolean).pop();
+    }
+
     static value(node) {
-      return node.querySelector('blockquote')?.getAttribute('cite');
+      const blockquote = node.querySelector('blockquote');
+      return blockquote ? blockquote.getAttribute('cite') : '';
     }
   }
   TikTokBlot.blotName = 'tiktok';
@@ -271,6 +363,8 @@ function initializeQuillEditor() {
       const noteContent = `<%= j @article.note.html_safe %>`;
       if (noteContent.trim() !== '') {
         window.editor.root.innerHTML = noteContent;
+        // INICIALIZAR EMBEBIDOS DESPUÉS DE CARGAR CONTENIDO
+        setTimeout(initializeSocialEmbeds, 500);
       }
     } catch(e) {
       console.error("Error cargando contenido existente:", e);
