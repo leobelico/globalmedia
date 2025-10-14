@@ -114,240 +114,234 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-  if (typeof window.editor === 'undefined') {
-    const BlockEmbed = Quill.import('blots/block/embed');
+  // Reemplaza todo el script con esta versión
+document.addEventListener('turbolinks:load', function() {
+  // Tu código de inicialización de Quill aquí
+  if (typeof window.editor === 'undefined' || window.editor === null) {
+    initializeQuill();
+  }
+});
 
-    // === Tweet Blot ===
-    class TweetBlot extends BlockEmbed {
-      static create(url) {
-        const node = super.create();
-        node.innerHTML = `<blockquote class="twitter-tweet"><a href="${url}"></a></blockquote>`;
-        if (typeof twttr !== 'undefined') {
-          twttr.widgets.load(node);
-        }
-        return node;
-      }
+function initializeQuill() {
+  const BlockEmbed = Quill.import('blots/block/embed');
 
-      static value(node) {
-        const anchor = node.querySelector('a');
-        return anchor ? anchor.getAttribute('href') : '';
+  // === Tweet Blot ===
+  class TweetBlot extends BlockEmbed {
+    static create(url) {
+      const node = super.create();
+      node.innerHTML = `<blockquote class="twitter-tweet"><a href="${url}"></a></blockquote>`;
+      if (typeof twttr !== 'undefined') {
+        twttr.widgets.load(node);
       }
-    }
-    TweetBlot.blotName = 'tweet';
-    TweetBlot.tagName = 'div';
-    TweetBlot.className = 'tweet-embed';
-    Quill.register(TweetBlot);
-
-    // === Instagram Blot ===
-    class InstagramBlot extends BlockEmbed {
-      static create(url) {
-        const node = super.create();
-        node.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${url}" data-instgrm-version="12"></blockquote>`;
-        if (window.instgrm) {
-          window.instgrm.Embeds.process(node);
-        }
-        return node;
-      }
-
-      static value(node) {
-        return node.querySelector('blockquote')?.getAttribute('data-instgrm-permalink');
-      }
-    }
-    InstagramBlot.blotName = 'instagram';
-    InstagramBlot.tagName = 'div';
-    InstagramBlot.className = 'instagram-embed';
-    Quill.register(InstagramBlot);
-
-    // === TikTok Blot ===
-    class TikTokBlot extends BlockEmbed {
-      static create(url) {
-        const node = super.create();
-        const videoId = url.split('/').filter(Boolean).pop();
-        node.innerHTML = `
-          <blockquote class="tiktok-embed" cite="${url}" data-video-id="${videoId}" style="max-width: 325px;"><section></section></blockquote>
-        `;
-        const script = document.createElement('script');
-        script.src = 'https://www.tiktok.com/embed.js';
-        script.async = true;
-        node.appendChild(script);
-        return node;
-      }
-
-      static value(node) {
-        return node.querySelector('blockquote')?.getAttribute('cite');
-      }
-    }
-    TikTokBlot.blotName = 'tiktok';
-    TikTokBlot.tagName = 'div';
-    TikTokBlot.className = 'tiktok-embed';
-    Quill.register(TikTokBlot);
-
-    // === Inicialización de Quill ===
-    window.editor = new Quill('#note-editor', {
-      theme: 'snow',
-      modules: {
-        toolbar: [
-          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          ['blockquote', 'code-block', 'video', 'image', 'link'],
-          ['tweet', 'instagram', 'tiktok'], // Botones personalizados
-          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-          [{ 'indent': '-1'}, { 'indent': '+1' }],
-          [{ 'align': [] }],
-          [{ 'color': [] }, { 'background': [] }],
-          [{ 'font': [] }],
-          [{ 'size': ['small', false, 'large', 'huge'] }],
-          ['clean']
-        ],
-        clipboard: {
-          matchVisual: false
-        }
-      },
-      placeholder: 'Escribe el contenido de tu artículo aquí...'
-    });
-
-    // === Handlers para insertar embeds ===
-    const toolbar = window.editor.getModule('toolbar');
-    toolbar.addHandler('tweet', function() {
-      const url = prompt('Pega el enlace del Tweet:');
-      if (url) {
-        window.editor.insertEmbed(window.editor.getSelection().index, 'tweet', url);
-      }
-    });
-    toolbar.addHandler('instagram', function() {
-      const url = prompt('Pega el enlace del post de Instagram:');
-      if (url) {
-        window.editor.insertEmbed(window.editor.getSelection().index, 'instagram', url);
-      }
-    });
-    toolbar.addHandler('tiktok', function() {
-      const url = prompt('Pega el enlace del video de TikTok:');
-      if (url) {
-        window.editor.insertEmbed(window.editor.getSelection().index, 'tiktok', url);
-      }
-    });
-
-    // === Cargar contenido existente ===
-    <% if @article.note.present? %>
-      try {
-        const noteContent = `<%= j @article.note.html_safe %>`;
-        if (noteContent.trim() !== '') {
-          window.editor.root.innerHTML = noteContent;
-        }
-      } catch(e) {
-        console.error("Error cargando contenido existente:", e);
-      }
-    <% end %>
-
-    // === Manejo del submit del formulario ===
-    const form = document.querySelector('form.directUpload');
-    if (form) {
-      form.addEventListener('submit', function(e) {
-        const contentField = document.querySelector('#article_note');
-        if (contentField) {
-          contentField.value = JSON.stringify({
-            html: window.editor.root.innerHTML,
-            delta: window.editor.getContents()
-          });
-        }
-        return true;
-      });
+      return node;
     }
 
-    // === submit_form seguro ===
-    if (typeof submit_form === 'function') {
-      const originalSubmitForm = submit_form;
-      window.submit_form = function(t, e, n, r) {
-        try {
-          const content = window.editor.getContents();
-          const text = window.editor.getText();
-          return originalSubmitForm(t, e, n, r);
-        } catch(error) {
-          console.error("Error en submit_form:", error);
-          return false;
-        }
-      };
+    static value(node) {
+      const anchor = node.querySelector('a');
+      return anchor ? anchor.getAttribute('href') : '';
+    }
+  }
+  TweetBlot.blotName = 'tweet';
+  TweetBlot.tagName = 'div';
+  TweetBlot.className = 'tweet-embed';
+  Quill.register(TweetBlot);
+
+  // === Instagram Blot ===
+  class InstagramBlot extends BlockEmbed {
+    static create(url) {
+      const node = super.create();
+      node.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${url}" data-instgrm-version="12"></blockquote>`;
+      if (window.instgrm) {
+        window.instgrm.Embeds.process(node);
+      }
+      return node;
     }
 
-    // === Contadores de caracteres ===
-    $(function() {
-      $('#article_name').on('input', function() {
-        const currentLength = $(this).val().length;
-        if (currentLength > 120) {
-          $(this).val($(this).val().substring(0, 120));
-        }
-        $('#title-counter').text($(this).val().length + '/120');
-      }).trigger('input');
+    static value(node) {
+      return node.querySelector('blockquote')?.getAttribute('data-instgrm-permalink');
+    }
+  }
+  InstagramBlot.blotName = 'instagram';
+  InstagramBlot.tagName = 'div';
+  InstagramBlot.className = 'instagram-embed';
+  Quill.register(InstagramBlot);
 
-      $('#article_short_description').on('input', function() {
-        const currentLength = $(this).val().length;
-        if (currentLength > 150) {
-          $(this).val($(this).val().substring(0, 150));
-        }
-        $('#excerpt-counter').text($(this).val().length + '/150');
-      }).trigger('input');
+  // === TikTok Blot ===
+  class TikTokBlot extends BlockEmbed {
+    static create(url) {
+      const node = super.create();
+      const videoId = url.split('/').filter(Boolean).pop();
+      node.innerHTML = `
+        <blockquote class="tiktok-embed" cite="${url}" data-video-id="${videoId}" style="max-width: 325px;"><section></section></blockquote>
+      `;
+      const script = document.createElement('script');
+      script.src = 'https://www.tiktok.com/embed.js';
+      script.async = true;
+      node.appendChild(script);
+      return node;
+    }
 
-      $('<span id="title-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/120</span>').insertAfter('#article_name');
-      $('<span id="excerpt-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/150</span>').insertAfter('#article_short_description');
-    });
+    static value(node) {
+      return node.querySelector('blockquote')?.getAttribute('cite');
+    }
+  }
+  TikTokBlot.blotName = 'tiktok';
+  TikTokBlot.tagName = 'div';
+  TikTokBlot.className = 'tiktok-embed';
+  Quill.register(TikTokBlot);
 
-    // === Vista previa de imágenes ===
-      $("input[type=file]").each(function() {
-      const $input = $(this);
-      if ($input.parents(".field").find("img").length === 0) {
-        $input.before('<img class="form__image-preview" style="display:none;max-width:100%;max-height:150px;margin-bottom:10px;border:1px solid #ddd;">');
+  // Verificar que el contenedor existe
+  const noteEditor = document.getElementById('note-editor');
+  if (!noteEditor) {
+    console.warn('Editor container not found');
+    return;
+  }
+
+  // === Inicialización de Quill ===
+  window.editor = new Quill('#note-editor', {
+    theme: 'snow',
+    modules: {
+      toolbar: [
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block', 'video', 'image', 'link'],
+        ['tweet', 'instagram', 'tiktok'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'indent': '-1'}, { 'indent': '+1' }],
+        [{ 'align': [] }],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'font': [] }],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        ['clean']
+      ],
+      clipboard: {
+        matchVisual: false
       }
+    },
+    placeholder: 'Escribe el contenido de tu artículo aquí...'
+  });
 
-      $input.on('change', function() {
-        if (this.files && this.files[0]) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            $input.parents(".field").find("img")
-              .attr('src', e.target.result)
-              .css("display", "block");
-          };
-          reader.readAsDataURL(this.files[0]);
-        }
-      });
+  // === Handlers para insertar embeds ===
+  const toolbar = window.editor.getModule('toolbar');
+  toolbar.addHandler('tweet', function() {
+    const url = prompt('Pega el enlace del Tweet:');
+    if (url) {
+      window.editor.insertEmbed(window.editor.getSelection().index, 'tweet', url);
+    }
+  });
+  toolbar.addHandler('instagram', function() {
+    const url = prompt('Pega el enlace del post de Instagram:');
+    if (url) {
+      window.editor.insertEmbed(window.editor.getSelection().index, 'instagram', url);
+    }
+  });
+  toolbar.addHandler('tiktok', function() {
+    const url = prompt('Pega el enlace del video de TikTok:');
+    if (url) {
+      window.editor.insertEmbed(window.editor.getSelection().index, 'tiktok', url);
+    }
+  });
+
+  // === Cargar contenido existente ===
+  <% if @article.note.present? %>
+    try {
+      const noteContent = `<%= j @article.note.html_safe %>`;
+      if (noteContent.trim() !== '') {
+        window.editor.root.innerHTML = noteContent;
+      }
+    } catch(e) {
+      console.error("Error cargando contenido existente:", e);
+    }
+  <% end %>
+
+  // === Manejo del submit del formulario ===
+  const form = document.querySelector('form.directUpload');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      const contentField = document.querySelector('#article_note');
+      if (contentField && window.editor) {
+        contentField.value = JSON.stringify({
+          html: window.editor.root.innerHTML,
+          delta: window.editor.getContents()
+        });
+      }
+      return true;
     });
-  } // <-- Esta llave cierra el if (typeof window.editor === 'undefined')
-  
-  // Contador y limitador de palabras para metatags
+  }
+
+  // Inicializar contadores y preview de imágenes
+  initializeFormHelpers();
+}
+
+function initializeFormHelpers() {
+  // Contadores de caracteres
   $(function() {
-    const $metaTags = $('#meta_tags');
-    const $metaTagsCounter = $('#meta-tags-counter');
-    
-    function updateMetaTagsCounter() {
-      const text = $metaTags.val();
-      const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
-      
-      if (words > 3) {
-        // Si excede 3 palabras, recortar el texto
-        const wordsArray = text.trim().split(/\s+/).slice(0, 3);
-        $metaTags.val(wordsArray.join(' '));
-        $metaTagsCounter.text('3/3 palabras (límite alcanzado)').css('color', '#e74c3c');
-      } else {
-        $metaTagsCounter.text(words + '/3 palabras');
-        $metaTagsCounter.css('color', words === 3 ? '#e74c3c' : '#666');
+    $('#article_name').on('input', function() {
+      const currentLength = $(this).val().length;
+      if (currentLength > 120) {
+        $(this).val($(this).val().substring(0, 120));
       }
+      $('#title-counter').text($(this).val().length + '/120');
+    }).trigger('input');
+
+    $('#article_short_description').on('input', function() {
+      const currentLength = $(this).val().length;
+      if (currentLength > 150) {
+        $(this).val($(this).val().substring(0, 150));
+      }
+      $('#excerpt-counter').text($(this).val().length + '/150');
+    }).trigger('input');
+
+    // Crear contadores si no existen
+    if ($('#title-counter').length === 0) {
+      $('<span id="title-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/120</span>').insertAfter('#article_name');
     }
-    
-    $metaTags.on('input', updateMetaTagsCounter);
-    updateMetaTagsCounter(); // Inicializar contador
-    
-    // También validar antes del envío del formulario
-    $('form.directUpload').on('submit', function(e) {
-      const text = $metaTags.val();
-      const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
-      
-      if (words > 3) {
-        e.preventDefault();
-        alert('Los metatags no pueden tener más de 3 palabras');
-        $metaTags.focus();
-        return false;
+    if ($('#excerpt-counter').length === 0) {
+      $('<span id="excerpt-counter" class="char-counter" style="display:block;font-size:0.8em;color:#666;">0/150</span>').insertAfter('#article_short_description');
+    }
+  });
+
+  // Vista previa de imágenes
+  $("input[type=file]").each(function() {
+    const $input = $(this);
+    if ($input.parents(".field").find("img").length === 0) {
+      $input.before('<img class="form__image-preview" style="display:none;max-width:100%;max-height:150px;margin-bottom:10px;border:1px solid #ddd;">');
+    }
+
+    $input.off('change').on('change', function() {
+      if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          $input.parents(".field").find("img")
+            .attr('src', e.target.result)
+            .css("display", "block");
+        };
+        reader.readAsDataURL(this.files[0]);
       }
     });
   });
+
+  // Contador de metatags
+  const $metaTags = $('#meta_tags');
+  const $metaTagsCounter = $('#meta-tags-counter');
+  
+  function updateMetaTagsCounter() {
+    const text = $metaTags.val();
+    const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+    
+    if (words > 3) {
+      const wordsArray = text.trim().split(/\s+/).slice(0, 3);
+      $metaTags.val(wordsArray.join(' '));
+      $metaTagsCounter.text('3/3 palabras (límite alcanzado)').css('color', '#e74c3c');
+    } else {
+      $metaTagsCounter.text(words + '/3 palabras');
+      $metaTagsCounter.css('color', words === 3 ? '#e74c3c' : '#666');
+    }
+  }
+  
+  $metaTags.off('input').on('input', updateMetaTagsCounter);
+  updateMetaTagsCounter();
+}
 </script>
 
 <%= render "components/s3_form_js" %>
