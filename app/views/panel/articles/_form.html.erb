@@ -253,25 +253,25 @@ function initializeQuillEditor() {
     }
   });
 
-  // === Cargar contenido existente (para edición) ===
-  <% if @article&.note.present? %>
-    try {
-      // Esperar a que Quill esté completamente inicializado
-      setTimeout(() => {
-        if (window.editor && <%= @article.note.present? %>) {
-          const noteContent = <%= raw(@article.note.to_json) %>;
-          if (noteContent && noteContent.ops) {
-            window.editor.setContents(noteContent);
-          } else if (typeof noteContent === 'string') {
-            // Si es HTML en lugar de Delta
-            window.editor.root.innerHTML = noteContent;
-          }
+
+<% if @article&.note.present? %>
+  try {
+    // Esperar a que Quill esté completamente inicializado
+    setTimeout(() => {
+      if (window.editor) {
+        const noteContent = <%= raw(@article.note.to_json) %>;
+        if (noteContent && noteContent.ops) {
+          window.editor.setContents(noteContent);
+        } else if (typeof noteContent === 'string') {
+          // Si es HTML en lugar de Delta
+          window.editor.root.innerHTML = noteContent;
         }
-      }, 100);
-    } catch(e) {
-      console.error("Error cargando contenido existente:", e);
-    }
-  <% end %>
+      }
+    }, 100);
+  } catch(e) {
+    console.error("Error cargando contenido existente:", e);
+  }
+<% end %>
 
   // === Manejo del submit del formulario ===
   const form = document.querySelector('form.directUpload');

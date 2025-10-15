@@ -23,58 +23,58 @@ module ApplicationHelper
             })
   end
 
-def display_quill_content(content)
-  return "" unless content.present?
+  def display_quill_content(content)
+    return "" unless content.present?
 
-  # Si el contenido ya es HTML (formato antiguo)
-  if content.include?('<') && !content.start_with?('{')
-    # Para contenido que sabemos tiene embeds, evitar sanitización agresiva
-    if has_social_embeds?(content)
-      return wrapped_content(content.html_safe)
-    else
-      return sanitize(content, tags: allowed_quill_tags, attributes: allowed_quill_attributes)
-    end
-  end
-
-  # Procesamiento para contenido en formato Delta (JSON)
-  if content.is_a?(String) && content.start_with?('{')
-    begin
-      parsed = JSON.parse(content)
-      
-      if parsed["html"]
-        # No sanitizar si tiene embeds
-        if has_social_embeds?(parsed["html"])
-          wrapped_content(parsed["html"].html_safe)
-        else
-          sanitized_html = sanitize(parsed["html"], tags: allowed_quill_tags, attributes: allowed_quill_attributes)
-          wrapped_content(sanitized_html)
-        end
-      elsif parsed["ops"]
-        html = quill_delta_to_html(parsed["ops"])
-        wrapped_content(html)
+    # Si el contenido ya es HTML (formato antiguo)
+    if content.include?('<') && !content.start_with?('{')
+      # Para contenido que sabemos tiene embeds, evitar sanitización agresiva
+      if has_social_embeds?(content)
+        return wrapped_content(content.html_safe)
       else
+        return sanitize(content, tags: allowed_quill_tags, attributes: allowed_quill_attributes)
+      end
+    end
+
+    # Procesamiento para contenido en formato Delta (JSON)
+    if content.is_a?(String) && content.start_with?('{')
+      begin
+        parsed = JSON.parse(content)
+        
+        if parsed["html"]
+          # No sanitizar si tiene embeds
+          if has_social_embeds?(parsed["html"])
+            wrapped_content(parsed["html"].html_safe)
+          else
+            sanitized_html = sanitize(parsed["html"], tags: allowed_quill_tags, attributes: allowed_quill_attributes)
+            wrapped_content(sanitized_html)
+          end
+        elsif parsed["ops"]
+          html = quill_delta_to_html(parsed["ops"])
+          wrapped_content(html)
+        else
+          wrapped_content(content.to_s)
+        end
+      rescue JSON::ParserError
         wrapped_content(content.to_s)
       end
-    rescue JSON::ParserError
+    else
       wrapped_content(content.to_s)
     end
-  else
-    wrapped_content(content.to_s)
-  end
-end  # ← ¡ESTE end FALTABA!
+  end  # ← ESTE end CIERRA display_quill_content CORRECTAMENTE
 
-# Método para detectar si el contenido tiene embeds de redes sociales
-def has_social_embeds?(html)
-  html.include?('instagram-embed') || 
-  html.include?('tweet-embed') || 
-  html.include?('tiktok-embed') ||
-  html.include?('twitter-tweet') ||
-  html.include?('instagram-media')
-end
+  # Método para detectar si el contenido tiene embeds de redes sociales
+  def has_social_embeds?(html)
+    html.include?('instagram-embed') || 
+    html.include?('tweet-embed') || 
+    html.include?('tiktok-embed') ||
+    html.include?('twitter-tweet') ||
+    html.include?('instagram-media')
+  end
 
   private
 
-    def wrapped_content(html)
+  def wrapped_content(html)
     style = <<-CSS
       <style>
         .quill-content,
@@ -143,22 +143,21 @@ end
     (style + content).html_safe
   end
 
+  def allowed_quill_tags
+    %w[p br ul ol li strong em u s a img h1 h2 h3 h4 h5 h6 blockquote pre 
+       iframe div span table tr td th script blockquote section]
+  end
 
- def allowed_quill_tags
-  %w[p br ul ol li strong em u s a img h1 h2 h3 h4 h5 h6 blockquote pre 
-     iframe div span table tr td th script blockquote section]
-end
-
-def allowed_quill_attributes
-  %w[href src alt title class style width height frameborder allowfullscreen 
-     data-id data-url data-align data-instgrm-permalink data-instgrm-version
-     data-video-id cite data-twitter-extracted-i data-gramm 
-     contenteditable data-placeholder allowtransparency scrolling
-     data-instgrm-payload-id data-instgrm-captioned data-instgrm-username
-     data-tweet-id data-conversation data-theme data-cards hidden data-text
-     data-size data-dnt data-lang data-show-count data-show-screen-name
-     data-aria-polite data-aria-live data-chrome data-align data-partner]
-end
+  def allowed_quill_attributes
+    %w[href src alt title class style width height frameborder allowfullscreen 
+       data-id data-url data-align data-instgrm-permalink data-instgrm-version
+       data-video-id cite data-twitter-extracted-i data-gramm 
+       contenteditable data-placeholder allowtransparency scrolling
+       data-instgrm-payload-id data-instgrm-captioned data-instgrm-username
+       data-tweet-id data-conversation data-theme data-cards hidden data-text
+       data-size data-dnt data-lang data-show-count data-show-screen-name
+       data-aria-polite data-aria-live data-chrome data-align data-partner]
+  end
 
   def quill_delta_to_html(ops)
     return "" unless ops.is_a?(Array)
