@@ -3,9 +3,9 @@
 </div>
 
 <div class="radio-banner">
-  <!-- Mostramos todas las estaciones excepto W Radio (incluyendo Los40 Querétaro en W Radio) -->
+  <!-- Mostramos todas las estaciones excepto W Radio y Los40 Querétaro -->
   <% get_current_programs.each do |program| %>
-    <% unless ["WRADIO"].include?(program.station.name.upcase) %>
+    <% unless ["WRadio", "LOS40QUERETARO"].include?(program.station.name.upcase) %>
       <div class="radio-program">
         <div class="radio-program-parent">
           <%= link_to "/#{program.station.slug}", 
@@ -14,13 +14,15 @@
           <% end %>
         </div>
         
-        <!-- Mostramos todos los hijos normalmente -->
+        <!-- Mostramos hijos excepto Los40 Querétaro -->
         <% get_children_programs(program.station.id).each do |child| %>
-          <div class="radio-program-children">
-            <%= link_to "/#{child.station.slug}", target: "_top" do %>
-              <%= image_tag child.image %>
-            <% end %>
-          </div>
+          <% unless child.station.slug == "los40queretaro" %>
+            <div class="radio-program-children">
+              <%= link_to "/#{child.station.slug}", target: "_top" do %>
+                <%= image_tag child.image %>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
       </div>
     <% end %>
@@ -63,32 +65,19 @@
   .radio-banner {
     margin-bottom: 0.8rem;
     z-index: 9;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
   }
   .radio-program {
-    display: flex;
+    display: block;
     flex-direction: column;
-    position: relative;
   }
   .radio-program .radio-program-parent a img {
     width: 100%;
-    max-width: 120px;
   }
   .radio-program .radio-program-children {
     display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 10;
   }
   .radio-program:hover .radio-program-children {
     display: block;
-  }
-  .radio-program-children a img {
-    width: 100%;
-    max-width: 120px;
   }
 </style>
 
