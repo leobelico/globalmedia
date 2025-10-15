@@ -38,7 +38,9 @@
 	<!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" async></script> -->
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload', cache: "cached/all" %>
-
+	<% if content_for?(:turbolinks_no_cache) %>
+    <meta name="turbolinks-cache-control" content="no-cache">
+	<% end %>
 		
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 	<script src="https://platform.twitter.com/widgets.js" async></script>
