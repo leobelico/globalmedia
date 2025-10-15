@@ -50,7 +50,7 @@ function uploadAWSS3(file) {
       const originalKey = keyInput.value;
       const actualKey = originalKey.replace('${filename}', file.name);
       formData.set('key', actualKey);
-      formData.append('Content-Type', file.type);
+      
       formData.append('file', file);
 
       const xhr = new XMLHttpRequest();
