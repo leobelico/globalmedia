@@ -113,13 +113,11 @@
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-// Variable global para controlar el estado
-window.articleFormInitialized = false;
 
-function initializeArticleForm() {
-  // Si ya está inicializado, salir
-  if (window.articleFormInitialized) return;
+<script>
+// Código simplificado - SIN lógica de Turbolinks
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Inicializando formulario de artículo...');
   
   // Verificar que todos los elementos necesarios existen
   const noteEditor = document.getElementById('note-editor');
@@ -127,13 +125,10 @@ function initializeArticleForm() {
   const shortDescription = document.getElementById('article_short_description');
   
   if (!noteEditor || !articleName || !shortDescription) {
-    console.warn('Elementos del formulario no encontrados, reintentando...');
-    setTimeout(initializeArticleForm, 100);
+    console.warn('Elementos del formulario no encontrados');
     return;
   }
 
-  console.log('Inicializando formulario de artículo...');
-  
   // Inicializar Quill solo si no existe
   if (typeof window.editor === 'undefined' || window.editor === null) {
     initializeQuillEditor();
@@ -141,16 +136,9 @@ function initializeArticleForm() {
   
   // Inicializar contadores
   initializeCounters();
-  
-  // Inicializar preview de imágenes
   initializeImagePreviews();
-  
-  // Inicializar contador de metatags
   initializeMetaTagsCounter();
-  
-  // Marcar como inicializado
-  window.articleFormInitialized = true;
-}
+});
 
 function initializeQuillEditor() {
   const BlockEmbed = Quill.import('blots/block/embed');
@@ -265,13 +253,21 @@ function initializeQuillEditor() {
     }
   });
 
-  // === Cargar contenido existente ===
-  <% if @article.note.present? %>
+  // === Cargar contenido existente (para edición) ===
+  <% if @article&.note.present? %>
     try {
-      const noteContent = `<%= j @article.note.html_safe %>`;
-      if (noteContent.trim() !== '') {
-        window.editor.root.innerHTML = noteContent;
-      }
+      // Esperar a que Quill esté completamente inicializado
+      setTimeout(() => {
+        if (window.editor && <%= @article.note.present? %>) {
+          const noteContent = <%= raw(@article.note.to_json) %>;
+          if (noteContent && noteContent.ops) {
+            window.editor.setContents(noteContent);
+          } else if (typeof noteContent === 'string') {
+            // Si es HTML en lugar de Delta
+            window.editor.root.innerHTML = noteContent;
+          }
+        }
+      }, 100);
     } catch(e) {
       console.error("Error cargando contenido existente:", e);
     }
@@ -321,7 +317,7 @@ function initializeCounters() {
     };
     
     titleInput.addEventListener('input', updateTitleCounter);
-    updateTitleCounter.call(titleInput); // Inicializar
+    updateTitleCounter.call(titleInput);
   }
   
   if (excerptInput) {
@@ -347,12 +343,11 @@ function initializeCounters() {
     };
     
     excerptInput.addEventListener('input', updateExcerptCounter);
-    updateExcerptCounter.call(excerptInput); // Inicializar
+    updateExcerptCounter.call(excerptInput);
   }
 }
 
 function initializeImagePreviews() {
-  // Vista previa de imágenes usando JavaScript puro
   document.querySelectorAll('input[type=file]').forEach(function(input) {
     const field = input.closest('.field');
     if (field && !field.querySelector('.form__image-preview')) {
@@ -399,28 +394,30 @@ function initializeMetaTagsCounter() {
     };
     
     metaTagsInput.addEventListener('input', updateMetaTagsCounter);
-    updateMetaTagsCounter.call(metaTagsInput); // Inicializar
+    updateMetaTagsCounter.call(metaTagsInput);
   }
 }
 
-// Múltiples estrategias de inicialización
-document.addEventListener('DOMContentLoaded', initializeArticleForm);
-document.addEventListener('turbolinks:load', initializeArticleForm);
-
-// Inicialización inmediata si la página ya está cargada
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeArticleForm);
-} else {
-  setTimeout(initializeArticleForm, 0);
-}
-
-// Limpiar al salir de la página
-document.addEventListener('turbolinks:before-cache', function() {
-  window.articleFormInitialized = false;
-  if (window.editor) {
-    // No destruimos el editor completamente, solo marcamos como no inicializado
-    window.articleFormInitialized = false;
+// SOLO DOMContentLoaded - SIN Turbolinks
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Inicializando formulario de artículo...');
+  
+  const noteEditor = document.getElementById('note-editor');
+  const articleName = document.getElementById('article_name');
+  const shortDescription = document.getElementById('article_short_description');
+  
+  if (!noteEditor || !articleName || !shortDescription) {
+    console.warn('Elementos del formulario no encontrados');
+    return;
   }
+
+  if (typeof window.editor === 'undefined' || window.editor === null) {
+    initializeQuillEditor();
+  }
+  
+  initializeCounters();
+  initializeImagePreviews();
+  initializeMetaTagsCounter();
 });
 </script>
 
