@@ -24,6 +24,11 @@ module ApplicationHelper
   end
 
   def display_quill_content(content)
+     puts "=== DEBUG display_quill_content ==="
+  puts "Content class: #{content.class}"
+  puts "Content: #{content.inspect}"
+  puts "Content starts with {?: #{content.to_s.start_with?('{')}"
+  puts "Content includes <?: #{content.to_s.include?('<')}"
     return "" unless content.present?
 
     # Si el contenido ya es HTML (formato antiguo)

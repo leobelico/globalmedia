@@ -279,10 +279,8 @@ function initializeQuillEditor() {
     form.addEventListener('submit', function(e) {
       const contentField = document.querySelector('#article_note');
       if (contentField && window.editor) {
-        contentField.value = JSON.stringify({
-          html: window.editor.root.innerHTML,
-          delta: window.editor.getContents()
-        });
+        // Guardar SOLO el Delta, no ambos formatos
+        contentField.value = JSON.stringify(window.editor.getContents());
       }
       return true;
     });
