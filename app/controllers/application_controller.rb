@@ -35,6 +35,8 @@ def redirect_subdomain
     @location_id = 5
   when 'vallartabahia'
     @location_id = 4
+  when 'queretaro'
+    @location_id = 3  # Querétaro ya existe con ID 3
   else
     @location_id = 1 # Default: San Luis
   end
