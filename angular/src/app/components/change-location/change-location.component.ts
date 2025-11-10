@@ -17,14 +17,22 @@ export class ChangeLocationComponent implements OnInit {
               private configurationService: ConfigurationService,
               private navigationService: NavigationService) { }
 
-  ngOnInit(): void {
-    this.locationGraphqlService.all().subscribe(locations => {
-      this.locations = locations.filter(value => value.key === 'san-luis' || value.key === 'vallartabahia'|| value.key === 'zacatecas'|| value.key === 'leon' || value.key === 'queretaro');
-    });
-    this.configurationService.subdomainKey.subscribe(key => {
-      this.currentKeyLocation = key;
-    });
-  }
+ngOnInit(): void {
+  this.locationGraphqlService.all().subscribe(locations => {
+    console.log('Todas las locations:', locations); // 👈 agrega esto
+    this.locations = locations.filter(value =>
+      value.key === 'san-luis' ||
+      value.key === 'vallartabahia' ||
+      value.key === 'zacatecas' ||
+      value.key === 'leon' ||
+      value.key === 'queretaro'
+    );
+  });
+
+  this.configurationService.subdomainKey.subscribe(key => {
+    this.currentKeyLocation = key;
+  });
+}
 
   changeLocation(locationKey: string): void {
     this.navigationService.changeLocationHost(locationKey);
