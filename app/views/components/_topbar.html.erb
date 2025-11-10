@@ -17,7 +17,7 @@
 
 <div class="d-flex overflow-hidden" style="gap: 8px; align-items: center;">
   <% locations = Location.where(key: ['san-luis', 'vallartabahia', 'zacatecas', 'leon', 'queretaro']) %>
-  <% current_key = request.subdomains.first || 'san-luis' %>
+  <% current_key = (request.subdomains.first == 'www' || request.subdomains.blank?) ? 'san-luis' : request.subdomains.first %>
 
   <% visible_locations = locations.reject { |loc| loc.key == current_key } %>
 
@@ -32,7 +32,6 @@
       <%= loc.name %>
     </span>
 
-    <%# Agrega el separador " | " excepto después del último %>
     <% if index < visible_locations.size - 1 %>
       <span style="font-weight: bold;">|</span>
     <% end %>
