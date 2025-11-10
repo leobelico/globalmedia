@@ -15,21 +15,26 @@
       </a>
     <% end %>
 
-<div class="d-flex overflow-hidden">
+<div class="d-flex overflow-hidden" style="gap: 8px; align-items: center;">
   <% locations = Location.where(key: ['san-luis', 'vallartabahia', 'zacatecas', 'leon', 'queretaro']) %>
   <% current_key = request.subdomains.first || 'san-luis' %>
 
-  <% locations.each do |loc| %>
-    <% unless loc.key == current_key %>
-      <% if loc.key == 'san-luis' %>
-        <% url = "https://globalmedia.mx" %>
-      <% else %>
-        <% url = "https://#{loc.key}.globalmedia.mx" %>
-      <% end %>
+  <% visible_locations = locations.reject { |loc| loc.key == current_key } %>
 
-      <span class="location" onclick="window.location.href='<%= url %>'">
-        <%= loc.name %>
-      </span>
+  <% visible_locations.each_with_index do |loc, index| %>
+    <% if loc.key == 'san-luis' %>
+      <% url = "https://globalmedia.mx" %>
+    <% else %>
+      <% url = "https://#{loc.key}.globalmedia.mx" %>
+    <% end %>
+
+    <span class="location" onclick="window.location.href='<%= url %>'" style="cursor: pointer; font-weight: bold;">
+      <%= loc.name %>
+    </span>
+
+    <%# Agrega el separador " | " excepto después del último %>
+    <% if index < visible_locations.size - 1 %>
+      <span style="font-weight: bold;">|</span>
     <% end %>
   <% end %>
 </div>
