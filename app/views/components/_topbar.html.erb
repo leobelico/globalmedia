@@ -15,9 +15,25 @@
       </a>
     <% end %>
 
-    <div class="d-block">
-      <change-location></change-location>
-    </div>
+<div class="d-flex overflow-hidden">
+  <% locations = Location.where(key: ['san-luis', 'vallartabahia', 'zacatecas', 'leon', 'queretaro']) %>
+  <% current_key = request.subdomains.first || 'san-luis' %>
+
+  <% locations.each do |loc| %>
+    <% unless loc.key == current_key %>
+      <% if loc.key == 'san-luis' %>
+        <% url = "https://globalmedia.mx" %>
+      <% else %>
+        <% url = "https://#{loc.key}.globalmedia.mx" %>
+      <% end %>
+
+      <span class="location" onclick="window.location.href='<%= url %>'">
+        <%= loc.name %>
+      </span>
+    <% end %>
+  <% end %>
+</div>
+
 
     <div class="social-media">
       <p class="social-media__tag">Síguenos</p>
