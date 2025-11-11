@@ -254,20 +254,40 @@ function initializeQuillEditor() {
   });
 
 
+// REEMPLAZA ESTA PARTE DEL SCRIPT CON LO SIGUIENTE:
+
 <% if @article&.note.present? %>
   try {
     // Esperar a que Quill esté completamente inicializado
     setTimeout(() => {
       if (window.editor) {
         const noteContent = <%= raw(@article.note.to_json) %>;
-        if (noteContent && noteContent.ops) {
+        console.log('Contenido desde DB:', noteContent);
+        
+        if (noteContent && typeof noteContent === 'object' && noteContent.ops) {
+          // Es un objeto Delta válido
+          console.log('Cargando como objeto Delta');
           window.editor.setContents(noteContent);
         } else if (typeof noteContent === 'string') {
-          // Si es HTML en lugar de Delta
-          window.editor.root.innerHTML = noteContent;
+          // Es un string - podría ser Delta stringificado o HTML
+          try {
+            const parsed = JSON.parse(noteContent);
+            if (parsed && parsed.ops) {
+              console.log('Cargando como Delta parseado desde string');
+              window.editor.setContents(parsed);
+            } else {
+              // Si no es Delta, cargar como HTML
+              console.log('Cargando como HTML');
+              window.editor.root.innerHTML = noteContent;
+            }
+          } catch (e) {
+            // Si falla el parseo JSON, es HTML plano
+            console.log('Cargando como HTML plano');
+            window.editor.root.innerHTML = noteContent;
+          }
         }
       }
-    }, 100);
+    }, 200);
   } catch(e) {
     console.error("Error cargando contenido existente:", e);
   }
