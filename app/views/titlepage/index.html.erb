@@ -7,35 +7,6 @@
     #clappr > div{ width:100%;height:100%;position: absolute;}
 </style>
 
-<!-- aqui comienza el banner -->
-<!--
-<div style="margin:0px auto;">
-<iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FGlobalMediaSLP%2Fvideos%2F1198823818152123%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-</div>
--->
-
-<div id="polls-banner-container">
-<div class="enc-links polls-banner-opened" style="display: none;">
-<a href="https://globalmediaprep.com" target="_blank">
-<img src="https://globalmediarocks.s3.us-west-1.amazonaws.com/BANNERPREP.jpg" style="witdh:100%; height:100%" style="img-desktop">
-</a>
-</div>
-
-<table class="polls-banner-opened"  width="100%" style="display: none;">
-  <tr>
-<td width="100%">
-<div class="enc-links">
-<a href="https://www.globalmedia.mx/sections/Par%C3%ADs2024">
-<img src="https://globalmediarocks.s3.us-west-1.amazonaws.com/BANNER2.jpg" style="img-desktop banner-new-polls">
-</a>
- </div>
-</td>
- </tr>
-</table>
-</div>
-
-
-
 <style>
     .enc-links {
         display:  flex;
@@ -43,25 +14,7 @@
         align-items:  stretch;
         justify-content:  center;
         width:  100%;
-    }<div id="polls-banner-container">
-<div class="enc-links polls-banner-opened" style="display: block;">
-<a href="https://sondeosglobalmedia.com.mx" target="_blank">
-<img src="https://globalmediarocks.s3.us-west-1.amazonaws.com/sondeosprueba02042024.jpg" style="img-desktop">
-</a>
-</div>
-
-<table class="polls-banner-opened"  width="100%" style="display: none;">
-  <tr>
-<td width="100%">
-<div class="enc-links">
-<a href="https://sondeosglobalmedia.com.mx">
-<img src="https://globalmedia-gm.s3.us-west-1.amazonaws.com/qatar2022/Banner_Qatar.gif" style="img-desktop banner-new-polls">
-</a>
- </div>
-</td>
- </tr>
-</table>
-</div>
+    }
     .enc-links a {
         width:  100%;
     }
@@ -69,25 +22,7 @@
         height:  auto;
         width:  100%;
         flex-shrink: 0;
-    }<div id="polls-banner-container">
-<div class="enc-links polls-banner-opened" style="display: block;">
-<a href="https://sondeosglobalmedia.com.mx" target="_blank">
-<img src="https://globalmediarocks.s3.us-west-1.amazonaws.com/sondeosprueba02042024.jpg" style="img-desktop">
-</a>
-</div>
-
-<table class="polls-banner-opened"  width="100%" style="display: none;">
-  <tr>
-<td width="100%">
-<div class="enc-links">
-<a href="https://sondeosglobalmedia.com.mx">
-<img src="https://globalmedia-gm.s3.us-west-1.amazonaws.com/qatar2022/Banner_Qatar.gif" style="img-desktop banner-new-polls">
-</a>
- </div>
-</td>
- </tr>
-</table>
-</div>
+    }
     @media screen and (max-width:  1024px) {
         .enc-links {
             flex-direction:  column;
@@ -114,20 +49,12 @@
     .banner-ww {
         width: 100%;
         height:  auto;
-        /*display:  flex; */
     }
     .banner-ww img {
         width:  100%;
         height:  auto;
     }
 </style>
-<!-- <br>
-
-<a href="/WFM" class="banner-ww">
-	<img src="https://globalmediarocks.s3-us-west-1.amazonaws.com/banners/ban.jpg">
-</a>
-<br>
--->
 
 <%# cache @breaking_news do %>
   <%# if @breaking_news.count > 0 %>
@@ -149,67 +76,29 @@
   <p>No hay highlights disponibles.</p>
 <% end %>
 
-
 <% cache(get_banner("global", "TitlePage", "Grande")) do %>
-  <% if get_banner("global", "TitlePage", "Grande") %>
+  <% if get_banner("global", "TitlePage", "Grande")&.count.to_i > 0 %>
     <%= render "components/big-banner", banner: get_banner("global", "TitlePage", "Grande") %>
   <% end %>
 <% end %>
-<div class="special-articles-container">
-  <!-- OJO AQUI ES PARA agregar el video arriba de min a min -->
-  <!-- pega el siguiente texto donde quieras acomodar el player<body> -->
-  <div class="special-articles d-flex" style="width: 100% !important;">
-    <!--  <div class="w-100 mb-5">
-        <p class="sp__name mb-3" style="background-color: #730E15">GlobalMedia TV</p>
-        <!-- Paste the following into the <body> -->
-    <!--<div id="MediaPlayerMiniPlayer" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
-    <script type="text/javascript">
-        WowzaPlayer.create('MediaPlayerMiniPlayer',
-            {
-                "license":"PLAY1-4BVTz-Rmtp4-Dx49D-Y4Qjv-6PVnb",
-                "title":"Live Streaming",
-                "description":"",
-                "sourceURL":
-                    "https://videocast.mx:1936/8010/ngrp:8010_all/playlist.m3u8"
 
-                ,
-                "autoPlay":true,
-                "volume":"75",
-                "mute":true,
-                "loop":false,
-                "audioOnly":false,
-                "uiShowQuickRewind":false,
-                "uiQuickRewindSeconds":"30"
-            }
-        );
-    </script>
-  </div>
-  <div class="w-100 mb-3"></div>
-  <!--<div class="special-articles d-flex" style="width: 100% !important;">
-      <div class="w-100 mb-5">
-         <p class="sp__name mb-3" style="background-color: #730E15">ASí LAS COSAS EN VIVO</p>
-        <iframe width="470" height="400" src="https://www.youtube.com/embed/u0kTFc5cRwU?autoplay=1&mute=1&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>-->
-    <!-- termina codiel video arriba de min a min -->
-    <!--cuando se quiere desactivar el reproductor se agrega esta linea -->
-    <!--<div class="special-articles">-->
-    <!--fin de linea -->
+<div class="special-articles-container">
+  <div class="special-articles d-flex" style="width: 100% !important;">
     <% cache(latest_news) do %>
-      <%= render "components/latest-news", articles: latest_news  %>
+      <%= render "components/latest-news", articles: latest_news %>
     <% end %>
-    <% if get_banner("", "TitlePage", "Chico" ).count > 0 %>
-      <%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico" ) %>
-    <% else %>
-      <% if get_banner("", "Global", "Chico" ).count > 0 %>
-        <%= render "components/small-banner", banner: get_banner("", "Global", "Chico" ) %>
-      <% end %>
+    <% if get_banner("", "TitlePage", "Chico")&.count.to_i > 0 %>
+      <%= render "components/small-banner", banner: get_banner("", "TitlePage", "Chico") %>
+    <% elsif get_banner("", "Global", "Chico")&.count.to_i > 0 %>
+      <%= render "components/small-banner", banner: get_banner("", "Global", "Chico") %>
     <% end %>
   </div>
   <div class="special-articles--collaborators">
-   <%= render "components/collaborators", articles: get_collaborators || [] %>
+    <%= render "components/collaborators", articles: get_collaborators || [] %>
   </div>
 </div>
- <div class="section-previews-container">
+
+<div class="section-previews-container">
   <%# San-Luis primero %>
   <% san_luis_section = @sections.find_by(name: "San-Luis") %>
   <% if san_luis_section %>
@@ -234,10 +123,9 @@
     <% end %>
   <% end %>
 </div>
-<% if get_banner("", "TitlePage", "Grande" ).count > 0 %>
-  <%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande" )  %>
-<% else %>
-  <% if get_banner("", "Global", "Grande" ).count > 0 %>
-    <%= render "components/big-banner", banner: get_banner("", "Global", "Grande" )  %>
-  <% end %>
+
+<% if get_banner("", "TitlePage", "Grande")&.count.to_i > 0 %>
+  <%= render "components/big-banner", banner: get_banner("", "TitlePage", "Grande") %>
+<% elsif get_banner("", "Global", "Grande")&.count.to_i > 0 %>
+  <%= render "components/big-banner", banner: get_banner("", "Global", "Grande") %>
 <% end %>
