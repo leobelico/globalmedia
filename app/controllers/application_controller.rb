@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     redirect_to panel_path, :alert => exception.message
   end
 
-  #before_action :redirect_subdomain
+  before_action :redirect_subdomain
 
   @meta_description = ''
 def redirect_subdomain
@@ -17,44 +17,42 @@ def redirect_subdomain
   @meta_description = ''
   @subdomain_location = 'default'
   host = request.host
-
-  # 🔥 ROOT DOMAIN (con o sin www)
-  if host.match?(/^(www\.)?globalmedia\.(onrender\.com|mx)$/)
+  if host == "www.globalmedia.mx"
     @location_id = 1
-  else
-    # Subdominios
-    subdomain_match = host.match(/^([a-zA-Z0-9-]+)\.globalmedia\.(onrender\.com|mx)$/)
-
-    if subdomain_match
-      subdomain = subdomain_match[1]
-
-      case subdomain
-      when 'leon'
-        @location_id = 2
-      when 'zacatecas'
-        @location_id = 5
-      when 'vallartabahia'
-        @location_id = 4
-      when 'queretaro'
-        @location_id = 3
-      else
-        @location_id = 1
-      end
-    else
-      # 🔥 fallback seguro
-      @location_id = 1
-    end
+    return
+  end
+  # Dominio raíz sin subdominio (por ejemplo globalmedia.onrender.com o globalmedia.mx)
+  if host.match?(/^(www\.)?globalmedia\.(onrender\.com|mx)$/)
+    @location_id = 1 # San Luis Potosí
+    return
   end
 
-  # 🔥 PROTEGER NIL
-  location = Location.find_by(id: @location_id)
+  # Detectar subdominio como leon.globalmedia.mx o leon.globalmedia.onrender.com
+  subdomain_match = host.match(/^([a-zA-Z0-9-]+)\.globalmedia\.(onrender\.com|mx)$/)
+  subdomain = subdomain_match[1] if subdomain_match
 
-  if location.present?
+  case subdomain
+  when 'leon'
+    @location_id = 2
+  when 'zacatecas'
+    @location_id = 5
+  when 'vallartabahia'
+    @location_id = 4
+  when 'queretaro'
+    @location_id = 3  # Querétaro ya existe con ID 3
+  when 'sanluis'
+    @location_id = 1  # San Luis Potosí ya existe con ID 1
+  else
+    @location_id = 1 # Default: San Luis
+  end
+
+  # Intentar cargar datos del Location
+  location = Location.find_by(id: @location_id)
+  if location
     @meta_description = location.meta_description
     @subdomain_location = location.key
   else
-    @meta_description = 'Noticias de hoy en San Luis Potosí...'
-    @subdomain_location = 'san-luis'
+    @meta_description = 'Noticias de hoy en San Luis Potosí, México y el mundo, sigue la información minuto a minuto desde San Luis Potosí GlobalMedia es noticia.'
   end
 end
 
