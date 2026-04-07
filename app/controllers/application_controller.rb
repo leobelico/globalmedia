@@ -5,59 +5,44 @@ class ApplicationController < ActionController::Base
     redirect_to panel_path, :alert => exception.message
   end
 
-  before_action :redirect_subdomain
+  #before_action :redirect_subdomain
 
   @meta_description = ''
 def redirect_subdomain
-  if Rails.env.development?
-    set_local_dev_location
-    return
-  end
+  return set_local_dev_location if Rails.env.development?
 
   @meta_description = ''
   @subdomain_location = 'default'
-  host = request.host
 
-  # 🔥 ROOT DOMAIN (con o sin www)
-  if host.match?(/^(www\.)?globalmedia\.(onrender\.com|mx)$/)
+  host = request.host.to_s.downcase
+
+  # 🔥 NORMALIZAR HOST
+  host = host.gsub(/^www\./, '')
+
+  case host
+  when 'globalmedia.mx', 'globalmedia.onrender.com'
     @location_id = 1
+  when /leon\.globalmedia\./
+    @location_id = 2
+  when /zacatecas\.globalmedia\./
+    @location_id = 5
+  when /queretaro\.globalmedia\./
+    @location_id = 3
+  when /vallartabahia\.globalmedia\./
+    @location_id = 4
   else
-    # Subdominios
-    subdomain_match = host.match(/^([a-zA-Z0-9-]+)\.globalmedia\.(onrender\.com|mx)$/)
-
-    if subdomain_match
-      subdomain = subdomain_match[1]
-
-      case subdomain
-      when 'leon'
-        @location_id = 2
-      when 'zacatecas'
-        @location_id = 5
-      when 'vallartabahia'
-        @location_id = 4
-      when 'queretaro'
-        @location_id = 3
-      else
-        @location_id = 1
-      end
-    else
-      # 🔥 fallback seguro
-      @location_id = 1
-    end
+    @location_id = 1
   end
 
-  # 🔥 PROTEGER NIL
   location = Location.find_by(id: @location_id)
 
-  if location.present?
+  if location
     @meta_description = location.meta_description
     @subdomain_location = location.key
   else
-    @meta_description = 'Noticias de hoy en San Luis Potosí...'
-    @subdomain_location = 'san-luis'
+    @meta_description = 'Noticias de hoy en México'
   end
 end
-
   # before_action do
   #   if user_signed_in?
   #     # Rack::MiniProfiler.authorize_request
