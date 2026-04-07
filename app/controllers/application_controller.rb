@@ -17,42 +17,44 @@ def redirect_subdomain
   @meta_description = ''
   @subdomain_location = 'default'
   host = request.host
-  if host == "www.globalmedia.mx"
-    @location_id = 1
-    return
-  end
-  # Dominio raíz sin subdominio (por ejemplo globalmedia.onrender.com o globalmedia.mx)
+
+  # 🔥 ROOT DOMAIN (con o sin www)
   if host.match?(/^(www\.)?globalmedia\.(onrender\.com|mx)$/)
-    @location_id = 1 # San Luis Potosí
-    return
-  end
-
-  # Detectar subdominio como leon.globalmedia.mx o leon.globalmedia.onrender.com
-  subdomain_match = host.match(/^([a-zA-Z0-9-]+)\.globalmedia\.(onrender\.com|mx)$/)
-  subdomain = subdomain_match[1] if subdomain_match
-
-  case subdomain
-  when 'leon'
-    @location_id = 2
-  when 'zacatecas'
-    @location_id = 5
-  when 'vallartabahia'
-    @location_id = 4
-  when 'queretaro'
-    @location_id = 3  # Querétaro ya existe con ID 3
-  when 'sanluis'
-    @location_id = 1  # San Luis Potosí ya existe con ID 1
+    @location_id = 1
   else
-    @location_id = 1 # Default: San Luis
+    # Subdominios
+    subdomain_match = host.match(/^([a-zA-Z0-9-]+)\.globalmedia\.(onrender\.com|mx)$/)
+
+    if subdomain_match
+      subdomain = subdomain_match[1]
+
+      case subdomain
+      when 'leon'
+        @location_id = 2
+      when 'zacatecas'
+        @location_id = 5
+      when 'vallartabahia'
+        @location_id = 4
+      when 'queretaro'
+        @location_id = 3
+      else
+        @location_id = 1
+      end
+    else
+      # 🔥 fallback seguro
+      @location_id = 1
+    end
   end
 
-  # Intentar cargar datos del Location
+  # 🔥 PROTEGER NIL
   location = Location.find_by(id: @location_id)
-  if location
+
+  if location.present?
     @meta_description = location.meta_description
     @subdomain_location = location.key
   else
-    @meta_description = 'Noticias de hoy en San Luis Potosí, México y el mundo, sigue la información minuto a minuto desde San Luis Potosí GlobalMedia es noticia.'
+    @meta_description = 'Noticias de hoy en San Luis Potosí...'
+    @subdomain_location = 'san-luis'
   end
 end
 
