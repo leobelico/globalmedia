@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
 
   @meta_description = ''
 def redirect_subdomain
-def redirect_subdomain
   if Rails.env.development?
     set_local_dev_location
     return
@@ -19,15 +18,9 @@ def redirect_subdomain
   @subdomain_location = 'default'
   host = request.host
 
-  # 🔥 PARCHE TEMPORAL (AGREGA ESTO)
-  if host == "www.globalmedia.mx"
-    redirect_to "https://sanluis.globalmedia.mx", status: 302, allow_other_host: true
-    return
-  end
-
-  # Dominio raíz sin subdominio
+  # Dominio raíz sin subdominio (por ejemplo globalmedia.onrender.com o globalmedia.mx)
   if host.match?(/^globalmedia\.(onrender\.com|mx)$/)
-    @location_id = 1
+    @location_id = 1 # San Luis Potosí
     return
   end
 
