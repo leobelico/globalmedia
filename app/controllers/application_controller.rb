@@ -20,7 +20,7 @@ def redirect_subdomain
 
   # Dominio raíz sin subdominio (por ejemplo globalmedia.onrender.com o globalmedia.mx)
   if host.match?(/^globalmedia\.(onrender\.com|mx)$/)
-    @location_id = 1 # San Luis Potosí
+    @location_id = 2 # San Luis Potosí
     return
   end
 
