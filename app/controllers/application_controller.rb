@@ -17,9 +17,12 @@ def redirect_subdomain
   @meta_description = ''
   @subdomain_location = 'default'
   host = request.host
-
+  if host == "www.globalmedia.mx"
+    @location_id = 1
+    return
+  end
   # Dominio raíz sin subdominio (por ejemplo globalmedia.onrender.com o globalmedia.mx)
-  if host.match?(/^globalmedia\.(onrender\.com|mx)$/)
+  if host.match?(/^(www\.)?globalmedia\.(onrender\.com|mx)$/)
     @location_id = 1 # San Luis Potosí
     return
   end
@@ -37,6 +40,8 @@ def redirect_subdomain
     @location_id = 4
   when 'queretaro'
     @location_id = 3  # Querétaro ya existe con ID 3
+  when 'sanluis'
+    @location_id = 1  # San Luis Potosí ya existe con ID 1
   else
     @location_id = 1 # Default: San Luis
   end
