@@ -47,6 +47,10 @@ class Article < ApplicationRecord
     end
   end
 
+  def safe_published_at
+  published_at || created_at
+end
+
   private
     def associate_tags
       # if self.note_old
