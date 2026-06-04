@@ -1,17 +1,18 @@
 
 <div class="header--wrapper">
 	<div class="header">
-		<div class="header__container container--1">
-      <%= link_to root_path, class: "header__logo" do %>
-      <% if get_current_location.present? %>
-		<img src="/assets/logos/san-luis.png" alt="GlobalMedia">
+	<div class="header__container container--1">
+	<%= link_to root_path, class: "header__logo" do %>
+		<% if get_current_location.present? %>
+		<img src="/assets/logos/globalmedia.png" alt="GlobalMedia">
+		<span class="header__logo-location">| <%= get_current_location.name %></span>
 		<% else %>
-		<img src="/assets/logos/san-luis.png" alt="GlobalMedia">
+		<img src="/assets/logos/globalmedia.png" alt="GlobalMedia">
 		<% end %>
-      <% end %>
-      <%= link_to stations_path, class: "stations-link", target: "_blank" do %>
-        <%= image_tag "radio-y-tv.svg" %>
-      <% end %>
+	<% end %>
+	<%= link_to stations_path, class: "stations-link", target: "_blank" do %>
+		<%= image_tag "radio-y-tv.svg" %>
+	<% end %>
       <div class="menu-button">
         <p>MENU</p>
         <div class="menu-trigger">
@@ -192,3 +193,4 @@ function display_quill_notex(quill_note, container) {
   window.quillViewer.setContents(quill_note);
 }
 </script>
+
