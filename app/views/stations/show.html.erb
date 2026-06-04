@@ -177,7 +177,15 @@
 						<% end %>
 					</div>
 				<% end	%>-->
+				<% if get_banner(@section, "Section", "Grande" ).count > 0 %>
 
+							<%=render "components/big-banner", banner: get_banner(@section, "Section", "Grande" )  %>
+						<% else %>
+							<% if get_banner(@section, "Global", "Grande" ).count > 0 %>
+								<%= render "components/big-banner", banner: get_banner(@section, "Global", "Grande" ) %>
+							<% end %>
+							<br/>
+					<% end %>
 				<div class="radio-banner__tune-in">También puedes disfrutar</div>
 				<div class="station__recommendations">
 					<% @recommendations.each do |recommendation| %>
