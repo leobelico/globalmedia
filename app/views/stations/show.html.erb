@@ -33,7 +33,19 @@
 						<%= image_tag @station.image, class: "station__image" %>
 					</div>-->
 				</div>
+					<% if get_banner(nil, "Global", "Grande").count > 0 %>
+				<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
+				<% end %>
+				<br/>
 
+				<div class="radio-banner__tune-in">También puedes disfrutar</div>
+				<div class="station__recommendations">
+				<% @recommendations.each do |recommendation| %>
+					<%= link_to recommendation, class: "recommendation__image" do %>
+					<%= image_tag recommendation.image %>
+					<% end %>
+				<% end %>
+				
 				<% if !@station.video? and !@station.news? %>
 					<audio id="myAudio" preload="metadata" src="<%= @station.stream_url %>" autoplay onended=this.play(); controls=controls autobuffer>
 					</audio>
@@ -177,18 +189,7 @@
 						<% end %>
 					</div>
 				<% end	%>-->
-				<% if get_banner(nil, "Global", "Grande").count > 0 %>
-				<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
-				<% end %>
-				<br/>
-
-				<div class="radio-banner__tune-in">También puedes disfrutar</div>
-				<div class="station__recommendations">
-				<% @recommendations.each do |recommendation| %>
-					<%= link_to recommendation, class: "recommendation__image" do %>
-					<%= image_tag recommendation.image %>
-					<% end %>
-				<% end %>
+			
 				</div>
 
 				<div class="radio-banner__tune-in">Lo más reciente</div>
