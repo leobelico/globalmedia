@@ -1,4 +1,3 @@
-
 <!-- Paste the following into the <head>  -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
 
@@ -33,19 +32,7 @@
 						<%= image_tag @station.image, class: "station__image" %>
 					</div>-->
 				</div>
-					<% if get_banner(nil, "Global", "Grande").count > 0 %>
-				<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
-				<% end %>
-				<br/>
 
-				<div class="radio-banner__tune-in">También puedes disfrutar</div>
-				<div class="station__recommendations">
-				<% @recommendations.each do |recommendation| %>
-					<%= link_to recommendation, class: "recommendation__image" do %>
-					<%= image_tag recommendation.image %>
-					<% end %>
-				<% end %>
-				
 				<% if !@station.video? and !@station.news? %>
 					<audio id="myAudio" preload="metadata" src="<%= @station.stream_url %>" autoplay onended=this.play(); controls=controls autobuffer>
 					</audio>
@@ -81,6 +68,10 @@
 							#clappr > div{ width:100%;height:100%;position: absolute;}
 						</style>
 
+						<!-- BANNER ARRIBA DEL PLAYER -->
+						<% if get_banner(@station, "Station", "Grande").count > 0 %>
+							<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande") %>
+						<% end %>
 
 						<!-- pega el siguiente texto donde quieras acomodar el player<body> -->
 
@@ -189,7 +180,18 @@
 						<% end %>
 					</div>
 				<% end	%>-->
-			
+				<% if get_banner(nil, "Global", "Grande").count > 0 %>
+				<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
+				<% end %>
+				<br/>
+
+				<div class="radio-banner__tune-in">También puedes disfrutar</div>
+				<div class="station__recommendations">
+				<% @recommendations.each do |recommendation| %>
+					<%= link_to recommendation, class: "recommendation__image" do %>
+					<%= image_tag recommendation.image %>
+					<% end %>
+				<% end %>
 				</div>
 
 				<div class="radio-banner__tune-in">Lo más reciente</div>
@@ -214,9 +216,6 @@
             </a>
           </div>
         <% end %>
-				<% if get_banner(@station, "Station", "Grande").count > 0 %>
-					<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
-				<% end %>
 			</div>
 
 			<%= render "components/stations-sidebar", facebook: @station.facebook, twitter: @station.twitter %>
@@ -228,25 +227,4 @@
 
 <script type="text/javascript">
 	$('[data-chrome]').hide();
-
-	/*function requestFlashPermission() {
-	    var iframe = document.createElement('iframe');
-	    iframe.src = 'https://get.adobe.com/flashplayer';
-	    iframe.sandbox = '';
-	    document.body.appendChild(iframe);
-	    document.body.removeChild(iframe);
-	}
-
-	var isNewChrome = (navigator.userAgent.match(/Chrom(e|ium)\/(\d+)/) || [])[2] > 56
-	    && !/Mobile/i.test(navigator.userAgent);
-	    var isNewFirefox = (navigator.userAgent.match(/Fireforx\/(\d+)/));
-
-	var canRequestPermission =  isNewChrome;
-
-	if (!swfobject.hasFlashPlayerVersion('10') && canRequestPermission) {
-		$('[data-chrome]').show();
-	    requestFlashPermission();
-	    // Chrome requires user's click in order to allow iframe embeding
-	    $(window).one('click', requestFlashPermission);
-	}*/
 </script>
