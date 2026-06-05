@@ -68,9 +68,9 @@
 							#clappr > div{ width:100%;height:100%;position: absolute;}
 						</style>
 
-						<!-- BANNER ARRIBA DEL PLAYER -->
-						<% if get_banner(@station, "Station", "Grande").count > 0 %>
-							<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande") %>
+						<!-- BANNER GLOBAL ARRIBA DEL PLAYER -->
+						<% if get_banner(nil, "Global", "Grande").count > 0 %>
+							<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
 						<% end %>
 
 						<!-- pega el siguiente texto donde quieras acomodar el player<body> -->
@@ -180,9 +180,6 @@
 						<% end %>
 					</div>
 				<% end	%>-->
-				<% if get_banner(nil, "Global", "Grande").count > 0 %>
-				<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
-				<% end %>
 				<br/>
 
 				<div class="radio-banner__tune-in">También puedes disfrutar</div>
@@ -216,6 +213,9 @@
             </a>
           </div>
         <% end %>
+				<% if get_banner(@station, "Station", "Grande").count > 0 %>
+					<%= render "components/big-banner", banner: get_banner(@station, "Station", "Grande" ) %>
+				<% end %>
 			</div>
 
 			<%= render "components/stations-sidebar", facebook: @station.facebook, twitter: @station.twitter %>
