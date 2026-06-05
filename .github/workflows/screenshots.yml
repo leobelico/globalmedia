@@ -1,0 +1,23 @@
+name: Screenshot Monitor
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Cada 6 horas
+  workflow_dispatch:         # También puedes correrlo manualmente
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm install puppeteer
+      - run: node screenshots.js
+        env:
+          GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: screenshots-${{ github.run_id }}
+          path: screenshots/
+          retention-days: 30
