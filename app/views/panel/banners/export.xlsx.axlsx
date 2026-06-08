@@ -1,100 +1,39 @@
 wb = xlsx_package.workbook
 
-# Estilos
 header_style = wb.styles.add_style(
-  bg_color: "1F3864",
-  fg_color: "FFFFFF",
-  font_name: "Arial",
-  sz: 11,
-  b: true,
+  bg_color: "1F3864", fg_color: "FFFFFF", font_name: "Arial",
+  sz: 11, b: true,
   alignment: { horizontal: :center, vertical: :center },
   border: { style: :thin, color: "BFBFBF" }
 )
+data_style  = wb.styles.add_style(font_name: "Arial", sz: 10, alignment: { horizontal: :center, vertical: :center }, border: { style: :thin, color: "BFBFBF" })
+data_left   = wb.styles.add_style(font_name: "Arial", sz: 10, alignment: { horizontal: :left,   vertical: :center }, border: { style: :thin, color: "BFBFBF" })
+alt_style   = wb.styles.add_style(bg_color: "F2F2F2", font_name: "Arial", sz: 10, alignment: { horizontal: :center, vertical: :center }, border: { style: :thin, color: "BFBFBF" })
+alt_left    = wb.styles.add_style(bg_color: "F2F2F2", font_name: "Arial", sz: 10, alignment: { horizontal: :left,   vertical: :center }, border: { style: :thin, color: "BFBFBF" })
+total_style = wb.styles.add_style(bg_color: "D6E4F0", fg_color: "1F3864", font_name: "Arial", sz: 10, b: true, alignment: { horizontal: :center, vertical: :center }, border: { style: :medium, color: "2E5FA3" })
+green_style = wb.styles.add_style(bg_color: "E2EFDA", fg_color: "375623", font_name: "Arial", sz: 10, b: true, alignment: { horizontal: :center, vertical: :center }, border: { style: :thin, color: "BFBFBF" })
+title_style = wb.styles.add_style(bg_color: "1F3864", fg_color: "FFFFFF", font_name: "Arial", sz: 14, b: true, alignment: { horizontal: :center, vertical: :center })
+sub_style   = wb.styles.add_style(bg_color: "F2F2F2", fg_color: "595959", font_name: "Arial", sz: 10,  i: true, alignment: { horizontal: :center, vertical: :center })
 
-data_style = wb.styles.add_style(
-  font_name: "Arial",
-  sz: 10,
-  alignment: { horizontal: :center, vertical: :center },
-  border: { style: :thin, color: "BFBFBF" }
-)
-
-data_left = wb.styles.add_style(
-  font_name: "Arial",
-  sz: 10,
-  alignment: { horizontal: :left, vertical: :center },
-  border: { style: :thin, color: "BFBFBF" }
-)
-
-alt_style = wb.styles.add_style(
-  bg_color: "F2F2F2",
-  font_name: "Arial",
-  sz: 10,
-  alignment: { horizontal: :center, vertical: :center },
-  border: { style: :thin, color: "BFBFBF" }
-)
-
-alt_left = wb.styles.add_style(
-  bg_color: "F2F2F2",
-  font_name: "Arial",
-  sz: 10,
-  alignment: { horizontal: :left, vertical: :center },
-  border: { style: :thin, color: "BFBFBF" }
-)
-
-total_style = wb.styles.add_style(
-  bg_color: "D6E4F0",
-  fg_color: "1F3864",
-  font_name: "Arial",
-  sz: 10,
-  b: true,
-  alignment: { horizontal: :center, vertical: :center },
-  border: { style: :medium, color: "2E5FA3" }
-)
-
-green_style = wb.styles.add_style(
-  bg_color: "E2EFDA",
-  fg_color: "375623",
-  font_name: "Arial",
-  sz: 10,
-  b: true,
-  alignment: { horizontal: :center, vertical: :center },
-  border: { style: :thin, color: "BFBFBF" }
-)
-
-# =====================
-# HOJA 1: Resumen
-# =====================
 wb.add_worksheet(name: "Resumen de Banners") do |sheet|
-
-  sheet.add_row ["GlobalMedia — Reporte de Banners Publicitarios"],
-    style: wb.styles.add_style(bg_color: "1F3864", fg_color: "FFFFFF", font_name: "Arial", sz: 14, b: true, alignment: { horizontal: :center, vertical: :center })
-
-  sheet.add_row ["Generado: #{Date.today.strftime('%d/%m/%Y')}"],
-    style: wb.styles.add_style(bg_color: "F2F2F2", fg_color: "595959", font_name: "Arial", sz: 10, i: true, alignment: { horizontal: :center })
-
+  sheet.add_row ["GlobalMedia — Reporte de Banners Publicitarios"], style: title_style
+  sheet.add_row ["Generado: #{Date.today.strftime('%d/%m/%Y')}"], style: sub_style
   sheet.add_row []
-
-  sheet.add_row ["ID", "Nombre del Banner", "Cliente", "Tamaño", "Activo", "Expira", "Impresiones", "Clics", "CTR (%)"],
-    style: header_style
+  sheet.add_row ["ID", "Nombre del Banner", "Cliente", "Tamaño", "Activo", "Expira", "Impresiones", "Clics", "CTR (%)"], style: header_style
 
   @banners.each_with_index do |b, i|
-    bg_data   = i.even? ? data_style  : alt_style
-    bg_left   = i.even? ? data_left   : alt_left
+    bg_data = i.even? ? data_style : alt_style
+    bg_left = i.even? ? data_left  : alt_left
     impressions = b.impressions.to_i
     clicks      = b.clicks.to_i
     ctr         = impressions > 0 ? (clicks.to_f / impressions * 100).round(3) : 0
     ctr_s       = ctr >= 1.0 ? green_style : bg_data
 
     sheet.add_row [
-      b.id,
-      b.name,
-      b.client,
-      b.size,
+      b.id, b.name, b.client, b.size,
       b.active? ? "Sí" : "No",
       b.expiry_date&.strftime('%d/%m/%Y'),
-      impressions,
-      clicks,
-      "#{ctr}%"
+      impressions, clicks, "#{ctr}%"
     ], style: [bg_data, bg_left, bg_left, bg_data, bg_data, bg_data, bg_data, bg_data, ctr_s]
   end
 
@@ -103,28 +42,20 @@ wb.add_worksheet(name: "Resumen de Banners") do |sheet|
   total_ctr    = total_imp > 0 ? (total_clicks.to_f / total_imp * 100).round(3) : 0
 
   sheet.add_row ["TOTALES", "", "", "", "", "", total_imp, total_clicks, "#{total_ctr}%"],
-    style: total_style
+    style: [total_style, total_style, total_style, total_style, total_style, total_style, total_style, total_style, total_style]
 
-  sheet.column_widths 10, 35, 28, 12, 10, 14, 15, 10, 12
   sheet.merge_cells "A1:I1"
   sheet.merge_cells "A2:I2"
+  sheet.column_widths 10, 35, 28, 12, 10, 14, 15, 10, 12
 end
 
-# =====================
-# HOJA 2: Por Cliente
-# =====================
 wb.add_worksheet(name: "Por Cliente") do |sheet|
-
-  sheet.add_row ["Rendimiento Agrupado por Cliente"],
-    style: wb.styles.add_style(bg_color: "1F3864", fg_color: "FFFFFF", font_name: "Arial", sz: 13, b: true, alignment: { horizontal: :center, vertical: :center })
-
+  title2 = wb.styles.add_style(bg_color: "1F3864", fg_color: "FFFFFF", font_name: "Arial", sz: 13, b: true, alignment: { horizontal: :center, vertical: :center })
+  sheet.add_row ["Rendimiento Agrupado por Cliente"], style: title2
   sheet.add_row []
+  sheet.add_row ["Cliente", "Banners Activos", "Total Impresiones", "Total Clics", "CTR Promedio (%)", "Mejor Banner"], style: header_style
 
-  sheet.add_row ["Cliente", "Banners Activos", "Total Impresiones", "Total Clics", "CTR Promedio (%)", "Mejor Banner"],
-    style: header_style
-
-  grouped = @banners.group_by(&:client)
-  grouped.each_with_index do |(client, bans), i|
+  @banners.group_by(&:client).each_with_index do |(client, bans), i|
     bg_data = i.even? ? data_style : alt_style
     bg_left = i.even? ? data_left  : alt_left
     total_i = bans.sum { |b| b.impressions.to_i }
@@ -136,6 +67,6 @@ wb.add_worksheet(name: "Por Cliente") do |sheet|
       style: [bg_left, bg_data, bg_data, bg_data, bg_data, bg_left]
   end
 
-  sheet.column_widths 30, 18, 22, 15, 20, 38
   sheet.merge_cells "A1:F1"
+  sheet.column_widths 30, 18, 22, 15, 20, 38
 end

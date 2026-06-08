@@ -45,7 +45,7 @@
 		
 <% if current_user.banners_permission? %>
   <%= link_to "Banners publicitarios", panel_banners_path, class: "admin-sidebar__link" %>
-  <%= link_to "Reporte de Banners", export_panel_banners_path(format: :xlsx), class: "admin-sidebar__link" %>
+  <a href="/panel/banners/export.xlsx" class="admin-sidebar__link">Reporte de Banners</a>
 <% end %>
 	<%= link_to "Salir", destroy_user_session_path, class: "button--logout admin-sidebar__link" %>
 </div>
