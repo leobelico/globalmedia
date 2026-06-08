@@ -149,7 +149,9 @@ Rails.application.routes.draw do
       get :user_graph, on: :collection
       post :user_graph, on: :collection
     end
-    resources :banners
+    resources :banners do
+      get :track_click, on: :member
+    end
     resources :relationships, param: :slug
     resources :hit_objectives
     resources :controls do 

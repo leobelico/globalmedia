@@ -47,7 +47,11 @@ class Panel::BannersController < ApplicationController
 	def edit
 
 	end
-
+	def track_click
+		@banner = Banner.find(params[:id])
+		@banner.increment!(:clicks)
+		redirect_to @banner.vinculo, allow_other_host: true
+		end
 	def update
 		if @banner.update(banner_params)
 			banners_in_sections = SectionBanner.where(banner: @banner)
