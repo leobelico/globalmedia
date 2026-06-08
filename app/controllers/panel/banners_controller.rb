@@ -90,7 +90,7 @@ class Panel::BannersController < ApplicationController
 		redirect_to panel_banners_path
 	end
 	def export
-  @banners = Banner.all
+  @banners = Banner.where(location_id: @location_id, active: true).all
   respond_to do |format|
     format.xlsx { render xlsx: 'export', filename: "reporte_banners_#{Date.today}.xlsx" }
   end
