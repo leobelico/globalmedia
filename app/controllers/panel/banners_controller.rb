@@ -103,4 +103,10 @@ class Panel::BannersController < ApplicationController
 			one_year_from_now = Time.now + one_year_in_seconds
     		@s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read', expires: one_year_from_now, cache_control: "max-age=#{one_year_in_seconds}")
   		end
+		def export
+  @banners = Banner.where(location_id: @location_id).all
+  respond_to do |format|
+    format.xlsx { render xlsx: 'export', filename: "reporte_banners_#{Date.today}.xlsx" }
+  end
+end
 end
