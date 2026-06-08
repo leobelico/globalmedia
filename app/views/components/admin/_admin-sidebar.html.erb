@@ -46,7 +46,10 @@
   <% if current_user.create_articles_permission? or current_user.destroy_articles_permission? %>
     <a target="_blank" href="https://gmnet.vip/login" class="admin-sidebar__link" style="color: #ff0000;">Acortador URL</a>
   <% end %>
-
+  <% if current_user.banners_permission? %>
+  <%= link_to "Banners publicitarios", panel_banners_path, class: "admin-sidebar__link" %>
+  <%= link_to "Reporte de Banners", export_panel_banners_path(format: :xlsx), class: "admin-sidebar__link" %>
+<% end %>
 
 	<%= link_to "Salir", destroy_user_session_path, class: "button--logout admin-sidebar__link" %>
 </div>

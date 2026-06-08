@@ -30,7 +30,12 @@ class Panel::PanelController < ApplicationController
 		redirect_back(fallback_location: root_url)
 		
 	end
-
+	def export
+		@banners = Banner.where(location_id: @location_id).all
+		respond_to do |format|
+			format.xlsx { render xlsx: 'export', filename: "reporte_banners_#{Date.today}.xlsx" }
+		end
+	end
 	def panel
 	end 
 
