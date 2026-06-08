@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   resources :highlights do 
   	get :autocomplete_article_name, on: :collection
   end
-
+  get 'banners/:id/track_click', to: 'banners#track_click', as: 'track_click_banner'
   namespace :panel do
    
     resources :keywords, param: :slug 
@@ -149,9 +149,7 @@ Rails.application.routes.draw do
       get :user_graph, on: :collection
       post :user_graph, on: :collection
     end
-    resources :banners do
-      get :track_click, on: :member
-    end
+    resources :banners 
     resources :relationships, param: :slug
     resources :hit_objectives
     resources :controls do 
