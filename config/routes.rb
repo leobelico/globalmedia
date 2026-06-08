@@ -67,7 +67,9 @@ Rails.application.routes.draw do
    
     resources :keywords, param: :slug 
     resources :cameras
-
+    resources :banners do
+      get :export, on: :collection
+    end
     get "edit_multiple_keywords", to: "keywords#edit_multiple"
     #post "edit_multiple_keywords", to: "keywords#edit_multiple"
     get "update_multiple_keywords", to: "keywords#update_multiple"
@@ -149,7 +151,6 @@ Rails.application.routes.draw do
       get :user_graph, on: :collection
       post :user_graph, on: :collection
     end
-    resources :banners 
     resources :relationships, param: :slug
     resources :hit_objectives
     resources :controls do 
