@@ -1,25 +1,20 @@
 wb = xlsx_package.workbook
 
-header_style = wb.styles.add_style(
-  bg_color: "1F3864", fg_color: "FFFFFF", font_name: "Arial",
-  sz: 11, b: true,
-  alignment: { horizontal: :center, vertical: :center },
-  border: { style: :thin, color: "BFBFBF" }
-)
-data_style  = wb.styles.add_style(font_name: "Arial", sz: 10, alignment: { horizontal: :center, vertical: :center }, border: { style: :thin, color: "BFBFBF" })
-data_left   = wb.styles.add_style(font_name: "Arial", sz: 10, alignment: { horizontal: :left,   vertical: :center }, border: { style: :thin, color: "BFBFBF" })
-alt_style   = wb.styles.add_style(bg_color: "F2F2F2", font_name: "Arial", sz: 10, alignment: { horizontal: :center, vertical: :center }, border: { style: :thin, color: "BFBFBF" })
-alt_left    = wb.styles.add_style(bg_color: "F2F2F2", font_name: "Arial", sz: 10, alignment: { horizontal: :left,   vertical: :center }, border: { style: :thin, color: "BFBFBF" })
-total_style = wb.styles.add_style(bg_color: "D6E4F0", fg_color: "1F3864", font_name: "Arial", sz: 10, b: true, alignment: { horizontal: :center, vertical: :center }, border: { style: :medium, color: "2E5FA3" })
-green_style = wb.styles.add_style(bg_color: "E2EFDA", fg_color: "375623", font_name: "Arial", sz: 10, b: true, alignment: { horizontal: :center, vertical: :center }, border: { style: :thin, color: "BFBFBF" })
-title_style = wb.styles.add_style(bg_color: "1F3864", fg_color: "FFFFFF", font_name: "Arial", sz: 14, b: true, alignment: { horizontal: :center, vertical: :center })
-sub_style   = wb.styles.add_style(bg_color: "F2F2F2", fg_color: "595959", font_name: "Arial", sz: 10,  i: true, alignment: { horizontal: :center, vertical: :center })
+header_style = wb.styles.add_style(bg_color: "1F3864", fg_color: "FFFFFF", font_name: "Arial", sz: 11, b: true, alignment: { horizontal: :center, vertical: :center }, border: { style: :thin, color: "BFBFBF" })
+data_style   = wb.styles.add_style(font_name: "Arial", sz: 10, alignment: { horizontal: :center, vertical: :center }, border: { style: :thin, color: "BFBFBF" })
+data_left    = wb.styles.add_style(font_name: "Arial", sz: 10, alignment: { horizontal: :left, vertical: :center }, border: { style: :thin, color: "BFBFBF" })
+alt_style    = wb.styles.add_style(bg_color: "F2F2F2", font_name: "Arial", sz: 10, alignment: { horizontal: :center, vertical: :center }, border: { style: :thin, color: "BFBFBF" })
+alt_left     = wb.styles.add_style(bg_color: "F2F2F2", font_name: "Arial", sz: 10, alignment: { horizontal: :left, vertical: :center }, border: { style: :thin, color: "BFBFBF" })
+total_style  = wb.styles.add_style(bg_color: "D6E4F0", fg_color: "1F3864", font_name: "Arial", sz: 10, b: true, alignment: { horizontal: :center, vertical: :center }, border: { style: :thin, color: "2E5FA3" })
+green_style  = wb.styles.add_style(bg_color: "E2EFDA", fg_color: "375623", font_name: "Arial", sz: 10, b: true, alignment: { horizontal: :center, vertical: :center }, border: { style: :thin, color: "BFBFBF" })
+title_style  = wb.styles.add_style(bg_color: "1F3864", fg_color: "FFFFFF", font_name: "Arial", sz: 14, b: true, alignment: { horizontal: :center, vertical: :center })
+sub_style    = wb.styles.add_style(bg_color: "F2F2F2", fg_color: "595959", font_name: "Arial", sz: 10, i: true, alignment: { horizontal: :center, vertical: :center })
 
 wb.add_worksheet(name: "Resumen de Banners") do |sheet|
-  sheet.add_row ["GlobalMedia — Reporte de Banners Publicitarios"], style: title_style
-  sheet.add_row ["Generado: #{Date.today.strftime('%d/%m/%Y')}"], style: sub_style
+  sheet.add_row ["GlobalMedia — Reporte de Banners Publicitarios", nil, nil, nil, nil, nil, nil, nil, nil], style: [title_style, title_style, title_style, title_style, title_style, title_style, title_style, title_style, title_style]
+  sheet.add_row ["Generado: #{Date.today.strftime('%d/%m/%Y')}", nil, nil, nil, nil, nil, nil, nil, nil], style: [sub_style, sub_style, sub_style, sub_style, sub_style, sub_style, sub_style, sub_style, sub_style]
   sheet.add_row []
-  sheet.add_row ["ID", "Nombre del Banner", "Cliente", "Tamaño", "Activo", "Expira", "Impresiones", "Clics", "CTR (%)"], style: header_style
+  sheet.add_row ["ID", "Nombre del Banner", "Cliente", "Tamaño", "Activo", "Expira", "Impresiones", "Clics", "CTR (%)"], style: [header_style, header_style, header_style, header_style, header_style, header_style, header_style, header_style, header_style]
 
   @banners.each_with_index do |b, i|
     bg_data = i.even? ? data_style : alt_style
@@ -41,7 +36,7 @@ wb.add_worksheet(name: "Resumen de Banners") do |sheet|
   total_clicks = @banners.sum { |b| b.clicks.to_i }
   total_ctr    = total_imp > 0 ? (total_clicks.to_f / total_imp * 100).round(3) : 0
 
-  sheet.add_row ["TOTALES", "", "", "", "", "", total_imp, total_clicks, "#{total_ctr}%"],
+  sheet.add_row ["TOTALES", nil, nil, nil, nil, nil, total_imp, total_clicks, "#{total_ctr}%"],
     style: [total_style, total_style, total_style, total_style, total_style, total_style, total_style, total_style, total_style]
 
   sheet.merge_cells "A1:I1"
@@ -51,9 +46,10 @@ end
 
 wb.add_worksheet(name: "Por Cliente") do |sheet|
   title2 = wb.styles.add_style(bg_color: "1F3864", fg_color: "FFFFFF", font_name: "Arial", sz: 13, b: true, alignment: { horizontal: :center, vertical: :center })
-  sheet.add_row ["Rendimiento Agrupado por Cliente"], style: title2
+
+  sheet.add_row ["Rendimiento Agrupado por Cliente", nil, nil, nil, nil, nil], style: [title2, title2, title2, title2, title2, title2]
   sheet.add_row []
-  sheet.add_row ["Cliente", "Banners Activos", "Total Impresiones", "Total Clics", "CTR Promedio (%)", "Mejor Banner"], style: header_style
+  sheet.add_row ["Cliente", "Banners Activos", "Total Impresiones", "Total Clics", "CTR Promedio (%)", "Mejor Banner"], style: [header_style, header_style, header_style, header_style, header_style, header_style]
 
   @banners.group_by(&:client).each_with_index do |(client, bans), i|
     bg_data = i.even? ? data_style : alt_style
