@@ -36,7 +36,9 @@
 							<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
 						<% end %>			
 				<% if !@station.video? and !@station.news? %>
-					<audio id="myAudio" preload="metadata" src="<%= @station.stream_url %>" autoplay onended=this.play(); controls=controls autobuffer>
+					<audio id="myAudio" preload="metadata" 
+						src="https://streams.ilovemusic.de/ilovebiggestpophits.mp3" 
+						autoplay controls style="width:100%;">
 					</audio>
 				<% else %>
 					<!-- Insertar en body -->
