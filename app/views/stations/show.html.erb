@@ -36,7 +36,8 @@
 							<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
 						<% end %>			
 				<% if !@station.video? and !@station.news? %>
-				<% if @station.stream_url == "http://kebuenaslp.b-cdn.net/stream" || @station.stream_url == "http://playradio.mx/proxy/kebuenav?mp=/stream" %>
+				<% if @station.stream_url == "http://wradio.b-cdn.net/stream" || @station.stream_url == "https://playradio.mx/proxy/los40jose?mp=/stream" || @station.stream_url == "http://playradio.mx/proxy/wzacatecas?mp=/stream" || @station.stream_url == "https://playradio.mx/proxy/wqueretaro?mp=/stream" || @station.stream_url == "http://playradio.mx/proxy/wleon?mp=/stream" 
+				|| @station.stream_url == "http://playradio.mx/proxy/wvallarta?mp=/stream" || @station.stream_url == "https://wqro.b-cdn.net/stream" || @station.stream_url == "https://cader.b-cdn.net/stream" %>
 					<audio id="myAudio" preload="metadata" 
 					src="https://streams.ilovemusic.de/ilovebiggestpophits.mp3" 
 					autoplay controls style="width:100%;">
