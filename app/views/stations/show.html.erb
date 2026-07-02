@@ -37,9 +37,15 @@
 						<% end %>			
 				<% if !@station.video? and !@station.news? %>
 				<% restricted_streams = [
-					"https://los40.b-cdn.net/stream",
-					"https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_VALLARTAAAC.aac",
-					"http://playradio.mx/proxy/kebuenav?mp=/stream"					
+					"https://los40.b-cdn.net/stream" , 
+					"http://wradio.b-cdn.net/stream" , 
+					"http://playradio.mx/proxy/kebuenav?mp=/stream" ,
+					"https://playradio.mx/proxy/los40jose?mp=/stream" ,
+					"http://playradio.mx/proxy/wzacatecas?mp=/stream" ,
+					"https://playradio.mx/proxy/wqueretaro?mp=/stream",
+					"http://playradio.mx/proxy/wleon?mp=/stream" ,
+					"http://playradio.mx/proxy/wvallarta?mp=/stream" ,
+					"https://wqro.b-cdn.net/stream"						
 				] %>
 				<% if restricted_streams.include?(@station.stream_url) %>
 					<audio id="myAudio" preload="metadata" 
