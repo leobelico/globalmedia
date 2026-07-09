@@ -69,6 +69,9 @@
             <%= image_tag timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
             <p><strong><%= timetables.first.name %></strong>
               <br> <br><%= timetables.first.description %></p>
+                  <% if get_banner(nil, "Global", "Grande").count > 0 %>
+  <%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
+<% end %>
           <% end %>
         </div>
       </div>
@@ -177,9 +180,7 @@
         <!-- VÏNCULO PARA VER MAS -->
         <% link_to "Ver más notas", station_articles_path(station.slug) %>
       </div>
-      <% if get_banner(nil, "Global", "Grande").count > 0 %>
-  <%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
-<% end %>
+  
     </div>
   </div>
   <%= render "components/stations-sidebar", facebook: station.facebook, twitter: station.twitter %>
