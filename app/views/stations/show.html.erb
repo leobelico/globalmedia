@@ -51,6 +51,9 @@
 				<% else %>
 					<!-- Insertar en body -->
 					<div class="radio-banner__tune-in"><%= @station.name %></div>
+									<% if get_banner(nil, "Global", "Grande").count > 0 %>
+							<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
+						<% end %>
 					<% if @station.name == "Frecuencia Con Tu Salud" or @station.name == "CUENTO CONTIGO" or @station.name == "Vox Informativa" %>
 
 						<% if @station.name == "FRECUENCIA CON TU SALUD" %>
