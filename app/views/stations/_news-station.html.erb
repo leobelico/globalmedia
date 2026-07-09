@@ -34,6 +34,9 @@
 
         <% if @station.news %>
           <!-- Insertar en body -->
+                            <% if get_banner(nil, "Global", "Grande").count > 0 %>
+  <%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
+<% end %>
           <div class="enc-links">
             <%= image_tag @station.image, class: "img-desktop" %>
           </div>
@@ -69,9 +72,6 @@
             <%= image_tag timetables.first.broadcaster_image, class: "station__broadcaster-image" %>
             <p><strong><%= timetables.first.name %></strong>
               <br> <br><%= timetables.first.description %></p>
-                  <% if get_banner(nil, "Global", "Grande").count > 0 %>
-  <%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
-<% end %>
           <% end %>
         </div>
       </div>
