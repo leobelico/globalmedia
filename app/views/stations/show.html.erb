@@ -11,9 +11,7 @@
 					<%= image_tag @station.image, class: "station__image" %>
 					<div class="header__info">
 						<h4 class="station__name"><%= @station.name %></h4>
-						<% if get_banner(nil, "Global", "Grande").count > 0 %>
-							<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
-						<% end %>
+						
 						<p class="station__description"><%= @station.description %></p>
 						<div class="social-media" data-article="<%= station_url(@station) %>">
 							<%= link_to ("whatsapp://send?text=" + station_url(@station)), class: "social-media__link whatsapp", target: "_blank" do %>
