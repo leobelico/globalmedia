@@ -8,9 +8,6 @@
         <div class="header__info">
           <h4 class="station__name"><%= station.name %></h4>
           <div class="station__line"></div>
-                    	<% if get_banner(nil, "Global", "Grande").count > 0 %>
-							<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
-						<% end %>	
           <div class="broadcast__info">
             <% if timetables.count > 1 %>
               <p class="broadcaster__name"><%= timetables.first.broadcasters %></p>
@@ -34,12 +31,16 @@
 				</video>
 				</div> -->
       <% else %>
+
         <% if @station.news %>
           <!-- Insertar en body -->
           <div class="enc-links">
             <%= image_tag @station.image, class: "img-desktop" %>
           </div>
         <% else %>
+           	<% if get_banner(nil, "Global", "Grande").count > 0 %>
+							<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
+						<% end %>	
           <!-- Insertar en Head -->
           <!--<script type="text/javascript" src="https://player.wowza.com/player/ull/latest/wowzaplayer.min.js"></script>
           <div id="playerElement" style="width:100%; height:0; padding:0 0 56.25% 0"></div>
