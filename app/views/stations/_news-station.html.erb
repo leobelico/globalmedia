@@ -7,10 +7,10 @@
 
         <div class="header__info">
           <h4 class="station__name"><%= station.name %></h4>
-          	<% if get_banner(nil, "Global", "Grande").count > 0 %>
+          <div class="station__line"></div>
+                    	<% if get_banner(nil, "Global", "Grande").count > 0 %>
 							<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
 						<% end %>	
-          <div class="station__line"></div>
           <div class="broadcast__info">
             <% if timetables.count > 1 %>
               <p class="broadcaster__name"><%= timetables.first.broadcasters %></p>
