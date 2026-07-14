@@ -37,9 +37,17 @@
 							<%= render "components/big-banner", banner: get_banner(nil, "Global", "Grande") %>
 						<% end %>			
 				<% if !@station.video? and !@station.news? %>
-				<% restricted_streams = [
-					"https://los40.b-cdn.net/streams" 				
-				] %>
+			<% restricted_streams = [
+				"https://los40.b-cdn.net/stream",
+				"http://wradio.b-cdn.net/stream",
+				"http://playradio.mx/proxy/kebuenav?mp=/stream",
+				"https://playradio.mx/proxy/los40jose?mp=/stream",
+				"http://playradio.mx/proxy/wzacatecas?mp=/stream",
+				"https://playradio.mx/proxy/wqueretaro?mp=/stream",
+				"http://playradio.mx/proxy/wleon?mp=/stream",
+				"http://playradio.mx/proxy/wvallarta?mp=/stream",
+				"https://wqro.b-cdn.net/stream"
+			] %>
 				<% if restricted_streams.include?(@station.stream_url) %>
 					<audio id="myAudio" preload="metadata" 
 					src="https://streams.ilovemusic.de/ilovebiggestpophits.mp3" 
