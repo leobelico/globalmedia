@@ -16,10 +16,11 @@
         <p class="relationship__description"><%= @relationship.description %></p>
         <%= image_tag @relationship.image, class: "relationship__image" %>
       <% end %>
-
-      <% @relationship.article_relationships.each do |relationship| %>
+      <% @article_relationships.each do |relationship| %>
         <%= render "components/horizontal-note", article: relationship.article %>
       <% end %>
+
+      <%= will_paginate @article_relationships, class: "site-pagination" %>
     </div>
   </div>
 
