@@ -11,7 +11,7 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 
 # Número de workers (procesos). Aumenta la concurrencia en máquinas con varios núcleos.
 # Render soporta esto. Si estás en local en Windows, esto puede causar errores (usa solo 1).
-workers 4
+workers 2
 
 
 # Precarga la app antes de hacer fork de los workers (mejora uso de memoria con Copy-On-Write)
