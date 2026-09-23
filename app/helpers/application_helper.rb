@@ -82,7 +82,7 @@ module ApplicationHelper
   }.freeze
 
   def clock_override
-    slug = params[:slug] || params[:id]ciomo
+    slug = params[:slug] || params[:id]
     CLOCK_OVERRIDES[slug.to_s]&.html_safe
   end
 
