@@ -78,7 +78,7 @@ module ApplicationHelper
   end
     # slug de la nota => texto fijo que mostrará el reloj
   CLOCK_OVERRIDES = {
-    "mexico_apuesta_por_microchips_para_garantizar_trazabilidad_del_ganado_rumbo_a_eua" => "Lunes 24 de Agosto, 2026"
+    "mexico_apuesta_por_microchips_para_garantizar_trazabilidad_del_ganado_rumbo_a_eua" => "Lunes 24 de Agosto, 2026<br>"
   }.freeze
 
   def clock_override
