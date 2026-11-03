@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   end
   get 'banners/:id/track_click', to: 'banners#track_click', as: 'track_click_banner'
   namespace :panel do
+    resources :short_links, only: [:index, :create, :destroy]
    
     resources :keywords, param: :slug 
     resources :cameras
@@ -299,6 +300,13 @@ Rails.application.routes.draw do
   post 'set_image', to: "titlepage#set_image"
 
   get 'publish_highlights', to: "titlepage#publish_highlights"
+  # Enlaces cortos de notas (globalmedia.mx/Ab3xK9). Solo responde si el código existe,
+  # así las estaciones que también usan /:id siguen funcionando.
+  get '/:code', to: 'short_links#show', format: false,
+      constraints: ->(req) {
+        code = req.path.delete_prefix('/')
+        code.match?(/A[a-zA-Z0-9]{6}z/) && ShortLink.exists?(code: code)
+      }
   get '/:id', to: 'stations#show'    
 
   

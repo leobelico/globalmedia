@@ -1,0 +1,76 @@
+<div class="panel__header">
+  <h2 class="title panel__title"><span class="current">Acortador de enlaces</span> <small>(<%= ShortLink.host %>/xxxxxx)</small></h2>
+</div>
+
+<%= form_tag panel_short_links_path, method: :post, class: "card admin-form short-links__form" do %>
+  <div class="field">
+    <label for="short-link-url">Enlace de la nota</label><br>
+    <div class="short-links__row">
+      <%= text_field_tag :url, params[:url], id: "short-link-url", required: true, autofocus: true,
+            placeholder: "https://www.globalmedia.mx/articles/nombre-de-la-nota" %>
+      <%= submit_tag "Acortar", class: "button" %>
+    </div>
+    <small class="short-links__hint">Pega el enlace de una nota de Global Media (también sirve el de los subdominios regionales). Si la nota ya tiene enlace corto, se reutiliza.</small>
+  </div>
+<% end %>
+
+<% if @short_link %>
+  <div class="card short-links__result">
+    <p class="short-links__label">Enlace corto listo</p>
+    <div class="short-links__row">
+      <input class="short-links__output" type="text" value="<%= @short_link.short_url %>" readonly onclick="this.select()">
+      <button type="button" class="button copy" data-clipboard-text="<%= @short_link.short_url %>">Copiar</button>
+    </div>
+    <p class="short-links__target">
+      → <%= @short_link.article&.name || @short_link.url %>
+    </p>
+  </div>
+<% end %>
+
+<div class="card">
+  <%= form_tag panel_short_links_path, method: :get, class: "short-links__search" do %>
+    <%= text_field_tag :q, params[:q], placeholder: "Buscar por título de la nota o código" %>
+    <%= submit_tag "Buscar", class: "button", name: nil %>
+    <% if params[:q].present? %>
+      <%= link_to "Limpiar", panel_short_links_path %>
+    <% end %>
+  <% end %>
+
+  <div class="table__row">
+    <p class="table__cell">Enlace corto:</p>
+    <p class="table__cell f-2">Nota:</p>
+    <p class="table__cell">Clics:</p>
+    <p class="table__cell">Creado:</p>
+    <p class="table__cell">Copiar:</p>
+    <p class="table__cell delete">Eliminar:</p>
+  </div>
+  <% if @short_links.empty? %>
+    <div class="table__row">
+      <p class="table__cell">Todavía no hay enlaces cortos.</p>
+    </div>
+  <% end %>
+  <% @short_links.each do |link| %>
+    <div class="table__row">
+      <a class="table__cell short-links__code" href="<%= link.short_url %>" target="_blank" rel="noopener"><%= link.display_url %></a>
+      <a class="table__cell f-2" href="<%= link.url %>" target="_blank" rel="noopener"><%= link.article&.name.presence || link.url %></a>
+      <p class="table__cell"><%= link.clicks %></p>
+      <p class="table__cell"><%= link.created_at.strftime("%d/%m/%Y %H:%M") %><% if link.user %><br><small><%= link.user.full_name %></small><% end %></p>
+      <p class="table__cell"><button type="button" class="button copy" data-clipboard-text="<%= link.short_url %>">Copiar</button></p>
+      <%= link_to "Eliminar", panel_short_link_path(link), method: :delete, data: { confirm: "¿Eliminar #{link.display_url}? El enlace dejará de funcionar." }, class: "table__cell delete" %>
+    </div>
+  <% end %>
+</div>
+<%= will_paginate @short_links, class: "card admin-pagination" %>
+
+<style>
+  .short-links__row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .short-links__row input[type="text"] { flex: 1; min-width: 260px; }
+  .short-links__hint { display: block; margin-top: 6px; color: #757575; }
+  .short-links__result { border-left: 4px solid #2768d1; }
+  .short-links__label { font-weight: bold; color: #2768d1; margin: 0 0 8px; }
+  .short-links__output { font-size: 20px; font-weight: bold; color: #1b2d41; padding: 8px 10px; }
+  .short-links__target { margin: 8px 0 0; color: #616161; }
+  .short-links__search { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+  .short-links__search input[type="text"] { flex: 1; }
+  .short-links__code { font-weight: bold; color: #2768d1; }
+</style>

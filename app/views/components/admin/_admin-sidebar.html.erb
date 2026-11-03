@@ -40,7 +40,7 @@
   <a href="/panel/preferences" class="admin-sidebar__link">Preferencias</a>
 
   <% if current_user.create_articles_permission? or current_user.destroy_articles_permission? %>
-    <a target="_blank" href="https://gmnet.vip/login" class="admin-sidebar__link" style="color: #ff0000;">Acortador URL</a>
+    <%= link_to "Acortador URL", panel_short_links_path, class: "admin-sidebar__link" %>
   <% end %>
 		
 <% if current_user.banners_permission? %>
