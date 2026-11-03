@@ -305,7 +305,13 @@ Rails.application.routes.draw do
   get '/:code', to: 'short_links#show', format: false,
       constraints: ->(req) {
         code = req.path.delete_prefix('/')
-        code.match?(/A[a-zA-Z0-9]{6}z/) && ShortLink.exists?(code: code)
+        next false unless code.match?(/\A[a-zA-Z0-9]{6}\z/)
+
+        begin
+          ShortLink.exists?(code: code)
+        rescue ActiveRecord::ActiveRecordError
+          false # si la tabla aún no existe, se sigue a la ruta de estaciones
+        end
       }
   get '/:id', to: 'stations#show'    
 
