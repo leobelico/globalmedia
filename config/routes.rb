@@ -300,6 +300,9 @@ Rails.application.routes.draw do
   post 'set_image', to: "titlepage#set_image"
 
   get 'publish_highlights', to: "titlepage#publish_highlights"
+  # Imagen de la nota con el tipo correcto para vistas previas en WhatsApp/Facebook.
+  get '/og-image/:id', to: 'social_images#show', as: :og_image, format: false, constraints: { id: /\d+/ }
+
   # Enlaces cortos de notas (globalmedia.mx/Ab3xK9). Solo responde si el código existe,
   # así las estaciones que también usan /:id siguen funcionando.
   get '/:code', to: 'short_links#show', format: false,

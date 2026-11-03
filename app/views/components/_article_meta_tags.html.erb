@@ -21,7 +21,7 @@
 <% social_image = social_image_url(article) %>
 <meta property="og:image" itemprop="image" content="<%= social_image %>" />
 <meta property="og:image:secure_url" content="<%= social_image %>" />
-<meta property="og:image:type" content="<%= social_image_type(social_image) %>" />
+<meta property="og:image:type" content="<%= social_image_type(social_image_source(article)) %>" />
 <meta property="og:image:alt" content="<%= article.name %>" />
 
 <meta name="twitter:image" content="<%= social_image %>" />

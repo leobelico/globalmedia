@@ -1,7 +1,18 @@
 module ArticlesHelper
-  # URL absoluta con https de la imagen de la nota, para og:image (WhatsApp y Facebook
-  # no aceptan direcciones que empiezan con "//" ni con "http:").
+  # URL para og:image. Las fotos del bucket de S3 pasan por /og-image/:id, que las entrega con
+  # el tipo correcto; las demás se usan directo.
   def social_image_url(article)
+    source = social_image_source(article)
+    if article.id && source.match?(SocialImagesController::ALLOWED_HOSTS_IN_URL)
+      og_image_url(article.id, protocol: "https", host: "www.globalmedia.mx")
+    else
+      source
+    end
+  end
+
+  # URL absoluta con https de la imagen original de la nota (WhatsApp y Facebook
+  # no aceptan direcciones que empiezan con "//" ni con "http:").
+  def social_image_source(article)
     src = article.image.to_s.strip
     url =
       if src.blank? then image_url("globalmedia.jpg")
