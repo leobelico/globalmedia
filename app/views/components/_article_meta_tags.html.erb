@@ -18,20 +18,20 @@
 <meta property="article:section" content="<%= article.articable.name if article.articable %>" />
 
 <meta property="og:url" content="<%= article_url(article) %>" />
-<meta property="og:image" itemprop="image" content="<%= image_url(article.image) %>" />
-<meta property="og:image:secure_url" content="<%= image_url(article.image).sub(/^http:/, 'https:') %>" />
-<meta property="og:image:type" content="image/jpg" />
-<meta property="og:image:width" itemprop="image" content="400" />
-<meta property="og:image:height" itemprop="image" content="400" />
+<% social_image = social_image_url(article) %>
+<meta property="og:image" itemprop="image" content="<%= social_image %>" />
+<meta property="og:image:secure_url" content="<%= social_image %>" />
+<meta property="og:image:type" content="<%= social_image_type(social_image) %>" />
+<meta property="og:image:alt" content="<%= article.name %>" />
 
-<meta name="twitter:image" content="<%= image_url(article.image).sub(/^http:/, 'https:') %>" />
-<link rel="image_src" href="<%= image_url(article.image) %>" />
+<meta name="twitter:image" content="<%= social_image %>" />
+<link rel="image_src" href="<%= social_image %>" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@globalmediamx" />
 <meta name="twitter:title" content="<%= article.name %>" />
 <meta name="twitter:description" content="<%= article.short_description %> <%= truncate(article.plain_text, length: 300) %>" />
 <meta name="twitter:creator" content="@globalmediamx" />
-<meta name="twitter:image:src" content="<%= image_url(article.image).sub(/^http:/, 'https:') %>" />
+<meta name="twitter:image:src" content="<%= social_image %>" />
 <meta name="twitter:image:alt" content="<%= truncate(article.short_description, length: 50) %>" />
 <meta name="twitter:domain" content="www.globalmedia.mx" />

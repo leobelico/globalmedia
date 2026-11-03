@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= render "components/article_meta_tags", article: @article %>
+  <link rel="canonical" href="<%= @target_url %>">
+  <meta http-equiv="refresh" content="0; url=<%= @target_url %>">
+</head>
+<body>
+  <p><a href="<%= @target_url %>"><%= @article.name %></a></p>
+</body>
+</html>

@@ -31,6 +31,11 @@ class ShortLink < ApplicationRecord
     "#{self.class.host}/#{code}"
   end
 
+  # Destino final sin saltos extra: el dominio sin "www" redirige a "www", así que se usa "www" de una vez.
+  def target_url
+    url.sub(%r{\Ahttps?://globalmedia\.mx/}i, "https://www.globalmedia.mx/")
+  end
+
   # Crea (o reutiliza) el enlace corto de una nota a partir de su URL o su slug.
   # Devuelve el ShortLink o lanza ArgumentError con un mensaje para el editor.
   def self.for_input(input, user: nil)
@@ -64,6 +69,7 @@ class ShortLink < ApplicationRecord
 
     base = input.include?("/") ? parse_uri(input) : nil
     host = base&.host.presence || "www.globalmedia.mx"
+    host = "www.globalmedia.mx" if host.casecmp?("globalmedia.mx")
     [article, "https://#{host}/articles/#{CGI.escape(article.slug).gsub('+', '%20')}"]
   end
 
