@@ -24,6 +24,16 @@ class Panel::ShortLinksController < ApplicationController
     redirect_to panel_short_links_path, notice: "Enlace corto eliminado"
   end
 
+  # TEMPORAL: muestra el error real (solo a usuarios con sesión en el panel) para diagnosticar el 500.
+  rescue_from StandardError do |e|
+    raise e unless user_signed_in?
+
+    Rails.logger.error("[short_links] #{e.class}: #{e.message}\n#{e.backtrace.first(15).join("\n")}")
+    app_lines = e.backtrace.select { |l| l.include?("/app/") }.first(8)
+    render plain: "Error en el acortador (diagnóstico temporal)\n\n#{e.class}: #{e.message}\n\n#{app_lines.join("\n")}\n\n#{e.backtrace.first(5).join("\n")}",
+           status: :internal_server_error
+  end
+
   private
 
   def require_articles_permission
