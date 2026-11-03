@@ -31,10 +31,18 @@
   <%= form_tag panel_short_links_path, method: :get, class: "short-links__search" do %>
     <%= text_field_tag :q, params[:q], placeholder: "Buscar por título de la nota o código" %>
     <%= submit_tag "Buscar", class: "button", name: nil %>
-    <% if params[:q].present? %>
+    <% if @searching %>
       <%= link_to "Limpiar", panel_short_links_path %>
     <% end %>
   <% end %>
+
+  <p class="short-links__list-title">
+    <% if @searching %>
+      Resultados para “<%= params[:q] %>” <small>(máximo <%= Panel::ShortLinksController::SEARCH_LIMIT %>)</small>
+    <% else %>
+      Últimos <%= Panel::ShortLinksController::RECENT_LIMIT %> enlaces creados <small>— usa el buscador para encontrar enlaces anteriores</small>
+    <% end %>
+  </p>
 
   <div class="table__row">
     <p class="table__cell">Enlace corto:</p>
@@ -46,7 +54,7 @@
   </div>
   <% if @short_links.empty? %>
     <div class="table__row">
-      <p class="table__cell">Todavía no hay enlaces cortos.</p>
+      <p class="table__cell"><%= @searching ? "No se encontraron enlaces con esa búsqueda." : "Todavía no hay enlaces cortos." %></p>
     </div>
   <% end %>
   <% @short_links.each do |link| %>
@@ -60,7 +68,6 @@
     </div>
   <% end %>
 </div>
-<%= will_paginate @short_links, class: "card admin-pagination" %>
 
 <style>
   .short-links__row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
@@ -72,5 +79,7 @@
   .short-links__target { margin: 8px 0 0; color: #616161; }
   .short-links__search { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
   .short-links__search input[type="text"] { flex: 1; }
+  .short-links__list-title { font-weight: bold; color: #1b2d41; margin: 0 0 8px; }
+  .short-links__list-title small { font-weight: normal; color: #757575; }
   .short-links__code { font-weight: bold; color: #2768d1; }
 </style>

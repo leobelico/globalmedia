@@ -2,14 +2,22 @@ class Panel::ShortLinksController < ApplicationController
   before_action :authenticate_user!
   before_action :require_articles_permission
 
+  RECENT_LIMIT = 5
+  SEARCH_LIMIT = 20
+
+  # Por defecto solo los 5 más recientes (la lista crece mucho); con búsqueda, hasta 20 coincidencias.
   def index
     @short_link = ShortLink.find_by(id: params[:created]) if params[:created]
-    @short_links = ShortLink.includes(:article).recent
-    if params[:q].present?
+    @searching = params[:q].present?
+    @short_links = ShortLink.includes(:article, :user).recent
+    if @searching
       term = "%#{params[:q].strip}%"
-      @short_links = @short_links.left_joins(:article).where("articles.name ILIKE :t OR short_links.code = :c OR short_links.url ILIKE :t", t: term, c: params[:q].strip)
+      @short_links = @short_links.left_joins(:article)
+                                 .where("articles.name ILIKE :t OR short_links.code = :c OR short_links.url ILIKE :t", t: term, c: params[:q].strip)
+                                 .limit(SEARCH_LIMIT)
+    else
+      @short_links = @short_links.limit(RECENT_LIMIT)
     end
-    @short_links = @short_links.paginate(page: params[:page], per_page: 20)
   end
 
   def create
