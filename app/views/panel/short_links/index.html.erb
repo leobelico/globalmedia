@@ -4,13 +4,13 @@
 
 <%= form_tag panel_short_links_path, method: :post, class: "card admin-form short-links__form" do %>
   <div class="field">
-    <label for="short-link-url">Enlace de la nota</label><br>
+    <label for="short-link-url">Enlace a acortar</label><br>
     <div class="short-links__row">
       <%= text_field_tag :url, params[:url], id: "short-link-url", required: true, autofocus: true,
-            placeholder: "https://www.globalmedia.mx/articles/nombre-de-la-nota" %>
+            placeholder: "https://… (nota de Global Media o cualquier otro sitio)" %>
       <%= submit_tag "Acortar", class: "button" %>
     </div>
-    <small class="short-links__hint">Pega el enlace de una nota de Global Media (también sirve el de los subdominios regionales). Si la nota ya tiene enlace corto, se reutiliza.</small>
+    <small class="short-links__hint">Acepta cualquier enlace (notas de Global Media, YouTube, Facebook, Drive, otros sitios…). Las notas de Global Media conservan su vista previa con foto en WhatsApp y Facebook. Si el enlace ya se había acortado, se reutiliza.</small>
   </div>
 <% end %>
 
@@ -60,7 +60,14 @@
   <% @short_links.each do |link| %>
     <div class="table__row">
       <a class="table__cell short-links__code" href="<%= link.short_url %>" target="_blank" rel="noopener"><%= link.display_url %></a>
-      <a class="table__cell f-2" href="<%= link.url %>" target="_blank" rel="noopener"><%= link.article&.name.presence || link.url %></a>
+      <a class="table__cell f-2 short-links__dest" href="<%= link.url %>" target="_blank" rel="noopener noreferrer">
+        <% if link.article %>
+          <%= link.article.name %>
+        <% else %>
+          <span class="short-links__external">Externo · <%= URI.parse(link.url).host rescue "enlace" %></span><br>
+          <small><%= truncate(link.url, length: 90) %></small>
+        <% end %>
+      </a>
       <p class="table__cell"><%= link.clicks %></p>
       <p class="table__cell"><%= link.created_at.strftime("%d/%m/%Y %H:%M") %><% if link.user %><br><small><%= link.user.full_name %></small><% end %></p>
       <p class="table__cell"><button type="button" class="button copy" data-clipboard-text="<%= link.short_url %>">Copiar</button></p>
@@ -80,6 +87,8 @@
   .short-links__search { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
   .short-links__search input[type="text"] { flex: 1; }
   .short-links__list-title { font-weight: bold; color: #1b2d41; margin: 0 0 8px; }
+  .short-links__dest { word-break: break-all; }
+  .short-links__external { display: inline-block; background: #efeff7; color: #2d5b8e; font-weight: bold; font-size: 12px; padding: 1px 6px; border-radius: 3px; }
   .short-links__list-title small { font-weight: normal; color: #757575; }
   .short-links__code { font-weight: bold; color: #2768d1; }
 </style>

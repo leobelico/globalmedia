@@ -36,36 +36,42 @@ class ShortLink < ApplicationRecord
     url.sub(%r{\Ahttps?://globalmedia\.mx/}i, "https://www.globalmedia.mx/")
   end
 
-  # Crea (o reutiliza) el enlace corto de una nota a partir de su URL o su slug.
+  MAX_URL_LENGTH = 2000
+
+  # Crea (o reutiliza) un enlace corto para cualquier URL http(s).
+  # Si es una nota de Global Media se liga a la nota (para la vista previa en WhatsApp/Facebook).
   # Devuelve el ShortLink o lanza ArgumentError con un mensaje para el editor.
   def self.for_input(input, user: nil)
-    article, url = resolve_article(input.to_s.strip)
-    existing = find_by(article_id: article.id) || find_by(url: url)
+    input = input.to_s.strip
+    raise ArgumentError, "Pega el enlace que quieres acortar" if input.blank?
+
+    article, url = resolve_article(input)
+    article, url = nil, normalize_external(input) unless article
+
+    existing = (article && find_by(article_id: article.id)) || find_by(url: url)
     return existing if existing
 
     create!(url: url, article: article, user: user)
   end
 
-  # Acepta "https://www.globalmedia.mx/articles/mi-nota", "zacatecas.globalmedia.mx/articles/mi-nota"
-  # o solo el slug "mi-nota".
+  # Nota de Global Media a partir de "https://www.globalmedia.mx/articles/mi-nota",
+  # "zacatecas.globalmedia.mx/articles/mi-nota" o solo el slug "mi-nota". Devuelve nil si no es una nota.
   def self.resolve_article(input)
-    raise ArgumentError, "Pega el enlace de una nota" if input.blank?
-
     slug =
       if input.include?("/")
         uri = parse_uri(input)
-        unless uri&.host&.match?(ALLOWED_HOST)
-          raise ArgumentError, "Solo se pueden acortar enlaces de notas de globalmedia.mx"
-        end
+        return nil unless uri&.host&.match?(ALLOWED_HOST)
+
         match = uri.path.to_s.match(%r{\A/articles/([^/?#]+)/?\z})
-        raise ArgumentError, "El enlace no es de una nota (debe verse como globalmedia.mx/articles/…)" unless match
+        return nil unless match
+
         CGI.unescape(match[1])
       else
         input
       end
 
     article = Article.find_by(slug: slug)
-    raise ArgumentError, "No encontramos ninguna nota con ese enlace" unless article
+    return nil unless article
 
     base = input.include?("/") ? parse_uri(input) : nil
     host = base&.host.presence || "www.globalmedia.mx"
@@ -73,8 +79,32 @@ class ShortLink < ApplicationRecord
     [article, "https://#{host}/articles/#{CGI.escape(article.slug).gsub('+', '%20')}"]
   end
 
+  # Valida y normaliza un enlace externo (cualquier sitio http/https).
+  def self.normalize_external(input)
+    raise ArgumentError, "El enlace es demasiado largo (máximo #{MAX_URL_LENGTH} caracteres)" if input.length > MAX_URL_LENGTH
+    raise ArgumentError, "El enlace no puede tener espacios" if input.match?(/\s/)
+
+    uri = parse_uri(input)
+    unless uri.is_a?(URI::HTTP) && uri.host.present? && uri.host.include?(".")
+      raise ArgumentError, "Ese texto no parece un enlace válido (ejemplo: https://sitio.com/pagina)"
+    end
+    # Evita acortar un enlace corto (redirección en círculo).
+    if uri.host.match?(ALLOWED_HOST)
+      code = uri.path.to_s.delete_prefix("/").delete_suffix("/")
+      raise ArgumentError, "Ese ya es un enlace corto de Global Media" if code.match?(CODE_FORMAT) && exists?(code: code)
+    end
+
+    uri.to_s
+  end
+
   def self.parse_uri(input)
-    URI.parse(input.match?(%r{\Ahttps?://}i) ? input : "https://#{input}")
+    str = input.match?(%r{\Ahttps?://}i) ? input : "https://#{input}"
+    begin
+      URI.parse(str)
+    rescue URI::InvalidURIError
+      # Enlaces con acentos u otros caracteres especiales: se codifican y se vuelve a intentar.
+      URI.parse(URI::DEFAULT_PARSER.escape(str))
+    end
   rescue URI::InvalidURIError
     nil
   end
