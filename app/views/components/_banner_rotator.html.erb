@@ -1,0 +1,57 @@
+<%# Rotación de banners compartida por los tamaños grande, mediano y chico.
+    Cada carrusel se inicia una sola vez y cada banner se queda los segundos elegidos en el panel
+    (data-duration). Antes cada banner de la página movía TODOS los carruseles y cambiaban muy rápido. %>
+<script>
+(function () {
+  if (!window.gmRotateBanners) {
+    window.gmRotateBanners = function () {
+      $(".banners-container").each(function () {
+        var $slider = $(this);
+        if ($slider.data("gm-rotating")) return;
+        var $slides = $slider.children(".slider-item");
+        var total = $slides.length;
+        if (total < 2) return;
+        $slider.data("gm-rotating", true);
+
+        var current = 0;
+        var timer = null;
+
+        function seconds(i) {
+          var s = parseInt($slides.eq(i).attr("data-duration"), 10);
+          return s >= 2 ? s : 8;
+        }
+
+        function show(next, time) {
+          var $prev = $slides.eq(current);
+          var $next = $slides.eq(next);
+          if (next !== current) TweenMax.to($prev, time, { opacity: 0, pointerEvents: "none" });
+          TweenMax.fromTo($next, time, { opacity: 0, pointerEvents: "none" }, { opacity: 1, pointerEvents: "all" });
+          current = next;
+        }
+
+        function schedule() {
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            show((current + 1) % total, 0.6);
+            schedule();
+          }, seconds(current) * 1000);
+        }
+
+        $slider.children(".banner__previous").on("click", function () {
+          show((current - 1 + total) % total, 0.3);
+          schedule();
+        });
+        $slider.children(".banner__next").on("click", function () {
+          show((current + 1) % total, 0.3);
+          schedule();
+        });
+
+        TweenMax.set($slides, { opacity: 0, pointerEvents: "none" });
+        show(0, 0);
+        schedule();
+      });
+    };
+  }
+  window.gmRotateBanners();
+})();
+</script>

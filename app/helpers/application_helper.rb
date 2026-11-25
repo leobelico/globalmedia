@@ -1,4 +1,12 @@
 module ApplicationHelper
+  BANNER_DEFAULT_SECONDS = 8
+
+  # Segundos que el banner se queda en pantalla (se elige en el panel; 8 si no hay dato o
+  # si la columna todavía no existe en la base).
+  def banner_seconds(banner)
+    seconds = banner.has_attribute?(:duration_seconds) ? banner.duration_seconds.to_i : 0
+    seconds.between?(2, 300) ? seconds : BANNER_DEFAULT_SECONDS
+  end
   # Métodos existentes para nested forms
   def link_to_remove_fields(name, f, css_class)
     f.hidden_field(:_destroy) + 

@@ -97,7 +97,10 @@ class Panel::BannersController < ApplicationController
 end
 	private
 		def banner_params
-			params.require(:banner).permit(:large_image, :small_image, :size, :name, :client, :global, :titlepage, :url, :active, :expiry_date)
+			permitted = [:large_image, :small_image, :size, :name, :client, :global, :titlepage, :url, :active, :expiry_date]
+			# Solo si la base ya tiene la columna (ver migración AddDurationSecondsToBanners).
+			permitted << :duration_seconds if Banner.column_names.include?("duration_seconds")
+			params.require(:banner).permit(*permitted)
 		end
 
 		def set_banner
