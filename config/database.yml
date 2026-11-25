@@ -18,3 +18,8 @@ test:
 production:
   <<: *default
   database: globalmedia2025reparada
+  # Postgres cancela cualquier consulta que pase de 20 s. Sin esto, cuando Rack::Timeout corta una
+  # petición a los 25 s la consulta sigue corriendo en la base, se acumulan y saturan todo el sitio.
+  connect_timeout: 5
+  variables:
+    statement_timeout: <%= ENV.fetch("DB_STATEMENT_TIMEOUT", "20s") %>
