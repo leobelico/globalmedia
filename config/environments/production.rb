@@ -54,7 +54,9 @@ config.public_file_server.enabled = true
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   require 'logger' unless defined?(Logger)
-  config.log_level = :debug
+  # :info y no :debug: en debug se escribía cada consulta SQL (cientos por página), lo que gasta CPU
+  # del servidor. Las consultas lentas se siguen registrando como [SlowQuery] (nivel warn).
+  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info").to_sym
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]

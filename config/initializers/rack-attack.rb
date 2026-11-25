@@ -12,6 +12,7 @@ class Rack::Attack
   BAD_BOTS = /
     bytespider|petalbot|semrushbot|ahrefsbot|mj12bot|dotbot|blexbot|dataforseobot|serpstatbot|
     megaindex|barkrowler|seekportbot|zoominfobot|imagesiftbot|awario|magpie-crawler|
+    epochal-search|exasearchbot|
     python-requests|go-http-client|scrapy|httpclient|libwww-perl|java\/
   /xi
 

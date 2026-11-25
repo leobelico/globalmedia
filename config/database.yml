@@ -21,5 +21,9 @@ production:
   # Postgres cancela cualquier consulta que pase de 20 s. Sin esto, cuando Rack::Timeout corta una
   # petición a los 25 s la consulta sigue corriendo en la base, se acumulan y saturan todo el sitio.
   connect_timeout: 5
+  # Puma usa 5 hilos, pero los trabajos en segundo plano (SaveHitsJob en cada visita a una nota)
+  # corren en el mismo proceso y también piden conexión. Con solo 5, las páginas se quedaban
+  # esperando una conexión libre.
+  pool: <%= ENV.fetch("DB_POOL") { ENV.fetch("RAILS_MAX_THREADS") { 5 }.to_i + 5 } %>
   variables:
     statement_timeout: <%= ENV.fetch("DB_STATEMENT_TIMEOUT", "20s") %>
