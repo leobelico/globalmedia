@@ -18,6 +18,9 @@ test:
 production:
   <<: *default
   database: globalmedia2025reparada
+  # En Render manda DATABASE_URL. Si la URL no trae puerto, sin esta línea se usaba el 5433 del
+  # Postgres local de arriba y el sitio no conectaba ("Connection refused").
+  port: 5432
   # Postgres cancela cualquier consulta que pase de 20 s. Sin esto, cuando Rack::Timeout corta una
   # petición a los 25 s la consulta sigue corriendo en la base, se acumulan y saturan todo el sitio.
   connect_timeout: 5

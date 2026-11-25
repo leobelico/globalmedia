@@ -6,6 +6,12 @@ class Rack::Attack
   # Contadores en la memoria de cada proceso (no depende de memcached).
   Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new(size: 16.megabytes)
 
+  # El sitio pasa por Cloudflare: req.ip es la IP de Cloudflare (compartida por miles de lectores).
+  # La IP real del visitante viene en CF-Connecting-IP.
+  def self.client_ip(req)
+    req.get_header("HTTP_CF_CONNECTING_IP").presence || req.ip
+  end
+
   STATIC = %r{\A/(assets|packs|images|uploads|fonts|favicon|apple-touch|android-chrome|robots\.txt)}i
 
   # Robots de herramientas SEO y scrapers que no traen lectores y consumen mucho.
@@ -26,17 +32,17 @@ class Rack::Attack
   # Ráfagas: más de 150 páginas por minuto desde la misma IP. Una persona lee muchísimo menos;
   # el margen alcanza para una oficina o un café con varias personas en la misma red.
   throttle("paginas por ip", limit: 150, period: 60) do |req|
-    req.ip unless STATIC.match?(req.path) || PANEL.match?(req.path)
+    client_ip(req) unless STATIC.match?(req.path) || PANEL.match?(req.path)
   end
 
   # Búsqueda pública: de las consultas más caras de la base.
   throttle("busquedas por ip", limit: 30, period: 60) do |req|
-    req.ip if !PANEL.match?(req.path) && (req.path.include?("search") || req.path.include?("autocomplete"))
+    client_ip(req) if !PANEL.match?(req.path) && (req.path.include?("search") || req.path.include?("autocomplete"))
   end
 
   # Intentos de inicio de sesión al panel.
   throttle("logins por ip", limit: 10, period: 60) do |req|
-    req.ip if req.post? && req.path.include?("sign_in")
+    client_ip(req) if req.post? && req.path.include?("sign_in")
   end
 
   self.blocklisted_responder = lambda do |_req|
@@ -53,5 +59,5 @@ end
 ActiveSupport::Notifications.subscribe(/rack_attack/) do |_name, _start, _finish, _id, payload|
   req = payload[:request]
   next unless req && %i[throttle blocklist].include?(req.env["rack.attack.match_type"])
-  Rails.logger.warn("[RackAttack] #{req.env['rack.attack.match_type']} #{req.env['rack.attack.matched']} ip=#{req.ip} ua=#{req.user_agent.to_s[0, 120]} path=#{req.path}")
+  Rails.logger.warn("[RackAttack] #{req.env['rack.attack.match_type']} #{req.env['rack.attack.matched']} ip=#{Rack::Attack.client_ip(req)} ua=#{req.user_agent.to_s[0, 120]} path=#{req.path}")
 end
