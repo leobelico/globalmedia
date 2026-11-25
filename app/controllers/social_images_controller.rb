@@ -13,7 +13,9 @@ class SocialImagesController < ApplicationController
     article = Article.find_by(id: params[:id])
     return head(:not_found) unless article
 
-    source = helpers.social_image_source(article)
+    # Muchas fotos se subieron con espacios o acentos en el nombre ("WhatsApp Image … (1).jpeg"):
+    # se codifican para que la URL sea válida (lo ya codificado como %20 se respeta).
+    source = escape_url(helpers.social_image_source(article).to_s.strip)
     uri = URI.parse(source)
     return redirect_to(source, allow_other_host: true) unless uri.host.to_s.match?(ALLOWED_HOSTS)
 
@@ -29,6 +31,14 @@ class SocialImagesController < ApplicationController
   end
 
   private
+
+  # Codifica (en UTF-8) solo lo que no puede ir en una URL: espacios, acentos, etc.
+  # El "%" se deja igual para no codificar dos veces lo que ya viene como %20.
+  def escape_url(url)
+    url.dup.force_encoding(Encoding::UTF_8).gsub(%r{[^A-Za-z0-9\-._~:/?#\[\]@!$&'()*+,;=%]}) do |char|
+      char.bytes.map { |b| format("%%%02X", b) }.join
+    end
+  end
 
   def fetch(uri)
     Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == "https", open_timeout: 4, read_timeout: 8) do |http|
